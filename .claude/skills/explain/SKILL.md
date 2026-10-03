@@ -33,7 +33,7 @@ Load the playbook for the selected medium. Render only what is in the model.
 | 1 Prose | `references/writing.md` | — |
 | 2 Diagram | `references/diagrams.md` + `references/writing.md` | `artifact-diagramming` skill if the diagram is an SVG/HTML page |
 | 3 Interactive HTML | `references/html.md` + `references/diagrams.md` | `artifact-design` skill before you write the page |
-| 4 Animation | `references/video.md` + `references/diagrams.md` | — |
+| 4 Animation | `references/video.md` + `references/diagrams.md` | follow the `video` skill procedure (`uv run explainer …`) |
 
 Use the exact entity names from the model in every label, caption, heading, and narration line.
 
@@ -50,7 +50,7 @@ Show Level 1 first. Reveal deeper levels on demand (click, expand, scene progres
 
 ## Step 5 — Verify
 
-Run the seven questions in `CLAUDE.md` §7 against the rendered result, not against your intent. For HTML, open the page in a browser (Playwright) and check it at desktop and phone width. For video, watch the key frames (extract with `ffmpeg`).
+Run the seven questions in `CLAUDE.md` §7 against the rendered result, not against your intent. For HTML, open the page in a browser (Playwright) and check it at desktop and phone width. For video, read `contact.png` and `captions.srt`, and check frames at bookmark times.
 
 Also check model consistency: every label in the rendering must exist in `model.md`, and no rendering may contradict another.
 
@@ -61,6 +61,6 @@ If a check fails, revise. If a revision cannot fix it, escalate one stage.
 - Stage 1: the answer in chat.
 - Stage 2: the diagram inline (Mermaid or ASCII) in chat, or an SVG/HTML page for complex diagrams.
 - Stage 3: publish `index.html` with the Artifact tool and give the link. Keep the local file.
-- Stage 4: give the path to `out.mp4`, plus the narration script and captions.
+- Stage 4: give the path to `explainers/<slug>/video/out.mp4` and `captions.srt`.
 
 End with a two-line summary: the stage chosen, and what the reader can now do or predict.

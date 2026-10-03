@@ -101,16 +101,31 @@ Check the result against these questions:
 
 If an answer is "no", revise the representation or escalate one stage.
 
+## Stage 4 is a first-class workflow
+
+Animated explainers use the 3Blue1Brown model: Manim Community scenes, narration synchronized through `manim-voiceover`, and a local Kokoro voice. The stack needs no API keys. Use `/video <topic>` to go straight to Stage 4. Rules: `.claude/skills/explain/references/video.md`. Reference implementation: `explainers/ste-80/`.
+
+```bash
+uv run explainer new <slug>              # scaffold model.md, storyboard.md, scene.py
+uv run explainer render <slug> --draft   # fast silent layout pass
+uv run explainer render <slug>           # 1080p60 + Kokoro voice + captions + contact sheet
+```
+
+Always read the contact sheet and captions before you call a video done.
+
 ## Folder layout
 
 ```text
+explainer_kit/      shared toolkit: ExplainerScene, Role colors, Kokoro service, word morphs, CLI
 explainers/<slug>/
-  model.md        semantic model — source of truth
-  index.html      Stage 2–3 artifact (diagram page or interactive explainer)
-  video/          Stage 4: storyboard.md, narration.txt, scenes/, audio/, out.mp4
+  model.md          semantic model — source of truth
+  index.html        Stage 2–3 artifact (diagram page or interactive explainer)
+  video/            Stage 4: storyboard.md, scene.py → out.mp4, captions.srt, contact.png
+models/             Kokoro model files (git-ignored; `uv run explainer setup` downloads them)
 ```
 
 ## Local toolchain (checked 2026-10-03)
 
-- Available: `ffmpeg`, `python3`, `uv`/`uvx`, `node`, macOS `say` (local TTS).
-- Not installed: `manim`, `mmdc` (Mermaid CLI), `dot` (Graphviz), `piper`. Run them with `uvx` / `npx` when needed, or ask before you install them.
+- Python env: `uv` project, Python 3.12 (`.python-version`). Run everything through `uv run`.
+- Available: Manim CE 0.21, manim-voiceover 0.4, kokoro-onnx, `ffmpeg`, `sox`, Cairo/Pango, `node`.
+- Not installed: LaTeX (needed for `MathTex`/`Tex`/`DecimalNumber`; the user must run `brew install --cask basictex`), `mmdc` (Mermaid CLI), `dot` (Graphviz). Use `npx` / `uvx` for Mermaid and Graphviz, or ask before you install them.

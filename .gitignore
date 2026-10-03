@@ -1,3 +1,9 @@
 .DS_Store
-explainers/*/video/audio/
-explainers/*/video/scenes/media/
+__pycache__/
+.venv/
+models/
+explainers/*/video/media/
+explainers/*/video/draft*
+explainers/*/video/*.mp4
+!explainers/ste-80/video/out.mp4
+media/

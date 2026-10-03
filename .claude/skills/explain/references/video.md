@@ -1,86 +1,105 @@
-# Animated explainer mode
+# Animated explainer mode (3b1b style + voiceover)
 
 Create an animated explainer when the subject depends on dynamic change: movement, time, transformation, emergence, an algorithm executing, geometry changing, a signal propagating, data flowing, or repeated iteration.
 
 Do not make a narrated slide deck.
 
+The default stack runs on one machine with no API keys:
+
+| Layer | Tool |
+|---|---|
+| Animation | Manim Community (`manim`) |
+| Voice sync | `manim-voiceover` (`with self.voiceover(...)`, bookmarks) |
+| Voice | Kokoro-82M, local, via `explainer_kit.KokoroService` |
+| House style | `explainer_kit.ExplainerScene`, `Role` colors, `label()`, `words.sentence()` / `words.morph()` |
+| Assembly | `uv run explainer render` → FFmpeg concat, -16 LUFS mastering, soft captions, contact sheet |
+
+Reference implementation: `explainers/ste-80/` (model → storyboard → scene → out.mp4).
+
 ## 1. Visual language
 
-Use the visual language of high-quality mathematical and scientific explanation:
-
-- Persistent visual objects.
-- Spatial reasoning.
-- Transformations, not slide changes.
-- Narration synchronized with visuals.
-- Minimal on-screen text.
-- Visual emphasis on the object being discussed.
-- Deliberate pacing.
-- Progressive construction of complexity.
+- Persistent visual objects. An object that represents one entity stays the same object for the whole video.
+- Transformations, not slide changes. Move, morph, recolor. Do not clear the screen between ideas.
+- Spatial reasoning. Position encodes structure (left → right = sequence, up → down = level).
+- Minimal on-screen text. The narration carries the words; the screen carries the evidence.
+- Color encodes meaning through `Role` (ENTITY, FOCUS, RELATION, MUTED, GOOD, BAD, ASSUMPTION, QUANTITY). One meaning per color for the whole video.
+- Progressive construction. Introduce no object before the viewer needs it.
+- Deliberate pacing. Leave about 0.5 s of stillness after each important change.
 
 Every scene must answer one specific conceptual question.
 
-## 2. Pre-production (write these before any rendering code)
+## 2. Pre-production (before any scene code)
 
-Save to `explainers/<slug>/video/storyboard.md`:
+1. Update `explainers/<slug>/model.md`. Set the stage to 4 and give the reason.
+2. Fill in `explainers/<slug>/video/storyboard.md`:
+   1. learning objective;
+   2. conceptual sequence (from the model's dependencies and causal chain);
+   3. scene table: question, visual transformation, bookmarks;
+   4. visual-object inventory: role color, first scene, persistence, what it becomes;
+   5. timing (narration is about 2.6 words per second);
+   6. rendering plan: voice, lexicon entries, MathTex yes/no.
+3. Write the narration in STE-80. Short sentences read well aloud, and sentence ends are natural bookmark points.
 
-1. Learning objective.
-2. Conceptual sequence (from `model.md` dependencies and causal chain).
-3. Storyboard: one entry per scene, with the question the scene answers.
-4. Narration script (STE-80; also save as `narration.txt`).
-5. Visual-object inventory: each object, the scene where it first appears, and the scenes where it persists.
-6. Animation plan: the transformation in each scene.
-7. Timing plan.
-8. Rendering plan: tool per scene.
+## 3. Scene code
+
+Scaffold with `uv run explainer new <slug>`. Then edit `video/scene.py`:
+
+```python
+from manim import *
+from explainer_kit import ExplainerScene, Role, label
+from explainer_kit.words import sentence, morph
+
+class MyTopic(ExplainerScene):
+    voice = "af_heart"                     # uv run explainer voices
+    lexicon = {"QKᵀ": "Q K transpose"}     # spoken form for TTS; captions keep the written form
+
+    def construct(self):
+        with self.voiceover(text="Each token asks a question. <bookmark mark='q'/> The question is a vector.") as tracker:
+            self.play(FadeIn(tokens))
+            self.wait_until_bookmark("q")
+            self.play(GrowArrow(q_arrow), run_time=tracker.get_remaining_duration())
+```
 
 Rules:
 
-- Introduce no object before the viewer needs it.
-- Keep important objects visible across scenes.
-- Transform existing objects. Do not replace the entire frame.
-- Synchronize each narration statement with the visual evidence for that statement.
+- One `with self.voiceover(...)` block per narration statement. The animation inside the block is the visual evidence for that statement.
+- Time animations to the voice: `run_time=tracker.duration`, `tracker.time_until_bookmark("x")`, `self.wait_until_bookmark("x")`, `tracker.get_remaining_duration()`. Do not hard-code durations that must match speech.
+- Put bookmarks at clause or sentence boundaries. `KokoroService` synthesizes each bookmark segment separately, so the bookmark times are exact, but a bookmark in the middle of a phrase breaks the prosody.
+- Use `words.sentence()` and `words.morph()` when text changes. Kept words move, removed words fade out, added words fade in.
+- Several `class X(ExplainerScene)` in one `scene.py` render in file order and are joined. Use one class per chapter for long videos; each chapter re-renders independently.
+- `MathTex` / `Tex` need LaTeX (not installed by default; `brew install --cask basictex`). Use `label()` / `Text` when LaTeX is missing.
+- `DecimalNumber` and `Integer` also need LaTeX. For a live number, use `always_redraw(lambda: label(f"{tracker.get_value():.0f}"))`.
 
-## 3. Production pipeline
+## 4. Render loop
 
-```text
-model.md → storyboard
-              ├→ narration.txt → TTS → audio/ → timestamps
-              └→ scene model  → Manim / HTML / SVG → scenes/
-                                   │
-                       timeline (visual cues timed to audio)
-                                   ↓
-                         render → captions (.srt) → out.mp4 (FFmpeg)
+```bash
+uv run explainer render <slug> --draft   # 480p15, silent estimated narration: layout and pacing
+uv run explainer render <slug>           # 1080p60, Kokoro voice, mastered audio, captions
+uv run explainer render <slug> --scene Intro -q m   # one chapter at 720p
+uv run explainer say "Test this line." --voice am_michael   # audition a voice or a pronunciation
 ```
 
-## 4. Tools
+Output in `explainers/<slug>/video/`: `out.mp4` (captions muxed as a soft track), `captions.srt`, `contact.png`. Voice clips are cached in `media/voiceovers/`; a re-render synthesizes only changed lines.
 
-Prefer deterministic animation systems for technical content.
+## 5. Review (always, before delivery)
 
-| Tool | Use for | How to run here |
-|---|---|---|
-| Manim (Community) | Mathematics, geometry, scientific diagrams | Not installed. Try `uvx --from manim manim -qm scene.py SceneName`. Manim needs Cairo and Pango (`brew install cairo pango`); ask before you install system packages. |
-| SVG / Canvas / WebGL | Data-driven or browser-native animation | Render frames with Playwright, or record the page. |
-| matplotlib (`FuncAnimation`) | Animated plots | `uv run --with matplotlib` |
-| FFmpeg | Composition, audio mux, captions, final encode | Installed. |
+1. Read `contact.png` (one frame every `--every` seconds). Check layout, overlaps, legibility, and that objects persist instead of reappearing.
+2. Check sync: for each bookmark, extract the frame just after it (`ffmpeg -ss <t> -i out.mp4 -frames:v 1 f.png`) and confirm the visual evidence is on screen. Bookmark times are in `media/voiceovers/cache.json` (`word_boundaries`, units of 1e-7 s).
+3. Read `captions.srt`. Every caption must match the narration.
+4. Run the seven understanding questions from `CLAUDE.md` §7.
 
-## 5. Narration
+## 6. Voice
 
-Choose the first option that works:
+| Option | When |
+|---|---|
+| Kokoro (default) | Always available after `uv run explainer setup`. Good voices: `af_heart`, `af_bella`, `am_michael`, `am_fenrir`, `bm_george`. |
+| `EXPLAINER_TTS=silent` | Layout drafts (`--draft` sets it). |
+| manim-voiceover cloud services (`ElevenLabsService`, `OpenAIService`, `AzureService`) | Only when the user asks and the key is set. Call `self.set_speech_service(...)` in `setup()` after `super().setup()`. |
 
-1. A configured high-quality TTS provider (check for an API key in the environment; ask the user before you use a paid service).
-2. Local TTS: macOS `say -v <voice> -o line.aiff "text"` (installed). List voices with `say -v '?'`.
-3. No audio: render the video with captions and deliver the narration script.
+Use the lexicon for acronyms, symbols, and names that Kokoro mispronounces. Test them with `explainer say`.
 
-Narration is optional. Do not block the visual artifact on narration.
+## 7. Optional: showtime
 
-## 6. Timing
+[showtime](https://github.com/FavioVazquez/showtime) is a user-level Claude Code plugin for local video production (HTML/canvas motion graphics in headless Chrome, Manim, Kokoro/Piper voices with forced-alignment word timings, audio mastering, footage editing). Install: `/plugin marketplace add FavioVazquez/showtime` then `/plugin install showtime@showtime`.
 
-- Generate one audio clip per narration statement. Measure each clip with `ffprobe` to get timestamps.
-- Time visual transitions to the narration. Do not force narration into arbitrary scene lengths.
-- Build the `.srt` captions from the same timestamps.
-
-## 7. Verify and deliver
-
-1. Extract key frames with `ffmpeg -ss <t> -frames:v 1` and look at them.
-2. Check that each narration statement plays while its visual evidence is on screen.
-3. Run the seven understanding questions from `CLAUDE.md` §7.
-4. Deliver `out.mp4`, `captions.srt`, and `narration.txt`.
+Use the in-repo pipeline by default: it is pinned in `uv.lock` and works from a fresh clone. Use showtime when the user asks for it or when the video needs what this pipeline lacks: HTML motion graphics, music or sound effects, or real footage.
