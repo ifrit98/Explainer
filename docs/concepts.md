@@ -1,5 +1,7 @@
 # Concepts
 
+> The four-format ladder (STE-style writing → diagrams → HTML → 3b1b-style videos) comes from [Andrej Karpathy's post](https://x.com/karpathy/status/2105819303471976479). This repo adds the shared semantic model, the routing rules, and the toolchain.
+
 ## The explanation compiler
 
 Most explanations are written once, in one format. Explainer separates two jobs:

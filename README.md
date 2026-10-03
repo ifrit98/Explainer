@@ -4,11 +4,24 @@
 
 The video pipeline runs on one machine: Manim for animation, a local Kokoro voice, and no API keys.
 
+Inspired by [Andrej Karpathy's post](https://x.com/karpathy/status/2105819303471976479) on understanding LLM output through richer formats.
+
 <p align="center">
   <a href="explainers/softmax-temperature/video/out.mp4"><img src="docs/assets/softmax-temperature.gif" width="720" alt="Animated explainer: as temperature T falls from 1 to 0.5, four dots on a z/T number line spread apart and the cat bar grows from 0.61 to 0.84; as T rises to 2 the dots gather and the bars flatten."></a>
   <br>
   <sub>From <a href="explainers/softmax-temperature/"><code>softmax-temperature</code></a>. One value, T, drives every object. <a href="explainers/softmax-temperature/video/out.mp4">Full video with narration (64 s)</a>.</sub>
 </p>
+
+## Inspiration
+
+This project started from [a post by Andrej Karpathy](https://x.com/karpathy/status/2105819303471976479) (October 2026). The post proposes a ladder of output formats for understanding what language models produce, with each rung "even better" than the last:
+
+1. **Writing** in ASD-STE100, softened to "80% of the way" because the spec is strict. Here: **STE-80**.
+2. **Diagrams** instead of prose. Here: Stage 2.
+3. **Web pages**: ask for output "in HTML" to get an interactive page. Here: Stage 3.
+4. **Explainer videos**: "Create a 3b1b style video explainer on X", narrated with a TTS API key or a free local alternative. Here: Stage 4, with a local Kokoro voice.
+
+The post's closing point is the project's premise: as code gets cheap, it makes sense to ask for "large, custom, discardable software artifacts" that would never have been worth building before. Explainer turns the ladder into a workflow. It builds one semantic model, chooses the lowest rung that keeps the structure, and keeps every rendering consistent with the model.
 
 ## Why
 
