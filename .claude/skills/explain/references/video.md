@@ -68,7 +68,7 @@ Rules:
 - Use `words.sentence()` and `words.morph()` when text changes. Kept words move, removed words fade out, added words fade in.
 - Several `class X(ExplainerScene)` in one `scene.py` render in file order and are joined. Use one class per chapter for long videos; each chapter re-renders independently.
 - `MathTex` / `Tex` need LaTeX (not installed by default; `brew install --cask basictex`). Use `label()` / `Text` when LaTeX is missing.
-- `DecimalNumber` and `Integer` also need LaTeX. For a live number, use `always_redraw(lambda: label(f"{tracker.get_value():.0f}"))`.
+- `DecimalNumber`, `Integer`, `BraceLabel`, and `NumberLine(include_numbers=True)` also need LaTeX (`Brace` alone does not). For a live number, use `always_redraw(lambda: label(f"{tracker.get_value():.0f}"))`.
 
 ## 4. Render loop
 

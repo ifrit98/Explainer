@@ -6,4 +6,7 @@ explainers/*/video/media/
 explainers/*/video/draft*
 explainers/*/video/*.mp4
 !explainers/ste-80/video/out.mp4
+!explainers/softmax-temperature/video/out.mp4
+explainers/*/video/*contact.png
+.playwright-mcp/
 media/

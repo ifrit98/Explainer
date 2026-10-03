@@ -113,6 +113,10 @@ uv run explainer render <slug>           # 1080p60 + Kokoro voice + captions + c
 
 Always read the contact sheet and captions before you call a video done.
 
+## Examples and docs
+
+Reference implementations by stage are indexed in `explainers/README.md`. Follow their structure for new examples. Human-facing docs live in `docs/`; when you change the toolkit or the workflow, update the matching doc page.
+
 ## Folder layout
 
 ```text

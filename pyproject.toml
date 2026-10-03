@@ -2,6 +2,8 @@
 name = "explainer"
 version = "0.1.0"
 description = "Explanation compiler: 3b1b-style Manim explainers with synchronized local voiceover"
+readme = "README.md"
+license = "MIT"
 requires-python = ">=3.11,<3.14"
 dependencies = [
     "kokoro-onnx>=0.5",
@@ -9,6 +11,10 @@ dependencies = [
     "manim-voiceover>=0.4",
     "soundfile>=0.13",
 ]
+
+[project.urls]
+Repository = "https://github.com/ifrit98/Explainer"
+Documentation = "https://github.com/ifrit98/Explainer/tree/main/docs"
 
 [project.scripts]
 explainer = "explainer_kit.cli:main"
