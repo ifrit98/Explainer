@@ -46,7 +46,7 @@ Start with the cheapest representation that can work. Escalate only when the cur
 |---|---|---|---|
 | 1 | Controlled prose | a procedure, a definition, an argument | [git bisect](../explainers/git-bisect/explanation.md) |
 | 2 | Static diagram | topology, flow, architecture, dependencies | [git objects](../explainers/git-objects/diagram.md) |
-| 3 | Interactive HTML | a parameter, scenarios, layers, drill-down | [softmax temperature](../explainers/softmax-temperature/index.html) |
+| 3 | Interactive HTML | a parameter, scenarios, layers, drill-down | [softmax temperature](https://ifrit98.github.io/Explainer/explainers/softmax-temperature/) |
 | 4 | Animated video | a transformation: how state A becomes state B | [STE-80 rewrite](../explainers/ste-80/video/out.mp4) |
 
 Three tests decide most cases:
@@ -88,7 +88,7 @@ Narration uses the same style. Short sentences sound clear when spoken, and sent
 
 ## Epistemic clarity
 
-Every non-trivial claim carries a status: observation, established fact, mathematical consequence, assumption, estimate, model output, disputed interpretation, or speculation. Interactive pages show the status as tags and, where practical, expose assumptions as toggles. Examples: the shift-invariance toggle and the "loose description" tag in the [softmax page](../explainers/softmax-temperature/index.html).
+Every non-trivial claim carries a status: observation, established fact, mathematical consequence, assumption, estimate, model output, disputed interpretation, or speculation. Interactive pages show the status as tags and, where practical, expose assumptions as toggles. Examples: the shift-invariance toggle and the "loose description" tag in the [softmax page](https://ifrit98.github.io/Explainer/explainers/softmax-temperature/).
 
 ## The understanding test
 

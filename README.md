@@ -4,7 +4,7 @@
 
 The video pipeline runs on one machine: Manim for animation, a local Kokoro voice, and no API keys.
 
-Inspired by [Andrej Karpathy's post](https://x.com/karpathy/status/2105819303471976479) on understanding LLM output through richer formats.
+**[Live site: videos and interactive demo](https://ifrit98.github.io/Explainer/)** · Inspired by [Andrej Karpathy's post](https://x.com/karpathy/status/2105819303471976479) on understanding LLM output through richer formats.
 
 <p align="center">
   <a href="explainers/softmax-temperature/video/out.mp4"><img src="docs/assets/softmax-temperature.gif" width="720" alt="Animated explainer: as temperature T falls from 1 to 0.5, four dots on a z/T number line spread apart and the cat bar grows from 0.61 to 0.84; as T rises to 2 the dots gather and the bars flatten."></a>
@@ -53,7 +53,7 @@ If five sentences explain it, the answer is five sentences.
 
 | | |
 |---|---|
-| [![Softmax temperature interactive page](docs/assets/softmax-interactive.png)](explainers/softmax-temperature/index.html) | **[Softmax temperature](explainers/softmax-temperature/)**: the compiler demo. One model rendered as [prose](explainers/softmax-temperature/explanation.md), [diagrams](explainers/softmax-temperature/diagram.md), an [interactive page](explainers/softmax-temperature/index.html) (slider, sampler, assumption toggle), and a [narrated video](explainers/softmax-temperature/video/out.mp4). |
+| [![Softmax temperature interactive page](docs/assets/softmax-interactive.png)](https://ifrit98.github.io/Explainer/explainers/softmax-temperature/) | **[Softmax temperature](explainers/softmax-temperature/)**: the compiler demo. One model rendered as [prose](explainers/softmax-temperature/explanation.md), [diagrams](explainers/softmax-temperature/diagram.md), an [interactive page](https://ifrit98.github.io/Explainer/explainers/softmax-temperature/) (slider, sampler, assumption toggle), and a [narrated video](explainers/softmax-temperature/video/out.mp4). |
 | [![STE-80 video frame](docs/assets/ste-80-video.png)](explainers/ste-80/video/out.mp4) | **[STE-80 rewrite](explainers/ste-80/)** (Stage 4): one manual sentence goes through three Simplified Technical English rules, 16 → 9 words. Kept words move; removed words fade. The narration is itself in STE. |
 | **[git bisect](explainers/git-bisect/explanation.md)** (Stage 1) | A procedure, so the router picks numbered steps and stops there. |
 | **[git objects](explainers/git-objects/diagram.md)** (Stage 2) | Pure topology (blobs, trees, commits, refs), so the router picks one diagram. |

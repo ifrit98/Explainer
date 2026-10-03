@@ -6,10 +6,10 @@ Each folder holds one `model.md` (the source of truth) and the renderings compil
 |---|---|---|---|
 | [git-bisect](git-bisect/) | 1 · prose | A linear procedure with one loop. Numbered steps carry all of it. | [explanation](git-bisect/explanation.md) |
 | [git-objects](git-objects/) | 2 · diagram | Five object types and four pointer relations, held at once. Nothing moves. | [diagram](git-objects/diagram.md) |
-| [softmax-temperature](softmax-temperature/) | 1 → 4 · all | **Compiler demo.** One model rendered at every stage. Normal routing picks Stage 3. | [prose](softmax-temperature/explanation.md) · [diagrams](softmax-temperature/diagram.md) · [interactive](softmax-temperature/index.html) · [video](softmax-temperature/video/out.mp4) |
+| [softmax-temperature](softmax-temperature/) | 1 → 4 · all | **Compiler demo.** One model rendered at every stage. Normal routing picks Stage 3. | [prose](softmax-temperature/explanation.md) · [diagrams](softmax-temperature/diagram.md) · [interactive (live)](https://ifrit98.github.io/Explainer/explainers/softmax-temperature/) · [video](softmax-temperature/video/out.mp4) |
 | [ste-80](ste-80/) | 4 · video | The meaning is in the transformation: which words survive each rewrite. | [video](ste-80/video/out.mp4) · [scene](ste-80/video/scene.py) |
 
-The interactive page is a single HTML file. Download it and open it in a browser, or serve the repo with `python3 -m http.server`.
+The interactive page and both videos are live at [https://ifrit98.github.io/Explainer/](https://ifrit98.github.io/Explainer/). Locally, serve the repo with `python3 -m http.server` and open the file.
 
 ## Layout of one example
 
