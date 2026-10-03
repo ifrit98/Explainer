@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Explainer</title>
+<meta name="description" content="An explanation compiler for Claude Code: one semantic model, rendered as controlled prose, diagrams, interactive pages, or 3Blue1Brown-style videos with local voiceover.">
+<meta property="og:title" content="Explainer">
+<meta property="og:description" content="One semantic model, compiled into prose, diagrams, interactive pages, or narrated 3b1b-style videos.">
+<meta property="og:image" content="https://ifrit98.github.io/Explainer/docs/assets/softmax-video.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Sans+Condensed:wght@600&display=swap">
+<style>
+/* Layout: thesis, then the compiler demo (one model → four outputs), then the videos, then the routing examples. */
+:root {
+  --bg: #F5F7FA; --surface: #FFFFFF; --fg: #13171D; --muted: #5A6372; --rule: #DDE2E9;
+  --accent: #2F5F8F; --stage1: #2F5F8F; --stage2: #2E7D6B; --stage3: #8A5A12; --stage4: #9C3F55;
+  --display: "IBM Plex Sans Condensed", "Arial Narrow", system-ui, sans-serif;
+  --body: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #0E1116; --surface: #161A21; --fg: #E5E9EF; --muted: #98A2B0; --rule: #272D36;
+  --accent: #74A6DB; --stage1: #74A6DB; --stage2: #6CC5AE; --stage3: #E2B25F; --stage4: #E58AA0; color-scheme: dark; } }
+:root[data-theme="dark"] {
+  --bg: #0E1116; --surface: #161A21; --fg: #E5E9EF; --muted: #98A2B0; --rule: #272D36;
+  --accent: #74A6DB; --stage1: #74A6DB; --stage2: #6CC5AE; --stage3: #E2B25F; --stage4: #E58AA0; color-scheme: dark; }
+
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--fg); font: 16px/1.55 var(--body); }
+main { max-width: 1040px; margin: 0 auto; padding-inline: 20px; padding-block: 40px 64px; display: grid; gap: 64px; }
+h1, h2, h3 { font-family: var(--display); font-weight: 600; letter-spacing: -0.01em; text-wrap: balance; margin: 0; }
+h1 { font-size: clamp(2.4rem, 7vw, 4rem); line-height: 1; }
+h2 { font-size: 1.6rem; }
+h3 { font-size: 1.15rem; }
+p { margin: 0; max-width: 65ch; }
+a { color: var(--accent); }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.eyebrow { font: 500 0.75rem/1 var(--mono); letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+.muted { color: var(--muted); }
+section { display: grid; gap: 20px; }
+
+header { display: grid; gap: 16px; }
+.lede { font-size: 1.2rem; }
+.actions { display: flex; flex-wrap: wrap; gap: 12px; }
+.btn { font: 500 0.9rem var(--mono); text-decoration: none; color: var(--fg); border: 1px solid var(--rule); border-radius: 6px; padding: 8px 14px; background: var(--surface); }
+.btn.primary { background: var(--fg); color: var(--bg); border-color: var(--fg); }
+.btn:hover { border-color: var(--muted); }
+
+.pipeline { font: 0.9rem/1.5 var(--mono); background: var(--surface); border: 1px solid var(--rule); border-radius: 10px; padding: 16px 20px; overflow-x: auto; white-space: pre; margin: 0; }
+
+.outputs { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; }
+@media (max-width: 860px) { .outputs { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 480px) { .outputs { grid-template-columns: minmax(0, 1fr); } }
+.out { display: grid; gap: 8px; align-content: start; padding: 16px; background: var(--surface); border: 1px solid var(--rule); border-top: 3px solid var(--stage); border-radius: 10px; text-decoration: none; color: var(--fg); min-width: 0; }
+.out:hover { border-color: var(--muted); border-top-color: var(--stage); }
+.out .stage { font: 500 0.72rem var(--mono); letter-spacing: 0.06em; text-transform: uppercase; color: var(--stage); }
+.out p { color: var(--muted); font-size: 0.92rem; }
+.s1 { --stage: var(--stage1); } .s2 { --stage: var(--stage2); } .s3 { --stage: var(--stage3); } .s4 { --stage: var(--stage4); }
+
+.videos { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; }
+@media (max-width: 760px) { .videos { grid-template-columns: minmax(0, 1fr); } }
+figure { margin: 0; display: grid; gap: 10px; min-width: 0; }
+video { width: 100%; max-width: 100%; aspect-ratio: 16 / 9; background: #0E0E12; border-radius: 8px; display: block; }
+figcaption { font-size: 0.92rem; color: var(--muted); }
+figcaption strong { color: var(--fg); font-weight: 600; }
+
+.routing { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; }
+.route { display: grid; gap: 6px; padding-top: 14px; border-top: 2px solid var(--rule); min-width: 0; }
+.route .stage { font: 500 0.72rem var(--mono); letter-spacing: 0.06em; text-transform: uppercase; color: var(--stage); }
+
+.stages { width: 100%; border-collapse: collapse; font-size: 0.95rem; }
+.stages-wrap { overflow-x: auto; border: 1px solid var(--rule); border-radius: 10px; background: var(--surface); }
+.stages th, .stages td { text-align: left; padding: 10px 14px; border-bottom: 1px solid var(--rule); vertical-align: top; }
+.stages thead th { font: 500 0.75rem var(--mono); color: var(--muted); letter-spacing: 0.04em; text-transform: uppercase; }
+.stages tbody tr:last-child td { border-bottom: 0; }
+.stages td:first-child { font-family: var(--mono); white-space: nowrap; color: var(--stage); font-weight: 500; }
+
+code { font-family: var(--mono); font-size: 0.9em; }
+.start { font: 0.9rem/1.7 var(--mono); background: var(--surface); border: 1px solid var(--rule); border-radius: 10px; padding: 16px 20px; overflow-x: auto; white-space: pre; margin: 0; }
+footer { font-size: 0.85rem; color: var(--muted); border-top: 1px solid var(--rule); padding-top: 16px; display: flex; flex-wrap: wrap; gap: 8px 24px; }
+</style>
+</head>
+<body>
+<main>
+
+<header>
+  <span class="eyebrow">An explanation compiler for Claude Code</span>
+  <h1>Explainer</h1>
+  <p class="lede">Ask a question. The agent builds a small model of the subject, then renders it in the simplest form that keeps the important structure: controlled prose, a diagram, an interactive page, or a narrated animation.</p>
+  <div class="actions">
+    <a class="btn primary" href="https://github.com/ifrit98/Explainer">View on GitHub</a>
+    <a class="btn" href="https://github.com/ifrit98/Explainer/blob/main/docs/getting-started.md">Getting started</a>
+    <a class="btn" href="explainers/softmax-temperature/index.html">Open the interactive demo</a>
+  </div>
+</header>
+
+<section aria-labelledby="h-demo">
+  <span class="eyebrow">Compiler demo</span>
+  <h2 id="h-demo">One model, four renderings</h2>
+  <p>Every rendering of <em>softmax temperature</em> is compiled from one <a href="https://github.com/ifrit98/Explainer/blob/main/explainers/softmax-temperature/model.md">model.md</a>. The terms and the numbers are the same in each one. Normal routing would stop at Stage 3; this folder renders all four to show that they agree.</p>
+  <pre class="pipeline" aria-label="Diagram: question to model to four renderings">                  ┌─ 1 · controlled prose
+question -> model ─┼─ 2 · diagram
+                  ├─ 3 · interactive page
+                  └─ 4 · animated video</pre>
+  <div class="outputs">
+    <a class="out s1" href="https://github.com/ifrit98/Explainer/blob/main/explainers/softmax-temperature/explanation.md">
+      <span class="stage">Stage 1 · prose</span><h3>Controlled prose</h3>
+      <p>The procedure in numbered steps, the ratio law, a worked table, and the limits. Written in STE-80.</p></a>
+    <a class="out s2" href="https://github.com/ifrit98/Explainer/blob/main/explainers/softmax-temperature/diagram.md">
+      <span class="stage">Stage 2 · diagram</span><h3>Diagrams</h3>
+      <p>Where T acts in one decoding step, three distributions side by side, the causal chain, the limit states.</p></a>
+    <a class="out s3" href="explainers/softmax-temperature/index.html">
+      <span class="stage">Stage 3 · interactive</span><h3>Interactive page</h3>
+      <p>Move T and watch the bars, the pipeline table, and the ratio. Draw samples. Test shift invariance.</p></a>
+    <a class="out s4" href="#h-videos">
+      <span class="stage">Stage 4 · video</span><h3>Narrated video</h3>
+      <p>One tracker drives every object: dots move on the z/T line while the bars sharpen and flatten.</p></a>
+  </div>
+</section>
+
+<section aria-labelledby="h-videos">
+  <span class="eyebrow">Stage 4 · Manim + local Kokoro voice · no API keys</span>
+  <h2 id="h-videos">Videos</h2>
+  <div class="videos">
+    <figure>
+      <video controls preload="metadata" playsinline poster="docs/assets/softmax-video.png">
+        <source src="explainers/softmax-temperature/video/out.mp4" type="video/mp4">
+        <track kind="captions" src="explainers/softmax-temperature/video/captions.vtt" srclang="en" label="English">
+      </video>
+      <figcaption><strong>Softmax temperature</strong> · 64 s. The distance between two dots sets their probability ratio, so the viewer sees why low T sharpens and high T flattens.</figcaption>
+    </figure>
+    <figure>
+      <video controls preload="metadata" playsinline poster="docs/assets/ste-80-video.png">
+        <source src="explainers/ste-80/video/out.mp4" type="video/mp4">
+        <track kind="captions" src="explainers/ste-80/video/captions.vtt" srclang="en" label="English">
+      </video>
+      <figcaption><strong>STE-80 rewrite</strong> · 54 s. One manual sentence through three Simplified Technical English rules, 16 → 9 words. Kept words move; removed words fade. The narration is in STE.</figcaption>
+    </figure>
+  </div>
+  <p class="muted">Narration and animation stay in sync through bookmarks in the script. The local voice service synthesizes each bookmark segment separately, so every bookmark time is exact, with no Whisper pass.</p>
+</section>
+
+<section aria-labelledby="h-routing">
+  <span class="eyebrow">Routing</span>
+  <h2 id="h-routing">The simplest medium that keeps the structure</h2>
+  <div class="stages-wrap">
+    <table class="stages">
+      <thead><tr><th>Stage</th><th>Use when the subject is mainly…</th><th>Escalate when…</th></tr></thead>
+      <tbody>
+        <tr class="s1"><td>1 · prose</td><td>a procedure, a definition, an argument</td><td>—</td></tr>
+        <tr class="s2"><td>2 · diagram</td><td>topology, flow, architecture</td><td>the reader must hold three or more relationships at once</td></tr>
+        <tr class="s3"><td>3 · interactive</td><td>a parameter, scenarios, drill-down</td><td>the reader must explore states or alternatives</td></tr>
+        <tr class="s4"><td>4 · video</td><td>a transformation over time</td><td>understanding depends on seeing state A become state B</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="routing">
+    <div class="route s1"><span class="stage">Stage 1 · prose</span><h3><a href="https://github.com/ifrit98/Explainer/blob/main/explainers/git-bisect/explanation.md">Find the commit that introduced a bug</a></h3><p class="muted">git bisect is a linear procedure with one loop. Numbered steps carry all of it, so the router stops here.</p></div>
+    <div class="route s2"><span class="stage">Stage 2 · diagram</span><h3><a href="https://github.com/ifrit98/Explainer/blob/main/explainers/git-objects/diagram.md">What git stores when you commit</a></h3><p class="muted">Blobs, trees, commits, and refs are pure topology. Nothing moves and nothing is tuned, so one diagram is enough.</p></div>
+  </div>
+</section>
+
+<section aria-labelledby="h-start">
+  <span class="eyebrow">Quick start</span>
+  <h2 id="h-start">Run it</h2>
+  <pre class="start">git clone https://github.com/ifrit98/Explainer.git && cd Explainer
+brew install uv cairo pango pkgconf ffmpeg sox
+uv sync && uv run explainer setup     # downloads the Kokoro voice (~350 MB)
+claude                                # then: /explain &lt;topic&gt;  or  /video &lt;topic&gt;</pre>
+</section>
+
+<footer>
+  <span>MIT license</span>
+  <a href="https://github.com/ifrit98/Explainer">github.com/ifrit98/Explainer</a>
+  <a href="https://github.com/ifrit98/Explainer/tree/main/docs">Documentation</a>
+</footer>
+</main>
+</body>
+</html>

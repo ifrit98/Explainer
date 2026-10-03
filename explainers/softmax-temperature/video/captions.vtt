@@ -1,0 +1,93 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:04.460
+A language model must pick the next word. Here it has four candidates:
+
+2
+00:00:04.560 --> 00:00:05.958
+cat, dog, fox, and owl.
+
+3
+00:00:06.050 --> 00:00:10.246
+The model gives each candidate a score. The score is called a logit.
+
+4
+00:00:10.346 --> 00:00:11.889
+Cat has the highest logit.
+
+5
+00:00:11.983 --> 00:00:14.662
+Softmax turns the logits into probabilities.
+
+6
+00:00:14.762 --> 00:00:17.630
+At temperature one, cat gets sixty-one percent.
+
+7
+00:00:17.716 --> 00:00:20.850
+Temperature divides every logit before softmax.
+
+8
+00:00:20.950 --> 00:00:24.015
+At T equal to one half, the logits move apart.
+
+9
+00:00:24.115 --> 00:00:26.286
+Cat now gets eighty-four percent.
+
+10
+00:00:26.383 --> 00:00:28.017
+Now raise the temperature.
+
+11
+00:00:28.117 --> 00:00:30.952
+At T equal to two, the logits move together.
+
+12
+00:00:31.052 --> 00:00:33.353
+The probabilities become more equal.
+
+13
+00:00:33.450 --> 00:00:34.758
+Why does this happen?
+
+14
+00:00:34.858 --> 00:00:39.252
+The ratio of two probabilities depends only on the distance between
+
+15
+00:00:39.352 --> 00:00:42.673
+their dots. A larger distance gives a larger ratio.
+
+16
+00:00:42.773 --> 00:00:45.826
+A smaller distance gives a ratio closer to one.
+
+17
+00:00:45.916 --> 00:00:49.679
+At a very low temperature, the top token takes almost all the
+
+18
+00:00:49.779 --> 00:00:50.439
+probability.
+
+19
+00:00:50.539 --> 00:00:54.238
+At a very high temperature, every token gets almost the same
+
+20
+00:00:54.338 --> 00:00:54.998
+probability.
+
+21
+00:00:55.083 --> 00:00:57.574
+In every case, the order stays the same.
+
+22
+00:00:57.674 --> 00:01:00.425
+Cat is always first, and owl is always last.
+
+23
+00:01:00.525 --> 00:01:02.757
+Temperature changes only the spread.

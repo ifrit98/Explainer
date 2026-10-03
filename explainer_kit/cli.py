@@ -140,6 +140,13 @@ def format_srt(cues: list[tuple[float, float, str]]) -> str:
     return "\n".join(f"{i}\n{t(a)} --> {t(b)}\n{txt}\n" for i, (a, b, txt) in enumerate(cues, 1))
 
 
+def format_vtt(cues: list[tuple[float, float, str]]) -> str:
+    """WebVTT for <video><track>: same cues, '.' before milliseconds."""
+    body = format_srt(cues)
+    body = re.sub(r"(\d\d:\d\d:\d\d),(\d\d\d)", r"\1.\2", body)
+    return "WEBVTT\n\n" + body
+
+
 def cmd_render(args) -> None:
     video = EXPLAINERS / args.slug / "video"
     scene_file = video / "scene.py"
@@ -172,6 +179,7 @@ def cmd_render(args) -> None:
         offset += ffprobe_duration(part)
     captions = video / "captions.srt"
     captions.write_text(format_srt(cues))
+    captions.with_suffix(".vtt").write_text(format_vtt(cues))
 
     joined = video / "joined.mp4"
     if len(parts) == 1:
