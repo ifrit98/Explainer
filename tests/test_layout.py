@@ -40,3 +40,15 @@ def test_intentional_overlay_is_skipped():
 
 def test_off_frame_text_is_flagged():
     assert any(i.startswith("off-frame") for i in issues(label("far away").shift(UP * 5)))
+
+
+def test_text_that_nearly_touches_is_crowded():
+    top = label("n odd numbers")
+    below = label("1 = 1").next_to(top, UP * -1, buff=0.02)
+    assert any(i.startswith("crowded:") for i in issues(top, below))
+
+
+def test_text_with_normal_spacing_is_not_crowded():
+    top = label("n odd numbers")
+    below = label("1 = 1").next_to(top, UP * -1, buff=0.25)
+    assert issues(top, below) == []

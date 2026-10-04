@@ -5,9 +5,10 @@ With the plugin installed, run `explainer <command>` from any project. In the Ex
 | Command | Does |
 |---|---|
 | `explainer setup` | Download the Kokoro voice (about 350 MB) and report which tools are present, including LaTeX. |
-| `explainer new <slug> [--stage 1 2 3 4]` | Create `model.md`, `model.yaml`, and the chosen renderings from templates. Default stage: 4. Existing files are kept. |
+| `explainer new <slug> [--stage 1 2 3 4]` | Create `model.md`, `model.yaml`, `narrative.md`, and the chosen renderings from templates. Default stage: 4. Existing files are kept. |
 | `explainer check [slug ...]` | Hold renderings to `model.yaml`: numbers, required values, claims. No slug: every explainer. Exit code 1 on any problem. `-v` lists notes. |
 | `explainer probe <slug>` | Print a prompt for a fresh agent that reads only `model.md` and lists what the explanation will omit. |
+| `explainer coldread <slug> [--rendering R]` | Print a first-viewing prompt: a fresh agent meets one rendering (`narrative` by default, or `prose`, `diagram`, `html`, `video`) in order and reports every reference it was not given, everything shown but unsaid, and every leap. `--rubric` prints the pass rule. |
 | `explainer sync <slug>` | Write the model's values and the current web toolkit into the slug's HTML pages. |
 | `explainer render <slug> [options]` | Render the video: voice, mastered audio, captions, chapters, timeline, contact sheet. |
 | `explainer review <slug> [--draft]` | Build the review sheet: one frame at each narration line, bookmark, and predict pause. |
@@ -36,6 +37,7 @@ It reports these problems (full list with fixes: [model reference](model-referen
 5. **A function with no why.** `model.md` names exp, log, sqrt, sigmoid, … and no `why` claim justifies it (or `accept_unjustified` gives a reason; `-v` lists each one).
 6. **A second name for a concept.** A rendering uses a phrase that a `terms` entry avoids.
 7. **A video without its predict pauses.** `index.html` plays a video that has predict pauses through a plain `<video>`; use `Explainer.video`.
+8. **A symbol the narrative does not introduce.** With a `narrative.md`, a single-letter symbol in the scene's on-screen math or labels, or spoken as "the n-th", must be listed in the introduction ledger.
 
 `--diagrams` also renders every Mermaid block (Markdown fences and `<pre class="mermaid">`) with the Mermaid CLI: `mmdc` on PATH, else `npx` with a pinned version. It needs Node. CI runs it.
 

@@ -103,6 +103,14 @@ Replace the `<video>` element with `Explainer.video(el, {src, captions, timeline
 
 Add `self.wait(1.2)` after the voiceover block that completes the claim. For a long line, split it: one sentence per step, with a bookmark where each step appears on screen.
 
+## `shows the symbol 'n', which the introduction ledger in narrative.md does not introduce`
+
+The scene shows a letter (in `MathTex`, a label, or "the n-th" in narration) that `narrative.md` never introduces. Add a ledger row with what it means and the instance that grounds it ("for 1 + 3 + 5, n is 3"), and make that beat say it aloud before the symbol appears.
+
+## `crowded: 'a' × 'b'`
+
+Two texts are closer than 0.1 scene units, so they read as touching. Move one, or increase the `buff`. `stagger_labels` now spaces its rows by the label height.
+
 ## `--diagrams: no Mermaid CLI`
 
 Install Node (for `npx`), or `npm install -g @mermaid-js/mermaid-cli` for `mmdc`. The first `npx` run downloads the CLI and a headless browser.

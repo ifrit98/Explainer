@@ -25,7 +25,16 @@ Add `--diagrams` when the explainer has Mermaid blocks: each block is rendered o
 - **Page.** Open `index.html` in a browser (Playwright when available). Use every control once. Check: no console errors, no horizontal scroll at 390 px, both light and dark themes, the predict gate hides its result until a prediction is committed.
 - **Prose and diagrams.** Read them against the STE-80 rules in `../explain/references/writing.md`. `explainer check --diagrams` renders each Mermaid block.
 
-## 3. Blind understanding test
+## 3. Cold read (first viewing, in order)
+
+The blind test asks what a reader understood at the end. The cold read finds where, in order, a first-time reader was handed something unexplained. A rendering can pass the blind test and fail the cold read: the reviewer fills gaps from context.
+
+1. Print the prompt: `explainer coldread <slug> --rendering <narrative|prose|diagram|html|video>`.
+2. Give it, unchanged, to a fresh subagent.
+3. Apply the pass rule (`explainer coldread <slug> --rubric`): no unresolved reference, nothing shown but unsaid, no leap on the main line, the result stated in words early, a motive and a reason for the approach, and a close that answers the opening question.
+4. Fix findings in `narrative.md` first, then in the renderings. Record them in `review/understanding.md`.
+
+## 4. Blind understanding test
 
 Use this for anything that will be published. A fresh agent sees only one rendering.
 

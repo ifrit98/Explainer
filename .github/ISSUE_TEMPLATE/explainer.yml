@@ -1,0 +1,23 @@
+name: Explainer idea or review finding
+description: Propose an example, or report an explanation that omits a connection or hands the reader something unexplained.
+labels: [explanation]
+body:
+  - type: input
+    id: subject
+    attributes:
+      label: Subject or explainer
+      description: A topic to explain, or the slug of an existing explainer.
+    validations:
+      required: true
+  - type: textarea
+    id: finding
+    attributes:
+      label: What a reader needs, or what is missing
+      description: For a finding, quote the moment (time or line) and say what the reader was not given. Cold-read output (`explainer coldread`) is welcome.
+    validations:
+      required: true
+  - type: textarea
+    id: rule
+    attributes:
+      label: A general rule (optional)
+      description: Which check, probe rule, or template line would catch this in any explanation?

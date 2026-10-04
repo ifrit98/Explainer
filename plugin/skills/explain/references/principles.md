@@ -7,15 +7,16 @@ Do not ask "What should I say?" Ask "What representation lets a human understand
 ## 1. Separate the model from the rendering
 
 ```text
-                  ┌─ controlled prose
-Question → Model ─┼─ diagram
-                  ├─ interactive HTML
-                  └─ animated explainer
+                              ┌─ controlled prose
+Question → Model → Narrative ─┼─ diagram
+                              ├─ interactive HTML
+                              └─ animated explainer
 ```
 
 1. Build the semantic model first (Pass 1).
 2. Select the representation second (Pass 2).
-3. Render every representation from the same model. Prose, diagram, page, and video must not disagree.
+3. Compile the narrative third (Pass 3, §11): the path a first-time reader takes through the model.
+4. Render every representation from the same model and narrative. Prose, diagram, page, and video must not disagree.
 
 The model is the source of truth. If a rendering needs a fact that the model does not contain, add the fact to the model first.
 
@@ -120,3 +121,20 @@ An explanation fails most often by omission: it states a formula without saying 
 Run `explainer probe <slug>` and give the prompt to a fresh agent that sees only `model.md`. Recompute every number it suggests before you add it. Then record the ideas as `claims` in `model.yaml`, and the one-word rules as `terms`; `explainer check` fails while a claim is incomplete, a rendering does not cover it, or a rendering uses a term's avoided phrase.
 
 **Turn each review finding into a rule.** When a blind test or a reader finds a gap, fix the rendering, then ask which check, probe rule, or template line would have caught it in any explanation. Add that too. A finding fixed only in one example comes back in the next one.
+
+## 11. Compile the narrative
+
+The model says what is true. It does not say the path a first-time reader takes to it. A correct model with every claim covered can still lose the reader: the odd-squares video passed its blind test while it used "the n-th L" without saying what n is, and never said its own result aloud. After the model, write `narrative.md` (Pass 3): the beats a reader goes through, in order. An explainer's power comes from the model and the narrative together, not from the animation.
+
+- **Question first, in words.** State the question, and the result itself, in words before you explain it. Answer it again at the end in the same words.
+- **Motive.** Give a reason to care, and a reason for the approach. ("A square number is a square of tiles. Each sum adds one odd number. So ask what one more odd number adds to a square.")
+- **Earn every reference.** Each term, symbol, name, and visual convention (a color, a highlight, a brace) is shown, named, and grounded by an instance before its first use. Keep one meaning per letter. If n is a count, it stays a count, or the narration says aloud that the count and the side are the same number.
+- **Concrete, then symbol.** Work an instance with numbers, say the binding aloud ("here n is 5"), then write the symbol.
+- **Say what you show; show what you say.** Read or explain every label and formula on screen, or remove it. Give everything you say a picture.
+- **Names match pictures, and each case gets its own picture.** If you call a shape an L, draw an L. Show a counterexample on its own small picture, not on the large one from another beat.
+- **Each beat answers the question the last one raised.** Write the bridge: so, but, therefore.
+- **Do not prove with examples.** After "five examples do not prove it", each general step needs a reason, not three more cases.
+- **Close the loop.** Answer the opening question with the general argument said aloud, then give the payoff and one connection.
+
+Run `explainer coldread <slug>` on the narrative before you render, and on each rendering after. A fresh agent meets the explanation for the first time and reports, in order, every reference it was not given, everything shown but not said, and every leap. `explainer check` fails a scene that shows a symbol the narrative's introduction ledger does not list.
+

@@ -92,11 +92,14 @@ class LabeledNumberLine(VGroup):
 
 
 def stagger_labels(labels: Sequence[VMobject], anchors: Sequence, direction=UP, buff: float = 0.25,
-                   row_gap: float = 0.38, pad: float = 0.12) -> VGroup:
+                   row_gap: float | None = None, pad: float = 0.12) -> VGroup:
     """Place each label next to its anchor point; move a label to the next row when it would overlap.
 
-    Rows are filled left to right, so the result is deterministic. Returns the labels as a VGroup.
+    Rows are filled left to right, so the result is deterministic. The row gap defaults to the tallest
+    label plus 0.15, so stacked labels keep the layout check's minimum gap. Returns the labels as a VGroup.
     """
+    if row_gap is None:
+        row_gap = max(lab.height for lab in labels) + 0.15
     order = sorted(range(len(labels)), key=lambda i: anchors[i][0])
     rows: list[list[tuple[float, float]]] = []
     for i in order:

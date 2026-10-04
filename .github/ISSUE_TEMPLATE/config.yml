@@ -1,0 +1,8 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Getting started
+    url: https://github.com/ifrit98/Explainer/blob/main/docs/getting-started.md
+    about: Install the plugin and make a first explainer.
+  - name: Troubleshooting
+    url: https://github.com/ifrit98/Explainer/blob/main/docs/troubleshooting.md
+    about: Common errors and check messages, with fixes.

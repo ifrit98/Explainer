@@ -1,6 +1,6 @@
 # Storyboard: {{slug}}
 
-> Derived from `../model.md`. Write this file before `scene.py`.
+> The visual plan for the beats in `../narrative.md`. Write the narrative first, then this file, then `scene.py`.
 
 ## 1. Learning objective
 

@@ -10,6 +10,8 @@
   explainer probe <slug>                prompt for a fresh agent that reads model.md and lists what it omits
   explainer quiz <slug> --rendering R   blind-test prompt for one rendering (R: prose, diagram, html, video)
   explainer quiz <slug> --rubric        expected answers, for scoring the blind test
+  explainer coldread <slug> --rendering R  first-viewing read: every reference a reader meets before it is
+                                        introduced, in order (R: narrative, prose, diagram, html, video)
   explainer voices / say "<text>"       list voices / audition a line
   explainer frames <slug>               rebuild the contact sheet
 
@@ -68,7 +70,7 @@ def cmd_new(args) -> None:
         sys.exit("slug must be kebab-case, for example: attention-heads")
     root = explainer_dir(slug)
     class_name = "".join(part.capitalize() for part in slug.split("-"))
-    files = [("model.md", "model.md"), ("model.yaml", "model.yaml")]
+    files = [("model.md", "model.md"), ("model.yaml", "model.yaml"), ("narrative.md", "narrative.md")]
     for stage in sorted(set(args.stage)):
         files += STAGE_FILES[stage]
     for rel, template in files:
@@ -158,6 +160,12 @@ def cmd_quiz(args) -> None:
         sys.exit("give --rendering {prose,diagram,html,video} or --rubric")
 
 
+def cmd_coldread(args) -> None:
+    from explainer_kit.review import COLDREAD_PASS, coldread_prompt
+
+    print(COLDREAD_PASS if args.rubric else coldread_prompt(args.slug, args.rendering))
+
+
 def cmd_probe(args) -> None:
     from explainer_kit.review import probe_prompt
 
@@ -235,6 +243,12 @@ def main() -> None:
     p.add_argument("--rendering", choices=["prose", "diagram", "html", "video"])
     p.add_argument("--rubric", action="store_true")
     p.set_defaults(fn=cmd_quiz)
+
+    p = sub.add_parser("coldread", help="first-viewing read: unintroduced references, in order")
+    p.add_argument("slug")
+    p.add_argument("--rendering", choices=["narrative", "prose", "diagram", "html", "video"], default="narrative")
+    p.add_argument("--rubric", action="store_true", help="print the pass rule")
+    p.set_defaults(fn=cmd_coldread)
 
     p = sub.add_parser("probe", help="gap-finding prompt for the model, before rendering")
     p.add_argument("slug")

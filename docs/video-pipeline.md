@@ -178,7 +178,7 @@ Voice clips are cached in `video/media/voiceovers/`. A re-render synthesizes onl
 
 1. `explainer check <slug>`: narration and labels against `model.yaml`.
 2. Read `review.png`: one frame at each line, bookmark, and predict pause, with the spoken text under it and layout issues in red. Each frame must show the evidence for its line.
-3. Fix every layout issue. The check does not see text crossing lines or arrows; look for that in the frames.
+3. Fix every layout issue: `overlap`, `crowded` (text closer than 0.1 units to other text), `covered`, `off-frame`. The check does not see text crossing lines or arrows; look for that in the frames.
 4. Fix every pace issue. From the timeline, each claim needs a pause of at least 1 s after its line, and no more than 10 s of narration over one picture after its mark. Split an argument into one line or bookmark per step. Silent drafts speak a little slower than the voice, so judge pace on the final render.
 5. Read `captions.srt` against the narration.
 6. Check each claim frame: does the screen show the claim's case at that moment? In `dijkstra`, the narration said "D is ten" while the screen showed D = 8; only the frame showed it.

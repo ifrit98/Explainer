@@ -7,7 +7,7 @@ Every explainer has two model files in `explainers/<slug>/`:
 | `model.md` | people (and the probe) | the semantic model in prose and tables |
 | `model.yaml` | tools | the values, claims, and quiz that renderings are checked against |
 
-`explainer new <slug>` creates both from templates.
+`explainer new <slug>` creates both from templates, and a third file, `narrative.md`: the path a first-time reader takes through the model (see below).
 
 ## `model.md` sections
 
@@ -92,6 +92,18 @@ A rendering covers a claim by marking the place where it presents it:
 
 A mark is a promise, not proof: the blind understanding test checks that the idea actually lands.
 
+## `narrative.md` sections
+
+| Section | Answers | Checked by |
+|---|---|---|
+| Reader before and after | What may the reader assume? What can they say afterwards? | the cold read uses "Before" as its prior knowledge |
+| Question and motive | The question and the result in words; why care; why this approach. | the cold read |
+| Introduction ledger | Every term, symbol, name, and visual convention: what it means, the instance that grounds it, the beat that introduces it. | `explainer check` (scene symbols), the cold read |
+| Beats | In order: the reader's question, the bridge, what is shown, what is said, what the reader now knows. | the cold read (`--rendering narrative`) |
+| Concrete to symbol | For each general statement: the instance, the binding said aloud, the symbol. | |
+| Links between representations | How two views of one quantity are linked at the same moment. | |
+| Close the loop | The answer, the general argument in words, the payoff. | the cold read |
+
 ## What `explainer check` reports
 
 | Problem | Example message | Fix |
@@ -105,6 +117,7 @@ A mark is a promise, not proof: the blind understanding test checks that the ide
 | A function with no why | `model.md uses exp but no 'why' claim says why` | add a `why` claim with `about: [exp]`, or `accept_unjustified` with a reason |
 | A second name for a concept | `video/scene.py: says 'has distance'; the model's term is 'estimate'` | use the term; avoid phrases match whole words, ignoring case and line breaks |
 | A video without its predict pauses | `index.html: plays the video with a plain <video>, which skips its 1 predict pause(s)` | play it with `Explainer.video` |
+| A symbol the narrative does not introduce | `video/scene.py: shows the symbol 'n', which the introduction ledger in narrative.md does not introduce` | add it to the ledger with its grounding instance, and introduce it in that beat |
 | A Mermaid syntax error (with `--diagrams`) | `diagram.md:24: Error: Parse error on line 3` | fix the block; the line is where the block starts |
 
 Numbers are compared at the precision shown: 0.84 matches 0.842, "84%" and "eighty-four percent" match 0.842, 6.0 × 10⁻⁶ is one number, and 2 never stands for 2.5. Stage, step, and section numbers, years, versions, and hash fragments are skipped.

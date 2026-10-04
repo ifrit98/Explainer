@@ -17,109 +17,109 @@ The model gives each candidate a score. The score is called a logit.
 Cat has the highest logit.
 
 5
-00:00:12.207 --> 00:00:15.060
+00:00:12.201 --> 00:00:15.054
 Softmax turns the logits into probabilities.
 
 6
-00:00:15.160 --> 00:00:17.854
+00:00:15.154 --> 00:00:17.848
 At temperature one, cat gets sixty-one percent.
 
 7
-00:00:17.945 --> 00:00:21.289
+00:00:17.934 --> 00:00:21.278
 Temperature divides every logit before softmax.
 
 8
-00:00:21.389 --> 00:00:24.668
+00:00:21.378 --> 00:00:24.657
 At T equal to one half, the logits move apart.
 
 9
-00:00:24.768 --> 00:00:26.481
+00:00:24.757 --> 00:00:26.470
 Cat now gets eighty-four percent.
 
 10
-00:00:26.579 --> 00:00:28.151
+00:00:26.568 --> 00:00:28.140
 Pause here and predict.
 
 11
-00:00:28.251 --> 00:00:31.735
+00:00:28.240 --> 00:00:31.724
 When T rises to 2, does cat stay the most likely token?
 
 12
-00:00:34.829 --> 00:00:36.551
+00:00:34.818 --> 00:00:36.540
 Now raise the temperature.
 
 13
-00:00:36.651 --> 00:00:39.802
+00:00:36.640 --> 00:00:39.791
 At T equal to two, the logits move together.
 
 14
-00:00:39.902 --> 00:00:41.807
+00:00:39.891 --> 00:00:41.796
 The probabilities become more equal.
 
 15
-00:00:41.895 --> 00:00:43.425
+00:00:41.884 --> 00:00:43.414
 Why does this happen?
 
 16
-00:00:43.525 --> 00:00:47.588
+00:00:43.514 --> 00:00:47.577
 The ratio of two probabilities depends only on the distance between
 
 17
-00:00:47.688 --> 00:00:51.315
+00:00:47.677 --> 00:00:51.304
 their dots. A larger distance gives a larger ratio.
 
 18
-00:00:51.415 --> 00:00:54.344
+00:00:51.404 --> 00:00:54.333
 A smaller distance gives a ratio closer to one.
 
 19
-00:00:54.429 --> 00:00:56.684
+00:00:54.418 --> 00:00:56.673
 Why exp, and not something simpler?
 
 20
-00:00:56.784 --> 00:01:01.535
+00:00:56.773 --> 00:01:01.524
 Divide each logit by their sum, and owl gets minus zero point four.
 
 21
-00:01:01.635 --> 00:01:03.869
+00:01:01.624 --> 00:01:03.858
 A probability cannot be negative.
 
 22
-00:01:03.969 --> 00:01:07.313
+00:01:03.958 --> 00:01:07.302
 Exp makes every weight positive and keeps the order.
 
 23
-00:01:07.413 --> 00:01:09.561
+00:01:07.402 --> 00:01:09.550
 And it turns a gap into a ratio.
 
 24
-00:01:09.661 --> 00:01:12.484
+00:01:09.650 --> 00:01:12.473
 That is why only the distance between the dots matters.
 
 25
-00:01:14.279 --> 00:01:18.084
+00:01:14.268 --> 00:01:18.073
 At a very low temperature, the top token takes almost all the
 
 26
-00:01:18.184 --> 00:01:18.966
+00:01:18.173 --> 00:01:18.955
 probability.
 
 27
-00:01:19.066 --> 00:01:22.638
+00:01:19.055 --> 00:01:22.627
 At a very high temperature, every token gets almost the same
 
 28
-00:01:22.738 --> 00:01:23.361
+00:01:22.727 --> 00:01:23.350
 probability.
 
 29
-00:01:23.445 --> 00:01:25.999
+00:01:23.434 --> 00:01:25.988
 In every case, the order stays the same.
 
 30
-00:01:26.099 --> 00:01:29.208
+00:01:26.088 --> 00:01:29.197
 Cat is always first, and owl is always last.
 
 31
-00:01:29.308 --> 00:01:31.256
+00:01:29.297 --> 00:01:31.245
 Temperature changes only the spread.

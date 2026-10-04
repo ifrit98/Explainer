@@ -13,8 +13,9 @@ The repo is three things: the toolkit (`explainer_kit/`), the Claude Code plugin
 Run the CLI through uv here: `uv run explainer <command>`. Plugin users run `explainer <command>` (the plugin's `bin/explainer` wrapper).
 
 ```bash
-uv run explainer new <slug> --stage 1 2 3 4   # scaffold model.md, model.yaml, and the chosen renderings
+uv run explainer new <slug> --stage 1 2 3 4   # scaffold model.md, model.yaml, narrative.md, and the chosen renderings
 uv run explainer check                        # every example against its model.yaml
+uv run explainer coldread <slug>              # first-viewing prompt for a fresh agent (narrative, then each rendering)
 uv run explainer render <slug> --draft        # fast silent layout pass
 uv run explainer render <slug> --review       # 1080p60, voice, captions, chapters, review sheet
 uv run pytest -q                              # toolkit tests

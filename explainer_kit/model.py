@@ -29,7 +29,8 @@ the scene calls `load_model(...)`, or the page has a synced
 6. functions in model.md (exp, log, sqrt, …) that no `why` claim justifies;
 7. a phrase a `terms` entry avoids (a second name for one concept);
 8. a page that embeds this explainer's video with plain <video> although the video has predict pauses
-   (use `Explainer.video`, which stops at them).
+   (use `Explainer.video`, which stops at them);
+9. with a `narrative.md`: a symbol on screen in the video that its introduction ledger does not list.
 """
 
 from __future__ import annotations
@@ -402,6 +403,62 @@ def terminology(folder: Path, model: dict, present: dict[str, Path], rep: "Repor
                                     f"'{term}' (terms in model.yaml)")
 
 
+ON_SCREEN_CALLS = {"MathTex", "Tex", "label", "Text", "MarkupText"}
+TEX_COMMAND = re.compile(r"\\[A-Za-z]+")
+SYMBOL = re.compile(r"(?<![A-Za-z])[A-Za-z](?![A-Za-z])")
+SPOKEN_SYMBOL = re.compile(r"\b(?:the\s+)?([a-zA-Z])-th\b")
+
+
+def scene_symbols(source: str) -> set[str]:
+    """Single-letter symbols a viewer meets in a scene: in on-screen math and labels, and as 'the n-th' in speech."""
+    found: set[str] = set()
+    tree = ast.parse(source)
+    specs = {id(n) for f in ast.walk(tree) if isinstance(f, ast.FormattedValue) and f.format_spec
+             for n in ast.walk(f.format_spec)}  # f"{x:.2f}": the format code is not on screen
+    for node in ast.walk(tree):
+        if not isinstance(node, ast.Call):
+            continue
+        name = getattr(node.func, "id", getattr(node.func, "attr", ""))
+        texts = [n.value for a in node.args for n in ast.walk(a)
+                 if isinstance(n, ast.Constant) and isinstance(n.value, str) and id(n) not in specs]
+        if name in ON_SCREEN_CALLS:
+            for t in texts:
+                found.update(SYMBOL.findall(TEX_COMMAND.sub(" ", t)) if name in ("MathTex", "Tex")
+                             or not re.search(r"[a-z]{2}", t) else [])
+        if name == "voiceover":
+            texts += [n.value for k in node.keywords if k.arg == "text" for n in ast.walk(k.value)
+                      if isinstance(n, ast.Constant) and isinstance(n.value, str)]
+            for t in texts:
+                found.update(SPOKEN_SYMBOL.findall(t))
+    return found
+
+
+def ledger_references(narrative_md: str) -> set[str]:
+    """First-column entries of the introduction ledger table in narrative.md."""
+    m = re.search(r"^## \d*\.?\s*Introduction ledger\s*$(.*?)(?=^## |\Z)", narrative_md, re.M | re.S)
+    if not m:
+        return set()
+    refs = set()
+    for line in m.group(1).splitlines():
+        cells = [c.strip() for c in line.strip().strip("|").split("|")] if line.strip().startswith("|") else []
+        if cells and cells[0] and not set(cells[0]) <= set("-: ") and cells[0] != "Reference":
+            refs.update(r.strip(" `*") for r in re.split(r",|/", cells[0]))
+    return refs
+
+
+def narrative_ledger(folder: Path, present: dict[str, Path], rep: "Report") -> None:
+    narrative = folder / "narrative.md"
+    if not narrative.exists():
+        if present:
+            rep.notes.append("no narrative.md: the reader's path is not written down (explainer new adds one)")
+        return
+    refs = ledger_references(narrative.read_text())
+    if "video" in present:
+        for sym in sorted(scene_symbols(present["video"].read_text()) - refs):
+            rep.problems.append(f"video/scene.py: shows the symbol '{sym}', which the introduction ledger in "
+                                f"narrative.md does not introduce")
+
+
 def predict_pauses(folder: Path) -> int:
     timeline = folder / "video" / "timeline.json"
     if not timeline.exists():
@@ -463,7 +520,10 @@ def check(folder: Path) -> Report:
                 rep.problems.append(f"{rel}: inlined web toolkit is out of date — run `explainer sync {folder.name}`")
 
     completeness(folder, model, present, rep)
+    if not model["claims"] and present:
+        rep.notes.append("no claims: completeness is not checked (principles §10)")
     terminology(folder, model, present, rep)
+    narrative_ledger(folder, present, rep)
     if "html" in present and plain_video_with_pauses(present["html"].read_text(), n := predict_pauses(folder)):
         rep.problems.append(f"index.html: plays the video with a plain <video>, which skips its {n} predict "
                             f"pause(s); use Explainer.video")

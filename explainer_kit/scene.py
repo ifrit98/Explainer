@@ -196,11 +196,23 @@ class ExplainerScene(VoiceoverScene):
             for _, b_name, b in texts[i + 1:]:
                 if _covered(a, b) > min_overlap:
                     issues.append(f"overlap: {a_name!r} × {b_name!r}")
+                elif _covered(a, b) == 0 and _gap(a, b) < MIN_GAP:
+                    issues.append(f"crowded: {a_name!r} × {b_name!r} (closer than {MIN_GAP})")
         for pk, p_name, p in panels:
             for tk, t_name, t in texts:
                 if pk != tk and _covered(t, p, of_first=True) > min_overlap:
                     issues.append(f"covered: {t_name!r} under a {p_name}")
         return issues
+
+
+MIN_GAP = 0.1  # scene units; text closer than this reads as touching
+
+
+def _gap(a, b) -> float:
+    """Distance between two boxes (0 when they touch or overlap)."""
+    dx = max(a[0] - b[2], b[0] - a[2], 0)
+    dy = max(a[1] - b[3], b[1] - a[3], 0)
+    return (dx ** 2 + dy ** 2) ** 0.5
 
 
 def _box(mob):

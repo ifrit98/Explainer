@@ -61,6 +61,17 @@ An explanation can pass every number check and still omit the idea that makes it
 
 Renderings mark where they cover each claim, and `explainer check` fails while a claim is incomplete or uncovered, or while `model.md` uses a function (exp, log, sqrt, …) that no claim justifies. Before rendering, `explainer probe` gives the model to a fresh agent that lists what is missing. The [authoring guide](authoring.md) walks through the method on `softmax-temperature`.
 
+## The narrative
+
+A correct, complete model can still lose the reader on the way. The odd-squares video passed its blind test while it used "the n-th L" without saying what n is, and never said its own result aloud. So between the model and the renderings sits a third pass: `narrative.md`, the path a first-time reader takes (principles §11).
+
+- The **question and the result** are said in words early, and answered again at the close.
+- A **motive** gives a reason to care, and a reason for the approach.
+- An **introduction ledger** lists every term, symbol, name, and visual convention, with the instance that grounds it. `explainer check` fails a scene symbol the ledger does not list.
+- **Beats** come in order. Each answers the question the last one raised, says what it shows, and shows what it says.
+
+`explainer coldread` gives the narrative, or any rendering, to a fresh agent that meets it for the first time and reports, in order, every reference it was not given. The blind test measures what a reader understood at the end; the cold read finds where, along the way, a reader was handed something unexplained. The [authoring guide](authoring.md#the-narrative-pass-odd-squares) shows the pass on odd-squares.
+
 ## Four stages, and when to escalate
 
 Start with the cheapest representation that can work. Escalate only when the current one forces the reader to do mental work that a richer medium would remove.

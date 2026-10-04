@@ -1,162 +1,454 @@
 {
- "duration": 58.867,
+ "duration": 260.733,
  "events": [
   {
    "kind": "voiceover",
    "t": 0.0,
-   "duration": 8.987,
-   "text": "Add the odd numbers in order. One. One plus three is four. Add five, and you get nine. Then sixteen, then twenty-five.",
+   "duration": 13.505,
+   "text": "Add the odd numbers in order, each in its own color, and watch what the sums make. One. One plus three is four. One plus three plus five is nine. Add seven: sixteen. Add nine: twenty-five.",
    "bookmarks": {
-    "r1": 1.928,
-    "r2": 2.818,
-    "r3": 4.691,
-    "r4": 6.645,
-    "r5": 7.8
+    "r1": 5.047,
+    "r2": 5.932,
+    "r3": 7.805,
+    "r4": 10.061,
+    "r5": 11.901
    },
    "scene": "OddSquares"
   },
   {
    "kind": "bookmark",
-   "t": 1.917,
+   "t": 5.033,
    "mark": "r1",
    "issues": [],
    "scene": "OddSquares"
   },
   {
    "kind": "bookmark",
-   "t": 2.817,
+   "t": 5.917,
    "mark": "r2",
    "issues": [],
    "scene": "OddSquares"
   },
   {
    "kind": "bookmark",
-   "t": 4.683,
+   "t": 7.8,
    "mark": "r3",
    "issues": [],
    "scene": "OddSquares"
   },
   {
    "kind": "bookmark",
-   "t": 6.633,
+   "t": 10.05,
    "mark": "r4",
    "issues": [],
    "scene": "OddSquares"
   },
   {
    "kind": "bookmark",
-   "t": 7.783,
+   "t": 11.9,
    "mark": "r5",
    "issues": [],
    "scene": "OddSquares"
   },
   {
    "kind": "voiceover_end",
-   "t": 8.983,
+   "t": 13.5,
    "issues": [],
    "scene": "OddSquares"
   },
   {
    "kind": "voiceover",
-   "t": 8.983,
-   "duration": 6.661,
-   "text": "Every sum is a square number. Five examples show a pattern. They do not prove a rule. A picture can.",
-   "bookmarks": {},
-   "scene": "OddSquares"
-  },
-  {
-   "kind": "voiceover_end",
-   "t": 15.633,
-   "issues": [],
-   "scene": "OddSquares"
-  },
-  {
-   "kind": "voiceover",
-   "t": 15.633,
-   "duration": 9.933,
-   "text": "Start with one square. Three squares wrap it into a two by two square. Five more make three by three. Seven make four by four. Nine make five by five.",
+   "t": 13.5,
+   "duration": 14.93,
+   "text": "Look at the answers. One is one times one. Four is two times two. Nine is three times three. Sixteen is four times four. Twenty-five is five times five. Every sum is a square number. Yellow marks what to look at.",
    "bookmarks": {
-    "g2": 17.155,
-    "g3": 20.092,
-    "g4": 22.124,
-    "g5": 23.96
+    "s1": 14.913,
+    "s2": 16.723,
+    "s3": 18.569,
+    "s4": 20.444,
+    "s5": 22.558
    },
    "scene": "OddSquares"
   },
   {
    "kind": "bookmark",
-   "t": 17.15,
-   "mark": "g2",
+   "t": 14.9,
+   "mark": "s1",
    "issues": [],
    "scene": "OddSquares"
   },
   {
    "kind": "bookmark",
-   "t": 20.083,
+   "t": 16.717,
+   "mark": "s2",
+   "issues": [],
+   "scene": "OddSquares"
+  },
+  {
+   "kind": "bookmark",
+   "t": 18.567,
+   "mark": "s3",
+   "issues": [],
+   "scene": "OddSquares"
+  },
+  {
+   "kind": "bookmark",
+   "t": 20.433,
+   "mark": "s4",
+   "issues": [],
+   "scene": "OddSquares"
+  },
+  {
+   "kind": "bookmark",
+   "t": 22.55,
+   "mark": "s5",
+   "issues": [],
+   "scene": "OddSquares"
+  },
+  {
+   "kind": "voiceover_end",
+   "t": 28.417,
+   "issues": [],
+   "scene": "OddSquares"
+  },
+  {
+   "kind": "voiceover",
+   "t": 28.417,
+   "duration": 12.515,
+   "text": "Now count the odd numbers in each sum. Three of them give three times three. Call that count n. For one plus three plus five, n is three. So it seems that the first n odd numbers add up to n times n.",
+   "bookmarks": {
+    "count": 30.776,
+    "rule": 37.157
+   },
+   "scene": "OddSquares"
+  },
+  {
+   "kind": "bookmark",
+   "t": 30.767,
+   "mark": "count",
+   "issues": [],
+   "scene": "OddSquares"
+  },
+  {
+   "kind": "bookmark",
+   "t": 37.15,
+   "mark": "rule",
+   "issues": [],
+   "scene": "OddSquares"
+  },
+  {
+   "kind": "voiceover_end",
+   "t": 40.917,
+   "issues": [],
+   "scene": "OddSquares"
+  },
+  {
+   "kind": "voiceover",
+   "t": 40.917,
+   "duration": 10.595,
+   "text": "But why should odd numbers make squares at all? Five examples show a pattern. They do not prove it for every n. The question mark means: not proved yet. We need a reason.",
+   "bookmarks": {
+    "q": 43.558,
+    "qm": 47.626
+   },
+   "scene": "OddSquares"
+  },
+  {
+   "kind": "bookmark",
+   "t": 43.55,
+   "mark": "q",
+   "issues": [],
+   "scene": "OddSquares"
+  },
+  {
+   "kind": "claim",
+   "t": 43.55,
+   "id": "misconception-examples",
+   "scene": "OddSquares"
+  },
+  {
+   "kind": "bookmark",
+   "t": 47.617,
+   "mark": "qm",
+   "issues": [],
+   "scene": "OddSquares"
+  },
+  {
+   "kind": "voiceover_end",
+   "t": 51.5,
+   "issues": [],
+   "scene": "OddSquares"
+  },
+  {
+   "kind": "voiceover",
+   "t": 53.2,
+   "duration": 17.528,
+   "text": "A square number is a square of tiles. Nine tiles make three rows of three: a three by three square, with side three. Each sum adds one more odd number. So ask: what does one more odd number add to a square of tiles? Start with the first odd number, one: one tile, a square with side one.",
+   "bookmarks": {
+    "nine": 55.412,
+    "ask": 60.366,
+    "t": 66.489
+   },
+   "scene": "OddSquares"
+  },
+  {
+   "kind": "bookmark",
+   "t": 60.35,
+   "mark": "ask",
+   "issues": [],
+   "scene": "OddSquares"
+  },
+  {
+   "kind": "bookmark",
+   "t": 66.483,
+   "mark": "t",
+   "issues": [],
+   "scene": "OddSquares"
+  },
+  {
+   "kind": "voiceover_end",
+   "t": 70.717,
+   "issues": [],
+   "scene": "OddSquares"
+  },
+  {
+   "kind": "voiceover",
+   "t": 70.717,
+   "duration": 20.246,
+   "text": "Add the next odd number, three. Three tiles go around it: to the left, below, and in the corner. Together they make an L shape: a column and a row that share a corner. The square now has side two. One plus three is four tiles, the same four as in the sums. Each L has the color of its odd number, and its number lights up in the sums.",
+   "bookmarks": {
+    "l2": 72.628,
+    "four": 82.72,
+    "color": 86.779
+   },
+   "scene": "OddSquares"
+  },
+  {
+   "kind": "bookmark",
+   "t": 72.628,
+   "mark": "l2",
+   "issues": [],
+   "scene": "OddSquares"
+  },
+  {
+   "kind": "bookmark",
+   "t": 82.712,
+   "mark": "four",
+   "issues": [],
+   "scene": "OddSquares"
+  },
+  {
+   "kind": "bookmark",
+   "t": 86.778,
+   "mark": "color",
+   "issues": [],
+   "scene": "OddSquares"
+  },
+  {
+   "kind": "voiceover_end",
+   "t": 90.962,
+   "issues": [],
+   "scene": "OddSquares"
+  },
+  {
+   "kind": "voiceover",
+   "t": 90.962,
+   "duration": 17.699,
+   "text": "The next L has five tiles, and makes side three. Seven tiles make side four. Nine tiles make side five. Each L adds one to the side. So after n Ls, the side is n. Here n counts the Ls, and each L is one odd number, so it is the same n as before.",
+   "bookmarks": {
+    "g3": 92.723,
+    "g4": 94.307,
+    "g5": 96.464
+   },
+   "scene": "OddSquares"
+  },
+  {
+   "kind": "bookmark",
+   "t": 92.712,
    "mark": "g3",
    "issues": [],
    "scene": "OddSquares"
   },
   {
    "kind": "bookmark",
-   "t": 22.117,
+   "t": 94.295,
    "mark": "g4",
    "issues": [],
    "scene": "OddSquares"
   },
   {
    "kind": "bookmark",
-   "t": 23.95,
+   "t": 96.462,
    "mark": "g5",
    "issues": [],
    "scene": "OddSquares"
   },
   {
    "kind": "voiceover_end",
-   "t": 25.567,
+   "t": 108.645,
    "issues": [],
    "scene": "OddSquares"
   },
   {
    "kind": "voiceover",
-   "t": 25.567,
-   "duration": 15.523,
-   "text": "Why does this always work? Each L has one new row, one new column, and one corner. For the fifth square, that is four, plus four, plus one: nine. In general, the n-th L has two n minus one squares. That is exactly the n-th odd number.",
+   "t": 109.845,
+   "duration": 10.997,
+   "text": "Why is each L the next odd number? Look at the L around the four by four square. It has a row of four, a column of four, and one corner. Four plus four plus one is nine.",
    "bookmarks": {
-    "parts": 27.344,
-    "law": 34.73
+    "old": 112.052,
+    "parts": 114.754,
+    "col": 116.212,
+    "corner": 117.46
    },
    "scene": "OddSquares"
   },
   {
    "kind": "bookmark",
-   "t": 27.333,
-   "mark": "parts",
+   "t": 112.045,
+   "mark": "old",
    "issues": [],
    "scene": "OddSquares"
   },
   {
    "kind": "bookmark",
-   "t": 34.717,
-   "mark": "law",
+   "t": 114.745,
+   "mark": "parts",
+   "issues": [],
+   "scene": "OddSquares"
+  },
+  {
+   "kind": "claim",
+   "t": 114.745,
+   "id": "mechanism-l",
+   "scene": "OddSquares"
+  },
+  {
+   "kind": "bookmark",
+   "t": 116.212,
+   "mark": "col",
+   "issues": [],
+   "scene": "OddSquares"
+  },
+  {
+   "kind": "bookmark",
+   "t": 117.445,
+   "mark": "corner",
    "issues": [],
    "scene": "OddSquares"
   },
   {
    "kind": "voiceover_end",
-   "t": 41.083,
+   "t": 120.828,
+   "issues": [],
+   "scene": "OddSquares"
+  },
+  {
+   "kind": "voiceover",
+   "t": 122.028,
+   "duration": 26.924,
+   "text": "The next L goes around the five by five square, and makes six by six. It is drawn faint, because we have not added it yet. It has five plus five plus one: eleven. Each L is two bigger than the one before: one more in its row, and one more in its column. The first L is the first tile: no row, no column, only its corner. It is one. So the Ls are one, three, five, seven, and so on: the odd numbers, in order.",
+   "bookmarks": {
+    "next": 124.674,
+    "two": 132.661,
+    "odd": 138.335
+   },
+   "scene": "OddSquares"
+  },
+  {
+   "kind": "bookmark",
+   "t": 124.662,
+   "mark": "next",
+   "issues": [],
+   "scene": "OddSquares"
+  },
+  {
+   "kind": "bookmark",
+   "t": 132.645,
+   "mark": "two",
+   "issues": [],
+   "scene": "OddSquares"
+  },
+  {
+   "kind": "claim",
+   "t": 132.645,
+   "id": "mechanism-next",
+   "scene": "OddSquares"
+  },
+  {
+   "kind": "bookmark",
+   "t": 138.328,
+   "mark": "odd",
+   "issues": [],
+   "scene": "OddSquares"
+  },
+  {
+   "kind": "voiceover_end",
+   "t": 148.945,
+   "issues": [],
+   "scene": "OddSquares"
+  },
+  {
+   "kind": "voiceover",
+   "t": 150.645,
+   "duration": 19.691,
+   "text": "So adding the odd numbers in order is adding the Ls in order. After n Ls, the square has side n. So the first n odd numbers add up to n times n. The question mark can go. We write n times n as n squared, n with a small two. The brace marks the n odd numbers, and the dots mean: and so on, in order.",
+   "bookmarks": {
+    "build": 154.579,
+    "done": 157.12,
+    "sq": 162.238,
+    "dots": 165.832
+   },
+   "scene": "OddSquares"
+  },
+  {
+   "kind": "bookmark",
+   "t": 154.578,
+   "mark": "build",
+   "issues": [],
+   "scene": "OddSquares"
+  },
+  {
+   "kind": "bookmark",
+   "t": 157.578,
+   "mark": "done",
+   "issues": [],
+   "scene": "OddSquares"
+  },
+  {
+   "kind": "claim",
+   "t": 157.578,
+   "id": "guarantee-every-n",
+   "scene": "OddSquares"
+  },
+  {
+   "kind": "bookmark",
+   "t": 162.228,
+   "mark": "sq",
+   "issues": [],
+   "scene": "OddSquares"
+  },
+  {
+   "kind": "bookmark",
+   "t": 165.828,
+   "mark": "dots",
+   "issues": [],
+   "scene": "OddSquares"
+  },
+  {
+   "kind": "voiceover_end",
+   "t": 170.328,
    "issues": [],
    "scene": "OddSquares"
   },
   {
    "kind": "predict",
-   "t": 42.083,
+   "t": 171.828,
    "question": "What is the sum of the first ten odd numbers?",
    "scene": "OddSquares"
   },
   {
    "kind": "voiceover",
-   "t": 42.083,
+   "t": 171.828,
    "duration": 3.891,
    "text": "Pause here and predict. What is the sum of the first ten odd numbers?",
    "bookmarks": {},
@@ -164,44 +456,161 @@
   },
   {
    "kind": "voiceover_end",
-   "t": 45.967,
+   "t": 175.712,
    "issues": [],
    "scene": "OddSquares"
   },
   {
    "kind": "voiceover",
-   "t": 48.967,
-   "duration": 4.211,
-   "text": "Ten L shapes make a ten by ten square. So the sum is one hundred.",
+   "t": 178.712,
+   "duration": 19.823,
+   "text": "Ten Ls make a square with side ten: one hundred tiles. The five new Ls are eleven, thirteen, fifteen, seventeen, and nineteen, each in its own color. The first L is one, and each of the nine Ls after it adds two: one plus nine times two is nineteen. So the first ten odd numbers add up to one hundred.",
    "bookmarks": {
-    "ten": 51.534
+    "new": 182.366,
+    "tenth": 188.838,
+    "ten": 195.673
    },
    "scene": "OddSquares"
   },
   {
    "kind": "bookmark",
-   "t": 51.717,
+   "t": 182.362,
+   "mark": "new",
+   "issues": [],
+   "scene": "OddSquares"
+  },
+  {
+   "kind": "bookmark",
+   "t": 188.828,
+   "mark": "tenth",
+   "issues": [],
+   "scene": "OddSquares"
+  },
+  {
+   "kind": "bookmark",
+   "t": 195.662,
    "mark": "ten",
    "issues": [],
    "scene": "OddSquares"
   },
   {
    "kind": "voiceover_end",
-   "t": 53.167,
+   "t": 198.528,
    "issues": [],
    "scene": "OddSquares"
   },
   {
    "kind": "voiceover",
-   "t": 53.167,
-   "duration": 4.203,
-   "text": "The rule holds for every n, because each step adds the same kind of L.",
-   "bookmarks": {},
+   "t": 199.728,
+   "duration": 10.906,
+   "text": "The first tile matters. Start at three instead: three plus five is eight. Without the first tile, the Ls go around a hole. Nine minus one is eight, and eight is not a square.",
+   "bookmarks": {
+    "s3": 201.395,
+    "need": 204.485
+   },
+   "scene": "OddSquares"
+  },
+  {
+   "kind": "bookmark",
+   "t": 201.395,
+   "mark": "s3",
+   "issues": [],
+   "scene": "OddSquares"
+  },
+  {
+   "kind": "claim",
+   "t": 201.395,
+   "id": "guarantee-every-n",
+   "scene": "OddSquares"
+  },
+  {
+   "kind": "bookmark",
+   "t": 204.478,
+   "mark": "need",
+   "issues": [],
    "scene": "OddSquares"
   },
   {
    "kind": "voiceover_end",
-   "t": 57.367,
+   "t": 210.628,
+   "issues": [],
+   "scene": "OddSquares"
+  },
+  {
+   "kind": "voiceover",
+   "t": 212.428,
+   "duration": 37.702,
+   "text": "One more thing. A sum of the first ten odd numbers stopped at nineteen. Where does a sum of n odd numbers stop? The L that makes side n tells us. It goes around a square of side n minus one. Here n is five, and n minus one is four. So it has n minus one, plus n minus one, plus one tiles. The brackets keep each n minus one together. Two copies of n make two n, which means two times n. Take away the two ones, and add the corner: two n minus one. Check: n equals five gives nine. N equals ten gives nineteen, where the sum stopped. N equals one gives one, the first tile.",
+   "bookmarks": {
+    "n": 224.421,
+    "sym": 227.323,
+    "l2": 234.303,
+    "l3": 240.466,
+    "check": 242.065
+   },
+   "scene": "OddSquares"
+  },
+  {
+   "kind": "bookmark",
+   "t": 224.412,
+   "mark": "n",
+   "issues": [],
+   "scene": "OddSquares"
+  },
+  {
+   "kind": "bookmark",
+   "t": 227.312,
+   "mark": "sym",
+   "issues": [],
+   "scene": "OddSquares"
+  },
+  {
+   "kind": "bookmark",
+   "t": 234.295,
+   "mark": "l2",
+   "issues": [],
+   "scene": "OddSquares"
+  },
+  {
+   "kind": "bookmark",
+   "t": 240.462,
+   "mark": "l3",
+   "issues": [],
+   "scene": "OddSquares"
+  },
+  {
+   "kind": "bookmark",
+   "t": 242.062,
+   "mark": "check",
+   "issues": [],
+   "scene": "OddSquares"
+  },
+  {
+   "kind": "voiceover_end",
+   "t": 250.128,
+   "issues": [],
+   "scene": "OddSquares"
+  },
+  {
+   "kind": "voiceover",
+   "t": 251.328,
+   "duration": 7.42,
+   "text": "So, the answer: the first n odd numbers add up to n squared. Every odd number is an L, and the Ls build squares.",
+   "bookmarks": {
+    "ans": 252.682
+   },
+   "scene": "OddSquares"
+  },
+  {
+   "kind": "bookmark",
+   "t": 252.678,
+   "mark": "ans",
+   "issues": [],
+   "scene": "OddSquares"
+  },
+  {
+   "kind": "voiceover_end",
+   "t": 258.745,
    "issues": [],
    "scene": "OddSquares"
   }

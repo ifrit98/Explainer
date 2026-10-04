@@ -11,6 +11,7 @@ quiz's expected answers. The prompt never includes model.md or model.yaml.
 from __future__ import annotations
 
 import json
+import re
 import subprocess
 import sys
 import tempfile
@@ -48,6 +49,7 @@ HOLD_AFTER_CLAIM = 1.0     # s of silence after the line that makes a claim
 ONE_PICTURE_LIMIT = 10.0   # s of narration after a claim mark with no further bookmark
 
 BLIND_FILES = {
+    "narrative": ["narrative.md"],
     "prose": ["explanation.md"],
     "diagram": ["diagram.md"],
     "html": ["index.html"],
@@ -234,6 +236,101 @@ def quiz_prompt(slug: str, rendering: str) -> str:
         + ", ".join(f'"{k}": ["..."]' for k in audit) + '}, "gaps": ["..."]}',
     ]
     return "\n".join(lines)
+
+
+# ---------------------------------------------------------------- cold read (first viewing, in order)
+
+UNITS = {
+    "narrative": ("beat", "Read only the Beats table, in order, as the script of the explanation: the 'Said' and "
+                          "'Shown' columns are what the reader hears and sees. The other sections are the author's "
+                          "plan; do not count them as given to the reader."),
+    "prose": ("paragraph", "Read the text in order, one paragraph, list item, or table at a time."),
+    "diagram": ("diagram", "Read the diagrams in order, one at a time, labels and arrows included."),
+    "html": ("section", "Read the page in order, one section at a time, including what each control does "
+                        "(read the script for that)."),
+    "video": ("caption", "The video is given as its transcript (captions.srt) and a review sheet (review.png): one "
+                         "frame at each narration line and bookmark, with the spoken text under it. Look at every "
+                         "label and formula on screen."),
+}
+
+
+def prior_knowledge(slug: str) -> str:
+    """What the reader may assume: the Before line of narrative.md, else model.md's audience section."""
+    folder = explainer_dir(slug)
+    narrative = folder / "narrative.md"
+    if narrative.exists():
+        m = re.search(r"\*\*Before:\*\*\s*(.+)", narrative.read_text())
+        if m and not m.group(1).strip().startswith("<"):
+            return m.group(1).strip()
+    model_md = folder / "model.md"
+    if model_md.exists():
+        m = re.search(r"^## Audience and prior knowledge\s*$(.*?)(?=^## |\Z)", model_md.read_text(), re.M | re.S)
+        if m and m.group(1).strip():
+            return " ".join(m.group(1).split())
+    return "general school knowledge only"
+
+
+def coldread_prompt(slug: str, rendering: str) -> str:
+    """Prompt for a fresh agent that meets one rendering for the first time and reports, moment by moment,
+    every reference it has not been given yet. The blind test asks what the reader understood at the end;
+    the cold read finds where, in order, a first-time reader was handed something unexplained."""
+    folder = explainer_dir(slug)
+    files = [folder / f for f in BLIND_FILES[rendering]]
+    missing = [display(f) for f in files if not f.exists()]
+    if missing:
+        sys.exit(f"missing for a {rendering} cold read: {', '.join(missing)}"
+                 + (f" (run: explainer review {slug})" if rendering == "video" else ""))
+    unit, how = UNITS[rendering]
+    shown = rendering in ("video", "html", "narrative")
+    return "\n".join([
+        "You are meeting an explanation for the first time. Report, moment by moment, where a first-time reader "
+        "is given a word, phrase, symbol, or picture that they have not been given yet.",
+        "",
+        "Read ONLY these files. Do not open any other file, and do not search the web:",
+        *[f"- {f}" for f in files],
+        "",
+        how,
+        "",
+        f"What the reader knows before they start: {prior_knowledge(slug)}"
+        + ("" if "nothing else counts as known" in prior_knowledge(slug).lower() else " Nothing else counts as known.")
+        + " A letter such as n, a name, or a color code is NOT known until the explanation says what it stands for.",
+        "",
+        f"Go through it in order, one {unit} at a time. Pretend you have not seen anything after the current "
+        f"{unit}. At each {unit}, report:",
+        "- unresolved: every word, phrase, symbol, name, or visual convention here that the reader has not been "
+        "given (not prior knowledge, and not explained earlier). Quote it exactly.",
+        *(["- unsaid: anything shown here (a label, a formula, a highlight, a color change) that the words do not "
+           "mention or explain."] if shown else []),
+        "- leap: any step whose reason is not given here or earlier (\"why does this follow?\").",
+        f"- purpose_unclear: true if a first-time reader could not say what question this {unit} answers, or why "
+        "it comes now.",
+        "",
+        "Then answer:",
+        "- question: the question the explanation sets out to answer, in your words, and where a reader first "
+        "knows it. Is the result itself stated in words? Quote where.",
+        "- motive: a reason to care about the question, and a reason for the approach it uses. Quote them, or say "
+        "they are missing.",
+        "- close: is the opening question answered at the end, with the general argument said in words? Quote it.",
+        "- recap: the one sentence you would tell a friend afterwards.",
+        "- strongest and weakest moment, with locations.",
+        "",
+        "Report only what the files show. Put ideas from your own knowledge only in a final \"suggestions\" list.",
+        "",
+        f'Reply with JSON only: {{"{unit}s": [{{"at": "...", "text": "...", "unresolved": ["..."], '
+        + ('"unsaid": ["..."], ' if shown else "")
+        + '"leap": ["..."], "purpose_unclear": false}], "question": {"text": "...", "known_at": "...", '
+        '"result_stated": "..."}, "motive": "...", "close": "...", "recap": "...", "strongest": "...", '
+        '"weakest": "...", "suggestions": ["..."]}',
+    ])
+
+
+COLDREAD_PASS = (
+    "A cold read passes when: no reference is unresolved; nothing shown is unsaid; no leap remains on the main "
+    "line of the argument; the result is stated in words before the explanation and the question is known in "
+    "the first beat; the motive and the approach both have a reason; the close answers the opening question; "
+    "and the recap matches the After line of narrative.md. Fix each finding in narrative.md first, then in the "
+    "renderings."
+)
 
 
 def quiz_rubric(slug: str) -> str:

@@ -7,7 +7,8 @@
 <meta name="description" content="An explanation compiler for Claude Code: one semantic model, rendered as controlled prose, diagrams, interactive pages, or 3Blue1Brown-style videos with local voiceover.">
 <meta property="og:title" content="Explainer">
 <meta property="og:description" content="One semantic model, compiled into prose, diagrams, interactive pages, or narrated 3b1b-style videos.">
-<meta property="og:image" content="https://ifrit98.github.io/Explainer/docs/assets/softmax-video.png">
+<meta property="og:image" content="https://ifrit98.github.io/Explainer/docs/assets/social-preview.png">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Sans+Condensed:wght@600&display=swap">
@@ -117,10 +118,12 @@ footer { font-size: 0.85rem; color: var(--muted); border-top: 1px solid var(--ru
   <span class="eyebrow">Compiler demo</span>
   <h2 id="h-demo">One model, four renderings</h2>
   <p>Every rendering of <em>softmax temperature</em> is compiled from one <a href="https://github.com/ifrit98/Explainer/blob/main/explainers/softmax-temperature/model.md">model.md</a>. The terms and the numbers are the same in each one. Normal routing would stop at Stage 3; this folder renders all four to show that they agree.</p>
-  <pre class="pipeline" aria-label="Diagram: question to model to four renderings">                  ┌─ 1 · controlled prose
-question -> model ─┼─ 2 · diagram
-                  ├─ 3 · interactive page
-                  └─ 4 · animated video</pre>
+  <pre class="pipeline" aria-label="Diagram: question to model to narrative to four renderings">                                ┌─ 1 · controlled prose
+question -> model -> narrative ─┼─ 2 · diagram
+             probe    cold read ├─ 3 · interactive page
+                                └─ 4 · animated video
+
+then: check · review sheet · cold read · blind test</pre>
   <div class="outputs">
     <a class="out s1" href="https://github.com/ifrit98/Explainer/blob/main/explainers/softmax-temperature/explanation.md">
       <span class="stage">Stage 1 · prose</span><h3>Controlled prose</h3>
@@ -157,7 +160,7 @@ question -> model ─┼─ 2 · diagram
       <div class="player" data-src="explainers/odd-squares/video/out.mp4" data-poster="docs/assets/odd-squares-video.png" data-captions="explainers/odd-squares/video/captions.vtt" data-timeline="explainers/odd-squares/video/timeline.json">
         <noscript><a href="explainers/odd-squares/video/out.mp4">Watch the video (MP4)</a></noscript>
       </div>
-      <figcaption><strong>Odd numbers make squares</strong> · 59 s. A proof by picture: each odd number is an L that grows the square by one size, with a pause to predict the sum of the first ten.</figcaption>
+      <figcaption><strong>Odd numbers make squares</strong> · 4 min 21 s. A proof by picture, compiled beat by beat from a narrative: each odd number is an L that grows the square by one, and each L is two bigger than the last. Every letter and color is introduced before it is used.</figcaption>
     </figure>
     <figure>
       <div class="player" data-src="explainers/dijkstra/video/out.mp4" data-poster="docs/assets/dijkstra-video.png" data-captions="explainers/dijkstra/video/captions.vtt" data-timeline="explainers/dijkstra/video/timeline.json">

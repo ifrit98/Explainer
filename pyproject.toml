@@ -1,6 +1,6 @@
 [project]
 name = "explainer"
-version = "0.4.0"
+version = "0.5.0"
 description = "Explanation compiler: 3b1b-style Manim explainers with synchronized local voiceover"
 readme = "README.md"
 license = "MIT"

@@ -1,0 +1,23 @@
+name: Bug report
+description: A command fails, a check is wrong, or a render looks broken.
+labels: [bug]
+body:
+  - type: input
+    id: command
+    attributes:
+      label: Command
+      description: The exact command, for example `explainer render my-topic --draft`.
+    validations:
+      required: true
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened, and what you expected
+      description: Paste the error or the check message. For a render, attach the review sheet frame if you can.
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: Version and platform
+      description: Plugin version (from /plugin) or git commit, and OS. For video, `explainer setup` output helps.

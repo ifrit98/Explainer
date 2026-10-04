@@ -1,5 +1,16 @@
 # Changelog
 
+## 0.5.0 — 2026-10-04
+
+The narrative pass: an explanation is a model plus the path a first-time reader takes through it.
+
+- **`narrative.md`** (Pass 3, principles §11), scaffolded by `explainer new`: the reader before and after; the question and the result in words; a motive and a reason for the approach; an introduction ledger of every term, symbol, name, and visual convention; the beats in order, each with its bridge, what is shown, and what is said; concrete to symbol; links between representations; the close.
+- **`explainer coldread <slug> --rendering R`**: a fresh agent meets the narrative or one rendering for the first time and reports, in order, every reference it was not given, everything shown but unsaid, every leap, and whether the question, motive, and close are there. `--rubric` prints the pass rule. The `verify` skill runs it before the blind test.
+- **Ledger check:** with a `narrative.md`, `explainer check` fails a scene symbol (on-screen math, a math label, "the n-th" in speech) that the ledger does not introduce. `check -v` notes explainers with no claims or no narrative.
+- **Layout:** a `crowded` issue for text closer than 0.1 units to other text. `stagger_labels` spaces its rows by label height (it fixes two touching labels in the softmax video).
+- **odd-squares, rebuilt from a narrative:** the old video passed its blind test and failed its cold read (n never introduced, the result never said aloud, two formulas never read). The narrative's own cold read, before rendering, changed the argument: each L is two bigger than the one before, and the first L is one tile, so the Ls are the odd numbers in order. The Ls are now real L shapes, the next L is drawn, the full sum to 19 is shown in the L colors, and the video ends on the answer. Claims and terms added.
+- **Docs:** principles §11, a narrative step in the `explain` and `video` skills, a cold-read step in `verify`, the authoring guide's narrative section with the odd-squares case, concepts, CLI, and model reference.
+
 ## 0.4.0 — 2026-10-04
 
 Review findings become rules. Each finding from the v0.3.0 blind tests is fixed in its example and turned into a check, a probe rule, or a template line that applies to every explanation.

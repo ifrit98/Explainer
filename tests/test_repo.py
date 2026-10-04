@@ -50,3 +50,12 @@ def test_plugin_manifest_and_skills():
 def test_example_matches_its_model(folder):
     rep = check(folder)
     assert rep.ok, "\n".join(rep.problems)
+
+
+@pytest.mark.skipif(__import__("explainer_kit.diagrams", fromlist=["x"]).mermaid_command() is None,
+                    reason="no Mermaid CLI (Node or mmdc)")
+def test_mermaid_in_readme_and_docs_renders():
+    from explainer_kit.diagrams import markdown_blocks, validate
+
+    blocks = [b for f in [ROOT / "README.md", *sorted((ROOT / "docs").glob("*.md"))] for b in markdown_blocks(f)]
+    assert blocks and validate(blocks) == []

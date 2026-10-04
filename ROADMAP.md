@@ -17,6 +17,7 @@ Status: `proposed` · `next` · `in progress` · `done`
 | 9 | [Open items from reviews](#9-open-items-from-reviews) | done (v0.4.0) |
 | 10 | [Complete the chain: claims and the probe](#10-complete-the-chain-claims-and-the-probe) | done (v0.3.0) |
 | 11 | [Review findings become rules](#11-review-findings-become-rules) | done (v0.4.0) |
+| 12 | [The narrative pass](#12-the-narrative-pass) | done (v0.5.0), with open items |
 
 ---
 
@@ -125,3 +126,29 @@ Still open from the audit: the predict card covers the estimates a viewer needs 
 
 - Pace thresholds are fixed numbers (1 s, 10 s). Calibrate them against more videos and viewer feedback.
 - `terms` catches listed phrases only. A term drift no one listed still needs the audit to find it.
+
+## 12. The narrative pass
+
+**Problem.** A correct model with every claim covered can still lose the reader on the way. The odd-squares video passed its blind test while it used "the n-th L" without saying what n is, and never said its own result aloud. The model says what is true; nothing said how a first-time reader gets there. That path is what gives a 3Blue1Brown video its power, more than the animation.
+
+**Built.**
+
+- `narrative.md`, Pass 3 (principles §11): the reader before and after; the question and the result in words; a motive and a reason for the approach; an introduction ledger (every term, symbol, name, and visual convention, with the instance that grounds it); the beats in order, each with its bridge, what is shown, and what is said; concrete to symbol; links between representations; the close. `explainer new` scaffolds it.
+- `explainer coldread <slug> --rendering R`: a fresh agent meets the narrative or a rendering for the first time and reports, in order, every reference it was not given, everything shown but unsaid, every leap, and whether the question, the motive, and the close are there. It runs on the narrative before rendering and on each rendering after.
+- `explainer check` fails a scene symbol (on-screen math, a math label, "the n-th" in speech) that the ledger does not introduce.
+- The layout check reports `crowded` text (closer than 0.1 units). It found two touching labels in the softmax video; `stagger_labels` now spaces rows by label height.
+
+**Evidence so far.** On the old odd-squares video, the blind test passed and the cold read found the undefined n, the unnamed L, three meanings of "square", two unread formulas, and a result never said. The narrative's own cold read, before rendering, then changed the argument: n had three meanings, and one general step rested on examples. The new argument (each L is two bigger than the last) came from that read.
+
+**Done when** — met, with a caveat. The rebuilt odd-squares video passes its blind test (every item 2, including the two new claim questions). Three rounds of cold reads converged: round 1 still found that the shape was ⌝ and not an L, an unexplained "?", and an unmotivated coda; round 3 found only edge items (a highlight color explained four seconds late, one remark in the wrong order). By the strict pass rule it is not a pass yet. Record: [`odd-squares/review/understanding.md`](explainers/odd-squares/review/understanding.md).
+
+Rounds 2 and 3 also produced general rules: names match pictures (call it an L only if it is drawn as an L), and each case gets its own picture (the start-at-3 hole on its own small square).
+
+**Next.**
+
+- Backfill `narrative.md` for the other examples (softmax-temperature, dijkstra, git-bisect, ste-80, git-objects, cdn-request), and cold-read each rendering.
+- The ledger check covers video symbols only. Prose and pages rely on the cold read.
+- The rebuilt video is 4 min 21 s, up from 59 s. Measure whether a shorter cut keeps the cold read clean.
+- odd-squares edge items from round 3: say what yellow and the colors mean at their first use; call the first tile an L when it appears; give the "where does the sum stop" section a stronger reason, or end the rule card in (2n − 1).
+- The review sheet captures some frames mid-animation, and cold readers report them as overlaps. Take each frame after the animation it starts has finished.
+- The cold read never runs out of findings. Grade findings by whether they are on the main line of the argument, and stop when only edge items remain.
