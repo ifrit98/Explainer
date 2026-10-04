@@ -17,7 +17,8 @@ Optimize for precision and low cognitive load, not literary style.
 
 ## Word rules
 
-- Use the same word for the same concept throughout. Do not use synonyms for variety.
+- Use the same word for the same concept throughout. Do not use synonyms for variety. When two concepts are close (a value that can still change, and its final value), give each its own word and never swap them. Record the wrong phrases under `terms` in `model.yaml`; `explainer check` fails a rendering that uses one.
+- Give each quantity its meaning when you first show it: what the number tells the reader, and what is different at a low value and a high one.
 - Define each technical term when you first introduce it.
 - Keep noun clusters to about three words. Break longer clusters with "of", "for", or a relative clause.
 - Avoid a pronoun when its antecedent could be ambiguous. Repeat the noun.

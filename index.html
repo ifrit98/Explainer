@@ -15,7 +15,7 @@
 /* Layout: thesis, then the compiler demo (one model → four outputs), then the videos, then the routing examples. */
 :root {
   --bg: #F5F7FA; --surface: #FFFFFF; --fg: #13171D; --muted: #5A6372; --rule: #DDE2E9;
-  --accent: #2F5F8F; --stage1: #2F5F8F; --stage2: #2E7D6B; --stage3: #8A5A12; --stage4: #9C3F55;
+  --accent: #2F5F8F; --good: #2E7D4F; --bad: #B23A3A; --stage1: #2F5F8F; --stage2: #2E7D6B; --stage3: #8A5A12; --stage4: #9C3F55;
   --display: "IBM Plex Sans Condensed", "Arial Narrow", system-ui, sans-serif;
   --body: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
   --mono: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
@@ -23,10 +23,10 @@
 }
 @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
   --bg: #0E1116; --surface: #161A21; --fg: #E5E9EF; --muted: #98A2B0; --rule: #272D36;
-  --accent: #74A6DB; --stage1: #74A6DB; --stage2: #6CC5AE; --stage3: #E2B25F; --stage4: #E58AA0; color-scheme: dark; } }
+  --accent: #74A6DB; --good: #6CC58A; --bad: #F08080; --stage1: #74A6DB; --stage2: #6CC5AE; --stage3: #E2B25F; --stage4: #E58AA0; color-scheme: dark; } }
 :root[data-theme="dark"] {
   --bg: #0E1116; --surface: #161A21; --fg: #E5E9EF; --muted: #98A2B0; --rule: #272D36;
-  --accent: #74A6DB; --stage1: #74A6DB; --stage2: #6CC5AE; --stage3: #E2B25F; --stage4: #E58AA0; color-scheme: dark; }
+  --accent: #74A6DB; --good: #6CC58A; --bad: #F08080; --stage1: #74A6DB; --stage2: #6CC5AE; --stage3: #E2B25F; --stage4: #E58AA0; color-scheme: dark; }
 
 * { box-sizing: border-box; }
 body { margin: 0; background: var(--bg); color: var(--fg); font: 16px/1.55 var(--body); }
@@ -63,7 +63,22 @@ header { display: grid; gap: 16px; }
 .videos { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; }
 @media (max-width: 760px) { .videos { grid-template-columns: minmax(0, 1fr); } }
 figure { margin: 0; display: grid; gap: 10px; min-width: 0; }
-video { width: 100%; max-width: 100%; aspect-ratio: 16 / 9; background: #0E0E12; border-radius: 8px; display: block; }
+/* Explainer.video player (explainer_kit/web/explainer.js): stops at each predict pause */
+.ex-video { position: relative; display: grid; gap: 10px; }
+.ex-video video { width: 100%; max-width: 100%; aspect-ratio: 16 / 9; background: #0E0E12; border-radius: 8px; display: block; }
+.ex-video .ex-overlay { position: absolute; inset: 0 0 auto 0; aspect-ratio: 16 / 9; display: grid; place-items: center; overflow: auto;
+  background: rgba(14, 14, 18, 0.82); border-radius: 8px; padding: 12px; }
+.ex-video .ex-overlay[hidden], .ex-result[hidden] { display: none; }
+.ex-predict { width: 100%; max-width: 440px; display: grid; gap: 8px; padding: 12px 14px; background: var(--surface); border: 2px solid var(--accent); border-radius: 10px; font-size: 0.9rem; }
+.ex-predict-head { font: 500 0.7rem var(--mono); letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); }
+.ex-predict form { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.ex-predict input[type=text] { flex: 1 1 10em; min-width: 0; font: 0.9rem var(--mono); padding: 6px 8px; border: 1px solid var(--rule); border-radius: 6px; background: var(--bg); color: var(--fg); }
+.ex-result { font-family: var(--mono); font-size: 0.85rem; }
+.ex-video button { font: 500 0.8rem var(--mono); color: var(--fg); background: var(--surface); border: 1px solid var(--rule); border-radius: 6px; padding: 6px 10px; cursor: pointer; }
+.ex-video button:hover { border-color: var(--muted); }
+.ex-video button.ex-primary { background: var(--fg); color: var(--bg); border-color: var(--fg); }
+.ex-video button:disabled { opacity: 0.45; cursor: not-allowed; }
+.ex-chapters { display: flex; flex-wrap: wrap; gap: 8px; }
 figcaption { font-size: 0.92rem; color: var(--muted); }
 figcaption strong { color: var(--fg); font-weight: 600; }
 
@@ -127,34 +142,31 @@ question -> model ─┼─ 2 · diagram
   <h2 id="h-videos">Videos</h2>
   <div class="videos">
     <figure>
-      <video controls preload="metadata" playsinline poster="docs/assets/softmax-video.png">
-        <source src="explainers/softmax-temperature/video/out.mp4" type="video/mp4">
-        <track kind="captions" src="explainers/softmax-temperature/video/captions.vtt" srclang="en" label="English">
-      </video>
-      <figcaption><strong>Softmax temperature</strong> · 92 s. The distance between two dots sets their probability ratio, so the viewer sees why low T sharpens and high T flattens, and why softmax needs exp: dividing by the sum gives owl −0.4.</figcaption>
+      <div class="player" data-src="explainers/softmax-temperature/video/out.mp4" data-poster="docs/assets/softmax-video.png" data-captions="explainers/softmax-temperature/video/captions.vtt" data-timeline="explainers/softmax-temperature/video/timeline.json">
+        <noscript><a href="explainers/softmax-temperature/video/out.mp4">Watch the video (MP4)</a></noscript>
+      </div>
+      <figcaption><strong>Softmax temperature</strong> · 93 s. The distance between two dots sets their probability ratio, so the viewer sees why low T sharpens and high T flattens, and why softmax needs exp: dividing by the sum gives owl −0.4.</figcaption>
     </figure>
     <figure>
-      <video controls preload="metadata" playsinline poster="docs/assets/ste-80-video.png">
-        <source src="explainers/ste-80/video/out.mp4" type="video/mp4">
-        <track kind="captions" src="explainers/ste-80/video/captions.vtt" srclang="en" label="English">
-      </video>
+      <div class="player" data-src="explainers/ste-80/video/out.mp4" data-poster="docs/assets/ste-80-video.png" data-captions="explainers/ste-80/video/captions.vtt" data-timeline="explainers/ste-80/video/timeline.json">
+        <noscript><a href="explainers/ste-80/video/out.mp4">Watch the video (MP4)</a></noscript>
+      </div>
       <figcaption><strong>STE-80 rewrite</strong> · 57 s. One manual sentence through three Simplified Technical English rules, 16 → 9 words. Kept words move; removed words fade. The narration is in STE.</figcaption>
     </figure>
     <figure>
-      <video controls preload="metadata" playsinline poster="docs/assets/odd-squares-video.png">
-        <source src="explainers/odd-squares/video/out.mp4" type="video/mp4">
-        <track kind="captions" src="explainers/odd-squares/video/captions.vtt" srclang="en" label="English">
-      </video>
+      <div class="player" data-src="explainers/odd-squares/video/out.mp4" data-poster="docs/assets/odd-squares-video.png" data-captions="explainers/odd-squares/video/captions.vtt" data-timeline="explainers/odd-squares/video/timeline.json">
+        <noscript><a href="explainers/odd-squares/video/out.mp4">Watch the video (MP4)</a></noscript>
+      </div>
       <figcaption><strong>Odd numbers make squares</strong> · 59 s. A proof by picture: each odd number is an L that grows the square by one size, with a pause to predict the sum of the first ten.</figcaption>
     </figure>
     <figure>
-      <video controls preload="metadata" playsinline poster="docs/assets/dijkstra-video.png">
-        <source src="explainers/dijkstra/video/out.mp4" type="video/mp4">
-        <track kind="captions" src="explainers/dijkstra/video/captions.vtt" srclang="en" label="English">
-      </video>
-      <figcaption><strong>Dijkstra's shortest paths</strong> · 2 min 31 s. The run from the model, replayed: why the smallest estimate settles first, why a settled distance is final, and one negative edge that breaks it.</figcaption>
+      <div class="player" data-src="explainers/dijkstra/video/out.mp4" data-poster="docs/assets/dijkstra-video.png" data-captions="explainers/dijkstra/video/captions.vtt" data-timeline="explainers/dijkstra/video/timeline.json">
+        <noscript><a href="explainers/dijkstra/video/out.mp4">Watch the video (MP4)</a></noscript>
+      </div>
+      <figcaption><strong>Dijkstra's shortest paths</strong> · 3 min 28 s. The run from the model, replayed: why the smallest estimate settles first, why a settled estimate is final, and one negative edge that breaks it.</figcaption>
     </figure>
   </div>
+  <p class="muted">Three videos stop where a learner should predict first: commit a guess, then the video continues. The chapter buttons jump to each pause.</p>
   <p class="muted">Narration and animation stay in sync through bookmarks in the script. The local voice service synthesizes each bookmark segment separately, so every bookmark time is exact, with no Whisper pass.</p>
 </section>
 
@@ -197,5 +209,12 @@ question -> model ─┼─ 2 · diagram
   <a href="https://github.com/ifrit98/Explainer/tree/main/docs">Documentation</a>
 </footer>
 </main>
+<script src="explainer_kit/web/explainer.js"></script>
+<script>
+  document.querySelectorAll(".player").forEach((el) => {
+    const { src, poster, captions, timeline } = el.dataset;
+    Explainer.video(el, { src, poster, captions, timeline });
+  });
+</script>
 </body>
 </html>

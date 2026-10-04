@@ -169,7 +169,7 @@ Environment variables: `EXPLAINER_TTS`, `EXPLAINER_VOICE`, `EXPLAINER_KOKORO_DIR
 2. Joins the scene videos and shifts each scene's captions and timeline events by its start time.
 3. Masters the narration to -16 LUFS integrated, -1.5 dBTP peak (skipped for `--draft`).
 4. Muxes the captions as a soft subtitle track and adds a chapter for each predict pause.
-5. Writes `captions.srt` and `.vtt`, `timeline.json`, and `contact.png`, and prints any layout issues.
+5. Writes `captions.srt` and `.vtt`, `timeline.json`, and `contact.png`, and prints any layout and pace issues.
 6. With `--review`, builds `review.png`.
 
 Voice clips are cached in `video/media/voiceovers/`. A re-render synthesizes only the lines that changed.
@@ -179,9 +179,10 @@ Voice clips are cached in `video/media/voiceovers/`. A re-render synthesizes onl
 1. `explainer check <slug>`: narration and labels against `model.yaml`.
 2. Read `review.png`: one frame at each line, bookmark, and predict pause, with the spoken text under it and layout issues in red. Each frame must show the evidence for its line.
 3. Fix every layout issue. The check does not see text crossing lines or arrows; look for that in the frames.
-4. Read `captions.srt` against the narration.
-5. Check each claim frame: does the screen show the claim's case at that moment? In `dijkstra`, the narration said "D is ten" while the screen showed D = 8; only the frame showed it.
-6. For a published video, run the blind understanding test (the `verify` skill). Results so far: [`dijkstra`](../explainers/dijkstra/review/understanding.md).
+4. Fix every pace issue. From the timeline, each claim needs a pause of at least 1 s after its line, and no more than 10 s of narration over one picture after its mark. Split an argument into one line or bookmark per step. Silent drafts speak a little slower than the voice, so judge pace on the final render.
+5. Read `captions.srt` against the narration.
+6. Check each claim frame: does the screen show the claim's case at that moment? In `dijkstra`, the narration said "D is ten" while the screen showed D = 8; only the frame showed it.
+7. For a published video, run the blind understanding test (the `verify` skill). Results so far: [`dijkstra`](../explainers/dijkstra/review/understanding.md).
 
 ## Pitfalls
 

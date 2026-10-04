@@ -82,7 +82,7 @@ Assumptions
 
 ## 5. Verify and deliver
 
-Run `explainer check <slug>` first: it fails on any visible number the model does not explain, and on a stale model or toolkit block.
+Run `explainer check <slug>` first: it fails on any visible number the model does not explain, on a stale model or toolkit block, and on a plain `<video>` for a video with predict pauses (use `Explainer.video`).
 
 1. Open the page with Playwright. Use every control once. Check the console for errors.
 2. Take screenshots at desktop and phone width. Look at them.

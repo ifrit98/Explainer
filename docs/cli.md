@@ -33,11 +33,15 @@ It reports these problems (full list with fixes: [model reference](model-referen
 2. **A required value that a rendering does not show.** From `require` in `model.yaml`. A rendering that loads the model passes by construction.
 3. **A stale page.** The embedded model or the inlined toolkit differs from the current one. Fix with `explainer sync`.
 4. **An incomplete or uncovered claim.** A `why` claim without its alternative and counterexample, a `guarantee` without an example and a counterexample, or a rendering that does not mark a claim it should cover.
-5. **A function with no why.** `model.md` names exp, log, sqrt, sigmoid, … and no `why` claim justifies it (or `accept_unjustified` gives a reason).
+5. **A function with no why.** `model.md` names exp, log, sqrt, sigmoid, … and no `why` claim justifies it (or `accept_unjustified` gives a reason; `-v` lists each one).
+6. **A second name for a concept.** A rendering uses a phrase that a `terms` entry avoids.
+7. **A video without its predict pauses.** `index.html` plays a video that has predict pauses through a plain `<video>`; use `Explainer.video`.
+
+`--diagrams` also renders every Mermaid block (Markdown fences and `<pre class="mermaid">`) with the Mermaid CLI: `mmdc` on PATH, else `npx` with a pinned version. It needs Node. CI runs it.
 
 ## `probe`
 
-`explainer probe <slug>` prints a prompt for a fresh agent with no other context. The agent reads only `model.md` and reports, against five rules (why this form, guarantees with two cases, terms, worked examples, next questions), what the explanation will omit. Recompute every number it suggests. See the [authoring guide](authoring.md#2-probe-the-model).
+`explainer probe <slug>` prints a prompt for a fresh agent with no other context. The agent reads only `model.md` and reports, against six rules (why this form, guarantees with two cases, terms and one name per concept, worked examples, the meaning of each quantity, next questions), what the explanation will omit. Recompute every number it suggests. See the [authoring guide](authoring.md#2-probe-the-model).
 
 ## `render` options
 

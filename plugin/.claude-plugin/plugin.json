@@ -1,7 +1,7 @@
 {
   "name": "explainer",
   "displayName": "Explainer",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "An explanation compiler: build one semantic model of a subject, render it as controlled prose, diagrams, an interactive page, or a 3Blue1Brown-style video with local voiceover, and check every rendering against the model.",
   "author": { "name": "ifrit98", "url": "https://github.com/ifrit98" },
   "homepage": "https://ifrit98.github.io/Explainer/",

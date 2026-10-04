@@ -17,6 +17,8 @@ After the video, the viewer can <predict / explain / compute> <what>.
 |---|---|---|---|---|
 | 1 | | | | |
 
+Pace: one picture per step of an argument (a bookmark per step), and a pause of at least 1 s after each claim line. `explainer render` reports pace issues.
+
 ## 4. Visual-object inventory
 
 | Object | Role color | First scene | Persists through | Becomes |

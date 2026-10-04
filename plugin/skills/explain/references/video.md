@@ -36,6 +36,7 @@ Every scene must answer one specific conceptual question.
 2. Fill `model.md` and `model.yaml`. Every number the narration speaks or a label shows goes in `values`.
 3. Fill `video/storyboard.md`: objective, conceptual sequence, scene table with bookmarks, object inventory, timing (about 2.6 words per second), predict pauses, rendering plan.
 4. Write the narration in STE-80. Short sentences read well aloud, and sentence ends are natural bookmark points.
+5. Pace each claim. Give an argument one line per step and one picture per step (a bookmark where each step appears). After the line that completes a claim, hold the frame at least 1 s (`self.wait(1.2)`). `explainer render` reports a claim with no pause after it, or one that talks more than 10 s over one picture.
 
 ## 3. Scene code
 
@@ -87,7 +88,7 @@ Output in `explainers/<slug>/video/`: `out.mp4` (soft captions, chapters), `capt
 ## 5. Review (always, before delivery)
 
 1. Read `review.png`: one frame at each narration line, bookmark, and predict pause, with the spoken text under it. Check that each frame shows the evidence for its line, and that objects persist instead of reappearing.
-2. Fix every layout issue that `render` and `review` list. The scene checks visible text at each bookmark and at the end of each line: `overlap` (text on text), `covered` (an opaque panel from another group over text), `off-frame`. The check does not see text crossing lines or arrows; look for that in the frames.
+2. Fix every layout and pace issue that `render` and `review` list. The scene checks visible text at each bookmark and at the end of each line: `overlap` (text on text), `covered` (an opaque panel from another group over text), `off-frame`. The check does not see text crossing lines or arrows; look for that in the frames.
 3. Read `captions.srt` against the narration.
 4. For published videos, run the blind understanding test (`verify` skill).
 

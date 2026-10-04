@@ -14,8 +14,9 @@ Status: `proposed` · `next` · `in progress` · `done`
 | 6 | [Broaden the gallery](#6-broaden-the-gallery) | done (v0.2.0) |
 | 7 | [Predict-first renderings](#7-predict-first-renderings) | done (v0.2.0) |
 | 8 | [A first real user outside this repo](#8-a-first-real-user-outside-this-repo) | done (v0.2.0) |
-| 9 | [Open items from reviews](#9-open-items-from-reviews) | partly done (v0.3.0) |
+| 9 | [Open items from reviews](#9-open-items-from-reviews) | done (v0.4.0) |
 | 10 | [Complete the chain: claims and the probe](#10-complete-the-chain-claims-and-the-probe) | done (v0.3.0) |
+| 11 | [Review findings become rules](#11-review-findings-become-rules) | done (v0.4.0) |
 
 ---
 
@@ -72,12 +73,12 @@ Done in v0.3.0:
 - `softmax-temperature`: why softmax uses exp, in every rendering. The page lets the reader try divide-by-sum and squares; the video shows owl at −0.4. The blind re-test now answers "why exp" in full.
 - `dijkstra`: finality shown with this run's numbers at the moment B settles; a negative-edge chapter; "relax" defined; why the smallest estimate settles first; the path read back through predecessors. Blind re-test: pass on all five quiz items.
 
-Still open:
+Done in v0.4.0, each one also turned into a general rule (item 11):
 
-- `dijkstra`: use one word ("estimate") for one concept; the narration also says "distance". Slow down the finality segment (about ten seconds).
-- `softmax-temperature`: a sentence of intuition for entropy beyond "2.76 equally likely choices".
-- Validate Mermaid blocks in CI (today they are checked by hand in a browser).
-- Landing page: play the videos with the predict-pause player.
+- `dijkstra`: one word per concept. "Estimate" is the value that can still drop; "distance" is only the final value. The finality argument is now three lines, one step per picture, with a pause after it (about 20 s instead of 12 s over one picture).
+- `softmax-temperature`: entropy as average surprise. −log₂ p is the number of fair yes/no questions; the log makes surprises add; a count of possible tokens says 4 at T = 0.25, where cat wins 98% of draws, and entropy says 1.11 choices.
+- Mermaid blocks render in CI (`explainer check --diagrams`).
+- The landing page plays the videos with the predict-pause player.
 
 ## 10. Complete the chain: claims and the probe
 
@@ -91,3 +92,36 @@ Still open:
 - **Model template** sections Why this form, Concrete cases, Terms, Scope; principle 10.
 
 **Done when** — met. The updated softmax prose and Dijkstra video pass blind re-tests that include the claim questions; the reviewers now answer "why exp" and "why is a settled distance final" with the counterexamples.
+
+## 11. Review findings become rules
+
+**Problem.** Each blind test found gaps in one example. Fixing only that example leaves the same gap in the next explanation.
+
+**Built.** For each finding, the rule that would have caught it anywhere:
+
+| Finding | Rule |
+|---|---|
+| "distance" for a value that can still drop | `terms` in `model.yaml`, checked; probe rule 3; audit `terms` |
+| "1.46 bits" with no meaning; `log` excused | probe rule 6 (meaning of each quantity); audit `unexplained`; `check -v` lists excused functions |
+| a guarantee told in 12 s over one picture | pace issues from the timeline: a pause after each claim, one picture per step |
+| a page that skipped the video's predict pauses | `check` fails a plain `<video>` when the timeline has predict pauses |
+| Mermaid checked by hand | `check --diagrams`, in CI |
+
+The `verify` skill now ends with the same question for every real gap: which check, probe rule, or template line would have caught it?
+
+**Done when** — met. Each check fails on a small copy of its problem (`tests/test_discipline.py`). On the real examples, the terms check failed the old Dijkstra narration five times, and the pace check flagged the old finality line and five claims with no pause; all pass now. The blind re-tests of the changed renderings are in each example's `review/understanding.md`.
+
+**Second round.** The blind re-tests passed (every quiz item 2/2), and their audit found three more gaps. Each was fixed and generalized:
+
+| Finding | Fix | Rule |
+|---|---|---|
+| Softmax prose used "gap" for the logit gap and for the gap divided by T. | "scaled gap" for the second | a `terms` entry; it then found the same mix-up on the page, which the reviewer never saw |
+| Dijkstra's finality argument drew B inside the "settled" box while arguing about paths that leave the box, named F as an exit, and skipped "reaching D costs at least its estimate". The model had the same flaw. | the box holds A and C; the exits are D and E; the step is said; B settles after the argument | probe rule 2 now checks each step of an argument as written |
+| Review-sheet headings showed the frame time, 0.5–1 s after the event. | headings show the event time, which matches the captions | — |
+
+Still open from the audit: the predict card covers the estimates a viewer needs to answer; colors are not explained; Bellman-Ford is named without a why (a scope pointer).
+
+**Next candidates.**
+
+- Pace thresholds are fixed numbers (1 s, 10 s). Calibrate them against more videos and viewer feedback.
+- `terms` catches listed phrases only. A term drift no one listed still needs the audit to find it.

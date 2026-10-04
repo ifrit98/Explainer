@@ -28,10 +28,15 @@ require:
 accept_unjustified:
   log: "only the out-of-scope running time uses it"
 
+terms:
+  - term: estimate
+    means: "the shortest length found so far; it can still drop until the node is settled. 'Distance' means only the true shortest distance, which a settled estimate equals"
+    avoid: [has distance, smallest distance, shorter distance, with distance, distance zero, distance infinity, distance of infinity]
+
 claims:
   - id: definition-relax
     kind: definition
-    statement: "To relax an edge u–v: if dist(u) + w < dist(v), replace dist(v) with the smaller value and record u as v's predecessor; otherwise keep dist(v)."
+    statement: "To relax an edge u–v: if estimate(u) + w < estimate(v), replace estimate(v) with the smaller value and record u as v's predecessor; otherwise keep estimate(v)."
   - id: why-smallest
     kind: why
     statement: "Settle the unsettled node with the smallest estimate: no other route can reach it more cheaply, because every other route passes an estimate at least as large."
@@ -41,16 +46,16 @@ claims:
   - id: guarantee-final
     kind: guarantee
     statement: "With lengths ≥ 0, a node's estimate is final when it is settled."
-    example: "B settles at 3 while D, E, F are at 10, 12, ∞; any other path to B passes one of them and costs at least 10."
+    example: "B (3) is the smallest unsettled estimate; A and C are settled. Any other path to B leaves {A, C} through D (10) or E (12), and reaching either costs at least its estimate, so the path costs at least 10 > 3."
     counterexample: "Directed A→B 2, A→C 3, C→B −2: B settles at 2, then C gives 3 − 2 = 1 < 2 after B is final."
-    ask: "Show with numbers why a settled distance cannot improve later, and give a graph where it does."
+    ask: "Show with numbers why a settled estimate cannot improve later, and give a graph where it does."
   - id: mechanism-path
     kind: mechanism
     statement: "Each node keeps the predecessor that gave its final estimate; following predecessors back from a node gives its shortest path."
     example: "From F: E, D, B, C, A. Reversed: A → C → B → D → E → F, length 2 + 1 + 5 + 2 + 3 = 13."
 
 quiz:
-  - q: "B is first reached with distance 4. Why is its final distance 3?"
+  - q: "B is first reached with estimate 4. Why is its final distance 3?"
     expect: "After C is settled at 2, the path through C gives 2 + 1 = 3, which is shorter, so B's estimate is improved to 3."
     misconception: "The first path found to a node is its shortest path."
   - q: "Which node is settled after D, and why that one?"

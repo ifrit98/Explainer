@@ -113,6 +113,7 @@ class SoftmaxTemperature(ExplainerScene):
             self.wait_until_bookmark("exp")
             self.claim("why-exp")
             self.play(FadeOut(alt), Write(law))
+        self.wait(1.2)
         self.play(FadeOut(law), run_time=0.5)
 
         # 7 — limits

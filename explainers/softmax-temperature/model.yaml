@@ -24,6 +24,9 @@ values:
   scale_example: {factor: 2, logits: [4, 2, 1, -2]}
   negative_T: {T: -1, scaled: [-2, -1, -0.5, 1], owl: 0.71}
   effective_choices_T1: 2.76
+  effective_choices: {"T=0.25": 1.11, "T=0.5": 1.71, "T=1.0": 2.76, "T=2.0": 3.54, "T=10": 3.98}
+  surprise_bits_T1: {cat: 0.71, dog: 2.16, fox: 2.88, owl: 5.04}   # −log₂ p
+  top_share_T025: 98        # percent of draws that pick cat at T = 0.25
   e: 2.718
   owl_T025_exact: 6.0e-6
   low_T_presets: [0, 0.3]   # Scope: extraction and code
@@ -36,8 +39,10 @@ require:
   - path: probabilities/T=1.0
     in: [prose, diagram, html]
 
-accept_unjustified:
-  log: "log₂ only defines entropy, a readout; the explanation does not derive it"
+terms:
+  - term: scaled gap
+    means: "the gap between two logits divided by T; T changes it, while the gap between the logits stays fixed"
+    avoid: [makes the gap large, makes the gap small, T changes the gap]
 
 claims:
   - id: why-exp
@@ -70,9 +75,14 @@ claims:
     statement: "One decoding step: divide each logit by T, apply exp, divide by the sum, sample."
     example: "T = 2: z/T = 1.0, 0.5, 0.25, −0.5; exp = 2.718, 1.649, 1.284, 0.607; sum 6.258; p = 0.434, 0.263, 0.205, 0.097."
     in: [prose, diagram, html]
-  - id: definition-entropy
-    kind: definition
-    statement: "Entropy H = −Σ p log₂ p measures spread in bits; 2^H is the number of equally likely choices with the same spread (1.46 bits ≈ 2.76 choices at T = 1)."
+  - id: why-entropy
+    kind: why
+    about: [log]
+    statement: "A token with probability p has a surprise of −log₂ p bits. One bit is one fair yes/no question. The log makes surprises add when probabilities multiply: two fair coins have p = 1/4 and 2 bits = 1 + 1. Entropy H is the average surprise of one draw, and 2^H is the number of equally likely tokens that give the same average."
+    alternative: "Count the tokens that can still be drawn (p > 0)."
+    counterexample: "At T = 0.25 all four tokens have p > 0, so the count says 4, but cat wins 98% of draws. Entropy says 0.15 bits, 2^0.15 ≈ 1.11 choices. At T = 10 the count is still 4, and entropy gives 1.99 bits ≈ 3.98 choices."
+    example: "T = 1: cat surprises 0.71 bits, owl 5.04 bits. The average is 1.46 bits, the same as 2^1.46 ≈ 2.76 equally likely tokens."
+    ask: "What does an entropy of 1.46 bits tell you about the next token, and why does entropy use a log instead of counting the possible tokens?"
     in: [prose, html]
 
 quiz:

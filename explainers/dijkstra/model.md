@@ -15,7 +15,7 @@ Developers who know what a graph is. No proof background.
 | Graph | Nodes A–F joined by undirected edges with lengths: A–B 4, A–C 2, B–C 1, B–D 5, C–D 8, C–E 10, D–E 2, D–F 6, E–F 3. | given |
 | Distance estimate | The shortest length found so far from A to a node. Starts at ∞ (A starts at 0). | definition |
 | Settled node | A node whose estimate is final. | definition |
-| Relaxation | Through node u, if dist(u) + w(u, v) < dist(v), set dist(v) to the smaller value and record u as v's predecessor. If it is not smaller, keep dist(v). | definition |
+| Relaxation | Through node u, if estimate(u) + w(u, v) < estimate(v), set estimate(v) to the smaller value and record u as v's predecessor. If it is not smaller, keep estimate(v). | definition |
 | Settled region | The set of settled nodes. | definition |
 | Predecessor | The neighbor that gave a node its current estimate. | definition |
 | Shortest-path tree | For each node, the edge that last improved its estimate. | consequence |
@@ -51,17 +51,17 @@ Shortest path to F: A → C → B → D → E → F, length 2 + 1 + 5 + 2 + 3 = 
 
 | Claim | Holds here | Breaks here, without its assumption |
 |---|---|---|
-| A settled distance is final (lengths ≥ 0). | B settles at 3. The unsettled estimates are D 10, E 12, F ∞, all ≥ 3. Any other path to B leaves the settled region {A, C, B} through one of them and only adds lengths ≥ 0, so it costs at least 10. | Directed edges A→B 2, A→C 3, C→B −2. B settles at 2. Then C, at 3, gives 3 + (−2) = 1 < 2, after B is already final. The true distance to B is 1. |
+| A settled estimate is final (lengths ≥ 0). | B is about to settle at 3. The settled nodes are A and C. Every other unsettled estimate is at least 3 (D 10, E 12, F ∞). Any other path to B leaves {A, C} through D or E. F has no edge to A or C. Each estimate is already the cheapest way there through settled nodes, because every settled node has relaxed its edges, so reaching D costs at least 10 and reaching E at least 12. The rest of the path only adds lengths ≥ 0, so it costs at least 10 > 3. | Directed edges A→B 2, A→C 3, C→B −2. B settles at 2. Then C, at 3, gives 3 + (−2) = 1 < 2, after B is already final. The true distance to B is 1. |
 | Relaxation, step by step. | Settle D at 8: E 8 + 2 = 10 < 12 → 10; F 8 + 6 = 14 < ∞ → 14. Settle E at 10: F 10 + 3 = 13 < 14 → 13. | — |
 | Reading the path. | Follow predecessors back from F: E, D, B, C, A. Reversed: A → C → B → D → E → F, length 13. | — |
 
-## Causal chain (why a settled distance is final)
+## Causal chain (why a settled estimate is final)
 
-Every other path to the settled node must leave the settled region through some unsettled node, whose estimate is already at least as large. With no negative edge lengths, the rest of that path cannot make it shorter.
+Take the unsettled node with the smallest estimate. Every other path to it must leave the settled region (the nodes settled before it) at some other unsettled node. Reaching that node costs at least its estimate, because every settled node has relaxed its edges, so the estimate is already the cheapest way there through settled nodes, and that estimate is at least as large. With no negative edge lengths, the rest of that path cannot make it shorter. Settled estimates never change again.
 
 ## Epistemic status
 
-- **Assumption (required):** every edge length is ≥ 0. With a negative length, a settled distance can be wrong.
+- **Assumption (required):** every edge length is ≥ 0. With a negative length, a settled estimate can be wrong.
 - **Mathematical fact:** under that assumption, each settled estimate equals the true shortest distance.
 - **Implementation:** a priority queue finds the smallest estimate quickly; this video shows the order, not the data structure.
 
@@ -69,6 +69,7 @@ Every other path to the settled node must leave the settled region through some 
 
 - "The first path found is the shortest." → No: B is first reached at 4, then improved to 3 through C.
 - "Dijkstra works with negative lengths." → No.
+- Two words, two concepts. An *estimate* is the shortest length found so far; it can still drop. The *distance* is the true shortest length. A settled estimate equals the distance. Renderings never call an estimate a distance (`terms` in model.yaml).
 
 ## Scope
 

@@ -17,12 +17,14 @@ R = 0.38  # node radius
 STEPS = {
     "A": "Settle A. <bookmark mark='r0'/> From A, B is four away, <bookmark mark='r1'/> and C is two away.",
     "C": "The smallest estimate is now C, at two. Settle C. <bookmark mark='r0'/> Through C, B is two plus one: "
-         "three. That is shorter than four, so B becomes three. <bookmark mark='r1'/> D becomes ten, "
-         "<bookmark mark='r2'/> and E becomes twelve.",
+         "three. That is shorter than four, so B becomes three. <bookmark mark='r1'/> D becomes two plus eight: ten. "
+         "<bookmark mark='r2'/> E becomes two plus ten: twelve.",
     "B": "Now relax B's edges. <bookmark mark='r0'/> Through B, D is three plus five: eight. "
          "Eight is shorter than ten.",
-    "D": "Settle D, at eight. <bookmark mark='r0'/> E becomes ten, <bookmark mark='r1'/> and F becomes fourteen.",
-    "E": "E, at ten. It is the smallest unsettled estimate. <bookmark mark='r0'/> Through E, F becomes thirteen.",
+    "D": "D, at eight, is now the smallest estimate. Settle D. <bookmark mark='r0'/> E becomes eight plus two: ten. "
+         "<bookmark mark='r1'/> F becomes eight plus six: fourteen.",
+    "E": "E, at ten. It is the smallest unsettled estimate. <bookmark mark='r0'/> Through E, F becomes ten plus "
+         "three: thirteen. That is shorter than fourteen.",
     "F": "Settle F, at thirteen. Every node is settled.",
 }
 
@@ -35,28 +37,55 @@ class Dijkstra(ExplainerScene):
         a, b, c = M["bfs_counterexample"]["B_first"], M["bfs_counterexample"]["B_true"], M["bfs_counterexample"]["via_C"]
         with self.voiceover(text="This is why the algorithm settles the smallest estimate, and not the first node "
                                  "it reached. <bookmark mark='w'/> Had it settled B at four, as soon as A reached it, "
-                                 "the answer would be wrong. The path through C costs two plus one, which is three."):
+                                 "the answer would be wrong. <bookmark mark='via'/> The path through C costs two plus "
+                                 "one, which is three."):
             self.wait_until_bookmark("w")
             self.claim("why-smallest")
             self.play(ShowPassingFlash(edge_lines[frozenset("AB")].copy().set_stroke(Role.BAD, 10), time_width=0.8),
                       run_time=1.2)
+            self.wait_until_bookmark("via")
             self.play(LaggedStart(ShowPassingFlash(edge_lines[frozenset("AC")].copy().set_stroke(Role.GOOD, 10), time_width=0.8),
                                   ShowPassingFlash(edge_lines[frozenset("BC")].copy().set_stroke(Role.GOOD, 10), time_width=0.8),
                                   lag_ratio=0.6), run_time=1.6)
+        self.wait(1.2)
 
-    def finality(self, nodes, tags):
-        """Right after B settles at 3: why no later path can beat it, with this run's numbers."""
-        region = DashedVMobject(SurroundingRectangle(VGroup(nodes["A"], nodes["B"], nodes["C"], tags["B"], tags["C"]),
+    def finality(self, nodes, tags, edge_lines, settle):
+        """B is the smallest unsettled estimate (3): why no later path can beat it, before B settles.
+        The settled region is A and C only; B is the candidate outside it."""
+        region = DashedVMobject(SurroundingRectangle(VGroup(nodes["A"], nodes["C"], tags["A"], tags["C"]),
                                                      color=Role.GOOD, buff=0.25, corner_radius=0.2), num_dashes=40)
-        region_label = label("settled", size=22, color=Role.GOOD).next_to(region, UP, buff=0.1).align_to(region, LEFT)
-        with self.voiceover(text="Settle B, at three. It is now final. <bookmark mark='f'/> Every unsettled estimate is at least "
-                                 "three: D is ten, E is twelve, and F is infinity. Any other path to B must pass one "
-                                 "of them, and no length is negative. So no other path can cost less than three."):
+        region_label = label("settled", size=22, color=Role.GOOD).next_to(region, DOWN, buff=0.1).align_to(region, LEFT)
+        with self.voiceover(text="B has the smallest estimate, three. Can a path found later still beat three? "
+                                 "<bookmark mark='d'/> Look at the other unsettled estimates. D is ten, "
+                                 "<bookmark mark='e'/> E is twelve, <bookmark mark='f'/> and F is infinity. "
+                                 "All of them are at least three."):
             self.play(Create(region), FadeIn(region_label))
-            self.wait_until_bookmark("f")
+            for n in "DEF":
+                self.wait_until_bookmark(n.lower())
+                self.play(Indicate(tags[n], color=Role.FOCUS, scale_factor=1.4), run_time=0.8)
+        self.wait(0.6)
+        exit_edges = [frozenset("CD"), frozenset("CE")]
+        with self.voiceover(text="Any other path to B must leave the settled nodes, A and C, <bookmark mark='leave'/> "
+                                 "through D or E. F has no edge to A or C. Each estimate is already the cheapest "
+                                 "way there through settled nodes, because every settled node has relaxed its "
+                                 "edges. So reaching D costs at least ten, and reaching E at least twelve. "
+                                 "<bookmark mark='grow'/> No length is negative, so the rest of the path can only add."):
+            self.wait_until_bookmark("leave")
+            self.play(LaggedStart(*[ShowPassingFlash(edge_lines[k].copy().set_stroke(Role.FOCUS, 10), time_width=0.8)
+                                    for k in exit_edges], lag_ratio=0.4), run_time=1.6)
+            self.play(Indicate(tags["D"], color=Role.FOCUS, scale_factor=1.4),
+                      Indicate(tags["E"], color=Role.FOCUS, scale_factor=1.4), run_time=1.0)
+            self.wait_until_bookmark("grow")
+            at_least = label("any other path to B costs ≥ 10 > 3", size=26, color=Role.FOCUS).to_edge(UP, buff=0.35)
+            self.play(FadeIn(at_least, shift=UP * 0.1))
+        with self.voiceover(text="So no other path can cost less than three. <bookmark mark='final'/> Settle B. "
+                                 "Its estimate is its final distance, and it never changes again."):
+            self.wait_until_bookmark("final")
             self.claim("guarantee-final")
-            self.play(*[Indicate(tags[n], color=Role.FOCUS) for n in "DEF"], run_time=1.5)
-        self.play(FadeOut(region), FadeOut(region_label), run_time=0.5)
+            self.play(*settle, run_time=0.7)
+            self.play(Indicate(tags["B"], color=Role.GOOD, scale_factor=1.5), run_time=1.0)
+        self.wait(1.5)
+        self.play(FadeOut(region), FadeOut(region_label), FadeOut(at_least), run_time=0.5)
 
     def construct(self):
         # graph
@@ -75,17 +104,22 @@ class Dijkstra(ExplainerScene):
                 .next_to(nodes[n], UP if POS[n][1] >= 0 else DOWN, buff=0.12) for n in POS}
 
         with self.voiceover(text="Dijkstra's algorithm finds the shortest distance from one start node to every "
-                                 "other node. The numbers on the edges are lengths. <bookmark mark='rule'/> "
+                                 "other node. Here the start node is A. The numbers on the edges are lengths, and "
+                                 "each edge works in both directions. <bookmark mark='rule'/> "
                                  "Every length must be zero or more."):
             self.play(LaggedStart(*[GrowFromCenter(v) for v in nodes.values()], lag_ratio=0.1),
                       LaggedStart(*[Create(l) for l in edge_lines.values()], lag_ratio=0.05), run_time=2)
             self.play(FadeIn(VGroup(*weights)))
             self.wait_until_bookmark("rule")
-        with self.voiceover(text="At the start, A has distance zero. Every other node has distance infinity. "
-                                 "<bookmark mark='loop'/> Then repeat two steps. First, settle the unsettled node "
-                                 "with the smallest distance. Second, relax its edges. <bookmark mark='relax'/> "
-                                 "To relax an edge, check whether the path through the settled node is shorter. "
-                                 "If it is, keep the shorter distance, and remember where it came from."):
+            self.play(FadeIn(label("every length ≥ 0", size=22, color=Role.MUTED).to_corner(UR, buff=0.4)))
+        with self.voiceover(text="Each node has an estimate: the shortest length found so far. At the start, A has "
+                                 "estimate zero. Every other node has estimate infinity: no path found yet. "
+                                 "<bookmark mark='loop'/> "
+                                 "Then repeat two steps. First, settle the unsettled node with the smallest "
+                                 "estimate. A settled estimate is the final distance. Second, relax its edges. "
+                                 "<bookmark mark='relax'/> To relax an edge, check whether the path through the "
+                                 "settled node is shorter. <bookmark mark='keep'/> If it is, keep the shorter "
+                                 "estimate, and remember where it came from."):
             self.play(LaggedStart(*[FadeIn(t, shift=DOWN * 0.1) for t in tags.values()], lag_ratio=0.1))
             self.wait_until_bookmark("loop")
             rule = VGroup(label("1  settle the smallest estimate", size=24),
@@ -95,6 +129,14 @@ class Dijkstra(ExplainerScene):
             self.wait_until_bookmark("relax")
             self.claim("definition-relax")
             self.play(Indicate(rule[1], color=Role.FOCUS))
+            test = label("estimate(u) + length < estimate(v) ?", size=22, color=Role.QUANTITY)
+            keep = label("yes: keep it, remember u", size=22, color=Role.GOOD)
+            VGroup(test, keep).arrange(DOWN, aligned_edge=LEFT, buff=0.12).next_to(rule, UP, buff=0.3, aligned_edge=LEFT)
+            self.play(FadeIn(test, shift=UP * 0.1))
+            self.wait_until_bookmark("keep")
+            self.play(FadeIn(keep, shift=UP * 0.1))
+        self.wait(1.2)
+        self.play(FadeOut(test), FadeOut(keep), run_time=0.4)
 
         # replay the run
         parent: dict[str, str] = {}
@@ -106,8 +148,8 @@ class Dijkstra(ExplainerScene):
             ring = Circle(radius=R + 0.08, color=Role.FOCUS, stroke_width=5).move_to(POS[u])
             settle = [Create(ring), nodes[u][0].animate.set_fill(Role.GOOD, 0.35).set_stroke(Role.GOOD)]
             if u == "B":  # show finality at the moment of settling, before B relaxes its edges
-                self.play(*settle, run_time=0.7)
-                self.finality(nodes, tags)
+                self.play(Create(ring), run_time=0.5)
+                self.finality(nodes, tags, edge_lines, settle[1:])
             with self.voiceover(text=STEPS[u]):
                 if u != "B":
                     self.play(*settle, run_time=0.7)
@@ -173,7 +215,7 @@ class NegativeEdge(ExplainerScene):
         title = label("one negative edge", size=28, color=Role.BAD).to_edge(UP, buff=0.5)
 
         with self.voiceover(text="Why must every length be zero or more? <bookmark mark='g'/> Here is a small graph "
-                                 "with one negative edge, from C to B, of length minus two."):
+                                 "with one negative edge, from C to B, of length minus two. Here each edge works in one direction only."):
             self.wait_until_bookmark("g")
             self.play(FadeIn(title), *[GrowFromCenter(v) for v in nodes.values()], *[GrowArrow(a) for a in arrows])
             self.play(FadeIn(VGroup(*weights)), FadeIn(VGroup(*tags.values())))
@@ -194,6 +236,7 @@ class NegativeEdge(ExplainerScene):
             self.claim("guarantee-final")
             truth = label(f"true: {N['via_C']}", size=26, color=Role.BAD).next_to(tags["B"], RIGHT, buff=0.3)
             self.play(tags["B"].animate.set_color(Role.BAD), FadeIn(truth, shift=UP * 0.1))
+        self.wait(1.5)
         with self.voiceover(text="With negative lengths, use the Bellman-Ford algorithm instead."):
             self.wait(0.5)
         self.wait(1)

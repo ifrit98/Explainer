@@ -91,6 +91,22 @@ The rendering should present claim `x` from `model.yaml` but has no mark for it.
 
 Add a `why` claim with `about: [exp]`: the simplest alternative and what it breaks, with numbers. If the function only names a readout that the explanation does not derive, list it under `accept_unjustified` with that reason.
 
+## `says 'has distance'; the model's term is 'estimate'`
+
+A `terms` entry in `model.yaml` lists that phrase as a wrong name for the concept. Use the term. If the phrase is right in this place (it names the other concept), make the `avoid` phrase more specific.
+
+## `plays the video with a plain <video>, which skips its predict pause(s)`
+
+Replace the `<video>` element with `Explainer.video(el, {src, captions, timeline})` from the web toolkit.
+
+## `pace: claim 'x' … pause after its line` or `… talks 12s over one picture`
+
+Add `self.wait(1.2)` after the voiceover block that completes the claim. For a long line, split it: one sentence per step, with a bookmark where each step appears on screen.
+
+## `--diagrams: no Mermaid CLI`
+
+Install Node (for `npx`), or `npm install -g @mermaid-js/mermaid-cli` for `mmdc`. The first `npx` run downloads the CLI and a headless browser.
+
 ## The check passed, but a changed value is still wrong somewhere
 
 The check matches values, not meanings. If the new value equals another number the rendering shows for a different reason (a logit of 2.5 and a sum of 2.5), the check cannot tell them apart. Make the rendering load the model (`load_model`, `Explainer.model`), or check that passage by hand.

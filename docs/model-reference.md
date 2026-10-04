@@ -52,7 +52,12 @@ claims:            # the ideas the explanation must convey (see below)
     ask: "Why does softmax use exp, instead of dividing by the sum of the logits?"
 
 accept_unjustified:   # functions in model.md that deliberately have no why claim, with the reason
-  log: "log₂ only defines entropy, a readout"
+  log: "only the out-of-scope running time uses it"   # a debt: `explainer check -v` lists it
+
+terms:             # one word per concept; a rendering that uses an avoided phrase fails
+  - term: estimate
+    means: "the shortest length found so far; 'distance' means only the final value"
+    avoid: [has distance, smallest distance, shorter distance]
 
 quiz:              # blind-test questions with expected answers
   - q: "If T rises from 1 to 3, what happens to the top probability, and does the order change?"
@@ -98,6 +103,9 @@ A mark is a promise, not proof: the blind understanding test checks that the ide
 | An uncovered claim | `explanation.md: does not cover claim 'why-exp'` | present the idea there and mark it, or narrow `in` |
 | An unknown mark | `index.html: marks unknown claim 'nope'` | fix the id |
 | A function with no why | `model.md uses exp but no 'why' claim says why` | add a `why` claim with `about: [exp]`, or `accept_unjustified` with a reason |
+| A second name for a concept | `video/scene.py: says 'has distance'; the model's term is 'estimate'` | use the term; avoid phrases match whole words, ignoring case and line breaks |
+| A video without its predict pauses | `index.html: plays the video with a plain <video>, which skips its 1 predict pause(s)` | play it with `Explainer.video` |
+| A Mermaid syntax error (with `--diagrams`) | `diagram.md:24: Error: Parse error on line 3` | fix the block; the line is where the block starts |
 
 Numbers are compared at the precision shown: 0.84 matches 0.842, "84%" and "eighty-four percent" match 0.842, 6.0 × 10⁻⁶ is one number, and 2 never stands for 2.5. Stage, step, and section numbers, years, versions, and hash fragments are skipped.
 

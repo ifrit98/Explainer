@@ -18,9 +18,9 @@ If the subject has no dynamic change (no transformation, motion, iteration, or p
 3. **Storyboard.** Fill `video/storyboard.md`: objective, sequence, scene table with bookmarks, object inventory, timing, predict pauses. Write the narration in STE-80.
 4. **Scene code.** Write `video/scene.py` on `ExplainerScene`. Read values with `load_model(__file__)`. One voiceover block per statement; time animations to the tracker and bookmarks. Use `explainer_kit.components` (TrackerBars, LiveNumber, LabeledNumberLine, stagger_labels) before writing your own. Add `self.predict(...)` before the result a learner should predict. Call `self.claim("id")` where each claim is shown, with its case on screen.
 5. **Check.** `explainer check <slug>`. Fix every number the model does not explain.
-6. **Draft.** `explainer render <slug> --draft --review`. Read `draft-review.png`. Fix every layout issue it lists (overlap, covered, off-frame) and every frame where the visual evidence is late or missing.
-7. **Final.** `explainer render <slug> --review`. Read `review.png` and `captions.srt`. At each claim frame, check that the screen shows what the narration says.
+6. **Draft.** `explainer render <slug> --draft --review`. Read `draft-review.png`. Fix every layout issue it lists (overlap, covered, off-frame), every pace issue (a claim with no pause after it, or a long line over one picture: split it, one step per bookmark), and every frame where the visual evidence is late or missing. Silent drafts speak a little slower than the voice, so the final render decides pace.
+7. **Final.** `explainer render <slug> --review`. Read `review.png` and `captions.srt`. At each claim frame, check that the screen shows what the narration says. Fix any pace issue it still reports.
 8. **Verify.** Follow the `verify` skill for the blind understanding test when the video will be published.
-9. **Deliver.** Give the path to `out.mp4`, the length, the voice, the number of predict pauses, and one line on what the viewer can now predict.
+9. **Deliver.** On a page, play the video with `Explainer.video` so it stops at the predict pauses (`explainer check` fails a plain `<video>`). Give the path to `out.mp4`, the length, the voice, the number of predict pauses, and one line on what the viewer can now predict.
 
 Reference implementations: `explainers/softmax-temperature/` (one tracker drives everything), `explainers/odd-squares/` (proof with LaTeX and a predict pause), `explainers/dijkstra/` (an algorithm replayed from the model).

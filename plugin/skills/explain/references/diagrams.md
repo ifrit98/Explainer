@@ -58,3 +58,7 @@ Level 3 (similarity):  QKᵀ / √d
 ```
 
 Each level expands exactly one object of the level above it.
+
+## 5. Check
+
+`explainer check --diagrams <slug>` renders every Mermaid block in the explainer once (Markdown fences and `<pre class="mermaid">` in pages) and fails on a syntax error. It uses `mmdc` when it is on PATH, else `npx` with a pinned Mermaid CLI, so Node is the only requirement. A block that renders can still say the wrong thing: read it against the model.

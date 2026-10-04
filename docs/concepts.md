@@ -57,6 +57,7 @@ An explanation can pass every number check and still omit the idea that makes it
 - A **why** claim names the simplest alternative and shows it failing (dividing by the sum of the logits gives owl −0.4, and T cancels).
 - A **guarantee** shows a case where it holds and a case where it breaks without its assumption (Dijkstra with C→B −2 answers 2 for a true distance of 1).
 - A **mechanism** has a worked example in numbers.
+- Each concept has **one word** (`terms`), each quantity a reader sees has a **meaning**, and in a video each key claim gets **time**: one picture per step and a pause after it.
 
 Renderings mark where they cover each claim, and `explainer check` fails while a claim is incomplete or uncovered, or while `model.md` uses a function (exp, log, sqrt, …) that no claim justifies. Before rendering, `explainer probe` gives the model to a fresh agent that lists what is missing. The [authoring guide](authoring.md) walks through the method on `softmax-temperature`.
 

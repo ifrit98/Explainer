@@ -75,6 +75,10 @@ button[aria-pressed="true"] { background: var(--fg); color: var(--surface); bord
 .readout { display: grid; gap: 4px; }
 .readout .label { font: 500 0.72rem var(--mono); letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); }
 .readout .value { font: 500 1.25rem var(--mono); font-variant-numeric: tabular-nums; }
+.bits { font-size: 0.85rem; color: var(--muted); }
+.bits summary { cursor: pointer; color: var(--fg); }
+.bits p { margin: 6px 0 0; }
+.bits .num { font-family: var(--mono); font-variant-numeric: tabular-nums; color: var(--fg); }
 .meter { height: 6px; background: var(--bar-soft); border-radius: 3px; overflow: hidden; }
 .meter > div { height: 100%; background: var(--bar); border-radius: 3px; transition: width 220ms ease; }
 .state { font-size: 0.95rem; }
@@ -147,12 +151,19 @@ footer { font-size: 0.85rem; color: var(--muted); border-top: 1px solid var(--ru
         <div class="tokens" id="tokens"></div>
       </div>
       <div class="readouts">
-        <div class="readout" data-claim="definition-entropy">
+        <div class="readout" data-claim="why-entropy">
           <span class="label">Entropy (spread)</span>
           <span class="value" id="entropy">1.46 bits</span>
           <div class="meter" aria-hidden="true"><div id="entropy-bar"></div></div>
           <span class="muted" style="font-size:.8rem">0 = certain · 2 bits = uniform</span>
           <span class="muted" style="font-size:.8rem" id="choices"></span>
+          <details class="bits">
+            <summary>What the bits mean</summary>
+            <p>Each token has a <em>surprise</em> of −log₂ p bits. One bit is one fair yes/no question.</p>
+            <p class="num" id="surprise"></p>
+            <p>Entropy is the average surprise of one draw. A count of the possible tokens says 4 at every T, even
+              at T = 0.25, where cat wins 98% of draws; entropy says about 1.11 choices there.</p>
+          </details>
         </div>
         <div class="readout">
           <span class="label">cat : dog ratio</span>
@@ -196,7 +207,7 @@ footer { font-size: 0.85rem; color: var(--muted); border-top: 1px solid var(--ru
 <section aria-labelledby="h-why" data-claim="why-divide-t">
   <span class="eyebrow">Level 3 · Why</span>
   <h2 id="h-why">Only the gap matters, and T divides the gap</h2>
-  <p>The ratio of two probabilities depends on the gap between their logits, divided by T. A small T makes the gap large, so the top token dominates. A large T makes the gap small, so the ratio goes toward 1.</p>
+  <p>The ratio of two probabilities depends on the gap between their logits, divided by T: the <em>scaled gap</em>. T does not change the gap itself. A small T makes the scaled gap large, so the top token dominates. A large T makes the scaled gap small, so the ratio goes toward 1.</p>
   <div class="law" id="law">p<sub>cat</sub> / p<sub>dog</sub> = exp((2.0 − 1.0) / <span class="live">1.00</span>) = <span class="live">2.72</span></div>
   <p>Put another way, every ratio becomes its T = 1 value raised to the power 1/T. At T = 2: (0.609 / 0.224)^(1/2) = 1.65. Adding T to every logit would do nothing, as the toggle above shows; dividing is what scales the gaps.</p>
 </section>
@@ -248,7 +259,7 @@ footer { font-size: 0.85rem; color: var(--muted); border-top: 1px solid var(--ru
 <footer>Rendered from <a href="https://github.com/ifrit98/Explainer/blob/main/explainers/softmax-temperature/model.md">model.md</a>. The same model is also rendered as <a href="https://github.com/ifrit98/Explainer/blob/main/explainers/softmax-temperature/explanation.md">prose</a>, <a href="https://github.com/ifrit98/Explainer/blob/main/explainers/softmax-temperature/diagram.md">diagrams</a>, and a <a href="video/out.mp4">narrated video</a>. <a href="../../">All examples</a>.</footer>
 </main>
 
-<script type="application/json" id="explainer-model">{"context": "The ___ sat on the mat.", "tokens": ["cat", "dog", "fox", "owl"], "logits": {"cat": 2.0, "dog": 1.0, "fox": 0.5, "owl": -1.0}, "probabilities": {"T=0.25": {"cat": 0.98, "dog": 0.018, "fox": 0.002, "owl": 0.0}, "T=0.5": {"cat": 0.842, "dog": 0.114, "fox": 0.042, "owl": 0.002}, "T=1.0": {"cat": 0.609, "dog": 0.224, "fox": 0.136, "owl": 0.03}, "T=2.0": {"cat": 0.434, "dog": 0.263, "fox": 0.205, "owl": 0.097}, "T=4.0": {"cat": 0.34, "dog": 0.265, "fox": 0.234, "owl": 0.161}, "T=10": {"cat": 0.285, "dog": 0.258, "fox": 0.245, "owl": 0.211}}, "entropy_bits": {"T=0.25": 0.15, "T=0.5": 0.78, "T=1.0": 1.46, "T=2.0": 1.82, "T=4.0": 1.95, "T=10": 1.99}, "cat_dog_ratio": {"T=0.25": 54.6, "T=0.5": 7.39, "T=1.0": 2.72, "T=2.0": 1.65, "T=4.0": 1.28, "T=10": 1.11}, "max_entropy_bits": 2, "uniform_probability": 0.25, "slider": {"min": 0.1, "max": 10}, "sum_normalization": {"sum": 2.5, "cat": 0.8, "dog": 0.4, "fox": 0.2, "owl": -0.4}, "squares_normalization": {"cat": 0.64, "dog": 0.16, "fox": 0.04, "owl": 0.16}, "worked_T2": {"scaled": [1.0, 0.5, 0.25, -0.5], "exp": [2.718, 1.649, 1.284, 0.607], "sum": 6.258}, "shift_example": {"add": 10, "logits": [12, 11, 10.5, 9]}, "scale_example": {"factor": 2, "logits": [4, 2, 1, -2]}, "negative_T": {"T": -1, "scaled": [-2, -1, -0.5, 1], "owl": 0.71}, "effective_choices_T1": 2.76, "e": 2.718, "owl_T025_exact": 6e-06, "low_T_presets": [0, 0.3]}</script>
+<script type="application/json" id="explainer-model">{"context": "The ___ sat on the mat.", "tokens": ["cat", "dog", "fox", "owl"], "logits": {"cat": 2.0, "dog": 1.0, "fox": 0.5, "owl": -1.0}, "probabilities": {"T=0.25": {"cat": 0.98, "dog": 0.018, "fox": 0.002, "owl": 0.0}, "T=0.5": {"cat": 0.842, "dog": 0.114, "fox": 0.042, "owl": 0.002}, "T=1.0": {"cat": 0.609, "dog": 0.224, "fox": 0.136, "owl": 0.03}, "T=2.0": {"cat": 0.434, "dog": 0.263, "fox": 0.205, "owl": 0.097}, "T=4.0": {"cat": 0.34, "dog": 0.265, "fox": 0.234, "owl": 0.161}, "T=10": {"cat": 0.285, "dog": 0.258, "fox": 0.245, "owl": 0.211}}, "entropy_bits": {"T=0.25": 0.15, "T=0.5": 0.78, "T=1.0": 1.46, "T=2.0": 1.82, "T=4.0": 1.95, "T=10": 1.99}, "cat_dog_ratio": {"T=0.25": 54.6, "T=0.5": 7.39, "T=1.0": 2.72, "T=2.0": 1.65, "T=4.0": 1.28, "T=10": 1.11}, "max_entropy_bits": 2, "uniform_probability": 0.25, "slider": {"min": 0.1, "max": 10}, "sum_normalization": {"sum": 2.5, "cat": 0.8, "dog": 0.4, "fox": 0.2, "owl": -0.4}, "squares_normalization": {"cat": 0.64, "dog": 0.16, "fox": 0.04, "owl": 0.16}, "worked_T2": {"scaled": [1.0, 0.5, 0.25, -0.5], "exp": [2.718, 1.649, 1.284, 0.607], "sum": 6.258}, "shift_example": {"add": 10, "logits": [12, 11, 10.5, 9]}, "scale_example": {"factor": 2, "logits": [4, 2, 1, -2]}, "negative_T": {"T": -1, "scaled": [-2, -1, -0.5, 1], "owl": 0.71}, "effective_choices_T1": 2.76, "effective_choices": {"T=0.25": 1.11, "T=0.5": 1.71, "T=1.0": 2.76, "T=2.0": 3.54, "T=10": 3.98}, "surprise_bits_T1": {"cat": 0.71, "dog": 2.16, "fox": 2.88, "owl": 5.04}, "top_share_T025": 98, "e": 2.718, "owl_T025_exact": 6e-06, "low_T_presets": [0, 0.3]}</script>
 <script>
 (() => {
   // Logits come from model.yaml via `explainer sync`, so the page cannot drift from the model.
@@ -317,6 +328,8 @@ footer { font-size: 0.85rem; color: var(--muted); border-top: 1px solid var(--ru
     const H = -p.reduce((a, x) => a + (x > 0 ? x * Math.log2(x) : 0), 0);
     $("entropy").textContent = `${H.toFixed(2)} bits`;
     $("choices").textContent = `≈ ${(2 ** H).toFixed(2)} equally likely choices`;
+    $("surprise").textContent = TOKENS.map(([name], i) =>
+      `${name} ${p[i] > 0 ? (-Math.log2(p[i])).toFixed(2) : "∞"}`).join(" · ") + " bits";
     $("sum-line").textContent = greedy ? "T = 0: greedy, no division." : `Sum of the exp column: ${ex.reduce((a, b) => a + b, 0).toFixed(3)}. Each probability is its exp value ÷ this sum.`;
     renderNorm(t);
     $("entropy-bar").style.width = `${(H / 2) * 100}%`;

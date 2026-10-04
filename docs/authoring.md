@@ -86,7 +86,19 @@ The check fails until every claim is complete, every rendering covers its claims
 
 For video, read the review sheet (`explainer render <slug> --review`). Claim marks appear on it, so you can see what is on screen when each idea is presented. In the Dijkstra update, the sheet showed that the narration said "D is ten" while the screen showed D = 8: the finality segment ran one step too late. No automatic check could see that; the sheet made it visible.
 
-Then run the blind test (`explainer quiz <slug> --rendering <r>`, the `verify` skill). Claims with an `ask` field become quiz questions, and the rubric expects the statement and its cases.
+Then run the blind test (`explainer quiz <slug> --rendering <r>`, the `verify` skill). Claims with an `ask` field become quiz questions, and the rubric expects the statement and its cases. The reviewer also returns an **audit**: concepts named by two words, numbers shown without a meaning, steps stated without a why, and (for video) points the narration rushes past.
+
+### 7. Turn each finding into a rule
+
+A gap fixed only in one example comes back in the next one. For each real finding, ask which check, probe rule, or template line would have caught it in any explanation, and add that too. The v0.3.0 blind tests left three findings. Each one became a general rule in v0.4.0:
+
+| Finding (one example) | General rule (every explanation) | Where it lives |
+|---|---|---|
+| Dijkstra's narration said "A has distance zero" for a value that can still drop; the model calls it an *estimate* and keeps *distance* for the final value. | One concept, one word. Close concepts get different words, and the wrong phrases are listed. | `terms` in `model.yaml` (checked); probe rule 3; blind-test audit `terms`; writing rules |
+| Softmax showed "entropy 1.46 bits" with only "≈ 2.76 choices"; `log` was excused with `accept_unjustified`. | Every quantity has a meaning, at a low value and a high one. A function excused without a why is a debt, listed by `check -v`. | probe rule 6; audit `unexplained`; template Terms section; softmax now has a `why-entropy` claim |
+| Dijkstra's finality argument ran 12 s over one picture, with half a second before the next line. | Every key claim gets time: one picture per step, and a pause after the claim. | `render` and `review` report pace issues from the timeline; storyboard template |
+| The landing page played videos with a plain `<video>`, which skipped the predict pauses. | A page that embeds a video with predict pauses plays it with `Explainer.video`. | `explainer check` |
+| Mermaid blocks were checked by hand in a browser. | Every Mermaid block renders once before delivery. | `explainer check --diagrams`; CI |
 
 ## A catalog of common omissions
 
@@ -99,6 +111,9 @@ Then run the blind test (`explainer quiz <slug> --rendering <r>`, the `verify` s
 | An undefined term | The reader skips or misreads it | Define it in Terms and in the rendering, before first use |
 | A silent boundary | The reader's next question has no answer | Scope entry with a pointer |
 | Mismatched words and picture | Narration says one value, the screen shows another | Read the review sheet; move the segment to the right moment |
+| One concept, two names | The reader treats "estimate" and "distance" as the same thing, or as two things | `terms` entry with the phrases to avoid |
+| A number with no meaning | The reader can quote "1.46 bits" but cannot say what it tells them | Say what the number means, at a low and a high value; if it uses a function, a `why` claim |
+| A rushed claim | "The finality segment is quick" | One line and one picture per step; a pause after the claim (pace issues) |
 
 ## Scope is not an omission
 

@@ -1,5 +1,5 @@
 {
- "duration": 91.617,
+ "duration": 92.817,
  "events": [
   {
    "kind": "voiceover",
@@ -11,88 +11,88 @@
   },
   {
    "kind": "voiceover_end",
-   "t": 6.017,
+   "t": 6.025,
    "issues": [],
    "scene": "SoftmaxTemperature"
   },
   {
    "kind": "voiceover",
-   "t": 6.017,
+   "t": 6.025,
    "duration": 6.183,
    "text": "The model gives each candidate a score. The score is called a logit. Cat has the highest logit.",
    "bookmarks": {
-    "line": 8.46
+    "line": 8.468
    },
    "scene": "SoftmaxTemperature"
   },
   {
    "kind": "bookmark",
-   "t": 8.45,
+   "t": 8.458,
    "mark": "line",
    "issues": [],
    "scene": "SoftmaxTemperature"
   },
   {
    "kind": "voiceover_end",
-   "t": 12.183,
+   "t": 12.207,
    "issues": [],
    "scene": "SoftmaxTemperature"
   },
   {
    "kind": "voiceover",
-   "t": 12.183,
+   "t": 12.207,
    "duration": 5.747,
    "text": "Softmax turns the logits into probabilities. At temperature one, cat gets sixty-one percent.",
    "bookmarks": {
-    "bars": 15.072
+    "bars": 15.096
    },
    "scene": "SoftmaxTemperature"
   },
   {
    "kind": "bookmark",
-   "t": 15.072,
+   "t": 15.096,
    "mark": "bars",
    "issues": [],
    "scene": "SoftmaxTemperature"
   },
   {
    "kind": "voiceover_end",
-   "t": 17.922,
+   "t": 17.946,
    "issues": [],
    "scene": "SoftmaxTemperature"
   },
   {
    "kind": "voiceover",
-   "t": 17.922,
+   "t": 17.946,
    "duration": 8.636,
    "text": "Temperature divides every logit before softmax. At T equal to one half, the logits move apart. Cat now gets eighty-four percent.",
    "bookmarks": {
-    "cold": 21.295
+    "cold": 21.319
    },
    "scene": "SoftmaxTemperature"
   },
   {
    "kind": "bookmark",
-   "t": 21.288,
+   "t": 21.312,
    "mark": "cold",
    "issues": [],
    "scene": "SoftmaxTemperature"
   },
   {
    "kind": "voiceover_end",
-   "t": 26.555,
+   "t": 26.579,
    "issues": [],
    "scene": "SoftmaxTemperature"
   },
   {
    "kind": "predict",
-   "t": 26.555,
+   "t": 26.579,
    "question": "When T rises to 2, does cat stay the most likely token?",
    "scene": "SoftmaxTemperature"
   },
   {
    "kind": "voiceover",
-   "t": 26.555,
+   "t": 26.579,
    "duration": 5.257,
    "text": "Pause here and predict. When T rises to 2, does cat stay the most likely token?",
    "bookmarks": {},
@@ -100,150 +100,150 @@
   },
   {
    "kind": "voiceover_end",
-   "t": 31.805,
+   "t": 31.829,
    "issues": [],
    "scene": "SoftmaxTemperature"
   },
   {
    "kind": "voiceover",
-   "t": 34.805,
+   "t": 34.829,
    "duration": 7.079,
    "text": "Now raise the temperature. At T equal to two, the logits move together. The probabilities become more equal.",
    "bookmarks": {
-    "hot": 36.562
+    "hot": 36.586
    },
    "scene": "SoftmaxTemperature"
   },
   {
    "kind": "bookmark",
-   "t": 36.555,
+   "t": 36.579,
    "mark": "hot",
    "issues": [],
    "scene": "SoftmaxTemperature"
   },
   {
    "kind": "voiceover_end",
-   "t": 41.884,
+   "t": 41.896,
    "issues": [],
    "scene": "SoftmaxTemperature"
   },
   {
    "kind": "voiceover",
-   "t": 41.884,
+   "t": 41.896,
    "duration": 12.549,
    "text": "Why does this happen? The ratio of two probabilities depends only on the distance between their dots. A larger distance gives a larger ratio. A smaller distance gives a ratio closer to one.",
    "bookmarks": {
-    "gap": 43.443,
-    "move": 48.411
+    "gap": 43.455,
+    "move": 48.423
    },
    "scene": "SoftmaxTemperature"
   },
   {
    "kind": "bookmark",
-   "t": 43.443,
+   "t": 43.446,
    "mark": "gap",
    "issues": [],
    "scene": "SoftmaxTemperature"
   },
   {
    "kind": "bookmark",
-   "t": 48.41,
+   "t": 48.412,
    "mark": "move",
    "issues": [],
    "scene": "SoftmaxTemperature"
   },
   {
    "kind": "voiceover_end",
-   "t": 54.426,
+   "t": 54.429,
    "issues": [],
    "scene": "SoftmaxTemperature"
   },
   {
    "kind": "voiceover",
-   "t": 54.426,
+   "t": 54.429,
    "duration": 18.155,
    "text": "Why exp, and not something simpler? Divide each logit by their sum, and owl gets minus zero point four. A probability cannot be negative. Exp makes every weight positive and keeps the order. And it turns a gap into a ratio. That is why only the distance between the dots matters.",
    "bookmarks": {
-    "alt": 56.718,
-    "exp": 63.9
+    "alt": 56.721,
+    "exp": 63.903
    },
    "scene": "SoftmaxTemperature"
   },
   {
    "kind": "bookmark",
-   "t": 56.71,
+   "t": 56.712,
    "mark": "alt",
    "issues": [],
    "scene": "SoftmaxTemperature"
   },
   {
    "kind": "bookmark",
-   "t": 63.893,
+   "t": 63.896,
    "mark": "exp",
    "issues": [],
    "scene": "SoftmaxTemperature"
   },
   {
    "kind": "claim",
-   "t": 63.893,
+   "t": 63.896,
    "id": "why-exp",
    "scene": "SoftmaxTemperature"
   },
   {
    "kind": "voiceover_end",
-   "t": 72.576,
+   "t": 72.579,
    "issues": [],
    "scene": "SoftmaxTemperature"
   },
   {
    "kind": "voiceover",
-   "t": 73.076,
+   "t": 74.279,
    "duration": 9.182,
    "text": "At a very low temperature, the top token takes almost all the probability. At a very high temperature, every token gets almost the same probability.",
    "bookmarks": {
-    "uni": 77.801
+    "uni": 79.003
    },
    "scene": "SoftmaxTemperature"
   },
   {
    "kind": "bookmark",
-   "t": 77.793,
+   "t": 78.996,
    "mark": "uni",
    "issues": [],
    "scene": "SoftmaxTemperature"
   },
   {
    "kind": "voiceover_end",
-   "t": 82.243,
+   "t": 83.446,
    "issues": [],
    "scene": "SoftmaxTemperature"
   },
   {
    "kind": "voiceover",
-   "t": 82.243,
+   "t": 83.446,
    "duration": 7.911,
    "text": "In every case, the order stays the same. Cat is always first, and owl is always last. Temperature changes only the spread.",
    "bookmarks": {
-    "formula": 88.036
+    "formula": 89.239
    },
    "scene": "SoftmaxTemperature"
   },
   {
    "kind": "claim",
-   "t": 84.243,
+   "t": 85.446,
    "id": "guarantee-order",
    "scene": "SoftmaxTemperature"
   },
   {
    "kind": "bookmark",
-   "t": 88.026,
+   "t": 89.229,
    "mark": "formula",
    "issues": [],
    "scene": "SoftmaxTemperature"
   },
   {
    "kind": "voiceover_end",
-   "t": 90.143,
+   "t": 91.346,
    "issues": [],
    "scene": "SoftmaxTemperature"
   }

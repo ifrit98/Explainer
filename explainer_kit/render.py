@@ -165,6 +165,11 @@ def render(slug: str, scene: str | None = None, quality: str | None = None, draf
         print(f"\nlayout issues ({len(issues)}) — run `explainer review {slug}` to see where:")
         for i in issues:
             print(f"  · {i}")
+    from explainer_kit.review import pace_issues
+    if pace := pace_issues(events):
+        print(f"\npace issues ({len(pace)}):")
+        for i in pace:
+            print(f"  · {i}")
     return out
 
 

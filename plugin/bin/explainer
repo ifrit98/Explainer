@@ -10,5 +10,5 @@ if ! command -v uvx >/dev/null 2>&1; then
   echo "explainer: needs uv — https://docs.astral.sh/uv/getting-started/installation/" >&2
   exit 127
 fi
-SOURCE="${EXPLAINER_SOURCE:-git+https://github.com/ifrit98/Explainer@v0.3.0}"
+SOURCE="${EXPLAINER_SOURCE:-git+https://github.com/ifrit98/Explainer@v0.4.0}"
 exec uvx --quiet --python 3.12 --from "$SOURCE" explainer "$@"

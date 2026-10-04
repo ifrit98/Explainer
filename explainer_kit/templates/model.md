@@ -67,7 +67,7 @@ For each guarantee or "always / never" claim: one instance with numbers where it
 
 ## Terms
 
-Every term a rendering uses, defined in one sentence, in the order a reader meets them.
+Every term a rendering uses, defined in one sentence, in the order a reader meets them. One word per concept: when two concepts are close (a tentative value and its final value), give each its own word and list the wrong uses under `terms` in model.yaml. Every quantity a rendering shows says what it means for the reader, with a value from the example (what is different at a low value and a high one).
 
 ## Epistemic status
 

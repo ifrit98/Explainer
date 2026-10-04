@@ -28,7 +28,13 @@ claims: []
 #    ask: "..."                # optional: becomes a blind-test question
 #    in: [prose, html]         # optional: default is every rendering present
 
-accept_unjustified: {}        # e.g. {log: "only names the unit of entropy"}
+accept_unjustified: {}        # e.g. {log: "..."}: a debt; `explainer check -v` lists it. Prefer a why claim.
+
+terms: []
+#  One word per concept. A rendering that uses an `avoid` phrase fails the check.
+#  - term: estimate
+#    means: "the shortest length found so far; 'distance' means only the final value"
+#    avoid: [smallest distance, has distance]
 
 quiz: []
 #  - q: "What happens to X when Y doubles?"

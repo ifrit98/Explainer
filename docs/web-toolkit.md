@@ -75,7 +75,9 @@ The prediction is kept per reader (local storage, never required), and the eleme
 
 ### `Explainer.video(el, {src, poster, captions, timeline})`
 
-A video player that pauses at every predict event of the render's `timeline.json` and asks for a prediction before it continues. Chapter buttons jump to each pause.
+A video player that pauses at every predict event of the render's `timeline.json` and asks for a prediction before it continues. Chapter buttons jump to each pause. `explainer check` fails a page that plays a video with predict pauses through a plain `<video>`.
+
+The [landing page](../index.html) uses the player outside an explainer folder: it loads `explainer_kit/web/explainer.js` with a `<script src>` and styles the player with its own tokens, because the toolkit CSS defines page-level tokens of its own. Seeking needs a server that answers HTTP range requests (GitHub Pages does; `python -m http.server` does not, so test locally with `npx http-server`).
 
 ### CSS pieces
 

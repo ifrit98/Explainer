@@ -1,5 +1,19 @@
 # Changelog
 
+## 0.4.0 — 2026-10-04
+
+Review findings become rules. Each finding from the v0.3.0 blind tests is fixed in its example and turned into a check, a probe rule, or a template line that applies to every explanation.
+
+- **Terms:** `terms` in `model.yaml` lists the phrases a rendering must not use for a concept. `explainer check` fails on one. Probe rule 3 now asks for one name per concept.
+- **Meaning of quantities:** probe rule 6 asks what each number shown means for the reader. `check -v` lists each `accept_unjustified` function as a debt.
+- **Pace:** `render` and `review` report a claim with less than 1 s of pause after its line, or more than 10 s of narration over one picture after its mark.
+- **Blind-test audit:** the reviewer also lists concepts with two names, numbers without a meaning, steps without a why, and (video) rushed points. The rubric treats each as a gap.
+- **Pages keep predict pauses:** `explainer check` fails a page that plays a video with predict pauses through a plain `<video>`. The landing page now uses `Explainer.video`.
+- **Mermaid:** `explainer check --diagrams` renders every Mermaid block with the pinned Mermaid CLI (`mmdc` or `npx`). CI runs it.
+- **Examples:** `dijkstra` uses "estimate" for the tentative value and "distance" only for the final one; the finality argument is three lines, one step per picture, with pauses; relax is shown as a test. `softmax-temperature` replaces the entropy definition with a `why-entropy` claim (surprise in bits, why a log and not a count, live per-token surprise on the page), and pauses after why exp.
+- **Second-round fixes from the audit:** softmax "scaled gap" (a `terms` entry, which also caught the page); Dijkstra's finality argument now draws the settled region as A and C, exits through D and E, and says why reaching D costs at least its estimate; the narration says each relaxation's sum. Probe rule 2 checks each step of an argument as written. Review-sheet headings show event times.
+- **Principles:** §10 adds one name per concept, a meaning for each quantity, time for each claim, and "turn each review finding into a rule".
+
 ## 0.3.0 — 2026-10-04
 
 Completeness: explanations must not omit the connections a learner needs.

@@ -12,7 +12,7 @@ A language model gives each candidate token a raw score. This score is the *logi
 1. Divide each logit by T.
 2. Apply the exponential function exp (e^x, with e ≈ 2.718) to each result.
 3. Divide each result by the sum of all results. Now the values are probabilities that sum to 1.
-4. Pick one token at random, with these probabilities.
+4. Pick one token at random, with these probabilities. A random pick, not always the top token, lets the output vary; T sets how much.
 
 Steps 2 and 3 together are the *softmax* function:
 
@@ -52,7 +52,7 @@ pᵢ / pⱼ = exp((zᵢ − zⱼ) / T)
 
 This follows from the softmax formula. Both probabilities have the same denominator Σⱼ exp(zⱼ / T), so it cancels in the ratio. What remains is exp(zᵢ / T) / exp(zⱼ / T), which equals exp((zᵢ − zⱼ) / T).
 
-A small T makes the gap large, so the ratio becomes very large. A large T makes the gap small, so the ratio goes toward 1. Put another way, every ratio becomes its T = 1 value raised to the power 1/T. Check it at T = 2: (0.609 / 0.224)^(1/2) = 1.65, the cat : dog ratio at T = 2 in the Example section.
+T does not change the gap between two logits. It changes the *scaled gap*, the gap divided by T. A small T makes the scaled gap large, so the ratio becomes very large. A large T makes the scaled gap small, so the ratio goes toward 1. Put another way, every ratio becomes its T = 1 value raised to the power 1/T, because exp(gap / T) = exp(gap)^(1/T). Check it at T = 2: (0.609 / 0.224)^(1/2) = 1.65, the cat : dog ratio at T = 2 in the Example section below.
 
 Adding T to every logit would not work. Adding one number to every logit changes nothing, as the next section shows.
 
@@ -60,10 +60,10 @@ Adding T to every logit would not work. Adding one number to every logit changes
 
 <!-- claim: guarantee-shift -->
 - **Adding** the same number to every logit changes nothing. Add 10: the logits 12, 11, 10.5, 9 still give 0.609, 0.224, 0.136, 0.030 at T = 1. The constant cancels in every ratio.
-- **Multiplying** every logit changes the result. Multiply by 2: the logits 4, 2, 1, −2 give 0.842, 0.114, 0.042, 0.002. That is exactly the T = 0.5 row, because doubling the logits doubles every gap, the same as halving T.
+- **Multiplying** every logit changes the result. Multiply by 2: the logits 4, 2, 1, −2 give 0.842, 0.114, 0.042, 0.002. That is exactly the T = 0.5 row of the table in the Example section below, because doubling the logits doubles every gap, the same as halving T.
 
 <!-- claim: guarantee-order -->
-- **The order never changes for T above 0.** Cat is first and owl is last in every row of the table. A negative T would reverse it: at T = −1 the scaled logits are −2, −1, −0.5, 1, and owl becomes the most likely token (0.71). APIs do not allow a negative T.
+- **The order never changes for T above 0.** Dividing by a positive T keeps the order of the logits, and exp keeps the order of its inputs. Cat is first and owl is last in every row of the table below. A negative T would reverse it: at T = −1 the scaled logits are −2, −1, −0.5, 1, and owl becomes the most likely token (0.71). APIs do not allow a negative T.
 
 ## Example
 
@@ -71,12 +71,18 @@ The context is "The ___ sat on the mat." The model gives four logits: cat 2.0, d
 
 | T | cat | dog | fox | owl | cat : dog | entropy |
 |---|---|---|---|---|---|---|
-| 0.5 | 0.842 | 0.114 | 0.042 | 0.002 | 7.39 | 0.78 bits |
-| 1.0 | 0.609 | 0.224 | 0.136 | 0.030 | 2.72 | 1.46 bits |
-| 2.0 | 0.434 | 0.263 | 0.205 | 0.097 | 1.65 | 1.82 bits |
+| 0.5 | 0.842 | 0.114 | 0.042 | 0.002 | 7.39 | 0.78 bits (≈ 1.71 choices) |
+| 1.0 | 0.609 | 0.224 | 0.136 | 0.030 | 2.72 | 1.46 bits (≈ 2.76 choices) |
+| 2.0 | 0.434 | 0.263 | 0.205 | 0.097 | 1.65 | 1.82 bits (≈ 3.54 choices) |
 
-<!-- claim: definition-entropy -->
-*Entropy* measures the spread: H = −Σ p log₂ p, in bits. 0 bits means certain; 2 bits means four equally likely tokens. At T = 1, 1.46 bits is the same spread as 2^1.46 = 2.76 equally likely choices.
+<!-- claim: why-entropy -->
+*Entropy* measures the spread: how much you do not know before the draw. It is the average *surprise*, in bits.
+
+- A token with probability p has a surprise of −log₂ p bits. One bit is one fair yes/no question. At T = 1, cat surprises you by 0.71 bits; owl surprises you by 5.04 bits.
+- Entropy is the average surprise of one draw: H = −Σ p log₂ p. At T = 1 it is 1.46 bits.
+- 2^H is the number of equally likely tokens with the same entropy: n equally likely tokens each surprise you by log₂ n bits, so their entropy is log₂ n, and 2^H = n. 1.46 bits is like a choice between 2^1.46 ≈ 2.76 equally likely tokens. 0 bits means certain; 2 bits means four equally likely tokens.
+
+Why a log, and not a count of the possible tokens? At T = 0.25 all four tokens are still possible, so a count says 4. But cat wins 98% of draws. Entropy says 0.15 bits, about 1.11 choices, which matches what you see. At T = 10 the count is still 4, and entropy says 1.99 bits, about 3.98 choices. The log also makes surprises add when probabilities multiply: two fair coins have p = 1/4, and 2 bits = 1 + 1.
 
 ## Limits
 

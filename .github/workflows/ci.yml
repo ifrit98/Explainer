@@ -13,11 +13,14 @@ jobs:
       - name: System libraries for Manim
         run: sudo apt-get update && sudo apt-get install -y --no-install-recommends libcairo2-dev libpango1.0-dev pkg-config ffmpeg
       - uses: astral-sh/setup-uv@v6
+      - uses: actions/setup-node@v4   # npx runs the pinned Mermaid CLI
+        with:
+          node-version: 22
       - name: Install
         run: uv sync
       - name: Tests (toolkit, links, plugin, every example against its model)
         run: uv run pytest -q
-      - name: Model check
-        run: uv run explainer check
+      - name: Model check, and every Mermaid block rendered once
+        run: uv run explainer check --diagrams
       - name: Draft render of one example (silent voice, no LaTeX needed)
         run: uv run explainer render ste-80 --draft --review

@@ -10,6 +10,8 @@ Each explainer has `model.md` (prose for people) and `model.yaml` (data for tool
     claims:      # the ideas the explanation must convey, each marked where a rendering covers it
       - {id: why-exp, kind: why, about: [exp], statement: ..., alternative: ..., counterexample: ...}
     accept_unjustified: {log: "reason"}   # functions deliberately left without a why claim
+    terms:       # one word per concept: phrases a rendering must not use for it
+      - {term: estimate, means: ..., avoid: [smallest distance]}
 
 Renderings are found by name: explanation.md (prose), diagram.md (diagram),
 index.html (html), video/scene.py (video). A rendering *loads the model* when
@@ -24,7 +26,10 @@ the scene calls `load_model(...)`, or the page has a synced
    counterexample, a `mechanism` without a worked example;
 5. claims a rendering does not cover (markers: `<!-- claim: id -->` in Markdown, `data-claim="id"` in
    HTML, `self.claim("id")` in a scene);
-6. functions in model.md (exp, log, sqrt, …) that no `why` claim justifies.
+6. functions in model.md (exp, log, sqrt, …) that no `why` claim justifies;
+7. a phrase a `terms` entry avoids (a second name for one concept);
+8. a page that embeds this explainer's video with plain <video> although the video has predict pauses
+   (use `Explainer.video`, which stops at them).
 """
 
 from __future__ import annotations
@@ -69,6 +74,7 @@ def read_model(path: Path) -> dict:
     data.setdefault("quiz", [])
     data.setdefault("claims", [])
     data.setdefault("accept_unjustified", {})
+    data.setdefault("terms", [])
     return data
 
 
@@ -373,6 +379,45 @@ def completeness(folder: Path, model: dict, present: dict[str, Path], rep: "Repo
         for f in sorted(functions_used(md.read_text()) - justified - accepted):
             rep.problems.append(f"model.md uses {f} but no `why` claim says why (add one, or accept_unjustified "
                                 f"with a reason)")
+    for f, reason in model["accept_unjustified"].items():
+        rep.notes.append(f"accepted without a why: {f} ({reason})")
+
+
+def avoided_phrases(text: str, avoid: list[str]) -> list[str]:
+    """The `avoid` phrases that occur in text, as whole words, ignoring case and line breaks."""
+    flat = " ".join(text.split())
+    return [a for a in avoid if re.search(rf"(?<!\w){re.escape(' '.join(str(a).split()))}(?!\w)", flat, re.I)]
+
+
+def terminology(folder: Path, model: dict, present: dict[str, Path], rep: "Report") -> None:
+    for t in model["terms"]:
+        term, avoid = t.get("term"), t.get("avoid") or []
+        if not term:
+            rep.problems.append(f"model.yaml: terms entry {t!r} needs a term")
+            continue
+        for kind, path in present.items():
+            text, _ = rendering_text(kind, path)
+            for phrase in avoided_phrases(text, avoid):
+                rep.problems.append(f"{path.relative_to(folder)}: says '{phrase}'; the model's term is "
+                                    f"'{term}' (terms in model.yaml)")
+
+
+def predict_pauses(folder: Path) -> int:
+    timeline = folder / "video" / "timeline.json"
+    if not timeline.exists():
+        return 0
+    try:
+        return sum(e.get("kind") == "predict" for e in json.loads(timeline.read_text()).get("events", []))
+    except (json.JSONDecodeError, AttributeError):
+        return 0
+
+
+def plain_video_with_pauses(page_source: str, pauses: int) -> bool:
+    """True when a page plays a video with predict pauses through a bare <video> element."""
+    from explainer_kit.web_toolkit import BLOCKS
+
+    own = BLOCKS["js"][0].sub("", page_source)  # the inlined toolkit documents Explainer.video itself
+    return pauses > 0 and "<video" in own and "Explainer.video(" not in own
 
 
 @dataclass
@@ -418,6 +463,10 @@ def check(folder: Path) -> Report:
                 rep.problems.append(f"{rel}: inlined web toolkit is out of date — run `explainer sync {folder.name}`")
 
     completeness(folder, model, present, rep)
+    terminology(folder, model, present, rep)
+    if "html" in present and plain_video_with_pauses(present["html"].read_text(), n := predict_pauses(folder)):
+        rep.problems.append(f"index.html: plays the video with a plain <video>, which skips its {n} predict "
+                            f"pause(s); use Explainer.video")
 
     for req in model["require"]:
         try:

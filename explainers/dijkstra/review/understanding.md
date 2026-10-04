@@ -30,3 +30,24 @@ Run 2026-10-04 on the re-rendered video (main run plus the negative-edge chapter
 | **Result** | **pass** | |
 
 Closed: the finality argument now has this run's numbers on screen; the negative-edge counterexample is shown; "relax" is defined in the narration. Still open: the narration uses "distance" and "estimate" for the same thing; the finality segment is quick (about ten seconds).
+
+## Re-tests in v0.4.0 (terms, pace, audit)
+
+Run 2026-10-04 on the re-rendered video. The narration now uses "estimate" for the value that can still drop and "distance" only for the final value; the finality argument is three lines, one step per picture; the reviewer also returns an audit.
+
+| Item | Round 1 | Round 2 | Answer (short) |
+|---|---|---|---|
+| 8 · B 4 → 3 | 2 | 2 | via C: 2 + 1 = 3 < 4 |
+| 9 · after D | 2 | 2 | E at 10 < F 14 |
+| 10 · assumption | 2 | 2 | lengths ≥ 0; with C→B −2 the algorithm answers 2, the true distance is 1 |
+| 11 · why smallest (`why-smallest`) | 2 | 2 | B at 4 would be wrong; via C it costs 3 |
+| 12 · finality (`guarantee-final`) | 2 | 2 | round 2: any other path leaves {A, C} through D (≥ 10) or E (≥ 12); plus the negative-edge graph |
+| **Result** | **pass** | **pass** | |
+
+Closed from v0.3.0: one word per concept; the finality segment is no longer rushed (no pace issues).
+
+Round 1 audit, fixed before round 2: the "settled" box held B while the narration argued about paths leaving it, F was named as an exit, and "reaching D costs at least its estimate" was unstated (the model had the same flaw). Also added: A is the start node, infinity means no path found yet, edges work both ways, every relaxation's sum, the length rule on screen.
+
+Round 2 audit, fixed after it (not re-tested): why each estimate is already the cheapest route through settled nodes (every settled node has relaxed its edges); why F is not an exit (no edge to A or C); the negative-edge graph is directed.
+
+Open: the predict card covers the estimates a viewer needs to answer; the colors are not explained; the relax test on screen uses u and v, which the narration does not name; Bellman-Ford is named without a why (a scope pointer).

@@ -72,6 +72,9 @@ Maximum entropy for 4 tokens: log₂ 4 = 2 bits (all p = 0.25).
 | exp before normalizing | divide each logit by the sum of the logits | Logits 2.0, 1.0, 0.5, −1.0 sum to 2.5, so owl gets −1.0 / 2.5 = −0.4: a negative probability. With z/T in place of z, T cancels: (z/T) / Σ(z/T) = z / Σz, so temperature would do nothing. |
 | exp before normalizing | square each logit, then normalize | z² / Σz² gives 0.64, 0.16, 0.04, 0.16: owl (−1)² ties dog and beats fox. The order of the tokens breaks. T cancels here too: (z/T)² / Σ(z/T)² = z² / Σz². |
 | divide the logits by T | add T to every logit | Adding one number to every logit changes nothing (shift invariance), so T would have no effect. |
+| entropy H = −Σ p log₂ p | count the tokens with p > 0 | At T = 0.25 all four tokens have p > 0 (owl 6.0 × 10⁻⁶), so the count says 4, but cat wins 98% of draws. Entropy gives 0.15 bits ≈ 1.11 choices. At T = 10 the count is still 4; entropy gives 1.99 bits ≈ 3.98 choices. |
+
+Why the log in entropy: −log₂ p is the surprise of one token, in bits; one bit is one fair yes/no question. The log makes surprises add when probabilities multiply (two fair coins: p = 1/4, 2 bits = 1 + 1). Entropy is the average surprise, and 2^H is the number of equally likely tokens with the same average. At T = 1: cat 0.71 bits, dog 2.16, fox 2.88, owl 5.04; the average is 1.46 bits ≈ 2.76 equally likely tokens.
 
 Why exp works: it turns every logit, positive or negative, into a positive weight; it keeps the order; and it turns a difference of logits into a ratio of weights, e^(a−b) = e^a / e^b. That ratio property is the whole temperature law: pᵢ / pⱼ = exp((zᵢ − zⱼ) / T). Dividing by T scales each gap by 1/T, so every ratio becomes its T = 1 value raised to the power 1/T: p(T) ∝ p(1)^(1/T). Example: (0.609 / 0.224)^(1/2) = 1.65, the cat : dog ratio at T = 2.
 
@@ -84,7 +87,7 @@ Origin of the name: physics writes the Boltzmann distribution as p ∝ exp(−E 
 | For T > 0 the order of the tokens never changes. | cat > dog > fox > owl in every row of the table. | T = −1: z/T = −2, −1, −0.5, 1, and owl becomes the most likely token (0.71). |
 | Adding the same number to every logit changes nothing. | +10: logits 12, 11, 10.5, 9 still give 0.609, 0.224, 0.136, 0.030 at T = 1. | Multiplying is different: ×2 gives logits 4, 2, 1, −2 and the T = 0.5 row, 0.842, 0.114, 0.042, 0.002. |
 | One decoding step (mechanism), worked at T = 2. | z/T = 1.0, 0.5, 0.25, −0.5 → exp = 2.718, 1.649, 1.284, 0.607 → sum 6.258 → p = 0.434, 0.263, 0.205, 0.097. | — |
-| Entropy measures spread. | 1.46 bits at T = 1 equals the spread of 2^1.46 = 2.76 equally likely choices. | — |
+| Entropy measures spread as average surprise. | 1.46 bits at T = 1 equals the spread of 2^1.46 = 2.76 equally likely choices. | A count of possible tokens says 4 at T = 0.25, where cat wins 98% of draws; entropy says 1.11 choices. |
 
 Probabilities are never exactly 0 for finite T: owl at T = 0.25 is 6.0 × 10⁻⁶, shown as 0.000 after rounding.
 
@@ -95,7 +98,8 @@ Probabilities are never exactly 0 for finite T: owl at T = 0.25 is 6.0 × 10⁻�
 - **exp:** the exponential function e^x, with e ≈ 2.718.
 - **Softmax:** exp of each scaled logit, divided by the sum of those values.
 - **Greedy decoding:** always pick the most likely token.
-- **Entropy (bits):** H = −Σ p log₂ p. 0 bits = certain; 2 bits = four equally likely tokens.
+- **Surprise (bits):** −log₂ p for one token. One bit is one fair yes/no question.
+- **Entropy (bits):** H = −Σ p log₂ p, the average surprise of one draw. 0 bits = certain; 2 bits = four equally likely tokens.
 
 ## Alternative states
 

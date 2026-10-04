@@ -2,7 +2,8 @@
 
   explainer setup                       download the Kokoro voice, check the toolchain
   explainer new <slug> [--stage 1 2 3 4] scaffold explainers/<slug>/: model + chosen renderings (default: 4)
-  explainer check [slug ...]            renderings vs model.yaml: unexplained numbers, missing values, stale pages
+  explainer check [slug ...]            renderings vs model.yaml: numbers, claims, terms, stale pages
+  explainer check --diagrams            also render every Mermaid block once (Node or mmdc)
   explainer sync <slug>                 write model values and the web toolkit into the slug's HTML pages
   explainer render <slug> [--draft]     render the video: voice, captions, chapters, timeline, contact sheet
   explainer review <slug>               review sheet: a frame at each line, bookmark, and predict pause
@@ -99,8 +100,29 @@ def cmd_check(args) -> None:
             for n in rep.notes:
                 print(f"      · {n}")
         failed += not rep.ok
+    if args.diagrams:
+        failed += check_diagrams(folders)
     if failed:
-        sys.exit(f"\n{failed} explainer(s) disagree with their model")
+        sys.exit(f"\n{failed} explainer(s) failed the check")
+
+
+def check_diagrams(folders) -> int:
+    from explainer_kit.diagrams import mermaid_blocks, validate
+
+    failed = 0
+    for folder in folders:
+        blocks = mermaid_blocks(folder)
+        if not blocks:
+            continue
+        try:
+            failures = validate(blocks)
+        except FileNotFoundError as e:
+            sys.exit(f"--diagrams: {e}")
+        print(f"{'ok  ' if not failures else 'FAIL'}  {folder.name}: {len(blocks)} Mermaid block(s)")
+        for block, error in failures:
+            print(f"      ✗ {display(block.path)}:{block.line}: {error}")
+        failed += bool(failures)
+    return failed
 
 
 def cmd_sync(args) -> None:
@@ -187,6 +209,7 @@ def main() -> None:
     p = sub.add_parser("check", help="check renderings against model.yaml")
     p.add_argument("slugs", nargs="*")
     p.add_argument("-v", "--verbose", action="store_true")
+    p.add_argument("--diagrams", action="store_true", help="also render every Mermaid block (needs Node or mmdc)")
     p.set_defaults(fn=cmd_check)
 
     p = sub.add_parser("sync", help="write model values and toolkit into HTML pages")

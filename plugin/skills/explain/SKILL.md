@@ -18,7 +18,8 @@ Read `references/principles.md` first. It holds the rules that apply to every ex
 5. Fill the completeness sections of `model.md`: **Why this form** (each operation's simplest alternative failing, with numbers), **Concrete cases** (each guarantee holding and breaking; each mechanism worked), **Terms**, **Scope** (principles §10).
 6. **Probe.** Run `explainer probe <slug>` and give the prompt, unchanged, to a fresh subagent. Recompute every number it suggests. Turn each finding into a claim, a Scope entry, or nothing.
 7. Record the ideas as `claims` in `model.yaml` (`why`, `guarantee`, `mechanism`, `definition`, …) with their required fields. Add `ask` to the claims a learner most needs; they become blind-test questions.
-8. Reduce the model. Remove each entity that the explanation does not need.
+8. Give each concept one word. Where two concepts are close (a tentative value and its final value), add a `terms` entry with the phrases renderings must not use. Give every quantity a reader will see its meaning, with a low and a high value.
+9. Reduce the model. Remove each entity that the explanation does not need.
 
 For a Stage 1 answer in chat, do this step internally and skip the files.
 
