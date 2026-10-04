@@ -129,6 +129,10 @@ One idea per sentence, active voice, one term per concept, and direct causal sta
 - [showtime](https://github.com/FavioVazquez/showtime): a broader local video studio plugin for coding agents (HTML motion graphics, footage editing, music). It works alongside this repo; see [video playbook §7](.claude/skills/explain/references/video.md#7-optional-showtime).
 - [Manim Community](https://www.manim.community/) · [manim-voiceover](https://github.com/ManimCommunity/manim-voiceover) · [Kokoro-82M](https://huggingface.co/hexgrad/Kokoro-82M)
 
+## Roadmap
+
+Planned work, in priority order: [ROADMAP.md](ROADMAP.md).
+
 ## License
 
 [MIT](LICENSE). Third-party components keep their own licenses: Manim and manim-voiceover (MIT), Kokoro-82M weights (Apache-2.0), kokoro-onnx (MIT), FFmpeg (LGPL/GPL). The Kokoro model files are downloaded by `explainer setup` and are not part of this repository.
