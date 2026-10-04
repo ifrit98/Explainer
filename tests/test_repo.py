@@ -9,7 +9,7 @@ import pytest
 from explainer_kit.model import check
 
 ROOT = Path(__file__).resolve().parent.parent
-SKIP = {".venv", "media", "models", "node_modules", ".playwright-mcp", ".git"}
+SKIP = {".venv", "media", "models", "node_modules", ".playwright-mcp", ".git", ".pytest_cache"}
 
 
 def markdown_files():
