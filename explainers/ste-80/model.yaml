@@ -1,0 +1,25 @@
+# Machine-readable half of model.md.
+values:
+  sentences:
+    - "It is imperative that the operator ensures the hydraulic reservoir is replenished prior to commencing operation."
+    - "It is imperative that the operator ensures the hydraulic reservoir is full before starting the operation."
+    - "Make sure that the hydraulic reservoir is full before you start the operation."
+    - "Fill the hydraulic reservoir before you start the machine."
+  word_counts: [16, 16, 13, 9]
+  rules: ["Use simple words", "Give the instruction directly", "Use a concrete verb"]
+  style_share_percent: 80     # STE-80: about 80% of ASD-STE100
+
+allow: [2, 3, 100]            # rule numbers 2 and 3; ASD-STE100
+
+require:
+  - path: word_counts
+    in: [video]
+
+quiz:
+  - q: "Rule one changes the sentence but not its length. What does it change, and why does that help?"
+    expect: "It replaces formal words (replenished, prior to, commencing) with common ones (full, before, starting); each word is easier to decode."
+    misconception: "Rule one makes the sentence shorter."
+  - q: "Which rule removes the most words, and what does it remove?"
+    expect: "Rule three (concrete verb): 'make sure that ... is full' becomes 'fill'; 13 to 9 words. (Rule two removes the abstract frame, 16 to 13.)"
+  - q: "Is a shorter sentence always better?"
+    expect: "No. The target is less decoding work with the same meaning, not fewer words."

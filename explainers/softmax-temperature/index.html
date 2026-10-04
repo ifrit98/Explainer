@@ -223,9 +223,12 @@ footer { font-size: 0.85rem; color: var(--muted); border-top: 1px solid var(--ru
 <footer>Rendered from <a href="https://github.com/ifrit98/Explainer/blob/main/explainers/softmax-temperature/model.md">model.md</a>. The same model is also rendered as <a href="https://github.com/ifrit98/Explainer/blob/main/explainers/softmax-temperature/explanation.md">prose</a>, <a href="https://github.com/ifrit98/Explainer/blob/main/explainers/softmax-temperature/diagram.md">diagrams</a>, and a <a href="video/out.mp4">narrated video</a>. <a href="../../">All examples</a>.</footer>
 </main>
 
+<script type="application/json" id="explainer-model">{"context": "The ___ sat on the mat.", "tokens": ["cat", "dog", "fox", "owl"], "logits": {"cat": 2.0, "dog": 1.0, "fox": 0.5, "owl": -1.0}, "probabilities": {"T=0.25": {"cat": 0.98, "dog": 0.018, "fox": 0.002, "owl": 0.0}, "T=0.5": {"cat": 0.842, "dog": 0.114, "fox": 0.042, "owl": 0.002}, "T=1.0": {"cat": 0.609, "dog": 0.224, "fox": 0.136, "owl": 0.03}, "T=2.0": {"cat": 0.434, "dog": 0.263, "fox": 0.205, "owl": 0.097}, "T=4.0": {"cat": 0.34, "dog": 0.265, "fox": 0.234, "owl": 0.161}, "T=10": {"cat": 0.285, "dog": 0.258, "fox": 0.245, "owl": 0.211}}, "entropy_bits": {"T=0.25": 0.15, "T=0.5": 0.78, "T=1.0": 1.46, "T=2.0": 1.82, "T=4.0": 1.95, "T=10": 1.99}, "cat_dog_ratio": {"T=0.25": 54.6, "T=0.5": 7.39, "T=1.0": 2.72, "T=2.0": 1.65, "T=4.0": 1.28, "T=10": 1.11}, "max_entropy_bits": 2, "uniform_probability": 0.25, "slider": {"min": 0.1, "max": 10}, "shift_test": 5}</script>
 <script>
 (() => {
-  const TOKENS = [["cat", 2.0], ["dog", 1.0], ["fox", 0.5], ["owl", -1.0]];
+  // Logits come from model.yaml via `explainer sync`, so the page cannot drift from the model.
+  const MODEL = JSON.parse(document.getElementById("explainer-model").textContent);
+  const TOKENS = MODEL.tokens.map((t) => [t, MODEL.logits[t]]);
   const $ = (id) => document.getElementById(id);
   const slider = $("t-slider");
   let greedy = false;
@@ -320,7 +323,7 @@ footer { font-size: 0.85rem; color: var(--muted); border-top: 1px solid var(--ru
     if (!greedy) { tExact = bt; slider.value = Math.log10(bt); }
     render();
   }));
-  $("shift").addEventListener("change", (e) => { shift = e.target.checked ? 5 : 0; render(); });
+  $("shift").addEventListener("change", (e) => { shift = e.target.checked ? MODEL.shift_test : 0; render(); });
 
   $("draw").addEventListener("click", () => {
     const counts = TOKENS.map(() => 0); const out = [];

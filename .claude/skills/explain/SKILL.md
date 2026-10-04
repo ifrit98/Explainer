@@ -10,7 +10,7 @@ The governing rules are in the project `CLAUDE.md`. This skill is the procedure.
 ## Step 1 — Build the semantic model
 
 1. Write the central question in one sentence.
-2. Fill in the model template: `templates/model.md`.
+2. Scaffold with `uv run explainer new <slug> --stage <stages>`. Fill in `model.md` (prose) and `model.yaml` (values, allowances, required values, quiz).
 3. Reduce the model. Remove each entity that the explanation does not need to answer the central question.
 4. Mark the epistemic status of each non-trivial claim.
 

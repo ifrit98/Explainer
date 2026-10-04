@@ -1,0 +1,13 @@
+# Machine-readable half of model.md.
+values:
+  object_types: [blob, tree, commit, tag]
+  min_parents: 0
+
+quiz:
+  - q: "Does a commit store a diff or a snapshot?"
+    expect: "A snapshot: it points to one root tree. Diffs are computed when asked."
+    misconception: "A commit stores the diff against its parent."
+  - q: "A file did not change between two commits. What does the second commit's tree point to for that file?"
+    expect: "The same blob as before: identical content has the same object ID."
+  - q: "One file deep in src/ changes. Which objects get new IDs?"
+    expect: "The new blob, every tree above it up to the root tree, and the new commit."

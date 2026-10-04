@@ -27,6 +27,8 @@ The ratio of two probabilities depends only on the gap between their logits, div
 pᵢ / pⱼ = exp((zᵢ − zⱼ) / T)
 ```
 
+This follows from the softmax formula. Both probabilities have the same denominator Σⱼ exp(zⱼ / T), so it cancels in the ratio. What remains is exp(zᵢ / T) / exp(zⱼ / T), which equals exp((zᵢ − zⱼ) / T).
+
 A small T makes the gap large, so the ratio becomes very large. A large T makes the gap small, so the ratio goes toward 1.
 
 ## Example

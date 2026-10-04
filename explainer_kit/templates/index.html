@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>{{slug}}</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Sans+Condensed:wght@600&display=swap">
+<!-- Filled by `explainer sync`: the shared toolkit CSS. Page-specific styles go in the second <style>. -->
+<style id="explainer-toolkit-css"></style>
+<style>
+/* Page-specific styles. Use the toolkit's tokens: var(--fg), var(--bar), var(--focus), ... */
+</style>
+</head>
+<body>
+<main class="ex">
+
+<header>
+  <span class="ex-eyebrow">Explainer · Stage 3 · interactive</span>
+  <h1>{{slug}}</h1>
+  <p class="ex-lede">One sentence that answers the central question of model.md.</p>
+</header>
+
+<!-- Level 1: the instrument. One control, one picture, one readout. -->
+<section aria-labelledby="h-instrument">
+  <h2 id="h-instrument" class="ex-eyebrow">The instrument</h2>
+  <div class="ex-panel">
+    <div id="control"></div>
+    <div class="ex-row">
+      <div id="chart"></div>
+      <div class="ex-readouts">
+        <div class="ex-readout"><span class="ex-label">Readout</span><span class="ex-value num" id="readout"></span></div>
+        <p id="state" class="ex-muted"></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Predict first: the result below stays hidden until the reader commits a prediction. -->
+<section aria-labelledby="h-predict">
+  <span class="ex-eyebrow">Predict first</span>
+  <h2 id="h-predict">What happens at the extreme?</h2>
+  <div id="predict-1"></div>
+  <p data-after="predict-1">The explanation of the result appears only after a prediction.</p>
+</section>
+
+<!-- Levels 2–4: progressive disclosure. -->
+<section aria-labelledby="h-levels">
+  <span class="ex-eyebrow">Go deeper</span>
+  <h2 id="h-levels">How and why</h2>
+  <div class="ex-levels">
+    <details class="ex-level" open><summary><span class="ex-level-n">Level 2 · how</span><h3>The mechanism</h3></summary>
+      <div class="ex-level-body"><p>Steps, in order.</p></div></details>
+    <details class="ex-level"><summary><span class="ex-level-n">Level 3 · why</span><h3>The reason it works</h3></summary>
+      <div class="ex-level-body"><p>A causes B because C.</p></div></details>
+    <details class="ex-level"><summary><span class="ex-level-n">Level 4 · implementation</span><h3>In practice</h3></summary>
+      <div class="ex-level-body"><p>Implementation detail.</p></div></details>
+  </div>
+</section>
+
+<section aria-labelledby="h-limits">
+  <span class="ex-eyebrow">Limits</span>
+  <h2 id="h-limits">What this does not show</h2>
+  <div class="ex-cards">
+    <div class="ex-card"><span class="ex-tag fact">fact</span><strong>An established fact.</strong><p class="ex-muted">Why it holds.</p></div>
+    <div class="ex-card"><span class="ex-tag assumption">assumption</span><strong>A simplification.</strong><p class="ex-muted">What it leaves out.</p></div>
+  </div>
+</section>
+
+<footer>Rendered from model.md.</footer>
+</main>
+
+<!-- Filled by `explainer sync` from model.yaml. Read it as Explainer.model. -->
+<script type="application/json" id="explainer-model"></script>
+<script id="explainer-toolkit-js"></script>
+<script>
+(() => {
+  const M = Explainer.model;  // values from model.yaml
+  const x = Explainer.tracker(0.5);
+  Explainer.slider(document.getElementById("control"), x, {
+    label: "Parameter", min: 0, max: 1, presets: [0, 0.25, 0.5, 1], scale: ["0", "1"],
+  });
+  const update = Explainer.bars(document.getElementById("chart"), { labels: ["A", "B"], format: (v) => v.toFixed(2) });
+  x.on((v) => {
+    update([v, 1 - v]);
+    document.getElementById("readout").textContent = v.toFixed(2);
+    document.getElementById("state").textContent = v > 0.5 ? "A is larger." : v < 0.5 ? "B is larger." : "A and B are equal.";
+  });
+  Explainer.predict(document.getElementById("predict-1"), {
+    id: "predict-1", question: "At parameter 1, what is B?", type: "number", answer: 0,
+    judge: (g) => Math.abs(g - 0) < 0.01, explain: "B = 1 − A, so B is 0 when A is 1.",
+  });
+})();
+</script>
+</body>
+</html>

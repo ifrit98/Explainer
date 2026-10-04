@@ -1,0 +1,36 @@
+# Machine-readable half of model.md. `explainer check softmax-temperature` holds every rendering to it.
+values:
+  context: "The ___ sat on the mat."
+  tokens: [cat, dog, fox, owl]
+  logits: {cat: 2.0, dog: 1.0, fox: 0.5, owl: -1.0}
+  probabilities:            # softmax(z / T), 3 decimals
+    "T=0.25": {cat: 0.980, dog: 0.018, fox: 0.002, owl: 0.000}
+    "T=0.5":  {cat: 0.842, dog: 0.114, fox: 0.042, owl: 0.002}
+    "T=1.0":  {cat: 0.609, dog: 0.224, fox: 0.136, owl: 0.030}
+    "T=2.0":  {cat: 0.434, dog: 0.263, fox: 0.205, owl: 0.097}
+    "T=4.0":  {cat: 0.340, dog: 0.265, fox: 0.234, owl: 0.161}
+    "T=10":   {cat: 0.285, dog: 0.258, fox: 0.245, owl: 0.211}
+  entropy_bits: {"T=0.25": 0.15, "T=0.5": 0.78, "T=1.0": 1.46, "T=2.0": 1.82, "T=4.0": 1.95, "T=10": 1.99}
+  cat_dog_ratio: {"T=0.25": 54.6, "T=0.5": 7.39, "T=1.0": 2.72, "T=2.0": 1.65, "T=4.0": 1.28, "T=10": 1.11}
+  max_entropy_bits: 2
+  uniform_probability: 0.25
+  slider: {min: 0.1, max: 10}
+  shift_test: 5             # constant added to every logit in the shift-invariance toggle
+
+allow: [4, 60, 100000]      # four tokens, 60 sampled draws, a 100,000-token vocabulary
+
+require:
+  - path: logits
+    in: [prose, diagram, html, video]
+  - path: probabilities/T=1.0
+    in: [prose, diagram, html]
+
+quiz:
+  - q: "If the temperature rises from 1 to 3, what happens to the probability of the most likely token, and does the order of the tokens change?"
+    expect: "It falls toward the uniform value (0.25 for four tokens); the distribution flattens. The order does not change."
+    misconception: "A different token becomes the most likely one."
+  - q: "What does a temperature of 0 mean in practice?"
+    expect: "Greedy decoding: the top token is picked every time (division by 0 is undefined, so APIs special-case it)."
+    misconception: "Completely random output."
+  - q: "By what mechanism does temperature change the spread?"
+    expect: "Every logit is divided by T before softmax; the ratio of two probabilities is exp((z_i - z_j) / T), so T scales the gaps."

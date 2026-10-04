@@ -1,0 +1,14 @@
+# Machine-readable half of model.md.
+values:
+  example_range_commits: 1000
+  example_steps: 10            # about log2(1000)
+  exit_codes: {good: 0, skip: 125, bad_min: 1, bad_max: 127}
+
+quiz:
+  - q: "About how many tests does git bisect need for 1,000 commits, and why?"
+    expect: "About 10, because each test halves the range (log2 of 1,000)."
+  - q: "A commit in the range does not build. What do you do?"
+    expect: "Run git bisect skip; git picks a nearby commit."
+  - q: "When can bisect name the wrong commit?"
+    expect: "When the bug comes and goes instead of appearing once and staying."
+    misconception: "Bisect is always correct if you test carefully."

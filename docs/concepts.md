@@ -24,7 +24,7 @@ The model is the single source of truth. If a rendering needs a fact, the fact g
 
 ## The semantic model
 
-Each `model.md` uses one template ([`.claude/skills/explain/templates/model.md`](../.claude/skills/explain/templates/model.md)):
+Each `model.md` uses one template ([`explainer_kit/templates/model.md`](../explainer_kit/templates/model.md)):
 
 | Section | Question it answers |
 |---|---|

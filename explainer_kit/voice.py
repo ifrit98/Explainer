@@ -4,9 +4,12 @@ KokoroService: high-quality local TTS (Kokoro-82M via ONNX). No API keys.
 SilentService: silent audio with estimated timing, for fast layout drafts.
 
 Bookmarks (<bookmark mark='x'/>) get exact times without Whisper: the text is
-split at each bookmark, each segment is synthesized separately, and a word
-boundary is recorded at every segment start. Put bookmarks at clause or
-sentence boundaries so the split does not break the prosody.
+split at each bookmark and at each sentence end, each segment is synthesized
+separately, and a boundary is recorded at every segment start. So bookmark
+times and sentence start times (used for captions) are exact sample offsets.
+Put bookmarks at clause or sentence boundaries so the split does not break
+the prosody. Word-level timing inside a sentence is not available: the ONNX
+Kokoro model returns audio only, without phoneme durations.
 """
 
 from __future__ import annotations
@@ -22,19 +25,21 @@ from manim_voiceover.helper import remove_bookmarks
 from manim_voiceover.services.base import SpeechService, initialize_speech_service, path_to_string
 from manim_voiceover.tracker import AUDIO_OFFSET_RESOLUTION
 
-REPO_ROOT = Path(__file__).resolve().parent.parent
-MODEL_DIR = Path(os.environ.get("EXPLAINER_KOKORO_DIR", REPO_ROOT / "models"))
+from explainer_kit.paths import model_dir
+
+MODEL_DIR = model_dir()
 MODEL_FILE = MODEL_DIR / "kokoro-v1.0.onnx"
 VOICES_FILE = MODEL_DIR / "voices-v1.0.bin"
 DEFAULT_VOICE = os.environ.get("EXPLAINER_VOICE", "af_heart")
 
 BOOKMARK_SPLIT = re.compile(r"(<bookmark\s*mark\s*=[\'\"]\w*[\"\']\s*/>)")
+SENTENCE_SPLIT = re.compile(r"(?<=[.!?])\s+(?=\S)")
 SENTENCE_END = (".", "!", "?", ":")
 CLAUSE_END = (",", ";", "—", "-")
 
 
 def split_segments(text: str) -> list[tuple[str, int]]:
-    """Split text at bookmarks. Return (segment, text_offset) pairs.
+    """Split text at bookmarks and sentence ends. Return (segment, text_offset) pairs.
 
     text_offset is measured in the bookmark-free text, which is the space
     that VoiceoverTracker uses to place bookmarks.
@@ -44,8 +49,15 @@ def split_segments(text: str) -> list[tuple[str, int]]:
     for part in BOOKMARK_SPLIT.split(text):
         if BOOKMARK_SPLIT.fullmatch(part):
             continue
-        if part.strip():
-            segments.append((part, offset))
+        start = 0
+        for m in [*SENTENCE_SPLIT.finditer(part), None]:
+            end = m.start() if m else len(part)
+            piece = part[start:end]
+            if piece.strip():
+                lead = len(piece) - len(piece.lstrip())
+                segments.append((piece.strip(), offset + start + lead))
+            if m:
+                start = m.end()
         offset += len(part)
     return segments
 
@@ -80,7 +92,7 @@ class _SegmentedService(SpeechService):
         self.clause_pause = clause_pause
 
     def _input_data(self, text: str) -> dict:
-        return {"input_text": text, "service": self.service_name, "lexicon": self.lexicon,
+        return {"input_text": text, "service": self.service_name, "lexicon": self.lexicon, "segmenter": 2,
                 "sentence_pause": self.sentence_pause, "clause_pause": self.clause_pause}
 
     def synthesize(self, text: str) -> np.ndarray:

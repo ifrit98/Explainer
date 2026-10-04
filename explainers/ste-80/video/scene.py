@@ -6,16 +6,12 @@ Render:  uv run explainer render ste-80 --draft
 
 from manim import *
 
-from explainer_kit import ExplainerScene, Role, label
+from explainer_kit import ExplainerScene, Role, label, load_model
 from explainer_kit.words import added_words, morph, removed_words, sentence
 
-S = [
-    "It is imperative that the operator ensures the hydraulic reservoir is replenished prior to commencing operation.",
-    "It is imperative that the operator ensures the hydraulic reservoir is full before starting the operation.",
-    "Make sure that the hydraulic reservoir is full before you start the operation.",
-    "Fill the hydraulic reservoir before you start the machine.",
-]
-RULES = ["1   Use simple words", "2   Give the instruction directly", "3   Use a concrete verb"]
+M = load_model(__file__)
+S = M["sentences"]
+RULES = [f"{i}   {rule}" for i, rule in enumerate(M["rules"], 1)]
 SENTENCE_POS = DOWN * 0.1
 WORD_UNIT = 0.35  # meter width per word
 

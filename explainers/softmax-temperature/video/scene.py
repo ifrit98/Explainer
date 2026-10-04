@@ -8,10 +8,11 @@ from math import exp
 
 from manim import *
 
-from explainer_kit import ExplainerScene, Role, label
+from explainer_kit import ExplainerScene, Role, label, load_model
 
-TOKENS = ["cat", "dog", "fox", "owl"]
-LOGITS = [2.0, 1.0, 0.5, -1.0]
+M = load_model(__file__)
+TOKENS = M["tokens"]
+LOGITS = [M["logits"][t] for t in TOKENS]
 COLORS = [BLUE_C, GOLD_C, TEAL_C, MAROON_C]  # token identity; color follows the token
 BAR_X = [-2.4, -0.8, 0.8, 2.4]
 BAR_BASE = -3.0

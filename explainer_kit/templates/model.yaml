@@ -1,0 +1,21 @@
+# Machine-readable half of model.md. `explainer check {{slug}}` holds every rendering to it.
+#
+# values:  the facts renderings show. Any nesting; numbers and strings.
+#          Scenes read them with `M = load_model(__file__)`; pages get them via `explainer sync`.
+# allow:   structural numbers that are not model values (item counts, slider ends, sample sizes).
+# require: values that each listed rendering must show, unless it loads the model.
+# quiz:    blind understanding test. `misconception` is a wrong answer the rendering must prevent.
+
+values:
+  example_quantity: 1.0
+
+allow: []
+
+require: []
+#  - path: example_quantity
+#    in: [prose, diagram, html, video]
+
+quiz: []
+#  - q: "What happens to X when Y doubles?"
+#    expect: "X halves, because ..."
+#    misconception: "X doubles"
