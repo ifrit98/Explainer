@@ -23,7 +23,7 @@ Find one commit where the bug is absent (*good*) and one where it is present (*b
    ```bash
    git bisect good v2.3.0
    ```
-   Git checks out a commit halfway between the two.
+   Git checks out a commit halfway between the two, so you are no longer on your branch.
 4. Test this commit.
 5. Mark the result:
    ```bash
@@ -39,7 +39,7 @@ Find one commit where the bug is absent (*good*) and one where it is present (*b
 
 ## If a commit cannot be tested
 
-Skip it. Git selects a nearby commit.
+Skip it, for example when it does not build. Git selects a nearby commit.
 
 ```bash
 git bisect skip
@@ -65,7 +65,7 @@ git bisect run npm test
 <!-- claim: guarantee-first-bad -->
 Bisect assumes that the bug appears once and stays. If the bug comes and goes, bisect can name the wrong commit.
 
-Example: across 1,000 commits, the bug is present in commits 300–400, gone, and back from 900. The first test, at 500, is good. Bisect now searches only 500–1,000 and names 900. The bug first appeared at 300. Testing next to 900 does not reveal this: those commits are good. If you suspect it, test a few commits spread across the earlier history. In the example, 350 is bad; bisect again between your good commit and 350, and it names 300.
+Example: across 1,000 commits, the bug is present in commits 300–400, gone, and back from 900. The first test, at 500, is good. Bisect now searches only 500–1,000 and names 900. The bug first appeared at 300. Testing next to 900 does not reveal this: those commits are good. If you suspect it, test a few commits spread across the earlier history. In the example, 350 is bad; bisect again between a good commit before 300 and 350, and it names 300.
 
 ## In short
 

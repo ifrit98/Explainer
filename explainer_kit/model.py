@@ -461,14 +461,18 @@ def narrative_ledger(folder: Path, present: dict[str, Path], rep: "Report") -> N
 
 
 # Length is a cost too. A default budget asks whether a length was chosen; a declared budget is a commitment.
-DEFAULT_BUDGET = {"prose": 600, "video": 150}
-BUDGET_UNIT = {"prose": "words", "video": "s"}
+DEFAULT_BUDGET = {"prose": 600, "diagram": 9, "video": 150}
+BUDGET_UNIT = {"prose": "words", "diagram": "nodes", "video": "s"}
 
 
 def rendering_length(kind: str, folder: Path, path: Path) -> float | None:
     """Words a reader reads (prose), or seconds a viewer watches (video, from the final timeline)."""
     if kind == "prose":
         return len(re.findall(r"[A-Za-z][A-Za-z'’-]*", visible_markdown(path.read_text())))
+    if kind == "diagram":   # the first-level view: 5-9 major objects
+        from explainer_kit.diagrams import flowchart_nodes, markdown_blocks
+        blocks = markdown_blocks(path)
+        return len(flowchart_nodes(blocks[0].source)) if blocks else None
     if kind == "video":
         timeline = folder / "video" / "timeline.json"
         if timeline.exists():
@@ -483,7 +487,9 @@ def length_budget(folder: Path, model: dict, present: dict[str, Path], rep: "Rep
     for kind, default in DEFAULT_BUDGET.items():
         if kind not in present or (size := rendering_length(kind, folder, present[kind])) is None:
             continue
-        rel, unit = present[kind].relative_to(folder) if kind == "prose" else "video", BUDGET_UNIT[kind]
+        rel = {"prose": present["prose"].relative_to(folder) if "prose" in present else "", "video": "video",
+               "diagram": "diagram.md, first diagram"}[kind]
+        unit = BUDGET_UNIT[kind]
         if kind in budget:
             if size > budget[kind]:
                 rep.problems.append(f"{rel}: {size:g} {unit}, over its budget of {budget[kind]} {unit} (budget in "

@@ -32,8 +32,10 @@ class Ste80(ExplainerScene):
                         ).arrange(DOWN, buff=0.18).next_to(subtitle, DOWN, buff=0.6)
         readers = label("read under time pressure, often in a second language", size=26, color=Role.FOCUS
                         ).next_to(source, DOWN, buff=0.45)
-        with self.voiceover(text="It uses about eighty percent of the rules of ASD-STE100, Simplified Technical "
-                                 "English, a standard for aircraft maintenance manuals. <bookmark mark='who'/> "
+        with self.voiceover(text="It comes from ASD-STE100, Simplified Technical English, a standard for aircraft "
+                                 "maintenance manuals. The eighty means about eighty percent of the way to strict "
+                                 "STE: it keeps the writing rules and drops the approved dictionary. "
+                                 "<bookmark mark='who'/> "
                                  "Manuals are read under time pressure, often in a second language, so every word "
                                  "must help.") as tracker:
             self.play(FadeIn(source, shift=UP * 0.15))
@@ -63,31 +65,44 @@ class Ste80(ExplainerScene):
         self.tags.arrange(DOWN, aligned_edge=LEFT, buff=0.22).next_to(title, DOWN, aligned_edge=LEFT, buff=0.45)
 
         words = self.rewrite(words, S[1], 0,
-                             "Rule one. Use simple words. <bookmark mark='mark'/> The words in red go. "
-                             "Replenished becomes full. Prior to becomes before. Commencing becomes starting. "
-                             "<bookmark mark='swap'/> Only one word goes, but each word is easier to read.")
+                             "Rule one. Use simple words: the common word, not the formal one. "
+                             "<bookmark mark='mark'/> The words in red change. "
+                             "<bookmark mark='swap'/> Replenished becomes full. Prior to becomes before. "
+                             "Commencing becomes starting. Only one word goes, but each word is easier to read.",
+                             claim=lambda: self.claim("limit-length"))
         words = self.rewrite(words, S[2], 1,
                              "Rule two. Give the instruction directly. <bookmark mark='mark'/> "
-                             "Remove the frame, it is imperative that the operator ensures, and tell the reader "
-                             "what to do: make sure, before you start. <bookmark mark='swap'/> Thirteen words.")
+                             "Cut the opening that only says the instruction matters. <bookmark mark='swap'/> "
+                             "Tell the reader what to do instead: make sure, before you start. Thirteen words.")
         words = self.rewrite(words, S[3], 2,
-                             "Rule three. Use a concrete verb. <bookmark mark='mark'/> "
-                             "Make sure that it is full asks the reader to check a result. The verb fill names "
-                             "the action. And the vague noun operation becomes the machine you start. "
-                             "<bookmark mark='swap'/> Nine words.")
+                             "Rule three. Use concrete words. <bookmark mark='mark'/> "
+                             "The phrase make sure that it is full asks the reader to check a result. "
+                             "<bookmark mark='swap'/> The verb fill names the action, and the machine names what you "
+                             "start. Nine words.",
+                             claim=lambda: self.claim("why-concrete-verb"))
 
         # 6 — What changed overall?
         before = sentence(S[0], size=26, color=Role.TEXT).set_opacity(0.4).move_to(UP * 2.0)
         with self.voiceover(text="Sixteen words became nine. <bookmark mark='compare'/> "
                                  "The reader still fills the reservoir before starting the machine, with less "
-                                 "work to read it. Full STE has more rules: short sentences, one meaning per "
-                                 "word, and an approved dictionary.") as tracker:
+                                 "work to read it.") as tracker:
             self.play(FadeOut(self.tags), run_time=0.6)
             self.wait_until_bookmark("compare")
+            self.claim("mechanism-rules")
             self.play(FadeIn(before, shift=DOWN * 0.2), words.animate.scale(1.15).move_to(DOWN * 0.4))
         self.wait(1)
+        with self.voiceover(text="The bar counts words, but the goal is less work: rule one cut only one word and "
+                                 "still helped."):
+            self.play(Indicate(number, color=Role.FOCUS, scale_factor=1.2), run_time=1.2)
+        self.wait(0.5)
+        more = label("more STE-80 rules: short sentences · one meaning per word · no filler", size=24,
+                     color=Role.MUTED).move_to(DOWN * 1.9)
+        with self.voiceover(text="STE-80 has more rules than these three: short sentences, one meaning per word, "
+                                 "and no filler."):
+            self.play(FadeIn(more, shift=UP * 0.1))
+        self.wait(1)
 
-    def rewrite(self, old: VGroup, new_text: str, rule: int, narration: str) -> VGroup:
+    def rewrite(self, old: VGroup, new_text: str, rule: int, narration: str, claim=None) -> VGroup:
         """Show rule tag, mark the words the rule removes, then morph into the new sentence."""
         new = sentence(new_text).move_to(SENTENCE_POS)
         removed = removed_words(old, new)
@@ -98,6 +113,10 @@ class Ste80(ExplainerScene):
             self.wait_until_bookmark("mark")
             self.play(removed.animate.set_color(Role.BAD), run_time=0.6)
             self.wait_until_bookmark("swap")
+            if claim:
+                claim()   # marks the claim this rewrite shows
             self.play(*morph(old, new), self.count.animate.set_value(len(new)), run_time=1.5)
         self.play(added.animate.set_color(Role.TEXT), run_time=0.5)
+        if claim:
+            self.wait(1)   # a pause after a claim
         return new

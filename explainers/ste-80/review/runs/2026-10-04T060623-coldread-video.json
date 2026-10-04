@@ -1,0 +1,556 @@
+{
+ "tool": "coldread",
+ "rendering": "video",
+ "slug": "ste-80",
+ "at": "2026-10-04T06:06:23",
+ "model": "default",
+ "prompt_sha": "b6ca366fa8e4",
+ "reply": {
+  "captions": [
+   {
+    "at": "00:00:00 (1)",
+    "text": "This is STE-80. It is a writing style for technical text.",
+    "unresolved": [
+     "\"STE-80\": the caption names it but does not say what \"STE\" or \"80\" stands for"
+    ],
+    "unsaid": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "00:00:04 (2)",
+    "text": "It uses about eighty percent of the rules of ASD-STE100, Simplified",
+    "unresolved": [
+     "\"ASD\" in \"ASD-STE100\" is never expanded",
+     "\"eighty percent of the rules\": which rules are in and which are left out is not said"
+    ],
+    "unsaid": [],
+    "leap": [
+     "Why use 80% and not the full standard? No reason is given."
+    ],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "00:00:09 (3)",
+    "text": "Technical English, a standard for aircraft maintenance manuals.",
+    "unresolved": [
+     "It is not said directly that \"STE\" is short for \"Simplified Technical English\". The reader has to infer it."
+    ],
+    "unsaid": [
+     "On screen, \"a standard for aircraft maintenance manuals\" is very faint and nearly unreadable"
+    ],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "00:00:14 (4)",
+    "text": "Manuals are read under time pressure, often in a second language, so",
+    "unresolved": [],
+    "unsaid": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "00:00:18 (5)",
+    "text": "every word must help.",
+    "unresolved": [],
+    "unsaid": [],
+    "leap": [
+     "It says why aircraft manuals need this. It does not say why a writer of other technical text should take it up."
+    ],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "00:00:20 (6)",
+    "text": "Here is a typical sentence from a manual. It has sixteen words:",
+    "unresolved": [],
+    "unsaid": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "00:00:24 (7)",
+    "text": "the orange bar counts them. Some of the words do not help the reader.",
+    "unresolved": [],
+    "unsaid": [],
+    "leap": [
+     "\"Some of the words do not help\": which words is not said yet"
+    ],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "00:00:28 (8)",
+    "text": "Rule one. Use simple words. The words in red go.",
+    "unresolved": [
+     "\"Rule one\": is this an ASD-STE100 rule, an STE-80 rule, or just a step in the demo? Not said."
+    ],
+    "unsaid": [
+     "A numbered rule list starts in the top-left corner and is not mentioned"
+    ],
+    "leap": [
+     "\"The words in red go\" is contradicted by the next captions: the red words are replaced, not removed"
+    ],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "00:00:33 (9)",
+    "text": "Replenished becomes full. Prior to becomes before.",
+    "unresolved": [],
+    "unsaid": [],
+    "leap": [
+     "What makes a word \"simple\"? No test or source is given, such as a word list."
+    ],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "00:00:36 (10)",
+    "text": "Commencing becomes starting.",
+    "unresolved": [],
+    "unsaid": [
+     "The bar changes from 16 to 15 words while the narration talks about something else"
+    ],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "00:00:38 (11)",
+    "text": "Only one word goes, but each word is easier to read.",
+    "unresolved": [],
+    "unsaid": [],
+    "leap": [
+     "\"each word is easier to read\" is stated without support"
+    ],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "00:00:43 (12)",
+    "text": "Rule two. Give the instruction directly.",
+    "unresolved": [],
+    "unsaid": [
+     "Rule 1 is greyed out in the list and rule 2 is added. This list convention is never explained."
+    ],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "00:00:46 (13)",
+    "text": "Remove the frame, it is imperative that the operator ensures, and tell",
+    "unresolved": [
+     "\"the frame\" is used as a term but never defined",
+     "When spoken, the quoted phrase \"it is imperative that the operator ensures\" has no audible quotation marks, so the sentence is hard to parse"
+    ],
+    "unsaid": [
+     "\"starting\" is also marked red and becomes \"you start the\". The narration does not mention it."
+    ],
+    "leap": [
+     "Why is a direct imperative better here? No reason is given (who acts, fewer words?)."
+    ],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "00:00:50 (14)",
+    "text": "the reader what to do: make sure, before you start. Thirteen words.",
+    "unresolved": [],
+    "unsaid": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "00:00:56 (15)",
+    "text": "Rule three. Use a concrete verb.",
+    "unresolved": [
+     "\"concrete verb\" is not defined here. Captions 16 and 17 partly explain it."
+    ],
+    "unsaid": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "00:00:59 (16)",
+    "text": "Make sure that it is full asks the reader to check a result.",
+    "unresolved": [],
+    "unsaid": [
+     "\"operation\" is marked red here, before the narration reaches it in caption 18",
+     "A mid-transition frame shows a 12-word count and overlapping ghost text that is never mentioned"
+    ],
+    "leap": [
+     "Why is checking a result worse than doing an action? Not said. The meaning also changes: if the reservoir is already full, \"make sure\" and \"fill\" are not the same instruction."
+    ],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "00:01:02 (17)",
+    "text": "The verb fill names the action.",
+    "unresolved": [],
+    "unsaid": [],
+    "leap": [
+     "The caption does not say why naming the action is better"
+    ],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "00:01:04 (18)",
+    "text": "And the vague noun operation becomes the machine you start.",
+    "unresolved": [],
+    "unsaid": [],
+    "leap": [
+     "This changes a noun under a rule about verbs",
+     "\"machine\" brings in information the original sentence did not contain",
+     "Why \"operation\" counts as \"vague\" is not explained"
+    ],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "00:01:08 (19)",
+    "text": "Nine words.",
+    "unresolved": [],
+    "unsaid": [],
+    "leap": [],
+    "excess": [
+     "\"Nine words.\" is said again in the next caption, and the bar already shows it"
+    ],
+    "purpose_unclear": false
+   },
+   {
+    "at": "00:01:11 (20)",
+    "text": "Sixteen words became nine.",
+    "unresolved": [],
+    "unsaid": [
+     "The original sentence comes back above in faint text for comparison. The narration does not mention it."
+    ],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "00:01:13 (21)",
+    "text": "The reader still fills the reservoir before starting the machine, with",
+    "unresolved": [],
+    "unsaid": [],
+    "leap": [
+     "\"still\" claims the meaning was kept, but captions 16 and 18 changed it (\"make sure\" became \"fill\", \"operation\" became \"machine\")"
+    ],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "00:01:16 (22)",
+    "text": "less work to read it.",
+    "unresolved": [],
+    "unsaid": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "00:01:18 (23)",
+    "text": "Full STE has more rules:",
+    "unresolved": [
+     "\"Full STE\": the link between this, \"STE-80\" and \"ASD-STE100\" is only implied"
+    ],
+    "unsaid": [
+     "The on-screen line \"full STE: short sentences · one meaning per word · an approved dictionary\" is very faint"
+    ],
+    "leap": [
+     "Are these the 20% that STE-80 leaves out? Not said."
+    ],
+    "excess": [],
+    "purpose_unclear": true
+   },
+   {
+    "at": "00:01:20 (24)",
+    "text": "short sentences, one meaning per word, and an approved dictionary.",
+    "unresolved": [
+     "\"an approved dictionary\": approved by whom, and which one?"
+    ],
+    "unsaid": [],
+    "leap": [
+     "The demo sentence did get shorter. So does STE-80 exclude \"short sentences\" or not? This is unclear."
+    ],
+    "excess": [],
+    "purpose_unclear": true
+   }
+  ],
+  "blocking": [
+   "Caption 2: \"about eighty percent of the rules\". The video never says which rules STE-80 keeps or drops, so the reader cannot say what STE-80 actually is.",
+   "Captions 23–24: \"Full STE has more rules: short sentences, one meaning per word, and an approved dictionary.\" It does not say these are the left-out 20%, and \"short sentences\" seems to clash with the shortened demo.",
+   "Caption 13: \"Remove the frame, it is imperative that the operator ensures, and tell\". In audio, the quoted phrase and the undefined \"frame\" make this sentence hard to parse."
+  ],
+  "cuts": [
+   "Caption 19: \"Nine words.\" Caption 20 repeats it straight away.",
+   "Caption 11: \"Only one word goes\". The bar already shows 16 to 15. Keep only the point about easier words, or cut the caption."
+  ],
+  "question": {
+   "text": "What is STE-80, and how does writing to it make a technical sentence easier to read?",
+   "known_at": "Captions 1–2 (\"This is STE-80… It uses about eighty percent of the rules of ASD-STE100\"). The 'how' becomes clear at caption 6 (\"Here is a typical sentence\").",
+   "result_stated": "Partly: \"Sixteen words became nine. The reader still fills the reservoir before starting the machine, with less work to read it.\" What STE-80 consists of, compared with full STE, is never stated."
+  },
+  "motive": "Reason to care: \"Manuals are read under time pressure, often in a second language, so every word must help.\" This is tied to aircraft manuals and not to the viewer's own technical writing. Reason for the approach (why use 80% of the rules and not all of them): missing.",
+  "close": "Partly. \"Sixteen words became nine… with less work to read it\" answers the demo. The ending then turns to \"Full STE has more rules\" without saying what STE-80 is in general, and does not return to \"every word must help\".",
+  "recap": "STE-80 is a lighter form of Simplified Technical English. It uses simple words, direct instructions and concrete verbs, and here it cut a 16-word manual sentence to 9 words.",
+  "strongest": "Captions 6–7 together with the running word-count bar: \"It has sixteen words: the orange bar counts them.\" It gives a clear, measurable thread that runs through the whole video.",
+  "weakest": "Captions 23–24: \"Full STE has more rules…\". The ending is ambiguous, adds new material, and never says how STE-80 relates to these rules.",
+  "suggestions": [
+   "Say once which rules STE-80 keeps and which it drops (for example, whether it skips the approved dictionary). Make the ending an explicit contrast.",
+   "Expand ASD and say directly that STE is short for Simplified Technical English.",
+   "In caption 13, signal the quote in speech, e.g. 'Cut the phrase \"it is imperative that the operator ensures\"', and drop \"frame\".",
+   "Fix caption 8 \"The words in red go\" to \"The words in red change\".",
+   "Give a reason for each rule (who acts, one action per step, no abstract nouns). Admit or fix the meaning shifts from \"make sure\" to \"fill\" and from \"operation\" to \"machine\".",
+   "Make the faint text on screen readable, or say it out loud."
+  ]
+ },
+ "findings": [
+  {
+   "n": 1,
+   "severity": "blocking",
+   "kind": "blocking",
+   "text": "Caption 2: \"about eighty percent of the rules\". The video never says which rules STE-80 keeps or drops, so the reader cannot say what STE-80 actually is."
+  },
+  {
+   "n": 2,
+   "severity": "blocking",
+   "kind": "blocking",
+   "text": "Captions 23–24: \"Full STE has more rules: short sentences, one meaning per word, and an approved dictionary.\" It does not say these are the left-out 20%, and \"short sentences\" seems to clash with the shortened demo."
+  },
+  {
+   "n": 3,
+   "severity": "blocking",
+   "kind": "blocking",
+   "text": "Caption 13: \"Remove the frame, it is imperative that the operator ensures, and tell\". In audio, the quoted phrase and the undefined \"frame\" make this sentence hard to parse."
+  },
+  {
+   "n": 4,
+   "severity": "excess",
+   "kind": "cut",
+   "text": "Caption 19: \"Nine words.\" Caption 20 repeats it straight away."
+  },
+  {
+   "n": 5,
+   "severity": "excess",
+   "kind": "cut",
+   "text": "Caption 11: \"Only one word goes\". The bar already shows 16 to 15. Keep only the point about easier words, or cut the caption."
+  },
+  {
+   "n": 6,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "00:00:00 (1): \"STE-80\": the caption names it but does not say what \"STE\" or \"80\" stands for"
+  },
+  {
+   "n": 7,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "00:00:04 (2): \"ASD\" in \"ASD-STE100\" is never expanded"
+  },
+  {
+   "n": 8,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "00:00:04 (2): \"eighty percent of the rules\": which rules are in and which are left out is not said"
+  },
+  {
+   "n": 9,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "00:00:04 (2): Why use 80% and not the full standard? No reason is given."
+  },
+  {
+   "n": 10,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "00:00:09 (3): It is not said directly that \"STE\" is short for \"Simplified Technical English\". The reader has to infer it."
+  },
+  {
+   "n": 11,
+   "severity": "edge",
+   "kind": "unsaid",
+   "text": "00:00:09 (3): On screen, \"a standard for aircraft maintenance manuals\" is very faint and nearly unreadable"
+  },
+  {
+   "n": 12,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "00:00:18 (5): It says why aircraft manuals need this. It does not say why a writer of other technical text should take it up."
+  },
+  {
+   "n": 13,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "00:00:24 (7): \"Some of the words do not help\": which words is not said yet"
+  },
+  {
+   "n": 14,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "00:00:28 (8): \"Rule one\": is this an ASD-STE100 rule, an STE-80 rule, or just a step in the demo? Not said."
+  },
+  {
+   "n": 15,
+   "severity": "edge",
+   "kind": "unsaid",
+   "text": "00:00:28 (8): A numbered rule list starts in the top-left corner and is not mentioned"
+  },
+  {
+   "n": 16,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "00:00:28 (8): \"The words in red go\" is contradicted by the next captions: the red words are replaced, not removed"
+  },
+  {
+   "n": 17,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "00:00:33 (9): What makes a word \"simple\"? No test or source is given, such as a word list."
+  },
+  {
+   "n": 18,
+   "severity": "edge",
+   "kind": "unsaid",
+   "text": "00:00:36 (10): The bar changes from 16 to 15 words while the narration talks about something else"
+  },
+  {
+   "n": 19,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "00:00:38 (11): \"each word is easier to read\" is stated without support"
+  },
+  {
+   "n": 20,
+   "severity": "edge",
+   "kind": "unsaid",
+   "text": "00:00:43 (12): Rule 1 is greyed out in the list and rule 2 is added. This list convention is never explained."
+  },
+  {
+   "n": 21,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "00:00:46 (13): \"the frame\" is used as a term but never defined"
+  },
+  {
+   "n": 22,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "00:00:46 (13): When spoken, the quoted phrase \"it is imperative that the operator ensures\" has no audible quotation marks, so the sentence is hard to parse"
+  },
+  {
+   "n": 23,
+   "severity": "edge",
+   "kind": "unsaid",
+   "text": "00:00:46 (13): \"starting\" is also marked red and becomes \"you start the\". The narration does not mention it."
+  },
+  {
+   "n": 24,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "00:00:46 (13): Why is a direct imperative better here? No reason is given (who acts, fewer words?)."
+  },
+  {
+   "n": 25,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "00:00:56 (15): \"concrete verb\" is not defined here. Captions 16 and 17 partly explain it."
+  },
+  {
+   "n": 26,
+   "severity": "edge",
+   "kind": "unsaid",
+   "text": "00:00:59 (16): \"operation\" is marked red here, before the narration reaches it in caption 18"
+  },
+  {
+   "n": 27,
+   "severity": "edge",
+   "kind": "unsaid",
+   "text": "00:00:59 (16): A mid-transition frame shows a 12-word count and overlapping ghost text that is never mentioned"
+  },
+  {
+   "n": 28,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "00:00:59 (16): Why is checking a result worse than doing an action? Not said. The meaning also changes: if the reservoir is already full, \"make sure\" and \"fill\" are not the same instruction."
+  },
+  {
+   "n": 29,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "00:01:02 (17): The caption does not say why naming the action is better"
+  },
+  {
+   "n": 30,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "00:01:04 (18): This changes a noun under a rule about verbs"
+  },
+  {
+   "n": 31,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "00:01:04 (18): \"machine\" brings in information the original sentence did not contain"
+  },
+  {
+   "n": 32,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "00:01:04 (18): Why \"operation\" counts as \"vague\" is not explained"
+  },
+  {
+   "n": 33,
+   "severity": "edge",
+   "kind": "unsaid",
+   "text": "00:01:11 (20): The original sentence comes back above in faint text for comparison. The narration does not mention it."
+  },
+  {
+   "n": 34,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "00:01:13 (21): \"still\" claims the meaning was kept, but captions 16 and 18 changed it (\"make sure\" became \"fill\", \"operation\" became \"machine\")"
+  },
+  {
+   "n": 35,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "00:01:18 (23): \"Full STE\": the link between this, \"STE-80\" and \"ASD-STE100\" is only implied"
+  },
+  {
+   "n": 36,
+   "severity": "edge",
+   "kind": "unsaid",
+   "text": "00:01:18 (23): The on-screen line \"full STE: short sentences · one meaning per word · an approved dictionary\" is very faint"
+  },
+  {
+   "n": 37,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "00:01:18 (23): Are these the 20% that STE-80 leaves out? Not said."
+  },
+  {
+   "n": 38,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "00:01:20 (24): \"an approved dictionary\": approved by whom, and which one?"
+  },
+  {
+   "n": 39,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "00:01:20 (24): The demo sentence did get shorter. So does STE-80 exclude \"short sentences\" or not? This is unclear."
+  }
+ ]
+}

@@ -75,15 +75,22 @@ def review_sheet(slug: str, draft: bool = False) -> Path:
         sys.exit(f"render first: explainer render {slug}{' --draft' if draft else ''}")
     timeline = json.loads(timeline_file.read_text())
 
-    # (frame time, heading, text, issues). The frame is taken a moment after the event, so the animation it
-    # starts is visible; the heading shows the event's own time, which matches captions.srt.
+    # (frame time, heading, text, issues). A bookmark's frame is taken just before the next event, so the
+    # animation it starts has finished (a frame taken mid-animation shows overlaps that a viewer never sees at
+    # rest); the heading shows the event's own time, which matches captions.srt.
     shots = []
+    times = sorted(e["t"] for e in timeline["events"])
+
+    def settled(t: float) -> float:
+        nxt = next((u for u in times if u > t + 0.05), t + 3.0)
+        return max(t + 0.5, min(nxt - 0.1, t + 4.0))
+
     for e in timeline["events"]:
         at = f"{e['t']:6.2f}s"
         if e["kind"] == "voiceover":
             shots.append((e["t"] + min(0.8, e["duration"] / 2), f"{at}  line", e["text"], []))
         elif e["kind"] == "bookmark":
-            shots.append((e["t"] + 0.5, f"{at}  bookmark '{e['mark']}'", "", e.get("issues", [])))
+            shots.append((settled(e["t"]), f"{at}  bookmark '{e['mark']}'", "", e.get("issues", [])))
         elif e["kind"] == "predict":
             shots.append((e["t"] + 1.0, f"{at}  PREDICT", e["question"], []))
         elif e["kind"] == "claim":
@@ -242,7 +249,8 @@ def quiz_prompt(slug: str, rendering: str) -> str:
         "Questions:",
         *[f"{i}. {q}" for i, q in enumerate(questions, 1)],
         "",
-        "Then audit the explanation. List, with quotes and locations (an empty list when there are none):",
+        "Then audit the explanation. In each list, give at most the five findings that matter most to this "
+        "reader, most important first, with quotes and locations. An empty list is a good answer:",
         *[f"- {k}: {v}" for k, v in audit.items()],
         "",
         'Reply with JSON only: {"answers": {"1": "...", "2": "...", ...}, "audit": {'
@@ -257,8 +265,10 @@ UNITS = {
     "narrative": ("beat", "Read only the Beats table, in order, as the script of the explanation: the 'Said' and "
                           "'Shown' columns are what the reader hears and sees. The other sections are the author's "
                           "plan; do not count them as given to the reader."),
-    "prose": ("paragraph", "Read the text in order, one paragraph, list item, or table at a time."),
-    "diagram": ("diagram", "Read the diagrams in order, one at a time, labels and arrows included."),
+    "prose": ("paragraph", "Read the text in order, one paragraph, list item, or table at a time, as it renders: "
+                           "HTML comments (<!-- ... -->) are not shown to the reader, so skip them."),
+    "diagram": ("diagram", "Read the diagrams in order, one at a time, labels and arrows included, as they render: "
+                           "HTML comments (<!-- ... -->) and Mermaid styling lines are not shown, so skip them."),
     "html": ("section", "Read the page in order, one section at a time, including what each control does "
                         "(read the script for that)."),
     "video": ("caption", "The video is given as its transcript (captions.srt) and a review sheet (review.png): one "
@@ -315,7 +325,8 @@ def coldread_prompt(slug: str, rendering: str) -> str:
         "explanation itself introduces is NOT known until the explanation says what it stands for.",
         "",
         f"Go through it in order, one {unit} at a time. Pretend you have not seen anything after the current "
-        f"{unit}. At each {unit}, report:",
+        f"{unit}. Report a finding only where this reader would actually stop, reread, or lose the thread; most "
+        f"{unit}s have none, and an empty list is the expected answer. At each {unit}, report:",
         "- unresolved: every word, phrase, symbol, name, or visual convention here that this reader does not know "
         "and has not been given earlier. Quote it exactly.",
         *(["- unsaid: anything shown here (a label, a formula, a highlight, a color change) that the words do not "
@@ -328,7 +339,8 @@ def coldread_prompt(slug: str, rendering: str) -> str:
         "",
         "Then answer:",
         "- blocking: the findings, from any " + unit + ", that stop this reader following the main line of the "
-        "argument. Quote each with its location. Everything else is an edge finding.",
+        "argument. Quote each with its location. Everything else is an edge finding. An empty list when nothing "
+        "blocks.",
         "- cuts: the cuts that would save this reader the most time with no loss, largest first.",
         "- question: the question the explanation sets out to answer, in your words, and where a reader first "
         "knows it. Is the result itself stated in words? Quote where.",
@@ -370,10 +382,11 @@ def quiz_rubric(slug: str) -> str:
             lines.append(f"   wrong if it says: {q['misconception']}")
     for i, c in enumerate([c for c in model["claims"] if c.get("ask")], n + len(model["quiz"]) + 1):
         lines += [f"{i}. {c['ask']}", f"   expect: {c['statement']}"]
-        for field in ("example", "counterexample"):
-            if c.get(field):
-                lines.append(f"   a full answer also gives the {field}: {c[field]}")
+        cases = [f"{field}: {c[field]}" for field in ("example", "counterexample") if c.get(field)]
+        if cases:
+            lines.append("   score 2 when the answer states this correctly and specifically; a case is not required. "
+                         "The rendering's own cases, for reference: " + " | ".join(cases))
     lines += ["", "A rendering passes when every quiz item scores 2 and no general item scores 0.",
-              "Each audit finding is a gap: fix it in the rendering, or record in review/understanding.md why it "
-              "stands."]
+              "Each audit finding is a candidate, not a defect: fix it when this reader needs it, and record the "
+              "decision (explainer decide)."]
     return "\n".join(lines)

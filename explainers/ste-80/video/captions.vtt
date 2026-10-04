@@ -5,89 +5,113 @@ WEBVTT
 This is STE-80. It is a writing style for technical text.
 
 2
-00:00:04.316 --> 00:00:09.412
-It uses about eighty percent of the rules of ASD-STE100, Simplified
+00:00:04.318 --> 00:00:09.907
+It comes from ASD-STE100, Simplified Technical English, a standard for
 
 3
-00:00:09.512 --> 00:00:14.380
-Technical English, a standard for aircraft maintenance manuals.
+00:00:10.007 --> 00:00:12.312
+aircraft maintenance manuals.
 
 4
-00:00:14.480 --> 00:00:18.436
-Manuals are read under time pressure, often in a second language, so
+00:00:12.412 --> 00:00:16.229
+The eighty means about eighty percent of the way to strict STE:
 
 5
-00:00:18.536 --> 00:00:19.670
-every word must help.
+00:00:16.329 --> 00:00:20.086
+it keeps the writing rules and drops the approved dictionary.
 
 6
-00:00:20.766 --> 00:00:24.689
-Here is a typical sentence from a manual. It has sixteen words:
+00:00:20.186 --> 00:00:24.142
+Manuals are read under time pressure, often in a second language, so
 
 7
-00:00:24.789 --> 00:00:28.342
-the orange bar counts them. Some of the words do not help the reader.
+00:00:24.242 --> 00:00:25.376
+every word must help.
 
 8
-00:00:28.433 --> 00:00:32.903
-Rule one. Use simple words. The words in red go.
+00:00:26.476 --> 00:00:30.399
+Here is a typical sentence from a manual. It has sixteen words:
 
 9
-00:00:33.003 --> 00:00:36.504
-Replenished becomes full. Prior to becomes before.
+00:00:30.499 --> 00:00:34.052
+the orange bar counts them. Some of the words do not help the reader.
 
 10
-00:00:36.604 --> 00:00:38.390
-Commencing becomes starting.
+00:00:34.143 --> 00:00:38.754
+Rule one. Use simple words: the common word, not the formal one.
 
 11
-00:00:38.490 --> 00:00:41.654
-Only one word goes, but each word is easier to read.
+00:00:38.854 --> 00:00:42.377
+The words in red change. Replenished becomes full.
 
 12
-00:00:42.250 --> 00:00:45.410
-Rule two. Give the instruction directly.
+00:00:42.477 --> 00:00:46.106
+Prior to becomes before. Commencing becomes starting.
 
 13
-00:00:45.510 --> 00:00:49.836
-Remove the frame, it is imperative that the operator ensures, and tell
+00:00:46.206 --> 00:00:49.370
+Only one word goes, but each word is easier to read.
 
 14
-00:00:49.936 --> 00:00:54.250
-the reader what to do: make sure, before you start. Thirteen words.
+00:00:50.960 --> 00:00:54.120
+Rule two. Give the instruction directly.
 
 15
-00:00:55.166 --> 00:00:58.028
-Rule three. Use a concrete verb.
+00:00:54.220 --> 00:00:57.499
+Cut the opening that only says the instruction matters.
 
 16
-00:00:58.128 --> 00:01:01.556
-Make sure that it is full asks the reader to check a result.
+00:00:57.599 --> 00:01:01.263
+Tell the reader what to do instead: make sure, before you start.
 
 17
-00:01:01.656 --> 00:01:03.549
-The verb fill names the action.
+00:01:01.363 --> 00:01:02.372
+Thirteen words.
 
 18
-00:01:03.649 --> 00:01:07.227
-And the vague noun operation becomes the machine you start.
+00:01:02.960 --> 00:01:05.757
+Rule three. Use concrete words.
 
 19
-00:01:07.327 --> 00:01:08.272
-Nine words.
+00:01:05.857 --> 00:01:09.337
+The phrase make sure that it is full asks the reader to check a
 
 20
-00:01:09.266 --> 00:01:11.180
-Sixteen words became nine.
+00:01:09.437 --> 00:01:09.841
+result.
 
 21
-00:01:11.280 --> 00:01:15.030
-The reader still fills the reservoir before starting the machine, with
+00:01:09.941 --> 00:01:13.881
+The verb fill names the action, and the machine names what you start.
 
 22
-00:01:15.130 --> 00:01:17.800
-less work to read it. Full STE has more rules:
+00:01:13.981 --> 00:01:14.927
+Nine words.
 
 23
-00:01:17.900 --> 00:01:21.962
-short sentences, one meaning per word, and an approved dictionary.
+00:01:16.527 --> 00:01:18.441
+Sixteen words became nine.
+
+24
+00:01:18.541 --> 00:01:22.063
+The reader still fills the reservoir before starting the machine, with
+
+25
+00:01:22.163 --> 00:01:23.134
+less work to read it.
+
+26
+00:01:24.227 --> 00:01:27.105
+The bar counts words, but the goal is less work:
+
+27
+00:01:27.205 --> 00:01:29.780
+rule one cut only one word and still helped.
+
+28
+00:01:30.377 --> 00:01:32.892
+STE-80 has more rules than these three:
+
+29
+00:01:32.992 --> 00:01:36.357
+short sentences, one meaning per word, and no filler.

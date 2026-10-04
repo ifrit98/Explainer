@@ -1,0 +1,576 @@
+# What the author did with each review finding (explainer decide). Read by findings --stats.
+2026-10-04T060802-probe#1:
+  decision: adopted
+  note: '3: shock + hike is available with the toggles; 8/9/12-14 edge or excess for
+    this reader'
+2026-10-04T060802-probe#10:
+  decision: adopted
+  note: '3: shock + hike is available with the toggles; 8/9/12-14 edge or excess for
+    this reader'
+2026-10-04T060802-probe#11:
+  decision: adopted
+  note: '3: shock + hike is available with the toggles; 8/9/12-14 edge or excess for
+    this reader'
+2026-10-04T060802-probe#12:
+  decision: declined
+  note: '3: shock + hike is available with the toggles; 8/9/12-14 edge or excess for
+    this reader'
+2026-10-04T060802-probe#13:
+  decision: declined
+  note: '3: shock + hike is available with the toggles; 8/9/12-14 edge or excess for
+    this reader'
+2026-10-04T060802-probe#14:
+  decision: declined
+  note: '3: shock + hike is available with the toggles; 8/9/12-14 edge or excess for
+    this reader'
+2026-10-04T060802-probe#2:
+  decision: adopted
+  note: '3: shock + hike is available with the toggles; 8/9/12-14 edge or excess for
+    this reader'
+2026-10-04T060802-probe#3:
+  decision: declined
+  note: '3: shock + hike is available with the toggles; 8/9/12-14 edge or excess for
+    this reader'
+2026-10-04T060802-probe#4:
+  decision: adopted
+  note: '3: shock + hike is available with the toggles; 8/9/12-14 edge or excess for
+    this reader'
+2026-10-04T060802-probe#5:
+  decision: adopted
+  note: '3: shock + hike is available with the toggles; 8/9/12-14 edge or excess for
+    this reader'
+2026-10-04T060802-probe#6:
+  decision: adopted
+  note: '3: shock + hike is available with the toggles; 8/9/12-14 edge or excess for
+    this reader'
+2026-10-04T060802-probe#7:
+  decision: adopted
+  note: '3: shock + hike is available with the toggles; 8/9/12-14 edge or excess for
+    this reader'
+2026-10-04T060802-probe#8:
+  decision: declined
+  note: '3: shock + hike is available with the toggles; 8/9/12-14 edge or excess for
+    this reader'
+2026-10-04T060802-probe#9:
+  decision: declined
+  note: '3: shock + hike is available with the toggles; 8/9/12-14 edge or excess for
+    this reader'
+2026-10-04T061548-quiz-html#1:
+  decision: declined
+  note: item 10 mechanism added to Level 3
+2026-10-04T061548-quiz-html#10:
+  decision: declined
+  note: item 10 mechanism added to Level 3
+2026-10-04T061548-quiz-html#11:
+  decision: declined
+  note: item 10 mechanism added to Level 3
+2026-10-04T061548-quiz-html#12:
+  decision: declined
+  note: item 10 mechanism added to Level 3
+2026-10-04T061548-quiz-html#13:
+  decision: declined
+  note: item 10 mechanism added to Level 3
+2026-10-04T061548-quiz-html#14:
+  decision: declined
+  note: item 10 mechanism added to Level 3
+2026-10-04T061548-quiz-html#15:
+  decision: declined
+  note: item 10 mechanism added to Level 3
+2026-10-04T061548-quiz-html#16:
+  decision: declined
+  note: item 10 mechanism added to Level 3
+2026-10-04T061548-quiz-html#17:
+  decision: declined
+  note: item 10 mechanism added to Level 3
+2026-10-04T061548-quiz-html#18:
+  decision: declined
+  note: item 10 mechanism added to Level 3
+2026-10-04T061548-quiz-html#19:
+  decision: declined
+  note: item 10 mechanism added to Level 3
+2026-10-04T061548-quiz-html#2:
+  decision: declined
+  note: item 10 mechanism added to Level 3
+2026-10-04T061548-quiz-html#20:
+  decision: declined
+  note: item 10 mechanism added to Level 3
+2026-10-04T061548-quiz-html#21:
+  decision: declined
+  note: item 10 mechanism added to Level 3
+2026-10-04T061548-quiz-html#22:
+  decision: declined
+  note: item 10 mechanism added to Level 3
+2026-10-04T061548-quiz-html#23:
+  decision: declined
+  note: item 10 mechanism added to Level 3
+2026-10-04T061548-quiz-html#24:
+  decision: declined
+  note: item 10 mechanism added to Level 3
+2026-10-04T061548-quiz-html#25:
+  decision: declined
+  note: item 10 mechanism added to Level 3
+2026-10-04T061548-quiz-html#26:
+  decision: declined
+  note: item 10 mechanism added to Level 3
+2026-10-04T061548-quiz-html#27:
+  decision: declined
+  note: item 10 mechanism added to Level 3
+2026-10-04T061548-quiz-html#28:
+  decision: declined
+  note: item 10 mechanism added to Level 3
+2026-10-04T061548-quiz-html#29:
+  decision: declined
+  note: item 10 mechanism added to Level 3
+2026-10-04T061548-quiz-html#3:
+  decision: declined
+  note: item 10 mechanism added to Level 3
+2026-10-04T061548-quiz-html#30:
+  decision: declined
+  note: item 10 mechanism added to Level 3
+2026-10-04T061548-quiz-html#31:
+  decision: declined
+  note: item 10 mechanism added to Level 3
+2026-10-04T061548-quiz-html#32:
+  decision: declined
+  note: item 10 mechanism added to Level 3
+2026-10-04T061548-quiz-html#33:
+  decision: declined
+  note: item 10 mechanism added to Level 3
+2026-10-04T061548-quiz-html#34:
+  decision: declined
+  note: item 10 mechanism added to Level 3
+2026-10-04T061548-quiz-html#35:
+  decision: declined
+  note: item 10 mechanism added to Level 3
+2026-10-04T061548-quiz-html#36:
+  decision: declined
+  note: item 10 mechanism added to Level 3
+2026-10-04T061548-quiz-html#37:
+  decision: declined
+  note: item 10 mechanism added to Level 3
+2026-10-04T061548-quiz-html#38:
+  decision: declined
+  note: item 10 mechanism added to Level 3
+2026-10-04T061548-quiz-html#4:
+  decision: declined
+  note: item 10 mechanism added to Level 3
+2026-10-04T061548-quiz-html#5:
+  decision: declined
+  note: item 10 mechanism added to Level 3
+2026-10-04T061548-quiz-html#6:
+  decision: declined
+  note: item 10 mechanism added to Level 3
+2026-10-04T061548-quiz-html#7:
+  decision: declined
+  note: item 10 mechanism added to Level 3
+2026-10-04T061548-quiz-html#8:
+  decision: declined
+  note: item 10 mechanism added to Level 3
+2026-10-04T061548-quiz-html#9:
+  decision: declined
+  note: item 10 mechanism added to Level 3
+2026-10-04T061601-coldread-html#1:
+  decision: adopted
+  note: round 1; 1 by a 4-quarter hike (toy timing inside the 1-2 year estimate)
+2026-10-04T061601-coldread-html#10:
+  decision: declined
+  note: round 1; 1 by a 4-quarter hike (toy timing inside the 1-2 year estimate)
+2026-10-04T061601-coldread-html#11:
+  decision: declined
+  note: round 1; 1 by a 4-quarter hike (toy timing inside the 1-2 year estimate)
+2026-10-04T061601-coldread-html#12:
+  decision: declined
+  note: round 1; 1 by a 4-quarter hike (toy timing inside the 1-2 year estimate)
+2026-10-04T061601-coldread-html#13:
+  decision: declined
+  note: round 1; 1 by a 4-quarter hike (toy timing inside the 1-2 year estimate)
+2026-10-04T061601-coldread-html#14:
+  decision: declined
+  note: round 1; 1 by a 4-quarter hike (toy timing inside the 1-2 year estimate)
+2026-10-04T061601-coldread-html#15:
+  decision: declined
+  note: round 1; 1 by a 4-quarter hike (toy timing inside the 1-2 year estimate)
+2026-10-04T061601-coldread-html#16:
+  decision: declined
+  note: round 1; 1 by a 4-quarter hike (toy timing inside the 1-2 year estimate)
+2026-10-04T061601-coldread-html#17:
+  decision: declined
+  note: round 1; 1 by a 4-quarter hike (toy timing inside the 1-2 year estimate)
+2026-10-04T061601-coldread-html#18:
+  decision: declined
+  note: round 1; 1 by a 4-quarter hike (toy timing inside the 1-2 year estimate)
+2026-10-04T061601-coldread-html#19:
+  decision: declined
+  note: round 1; 1 by a 4-quarter hike (toy timing inside the 1-2 year estimate)
+2026-10-04T061601-coldread-html#2:
+  decision: adopted
+  note: round 1; 1 by a 4-quarter hike (toy timing inside the 1-2 year estimate)
+2026-10-04T061601-coldread-html#20:
+  decision: declined
+  note: round 1; 1 by a 4-quarter hike (toy timing inside the 1-2 year estimate)
+2026-10-04T061601-coldread-html#21:
+  decision: declined
+  note: round 1; 1 by a 4-quarter hike (toy timing inside the 1-2 year estimate)
+2026-10-04T061601-coldread-html#22:
+  decision: declined
+  note: round 1; 1 by a 4-quarter hike (toy timing inside the 1-2 year estimate)
+2026-10-04T061601-coldread-html#23:
+  decision: declined
+  note: round 1; 1 by a 4-quarter hike (toy timing inside the 1-2 year estimate)
+2026-10-04T061601-coldread-html#24:
+  decision: declined
+  note: round 1; 1 by a 4-quarter hike (toy timing inside the 1-2 year estimate)
+2026-10-04T061601-coldread-html#25:
+  decision: declined
+  note: round 1; 1 by a 4-quarter hike (toy timing inside the 1-2 year estimate)
+2026-10-04T061601-coldread-html#26:
+  decision: declined
+  note: round 1; 1 by a 4-quarter hike (toy timing inside the 1-2 year estimate)
+2026-10-04T061601-coldread-html#27:
+  decision: declined
+  note: round 1; 1 by a 4-quarter hike (toy timing inside the 1-2 year estimate)
+2026-10-04T061601-coldread-html#28:
+  decision: declined
+  note: round 1; 1 by a 4-quarter hike (toy timing inside the 1-2 year estimate)
+2026-10-04T061601-coldread-html#29:
+  decision: declined
+  note: round 1; 1 by a 4-quarter hike (toy timing inside the 1-2 year estimate)
+2026-10-04T061601-coldread-html#3:
+  decision: adopted
+  note: round 1; 1 by a 4-quarter hike (toy timing inside the 1-2 year estimate)
+2026-10-04T061601-coldread-html#30:
+  decision: declined
+  note: round 1; 1 by a 4-quarter hike (toy timing inside the 1-2 year estimate)
+2026-10-04T061601-coldread-html#31:
+  decision: declined
+  note: round 1; 1 by a 4-quarter hike (toy timing inside the 1-2 year estimate)
+2026-10-04T061601-coldread-html#32:
+  decision: declined
+  note: round 1; 1 by a 4-quarter hike (toy timing inside the 1-2 year estimate)
+2026-10-04T061601-coldread-html#33:
+  decision: declined
+  note: round 1; 1 by a 4-quarter hike (toy timing inside the 1-2 year estimate)
+2026-10-04T061601-coldread-html#34:
+  decision: declined
+  note: round 1; 1 by a 4-quarter hike (toy timing inside the 1-2 year estimate)
+2026-10-04T061601-coldread-html#35:
+  decision: declined
+  note: round 1; 1 by a 4-quarter hike (toy timing inside the 1-2 year estimate)
+2026-10-04T061601-coldread-html#36:
+  decision: declined
+  note: round 1; 1 by a 4-quarter hike (toy timing inside the 1-2 year estimate)
+2026-10-04T061601-coldread-html#37:
+  decision: declined
+  note: round 1; 1 by a 4-quarter hike (toy timing inside the 1-2 year estimate)
+2026-10-04T061601-coldread-html#38:
+  decision: declined
+  note: round 1; 1 by a 4-quarter hike (toy timing inside the 1-2 year estimate)
+2026-10-04T061601-coldread-html#39:
+  decision: declined
+  note: round 1; 1 by a 4-quarter hike (toy timing inside the 1-2 year estimate)
+2026-10-04T061601-coldread-html#4:
+  decision: declined
+  note: round 1; 1 by a 4-quarter hike (toy timing inside the 1-2 year estimate)
+2026-10-04T061601-coldread-html#40:
+  decision: declined
+  note: round 1; 1 by a 4-quarter hike (toy timing inside the 1-2 year estimate)
+2026-10-04T061601-coldread-html#41:
+  decision: declined
+  note: round 1; 1 by a 4-quarter hike (toy timing inside the 1-2 year estimate)
+2026-10-04T061601-coldread-html#42:
+  decision: declined
+  note: round 1; 1 by a 4-quarter hike (toy timing inside the 1-2 year estimate)
+2026-10-04T061601-coldread-html#43:
+  decision: declined
+  note: round 1; 1 by a 4-quarter hike (toy timing inside the 1-2 year estimate)
+2026-10-04T061601-coldread-html#44:
+  decision: declined
+  note: round 1; 1 by a 4-quarter hike (toy timing inside the 1-2 year estimate)
+2026-10-04T061601-coldread-html#45:
+  decision: declined
+  note: round 1; 1 by a 4-quarter hike (toy timing inside the 1-2 year estimate)
+2026-10-04T061601-coldread-html#46:
+  decision: declined
+  note: round 1; 1 by a 4-quarter hike (toy timing inside the 1-2 year estimate)
+2026-10-04T061601-coldread-html#47:
+  decision: declined
+  note: round 1; 1 by a 4-quarter hike (toy timing inside the 1-2 year estimate)
+2026-10-04T061601-coldread-html#48:
+  decision: declined
+  note: round 1; 1 by a 4-quarter hike (toy timing inside the 1-2 year estimate)
+2026-10-04T061601-coldread-html#49:
+  decision: declined
+  note: round 1; 1 by a 4-quarter hike (toy timing inside the 1-2 year estimate)
+2026-10-04T061601-coldread-html#5:
+  decision: declined
+  note: round 1; 1 by a 4-quarter hike (toy timing inside the 1-2 year estimate)
+2026-10-04T061601-coldread-html#50:
+  decision: declined
+  note: round 1; 1 by a 4-quarter hike (toy timing inside the 1-2 year estimate)
+2026-10-04T061601-coldread-html#51:
+  decision: declined
+  note: round 1; 1 by a 4-quarter hike (toy timing inside the 1-2 year estimate)
+2026-10-04T061601-coldread-html#6:
+  decision: declined
+  note: round 1; 1 by a 4-quarter hike (toy timing inside the 1-2 year estimate)
+2026-10-04T061601-coldread-html#7:
+  decision: declined
+  note: round 1; 1 by a 4-quarter hike (toy timing inside the 1-2 year estimate)
+2026-10-04T061601-coldread-html#8:
+  decision: declined
+  note: round 1; 1 by a 4-quarter hike (toy timing inside the 1-2 year estimate)
+2026-10-04T061601-coldread-html#9:
+  decision: declined
+  note: round 1; 1 by a 4-quarter hike (toy timing inside the 1-2 year estimate)
+2026-10-04T061926-quiz-html#1:
+  decision: declined
+  note: 'round 2: pass'
+2026-10-04T061926-quiz-html#10:
+  decision: declined
+  note: 'round 2: pass'
+2026-10-04T061926-quiz-html#11:
+  decision: declined
+  note: 'round 2: pass'
+2026-10-04T061926-quiz-html#12:
+  decision: declined
+  note: 'round 2: pass'
+2026-10-04T061926-quiz-html#13:
+  decision: declined
+  note: 'round 2: pass'
+2026-10-04T061926-quiz-html#14:
+  decision: declined
+  note: 'round 2: pass'
+2026-10-04T061926-quiz-html#15:
+  decision: declined
+  note: 'round 2: pass'
+2026-10-04T061926-quiz-html#16:
+  decision: declined
+  note: 'round 2: pass'
+2026-10-04T061926-quiz-html#17:
+  decision: declined
+  note: 'round 2: pass'
+2026-10-04T061926-quiz-html#18:
+  decision: declined
+  note: 'round 2: pass'
+2026-10-04T061926-quiz-html#19:
+  decision: declined
+  note: 'round 2: pass'
+2026-10-04T061926-quiz-html#2:
+  decision: declined
+  note: 'round 2: pass'
+2026-10-04T061926-quiz-html#20:
+  decision: declined
+  note: 'round 2: pass'
+2026-10-04T061926-quiz-html#21:
+  decision: declined
+  note: 'round 2: pass'
+2026-10-04T061926-quiz-html#22:
+  decision: declined
+  note: 'round 2: pass'
+2026-10-04T061926-quiz-html#23:
+  decision: declined
+  note: 'round 2: pass'
+2026-10-04T061926-quiz-html#24:
+  decision: declined
+  note: 'round 2: pass'
+2026-10-04T061926-quiz-html#25:
+  decision: declined
+  note: 'round 2: pass'
+2026-10-04T061926-quiz-html#26:
+  decision: declined
+  note: 'round 2: pass'
+2026-10-04T061926-quiz-html#27:
+  decision: declined
+  note: 'round 2: pass'
+2026-10-04T061926-quiz-html#28:
+  decision: declined
+  note: 'round 2: pass'
+2026-10-04T061926-quiz-html#29:
+  decision: declined
+  note: 'round 2: pass'
+2026-10-04T061926-quiz-html#3:
+  decision: declined
+  note: 'round 2: pass'
+2026-10-04T061926-quiz-html#30:
+  decision: declined
+  note: 'round 2: pass'
+2026-10-04T061926-quiz-html#31:
+  decision: declined
+  note: 'round 2: pass'
+2026-10-04T061926-quiz-html#32:
+  decision: declined
+  note: 'round 2: pass'
+2026-10-04T061926-quiz-html#33:
+  decision: declined
+  note: 'round 2: pass'
+2026-10-04T061926-quiz-html#34:
+  decision: declined
+  note: 'round 2: pass'
+2026-10-04T061926-quiz-html#35:
+  decision: declined
+  note: 'round 2: pass'
+2026-10-04T061926-quiz-html#36:
+  decision: declined
+  note: 'round 2: pass'
+2026-10-04T061926-quiz-html#37:
+  decision: declined
+  note: 'round 2: pass'
+2026-10-04T061926-quiz-html#38:
+  decision: declined
+  note: 'round 2: pass'
+2026-10-04T061926-quiz-html#39:
+  decision: declined
+  note: 'round 2: pass'
+2026-10-04T061926-quiz-html#4:
+  decision: declined
+  note: 'round 2: pass'
+2026-10-04T061926-quiz-html#5:
+  decision: declined
+  note: 'round 2: pass'
+2026-10-04T061926-quiz-html#6:
+  decision: declined
+  note: 'round 2: pass'
+2026-10-04T061926-quiz-html#7:
+  decision: declined
+  note: 'round 2: pass'
+2026-10-04T061926-quiz-html#8:
+  decision: declined
+  note: 'round 2: pass'
+2026-10-04T061926-quiz-html#9:
+  decision: declined
+  note: 'round 2: pass'
+2026-10-04T061949-coldread-html#1:
+  decision: declined
+  note: 'round 2: nothing blocks'
+2026-10-04T061949-coldread-html#10:
+  decision: declined
+  note: 'round 2: nothing blocks'
+2026-10-04T061949-coldread-html#11:
+  decision: declined
+  note: 'round 2: nothing blocks'
+2026-10-04T061949-coldread-html#12:
+  decision: declined
+  note: 'round 2: nothing blocks'
+2026-10-04T061949-coldread-html#13:
+  decision: declined
+  note: 'round 2: nothing blocks'
+2026-10-04T061949-coldread-html#14:
+  decision: declined
+  note: 'round 2: nothing blocks'
+2026-10-04T061949-coldread-html#15:
+  decision: declined
+  note: 'round 2: nothing blocks'
+2026-10-04T061949-coldread-html#16:
+  decision: declined
+  note: 'round 2: nothing blocks'
+2026-10-04T061949-coldread-html#17:
+  decision: declined
+  note: 'round 2: nothing blocks'
+2026-10-04T061949-coldread-html#18:
+  decision: declined
+  note: 'round 2: nothing blocks'
+2026-10-04T061949-coldread-html#19:
+  decision: declined
+  note: 'round 2: nothing blocks'
+2026-10-04T061949-coldread-html#2:
+  decision: declined
+  note: 'round 2: nothing blocks'
+2026-10-04T061949-coldread-html#20:
+  decision: declined
+  note: 'round 2: nothing blocks'
+2026-10-04T061949-coldread-html#21:
+  decision: declined
+  note: 'round 2: nothing blocks'
+2026-10-04T061949-coldread-html#22:
+  decision: declined
+  note: 'round 2: nothing blocks'
+2026-10-04T061949-coldread-html#23:
+  decision: declined
+  note: 'round 2: nothing blocks'
+2026-10-04T061949-coldread-html#24:
+  decision: declined
+  note: 'round 2: nothing blocks'
+2026-10-04T061949-coldread-html#25:
+  decision: declined
+  note: 'round 2: nothing blocks'
+2026-10-04T061949-coldread-html#26:
+  decision: declined
+  note: 'round 2: nothing blocks'
+2026-10-04T061949-coldread-html#27:
+  decision: declined
+  note: 'round 2: nothing blocks'
+2026-10-04T061949-coldread-html#28:
+  decision: declined
+  note: 'round 2: nothing blocks'
+2026-10-04T061949-coldread-html#29:
+  decision: declined
+  note: 'round 2: nothing blocks'
+2026-10-04T061949-coldread-html#3:
+  decision: declined
+  note: 'round 2: nothing blocks'
+2026-10-04T061949-coldread-html#30:
+  decision: declined
+  note: 'round 2: nothing blocks'
+2026-10-04T061949-coldread-html#31:
+  decision: declined
+  note: 'round 2: nothing blocks'
+2026-10-04T061949-coldread-html#32:
+  decision: declined
+  note: 'round 2: nothing blocks'
+2026-10-04T061949-coldread-html#33:
+  decision: declined
+  note: 'round 2: nothing blocks'
+2026-10-04T061949-coldread-html#34:
+  decision: declined
+  note: 'round 2: nothing blocks'
+2026-10-04T061949-coldread-html#35:
+  decision: declined
+  note: 'round 2: nothing blocks'
+2026-10-04T061949-coldread-html#36:
+  decision: declined
+  note: 'round 2: nothing blocks'
+2026-10-04T061949-coldread-html#37:
+  decision: declined
+  note: 'round 2: nothing blocks'
+2026-10-04T061949-coldread-html#38:
+  decision: declined
+  note: 'round 2: nothing blocks'
+2026-10-04T061949-coldread-html#39:
+  decision: declined
+  note: 'round 2: nothing blocks'
+2026-10-04T061949-coldread-html#4:
+  decision: declined
+  note: 'round 2: nothing blocks'
+2026-10-04T061949-coldread-html#40:
+  decision: declined
+  note: 'round 2: nothing blocks'
+2026-10-04T061949-coldread-html#41:
+  decision: declined
+  note: 'round 2: nothing blocks'
+2026-10-04T061949-coldread-html#42:
+  decision: declined
+  note: 'round 2: nothing blocks'
+2026-10-04T061949-coldread-html#43:
+  decision: declined
+  note: 'round 2: nothing blocks'
+2026-10-04T061949-coldread-html#44:
+  decision: declined
+  note: 'round 2: nothing blocks'
+2026-10-04T061949-coldread-html#45:
+  decision: declined
+  note: 'round 2: nothing blocks'
+2026-10-04T061949-coldread-html#5:
+  decision: declined
+  note: 'round 2: nothing blocks'
+2026-10-04T061949-coldread-html#6:
+  decision: declined
+  note: 'round 2: nothing blocks'
+2026-10-04T061949-coldread-html#7:
+  decision: declined
+  note: 'round 2: nothing blocks'
+2026-10-04T061949-coldread-html#8:
+  decision: declined
+  note: 'round 2: nothing blocks'
+2026-10-04T061949-coldread-html#9:
+  decision: declined
+  note: 'round 2: nothing blocks'

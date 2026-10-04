@@ -1,0 +1,513 @@
+{
+ "tool": "coldread",
+ "rendering": "html",
+ "slug": "rates-inflation",
+ "at": "2026-10-04T06:16:01",
+ "model": "default",
+ "prompt_sha": "4a836f961d6a",
+ "reply": {
+  "sections": [
+   {
+    "at": "Header (h1 + lede + second paragraph)",
+    "text": "Title asks how a higher rate lowers inflation. The lede gives the whole chain and a lag of one to two years. The second paragraph says the direction is well supported, that size, timing and two claims are disputed, and that a toy model lets you switch each assumption.",
+    "unresolved": [
+     "\"a small constructed model\" (what 'constructed' means is not said until much later: 'chosen coefficients')"
+    ],
+    "unsaid": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Level 1 · The chain",
+    "text": "Six boxes: policy rate ↑ → market rates ↑ → real rate ↑ → demand ↓ → output gap < 0 → inflation ↓. A side note defines policy rate, real rate and output gap, and adds a second path through expectations.",
+    "unresolved": [
+     "\"market rates\" (not defined. The lede said 'Loan and savings rates', so the reader can probably infer it, but under a different name)"
+    ],
+    "unsaid": [
+     "The side note's last sentence ('if people believe the bank, the inflation they expect falls too, which lowers inflation directly') is a second path, and the drawn chain does not show it.",
+     "↑/↓ arrows and '< 0' are used without a word, though they read naturally."
+    ],
+    "leap": [
+     "\"market rates ↑ → real rate ↑\": the real rate is defined as 'an interest rate minus the inflation people expect', but nothing here says that expected inflation stays put when rates rise. That is the reason the real rate rises, and it only comes in Level 3, which is collapsed.",
+     "\"output gap < 0 → inflation ↓\": only the lede ('with less demand, firms raise prices and wages more slowly') covers this step. The chain gives no reason of its own."
+    ],
+    "excess": [
+     "The chain repeats the lede's narration ('Loan and savings rates follow, people and firms borrow and spend less...') with little new except the real rate and the output gap.",
+     "\"on overnight money between banks\": the argument never uses this detail."
+    ],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Predict first · When does inflation respond?",
+    "text": "The bank raises its rate by 1 point, holds it for 8 quarters, then lowers it, with expectations anchored. The reader must pick the quarter where inflation is lowest (1, 4, 11, 16) before the instrument appears. The script's answer is quarter 11: the output gap is lowest at quarter 9, just after the hike ends, and prices lag demand.",
+    "unresolved": [],
+    "unsaid": [
+     "The model and everything below stay hidden until the reader commits a prediction. The page never says this."
+    ],
+    "leap": [
+     "The only timing the reader has so far is the lede's 'typically one to two years later' (quarters 4–8). That points to 'quarter 4' or to no listed choice, not to 'quarter 11'. Nothing given lets the reader work out the answer.",
+     "The revealed reason ('lowest at quarter 9, just after the hike ends') shows that the trough timing is driven by the 8-quarter hold. That is not the same thing as the lede's general one-to-two-year lag, and the page never reconciles the two."
+    ],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "The instrument · Switch the assumptions",
+    "text": "A chart of policy rate, output gap and inflation over 16 quarters. Controls: a hike slider (0–3, presets 0/1/2/3, label 'held for 8 quarters'), four checkboxes (Expectations anchored, An energy price shock, Cost channel, Neo-Fisherian long run), each with a note that changes when toggled, four readouts, and a hover tooltip with values per quarter.",
+    "unresolved": [
+     "\"steady state\"",
+     "\"expectations channel\" ('channel' is not introduced until Level 2)",
+     "\"Cost channel\" (explained only once checked: 'Firms pass on higher financing costs')",
+     "\"Neo-Fisherian long run\" (when unchecked the note only says 'Off: the mainstream view.')",
+     "The tag words \"assumption\", \"scenario\", \"disputed\", \"disputed · minority\" and their colors (not explained until the What to trust section)",
+     "\"q9\" in the readouts (presumably quarter 9)"
+    ],
+    "unsaid": [
+     "The y-axis has no unit label, and one axis mixes percentage points (rate, inflation) with % (output gap).",
+     "The policy rate is drawn as a step line and the others as smooth lines. The zero line is darker than the grid. The text mentions neither.",
+     "With Neo-Fisherian on, the hike becomes permanent, but the slider still reads 'Rate hike, held for 8 quarters'.",
+     "With Neo-Fisherian on, inflation jumps to the hike size at quarter 1, despite the label 'long run'.",
+     "The 'scenario' tag uses the 'estimate' color class. The page does not say what 'scenario' means as an epistemic tag.",
+     "The inflation readouts have no unit, while the output gap readout shows %.",
+     "The model has no currency channel and no asset-price channel. The paragraph says only that the expectations channel is left out."
+    ],
+    "leap": [
+     "\"Expectations anchored\" when unchecked: 'effects last longer'. The page does not say why within this section."
+    ],
+    "excess": [
+     "\"The numbers show directions and order, not sizes for any real economy.\" This is the first of three such disclaimers. It is fine here."
+    ],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Level 2 · The channels (open by default)",
+    "text": "Four channels: borrowing, saving and assets, the currency, expectations.",
+    "unresolved": [],
+    "unsaid": [
+     "Of these four channels, only borrowing is in the model's chain. The currency and asset channels appear nowhere else, and the page does not say they are outside the model."
+    ],
+    "leap": [
+     "\"bond and house prices fall\": no reason is given.",
+     "\"imports get cheaper, and exports harder to sell\": how this lowers inflation is left to the reader."
+    ],
+    "excess": [
+     "\"Variable-rate loans cost more at once... Households and firms borrow and spend less.\" A reader who follows central-bank news knows this, and it repeats the lede.",
+     "\"Expectations. If people believe the bank...\" restates the chain side note."
+    ],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Level 3 · Why the real rate, why a lag, why expectations",
+    "text": "Three short paragraphs. The real rate: a 5% loan with 5% inflation costs nothing in goods, which links to the Neo-Fisherian toggle. The lag: fixed loans, contracts and annual wages, with the toy turning at quarters 9 and 11. Expectations: an anchored energy shock fades, while a backward-looking one peaks at +2.40.",
+    "unresolved": [
+     "\"supply shock\" (the controls said 'energy price shock')",
+     "\"credibility\" as a term of art, though it can be inferred"
+    ],
+    "unsaid": [
+     "Reproducing +2.40 and +0.44 needs three steps: uncheck anchored, check shock, and set the slider to 0. The page gives no such instruction."
+    ],
+    "leap": [
+     "Lag paragraph: the real-world reasons (fixed loans, menus, annual wages) are not what produces the toy's quarter-11 trough. That comes from the 8-quarter hold plus fixed 1- and 2-quarter lags in the equations. The text runs the two together.",
+     "\"When they follow last year's inflation\" conflicts with the instrument note, which says 'last quarter's inflation'."
+    ],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Level 4 · The toy model's equations",
+    "text": "Defines Δi, y, π, πe and w, and gives four update equations, the shock decay, and a note that central-bank models have more equations and one-to-two-year lags.",
+    "unresolved": [
+     "\"t\", \"t−1\" (the quarter index is never defined)",
+     "\"[cost]\", \"[shock]\" brackets"
+    ],
+    "unsaid": [
+     "The brackets mean 'only when that checkbox is on'. The page does not say so.",
+     "Δi(t−1) − πe(t−1) is the real rate, but the page never says this term is the real rate.",
+     "The steady state and target are implicitly 0, and the page never says so.",
+     "\"π the change in inflation\", yet the chart and readouts call it simply 'inflation'.",
+     "The neo-Fisherian line leaves out that the hike is also made permanent."
+    ],
+    "leap": [],
+    "excess": [
+     "\"The coefficients are chosen to show the order of effects, not estimated.\" This is the second 'not real sizes' disclaimer.",
+     "\"their lags for inflation are one to two years\": the third time this is said."
+    ],
+    "purpose_unclear": false
+   },
+   {
+    "at": "What to trust · Established, estimated, disputed",
+    "text": "Five tagged cards: direction (established), size and lag (estimate), price puzzle (disputed), neo-Fisherian (disputed · minority), every model number (constructed).",
+    "unresolved": [
+     "\"The price puzzle\" (a new name. Only the phrase 'Firms passing on higher financing costs' links it to the Cost channel toggle)"
+    ],
+    "unsaid": [
+     "The tag words here ('established', 'estimate', 'constructed') differ from those on the controls ('assumption', 'scenario'). The 'constructed' tag reuses the assumption color.",
+     "The page does not say that the price puzzle card corresponds to the Cost channel toggle."
+    ],
+    "leap": [
+     "\"so could studies that miss what the central bank knew when it moved\": the page does not say why this would make prices appear to rise."
+    ],
+    "excess": [
+     "\"The direction\" card restates the chain.",
+     "\"Central banks put the largest effect on inflation one to two years out\": the fourth time this is said.",
+     "\"Every number from the model... not how much for any economy\": the third disclaimer."
+    ],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Summary",
+    "text": "Four points: the real cost of borrowing lowers demand, inflation responds last, anchoring makes the job easier, and two disputed views. Not covered: QE, fiscal policy, neutral rate, exchange-rate regimes.",
+    "unresolved": [
+     "\"the neutral rate\" (never introduced, though it is explicitly out of scope)"
+    ],
+    "unsaid": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   }
+  ],
+  "blocking": [
+   "Predict first: the reader has only 'typically one to two years later' (lede), which points away from the answer 'quarter 11'. The prediction cannot be reasoned out, and the reveal ('just after the hike ends') shows the trough is set by the 8-quarter hold, which conflicts with the lede's lag.",
+   "Level 1 chain: 'market rates ↑ → real rate ↑'. The reason (expected inflation does not move with the hike) is missing, yet Summary item 1 rests the whole mechanism on the real rate. The reason appears only in collapsed Level 3 ('If expected inflation rose one for one with the policy rate, borrowing would cost no more').",
+   "Level 3 lag paragraph: the real-world reasons ('Many loans are fixed for years...') are offered to explain the toy's 'quarter 9... quarter 11', but those numbers come from the hold length and fixed lags in the equations."
+  ],
+  "cuts": [
+   "Level 2 'The channels' (open by default): mostly restates the lede and the side note for a news-following reader, and two of its four channels never appear in the model. Collapse it or cut it to the currency channel.",
+   "Repeated 'one to two years' (lede, Level 4, What to trust card, Summary): keep the lede and the Summary.",
+   "Repeated 'not sizes for any real economy' disclaimers (instrument paragraph, Level 4, 'Every number from the model' card): keep the one in the instrument paragraph.",
+   "'The direction' card in What to trust: it restates the chain.",
+   "'on overnight money between banks' in the policy rate definition."
+  ],
+  "question": {
+   "text": "Why and how does raising the central bank's rate bring inflation down, and how sure are we?",
+   "known_at": "h1 'How a higher interest rate lowers inflation'",
+   "result_stated": "Yes, in the lede: 'A central bank raises the one rate it sets. Loan and savings rates follow, people and firms borrow and spend less, and with less demand, firms raise prices and wages more slowly. Inflation falls last, typically one to two years later.'"
+  },
+  "motive": "Reason for the approach is given: 'How large the effect is, how long it takes, and two claims about whether a hike can raise inflation are disputed. Below, a small constructed model lets you switch each assumption and see what it does.' A reason to care about the question itself is missing. It is left implicit for a news reader.",
+  "close": "Yes. Summary: 'A higher policy rate lowers inflation by raising the real cost of borrowing, which lowers demand.' and 'Spending turns first; inflation responds last, typically one to two years later.' The general argument is stated in words, though the one-to-two-year lag sits uneasily beside the toy's quarter-11 trough.",
+  "recap": "A rate hike lowers inflation because, while expected inflation stays put, it raises the real cost of borrowing, so demand falls and prices slow last. That only holds if people's expectations don't simply rise with the rate, which is what a disputed minority view claims.",
+  "strongest": "Level 3, real rate paragraph: 'A loan at 5% while prices rise 5% a year costs nothing in goods... The neo-Fisherian toggle shows that case: inflation ends 1 point higher.' One example makes the key mechanism concrete and ties it to a control.",
+  "weakest": "Predict first section: the reader must guess 'quarter 11' with only 'one to two years' to go on, and the revealed reason shows the timing comes from the 8-quarter hold rather than from the general lag the page claims.",
+  "suggestions": [
+   "Put the reason for 'market rates ↑ → real rate ↑' into the chain side note: expected inflation barely moves at first, so the real rate rises with the nominal rate.",
+   "In the predict section, tell the reader that the trough comes after the hold ends, or offer choices relative to the end of the hike. Reconcile the toy's quarter 11 with 'one to two years'.",
+   "Change the slider label to 'permanent' when Neo-Fisherian is checked, and say that inflation jumps at once in this toy.",
+   "Explain the tag colors and words at first use (on the controls), and use the same words in the What to trust section.",
+   "Label the y-axis units, and add units to the inflation readouts.",
+   "Give the toggle steps needed to reproduce the +2.40 and +0.44 numbers in Level 3.",
+   "Change 'last year's inflation' to 'last quarter's' so it matches the model.",
+   "Define t, the bracket notation, and the zero baseline (target = 0) in Level 4. Point out that Δi − πe is the real rate.",
+   "Name the price puzzle card's link to the Cost channel toggle.",
+   "Use 'energy price shock' consistently, or define 'supply shock'."
+  ]
+ },
+ "findings": [
+  {
+   "n": 1,
+   "severity": "blocking",
+   "kind": "blocking",
+   "text": "Predict first: the reader has only 'typically one to two years later' (lede), which points away from the answer 'quarter 11'. The prediction cannot be reasoned out, and the reveal ('just after the hike ends') shows the trough is set by the 8-quarter hold, which conflicts with the lede's lag."
+  },
+  {
+   "n": 2,
+   "severity": "blocking",
+   "kind": "blocking",
+   "text": "Level 1 chain: 'market rates ↑ → real rate ↑'. The reason (expected inflation does not move with the hike) is missing, yet Summary item 1 rests the whole mechanism on the real rate. The reason appears only in collapsed Level 3 ('If expected inflation rose one for one with the policy rate, borrowing would cost no more')."
+  },
+  {
+   "n": 3,
+   "severity": "blocking",
+   "kind": "blocking",
+   "text": "Level 3 lag paragraph: the real-world reasons ('Many loans are fixed for years...') are offered to explain the toy's 'quarter 9... quarter 11', but those numbers come from the hold length and fixed lags in the equations."
+  },
+  {
+   "n": 4,
+   "severity": "excess",
+   "kind": "cut",
+   "text": "Level 2 'The channels' (open by default): mostly restates the lede and the side note for a news-following reader, and two of its four channels never appear in the model. Collapse it or cut it to the currency channel."
+  },
+  {
+   "n": 5,
+   "severity": "excess",
+   "kind": "cut",
+   "text": "Repeated 'one to two years' (lede, Level 4, What to trust card, Summary): keep the lede and the Summary."
+  },
+  {
+   "n": 6,
+   "severity": "excess",
+   "kind": "cut",
+   "text": "Repeated 'not sizes for any real economy' disclaimers (instrument paragraph, Level 4, 'Every number from the model' card): keep the one in the instrument paragraph."
+  },
+  {
+   "n": 7,
+   "severity": "excess",
+   "kind": "cut",
+   "text": "'The direction' card in What to trust: it restates the chain."
+  },
+  {
+   "n": 8,
+   "severity": "excess",
+   "kind": "cut",
+   "text": "'on overnight money between banks' in the policy rate definition."
+  },
+  {
+   "n": 9,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "Header (h1 + lede + second paragraph): \"a small constructed model\" (what 'constructed' means is not said until much later: 'chosen coefficients')"
+  },
+  {
+   "n": 10,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "Level 1 · The chain: \"market rates\" (not defined. The lede said 'Loan and savings rates', so the reader can probably infer it, but under a different name)"
+  },
+  {
+   "n": 11,
+   "severity": "edge",
+   "kind": "unsaid",
+   "text": "Level 1 · The chain: The side note's last sentence ('if people believe the bank, the inflation they expect falls too, which lowers inflation directly') is a second path, and the drawn chain does not show it."
+  },
+  {
+   "n": 12,
+   "severity": "edge",
+   "kind": "unsaid",
+   "text": "Level 1 · The chain: ↑/↓ arrows and '< 0' are used without a word, though they read naturally."
+  },
+  {
+   "n": 13,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "Level 1 · The chain: \"market rates ↑ → real rate ↑\": the real rate is defined as 'an interest rate minus the inflation people expect', but nothing here says that expected inflation stays put when rates rise. That is the reason the real rate rises, and it only comes in Level 3, which is collapsed."
+  },
+  {
+   "n": 14,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "Level 1 · The chain: \"output gap < 0 → inflation ↓\": only the lede ('with less demand, firms raise prices and wages more slowly') covers this step. The chain gives no reason of its own."
+  },
+  {
+   "n": 15,
+   "severity": "edge",
+   "kind": "unsaid",
+   "text": "Predict first · When does inflation respond?: The model and everything below stay hidden until the reader commits a prediction. The page never says this."
+  },
+  {
+   "n": 16,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "Predict first · When does inflation respond?: The only timing the reader has so far is the lede's 'typically one to two years later' (quarters 4–8). That points to 'quarter 4' or to no listed choice, not to 'quarter 11'. Nothing given lets the reader work out the answer."
+  },
+  {
+   "n": 17,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "Predict first · When does inflation respond?: The revealed reason ('lowest at quarter 9, just after the hike ends') shows that the trough timing is driven by the 8-quarter hold. That is not the same thing as the lede's general one-to-two-year lag, and the page never reconciles the two."
+  },
+  {
+   "n": 18,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "The instrument · Switch the assumptions: \"steady state\""
+  },
+  {
+   "n": 19,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "The instrument · Switch the assumptions: \"expectations channel\" ('channel' is not introduced until Level 2)"
+  },
+  {
+   "n": 20,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "The instrument · Switch the assumptions: \"Cost channel\" (explained only once checked: 'Firms pass on higher financing costs')"
+  },
+  {
+   "n": 21,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "The instrument · Switch the assumptions: \"Neo-Fisherian long run\" (when unchecked the note only says 'Off: the mainstream view.')"
+  },
+  {
+   "n": 22,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "The instrument · Switch the assumptions: The tag words \"assumption\", \"scenario\", \"disputed\", \"disputed · minority\" and their colors (not explained until the What to trust section)"
+  },
+  {
+   "n": 23,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "The instrument · Switch the assumptions: \"q9\" in the readouts (presumably quarter 9)"
+  },
+  {
+   "n": 24,
+   "severity": "edge",
+   "kind": "unsaid",
+   "text": "The instrument · Switch the assumptions: The y-axis has no unit label, and one axis mixes percentage points (rate, inflation) with % (output gap)."
+  },
+  {
+   "n": 25,
+   "severity": "edge",
+   "kind": "unsaid",
+   "text": "The instrument · Switch the assumptions: The policy rate is drawn as a step line and the others as smooth lines. The zero line is darker than the grid. The text mentions neither."
+  },
+  {
+   "n": 26,
+   "severity": "edge",
+   "kind": "unsaid",
+   "text": "The instrument · Switch the assumptions: With Neo-Fisherian on, the hike becomes permanent, but the slider still reads 'Rate hike, held for 8 quarters'."
+  },
+  {
+   "n": 27,
+   "severity": "edge",
+   "kind": "unsaid",
+   "text": "The instrument · Switch the assumptions: With Neo-Fisherian on, inflation jumps to the hike size at quarter 1, despite the label 'long run'."
+  },
+  {
+   "n": 28,
+   "severity": "edge",
+   "kind": "unsaid",
+   "text": "The instrument · Switch the assumptions: The 'scenario' tag uses the 'estimate' color class. The page does not say what 'scenario' means as an epistemic tag."
+  },
+  {
+   "n": 29,
+   "severity": "edge",
+   "kind": "unsaid",
+   "text": "The instrument · Switch the assumptions: The inflation readouts have no unit, while the output gap readout shows %."
+  },
+  {
+   "n": 30,
+   "severity": "edge",
+   "kind": "unsaid",
+   "text": "The instrument · Switch the assumptions: The model has no currency channel and no asset-price channel. The paragraph says only that the expectations channel is left out."
+  },
+  {
+   "n": 31,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "The instrument · Switch the assumptions: \"Expectations anchored\" when unchecked: 'effects last longer'. The page does not say why within this section."
+  },
+  {
+   "n": 32,
+   "severity": "edge",
+   "kind": "unsaid",
+   "text": "Level 2 · The channels (open by default): Of these four channels, only borrowing is in the model's chain. The currency and asset channels appear nowhere else, and the page does not say they are outside the model."
+  },
+  {
+   "n": 33,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "Level 2 · The channels (open by default): \"bond and house prices fall\": no reason is given."
+  },
+  {
+   "n": 34,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "Level 2 · The channels (open by default): \"imports get cheaper, and exports harder to sell\": how this lowers inflation is left to the reader."
+  },
+  {
+   "n": 35,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "Level 3 · Why the real rate, why a lag, why expectations: \"supply shock\" (the controls said 'energy price shock')"
+  },
+  {
+   "n": 36,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "Level 3 · Why the real rate, why a lag, why expectations: \"credibility\" as a term of art, though it can be inferred"
+  },
+  {
+   "n": 37,
+   "severity": "edge",
+   "kind": "unsaid",
+   "text": "Level 3 · Why the real rate, why a lag, why expectations: Reproducing +2.40 and +0.44 needs three steps: uncheck anchored, check shock, and set the slider to 0. The page gives no such instruction."
+  },
+  {
+   "n": 38,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "Level 3 · Why the real rate, why a lag, why expectations: Lag paragraph: the real-world reasons (fixed loans, menus, annual wages) are not what produces the toy's quarter-11 trough. That comes from the 8-quarter hold plus fixed 1- and 2-quarter lags in the equations. The text runs the two together."
+  },
+  {
+   "n": 39,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "Level 3 · Why the real rate, why a lag, why expectations: \"When they follow last year's inflation\" conflicts with the instrument note, which says 'last quarter's inflation'."
+  },
+  {
+   "n": 40,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "Level 4 · The toy model's equations: \"t\", \"t−1\" (the quarter index is never defined)"
+  },
+  {
+   "n": 41,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "Level 4 · The toy model's equations: \"[cost]\", \"[shock]\" brackets"
+  },
+  {
+   "n": 42,
+   "severity": "edge",
+   "kind": "unsaid",
+   "text": "Level 4 · The toy model's equations: The brackets mean 'only when that checkbox is on'. The page does not say so."
+  },
+  {
+   "n": 43,
+   "severity": "edge",
+   "kind": "unsaid",
+   "text": "Level 4 · The toy model's equations: Δi(t−1) − πe(t−1) is the real rate, but the page never says this term is the real rate."
+  },
+  {
+   "n": 44,
+   "severity": "edge",
+   "kind": "unsaid",
+   "text": "Level 4 · The toy model's equations: The steady state and target are implicitly 0, and the page never says so."
+  },
+  {
+   "n": 45,
+   "severity": "edge",
+   "kind": "unsaid",
+   "text": "Level 4 · The toy model's equations: \"π the change in inflation\", yet the chart and readouts call it simply 'inflation'."
+  },
+  {
+   "n": 46,
+   "severity": "edge",
+   "kind": "unsaid",
+   "text": "Level 4 · The toy model's equations: The neo-Fisherian line leaves out that the hike is also made permanent."
+  },
+  {
+   "n": 47,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "What to trust · Established, estimated, disputed: \"The price puzzle\" (a new name. Only the phrase 'Firms passing on higher financing costs' links it to the Cost channel toggle)"
+  },
+  {
+   "n": 48,
+   "severity": "edge",
+   "kind": "unsaid",
+   "text": "What to trust · Established, estimated, disputed: The tag words here ('established', 'estimate', 'constructed') differ from those on the controls ('assumption', 'scenario'). The 'constructed' tag reuses the assumption color."
+  },
+  {
+   "n": 49,
+   "severity": "edge",
+   "kind": "unsaid",
+   "text": "What to trust · Established, estimated, disputed: The page does not say that the price puzzle card corresponds to the Cost channel toggle."
+  },
+  {
+   "n": 50,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "What to trust · Established, estimated, disputed: \"so could studies that miss what the central bank knew when it moved\": the page does not say why this would make prices appear to rise."
+  },
+  {
+   "n": 51,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "Summary: \"the neutral rate\" (never introduced, though it is explicitly out of scope)"
+  }
+ ]
+}

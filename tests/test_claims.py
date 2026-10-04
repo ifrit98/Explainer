@@ -78,6 +78,6 @@ def test_probe_and_quiz_prompts(tmp_path):
     try:
         assert "Why this form" in probe_prompt("x") and str(d / "model.md") in probe_prompt("x")
         assert "Why exp?" in quiz_prompt("x", "prose") and "model.yaml" not in quiz_prompt("x", "prose").split("Questions:")[1]
-        assert "a full answer also gives the counterexample: c" in quiz_rubric("x")
+        assert "counterexample: c" in quiz_rubric("x") and "a case is not required" in quiz_rubric("x")
     finally:
         del os.environ["EXPLAINER_ROOT"]

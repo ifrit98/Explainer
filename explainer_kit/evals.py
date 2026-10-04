@@ -13,13 +13,13 @@ import json
 import random
 import re
 import subprocess
-import tempfile
 from concurrent.futures import ThreadPoolExecutor
 from datetime import date
 from pathlib import Path
 
 import yaml
 
+from explainer_kit import agent
 from explainer_kit.paths import display, project_root
 
 NEUTRAL = "You are Claude, a helpful assistant. Answer the user's question."
@@ -50,18 +50,8 @@ def system_prompt(source: str) -> str:
 
 
 def ask(system: str, prompt: str, model: str | None = None, timeout: int = 300) -> str:
-    """One fresh `claude -p` call in an empty folder: no tools, no settings files, no MCP servers, no CLAUDE.md,
-    and no stdin (claude -p appends piped input to the prompt)."""
-    cmd = ["claude", "-p", "--setting-sources", "project", "--strict-mcp-config", "--tools", "",
-           "--system-prompt", system]
-    if model:
-        cmd += ["--model", model]
-    with tempfile.TemporaryDirectory() as empty:
-        out = subprocess.run(cmd + [prompt], cwd=empty, capture_output=True, text=True, timeout=timeout,
-                             stdin=subprocess.DEVNULL)
-    if out.returncode != 0:
-        raise RuntimeError(f"claude -p failed: {out.stderr.strip()[:300]}")
-    return out.stdout.strip()
+    """One fresh `claude -p` call with no tools (see explainer_kit.agent)."""
+    return agent.ask(system, prompt, model=model, timeout=timeout)
 
 
 def grade_prompt(reader: str, item: dict, answers: dict[str, str]) -> str:
@@ -97,11 +87,7 @@ def grade_prompt(reader: str, item: dict, answers: dict[str, str]) -> str:
     ])
 
 
-def parse_json(text: str) -> dict:
-    m = re.search(r"\{.*\}", text, re.S)
-    if not m:
-        raise ValueError(f"no JSON in grader reply: {text[:200]}")
-    return json.loads(m.group(0))
+parse_json = agent.parse_json
 
 
 def words(text: str) -> int:

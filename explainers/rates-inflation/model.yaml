@@ -1,0 +1,70 @@
+# Machine-readable half of model.md. The page simulates the toy model live from `toy`; the numbers in its
+# text must match these values.
+
+values:
+  toy:
+    a: 0.25            # output gap response to the real rate, per quarter
+    rho: 0.7           # output gap persistence
+    b: 0.35            # inflation response to the output gap, two quarters later
+    c: 0.15            # cost channel: inflation response to the rate, one quarter later
+    w_anchored: 0.9    # weight on the target in expected inflation
+    w_weak: 0.4
+    shock: 2           # supply shock, points of inflation in quarter 1
+    shock_decay: 0.6   # the shock keeps 60% each quarter (shrinks by 40%)
+    shrink_pct: 40
+    quarters: 16
+    hold: 4            # quarters the hike is held
+  hike_default: 1
+  hike_max: 3
+  results:
+    hike_anchored: {y_min: -0.63, y_min_q: 5, p_min: -0.24, p_min_q: 7, p_end: -0.01}
+    hike_weak: {y_min: -0.63, p_min: -0.41, p_min_q: 7, p_end: -0.18}
+    hike_cost: {p_max: 0.16, p_max_q: 3, p_min: -0.24}
+    shock_anchored: {p_max: 2.0, p_max_q: 1, p_end: 0.0}
+    shock_weak: {p_max: 2.4, p_max_q: 2, p_end: 0.44}
+    fisher: {p_end: 1.0}
+  lag_years: [1, 2]    # estimate: largest effect on inflation one to two years later
+
+allow: [0, 1, 2, 3, 4]
+
+require:
+  - path: results/hike_anchored
+    in: [html]
+
+claims:
+  - id: mechanism-chain
+    kind: mechanism
+    statement: "A higher policy rate raises market rates and the real rate, which lowers demand; lower demand slows price and wage rises, so inflation falls, after a lag."
+    example: "Toy model, 1-point hike held 4 quarters, anchored expectations: the output gap is lowest (−0.63%) at quarter 5, inflation lowest (−0.24 points) at quarter 7."
+  - id: why-real-rate
+    kind: why
+    about: []
+    statement: "Demand responds to the real rate, the nominal rate minus expected inflation."
+    alternative: "Demand responds to the policy rate itself."
+    counterexample: "If expected inflation rises one for one with the policy rate (the neo-Fisherian assumption), the real rate is unchanged, demand does not fall, and inflation ends 1 point higher."
+  - id: guarantee-anchoring
+    kind: guarantee
+    statement: "With anchored expectations a supply shock fades without a hike; with weakly anchored expectations it persists."
+    example: "Supply shock of 2 points, anchored, no hike: inflation is back to 0 by quarter 16."
+    counterexample: "Same shock, weakly anchored: inflation peaks at +2.40 at quarter 2 and is still +0.44 at quarter 16."
+    ask: "Why do central banks care so much about whether people expect inflation to stay near the target?"
+  - id: disputed-price-puzzle
+    kind: limit
+    statement: "Disputed: some studies find prices rise for a while after a hike. A cost channel (firms pass on higher financing costs) could explain it; so could studies that miss what the central bank knew."
+  - id: disputed-neo-fisher
+    kind: limit
+    statement: "Disputed, a minority view: a permanently higher policy rate raises inflation in the long run, because expected inflation adjusts to the rate."
+
+terms:
+  - term: policy rate
+    means: "the rate the central bank sets; not the rates on loans and mortgages, which are market rates"
+    avoid: [the interest rate the bank charges you]
+
+quiz:
+  - q: "In the toy model with anchored expectations, a 1-point hike is held for 4 quarters. When is inflation lowest, and why then?"
+    expect: "Around quarter 7: the hike lowers demand first (output gap lowest at quarter 5), and prices respond to demand with a delay."
+    misconception: "At once, in the quarter of the hike"
+  - q: "Can a rate hike raise inflation? Give the two disputed ways the page shows."
+    expect: "In the short run through a cost channel (+0.16 points at quarter 3 in the toy model), and, in the neo-Fisherian view, in the long run if expected inflation rises with the rate (+1 point)."
+  - q: "What does the hike do to inflation if the central bank is credible and expectations stay anchored, compared with weakly anchored?"
+    expect: "Anchored: a smaller, temporary fall (−0.24 points, near 0 by quarter 16). Weakly anchored: a larger, lasting fall (−0.41 points, still −0.18 at quarter 16), because expected inflation follows actual inflation."

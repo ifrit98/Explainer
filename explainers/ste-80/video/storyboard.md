@@ -12,7 +12,7 @@ After the video, the viewer can apply three STE rules to a sentence and predict 
 2. A typical manual sentence has words that do not help the reader.
 3. Rule 1 replaces formal words. Length stays the same.
 4. Rule 2 makes the instruction direct. Length drops.
-5. Rule 3 uses a concrete verb. Length drops again.
+5. Rule 3 uses concrete words: a verb for the action, a noun for the thing. Length drops again.
 6. Same instruction, less decoding work.
 
 ## 3. Scenes

@@ -1,0 +1,201 @@
+{
+ "tool": "quiz",
+ "rendering": "diagram",
+ "slug": "git-objects",
+ "at": "2026-10-04T06:00:12",
+ "model": "default",
+ "prompt_sha": "5c2aa46c63eb",
+ "reply": {
+  "answers": {
+   "1": "There are four kinds of objects: blob (file content), tree (a directory listing), commit, and annotated tag. There are also refs such as HEAD and main. Refs are names that point to an object, and they are not objects themselves.",
+   "2": "A ref points to a commit, and HEAD points to main, which points to commit 7f3a…. A commit points to one root tree and to zero, one or several parent commits. A tree maps names to blobs (files) or to other trees (directories). A blob points to nothing. A tag points to one object, usually a commit. Every object is identified by the hash of its content.",
+   "3": "An object's ID is the hash of its content, and each tree stores the IDs of its entries. So identical content is one shared object, and a changed file changes the IDs of every tree above it and of the commit.",
+   "4": "The key variable is a file's content. If it changes, its blob gets a new ID. The parent tree stores that ID, so the tree's content and ID change, and so on up to the root tree and the commit. If the content stays the same, the ID stays the same and the existing blob is reused.",
+   "5": "Simplification: the hashes in the diagram are shortened and made up. Established fact: README.md did not change, so both root trees point to the same blob a3f2…. It is also stated that git show computes the diff against the parent only when asked.",
+   "6": "Git does not store diffs. Each commit points to a root tree that describes the whole project. Trees map names to blobs or subtrees, and every object's ID is the hash of its content. Unchanged content gives the same ID, so new trees just point to the existing objects. A changed file gets a new blob, and new IDs ripple up through each parent tree to the commit, while diffs are computed on demand.",
+   "7": "The last paragraph was hardest. It says a commit 'stores only what changed', which seems to contradict the earlier 'full snapshot' claim. It would help to separate what a commit refers to (the full tree) from what new objects get written (only the changed path). It also says IDs are hashes without saying why that guarantees that 'same content gives the same ID'.",
+   "8": "A snapshot. The commit points to a whole tree, and diffs are computed on demand, for example by git show.",
+   "9": "The same existing blob, with the same ID. In the example, both root trees point to blob a3f2… for README.md.",
+   "10": "The changed file's new blob, the src/ tree, the root tree and the commit. In the example these are c88d…, 51aa…, e41c… and 7f3a…. Any trees between src/ and the file would change too.",
+   "11": "Its content is the same, so its hash ID is the same, and it is the same object. The new tree just stores the existing ID, and nothing new is written for that file."
+  },
+  "audit": {
+   "terms": [
+    "'ID' (line 5: 'each object's ID is the hash of its content', and table: 'the IDs of its entries') vs 'hash' (line 9: 'Hashes are shortened') vs the hex labels like '7f3a…' all name the same identifier.",
+    "'full snapshot' (line 5) vs 'a whole tree' (line 53) vs 'root tree' (line 40) are used for the same thing the commit points to.",
+    "'refs' (line 9) vs 'names' (line 39: 'names, not objects'). 'names' is also used for tree entry names (line 41), which overloads the word.",
+    "'file' vs 'blob' (line 41: 'blobs (files)'), while the table says a blob is 'file content only (no name)'."
+   ],
+   "unexplained": [
+    "Line 9: 'Hashes are shortened and made up'. It does not say what the full hash is, how long it is, or why a shortened one is enough.",
+    "Table, tree row: 'modes' is never explained.",
+    "Table, commit row: a commit with 'several' parents (a merge) is not explained or shown."
+   ],
+   "missing_why": [
+    "Line 5: 'each object's ID is the hash of its content'. It does not explain why a content hash ensures that identical content gets the same ID and different content gets a different ID, or which hash is used.",
+    "Table: 'blob | file content only (no name)'. It does not explain why the name lives in the tree rather than the blob, even though that is what lets two differently named or placed identical files share a blob.",
+    "Line 53: 'A commit stores only what changed'. This is stated without reconciling it with 'full snapshot' (line 5), and the two read as contradictory."
+   ],
+   "excess": [
+    "Table, tag row: annotated tags are not in the diagram and are not used by the argument or the questions.",
+    "Line 53: the packfiles aside ('packfiles compress similar objects against each other') is a detour the argument does not need.",
+    "Line 39 repeats line 9's definition of refs without adding anything."
+   ]
+  },
+  "gaps": [
+   "It does not say what a hash is or why equal content means an equal ID. This reader has to take that on faith.",
+   "'Full snapshot' (line 5) and 'stores only what changed' (line 53) conflict unless the reader works out the difference between what a commit references and what gets newly written.",
+   "It never says why blobs have no names. That is the key to sharing.",
+   "The table introduces merges (several parents) and annotated tags, but the diagram shows neither."
+  ]
+ },
+ "grade": {
+  "scores": {
+   "1": 2,
+   "2": 2,
+   "3": 1,
+   "4": 2,
+   "5": 1,
+   "6": 2,
+   "7": 2,
+   "8": 2,
+   "9": 2,
+   "10": 2,
+   "11": 1
+  },
+  "reasons": {
+   "3": "The chain stops at shared objects and rippling IDs. It never reaches the model's conclusion: a commit is a full snapshot that costs only the changed objects.",
+   "5": "It covers shortened hashes and diffs computed on demand. It misses two points from the model. Packfile deltas are a compression detail, not the data model. The hash is SHA-1 by default, with SHA-256 possible.",
+   "11": "The mechanism is correct: same content gives the same ID, the new tree stores the existing ID, and nothing new is written. But it gives no concrete case with numbers, such as both root trees pointing to blob a3f2… for README.md, or a one-byte change producing a new blob. The rubric requires such a case for a full answer."
+  },
+  "pass": false
+ },
+ "findings": [
+  {
+   "n": 1,
+   "severity": "gap",
+   "kind": "terms",
+   "text": "'ID' (line 5: 'each object's ID is the hash of its content', and table: 'the IDs of its entries') vs 'hash' (line 9: 'Hashes are shortened') vs the hex labels like '7f3a…' all name the same identifier."
+  },
+  {
+   "n": 2,
+   "severity": "gap",
+   "kind": "terms",
+   "text": "'full snapshot' (line 5) vs 'a whole tree' (line 53) vs 'root tree' (line 40) are used for the same thing the commit points to."
+  },
+  {
+   "n": 3,
+   "severity": "gap",
+   "kind": "terms",
+   "text": "'refs' (line 9) vs 'names' (line 39: 'names, not objects'). 'names' is also used for tree entry names (line 41), which overloads the word."
+  },
+  {
+   "n": 4,
+   "severity": "gap",
+   "kind": "terms",
+   "text": "'file' vs 'blob' (line 41: 'blobs (files)'), while the table says a blob is 'file content only (no name)'."
+  },
+  {
+   "n": 5,
+   "severity": "gap",
+   "kind": "unexplained",
+   "text": "Line 9: 'Hashes are shortened and made up'. It does not say what the full hash is, how long it is, or why a shortened one is enough."
+  },
+  {
+   "n": 6,
+   "severity": "gap",
+   "kind": "unexplained",
+   "text": "Table, tree row: 'modes' is never explained."
+  },
+  {
+   "n": 7,
+   "severity": "gap",
+   "kind": "unexplained",
+   "text": "Table, commit row: a commit with 'several' parents (a merge) is not explained or shown."
+  },
+  {
+   "n": 8,
+   "severity": "gap",
+   "kind": "missing_why",
+   "text": "Line 5: 'each object's ID is the hash of its content'. It does not explain why a content hash ensures that identical content gets the same ID and different content gets a different ID, or which hash is used."
+  },
+  {
+   "n": 9,
+   "severity": "gap",
+   "kind": "missing_why",
+   "text": "Table: 'blob | file content only (no name)'. It does not explain why the name lives in the tree rather than the blob, even though that is what lets two differently named or placed identical files share a blob."
+  },
+  {
+   "n": 10,
+   "severity": "gap",
+   "kind": "missing_why",
+   "text": "Line 53: 'A commit stores only what changed'. This is stated without reconciling it with 'full snapshot' (line 5), and the two read as contradictory."
+  },
+  {
+   "n": 11,
+   "severity": "excess",
+   "kind": "excess",
+   "text": "Table, tag row: annotated tags are not in the diagram and are not used by the argument or the questions."
+  },
+  {
+   "n": 12,
+   "severity": "excess",
+   "kind": "excess",
+   "text": "Line 53: the packfiles aside ('packfiles compress similar objects against each other') is a detour the argument does not need."
+  },
+  {
+   "n": 13,
+   "severity": "excess",
+   "kind": "excess",
+   "text": "Line 39 repeats line 9's definition of refs without adding anything."
+  },
+  {
+   "n": 14,
+   "severity": "gap",
+   "kind": "gap",
+   "text": "It does not say what a hash is or why equal content means an equal ID. This reader has to take that on faith."
+  },
+  {
+   "n": 15,
+   "severity": "gap",
+   "kind": "gap",
+   "text": "'Full snapshot' (line 5) and 'stores only what changed' (line 53) conflict unless the reader works out the difference between what a commit references and what gets newly written."
+  },
+  {
+   "n": 16,
+   "severity": "gap",
+   "kind": "gap",
+   "text": "It never says why blobs have no names. That is the key to sharing."
+  },
+  {
+   "n": 17,
+   "severity": "gap",
+   "kind": "gap",
+   "text": "The table introduces merges (several parents) and annotated tags, but the diagram shows neither."
+  }
+ ],
+ "earlier_grades": [
+  {
+   "scores": {
+    "1": 1,
+    "2": 2,
+    "3": 2,
+    "4": 2,
+    "5": 1,
+    "6": 2,
+    "7": 2,
+    "8": 2,
+    "9": 2,
+    "10": 2,
+    "11": 1
+   },
+   "reasons": {
+    "1": "Lists blob, tree, commit, tag, refs and HEAD, but never defines a commit as a snapshot (one root tree, parents, author, message) and never names the object ID (content hash) as an entity. Annotated tag is correct but outside the model.",
+    "5": "Separates one simplification (made-up short hashes) from one fact (README.md shares blob a3f2…). It misses the model's key epistemic split: packfile deltas are an on-disk compression detail, not the data model. It also omits SHA-1/SHA-256.",
+    "7": "Specific and actionable, so it scores 2. It is still an audit finding: the closing 'stores only what changed' wording conflicts with 'full snapshot', and the text never says why hashing makes same content give the same ID. Fix the rendering or record why it stands in review/understanding.md.",
+    "11": "Gives the core mechanism (same content, same ID, the tree reuses the existing blob). It omits the expected example (README.md unchanged, so both root trees point to blob a3f2…) and the counterexample (change one byte and the hash changes, so a new blob is needed)."
+   },
+   "pass": false
+  }
+ ]
+}

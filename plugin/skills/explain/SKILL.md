@@ -28,7 +28,7 @@ Every tier: a named reader (default: a technical reader new to this subject), th
 3. Fill `model.md`: entities, relationships, causal chain, quantities, alternative states, epistemic status, confusion points, representation decision.
 4. Fill `model.yaml`: every number a rendering will show goes in `values`. Add `require` for values each rendering must show. Published tier: 2–3 `quiz` items (question, expected answer, likely misconception) for the blind test.
 5. Fill the completeness sections of `model.md` (`references/completeness.md`): **Why this form**, **Concrete cases**, **Terms**, **Scope**. One case per idea is enough.
-6. **Probe.** Run `explainer probe <slug>` and give the prompt, unchanged, to a fresh subagent. Recompute every number it suggests. Turn each finding into a claim, a Scope entry, or nothing: a question this audience would not ask is nothing.
+6. **Probe.** Run `explainer probe <slug> --run` (a fresh `claude -p` agent reads only `model.md`; or give the printed prompt, unchanged, to a fresh subagent). Recompute every number it suggests. Turn each finding into a claim, a Scope entry, or nothing: a question this audience would not ask is nothing. Record what you did: `explainer decide <slug> <run> --adopt … --decline-rest`.
 7. Record the ideas as `claims` in `model.yaml` (`why`, `guarantee`, `mechanism`, `definition`, …) with their required fields. Add `ask` to the claims a learner most needs; they become blind-test questions.
 8. Give each concept one word. Where two concepts are close (a tentative value and its final value), add a `terms` entry with the phrases renderings must not use. Give every quantity a reader will see its meaning, with a low and a high value.
 9. Reduce the model. Remove each entity that the explanation does not need. Set the length: the defaults are 600 words of prose and 150 s of video. If the subject needs more, set `budget` in `model.yaml` with the reason.
@@ -41,7 +41,7 @@ Fill `narrative.md` (`references/narrative.md`) before any rendering:
 2. **Question and motive:** the question and the result in words; why care; why this approach.
 3. **Introduction ledger:** every term, symbol, name, and visual convention that is new to this reader, with the instance that grounds it and the beat that introduces it.
 4. **Beats:** in order, each with the reader's question, the bridge (so, but, therefore), what is shown, what is said, and what the reader now knows.
-5. **Cold read:** run `explainer coldread <slug> --rendering narrative` and give the prompt, unchanged, to a fresh subagent. Fix every blocking finding. Cut what it marks as excess. Fix an edge finding when the fix is short. A finding can change the argument itself; change the model too when it does.
+5. **Cold read:** run `explainer coldread <slug> --rendering narrative --run` (or give the printed prompt, unchanged, to a fresh subagent). Fix every blocking finding. Cut what it marks as excess. Fix an edge finding when the fix is short. A finding can change the argument itself; change the model too when it does.
 
 ## Step 2 — Select the stage
 

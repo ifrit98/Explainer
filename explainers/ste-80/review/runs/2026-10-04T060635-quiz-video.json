@@ -1,0 +1,247 @@
+{
+ "tool": "quiz",
+ "rendering": "video",
+ "slug": "ste-80",
+ "at": "2026-10-04T06:06:12",
+ "model": "default",
+ "prompt_sha": "a4eaa54e7bbc",
+ "reply": {
+  "answers": {
+   "1": "The main objects are: STE-80, a writing style for technical text; ASD-STE100 (Simplified Technical English), a standard for aircraft maintenance manuals; the manual reader, who reads under time pressure and often in a second language; one sample sentence from a manual; its word count, shown by the orange bar; and three rules: (1) use simple words, (2) give the instruction directly, (3) use a concrete verb. Full STE adds more rules: short sentences, one meaning per word, and an approved dictionary.",
+   "2": "STE-80 uses about 80% of the ASD-STE100 rules. The three rules are applied one after another to the same sentence, and the bar tracks the word count: 16 → 15 (rule 1) → 13 (rule 2) → 9 (rule 3). The reader's situation (time pressure, second language) is the reason every word must help. Full STE is the larger set, and STE-80 is a subset of it.",
+   "3": "The reader has little time and may not read English as a first language, so each word must help. The rules replace hard words, remove the 'it is imperative that…' frame and name the action with a verb. The result is a shorter sentence that gives the same instruction with less work to read.",
+   "4": "The video never names the most important variable, so I can only infer one. If 'word count' is that variable, cutting words lowers reading effort as long as the meaning stays the same ('the reader still fills the reservoir'). If 'reader pressure' (time, second language) is the variable, more pressure would make each unneeded word cost more. Neither cause-and-effect link is stated directly.",
+   "5": "Assumption or simplification: fewer words and simpler words mean 'less work to read'. The video asserts this and does not show it. Simplification: STE-80 keeps only about 80% of the rules, and the video shows only three. Fact: ASD-STE100 is a standard for aircraft maintenance manuals, and the sample sentence goes from 16 words to 9.",
+   "6": "STE-80 is a writing style that uses about 80% of the rules of ASD-STE100, a simplified English standard for aircraft maintenance manuals. Manual readers work under time pressure and often in a second language, so every word must help. Rule one swaps hard words for simple ones ('replenished prior to commencing' becomes 'full before starting'). Rule two removes the 'it is imperative that the operator ensures' frame and says 'make sure'. Rule three uses an action verb ('fill') and a concrete noun ('machine'), so the sentence drops from 16 words to 9 with the same meaning.",
+   "7": "Rule three was the hardest. The narration says 'make sure that it is full asks the reader to check a result', but it does not say why that is worse than naming the action. The transition frame at 68.27s also shows overlapping, garbled text ('Make sure the / machine. operation.'). Stating the cost of the 'check a result' wording, and a clean before/after with no overlap, would have made it easier.",
+   "8": "Rule one replaces 'replenished prior to commencing' (4 words) with 'full before starting' (3 words), so the count goes from 16 to 15. The video says it helps because 'each word is easier to read'. It does not say why simple words are easier. I can only connect this to the earlier point about second-language readers; the video does not make that link.",
+   "9": "Rule three removes the most: 13 → 9, which is four words. 'Make sure that … is full' becomes 'Fill', and 'the operation' becomes 'the machine'. Rule two removes two words (the frame 'It is imperative that the operator ensures' becomes 'Make sure … you start').",
+   "10": "The video does not answer this directly. Rule one hints that word count is not the only measure: 'Only one word goes, but each word is easier to read.' The conclusion still treats '16 became 9' as the result, and full STE lists 'short sentences' as a rule. So the video neither says nor rules out that shorter is always better. It never shows a case where cutting words hurts."
+  },
+  "audit": {
+   "terms": [
+    "The style is called 'STE-80' (0.00s), 'ASD-STE100' / 'Simplified Technical English' (4.32s) and 'Full STE' (78.97s). How 'STE' and 'ASD-STE100' relate is only implied.",
+    "The person following the instruction is called 'the operator' (sentence on screen, 46.44s), 'the reader' (7, 13, 21) and 'you' ('before you start', 54.17s), all for the same person.",
+    "'the words in red go' (28.44s) vs 'Only one word goes' (38.4s): 'go' means 'is replaced' in one place and 'is removed' in the other.",
+    "'the frame' (rule 2, 46.5s) names the 'it is imperative that the operator ensures' wording, but this is the only time the word is used and it is never defined."
+   ],
+   "unexplained": [
+    "'about eighty percent of the rules' (4.32s): it does not say which rules are kept, which are dropped, or how keeping more or fewer rules would change the result.",
+    "The orange word-count bar (16/15/13/12/9): it does not say whether lower is always better or what a given count means for reading effort. Only the closing phrase 'less work to read' links count to effort.",
+    "The '12 words' frame (68.27s) shows a count that the narration never mentions, so it is unclear what that intermediate state means."
+   ],
+   "missing_why": [
+    "Rule 1: it does not say why 'replenished/prior to/commencing' are harder than 'full/before/starting' (frequency? second-language readers?).",
+    "Rule 2: it does not say why removing the 'imperative' frame helps beyond 'tell the reader what to do'.",
+    "Rule 3: it does not say why 'asks the reader to check a result' is worse than naming the action, or why 'operation' counts as vague.",
+    "Rule 2 adds 'Make sure', and rule 3 removes it again right away. The video does not explain why the step is done in that order.",
+    "STE-80 vs full STE: it does not say why these 80% of the rules were chosen or why the other rules were left out."
+   ],
+   "pace": [
+    "28.44s: the narration says 'The words in red go', but the red marking appears only at 31.16s.",
+    "33.0–36.6s: 'Replenished becomes full… Commencing becomes starting' is spoken, but the swap appears at 38.42s, about 5 s later.",
+    "~51s: 'make sure, before you start' is spoken, but the swap appears at 54.17s.",
+    "62.7–64.7s: 'The verb fill… operation becomes the machine' is spoken, but the swap appears only at 68.27s, and the frame there is overlapping and unreadable.",
+    "78.97s: the extra full-STE rules appear only as small, faint text, and the video ends about 5 s later with no pause to absorb them.",
+    "4.32s: 'eighty percent' is spoken but never shown on screen."
+   ],
+   "excess": [
+    "'Full STE has more rules: short sentences, one meaning per word, and an approved dictionary' (78.97s): an aside at the end that the argument does not use and does not explain.",
+    "'the orange bar counts them' (7): fine, but the per-rule counts are then spoken again ('Thirteen words', 'Nine words') while the bar already shows them, so the spoken counts add nothing."
+   ]
+  },
+  "gaps": [
+   "There is no explicit link between fewer or simpler words and the reader's time pressure or second language. 'Easier to read' is asserted, not shown.",
+   "It never says whether shorter is always better, or gives a limit or counter-example.",
+   "It does not say which 80% of the rules STE-80 keeps, or how STE-80 differs from ASD-STE100 beyond 'fewer rules'.",
+   "Rule 3's reasoning ('check a result' vs 'name the action') is not explained.",
+   "The term 'frame' is not defined.",
+   "The on-screen swaps lag the narration by 3–5 s on every rule, and the rule 3 transition frame is garbled."
+  ]
+ },
+ "grade": {
+  "scores": {
+   "1": 2,
+   "2": 2,
+   "3": 2,
+   "4": 1,
+   "5": 1,
+   "6": 2,
+   "7": 2,
+   "8": 2,
+   "9": 2,
+   "10": 1
+  },
+  "reasons": {
+   "1": "No deduction. All model entities are present (ASD-STE100, STE-80, sentence, word count, the three rules). The answer implies the dictionary difference but does not state that STE-80 drops the dictionary check. Extra context (aircraft manuals, reader pressure) does not come from model.md.",
+   "2": "No deduction. The answer gives the subset relation, applies the rules in order to one sentence and tracks the count. 16→15→13→9 matches the model's Quantities line. Audit gap: the model's S1 table says 16, but the S1 sentence counts 16 words, so the model contradicts itself.",
+   "3": "No deduction. It covers all three sources (hard words, abstract frame, state verb) leading to less reading work with the same instruction.",
+   "4": "Partial. The reviewer says the variable is never named and offers two candidates. One candidate is close to the model: word count as a proxy for reading effort only while meaning is kept. The answer does not commit to decoding work as the target variable.",
+   "5": "Partial. It identifies the main assumption (fewer and simpler words mean less work). It misses the model's named simplification: S3 changes 'operation' to 'machine', a change of reference. It also does not separate the established fact that the three rules are ASD-STE100 rules.",
+   "6": "No deduction. The summary is accurate and specific with examples for each rule. It calls the result 'the same meaning' without noting the operation→machine change of reference, and it does not mention the missing dictionary check.",
+   "7": "No deduction. The difficulty is specific and actionable: the unexplained cost of 'check a result' and the garbled overlapping frame at 68.27s.",
+   "8": "No deduction. It states the swap from hard to simple words and the benefit that each word is easier to read. It does not frame the rule as shortening; 16→15 is given only as the count.",
+   "9": "No deduction. It names rule three, 'make sure that … is full' → 'fill', 13→9. Its rule-two figure (two words, 15→13) differs from the expected 16→13, because model.md is internally inconsistent here.",
+   "10": "Partial. The expected answer is 'No'. The reviewer says the video neither says nor rules out that shorter is always better. It does cite the rule-one hint ('only one word goes, but each word is easier'), but it never states that the target is less decoding with the same meaning. Rendering gap: the video does not make this point explicitly."
+  },
+  "pass": false
+ },
+ "findings": [
+  {
+   "n": 1,
+   "severity": "gap",
+   "kind": "terms",
+   "text": "The style is called 'STE-80' (0.00s), 'ASD-STE100' / 'Simplified Technical English' (4.32s) and 'Full STE' (78.97s). How 'STE' and 'ASD-STE100' relate is only implied."
+  },
+  {
+   "n": 2,
+   "severity": "gap",
+   "kind": "terms",
+   "text": "The person following the instruction is called 'the operator' (sentence on screen, 46.44s), 'the reader' (7, 13, 21) and 'you' ('before you start', 54.17s), all for the same person."
+  },
+  {
+   "n": 3,
+   "severity": "gap",
+   "kind": "terms",
+   "text": "'the words in red go' (28.44s) vs 'Only one word goes' (38.4s): 'go' means 'is replaced' in one place and 'is removed' in the other."
+  },
+  {
+   "n": 4,
+   "severity": "gap",
+   "kind": "terms",
+   "text": "'the frame' (rule 2, 46.5s) names the 'it is imperative that the operator ensures' wording, but this is the only time the word is used and it is never defined."
+  },
+  {
+   "n": 5,
+   "severity": "gap",
+   "kind": "unexplained",
+   "text": "'about eighty percent of the rules' (4.32s): it does not say which rules are kept, which are dropped, or how keeping more or fewer rules would change the result."
+  },
+  {
+   "n": 6,
+   "severity": "gap",
+   "kind": "unexplained",
+   "text": "The orange word-count bar (16/15/13/12/9): it does not say whether lower is always better or what a given count means for reading effort. Only the closing phrase 'less work to read' links count to effort."
+  },
+  {
+   "n": 7,
+   "severity": "gap",
+   "kind": "unexplained",
+   "text": "The '12 words' frame (68.27s) shows a count that the narration never mentions, so it is unclear what that intermediate state means."
+  },
+  {
+   "n": 8,
+   "severity": "gap",
+   "kind": "missing_why",
+   "text": "Rule 1: it does not say why 'replenished/prior to/commencing' are harder than 'full/before/starting' (frequency? second-language readers?)."
+  },
+  {
+   "n": 9,
+   "severity": "gap",
+   "kind": "missing_why",
+   "text": "Rule 2: it does not say why removing the 'imperative' frame helps beyond 'tell the reader what to do'."
+  },
+  {
+   "n": 10,
+   "severity": "gap",
+   "kind": "missing_why",
+   "text": "Rule 3: it does not say why 'asks the reader to check a result' is worse than naming the action, or why 'operation' counts as vague."
+  },
+  {
+   "n": 11,
+   "severity": "gap",
+   "kind": "missing_why",
+   "text": "Rule 2 adds 'Make sure', and rule 3 removes it again right away. The video does not explain why the step is done in that order."
+  },
+  {
+   "n": 12,
+   "severity": "gap",
+   "kind": "missing_why",
+   "text": "STE-80 vs full STE: it does not say why these 80% of the rules were chosen or why the other rules were left out."
+  },
+  {
+   "n": 13,
+   "severity": "gap",
+   "kind": "pace",
+   "text": "28.44s: the narration says 'The words in red go', but the red marking appears only at 31.16s."
+  },
+  {
+   "n": 14,
+   "severity": "gap",
+   "kind": "pace",
+   "text": "33.0–36.6s: 'Replenished becomes full… Commencing becomes starting' is spoken, but the swap appears at 38.42s, about 5 s later."
+  },
+  {
+   "n": 15,
+   "severity": "gap",
+   "kind": "pace",
+   "text": "~51s: 'make sure, before you start' is spoken, but the swap appears at 54.17s."
+  },
+  {
+   "n": 16,
+   "severity": "gap",
+   "kind": "pace",
+   "text": "62.7–64.7s: 'The verb fill… operation becomes the machine' is spoken, but the swap appears only at 68.27s, and the frame there is overlapping and unreadable."
+  },
+  {
+   "n": 17,
+   "severity": "gap",
+   "kind": "pace",
+   "text": "78.97s: the extra full-STE rules appear only as small, faint text, and the video ends about 5 s later with no pause to absorb them."
+  },
+  {
+   "n": 18,
+   "severity": "gap",
+   "kind": "pace",
+   "text": "4.32s: 'eighty percent' is spoken but never shown on screen."
+  },
+  {
+   "n": 19,
+   "severity": "excess",
+   "kind": "excess",
+   "text": "'Full STE has more rules: short sentences, one meaning per word, and an approved dictionary' (78.97s): an aside at the end that the argument does not use and does not explain."
+  },
+  {
+   "n": 20,
+   "severity": "excess",
+   "kind": "excess",
+   "text": "'the orange bar counts them' (7): fine, but the per-rule counts are then spoken again ('Thirteen words', 'Nine words') while the bar already shows them, so the spoken counts add nothing."
+  },
+  {
+   "n": 21,
+   "severity": "gap",
+   "kind": "gap",
+   "text": "There is no explicit link between fewer or simpler words and the reader's time pressure or second language. 'Easier to read' is asserted, not shown."
+  },
+  {
+   "n": 22,
+   "severity": "gap",
+   "kind": "gap",
+   "text": "It never says whether shorter is always better, or gives a limit or counter-example."
+  },
+  {
+   "n": 23,
+   "severity": "gap",
+   "kind": "gap",
+   "text": "It does not say which 80% of the rules STE-80 keeps, or how STE-80 differs from ASD-STE100 beyond 'fewer rules'."
+  },
+  {
+   "n": 24,
+   "severity": "gap",
+   "kind": "gap",
+   "text": "Rule 3's reasoning ('check a result' vs 'name the action') is not explained."
+  },
+  {
+   "n": 25,
+   "severity": "gap",
+   "kind": "gap",
+   "text": "The term 'frame' is not defined."
+  },
+  {
+   "n": 26,
+   "severity": "gap",
+   "kind": "gap",
+   "text": "The on-screen swaps lag the narration by 3–5 s on every rule, and the rule 3 transition frame is garbled."
+  }
+ ]
+}

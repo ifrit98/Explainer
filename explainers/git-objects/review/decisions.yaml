@@ -1,0 +1,115 @@
+# What the author did with each review finding (explainer decide). Read by findings --stats.
+2026-10-04T060025-quiz-diagram#1:
+  decision: declined
+  note: 8/14/10/15 resolved by the round-2 cold-read fixes; 16 added
+2026-10-04T060025-quiz-diagram#10:
+  decision: adopted
+  note: 8/14/10/15 resolved by the round-2 cold-read fixes; 16 added
+2026-10-04T060025-quiz-diagram#11:
+  decision: declined
+  note: 8/14/10/15 resolved by the round-2 cold-read fixes; 16 added
+2026-10-04T060025-quiz-diagram#12:
+  decision: declined
+  note: 8/14/10/15 resolved by the round-2 cold-read fixes; 16 added
+2026-10-04T060025-quiz-diagram#13:
+  decision: declined
+  note: 8/14/10/15 resolved by the round-2 cold-read fixes; 16 added
+2026-10-04T060025-quiz-diagram#14:
+  decision: adopted
+  note: 8/14/10/15 resolved by the round-2 cold-read fixes; 16 added
+2026-10-04T060025-quiz-diagram#15:
+  decision: adopted
+  note: 8/14/10/15 resolved by the round-2 cold-read fixes; 16 added
+2026-10-04T060025-quiz-diagram#16:
+  decision: adopted
+  note: 8/14/10/15 resolved by the round-2 cold-read fixes; 16 added
+2026-10-04T060025-quiz-diagram#17:
+  decision: declined
+  note: 8/14/10/15 resolved by the round-2 cold-read fixes; 16 added
+2026-10-04T060025-quiz-diagram#2:
+  decision: declined
+  note: 8/14/10/15 resolved by the round-2 cold-read fixes; 16 added
+2026-10-04T060025-quiz-diagram#3:
+  decision: declined
+  note: 8/14/10/15 resolved by the round-2 cold-read fixes; 16 added
+2026-10-04T060025-quiz-diagram#4:
+  decision: declined
+  note: 8/14/10/15 resolved by the round-2 cold-read fixes; 16 added
+2026-10-04T060025-quiz-diagram#5:
+  decision: declined
+  note: 8/14/10/15 resolved by the round-2 cold-read fixes; 16 added
+2026-10-04T060025-quiz-diagram#6:
+  decision: declined
+  note: 8/14/10/15 resolved by the round-2 cold-read fixes; 16 added
+2026-10-04T060025-quiz-diagram#7:
+  decision: declined
+  note: 8/14/10/15 resolved by the round-2 cold-read fixes; 16 added
+2026-10-04T060025-quiz-diagram#8:
+  decision: adopted
+  note: 8/14/10/15 resolved by the round-2 cold-read fixes; 16 added
+2026-10-04T060025-quiz-diagram#9:
+  decision: declined
+  note: 8/14/10/15 resolved by the round-2 cold-read fixes; 16 added
+2026-10-04T060035-coldread-diagram#1:
+  decision: adopted
+  note: round 2
+2026-10-04T060035-coldread-diagram#10:
+  decision: declined
+  note: round 2
+2026-10-04T060035-coldread-diagram#11:
+  decision: declined
+  note: round 2
+2026-10-04T060035-coldread-diagram#12:
+  decision: declined
+  note: round 2
+2026-10-04T060035-coldread-diagram#13:
+  decision: declined
+  note: round 2
+2026-10-04T060035-coldread-diagram#14:
+  decision: declined
+  note: round 2
+2026-10-04T060035-coldread-diagram#15:
+  decision: declined
+  note: round 2
+2026-10-04T060035-coldread-diagram#16:
+  decision: declined
+  note: round 2
+2026-10-04T060035-coldread-diagram#17:
+  decision: declined
+  note: round 2
+2026-10-04T060035-coldread-diagram#18:
+  decision: declined
+  note: round 2
+2026-10-04T060035-coldread-diagram#19:
+  decision: declined
+  note: round 2
+2026-10-04T060035-coldread-diagram#2:
+  decision: adopted
+  note: round 2
+2026-10-04T060035-coldread-diagram#20:
+  decision: declined
+  note: round 2
+2026-10-04T060035-coldread-diagram#21:
+  decision: declined
+  note: round 2
+2026-10-04T060035-coldread-diagram#3:
+  decision: adopted
+  note: round 2
+2026-10-04T060035-coldread-diagram#4:
+  decision: declined
+  note: round 2
+2026-10-04T060035-coldread-diagram#5:
+  decision: declined
+  note: round 2
+2026-10-04T060035-coldread-diagram#6:
+  decision: declined
+  note: round 2
+2026-10-04T060035-coldread-diagram#7:
+  decision: declined
+  note: round 2
+2026-10-04T060035-coldread-diagram#8:
+  decision: declined
+  note: round 2
+2026-10-04T060035-coldread-diagram#9:
+  decision: declined
+  note: round 2

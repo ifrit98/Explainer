@@ -1,0 +1,254 @@
+{
+ "tool": "quiz",
+ "rendering": "html",
+ "slug": "cdn-request",
+ "at": "2026-10-04T06:06:15",
+ "model": "default",
+ "prompt_sha": "7fee7015820d",
+ "reply": {
+  "answers": {
+   "1": "The client, the edge server (the CDN), and the origin server. Two distances link them: client to edge (300 km by default) and edge to origin (6,000 km by default). The other objects are round trips (TCP, TLS 1.3 and the request itself), processing time (1 ms at the edge, 20 ms at the origin), the edge's cache (a hit or a miss, with a TTL and a cache key), and the open connection the edge keeps to the origin.",
+   "2": "The client always does its handshakes and sends its request to whichever machine it is talking to. With a CDN that machine is the edge, over the short path. On a hit, the edge answers from its cache. On a miss, the edge sends one round trip to the origin over the long path, using a connection it already keeps open, so there are no new handshakes. It then caches the response for its TTL, which comes from Cache-Control: max-age. Without a CDN, the client talks to the origin directly. The page assumes the origin is as far from the client as it is from the edge.",
+   "3": "A new HTTPS request costs 3 round trips, and each round trip costs about 1 ms per 100 km. So total time is mostly 3 × distance. A CDN moves those 3 round trips onto the short client-to-edge path. On a miss it pays the long distance only once, and on a hit not at all.",
+   "4": "The most important variable is distance. If edge-to-origin distance goes up, the no-CDN time grows by 3 ms for every 100 km added, because all 3 round trips cross it. The miss time grows by only 1 ms per 100 km, because only one round trip crosses it. The hit time does not change. If client-to-edge distance goes up, hit and miss times grow by 3 ms per 100 km, because all 3 handshake and request round trips cross that path. At 6,000 km and 300 km: no CDN 200 ms, miss 90 ms, hit 10 ms.",
+   "5": "Assumption: every request opens a new connection (3 round trips). With keep-alive or HTTP/2 a request needs only 1 round trip. Others: paths are straight, and the origin is as far from the client as from the edge. Fact: light in fiber travels at about two thirds of its speed in a vacuum, so 100 km of fiber costs about 1 ms per round trip.",
+   "6": "A new HTTPS request takes 3 round trips (TCP, TLS 1.3, then the request), and each costs about 1 ms per 100 km. So distance, paid three times, is most of the latency. A CDN sends you to a nearby edge, so those 3 round trips cross only the short path. On a cache hit the edge answers itself, in about 10 ms instead of 200 ms in the default case. On a miss, the edge makes one long trip to the origin over a connection it already keeps open, about 90 ms. That is still faster than no CDN unless the client-to-edge distance is more than about two thirds of the edge-to-origin distance.",
+   "7": "The 'about two thirds' rule in the summary was hardest. The page never derives it. The phrase 'two thirds as far as the origin' does not say which distance it compares against. The same fraction 'two thirds' also appears for the speed of light in fiber, which invites confusion. A one-line inequality would fix it: miss = 3·short + long + 21 versus no CDN = 3·long + 20, so a miss is slower once short ≳ ⅔·long. Showing the miss and hit formulas next to the no-CDN formula would also help.",
+   "8": "About 200 ms. Each round trip over 6,000 km takes 60 ms (1 ms per 100 km). A new request needs 3 of them (TCP, TLS 1.3, request), which gives 180 ms. The origin's 20 ms of processing brings it to 200 ms.",
+   "9": "The 3 round trips for handshakes and the request run over the short client-to-edge path (3 × 3 ms = 9 ms at 300 km). The edge reaches the origin over a connection it already keeps open, so the long distance is crossed only once (60 ms), not three times (180 ms). Total: 9 + 60 + 21 = 90 ms versus 200 ms.",
+   "10": "The page never directly says when a CDN helps little. From the model, I can infer these cases: the origin is close (a short edge-to-origin distance means little long-path time to save); the client is far from its edge; responses are per-user and never cached, so every request is a miss; or the connection is already open (keep-alive, HTTP/2), so only 1 round trip is at stake instead of 3. The page also says a faster origin saves only its 20 ms.",
+   "11": "When the client-to-edge distance is more than about two thirds of the edge-to-origin distance. Then 3 short round trips plus 1 long one (plus 1 ms at the edge) cost as much as or more than 3 long ones. One example the sliders allow: client to edge 2,000 km, edge to origin 1,000 km."
+  },
+  "audit": {
+   "terms": [
+    "The edge machine has three names: 'edge' (SVG, sliders), 'edge server' (lede, Level 2) and 'nearby edge' (Summary).",
+    "The client-to-edge path has three names: 'short path' (lede, Level 2, Level 3), 'short: every handshake' (SVG) and 'Client to edge' (slider label).",
+    "The edge-to-origin path has four names: 'long trip to the origin' (lede), 'long: only on a cache miss' (SVG), 'Edge to origin' (slider) and 'edge ↔ origin' (legend).",
+    "The open connection has three names: 'a connection it keeps open' (instrument, Level 2), 'an open connection' (Summary) and 'keep-alive, HTTP/2' / 'a connection that is already open' (limits card). The first two mean the edge-to-origin link; the third means the client's own connection.",
+    "The end point of the timing has two names: 'before the first byte arrives' (lede) and 'from the first packet to the response' (predict question).",
+    "Origin time has two names: 'The origin takes about 20 ms to answer' (Predict first) and 'processing' (legend, limits card).",
+    "The same caveat is labeled two ways: the 'simplification' tag on the new-connection card uses class 'assumption', while the other cards are labeled 'assumption'.",
+    "'two thirds' is used for two different things: the fiber speed fraction (limits card) and the distance threshold for a miss (Summary item 3)."
+   ],
+   "unexplained": [
+    "'1 ms at the edge' edge processing first appears only in the Limits card ('Processing times'). The miss total (90 ms) and hit total (10 ms) include it without saying so in the instrument.",
+    "The verdict line ('A hit is N× faster than no CDN') gives a ratio but never says what makes it rise or fall.",
+    "'TTL' (Level 2, Level 4) is not linked to what a longer or shorter TTL does to the hit rate. The page never states hit rate as a variable at all, even though it decides how often you get 10 ms versus 90 ms.",
+    "'less than about two thirds as far as the origin' (Summary item 3): no derivation, and it does not say which distance it compares against.",
+    "The default distances (300 km, 6,000 km) and the slider ranges (50–2,000 km, 500–15,000 km) are not tied to any real deployment, so the reader can't tell what a typical value is."
+   ],
+   "missing_why": [
+    "Summary item 3's 'about two thirds' threshold is stated with no inequality behind it.",
+    "'a new connection needs 3 round trips (TCP, TLS 1.3, then the request itself)' (Predict first): no reason is given for why each of TCP and TLS 1.3 costs exactly one round trip.",
+    "Level 3's law shows only the no-CDN formula. The miss formula (3·short + long + edge + origin processing) and the hit formula are never written out, only shown as bars.",
+    "'About two thirds of its vacuum speed, so 100 km of fiber costs about 1 ms per round trip' (limits card): the step from the speed to 1 ms per 100 km (200 km round trip ÷ 200,000 km/s) is left implicit.",
+    "'A faster origin would save only its 20 ms of processing' (Summary item 2): it is asserted, not tied back to the formula."
+   ],
+   "excess": [
+    "Level 2 step 1, 'DNS sends the client to a nearby edge server', and Level 4, 'anycast or DNS steering': DNS is then excluded from the model ('DNS and bandwidth are left out'), so these lines are a detour.",
+    "The fiber fact is repeated three times: 'Light in fiber goes 100 km and back in about 1 ms' (Predict first), 'Each round trip costs about 1 ms per 100 km of fiber' (Level 3), and the limits card.",
+    "Summary item 1 repeats the lede's first sentence almost word for word.",
+    "Level 4's 'cache key, usually the URL plus selected headers' is cache configuration detail that neither the latency argument nor the questions use."
+   ]
+  },
+  "gaps": [
+   "The page never derives the condition under which a miss is slower than no CDN, and the wording 'two thirds as far as the origin' is ambiguous.",
+   "There is no explicit section on when a CDN helps little. The reader has to infer it from the sliders and the limits cards.",
+   "Hit rate is never modeled, so the reader can't estimate average latency across a mix of hits and misses, or see how TTL changes it.",
+   "The keep-alive case (1 round trip instead of 3) is mentioned only as a limitation. The page never says how much it shrinks the CDN's advantage, though it is common in real deployments.",
+   "The 1 ms of edge processing is hidden inside the totals until the Limits section.",
+   "The assumption that the origin is as far from the client as from the edge is what makes no-CDN depend only on edge-to-origin distance. The page states it, but never explains how results would change if it were false."
+  ]
+ },
+ "grade": {
+  "scores": {
+   "1": 2,
+   "2": 2,
+   "3": 2,
+   "4": 2,
+   "5": 2,
+   "6": 2,
+   "7": 2,
+   "8": 2,
+   "9": 2,
+   "10": 2,
+   "11": 1
+  },
+  "reasons": {
+   "5": "Correct on the core assumptions (straight paths, client–origin ≈ edge–origin) and the fiber fact. It omits the processing-time assumptions and the stated simplifications (DNS, bandwidth, TLS session resumption), but nothing it says is wrong.",
+   "10": "Full marks: it names the client far from its edge and uncacheable per-user responses. Its note that 'the page never directly says when a CDN helps little' is a gap in the rendering, not in the answer.",
+   "11": "The threshold (client–edge > ~2/3 edge–origin) is correct. It never states the main point that a miss is normally faster when the edge is much closer than the origin. Its example (2,000 km / 1,000 km) gives only distances, not times; the rubric asks for a concrete case in numbers, such as a miss of 91 ms against 50 ms with no CDN."
+  },
+  "pass": false
+ },
+ "findings": [
+  {
+   "n": 1,
+   "severity": "gap",
+   "kind": "terms",
+   "text": "The edge machine has three names: 'edge' (SVG, sliders), 'edge server' (lede, Level 2) and 'nearby edge' (Summary)."
+  },
+  {
+   "n": 2,
+   "severity": "gap",
+   "kind": "terms",
+   "text": "The client-to-edge path has three names: 'short path' (lede, Level 2, Level 3), 'short: every handshake' (SVG) and 'Client to edge' (slider label)."
+  },
+  {
+   "n": 3,
+   "severity": "gap",
+   "kind": "terms",
+   "text": "The edge-to-origin path has four names: 'long trip to the origin' (lede), 'long: only on a cache miss' (SVG), 'Edge to origin' (slider) and 'edge ↔ origin' (legend)."
+  },
+  {
+   "n": 4,
+   "severity": "gap",
+   "kind": "terms",
+   "text": "The open connection has three names: 'a connection it keeps open' (instrument, Level 2), 'an open connection' (Summary) and 'keep-alive, HTTP/2' / 'a connection that is already open' (limits card). The first two mean the edge-to-origin link; the third means the client's own connection."
+  },
+  {
+   "n": 5,
+   "severity": "gap",
+   "kind": "terms",
+   "text": "The end point of the timing has two names: 'before the first byte arrives' (lede) and 'from the first packet to the response' (predict question)."
+  },
+  {
+   "n": 6,
+   "severity": "gap",
+   "kind": "terms",
+   "text": "Origin time has two names: 'The origin takes about 20 ms to answer' (Predict first) and 'processing' (legend, limits card)."
+  },
+  {
+   "n": 7,
+   "severity": "gap",
+   "kind": "terms",
+   "text": "The same caveat is labeled two ways: the 'simplification' tag on the new-connection card uses class 'assumption', while the other cards are labeled 'assumption'."
+  },
+  {
+   "n": 8,
+   "severity": "gap",
+   "kind": "terms",
+   "text": "'two thirds' is used for two different things: the fiber speed fraction (limits card) and the distance threshold for a miss (Summary item 3)."
+  },
+  {
+   "n": 9,
+   "severity": "gap",
+   "kind": "unexplained",
+   "text": "'1 ms at the edge' edge processing first appears only in the Limits card ('Processing times'). The miss total (90 ms) and hit total (10 ms) include it without saying so in the instrument."
+  },
+  {
+   "n": 10,
+   "severity": "gap",
+   "kind": "unexplained",
+   "text": "The verdict line ('A hit is N× faster than no CDN') gives a ratio but never says what makes it rise or fall."
+  },
+  {
+   "n": 11,
+   "severity": "gap",
+   "kind": "unexplained",
+   "text": "'TTL' (Level 2, Level 4) is not linked to what a longer or shorter TTL does to the hit rate. The page never states hit rate as a variable at all, even though it decides how often you get 10 ms versus 90 ms."
+  },
+  {
+   "n": 12,
+   "severity": "gap",
+   "kind": "unexplained",
+   "text": "'less than about two thirds as far as the origin' (Summary item 3): no derivation, and it does not say which distance it compares against."
+  },
+  {
+   "n": 13,
+   "severity": "gap",
+   "kind": "unexplained",
+   "text": "The default distances (300 km, 6,000 km) and the slider ranges (50–2,000 km, 500–15,000 km) are not tied to any real deployment, so the reader can't tell what a typical value is."
+  },
+  {
+   "n": 14,
+   "severity": "gap",
+   "kind": "missing_why",
+   "text": "Summary item 3's 'about two thirds' threshold is stated with no inequality behind it."
+  },
+  {
+   "n": 15,
+   "severity": "gap",
+   "kind": "missing_why",
+   "text": "'a new connection needs 3 round trips (TCP, TLS 1.3, then the request itself)' (Predict first): no reason is given for why each of TCP and TLS 1.3 costs exactly one round trip."
+  },
+  {
+   "n": 16,
+   "severity": "gap",
+   "kind": "missing_why",
+   "text": "Level 3's law shows only the no-CDN formula. The miss formula (3·short + long + edge + origin processing) and the hit formula are never written out, only shown as bars."
+  },
+  {
+   "n": 17,
+   "severity": "gap",
+   "kind": "missing_why",
+   "text": "'About two thirds of its vacuum speed, so 100 km of fiber costs about 1 ms per round trip' (limits card): the step from the speed to 1 ms per 100 km (200 km round trip ÷ 200,000 km/s) is left implicit."
+  },
+  {
+   "n": 18,
+   "severity": "gap",
+   "kind": "missing_why",
+   "text": "'A faster origin would save only its 20 ms of processing' (Summary item 2): it is asserted, not tied back to the formula."
+  },
+  {
+   "n": 19,
+   "severity": "excess",
+   "kind": "excess",
+   "text": "Level 2 step 1, 'DNS sends the client to a nearby edge server', and Level 4, 'anycast or DNS steering': DNS is then excluded from the model ('DNS and bandwidth are left out'), so these lines are a detour."
+  },
+  {
+   "n": 20,
+   "severity": "excess",
+   "kind": "excess",
+   "text": "The fiber fact is repeated three times: 'Light in fiber goes 100 km and back in about 1 ms' (Predict first), 'Each round trip costs about 1 ms per 100 km of fiber' (Level 3), and the limits card."
+  },
+  {
+   "n": 21,
+   "severity": "excess",
+   "kind": "excess",
+   "text": "Summary item 1 repeats the lede's first sentence almost word for word."
+  },
+  {
+   "n": 22,
+   "severity": "excess",
+   "kind": "excess",
+   "text": "Level 4's 'cache key, usually the URL plus selected headers' is cache configuration detail that neither the latency argument nor the questions use."
+  },
+  {
+   "n": 23,
+   "severity": "gap",
+   "kind": "gap",
+   "text": "The page never derives the condition under which a miss is slower than no CDN, and the wording 'two thirds as far as the origin' is ambiguous."
+  },
+  {
+   "n": 24,
+   "severity": "gap",
+   "kind": "gap",
+   "text": "There is no explicit section on when a CDN helps little. The reader has to infer it from the sliders and the limits cards."
+  },
+  {
+   "n": 25,
+   "severity": "gap",
+   "kind": "gap",
+   "text": "Hit rate is never modeled, so the reader can't estimate average latency across a mix of hits and misses, or see how TTL changes it."
+  },
+  {
+   "n": 26,
+   "severity": "gap",
+   "kind": "gap",
+   "text": "The keep-alive case (1 round trip instead of 3) is mentioned only as a limitation. The page never says how much it shrinks the CDN's advantage, though it is common in real deployments."
+  },
+  {
+   "n": 27,
+   "severity": "gap",
+   "kind": "gap",
+   "text": "The 1 ms of edge processing is hidden inside the totals until the Limits section."
+  },
+  {
+   "n": 28,
+   "severity": "gap",
+   "kind": "gap",
+   "text": "The assumption that the origin is as far from the client as from the edge is what makes no-CDN depend only on edge-to-origin distance. The page states it, but never explains how results would change if it were false."
+  }
+ ]
+}

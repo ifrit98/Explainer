@@ -1,0 +1,366 @@
+{
+ "tool": "coldread",
+ "rendering": "video",
+ "slug": "ste-80",
+ "at": "2026-10-04T06:22:08",
+ "model": "default",
+ "prompt_sha": "b6ca366fa8e4",
+ "reply": {
+  "captions": [
+   {
+    "at": "1 (0:00)",
+    "text": "This is STE-80. It is a writing style for technical text.",
+    "unresolved": [],
+    "unsaid": [
+     "The title 'STE-80' is drawn in stroke by stroke ('STE-8' plus part of the 0). This is decoration and needs no words."
+    ],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "2-3 (0:04)",
+    "text": "It comes from ASD-STE100, Simplified Technical English, a standard for aircraft maintenance manuals.",
+    "unresolved": [],
+    "unsaid": [
+     "The subtitle 'a standard for aircraft maintenance manuals' is very faint on screen, almost unreadable."
+    ],
+    "leap": [],
+    "excess": [
+     "\"ASD-STE100\": the full code is not needed. 'Simplified Technical English' is enough for this reader, and the letters 'ASD' are never explained."
+    ],
+    "purpose_unclear": false
+   },
+   {
+    "at": "4-5 (0:12)",
+    "text": "The eighty means about eighty percent of the way to strict STE: it keeps the writing rules and drops the approved dictionary.",
+    "unresolved": [
+     "\"strict STE\": the reader is not told what makes it 'strict'",
+     "\"the approved dictionary\": the reader has not heard of it and does not know what it holds",
+     "\"the writing rules\": none have been named yet"
+    ],
+    "unsaid": [
+     "Nothing about the 'eighty' or the dictionary is shown on screen. This frame has only the title card."
+    ],
+    "leap": [
+     "\"about eighty percent\": the reader is not told how the percentage is measured, so it reads as a loose figure"
+    ],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "6-7 (0:20)",
+    "text": "Manuals are read under time pressure, often in a second language, so every word must help.",
+    "unresolved": [],
+    "unsaid": [
+     "The on-screen line 'read under time pressure, often in a second language' appears under faint text and is easy to miss. It does match the words."
+    ],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "8-9 (0:26)",
+    "text": "Here is a typical sentence from a manual. It has sixteen words: the orange bar counts them. Some of the words do not help the reader.",
+    "unresolved": [],
+    "unsaid": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "10 (0:34)",
+    "text": "Rule one. Use simple words: the common word, not the formal one.",
+    "unresolved": [],
+    "unsaid": [
+     "A numbered rule list starts in the top left ('1 Use simple words'). Later, older rules turn grey. That convention is never said."
+    ],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "11-12 (0:38)",
+    "text": "The words in red change. Replenished becomes full. Prior to becomes before. Commencing becomes starting.",
+    "unresolved": [],
+    "unsaid": [
+     "The new words appear in green ('full before starting'). The words name red but never name green."
+    ],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "13 (0:46)",
+    "text": "Only one word goes, but each word is easier to read.",
+    "unresolved": [],
+    "unsaid": [
+     "The bar shrinks from 16 to 15 words without comment."
+    ],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "14-15 (0:50)",
+    "text": "Rule two. Give the instruction directly. Cut the opening that only says the instruction matters.",
+    "unresolved": [],
+    "unsaid": [
+     "The red highlight covers 'It is imperative', 'the operator ensures' and 'starting'. The words only cover the opening that 'says the instruction matters'. They do not say why 'the operator ensures' and 'starting' change."
+    ],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "16-17 (0:57)",
+    "text": "Tell the reader what to do instead: make sure, before you start. Thirteen words.",
+    "unresolved": [],
+    "unsaid": [
+     "'the operator' becomes 'you', and 'starting' becomes 'you start the'. The change from third person to the command form is shown but never said."
+    ],
+    "leap": [
+     "The reader is not told why writing to 'you' is part of 'directly'. The step is implied but not given."
+    ],
+    "excess": [
+     "\"Thirteen words.\": the bar already shows 13"
+    ],
+    "purpose_unclear": false
+   },
+   {
+    "at": "18-20 (1:02)",
+    "text": "Rule three. Use concrete words. The phrase make sure that it is full asks the reader to check a result.",
+    "unresolved": [],
+    "unsaid": [
+     "The red covers 'Make sure that', 'is full' and 'operation.'. 'operation' is not mentioned until the next caption.",
+     "At 69.88s a transition frame shows overlapping, garbled text ('Make sure that' over 'the hydraulic reservoir', and 'machine' over 'operation') with a '12 words' count. The text is hard to read and the count is never explained."
+    ],
+    "leap": [
+     "The reader is not told why asking the reader to check a result is worse than naming the action. The rule is 'concrete words', but the argument is about verbs of action against verbs of checking. The link between 'concrete' and 'action' is not given."
+    ],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "21-22 (1:09)",
+    "text": "The verb fill names the action, and the machine names what you start. Nine words.",
+    "unresolved": [],
+    "unsaid": [],
+    "leap": [
+     "'operation' becomes 'machine'. The original said 'commencing operation', and the reader is not told whether 'the machine' keeps that meaning."
+    ],
+    "excess": [
+     "\"Nine words.\": the bar shows it"
+    ],
+    "purpose_unclear": false
+   },
+   {
+    "at": "23-25 (1:16)",
+    "text": "Sixteen words became nine. The reader still fills the reservoir before starting the machine, with less work to read it.",
+    "unresolved": [],
+    "unsaid": [
+     "The original sentence comes back faint at the top for comparison. The words do not point to it."
+    ],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "26-27 (1:24)",
+    "text": "The bar counts words, but the goal is less work: rule one cut only one word and still helped.",
+    "unresolved": [],
+    "unsaid": [],
+    "leap": [],
+    "excess": [
+     "\"rule one cut only one word and still helped\": this repeats caption 13 ('Only one word goes, but each word is easier to read') with nothing new"
+    ],
+    "purpose_unclear": false
+   },
+   {
+    "at": "28-29 (1:30)",
+    "text": "STE-80 has more rules than these three: short sentences, one meaning per word, and no filler.",
+    "unresolved": [
+     "\"one meaning per word\": this reader cannot tell what it requires in practice"
+    ],
+    "unsaid": [
+     "The on-screen list of extra rules is very small and faint."
+    ],
+    "leap": [],
+    "excess": [
+     "\"no filler\": the reader cannot tell how this differs from rule two (cut the opening that only says the instruction matters)"
+    ],
+    "purpose_unclear": false
+   }
+  ],
+  "blocking": [],
+  "cuts": [
+   "Caption 27: 'rule one cut only one word and still helped' (repeats caption 13)",
+   "Captions 17 and 22: 'Thirteen words.' / 'Nine words.' (the bar already shows them)",
+   "Caption 2: 'ASD-STE100' can go; 'Simplified Technical English' is enough"
+  ],
+  "question": {
+   "text": "What is STE-80, and how does it make a manual sentence easier to read?",
+   "known_at": "Caption 1 ('This is STE-80. It is a writing style for technical text.') and captions 6-7 for why it matters",
+   "result_stated": "Yes, in captions 24-26: 'The reader still fills the reservoir before starting the machine, with less work to read it.' and 'the goal is less work'"
+  },
+  "motive": "Reason to care: captions 6-7, 'Manuals are read under time pressure, often in a second language, so every word must help.' Reason for the approach: there is none. The video never says why it shows one sentence rewritten rule by rule, or why these three rules were picked.",
+  "close": "Partly. Caption 26 ('The bar counts words, but the goal is less work') states the general point. The last captions (28-29) list more rules instead of going back to what STE-80 is, so the '80' and dropped-dictionary idea from caption 5 is never picked up again.",
+  "recap": "STE-80 is Simplified Technical English without its dictionary: use common words, give direct commands, and name the action, so that a 16-word manual sentence becomes a 9-word one that is easier to read.",
+  "strongest": "Captions 23-25 (1:16): the faint original sits above 'Fill the hydraulic reservoir before you start the machine.' with the bar at 9. The gain is easy to see.",
+  "weakest": "Rule three (captions 18-21, 1:02-1:13 including the 69.88s frame). It has the garbled overlapping-text transition with an unexplained '12 words' count, a 'concrete words' rule that is argued as action against check, and an unexplained change from 'operation' to 'machine'.",
+  "suggestions": [
+   "Say in one phrase what the ASD-STE100 approved dictionary is (a controlled list of allowed words with fixed meanings), so 'drops the dictionary' means something.",
+   "State the color code once: red marks what changes, green marks the replacement.",
+   "In rule two, say that the sentence now addresses the reader as 'you' with a command (imperative).",
+   "Fix the 69.88s transition so the old and new text do not overlap.",
+   "Either drop 'operation'→'machine' or say why 'machine' is more concrete.",
+   "End by tying back to the opening: 'That is STE-80: the STE writing rules, without the dictionary.'"
+  ]
+ },
+ "findings": [
+  {
+   "n": 1,
+   "severity": "excess",
+   "kind": "cut",
+   "text": "Caption 27: 'rule one cut only one word and still helped' (repeats caption 13)"
+  },
+  {
+   "n": 2,
+   "severity": "excess",
+   "kind": "cut",
+   "text": "Captions 17 and 22: 'Thirteen words.' / 'Nine words.' (the bar already shows them)"
+  },
+  {
+   "n": 3,
+   "severity": "excess",
+   "kind": "cut",
+   "text": "Caption 2: 'ASD-STE100' can go; 'Simplified Technical English' is enough"
+  },
+  {
+   "n": 4,
+   "severity": "edge",
+   "kind": "unsaid",
+   "text": "1 (0:00): The title 'STE-80' is drawn in stroke by stroke ('STE-8' plus part of the 0). This is decoration and needs no words."
+  },
+  {
+   "n": 5,
+   "severity": "edge",
+   "kind": "unsaid",
+   "text": "2-3 (0:04): The subtitle 'a standard for aircraft maintenance manuals' is very faint on screen, almost unreadable."
+  },
+  {
+   "n": 6,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "4-5 (0:12): \"strict STE\": the reader is not told what makes it 'strict'"
+  },
+  {
+   "n": 7,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "4-5 (0:12): \"the approved dictionary\": the reader has not heard of it and does not know what it holds"
+  },
+  {
+   "n": 8,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "4-5 (0:12): \"the writing rules\": none have been named yet"
+  },
+  {
+   "n": 9,
+   "severity": "edge",
+   "kind": "unsaid",
+   "text": "4-5 (0:12): Nothing about the 'eighty' or the dictionary is shown on screen. This frame has only the title card."
+  },
+  {
+   "n": 10,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "4-5 (0:12): \"about eighty percent\": the reader is not told how the percentage is measured, so it reads as a loose figure"
+  },
+  {
+   "n": 11,
+   "severity": "edge",
+   "kind": "unsaid",
+   "text": "6-7 (0:20): The on-screen line 'read under time pressure, often in a second language' appears under faint text and is easy to miss. It does match the words."
+  },
+  {
+   "n": 12,
+   "severity": "edge",
+   "kind": "unsaid",
+   "text": "10 (0:34): A numbered rule list starts in the top left ('1 Use simple words'). Later, older rules turn grey. That convention is never said."
+  },
+  {
+   "n": 13,
+   "severity": "edge",
+   "kind": "unsaid",
+   "text": "11-12 (0:38): The new words appear in green ('full before starting'). The words name red but never name green."
+  },
+  {
+   "n": 14,
+   "severity": "edge",
+   "kind": "unsaid",
+   "text": "13 (0:46): The bar shrinks from 16 to 15 words without comment."
+  },
+  {
+   "n": 15,
+   "severity": "edge",
+   "kind": "unsaid",
+   "text": "14-15 (0:50): The red highlight covers 'It is imperative', 'the operator ensures' and 'starting'. The words only cover the opening that 'says the instruction matters'. They do not say why 'the operator ensures' and 'starting' change."
+  },
+  {
+   "n": 16,
+   "severity": "edge",
+   "kind": "unsaid",
+   "text": "16-17 (0:57): 'the operator' becomes 'you', and 'starting' becomes 'you start the'. The change from third person to the command form is shown but never said."
+  },
+  {
+   "n": 17,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "16-17 (0:57): The reader is not told why writing to 'you' is part of 'directly'. The step is implied but not given."
+  },
+  {
+   "n": 18,
+   "severity": "edge",
+   "kind": "unsaid",
+   "text": "18-20 (1:02): The red covers 'Make sure that', 'is full' and 'operation.'. 'operation' is not mentioned until the next caption."
+  },
+  {
+   "n": 19,
+   "severity": "edge",
+   "kind": "unsaid",
+   "text": "18-20 (1:02): At 69.88s a transition frame shows overlapping, garbled text ('Make sure that' over 'the hydraulic reservoir', and 'machine' over 'operation') with a '12 words' count. The text is hard to read and the count is never explained."
+  },
+  {
+   "n": 20,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "18-20 (1:02): The reader is not told why asking the reader to check a result is worse than naming the action. The rule is 'concrete words', but the argument is about verbs of action against verbs of checking. The link between 'concrete' and 'action' is not given."
+  },
+  {
+   "n": 21,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "21-22 (1:09): 'operation' becomes 'machine'. The original said 'commencing operation', and the reader is not told whether 'the machine' keeps that meaning."
+  },
+  {
+   "n": 22,
+   "severity": "edge",
+   "kind": "unsaid",
+   "text": "23-25 (1:16): The original sentence comes back faint at the top for comparison. The words do not point to it."
+  },
+  {
+   "n": 23,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "28-29 (1:30): \"one meaning per word\": this reader cannot tell what it requires in practice"
+  },
+  {
+   "n": 24,
+   "severity": "edge",
+   "kind": "unsaid",
+   "text": "28-29 (1:30): The on-screen list of extra rules is very small and faint."
+  }
+ ]
+}

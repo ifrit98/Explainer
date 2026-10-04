@@ -9,6 +9,10 @@ With the plugin installed, run `explainer <command>` from any project. In the Ex
 | `explainer check [slug ...]` | Hold renderings to `model.yaml`: numbers, required values, claims, terms, length. No slug: every explainer. Exit code 1 on any problem; `!` lines are warnings. `-v` lists notes. |
 | `explainer probe <slug>` | Print a prompt for a fresh agent that reads only `model.md` and lists what the explanation will omit, for the audience the model names: each gap main or edge, and model entries the audience does not need. |
 | `explainer coldread <slug> [--rendering R]` | Print a first-viewing prompt: a fresh agent reads one rendering (`narrative` by default, or `prose`, `diagram`, `html`, `video`) in order, as the audience in `model.md`, and reports every reference it was not given, everything shown but unsaid, every leap, and every excess: what it already knew, a repeat, a detour. It marks the findings that block the main line. `--rubric` prints the pass rule. |
+| `explainer probe\|coldread\|quiz <slug> … --run` | Give the prompt to a fresh agent (`claude -p`, reading only this explainer's folder), save the reply as `review/runs/<time>-<tool>[-<rendering>].json`, and list its numbered findings. A blind test is then scored by a second fresh call against the rubric. `--model` picks the model. |
+| `explainer quiz <slug> --regrade <run>` | Score a saved blind test again with the current rubric. |
+| `explainer findings [slug] [--run R] [--stats]` | List the findings of the newest run of each tool, with what was decided. `--stats` (or no slug): per tool and severity, how many findings authors adopt. |
+| `explainer decide <slug> <run> --adopt N … --decline N … [--decline-rest] [--note …]` | Record what you did with a run's findings in `review/decisions.yaml`. |
 | `explainer sync <slug>` | Write the model's values and the current web toolkit into the slug's HTML pages. |
 | `explainer render <slug> [options]` | Render the video: voice, mastered audio, captions, chapters, timeline, contact sheet. |
 | `explainer review <slug> [--draft]` | Build the review sheet: one frame at each narration line, bookmark, and predict pause. |
@@ -39,7 +43,7 @@ It reports these problems (full list with fixes: [model reference](model-referen
 6. **A second name for a concept.** A rendering uses a phrase that a `terms` entry avoids.
 7. **A video without its predict pauses.** `index.html` plays a video that has predict pauses through a plain `<video>`; use `Explainer.video`.
 8. **A symbol the narrative does not introduce.** With a `narrative.md`, a single-letter symbol in the scene's on-screen math or labels, or spoken as "the n-th", must be listed in the introduction ledger.
-9. **Length.** A warning (`!`) when the prose is over 600 words or the video over 150 s; a failure when a rendering exceeds a `budget` declared in `model.yaml`. Length is a cost to the reader too: cut what this reader does not need, or declare the length with a reason.
+9. **Length.** A warning (`!`) when the prose is over 600 words, the first diagram has more than 9 nodes, or the video is over 150 s; a failure when a rendering exceeds a `budget` declared in `model.yaml`. Length is a cost to the reader too: cut what this reader does not need, or declare the length with a reason.
 
 `--diagrams` also renders every Mermaid block (Markdown fences and `<pre class="mermaid">`) with the Mermaid CLI: `mmdc` on PATH, else `npx` with a pinned version. It needs Node. CI runs it.
 

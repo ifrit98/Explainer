@@ -5,7 +5,7 @@
 ## 1. Reader before and after
 
 - **Before:** People who write technical text. They know grammar. They do not know ASD-STE100.
-- **After:** "Three rules (simple words, a direct instruction, a concrete verb) cut a 16-word sentence to 9 words without changing the instruction."
+- **After:** "Three rules (simple words, a direct instruction, concrete words) cut a 16-word sentence to 9 words without changing the instruction."
 
 ## 2. Question and motive
 
@@ -31,7 +31,7 @@
 | 2 | instance | What does it fix? | so | the 16-word sentence | a typical sentence from a manual | the starting point |
 | 3 | rule | Rule one | — | three words replaced | simple words; only one word goes (prior to → before) | rule one |
 | 4 | rule | Rule two | but | the frame removed | give the instruction directly: 13 words | rule two |
-| 5 | rule | Rule three | so | the verb changes | a concrete verb: 9 words | rule three |
+| 5 | rule | Rule three | so | the verb and the noun change | concrete words: 9 words | rule three |
 | 6 | recap | — | therefore | 16 → 9 | the reader still fills the reservoir before starting the machine; full STE has more rules | the takeaway |
 
 ## 7. Close the loop

@@ -44,3 +44,23 @@ Reports: [run a](../evals/chat/results/2026-10-04-a/report.md), [run b](../evals
 - Six questions, one grader, one model. Treat a difference of a few tenths of a point as noise.
 - The grader is a model with its own taste. It sees the reader and the must points, not the principles.
 - The answers come from a fresh CLI with no project context. Inside Claude Code the principles arrive together with other instructions, so behavior can differ.
+
+## Review adoption
+
+The review tools (probe, cold read, blind test) report findings; the author decides what to do with each. `explainer probe|coldread|quiz <slug> --run` runs a review with a fresh `claude -p` agent and saves it with numbered findings, `explainer decide` records the decision on each, and `explainer findings --stats` reports, per tool and severity, how many findings authors adopt. A tool whose findings are mostly declined over-reports: its prompt asks for more than this reader needs.
+
+First measurement, across the v0.7.0 review rounds on nine examples (2026-10-04):
+
+| Tool | Severity | Findings | Adopted |
+|---|---|---|---|
+| cold read | blocking | 17 | 100% of 15 decided |
+| cold read | edge | 286 | 3% |
+| cold read | excess | 36 | 6% |
+| probe | main | 6 | 83% |
+| probe | edge | 6 | 50% |
+| blind-test audit | gap | 233 | 9% |
+| blind-test audit | excess | 37 | 4% |
+
+Blocking findings and the probe's main gaps are well calibrated. The cold read's per-unit edge lists and the blind-test audit were mostly noise. The prompts changed in response: an edge finding only where this reader would stop or reread (most units have none), at most five audit findings per list, and a rubric that treats an audit finding as a candidate, not a defect.
+
+The blind-test grader needed the same correction. Its first rubric asked a full answer to repeat the rendering's own example and counterexample, and it failed correct answers for that: three of three blind tests "failed" on the same item. The rubric now scores a correct, specific statement as 2; `explainer quiz <slug> --regrade <run>` scores saved answers again under a changed rubric.

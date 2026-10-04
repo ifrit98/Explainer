@@ -157,8 +157,14 @@ def cmd_review(args) -> None:
 def cmd_quiz(args) -> None:
     from explainer_kit.review import quiz_prompt, quiz_rubric
 
-    if args.rubric:
+    if args.regrade:
+        from explainer_kit.runs import regrade, show
+        path = regrade(args.slug, args.regrade, args.model)
+        print(show(args.slug, path.stem).splitlines()[1])
+    elif args.rubric:
         print(quiz_rubric(args.slug))
+    elif args.rendering and args.run:
+        _run(args.slug, "quiz", args.rendering, args.model)
     elif args.rendering:
         print(quiz_prompt(args.slug, args.rendering))
     else:
@@ -168,13 +174,45 @@ def cmd_quiz(args) -> None:
 def cmd_coldread(args) -> None:
     from explainer_kit.review import COLDREAD_PASS, coldread_prompt
 
-    print(COLDREAD_PASS if args.rubric else coldread_prompt(args.slug, args.rendering))
+    if args.run:
+        _run(args.slug, "coldread", args.rendering, args.model)
+    else:
+        print(COLDREAD_PASS if args.rubric else coldread_prompt(args.slug, args.rendering))
 
 
 def cmd_probe(args) -> None:
     from explainer_kit.review import probe_prompt
 
-    print(probe_prompt(args.slug))
+    if args.run:
+        _run(args.slug, "probe", None, args.model)
+    else:
+        print(probe_prompt(args.slug))
+
+
+def _run(slug: str, tool: str, rendering: str | None, model: str | None) -> None:
+    from explainer_kit.runs import run_review, show
+
+    print(f"running   {tool}{f' ({rendering})' if rendering else ''} for {slug} with a fresh agent …", flush=True)
+    path = run_review(slug, tool, rendering, model)
+    print(f"saved     {display(path)}\n")
+    print(show(slug, path.stem))
+    print(f"\nrecord what you do with each finding: explainer decide {slug} {path.stem} --adopt N … --decline N …")
+
+
+def cmd_findings(args) -> None:
+    from explainer_kit.runs import show, stats
+
+    if args.stats or not args.slug:
+        print(stats())
+    else:
+        print(show(args.slug, args.run))
+
+
+def cmd_decide(args) -> None:
+    from explainer_kit.runs import decide
+
+    path = decide(args.slug, args.run, args.adopt, args.decline, args.note or "", args.decline_rest)
+    print(f"updated   {display(path)}")
 
 
 def cmd_eval(args) -> None:
@@ -256,17 +294,39 @@ def main() -> None:
     p.add_argument("slug")
     p.add_argument("--rendering", choices=["prose", "diagram", "html", "video"])
     p.add_argument("--rubric", action="store_true")
+    p.add_argument("--run", action="store_true", help="run it with a fresh agent (claude -p), score it, and save it")
+    p.add_argument("--regrade", metavar="RUN", help="score a saved blind test again with the current rubric")
+    p.add_argument("--model", help="model for --run (default: the claude CLI default)")
     p.set_defaults(fn=cmd_quiz)
 
     p = sub.add_parser("coldread", help="first-viewing read: unintroduced references, in order")
     p.add_argument("slug")
     p.add_argument("--rendering", choices=["narrative", "prose", "diagram", "html", "video"], default="narrative")
     p.add_argument("--rubric", action="store_true", help="print the pass rule")
+    p.add_argument("--run", action="store_true", help="run it with a fresh agent (claude -p) and save the findings")
+    p.add_argument("--model", help="model for --run (default: the claude CLI default)")
     p.set_defaults(fn=cmd_coldread)
 
     p = sub.add_parser("probe", help="gap-finding prompt for the model, before rendering")
     p.add_argument("slug")
+    p.add_argument("--run", action="store_true", help="run it with a fresh agent (claude -p) and save the findings")
+    p.add_argument("--model", help="model for --run (default: the claude CLI default)")
     p.set_defaults(fn=cmd_probe)
+
+    p = sub.add_parser("findings", help="review-run findings and their decisions; --stats: adoption per tool")
+    p.add_argument("slug", nargs="?")
+    p.add_argument("--run", help="one run (its file stem); default: the newest run of each tool")
+    p.add_argument("--stats", action="store_true")
+    p.set_defaults(fn=cmd_findings)
+
+    p = sub.add_parser("decide", help="record what you did with a run's findings")
+    p.add_argument("slug")
+    p.add_argument("run", help="the run's file stem, as findings prints it")
+    p.add_argument("--adopt", type=int, nargs="*", default=[])
+    p.add_argument("--decline", type=int, nargs="*", default=[])
+    p.add_argument("--note")
+    p.add_argument("--decline-rest", action="store_true", help="every finding not adopted or decided yet is declined")
+    p.set_defaults(fn=cmd_decide)
 
     p = sub.add_parser("eval", help="chat eval: answer questions under several system prompts, grade blind")
     p.add_argument("suite", choices=["chat"])

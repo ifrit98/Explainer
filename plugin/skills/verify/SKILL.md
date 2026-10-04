@@ -29,21 +29,21 @@ Add `--diagrams` when the explainer has Mermaid blocks: each block is rendered o
 
 The blind test asks what a reader understood at the end. The cold read finds where, in order, the reader paid effort: for something missing (a reference not given, a step without its reason) or for something extra (what they already know, a repeat, a detour). A rendering can pass the blind test and fail the cold read: the reviewer fills gaps from context.
 
-1. Print the prompt: `explainer coldread <slug> --rendering <narrative|prose|diagram|html|video>`. It plays the audience from `narrative.md` or `model.md`; set that audience first.
-2. Give it, unchanged, to a fresh subagent.
-3. Apply the pass rule (`explainer coldread <slug> --rubric`): no blocking finding; the question known early and the result stated in words; a motive and a reason for the approach; a close that answers the opening question.
-4. Fix every blocking finding. Cut each excess finding unless it carries a step of the argument. Fix an edge finding only when the fix is short. Prefer fixes that replace words to fixes that add them. Fix in `narrative.md` first, then in the renderings.
-5. Stop when nothing blocks. Record the findings and what you did not apply in `review/understanding.md`.
+1. Run it: `explainer coldread <slug> --rendering <narrative|prose|diagram|html|video> --run`. A fresh `claude -p` agent reads only this explainer's folder, as the audience from `narrative.md` or `model.md` (set that audience first), and the run is saved with numbered findings. Without `--run`, the command prints the prompt; give it, unchanged, to a fresh subagent.
+2. Apply the pass rule (`explainer coldread <slug> --rubric`): no blocking finding; the question known early and the result stated in words; a motive and a reason for the approach; a close that answers the opening question.
+3. Record what you do with each finding: `explainer decide <slug> <run> --adopt N … --decline-rest`. Fix every blocking finding. Cut each excess finding unless it carries a step of the argument. Fix an edge finding only when the fix is short. Prefer fixes that replace words to fixes that add them. Fix in `narrative.md` first, then in the renderings.
+4. Stop when nothing blocks. Record the findings and what you did not apply in `review/understanding.md`.
 
 ## 4. Blind understanding test
 
 Use this for anything that will be published. A fresh agent sees only one rendering.
 
-1. Print the prompt: `explainer quiz <slug> --rendering <prose|diagram|html|video>`. For video, run `explainer review <slug>` first: the reviewer reads the captions and the review sheet.
-2. Start a fresh subagent with the prompt text exactly as printed (the Agent tool, general-purpose). Do not add context. It must not read `model.md` or `model.yaml`.
-3. Score its answers with `explainer quiz <slug> --rubric`: each general item 0–2, each quiz item 0–2. Count an answer that states a listed misconception as 0.
-4. Pass: every quiz item scores 2 and no general item scores 0.
-5. Write the scores, the reviewer's "audit" (terms with two names, numbers without a meaning, steps without a why, and for video, rushed points) and its "gaps" to `review/understanding.md`. Fix real gaps in the rendering, then run the test again on the changed rendering.
-6. For each real gap, ask which check, probe rule, or template line would have caught it in any explanation, and add it (principles §10). Record it in `ROADMAP.md`.
+1. Run it: `explainer quiz <slug> --rendering <prose|diagram|html|video> --run`. For video, run `explainer review <slug>` first: the reviewer reads the captions and the review sheet. A fresh agent answers from the rendering alone, and a second fresh agent scores the answers against `explainer quiz <slug> --rubric` (each item 0–2; a listed misconception scores 0). Without `--run`, give the printed prompt, unchanged, to a fresh subagent that must not read `model.md` or `model.yaml`, and score it yourself.
+2. Read the grader's reasons before you fix anything: a grader can be stricter than the rubric. `--regrade <run>` scores saved answers again after a rubric change.
+3. Pass: every quiz item scores 2 and no general item scores 0.
+4. Record decisions on the audit findings (`explainer decide`). Write the scores, the reviewer's "audit" (terms with two names, numbers without a meaning, steps without a why, and for video, rushed points) and its "gaps" to `review/understanding.md`. Fix real gaps in the rendering, then run the test again on the changed rendering.
+5. For each real gap, ask which check, probe rule, or template line would have caught it in any explanation, and add it (principles §10). Record it in `ROADMAP.md`.
+
+`explainer findings --stats` shows, per tool, how many findings authors adopt. A tool whose findings are mostly declined over-reports; tune its prompt.
 
 A blind test that a deliberately broken copy also passes proves nothing. When you change the quiz, run it once on a broken copy (one key claim reversed) to confirm that the test can fail.

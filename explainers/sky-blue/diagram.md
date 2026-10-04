@@ -11,21 +11,16 @@ Terms: the *beam* is the light coming straight from the Sun. ω = 2πc / λ is t
 ```mermaid
 flowchart TD
     S["Sunlight"] --> M["Air molecule, 0.3 nm<br/>the light's field drives its electrons"]
-    M -->|"far below their ultraviolet natural frequency:<br/>nearly the same amplitude for every color"| A["acceleration = ω² × amplitude<br/>larger for blue"]
-    A -->|"radiated field ∝ acceleration,<br/>power ∝ field²"| P["Scattered power ∝ ω⁴ ∝ 1/λ⁴<br/>blue 450 nm: 5.86 × red 700 nm"]
+    M -->|"each electron is held like a mass on a spring;<br/>driven far below its ultraviolet natural frequency,<br/>it moves nearly the same distance for every color"| A["acceleration = ω² × amplitude<br/>larger for blue"]
+    A -->|"radiated field ∝ acceleration (established),<br/>power ∝ field²"| P["Scattered power ∝ ω⁴ ∝ 1/λ⁴<br/>blue 450 nm: 5.86 × red 700 nm"]
     P -->|"scattered out of the beam"| K["Sky light<br/>mostly blue: a blue sky"]
     P -->|"what stays in the beam;<br/>each air mass keeps the same fraction"| B["Sun's color"]
     B --> N["overhead, air mass 1<br/>blue 80%, red 96% get through: white"]
     B --> H["horizon, air mass 38<br/>blue 0.02%, red 25% get through: red"]
 ```
 
-## Why acceleration, not amplitude
-
 <!-- claim: why-acceleration -->
-```mermaid
-flowchart LR
-    A["If scattered power followed the amplitude<br/>(1.052 for blue, 1.021 for red)"] --> A2["blue only 1.06 × red<br/>a nearly white sky"]
-```
+Why acceleration and not amplitude: if scattered power followed the amplitude, blue would scatter only 1.06 times more than red, and the sky would be nearly white.
 
 ## When the rule fails: large scatterers
 

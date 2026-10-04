@@ -1,0 +1,190 @@
+{
+ "tool": "quiz",
+ "rendering": "prose",
+ "slug": "git-bisect",
+ "at": "2026-10-04T06:00:19",
+ "model": "default",
+ "prompt_sha": "193b6a3937a8",
+ "reply": {
+  "answers": {
+   "1": "The main objects are commits: a known good commit (bug absent), a known bad commit (bug present), and the first bad commit (the earliest commit where the bug is present). The others are the midpoint commit that git checks out, the range of suspect commits, the bisect session (started with start, ended with reset), the marks (good, bad, skip), and, when automated, a test command whose exit code becomes the mark.",
+   "2": "A good commit and a bad commit mark the two ends of the suspect range. The first bad commit lies after the good end and at or before the bad end. Git checks out the midpoint. Your mark on it decides which half still holds the first bad commit: bad means at or before the midpoint, good means after it. The next midpoint is taken inside that half. Skip makes git pick a nearby commit instead. With `git bisect run`, the command's exit code supplies the mark: 0 is good, 125 is skip, and any other value from 1 to 127 is bad.",
+   "3": "Each good or bad mark on the midpoint rules out half of the suspects. This works because the bug is assumed to appear once and stay. Repeated halving shrinks the range to a single commit, the first bad commit.",
+   "4": "The most important variable is the number of commits in the range. Doubling it adds only about one more test, because each test halves the range: the test count grows like the number of halvings needed to reach 1 (about 10 for 1,000), not like the number of commits. A second variable is whether the bug stays once it appears. If it comes and goes, a good result at the midpoint can wrongly throw away the half that holds the real first appearance, and bisect names a later commit.",
+   "5": "Assumption: the bug appears once and stays present in every later commit. Established fact: in the document's example, bisecting 1,000 commits names 900, even though the bug first appeared at 300.",
+   "6": "git bisect finds the earliest commit where a bug is present by binary search between a known good commit and a known bad commit. You start a session, mark bad and good, and git checks out the midpoint. You test it and mark it good or bad, which discards half the suspects, and you repeat until git prints the first bad commit. Then `git bisect reset` returns you to your branch. Untestable commits can be skipped, and `git bisect run` can automate the test through exit codes. The result is only reliable if the bug appeared once and stayed: about 10 tests cover 1,000 commits, but an intermittent bug can lead bisect to a later commit.",
+   "7": "The Limit example was hardest to follow. It is unclear why 'testing next to 900 does not reveal this', and the fix (find a bad commit like 350 by spot-checking, then bisect again) arrives quickly. A small diagram of the good and bad regions on a line from 0 to 1,000 would make it easier, as would saying how many spot checks are enough. The skip section is also thin: it never says what happens if the skipped commit is itself the culprit.",
+   "8": "About 10. Each test halves the suspects: 1,000 → 500 → 250 → 125 → 63 → 32 → 16 → 8 → 4 → 2 → 1. A one-by-one search could need up to 1,000 tests.",
+   "9": "Run `git bisect skip`, and git selects a nearby commit to test instead. In automated mode, have the command exit with code 125 to skip. The explanation does not say what happens if the skipped commit turns out to be the first bad commit.",
+   "10": "When the bug does not appear once and stay, so it comes and goes across history. A midpoint can then test good even though an earlier region was bad, and bisect discards that region. In automated mode, a test that fails for some other reason also marks a commit bad, which can mislead the search.",
+   "11": "When the bug comes and goes. Example: across 1,000 commits the bug is present in 300–400, absent after that, and back from 900. The first test, at 500, is good, so bisect searches only 500–1,000 and names 900, but the bug first appeared at 300. To catch this, test a few commits spread across earlier history. Here 350 is bad, and bisecting between a good commit before 300 and 350 names 300. A second case: with `git bisect run`, a command that fails for an unrelated reason marks a commit bad."
+  },
+  "audit": {
+   "terms": [
+    "'halfway between' (line 6, line 26) vs 'midpoint' (line 33) name the same commit",
+    "'suspects' (lines 6, 72) vs the commits 'between a good one and a bad one' (line 6) vs 'searches only 500–1,000' (line 68): the search range is named three ways and never called 'range'",
+    "'bug is absent'/'bug is present' (lines 10, 30–31) vs 'good'/'bad' (throughout): mapped explicitly, so this is minor"
+   ],
+   "unexplained": [
+    "Exit code table (lines 57–61): it does not say what happens for codes above 127. Since only 0, 125 and 1–127 are listed, the reader cannot tell what larger codes would mean.",
+    "'Git selects a nearby commit' (line 42): it does not say how near, or how skips affect the test count and the final answer.",
+    "'test a few commits spread across the earlier history' (line 68): 'a few' is never quantified, so the reader does not know what more or fewer checks would change."
+   ],
+   "missing_why": [
+    "Exit code 125 means skip (line 60) is stated without why 125 was chosen, or why that code range separates good from bad.",
+    "'Git selects a nearby commit' (line 42): no reason is given for picking nearby rather than another midpoint.",
+    "'Testing next to 900 does not reveal this: those commits are good' (line 68) is stated with little reasoning about why local checks cannot detect an earlier bad region."
+   ],
+   "excess": [
+    "'In short' (lines 70–72) mostly repeats line 6. Its 'because a bug that appears once stays' adds a little.",
+    "'The current commit is often the bad one' (line 10) is barely needed by this reader."
+   ]
+  },
+  "gaps": [
+   "It never says what happens if a skipped commit is the first bad commit: can bisect still name a single commit?",
+   "Behaviour for exit codes above 127 in `git bisect run` is not covered.",
+   "It does not explain how 'halfway' is chosen in history with merges, which daily git users will have.",
+   "There is no guidance on recovering from a wrong good or bad mark mid-session.",
+   "It does not say how to choose the good commit or how far back to go. 'A few' spread-out checks for an intermittent bug is vague."
+  ]
+ },
+ "grade": {
+  "scores": {
+   "1": 2,
+   "2": 2,
+   "3": 2,
+   "4": 2,
+   "5": 1,
+   "6": 2,
+   "7": 2,
+   "8": 2,
+   "9": 2,
+   "10": 2,
+   "11": 2
+  },
+  "reasons": {
+   "5": "The assumption is correct. The 'established fact' is wrong: it cites the counterexample outcome (bisect names 900), which only describes what happens when the assumption fails. The model's fact is that the step count is logarithmic because each step halves the range."
+  },
+  "pass": true
+ },
+ "findings": [
+  {
+   "n": 1,
+   "severity": "gap",
+   "kind": "terms",
+   "text": "'halfway between' (line 6, line 26) vs 'midpoint' (line 33) name the same commit"
+  },
+  {
+   "n": 2,
+   "severity": "gap",
+   "kind": "terms",
+   "text": "'suspects' (lines 6, 72) vs the commits 'between a good one and a bad one' (line 6) vs 'searches only 500–1,000' (line 68): the search range is named three ways and never called 'range'"
+  },
+  {
+   "n": 3,
+   "severity": "gap",
+   "kind": "terms",
+   "text": "'bug is absent'/'bug is present' (lines 10, 30–31) vs 'good'/'bad' (throughout): mapped explicitly, so this is minor"
+  },
+  {
+   "n": 4,
+   "severity": "gap",
+   "kind": "unexplained",
+   "text": "Exit code table (lines 57–61): it does not say what happens for codes above 127. Since only 0, 125 and 1–127 are listed, the reader cannot tell what larger codes would mean."
+  },
+  {
+   "n": 5,
+   "severity": "gap",
+   "kind": "unexplained",
+   "text": "'Git selects a nearby commit' (line 42): it does not say how near, or how skips affect the test count and the final answer."
+  },
+  {
+   "n": 6,
+   "severity": "gap",
+   "kind": "unexplained",
+   "text": "'test a few commits spread across the earlier history' (line 68): 'a few' is never quantified, so the reader does not know what more or fewer checks would change."
+  },
+  {
+   "n": 7,
+   "severity": "gap",
+   "kind": "missing_why",
+   "text": "Exit code 125 means skip (line 60) is stated without why 125 was chosen, or why that code range separates good from bad."
+  },
+  {
+   "n": 8,
+   "severity": "gap",
+   "kind": "missing_why",
+   "text": "'Git selects a nearby commit' (line 42): no reason is given for picking nearby rather than another midpoint."
+  },
+  {
+   "n": 9,
+   "severity": "gap",
+   "kind": "missing_why",
+   "text": "'Testing next to 900 does not reveal this: those commits are good' (line 68) is stated with little reasoning about why local checks cannot detect an earlier bad region."
+  },
+  {
+   "n": 10,
+   "severity": "excess",
+   "kind": "excess",
+   "text": "'In short' (lines 70–72) mostly repeats line 6. Its 'because a bug that appears once stays' adds a little."
+  },
+  {
+   "n": 11,
+   "severity": "excess",
+   "kind": "excess",
+   "text": "'The current commit is often the bad one' (line 10) is barely needed by this reader."
+  },
+  {
+   "n": 12,
+   "severity": "gap",
+   "kind": "gap",
+   "text": "It never says what happens if a skipped commit is the first bad commit: can bisect still name a single commit?"
+  },
+  {
+   "n": 13,
+   "severity": "gap",
+   "kind": "gap",
+   "text": "Behaviour for exit codes above 127 in `git bisect run` is not covered."
+  },
+  {
+   "n": 14,
+   "severity": "gap",
+   "kind": "gap",
+   "text": "It does not explain how 'halfway' is chosen in history with merges, which daily git users will have."
+  },
+  {
+   "n": 15,
+   "severity": "gap",
+   "kind": "gap",
+   "text": "There is no guidance on recovering from a wrong good or bad mark mid-session."
+  },
+  {
+   "n": 16,
+   "severity": "gap",
+   "kind": "gap",
+   "text": "It does not say how to choose the good commit or how far back to go. 'A few' spread-out checks for an intermittent bug is vague."
+  }
+ ],
+ "earlier_grades": [
+  {
+   "scores": {
+    "1": 2,
+    "2": 2,
+    "3": 2,
+    "4": 2,
+    "5": 1,
+    "6": 2,
+    "7": 2,
+    "8": 2,
+    "9": 2,
+    "10": 2,
+    "11": 1
+   },
+   "reasons": {
+    "5": "The assumption is stated correctly. The 'established fact' is wrong: the model's fact is that the step count is logarithmic because each step halves the range. The reviewer instead names the counterexample outcome (bisect names 900), which only happens when the assumption is broken.",
+    "11": "The counterexample is correct (bug in 300–400, gone, back from 900; first test at 500 is good; bisect names 900, not 300). The answer never states the claim that bisect names the first bad commit when the bug appears once and stays. It also lacks the holding example: good at 0, bad from 300 on, bisect names 300 after 10 tests. The re-bisect between a commit before 300 and 350 is a different scenario and does not replace that example."
+   },
+   "pass": false
+  }
+ ]
+}

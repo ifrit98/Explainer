@@ -10,12 +10,31 @@ values:
   defaults: {client_to_edge_km: 300, edge_to_origin_km: 6000}
   default_results_ms: {no_cdn: 200, miss: 90, hit: 10, rtt_edge: 3, rtt_origin: 60}
   sliders: {client_to_edge_km: [50, 2000], edge_to_origin_km: [500, 15000]}
+  far_edge: {client_to_edge_km: 2000, edge_to_origin_km: 1000, no_cdn: 50, miss: 91, hit: 61}
 
 allow: [2, 3]      # "two thirds"; "3 ×" round trips in formulas
 
 require:
   - path: default_results_ms
     in: [html]
+
+claims:
+  - id: mechanism-round-trips
+    kind: mechanism
+    statement: "A new HTTPS request costs 3 round trips (TCP, TLS 1.3, the request), each about 1 ms per 100 km of distance."
+    example: "No CDN, origin 6,000 km away: 3 × 60 ms + 20 ms at the origin = 200 ms."
+  - id: why-edge
+    kind: why
+    about: []
+    statement: "A CDN saves time by moving the round trips onto a short path, not by answering faster."
+    alternative: "A faster origin server."
+    counterexample: "Cutting the origin's 20 ms of processing to 0 saves 20 ms of 200; a hit at a 300 km edge takes 10 ms."
+  - id: guarantee-miss
+    kind: guarantee
+    statement: "A miss is still faster than no CDN when the edge is much closer than the origin: it adds one long round trip on an open connection."
+    example: "Edge 300 km, origin 6,000 km: miss 90 ms against 200 ms."
+    counterexample: "Edge 2,000 km, origin 1,000 km: miss 91 ms and hit 61 ms against 50 ms with no CDN."
+    ask: "When is a CDN cache miss slower than having no CDN at all?"
 
 quiz:
   - q: "With no CDN and an origin 6,000 km away, about how long does a new HTTPS request take in this model, and why?"

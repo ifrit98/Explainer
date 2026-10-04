@@ -1,0 +1,213 @@
+{
+ "tool": "probe",
+ "rendering": null,
+ "slug": "rates-inflation",
+ "at": "2026-10-04T06:08:02",
+ "model": "default",
+ "prompt_sha": "f18db0a57419",
+ "reply": {
+  "gaps": [
+   {
+    "rule": 2,
+    "severity": "main",
+    "about": "The claim 'anchored expectations make disinflation cheaper' is backed by the wrong scenario, and the model's own hike results seem to contradict it",
+    "why_it_matters": "'Cheaper' means less lost output for each point of inflation removed. The 'holds' example is a supply shock with no hike, so nothing is being disinflated. Worse, the hike rows point the other way. Anchored: inflation falls 0.31 points for a −0.80% output gap. Weakly anchored: it falls 0.69 points for a −0.90% gap, so weak anchoring buys more disinflation per unit of output lost. A reader will conclude the opposite of the claim.",
+    "suggested_addition": "State the claim as a ratio: lost output divided by points of inflation removed. Add a scenario that starts with inflation above target, e.g. a supply shock in Q1 plus a 1-point hike from Q2 to Q9. Compare the cumulative output gap needed to bring inflation back under 0.5 points when anchored versus weakly anchored. Or restate the claim as: 'anchored: a supply shock dies out with no hike (0.00 at Q16); weakly anchored: +0.44 at Q16 unless the bank causes a recession.' Also explain why de-anchored adaptive expectations make a hike look stronger in the toy."
+   },
+   {
+    "rule": 3,
+    "severity": "main",
+    "about": "'Credible' and 'anchored' are used for opposite behavior of expected inflation",
+    "why_it_matters": "In the causal chain (line 35), a credible bank makes expected inflation fall when it hikes. In the toy, anchored (w = 0.9) means expected inflation barely moves at all: πe = 0.1·π(t−1). So the stronger expectations channel shows up in the weakly anchored case. The reader can't tell which concept the toggle shows.",
+    "suggested_addition": "Use one name for each concept. 'Anchored' = πe stays near target whatever inflation does. 'Credible disinflation' = πe falls because the bank announced it, which the toy does not model. Say plainly that the toy's expectations are backward-looking. Example: after π = −0.31, anchored πe = −0.03 and weakly anchored πe = −0.19."
+   },
+   {
+    "rule": 4,
+    "severity": "main",
+    "about": "The toy never shows a bank lowering inflation that is above target",
+    "why_it_matters": "The central question is how a hike lowers inflation. Every hike scenario starts at target (steady state), and the supply-shock scenarios never hike. There is no run where elevated inflation is brought down by a hike, so the page never answers its own question.",
+    "suggested_addition": "Add the scenario: weakly anchored, supply shock +2 in Q1, 1-point hike held Q2 to Q9. Report peak inflation, inflation at Q8 and Q16, and the lowest output gap, all compared with the no-hike path (+2.40 at Q2, +0.44 at Q16)."
+   },
+   {
+    "rule": 2,
+    "severity": "main",
+    "about": "'How long it takes': the toy's timing comes from when the hike is reversed, not from the lag",
+    "why_it_matters": "Output is lowest at Q9 and inflation at Q11 because the hike is reversed after 8 quarters. A permanent hike would put both lows somewhere else. A reader will take '11 quarters' as the toy's lag and compare it with the stated 1 to 2 years. The hike's start quarter is also never stated; the numbers imply Q1.",
+    "suggested_addition": "State that the hike starts in Q1 and is reversed in Q9. Add a permanent-hike row, which the bank would only do for illustration. Rough long-run values: anchored, output gap about −0.86% and inflation about −0.34 points; weakly anchored, about −1.48% and −1.30 points. Report the quarter by which half of that effect has arrived."
+   },
+   {
+    "rule": 5,
+    "severity": "main",
+    "about": "No meaning is given for the output gap or for an inflation change in points",
+    "why_it_matters": "The output gap is the cost side of the answer. Without a translation, '−0.80%' means nothing to someone with no economics training. It is also unclear what '−0.31 points' does to a headline rate.",
+    "suggested_addition": "Example: a −0.80% gap means the economy produces 0.8% less than it can without speeding up inflation. In a $28T economy that is about $220B a year, and by a common rule of thumb (Okun's law) roughly +0.4 points of unemployment. '−0.31 points' takes inflation from 3.0% to about 2.7%. Note that these sizes are constructed and only the ordering is meant."
+   },
+   {
+    "rule": 1,
+    "severity": "main",
+    "about": "Why expectations are backward-looking (adaptive) in the toy",
+    "why_it_matters": "This one modeling choice decides the anchored/weak results, and the neo-Fisherian result needs forward-looking expectations. The natural alternative is forward-looking expectations that react to the announced path of rates. With that, an announced hike could lower πe right away, and the line-35 credibility channel would appear in Q1, not after Q3.",
+    "suggested_addition": "Add a 'why this form' row: πe = (1−w)·π(t−1) versus 'πe follows the announced policy'. Say what changes: the anchored path would move earlier, e.g. inflation lower in Q1 to Q2 instead of starting at Q3."
+   },
+   {
+    "rule": 3,
+    "severity": "edge",
+    "about": "Toy symbols are undefined: i, Δi, π, πe, y, w, 'cost', 'steady state'",
+    "why_it_matters": "Δi reads as a quarter-to-quarter change, but it is the level of the policy rate relative to steady state. w is the weight on the target. 'cost' is a 0/1 switch. None of these appear in Entities.",
+    "suggested_addition": "Add a symbol table: y = output gap (%), π = inflation above target, πe = expected inflation above target, Δi = policy rate above its starting level (1 during Q1 to Q8, then 0), w = weight on target (0.9 or 0.4), cost = 1 if the cost channel is on, else 0."
+   },
+   {
+    "rule": 3,
+    "severity": "edge",
+    "about": "'Price puzzle' and 'cost channel' are treated as one concept",
+    "why_it_matters": "Under Epistemic status, the price puzzle is an empirical finding and the cost channel is one possible explanation. The Concrete cases table labels the cost-channel run 'the price puzzle', merging the two.",
+    "suggested_addition": "'Price puzzle' = studies find prices rise for a while after a hike. 'Cost channel' = the toy's +0.15·Δi term, which produces +0.16 at Q3."
+   },
+   {
+    "rule": 1,
+    "severity": "edge",
+    "about": "Why the inflation equation uses a two-quarter lag, y(t−2), and why the output gap depends on its own last value (0.7·y)",
+    "why_it_matters": "The natural alternatives are y(t−1) and no persistence (coefficient 0). Without the 0.7 term, the gap would jump to −0.25 and stay there: no build-up, and the lowest point would come in Q2. That is the 'over months' claim.",
+    "suggested_addition": "Without 0.7: the gap is −0.25 from Q2 on. With it, the gap builds toward about −0.83. With y(t−1), inflation's low would move from Q11 to Q10."
+   },
+   {
+    "rule": 2,
+    "severity": "edge",
+    "about": "Supply shock, no hike, anchored: the output gap is listed as 0, but the equations give a small positive value",
+    "why_it_matters": "With w = 0.9, πe(Q2) = 0.1·2 = 0.2. That lowers the real rate, giving y ≈ +0.05 in Q3. The table contradicts its own equations, and the weakly anchored row's 'persists' overstates things: the gap is still fading, from 2.40 to 0.44.",
+    "suggested_addition": "Report the anchored gap as 'small positive, about +0.05 at its peak'. Change 'persists' to 'fades slowly, about 12% per quarter'. Recompute both."
+   },
+   {
+    "rule": 1,
+    "severity": "edge",
+    "about": "The toy passes the policy rate through to market rates fully and at once",
+    "why_it_matters": "This contradicts the causal chain, which says fixed-rate mortgages adjust slowly. A natural alternative is partial pass-through, e.g. 50% in the first year.",
+    "suggested_addition": "Say the toy assumes full, immediate pass-through. Partial pass-through, e.g. half the hike reaching borrowers, would roughly halve the −0.80 gap and delay its low."
+   },
+   {
+    "rule": 3,
+    "severity": "edge",
+    "about": "'Neutral real rate' appears only in Scope and is never defined, yet a 'higher real rate' only restrains demand when it is above neutral",
+    "why_it_matters": "The causal chain says real rate ↑ → demand ↓, but what matters is whether the rate is above or below neutral. Starting from a 0% real rate with neutral at 1%, a 1-point hike is not restrictive.",
+    "suggested_addition": "Define neutral rate as 'the real rate at which output gap = 0'. The toy measures everything from it. Keep how it is estimated out of scope."
+   }
+  ],
+  "excess": [
+   "The detail on how the price puzzle might be identified ('studies may miss information the central bank had'): an extra explanation of a statistical dispute that the central question doesn't need",
+   "The Representation decision's L4 level (raw equations) goes beyond what a reader with no economics training needs, unless the symbol table is added"
+  ],
+  "next_questions": [
+   {
+    "q": "How much unemployment or lost output does it cost to bring inflation down by 1 point?",
+    "answered_by_model": false,
+    "declared_out_of_scope": false
+   },
+   {
+    "q": "If inflation comes from an oil or supply shock, why does raising rates help at all?",
+    "answered_by_model": false,
+    "declared_out_of_scope": false
+   },
+   {
+    "q": "How does the bank decide how far to raise rates and when to stop, and what is 'neutral'?",
+    "answered_by_model": false,
+    "declared_out_of_scope": true
+   },
+   {
+    "q": "With lags of 1–2 years, how does the bank avoid overshooting into a recession?",
+    "answered_by_model": false,
+    "declared_out_of_scope": false
+   },
+   {
+    "q": "Do government deficits or quantitative easing work against the rate hikes?",
+    "answered_by_model": false,
+    "declared_out_of_scope": true
+   }
+  ]
+ },
+ "findings": [
+  {
+   "n": 1,
+   "severity": "main",
+   "kind": "rule 2",
+   "text": "The claim 'anchored expectations make disinflation cheaper' is backed by the wrong scenario, and the model's own hike results seem to contradict it → State the claim as a ratio: lost output divided by points of inflation removed. Add a scenario that starts with inflation above target, e.g. a supply shock in Q1 plus a 1-point hike from Q2 to Q9. Compare the cumulative output gap needed to bring inflation back under 0.5 points when anchored versus weakly anchored. Or restate the claim as: 'anchored: a supply shock dies out with no hike (0.00 at Q16); weakly anchored: +0.44 at Q16 unless the bank causes a recession.' Also explain why de-anchored adaptive expectations make a hike look stronger in the toy."
+  },
+  {
+   "n": 2,
+   "severity": "main",
+   "kind": "rule 3",
+   "text": "'Credible' and 'anchored' are used for opposite behavior of expected inflation → Use one name for each concept. 'Anchored' = πe stays near target whatever inflation does. 'Credible disinflation' = πe falls because the bank announced it, which the toy does not model. Say plainly that the toy's expectations are backward-looking. Example: after π = −0.31, anchored πe = −0.03 and weakly anchored πe = −0.19."
+  },
+  {
+   "n": 3,
+   "severity": "main",
+   "kind": "rule 4",
+   "text": "The toy never shows a bank lowering inflation that is above target → Add the scenario: weakly anchored, supply shock +2 in Q1, 1-point hike held Q2 to Q9. Report peak inflation, inflation at Q8 and Q16, and the lowest output gap, all compared with the no-hike path (+2.40 at Q2, +0.44 at Q16)."
+  },
+  {
+   "n": 4,
+   "severity": "main",
+   "kind": "rule 2",
+   "text": "'How long it takes': the toy's timing comes from when the hike is reversed, not from the lag → State that the hike starts in Q1 and is reversed in Q9. Add a permanent-hike row, which the bank would only do for illustration. Rough long-run values: anchored, output gap about −0.86% and inflation about −0.34 points; weakly anchored, about −1.48% and −1.30 points. Report the quarter by which half of that effect has arrived."
+  },
+  {
+   "n": 5,
+   "severity": "main",
+   "kind": "rule 5",
+   "text": "No meaning is given for the output gap or for an inflation change in points → Example: a −0.80% gap means the economy produces 0.8% less than it can without speeding up inflation. In a $28T economy that is about $220B a year, and by a common rule of thumb (Okun's law) roughly +0.4 points of unemployment. '−0.31 points' takes inflation from 3.0% to about 2.7%. Note that these sizes are constructed and only the ordering is meant."
+  },
+  {
+   "n": 6,
+   "severity": "main",
+   "kind": "rule 1",
+   "text": "Why expectations are backward-looking (adaptive) in the toy → Add a 'why this form' row: πe = (1−w)·π(t−1) versus 'πe follows the announced policy'. Say what changes: the anchored path would move earlier, e.g. inflation lower in Q1 to Q2 instead of starting at Q3."
+  },
+  {
+   "n": 7,
+   "severity": "edge",
+   "kind": "rule 3",
+   "text": "Toy symbols are undefined: i, Δi, π, πe, y, w, 'cost', 'steady state' → Add a symbol table: y = output gap (%), π = inflation above target, πe = expected inflation above target, Δi = policy rate above its starting level (1 during Q1 to Q8, then 0), w = weight on target (0.9 or 0.4), cost = 1 if the cost channel is on, else 0."
+  },
+  {
+   "n": 8,
+   "severity": "edge",
+   "kind": "rule 3",
+   "text": "'Price puzzle' and 'cost channel' are treated as one concept → 'Price puzzle' = studies find prices rise for a while after a hike. 'Cost channel' = the toy's +0.15·Δi term, which produces +0.16 at Q3."
+  },
+  {
+   "n": 9,
+   "severity": "edge",
+   "kind": "rule 1",
+   "text": "Why the inflation equation uses a two-quarter lag, y(t−2), and why the output gap depends on its own last value (0.7·y) → Without 0.7: the gap is −0.25 from Q2 on. With it, the gap builds toward about −0.83. With y(t−1), inflation's low would move from Q11 to Q10."
+  },
+  {
+   "n": 10,
+   "severity": "edge",
+   "kind": "rule 2",
+   "text": "Supply shock, no hike, anchored: the output gap is listed as 0, but the equations give a small positive value → Report the anchored gap as 'small positive, about +0.05 at its peak'. Change 'persists' to 'fades slowly, about 12% per quarter'. Recompute both."
+  },
+  {
+   "n": 11,
+   "severity": "edge",
+   "kind": "rule 1",
+   "text": "The toy passes the policy rate through to market rates fully and at once → Say the toy assumes full, immediate pass-through. Partial pass-through, e.g. half the hike reaching borrowers, would roughly halve the −0.80 gap and delay its low."
+  },
+  {
+   "n": 12,
+   "severity": "edge",
+   "kind": "rule 3",
+   "text": "'Neutral real rate' appears only in Scope and is never defined, yet a 'higher real rate' only restrains demand when it is above neutral → Define neutral rate as 'the real rate at which output gap = 0'. The toy measures everything from it. Keep how it is estimated out of scope."
+  },
+  {
+   "n": 13,
+   "severity": "excess",
+   "kind": "model entry",
+   "text": "The detail on how the price puzzle might be identified ('studies may miss information the central bank had'): an extra explanation of a statistical dispute that the central question doesn't need"
+  },
+  {
+   "n": 14,
+   "severity": "excess",
+   "kind": "model entry",
+   "text": "The Representation decision's L4 level (raw equations) goes beyond what a reader with no economics training needs, unless the symbol table is added"
+  }
+ ]
+}

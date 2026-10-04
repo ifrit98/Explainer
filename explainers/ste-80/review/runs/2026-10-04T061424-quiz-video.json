@@ -1,0 +1,203 @@
+{
+ "tool": "quiz",
+ "rendering": "video",
+ "slug": "ste-80",
+ "at": "2026-10-04T06:14:14",
+ "model": "default",
+ "prompt_sha": "a4eaa54e7bbc",
+ "reply": {
+  "answers": {
+   "1": "The main objects are: STE-80 (a writing style for technical text); ASD-STE100, Simplified Technical English (a standard for aircraft maintenance manuals, which STE-80 comes from); STE's writing rules and its approved dictionary; the reader of a manual, who reads under time pressure and often in a second language; an example sentence from a manual; a word count (the orange bar); and three rules: (1) use simple words, (2) give the instruction directly, (3) use a concrete verb.",
+   "2": "STE-80 comes from ASD-STE100. It keeps STE's writing rules and drops the approved dictionary, which is what the name's 'eighty percent of the way to strict STE' refers to. The rules are applied one after another to one manual sentence, and each rule rewrites the output of the one before. The orange bar shows the word count after each step: 16, then 15, then 13, then 9. The reader is the reason for the rules: every word must help someone reading quickly in a second language.",
+   "3": "Manual readers work under time pressure, often in a second language, so every word must help. Simple words, direct instructions and concrete verbs cut the reading work while keeping the same action (fill the reservoir before starting the machine).",
+   "4": "The video treats the reader's reading effort as the key variable. If a word or phrase adds effort without adding action (for example 'It is imperative that', 'replenished', 'operation'), it should be replaced or removed. This can leave the word count almost unchanged, as rule one shows (16 to 15), because the aim is less work, not fewer words. The video does not show a case where cutting words adds effort, so I cannot predict when the rules would stop helping.",
+   "5": "Assumption: simpler and more concrete wording means less work for the reader. The video asserts this and does not show evidence. Another simplification is that 'operation' and 'machine' are treated as meaning the same thing. Observation: in the example the word count fell from 16 to 9 and the action stayed the same. There is also the stated fact that STE comes from a standard for aircraft maintenance manuals.",
+   "6": "STE-80 is a writing style for technical text. It is based on Simplified Technical English (ASD-STE100), keeping its writing rules but dropping its approved dictionary. Because manuals are read quickly and often in a second language, every word must help the reader. Applied to one 16-word sentence, three rules (simple words, direct instruction, concrete verb) give 'Fill the hydraulic reservoir before you start the machine', which is 9 words with the same action. The goal is less reading work, not fewer words, and STE-80 also has rules for short sentences, one meaning per word, and no filler.",
+   "7": "Rule three was hardest. It makes two separate changes at once ('make sure that … is full' becomes 'fill', and 'operation' becomes 'machine'), and the transition frame at 67.47s shows overlapping, garbled text. Two things would help: showing the verb change and the noun change as separate steps, and saying why 'checking a result' is harder than 'naming an action'. The meaning of '80 percent' was also unclear, and so was how to judge a word 'simple' without the dictionary.",
+   "8": "Rule one replaces formal or less common words with simpler ones: 'replenished' becomes 'full', 'prior to' becomes 'before', 'commencing' becomes 'starting'. Only one word disappears because 'prior to' becomes 'before'. It helps because each word is easier to read, especially for second-language readers under time pressure. The video states this but does not say what makes a word 'simple'.",
+   "9": "Rule three removes the most: four words (13 to 9). It removes 'Make sure that' and 'is full' by turning them into the single verb 'fill', and it changes 'operation' to 'machine'. Rule two removes two words (15 to 13) by cutting the opening 'It is imperative that the operator ensures'. Rule one removes one.",
+   "10": "No. The video says 'The goal is less work, not fewer words', and rule one shows a change that is worth making even though it cuts only one word. Still, the video gives no example where a shorter sentence is worse, and it lists 'short sentences' as a further rule, so it does not say where the limit is."
+  },
+  "audit": {
+   "terms": [
+    "The standard has four names: 'ASD-STE100' (4.3s), 'Simplified Technical English' (4.3s), 'strict STE' (12.4s) and 'STE' (title card). Their relationship is never stated.",
+    "The same object is called 'operation' (sentence on screen and 69.5s, 'the vague noun operation') and then 'machine' (69.5s, 75.8s). These are presented as the same thing, but they are different words with different meanings.",
+    "The goal is described as 'help the reader' (30.5s), 'easier to read' (44.3s) and 'less work to read' (77.8s). These seem to be one concept with three names.",
+    "'Instruction' (49.1s, 52.3s, rule two) overlaps with 'action' (67.5s, 'names the action') and 'what to do' (55.7s)."
+   ],
+   "unexplained": [
+    "'eighty percent of the way to strict STE' (12.4–16.2s). It is not said what is measured, or what 70 or 90 would mean beyond dropping the dictionary.",
+    "The orange word-count bar and its values (16, 15, 13, 12, 9 words). The video ends by saying the goal is not fewer words, so it is unclear what a higher or lower count tells the reader.",
+    "The '12 words' shown in the 67.47s transition frame. It is never narrated and does not match any step."
+   ],
+   "missing_why": [
+    "Rule one (34.1s): no criterion for what makes a word 'simple'. This matters more because the approved dictionary was dropped (16.3s), so the reader has no list to check against.",
+    "Rule three (64.0s): 'asks the reader to check a result' versus 'names the action'. It is not said why checking a result is harder or worse.",
+    "'operation' becomes 'machine' (69.5s): it is not said why 'operation' is 'vague', or why this belongs to the 'concrete verb' rule when it is a noun change.",
+    "Why STE-80 keeps the rules and drops the dictionary (16.3s): no reason is given."
+   ],
+   "pace": [
+    "67.47s: the rule-three transition shows overlapping, garbled text ('Make sure the hydraulic reservoir … machine. operation.') and a '12 words' count while the narration explains the verb.",
+    "38.74s: the 'limit-length' frame shows struck-through words in transition while the narration is already giving the swaps.",
+    "86.03s: the extra rules (short sentences, one meaning per word, no filler) appear only as very faint small text, and the video ends with no pause.",
+    "75.76s: the key result 'Sixteen words became nine' gets about 2 seconds. The original sentence only reappears for comparison at 77.69s, after the narration has moved on to 'the goal is less work'."
+   ],
+   "excess": [
+    "86.03s: 'STE-80 has more rules than these three: short sentences, one meaning per word, and no filler.' This lists rules with no explanation or example, and none of the questions or the argument uses them."
+   ]
+  },
+  "gaps": [
+   "The video does not say how to judge a word 'simple' now that the approved dictionary is dropped.",
+   "'80 percent' is not defined as a measure.",
+   "Rule three combines a verb change with a noun change ('operation' becomes 'machine') and does not justify the noun change. It also changes the meaning.",
+   "There is no example where a shorter sentence is worse, so 'less work, not fewer words' is stated but not shown.",
+   "The relationship between ASD-STE100, STE and STE-80 is only sketched. The STE writing rules that STE-80 'keeps' are not listed, apart from three shown and three named."
+  ]
+ },
+ "grade": {
+  "scores": {
+   "1": 2,
+   "2": 2,
+   "3": 2,
+   "4": 2,
+   "5": 1,
+   "6": 2,
+   "7": 2,
+   "8": 2,
+   "9": 2,
+   "10": 2
+  },
+  "reasons": {
+   "5": "The answer misses the model's stated assumption that word count is a proxy for reading effort only when meaning stays the same. It names a different assumption instead: that simpler wording means less work. It does correctly identify the simplification of 'operation' to 'machine' and the 16-to-9 observation."
+  },
+  "pass": true
+ },
+ "findings": [
+  {
+   "n": 1,
+   "severity": "gap",
+   "kind": "terms",
+   "text": "The standard has four names: 'ASD-STE100' (4.3s), 'Simplified Technical English' (4.3s), 'strict STE' (12.4s) and 'STE' (title card). Their relationship is never stated."
+  },
+  {
+   "n": 2,
+   "severity": "gap",
+   "kind": "terms",
+   "text": "The same object is called 'operation' (sentence on screen and 69.5s, 'the vague noun operation') and then 'machine' (69.5s, 75.8s). These are presented as the same thing, but they are different words with different meanings."
+  },
+  {
+   "n": 3,
+   "severity": "gap",
+   "kind": "terms",
+   "text": "The goal is described as 'help the reader' (30.5s), 'easier to read' (44.3s) and 'less work to read' (77.8s). These seem to be one concept with three names."
+  },
+  {
+   "n": 4,
+   "severity": "gap",
+   "kind": "terms",
+   "text": "'Instruction' (49.1s, 52.3s, rule two) overlaps with 'action' (67.5s, 'names the action') and 'what to do' (55.7s)."
+  },
+  {
+   "n": 5,
+   "severity": "gap",
+   "kind": "unexplained",
+   "text": "'eighty percent of the way to strict STE' (12.4–16.2s). It is not said what is measured, or what 70 or 90 would mean beyond dropping the dictionary."
+  },
+  {
+   "n": 6,
+   "severity": "gap",
+   "kind": "unexplained",
+   "text": "The orange word-count bar and its values (16, 15, 13, 12, 9 words). The video ends by saying the goal is not fewer words, so it is unclear what a higher or lower count tells the reader."
+  },
+  {
+   "n": 7,
+   "severity": "gap",
+   "kind": "unexplained",
+   "text": "The '12 words' shown in the 67.47s transition frame. It is never narrated and does not match any step."
+  },
+  {
+   "n": 8,
+   "severity": "gap",
+   "kind": "missing_why",
+   "text": "Rule one (34.1s): no criterion for what makes a word 'simple'. This matters more because the approved dictionary was dropped (16.3s), so the reader has no list to check against."
+  },
+  {
+   "n": 9,
+   "severity": "gap",
+   "kind": "missing_why",
+   "text": "Rule three (64.0s): 'asks the reader to check a result' versus 'names the action'. It is not said why checking a result is harder or worse."
+  },
+  {
+   "n": 10,
+   "severity": "gap",
+   "kind": "missing_why",
+   "text": "'operation' becomes 'machine' (69.5s): it is not said why 'operation' is 'vague', or why this belongs to the 'concrete verb' rule when it is a noun change."
+  },
+  {
+   "n": 11,
+   "severity": "gap",
+   "kind": "missing_why",
+   "text": "Why STE-80 keeps the rules and drops the dictionary (16.3s): no reason is given."
+  },
+  {
+   "n": 12,
+   "severity": "gap",
+   "kind": "pace",
+   "text": "67.47s: the rule-three transition shows overlapping, garbled text ('Make sure the hydraulic reservoir … machine. operation.') and a '12 words' count while the narration explains the verb."
+  },
+  {
+   "n": 13,
+   "severity": "gap",
+   "kind": "pace",
+   "text": "38.74s: the 'limit-length' frame shows struck-through words in transition while the narration is already giving the swaps."
+  },
+  {
+   "n": 14,
+   "severity": "gap",
+   "kind": "pace",
+   "text": "86.03s: the extra rules (short sentences, one meaning per word, no filler) appear only as very faint small text, and the video ends with no pause."
+  },
+  {
+   "n": 15,
+   "severity": "gap",
+   "kind": "pace",
+   "text": "75.76s: the key result 'Sixteen words became nine' gets about 2 seconds. The original sentence only reappears for comparison at 77.69s, after the narration has moved on to 'the goal is less work'."
+  },
+  {
+   "n": 16,
+   "severity": "excess",
+   "kind": "excess",
+   "text": "86.03s: 'STE-80 has more rules than these three: short sentences, one meaning per word, and no filler.' This lists rules with no explanation or example, and none of the questions or the argument uses them."
+  },
+  {
+   "n": 17,
+   "severity": "gap",
+   "kind": "gap",
+   "text": "The video does not say how to judge a word 'simple' now that the approved dictionary is dropped."
+  },
+  {
+   "n": 18,
+   "severity": "gap",
+   "kind": "gap",
+   "text": "'80 percent' is not defined as a measure."
+  },
+  {
+   "n": 19,
+   "severity": "gap",
+   "kind": "gap",
+   "text": "Rule three combines a verb change with a noun change ('operation' becomes 'machine') and does not justify the noun change. It also changes the meaning."
+  },
+  {
+   "n": 20,
+   "severity": "gap",
+   "kind": "gap",
+   "text": "There is no example where a shorter sentence is worse, so 'less work, not fewer words' is stated but not shown."
+  },
+  {
+   "n": 21,
+   "severity": "gap",
+   "kind": "gap",
+   "text": "The relationship between ASD-STE100, STE and STE-80 is only sketched. The STE writing rules that STE-80 'keeps' are not listed, apart from three shown and three named."
+  }
+ ]
+}

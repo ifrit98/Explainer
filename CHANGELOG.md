@@ -1,9 +1,17 @@
 # Changelog
 
-## Unreleased
+## 0.7.0 — 2026-10-04
 
-- **Every example has a `narrative.md` and a v0.6.0 cold read.** The backfill for git-bisect, git-objects, cdn-request, and ste-80 found blocking problems in all four, two of them errors: the git-bisect remedy for a bug that comes and goes could not find the bug in its own example, and the CDN page said "faster" over bars that showed the CDN slower. Fixed, with records in each `review/understanding.md`. ste-80 re-rendered (16 → 15 → 13 → 9 words, with the count now honest; 83 s).
-- **GitHub page:** the README and the landing page lead with first-principles answers and the chat eval, with an interactive page next to a video at the top; repository description and topics updated.
+Reviews that run themselves, and a record of which findings matter.
+
+- **`--run` for the probe, the cold read, and the blind test.** One fresh `claude -p` call reads only the explainer's folder (no settings, no MCP servers, no CLAUDE.md, no stdin) and the reply is saved as `review/runs/<time>-<tool>[-<rendering>].json` with numbered findings. A blind test is scored by a second fresh call against the rubric; `--regrade` scores saved answers again.
+- **Adoption log.** `explainer decide` records what the author did with each finding (`review/decisions.yaml`); `explainer findings --stats` reports adoption per tool and severity. First measurement: cold-read blocking findings 100% adopted, the probe's main gaps 83%, cold-read edge findings 3%, blind-test audit gaps 9%. The prompts changed in response (edge findings only where the reader would stop; at most five audit items per list), and so did the grader's rubric, which had failed correct answers for not repeating the rendering's own example.
+- **Diagram budget:** `explainer check` warns when the first diagram has more than 9 nodes (`budget.diagram` declares more, with a reason).
+- **Review sheets** take each bookmark frame after its animation has finished, so readers no longer report mid-animation overlaps.
+- **New example: `rates-inflation`.** How a higher policy rate lowers inflation, on a Stage 3 page with a toy model and a toggle for each assumption: anchored expectations, a supply shock, the disputed cost channel (the price puzzle), and the disputed neo-Fisherian view. Every claim is tagged established, estimate, disputed, or constructed. Its probe found a claim the toy contradicted ("anchoring makes disinflation cheaper") and its cold read found the toy's timing outside the real-world estimate; both fixed.
+- **Verification gaps closed:** claims for git-objects, cdn-request, and ste-80; second-round cold reads of the six renderings fixed in the previous round (git-bisect, git-objects, cdn-request, ste-80, attention, the sky-blue diagram); blind tests of the four backfilled ones, all passing after fixes. ste-80 went through five rounds: rule three is now "use concrete words" (it changed a noun too), the word count is honest, and each swap lands as it is spoken.
+- **Since 0.6.0, every example has a `narrative.md` and a v0.6.0 cold read.** The backfill for git-bisect, git-objects, cdn-request, and ste-80 found blocking problems in all four, two of them errors: the git-bisect remedy for a bug that comes and goes could not find the bug in its own example, and the CDN page said "faster" over bars that showed the CDN slower. Fixed, with records in each `review/understanding.md`. ste-80 re-rendered (16 → 15 → 13 → 9 words, with the count now honest).
+- **GitHub page (since 0.6.0):** the README and the landing page lead with first-principles answers and the chat eval, with an interactive page next to a video at the top; repository description and topics updated.
 
 ## 0.6.0 — 2026-10-04
 

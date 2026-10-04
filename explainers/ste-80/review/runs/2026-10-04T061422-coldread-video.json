@@ -1,0 +1,550 @@
+{
+ "tool": "coldread",
+ "rendering": "video",
+ "slug": "ste-80",
+ "at": "2026-10-04T06:14:22",
+ "model": "default",
+ "prompt_sha": "b6ca366fa8e4",
+ "reply": {
+  "captions": [
+   {
+    "at": "1 (00:00:00)",
+    "text": "This is STE-80. It is a writing style for technical text.",
+    "unresolved": [
+     "STE-80"
+    ],
+    "unsaid": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "2 (00:00:04)",
+    "text": "It comes from ASD-STE100, Simplified Technical English, a standard for",
+    "unresolved": [
+     "ASD-STE100",
+     "ASD (never expanded)",
+     "STE100 (the meaning of '100' is never given)"
+    ],
+    "unsaid": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "3 (00:00:10)",
+    "text": "aircraft maintenance manuals.",
+    "unresolved": [],
+    "unsaid": [
+     "On screen the subtitle 'a standard for aircraft maintenance manuals' is very faint, close to unreadable"
+    ],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "4 (00:00:12)",
+    "text": "The eighty means about eighty percent of the way to strict STE:",
+    "unresolved": [
+     "strict STE",
+     "STE (the abbreviation is never linked to 'Simplified Technical English' in words)"
+    ],
+    "unsaid": [],
+    "leap": [
+     "'eighty percent' is a measure, but no one says what is being measured. Caption 5 suggests rules versus dictionary, which is not a percentage."
+    ],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "5 (00:00:16)",
+    "text": "it keeps the writing rules and drops the approved dictionary.",
+    "unresolved": [
+     "the approved dictionary",
+     "the writing rules (no rule has been named yet)"
+    ],
+    "unsaid": [
+     "Nothing about 'eighty' or the rules/dictionary split appears on screen"
+    ],
+    "leap": [
+     "No reason is given for dropping the dictionary"
+    ],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "6-7 (00:00:20)",
+    "text": "Manuals are read under time pressure, often in a second language, so every word must help.",
+    "unresolved": [],
+    "unsaid": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "8 (00:00:26)",
+    "text": "Here is a typical sentence from a manual. It has sixteen words:",
+    "unresolved": [],
+    "unsaid": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "9 (00:00:30)",
+    "text": "the orange bar counts them. Some of the words do not help the reader.",
+    "unresolved": [],
+    "unsaid": [],
+    "leap": [
+     "The video says 'some of the words do not help' but does not say which words or why yet"
+    ],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "10 (00:00:34)",
+    "text": "Rule one. Use simple words. The words in red change.",
+    "unresolved": [
+     "simple (the video has said the dictionary that defines 'simple' is dropped, so this reader cannot know the test for 'simple')"
+    ],
+    "unsaid": [
+     "The label '1 Use simple words' appears at the top left",
+     "The red appears at 36.86s, after the words 'The words in red change'"
+    ],
+    "leap": [
+     "Without the approved dictionary, how does a writer decide which words are simple?"
+    ],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "11 (00:00:38)",
+    "text": "Replenished becomes full. Prior to becomes before.",
+    "unresolved": [],
+    "unsaid": [
+     "The bar goes from 16 to 15 words"
+    ],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "12 (00:00:42)",
+    "text": "Commencing becomes starting.",
+    "unresolved": [],
+    "unsaid": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "13 (00:00:44)",
+    "text": "Only one word goes, but each word is easier to read.",
+    "unresolved": [],
+    "unsaid": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "14 (00:00:49)",
+    "text": "Rule two. Give the instruction directly.",
+    "unresolved": [],
+    "unsaid": [
+     "Rule 1 dims and '2 Give the instruction directly' is added to the list at the top left. The list is never explained."
+    ],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "15 (00:00:52)",
+    "text": "Cut the opening that only says the instruction matters.",
+    "unresolved": [],
+    "unsaid": [
+     "'the operator ensures' and 'starting' are also red, but the words only mention the opening",
+     "The words do not say that 'the operator' is removed or why (the instruction now speaks to the reader)"
+    ],
+    "leap": [
+     "Why the third-person 'operator' becomes 'you' is not stated"
+    ],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "16 (00:00:55)",
+    "text": "Tell the reader what to do instead: make sure, before you start.",
+    "unresolved": [],
+    "unsaid": [
+     "'that' is kept in 'Make sure that…', and nobody comments on it"
+    ],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "17 (00:00:59)",
+    "text": "Thirteen words.",
+    "unresolved": [],
+    "unsaid": [],
+    "leap": [],
+    "excess": [
+     "'Thirteen words.' The bar already shows '13 words'"
+    ],
+    "purpose_unclear": false
+   },
+   {
+    "at": "18 (00:01:01)",
+    "text": "Rule three. Use a concrete verb.",
+    "unresolved": [
+     "concrete verb (defined only through the example)"
+    ],
+    "unsaid": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "19 (00:01:04)",
+    "text": "Make sure that it is full asks the reader to check a result.",
+    "unresolved": [],
+    "unsaid": [
+     "'Make sure that', 'is full' and 'operation.' are red"
+    ],
+    "leap": [
+     "Why is asking for a check worse than naming an action? The reason is implied but not stated."
+    ],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "20 (00:01:07)",
+    "text": "The verb fill names the action.",
+    "unresolved": [],
+    "unsaid": [
+     "A mid-change frame shows '12 words' with overlapping text that is hard to read"
+    ],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "21 (00:01:09)",
+    "text": "And the vague noun operation becomes the machine you start.",
+    "unresolved": [],
+    "unsaid": [],
+    "leap": [
+     "A noun change sits under a rule about verbs",
+     "'machine' adds a referent that the original sentence does not name. The video does not say how the writer knows it is a machine."
+    ],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "22 (00:01:13)",
+    "text": "Nine words.",
+    "unresolved": [],
+    "unsaid": [],
+    "leap": [],
+    "excess": [
+     "'Nine words.' The bar already shows '9 words', and caption 23 repeats the number"
+    ],
+    "purpose_unclear": false
+   },
+   {
+    "at": "23 (00:01:15)",
+    "text": "Sixteen words became nine.",
+    "unresolved": [],
+    "unsaid": [
+     "The rule list disappears from the screen"
+    ],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "24-25 (00:01:17)",
+    "text": "The reader still fills the reservoir before starting the machine, with less work to read it. The goal is less work, not fewer words.",
+    "unresolved": [],
+    "unsaid": [
+     "The original sentence returns, faint, above the result for comparison. The words do not point to it."
+    ],
+    "leap": [
+     "The video says 'not fewer words', yet the only visual measure all through was a word-count bar. Nothing says how 'less work' was measured."
+    ],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "26-27 (00:01:26)",
+    "text": "STE-80 has more rules than these three: short sentences, one meaning per word, and no filler.",
+    "unresolved": [],
+    "unsaid": [
+     "On screen the list is tiny and faint: 'more STE-80 rules: short sentences · one meaning per word · no filler'"
+    ],
+    "leap": [],
+    "excess": [
+     "The list of extra rules is new material at the close, and nothing explains or shows it"
+    ],
+    "purpose_unclear": true
+   }
+  ],
+  "blocking": [
+   "Caption 5 / 10: 'drops the approved dictionary' followed by 'Use simple words'. Without the dictionary, this reader has no test for 'simple'. Rule one, the first rule, cannot be applied as given.",
+   "Caption 24-25: 'The goal is less work, not fewer words' conflicts with the orange word-count bar ('the orange bar counts them'), which was the only measure of progress the video gave"
+  ],
+  "cuts": [
+   "Captions 17 and 22 ('Thirteen words.', 'Nine words.'): the bar already shows these counts",
+   "Caption 4 ('about eighty percent of the way to strict STE'): this is a vague measure, and caption 5 says the same thing more clearly",
+   "Captions 26-27: a list of rules that are never shown, added at the close"
+  ],
+  "question": {
+   "text": "What is STE-80, and how do its rules make a technical sentence easier to read?",
+   "known_at": "Caption 1 says what it is. The how-question becomes clear only at caption 9 ('Some of the words do not help the reader').",
+   "result_stated": "Yes, at caption 25: 'The goal is less work, not fewer words.' Caption 24 also says: 'The reader still fills the reservoir before starting the machine, with less work to read it.'"
+  },
+  "motive": "Reason to care: caption 6-7, 'Manuals are read under time pressure, often in a second language, so every word must help.' This reason covers manuals only. Nothing ties it to this reader's own technical text. Reason for the approach (keep the rules, drop the dictionary): missing.",
+  "close": "Partly. Caption 25, 'The goal is less work, not fewer words', states the general point. The video then ends on caption 26-27, 'STE-80 has more rules than these three…', a list of new rules, instead of returning to the opening question.",
+  "recap": "STE-80 is Simplified Technical English without the dictionary: use simple words, give instructions directly, and use action verbs. Those three rules turned a 16-word manual sentence into 'Fill the hydraulic reservoir before you start the machine.'",
+  "strongest": "Captions 18-22 (rule three): 'Make sure that it is full asks the reader to check a result. The verb fill names the action.' This gives a clear reason and a visible change.",
+  "weakest": "Captions 26-27: faint on-screen text and new rules that are never explained, at the point where the video should close. A runner-up is caption 10, 'Use simple words', which comes right after the video says the dictionary is dropped.",
+  "suggestions": [
+   "Say how STE-80 judges a 'simple' word once the dictionary is gone, for example a common short word with one meaning.",
+   "Expand ASD (AeroSpace and Defence Industries Association of Europe), or leave it out.",
+   "Either drop the word-count bar or tell viewers early that it is only a rough stand-in for reading effort.",
+   "Say why 'the operator' becomes 'you': STE writes instructions in the imperative.",
+   "Move the noun change (operation → machine) out of the concrete-verb rule, or say that it is a separate fix.",
+   "End by restating the question and the answer, not with a list of new rules."
+  ]
+ },
+ "findings": [
+  {
+   "n": 1,
+   "severity": "blocking",
+   "kind": "blocking",
+   "text": "Caption 5 / 10: 'drops the approved dictionary' followed by 'Use simple words'. Without the dictionary, this reader has no test for 'simple'. Rule one, the first rule, cannot be applied as given."
+  },
+  {
+   "n": 2,
+   "severity": "blocking",
+   "kind": "blocking",
+   "text": "Caption 24-25: 'The goal is less work, not fewer words' conflicts with the orange word-count bar ('the orange bar counts them'), which was the only measure of progress the video gave"
+  },
+  {
+   "n": 3,
+   "severity": "excess",
+   "kind": "cut",
+   "text": "Captions 17 and 22 ('Thirteen words.', 'Nine words.'): the bar already shows these counts"
+  },
+  {
+   "n": 4,
+   "severity": "excess",
+   "kind": "cut",
+   "text": "Caption 4 ('about eighty percent of the way to strict STE'): this is a vague measure, and caption 5 says the same thing more clearly"
+  },
+  {
+   "n": 5,
+   "severity": "excess",
+   "kind": "cut",
+   "text": "Captions 26-27: a list of rules that are never shown, added at the close"
+  },
+  {
+   "n": 6,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "1 (00:00:00): STE-80"
+  },
+  {
+   "n": 7,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "2 (00:00:04): ASD-STE100"
+  },
+  {
+   "n": 8,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "2 (00:00:04): ASD (never expanded)"
+  },
+  {
+   "n": 9,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "2 (00:00:04): STE100 (the meaning of '100' is never given)"
+  },
+  {
+   "n": 10,
+   "severity": "edge",
+   "kind": "unsaid",
+   "text": "3 (00:00:10): On screen the subtitle 'a standard for aircraft maintenance manuals' is very faint, close to unreadable"
+  },
+  {
+   "n": 11,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "4 (00:00:12): strict STE"
+  },
+  {
+   "n": 12,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "4 (00:00:12): STE (the abbreviation is never linked to 'Simplified Technical English' in words)"
+  },
+  {
+   "n": 13,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "4 (00:00:12): 'eighty percent' is a measure, but no one says what is being measured. Caption 5 suggests rules versus dictionary, which is not a percentage."
+  },
+  {
+   "n": 14,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "5 (00:00:16): the approved dictionary"
+  },
+  {
+   "n": 15,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "5 (00:00:16): the writing rules (no rule has been named yet)"
+  },
+  {
+   "n": 16,
+   "severity": "edge",
+   "kind": "unsaid",
+   "text": "5 (00:00:16): Nothing about 'eighty' or the rules/dictionary split appears on screen"
+  },
+  {
+   "n": 17,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "5 (00:00:16): No reason is given for dropping the dictionary"
+  },
+  {
+   "n": 18,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "9 (00:00:30): The video says 'some of the words do not help' but does not say which words or why yet"
+  },
+  {
+   "n": 19,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "10 (00:00:34): simple (the video has said the dictionary that defines 'simple' is dropped, so this reader cannot know the test for 'simple')"
+  },
+  {
+   "n": 20,
+   "severity": "edge",
+   "kind": "unsaid",
+   "text": "10 (00:00:34): The label '1 Use simple words' appears at the top left"
+  },
+  {
+   "n": 21,
+   "severity": "edge",
+   "kind": "unsaid",
+   "text": "10 (00:00:34): The red appears at 36.86s, after the words 'The words in red change'"
+  },
+  {
+   "n": 22,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "10 (00:00:34): Without the approved dictionary, how does a writer decide which words are simple?"
+  },
+  {
+   "n": 23,
+   "severity": "edge",
+   "kind": "unsaid",
+   "text": "11 (00:00:38): The bar goes from 16 to 15 words"
+  },
+  {
+   "n": 24,
+   "severity": "edge",
+   "kind": "unsaid",
+   "text": "14 (00:00:49): Rule 1 dims and '2 Give the instruction directly' is added to the list at the top left. The list is never explained."
+  },
+  {
+   "n": 25,
+   "severity": "edge",
+   "kind": "unsaid",
+   "text": "15 (00:00:52): 'the operator ensures' and 'starting' are also red, but the words only mention the opening"
+  },
+  {
+   "n": 26,
+   "severity": "edge",
+   "kind": "unsaid",
+   "text": "15 (00:00:52): The words do not say that 'the operator' is removed or why (the instruction now speaks to the reader)"
+  },
+  {
+   "n": 27,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "15 (00:00:52): Why the third-person 'operator' becomes 'you' is not stated"
+  },
+  {
+   "n": 28,
+   "severity": "edge",
+   "kind": "unsaid",
+   "text": "16 (00:00:55): 'that' is kept in 'Make sure that…', and nobody comments on it"
+  },
+  {
+   "n": 29,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "18 (00:01:01): concrete verb (defined only through the example)"
+  },
+  {
+   "n": 30,
+   "severity": "edge",
+   "kind": "unsaid",
+   "text": "19 (00:01:04): 'Make sure that', 'is full' and 'operation.' are red"
+  },
+  {
+   "n": 31,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "19 (00:01:04): Why is asking for a check worse than naming an action? The reason is implied but not stated."
+  },
+  {
+   "n": 32,
+   "severity": "edge",
+   "kind": "unsaid",
+   "text": "20 (00:01:07): A mid-change frame shows '12 words' with overlapping text that is hard to read"
+  },
+  {
+   "n": 33,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "21 (00:01:09): A noun change sits under a rule about verbs"
+  },
+  {
+   "n": 34,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "21 (00:01:09): 'machine' adds a referent that the original sentence does not name. The video does not say how the writer knows it is a machine."
+  },
+  {
+   "n": 35,
+   "severity": "edge",
+   "kind": "unsaid",
+   "text": "23 (00:01:15): The rule list disappears from the screen"
+  },
+  {
+   "n": 36,
+   "severity": "edge",
+   "kind": "unsaid",
+   "text": "24-25 (00:01:17): The original sentence returns, faint, above the result for comparison. The words do not point to it."
+  },
+  {
+   "n": 37,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "24-25 (00:01:17): The video says 'not fewer words', yet the only visual measure all through was a word-count bar. Nothing says how 'less work' was measured."
+  },
+  {
+   "n": 38,
+   "severity": "edge",
+   "kind": "unsaid",
+   "text": "26-27 (00:01:26): On screen the list is tiny and faint: 'more STE-80 rules: short sentences · one meaning per word · no filler'"
+  }
+ ]
+}

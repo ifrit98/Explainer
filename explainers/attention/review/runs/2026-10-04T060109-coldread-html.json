@@ -1,0 +1,405 @@
+{
+ "tool": "coldread",
+ "rendering": "html",
+ "slug": "attention",
+ "at": "2026-10-04T06:01:09",
+ "model": "default",
+ "prompt_sha": "638b7f3147fe",
+ "reply": {
+  "sections": [
+   {
+    "at": "Header (h1 'How self-attention works', lede + problem paragraph)",
+    "text": "States the result in one line (a weighted average of values, with weights from how well a query matches a key) and the problem: the vector for \"it\" is the same in every sentence, so it has to mix in information from \"animal\".",
+    "unresolved": [
+     "\"values\" (italicized, not defined until Level 1)",
+     "\"query\" (not defined until Level 1)",
+     "\"key\" (not defined until Level 1)",
+     "\"its new vector\" (new for what, and where it goes next, is only said in Level 2: \"The output goes on to the next layer\")"
+    ],
+    "unsaid": [],
+    "leap": [
+     "\"Self-attention does this with queries, keys, and values\": this names the method but gives no reason why a weighted average, or a query/key match, is the right way to mix in another token's information."
+    ],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Level 1 · One token, attending (prose + predict-1 + instrument panel)",
+    "text": "Hand-made 2-entry keys and queries (animate, place). Score = q·k/√d, softmax gives weights, output = Σ weight × value. A predict question, then an interactive panel: a slider for what \"it\" looks for, weight bars, the sentence shaded by weight, checkboxes to remove parts, a table, and output meters.",
+    "unresolved": [
+     "\"W_Q\" in the 'A separate query and key' note (\"The query of \\\"it\\\" comes from its own matrix, W_Q.\"). It is defined only in Level 2.",
+     "\"Causal mask (GPT-style)\": the checkbox label, with no prior explanation",
+     "\"(an encoder)\" in the mask note",
+     "\"its own vector (0.5, 0.5)\" in the separate-off note. No token vector of \"it\" has been given; (0.5, 0.5) appears only as its key in the table."
+    ],
+    "unsaid": [
+     "The keys of \"street\" (0, 2), \"it\" (0.5, 0.5) and \"tired\" (0, 0) appear only in the table and bar sublabels. The prose never gives them, and never says why \"tired\" has a zero key.",
+     "Values have three entries (animal, street, tired) for four tokens, and the value of \"it\" is (0, 0, 0). The output meters have no \"it\" row. None of this is explained until Level 2 step 4.",
+     "The slider rotates the query and keeps its length at 2. The 'both' preset gives q = (1.41, 1.41). Neither is said.",
+     "Sentence tokens are shaded by their weight, \"it\" has an orange outline (self), and text turns light when a weight is over 0.5. No legend is given.",
+     "A note turns red when its part is removed (the 'broken' class). The mask note never turns red. Neither color convention is explained.",
+     "Unchecking 'A separate query and key' disables the slider. This is not mentioned.",
+     "The 'Divide by √d' note points to 'Level 3' and 'd = 64', which have not been introduced."
+    ],
+    "leap": [
+     "Why divide by √d. It is asserted here, and the reason is put off to Level 3.",
+     "Where a query comes from in a real model. Here it is 'made by hand', yet the panel note already talks about W_Q.",
+     "'here each value marks one token, so the output … reads as its share of each token': the reader has to work out the one-hot construction from the table."
+    ],
+    "excess": [
+     "\"Softmax turns the scores into weights\" is borderline, since the reader knows softmax, but it is short."
+    ],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Level 2 · how (Query · key → softmax → weighted sum)",
+    "text": "q, k, v come from x via learned W_Q, W_K, W_V. Four numbered steps for \"it\" with numbers. Every token does this in parallel, and the output goes to the next layer.",
+    "unresolved": [],
+    "unsaid": [],
+    "leap": [],
+    "excess": [
+     "\"(what it looks for) … (what it offers) … (what it passes on)\": the third time these glosses appear",
+     "\"Divide by √d, where d is the number of entries in q and k\": repeats Level 1 almost word for word",
+     "Steps 1–3 (\"gives 4, 0, 1, 0\", \"2.83, 0, 0.71, 0\", \"0.808, 0.048, 0.097, 0.048\") repeat the numbers already in the Level 1 table",
+     "\"positive, and they sum to 1\": the reader knows softmax"
+    ],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Level 3 · why (four cards + d slider demo)",
+    "text": "Why content-based weights, why a separate query, why softmax rather than plain division, and why divide by √d (variance argument plus an interactive demo of four scores at growing d).",
+    "unresolved": [
+     "Tag chips \"derived\" and \"fact\": their meaning and colors are never explained",
+     "\"its own vector (0.5, 0.5)\": Level 2 just said the token vector is x and k = x W_K. (0.5, 0.5) is the key of \"it\", so it is unclear whether 'no separate query' means q = x or q = k.",
+     "\"gradient\" / \"training gets almost no gradient\" is plausibly known to the reader, but the link is not explained"
+    ],
+    "unsaid": [
+     "The demo bars are labelled \"1st, 2nd, 3rd, 4th\", not the sentence tokens. The prose does not say they are generic scores.",
+     "The d slider is logarithmic and rounds d. Its presets (1, 4, 16, 64, 128) are not mentioned."
+    ],
+    "leap": [
+     "\"starts from four scores … at d = 1 and multiplies them by √d\": the reader must work out that this simulates the spread growing with d. On a first read it looks like the demo is doing the opposite of the fix.",
+     "\"Then training gets almost no gradient for the other tokens\": why a saturated softmax starves the gradient is not given.",
+     "Why the query and key entries can be treated as independent with mean 0 and variance 1."
+    ],
+    "excess": [
+     "The 'Softmax, not a plain division' card argues for softmax to a reader who already knows it. The negative-score example is useful but long (\"one, minus one, and one give weights of one, minus one, and one\")."
+    ],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Level 4 · in practice (matrices, heads, mask)",
+    "text": "Matrix form softmax(QKᵀ/√d)V, multi-head with GPT-2 small numbers, causal mask with masked weights for \"it\".",
+    "unresolved": [
+     "\"projected back\": projected by what? (no output matrix is named)",
+     "\"decoder\" and \"encoder\": glossed only as '(GPT-style)' and '(… such as BERT)'"
+    ],
+    "unsaid": [
+     "12 × 64 = 768 implies that the heads split the model width, but this is not said."
+    ],
+    "leap": [
+     "Why the heads' outputs are joined and projected rather than, for example, averaged."
+    ],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "What to trust",
+    "text": "Separates fact (the formulas, from Vaswani et al. 2017), constructed (every vector on the page), interpretation (the 'query = what it looks for' reading), and observation (some heads track clear relations).",
+    "unresolved": [
+     "Tag labels \"constructed\", \"interpretation\", \"observation\": a new tag vocabulary with no legend"
+    ],
+    "unsaid": [
+     "The 'observation' card has no source, while the formulas card cites one."
+    ],
+    "leap": [],
+    "excess": [
+     "\"A query is what a token looks for\" is quoted again (the fourth time), though here it is to add a caveat."
+    ],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Summary",
+    "text": "Four points restate the mechanism, the reasons for its parts, and the 81% result. Lists what was not covered.",
+    "unresolved": [],
+    "unsaid": [],
+    "leap": [],
+    "excess": [
+     "Point 1 restates the lede almost word for word: \"Each token's output is a weighted average of the values…\""
+    ],
+    "purpose_unclear": false
+   }
+  ],
+  "blocking": [
+   "Level 3 'A query separate from the key': \"If the query of \\\"it\\\" is its own vector (0.5, 0.5)\". Level 2 defines the token vector as x and k = x W_K, but (0.5, 0.5) is the key of \"it\". The reader cannot tell what the no-separate-query alternative is, so the 'why separate Q' argument does not land.",
+   "Level 3 'Divide by √d': \"starts from four scores 1.2, −0.3, 0.5, −0.9 at d = 1 and multiplies them by √d\". The demo looks like it does the opposite of the fix, and nothing says this simulates how the spread grows with d."
+  ],
+  "cuts": [
+   "Level 2 steps 1–3: they repeat the Level 1 table numbers. Keep the W_Q/W_K/W_V sentence and step 4 (the value of \"it\" is (0, 0, 0)).",
+   "The repeated glosses \"what it looks for / what it offers / what it passes on\" (Level 1, Level 2, and the 'interpretation' card): say them once.",
+   "The 'Softmax, not a plain division' card: cut it to one sentence, since the reader knows softmax.",
+   "The second definition \"where d is the number of entries in q and k\" in Level 2.",
+   "Summary point 1, which repeats the lede."
+  ],
+  "question": {
+   "text": "How can the vector for \"it\" take in information from \"animal\" (another token in the same sentence), and how does self-attention decide which token to draw from?",
+   "known_at": "Header, second paragraph: \"The problem it solves: the vector for \\\"it\\\" is the same in every sentence…\"",
+   "result_stated": "Yes. The lede says \"Each token builds its new vector as a weighted average of the tokens' values. The weights come from how well its query matches each token's key.\" Summary point 4 says \"So \\\"it\\\" ends up carrying 81% of the animal's value: its query asks for something animate, and the animal's key offers it.\""
+  },
+  "motive": "Reason to care: \"the vector for \\\"it\\\" is the same in every sentence … \\\"it\\\" must mix in information from \\\"animal\\\" to know what it means.\" Reason for the approach: given piece by piece in Level 3 (\"The simplest mix gives every token the same weight … it cannot tell which noun it refers to. Scores from query · key let each token choose.\"). No reason is given for using a weighted average of values as the way to mix in the first place.",
+  "close": "Yes. Summary point 4 answers the opening example (\"\\\"it\\\" ends up carrying 81% of the animal's value: its query asks for something animate, and the animal's key offers it\"), and points 1–3 state the general argument in words.",
+  "recap": "Each token asks a question (its query), every token advertises an answer (its key), and the token takes a softmax-weighted average of what the best matches pass on (their values). That is how \"it\" picks up \"animal\".",
+  "strongest": "Level 1 instrument: the 'Remove a part, see what breaks' checkboxes together with the predict question (turn the query to place, and the weight moves to \"street\"). Each component is tied to a visible failure on the same sentence.",
+  "weakest": "Level 3 'A query separate from the key' card: \"its own vector (0.5, 0.5)\" conflicts with Level 2's x / k = x W_K split. A close second is the √d demo's \"multiplies them by √d\" framing.",
+  "suggestions": [
+   "Rewrite the separate-query card so it says what 'no separate query' means (for example, 'if q = k, the query of \"it\" equals its key (0.5, 0.5)'), and match the Level 1 note.",
+   "In the √d card, say plainly: 'to imitate larger d, the demo stretches the same scores by √d, which is how unscaled dot products spread out'.",
+   "Add a one-line legend for the panel: shading = weight, outline = the token attending, red note = that part is broken. Give the keys of street, it and tired in the prose.",
+   "Explain the three-entry values (one slot each for animal, street, tired, with \"it\" set to zero) where values are first introduced in Level 1.",
+   "Define the tag vocabulary (fact, derived, constructed, interpretation, observation) once.",
+   "Name the output projection (W_O) in the heads paragraph instead of 'projected back'."
+  ]
+ },
+ "findings": [
+  {
+   "n": 1,
+   "severity": "blocking",
+   "kind": "blocking",
+   "text": "Level 3 'A query separate from the key': \"If the query of \\\"it\\\" is its own vector (0.5, 0.5)\". Level 2 defines the token vector as x and k = x W_K, but (0.5, 0.5) is the key of \"it\". The reader cannot tell what the no-separate-query alternative is, so the 'why separate Q' argument does not land."
+  },
+  {
+   "n": 2,
+   "severity": "blocking",
+   "kind": "blocking",
+   "text": "Level 3 'Divide by √d': \"starts from four scores 1.2, −0.3, 0.5, −0.9 at d = 1 and multiplies them by √d\". The demo looks like it does the opposite of the fix, and nothing says this simulates how the spread grows with d."
+  },
+  {
+   "n": 3,
+   "severity": "excess",
+   "kind": "cut",
+   "text": "Level 2 steps 1–3: they repeat the Level 1 table numbers. Keep the W_Q/W_K/W_V sentence and step 4 (the value of \"it\" is (0, 0, 0))."
+  },
+  {
+   "n": 4,
+   "severity": "excess",
+   "kind": "cut",
+   "text": "The repeated glosses \"what it looks for / what it offers / what it passes on\" (Level 1, Level 2, and the 'interpretation' card): say them once."
+  },
+  {
+   "n": 5,
+   "severity": "excess",
+   "kind": "cut",
+   "text": "The 'Softmax, not a plain division' card: cut it to one sentence, since the reader knows softmax."
+  },
+  {
+   "n": 6,
+   "severity": "excess",
+   "kind": "cut",
+   "text": "The second definition \"where d is the number of entries in q and k\" in Level 2."
+  },
+  {
+   "n": 7,
+   "severity": "excess",
+   "kind": "cut",
+   "text": "Summary point 1, which repeats the lede."
+  },
+  {
+   "n": 8,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "Header (h1 'How self-attention works', lede + problem paragraph): \"values\" (italicized, not defined until Level 1)"
+  },
+  {
+   "n": 9,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "Header (h1 'How self-attention works', lede + problem paragraph): \"query\" (not defined until Level 1)"
+  },
+  {
+   "n": 10,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "Header (h1 'How self-attention works', lede + problem paragraph): \"key\" (not defined until Level 1)"
+  },
+  {
+   "n": 11,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "Header (h1 'How self-attention works', lede + problem paragraph): \"its new vector\" (new for what, and where it goes next, is only said in Level 2: \"The output goes on to the next layer\")"
+  },
+  {
+   "n": 12,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "Header (h1 'How self-attention works', lede + problem paragraph): \"Self-attention does this with queries, keys, and values\": this names the method but gives no reason why a weighted average, or a query/key match, is the right way to mix in another token's information."
+  },
+  {
+   "n": 13,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "Level 1 · One token, attending (prose + predict-1 + instrument panel): \"W_Q\" in the 'A separate query and key' note (\"The query of \\\"it\\\" comes from its own matrix, W_Q.\"). It is defined only in Level 2."
+  },
+  {
+   "n": 14,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "Level 1 · One token, attending (prose + predict-1 + instrument panel): \"Causal mask (GPT-style)\": the checkbox label, with no prior explanation"
+  },
+  {
+   "n": 15,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "Level 1 · One token, attending (prose + predict-1 + instrument panel): \"(an encoder)\" in the mask note"
+  },
+  {
+   "n": 16,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "Level 1 · One token, attending (prose + predict-1 + instrument panel): \"its own vector (0.5, 0.5)\" in the separate-off note. No token vector of \"it\" has been given; (0.5, 0.5) appears only as its key in the table."
+  },
+  {
+   "n": 17,
+   "severity": "edge",
+   "kind": "unsaid",
+   "text": "Level 1 · One token, attending (prose + predict-1 + instrument panel): The keys of \"street\" (0, 2), \"it\" (0.5, 0.5) and \"tired\" (0, 0) appear only in the table and bar sublabels. The prose never gives them, and never says why \"tired\" has a zero key."
+  },
+  {
+   "n": 18,
+   "severity": "edge",
+   "kind": "unsaid",
+   "text": "Level 1 · One token, attending (prose + predict-1 + instrument panel): Values have three entries (animal, street, tired) for four tokens, and the value of \"it\" is (0, 0, 0). The output meters have no \"it\" row. None of this is explained until Level 2 step 4."
+  },
+  {
+   "n": 19,
+   "severity": "edge",
+   "kind": "unsaid",
+   "text": "Level 1 · One token, attending (prose + predict-1 + instrument panel): The slider rotates the query and keeps its length at 2. The 'both' preset gives q = (1.41, 1.41). Neither is said."
+  },
+  {
+   "n": 20,
+   "severity": "edge",
+   "kind": "unsaid",
+   "text": "Level 1 · One token, attending (prose + predict-1 + instrument panel): Sentence tokens are shaded by their weight, \"it\" has an orange outline (self), and text turns light when a weight is over 0.5. No legend is given."
+  },
+  {
+   "n": 21,
+   "severity": "edge",
+   "kind": "unsaid",
+   "text": "Level 1 · One token, attending (prose + predict-1 + instrument panel): A note turns red when its part is removed (the 'broken' class). The mask note never turns red. Neither color convention is explained."
+  },
+  {
+   "n": 22,
+   "severity": "edge",
+   "kind": "unsaid",
+   "text": "Level 1 · One token, attending (prose + predict-1 + instrument panel): Unchecking 'A separate query and key' disables the slider. This is not mentioned."
+  },
+  {
+   "n": 23,
+   "severity": "edge",
+   "kind": "unsaid",
+   "text": "Level 1 · One token, attending (prose + predict-1 + instrument panel): The 'Divide by √d' note points to 'Level 3' and 'd = 64', which have not been introduced."
+  },
+  {
+   "n": 24,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "Level 1 · One token, attending (prose + predict-1 + instrument panel): Why divide by √d. It is asserted here, and the reason is put off to Level 3."
+  },
+  {
+   "n": 25,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "Level 1 · One token, attending (prose + predict-1 + instrument panel): Where a query comes from in a real model. Here it is 'made by hand', yet the panel note already talks about W_Q."
+  },
+  {
+   "n": 26,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "Level 1 · One token, attending (prose + predict-1 + instrument panel): 'here each value marks one token, so the output … reads as its share of each token': the reader has to work out the one-hot construction from the table."
+  },
+  {
+   "n": 27,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "Level 3 · why (four cards + d slider demo): Tag chips \"derived\" and \"fact\": their meaning and colors are never explained"
+  },
+  {
+   "n": 28,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "Level 3 · why (four cards + d slider demo): \"its own vector (0.5, 0.5)\": Level 2 just said the token vector is x and k = x W_K. (0.5, 0.5) is the key of \"it\", so it is unclear whether 'no separate query' means q = x or q = k."
+  },
+  {
+   "n": 29,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "Level 3 · why (four cards + d slider demo): \"gradient\" / \"training gets almost no gradient\" is plausibly known to the reader, but the link is not explained"
+  },
+  {
+   "n": 30,
+   "severity": "edge",
+   "kind": "unsaid",
+   "text": "Level 3 · why (four cards + d slider demo): The demo bars are labelled \"1st, 2nd, 3rd, 4th\", not the sentence tokens. The prose does not say they are generic scores."
+  },
+  {
+   "n": 31,
+   "severity": "edge",
+   "kind": "unsaid",
+   "text": "Level 3 · why (four cards + d slider demo): The d slider is logarithmic and rounds d. Its presets (1, 4, 16, 64, 128) are not mentioned."
+  },
+  {
+   "n": 32,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "Level 3 · why (four cards + d slider demo): \"starts from four scores … at d = 1 and multiplies them by √d\": the reader must work out that this simulates the spread growing with d. On a first read it looks like the demo is doing the opposite of the fix."
+  },
+  {
+   "n": 33,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "Level 3 · why (four cards + d slider demo): \"Then training gets almost no gradient for the other tokens\": why a saturated softmax starves the gradient is not given."
+  },
+  {
+   "n": 34,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "Level 3 · why (four cards + d slider demo): Why the query and key entries can be treated as independent with mean 0 and variance 1."
+  },
+  {
+   "n": 35,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "Level 4 · in practice (matrices, heads, mask): \"projected back\": projected by what? (no output matrix is named)"
+  },
+  {
+   "n": 36,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "Level 4 · in practice (matrices, heads, mask): \"decoder\" and \"encoder\": glossed only as '(GPT-style)' and '(… such as BERT)'"
+  },
+  {
+   "n": 37,
+   "severity": "edge",
+   "kind": "unsaid",
+   "text": "Level 4 · in practice (matrices, heads, mask): 12 × 64 = 768 implies that the heads split the model width, but this is not said."
+  },
+  {
+   "n": 38,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "Level 4 · in practice (matrices, heads, mask): Why the heads' outputs are joined and projected rather than, for example, averaged."
+  },
+  {
+   "n": 39,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "What to trust: Tag labels \"constructed\", \"interpretation\", \"observation\": a new tag vocabulary with no legend"
+  },
+  {
+   "n": 40,
+   "severity": "edge",
+   "kind": "unsaid",
+   "text": "What to trust: The 'observation' card has no source, while the formulas card cites one."
+  }
+ ]
+}

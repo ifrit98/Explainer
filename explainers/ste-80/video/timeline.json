@@ -1,5 +1,5 @@
 {
- "duration": 83.05,
+ "duration": 97.45,
  "events": [
   {
    "kind": "voiceover",
@@ -11,169 +11,215 @@
   },
   {
    "kind": "voiceover_end",
-   "t": 4.317,
+   "t": 4.318,
    "issues": [],
    "scene": "Ste80"
   },
   {
    "kind": "voiceover",
-   "t": 4.317,
-   "duration": 15.454,
-   "text": "It uses about eighty percent of the rules of ASD-STE100, Simplified Technical English, a standard for aircraft maintenance manuals. Manuals are read under time pressure, often in a second language, so every word must help.",
+   "t": 4.318,
+   "duration": 21.159,
+   "text": "It comes from ASD-STE100, Simplified Technical English, a standard for aircraft maintenance manuals. The eighty means about eighty percent of the way to strict STE: it keeps the writing rules and drops the approved dictionary. Manuals are read under time pressure, often in a second language, so every word must help.",
    "bookmarks": {
-    "who": 14.404
+    "who": 20.125
    },
    "scene": "Ste80"
   },
   {
    "kind": "bookmark",
-   "t": 14.4,
+   "t": 20.125,
    "mark": "who",
    "issues": [],
    "scene": "Ste80"
   },
   {
    "kind": "voiceover_end",
-   "t": 19.767,
+   "t": 25.477,
    "issues": [],
    "scene": "Ste80"
   },
   {
    "kind": "voiceover",
-   "t": 20.767,
+   "t": 26.477,
    "duration": 7.676,
    "text": "Here is a typical sentence from a manual. It has sixteen words: the orange bar counts them. Some of the words do not help the reader.",
    "bookmarks": {
-    "count": 23.317
+    "count": 29.027
    },
    "scene": "Ste80"
   },
   {
    "kind": "bookmark",
-   "t": 23.333,
+   "t": 29.027,
    "mark": "count",
    "issues": [],
    "scene": "Ste80"
   },
   {
    "kind": "voiceover_end",
-   "t": 28.433,
+   "t": 34.144,
    "issues": [],
    "scene": "Ste80"
   },
   {
    "kind": "voiceover",
-   "t": 28.433,
-   "duration": 13.321,
-   "text": "Rule one. Use simple words. The words in red go. Replenished becomes full. Prior to becomes before. Commencing becomes starting. Only one word goes, but each word is easier to read.",
+   "t": 34.144,
+   "duration": 15.327,
+   "text": "Rule one. Use simple words: the common word, not the formal one. The words in red change. Replenished becomes full. Prior to becomes before. Commencing becomes starting. Only one word goes, but each word is easier to read.",
    "bookmarks": {
-    "mark": 31.164,
-    "swap": 38.428
+    "mark": 38.793,
+    "swap": 40.648
    },
    "scene": "Ste80"
   },
   {
    "kind": "bookmark",
-   "t": 31.15,
+   "t": 38.777,
    "mark": "mark",
    "issues": [],
    "scene": "Ste80"
   },
   {
    "kind": "bookmark",
-   "t": 38.417,
+   "t": 40.644,
    "mark": "swap",
    "issues": [],
    "scene": "Ste80"
   },
   {
+   "kind": "claim",
+   "t": 40.644,
+   "id": "limit-length",
+   "scene": "Ste80"
+  },
+  {
    "kind": "voiceover_end",
-   "t": 41.75,
+   "t": 49.461,
    "issues": [],
    "scene": "Ste80"
   },
   {
    "kind": "voiceover",
-   "t": 42.25,
-   "duration": 12.101,
-   "text": "Rule two. Give the instruction directly. Remove the frame, it is imperative that the operator ensures, and tell the reader what to do: make sure, before you start. Thirteen words.",
+   "t": 50.961,
+   "duration": 11.512,
+   "text": "Rule two. Give the instruction directly. Cut the opening that only says the instruction matters. Tell the reader what to do instead: make sure, before you start. Thirteen words.",
    "bookmarks": {
-    "mark": 45.448,
-    "swap": 53.179
+    "mark": 54.158,
+    "swap": 57.541
    },
    "scene": "Ste80"
   },
   {
    "kind": "bookmark",
-   "t": 45.433,
+   "t": 54.144,
    "mark": "mark",
    "issues": [],
    "scene": "Ste80"
   },
   {
    "kind": "bookmark",
-   "t": 53.167,
+   "t": 57.527,
    "mark": "swap",
    "issues": [],
    "scene": "Ste80"
   },
   {
    "kind": "voiceover_end",
-   "t": 54.667,
+   "t": 62.461,
    "issues": [],
    "scene": "Ste80"
   },
   {
    "kind": "voiceover",
-   "t": 55.167,
-   "duration": 13.206,
-   "text": "Rule three. Use a concrete verb. Make sure that it is full asks the reader to check a result. The verb fill names the action. And the vague noun operation becomes the machine you start. Nine words.",
+   "t": 62.961,
+   "duration": 12.067,
+   "text": "Rule three. Use concrete words. The phrase make sure that it is full asks the reader to check a result. The verb fill names the action, and the machine names what you start. Nine words.",
    "bookmarks": {
-    "mark": 58.052,
-    "swap": 67.267
+    "mark": 65.781,
+    "swap": 69.885
    },
    "scene": "Ste80"
   },
   {
    "kind": "bookmark",
-   "t": 58.05,
+   "t": 65.777,
    "mark": "mark",
    "issues": [],
    "scene": "Ste80"
   },
   {
    "kind": "bookmark",
-   "t": 67.267,
+   "t": 69.877,
    "mark": "swap",
    "issues": [],
    "scene": "Ste80"
   },
   {
+   "kind": "claim",
+   "t": 69.877,
+   "id": "why-concrete-verb",
+   "scene": "Ste80"
+  },
+  {
    "kind": "voiceover_end",
-   "t": 68.767,
+   "t": 75.027,
    "issues": [],
    "scene": "Ste80"
   },
   {
    "kind": "voiceover",
-   "t": 69.267,
-   "duration": 12.796,
-   "text": "Sixteen words became nine. The reader still fills the reservoir before starting the machine, with less work to read it. Full STE has more rules: short sentences, one meaning per word, and an approved dictionary.",
+   "t": 76.527,
+   "duration": 6.707,
+   "text": "Sixteen words became nine. The reader still fills the reservoir before starting the machine, with less work to read it.",
    "bookmarks": {
-    "compare": 71.209
+    "compare": 78.469
    },
    "scene": "Ste80"
   },
   {
    "kind": "bookmark",
-   "t": 71.2,
+   "t": 78.461,
    "mark": "compare",
    "issues": [],
    "scene": "Ste80"
   },
   {
+   "kind": "claim",
+   "t": 78.461,
+   "id": "mechanism-rules",
+   "scene": "Ste80"
+  },
+  {
    "kind": "voiceover_end",
-   "t": 82.05,
+   "t": 83.227,
+   "issues": [],
+   "scene": "Ste80"
+  },
+  {
+   "kind": "voiceover",
+   "t": 84.227,
+   "duration": 5.653,
+   "text": "The bar counts words, but the goal is less work: rule one cut only one word and still helped.",
+   "bookmarks": {},
+   "scene": "Ste80"
+  },
+  {
+   "kind": "voiceover_end",
+   "t": 89.877,
+   "issues": [],
+   "scene": "Ste80"
+  },
+  {
+   "kind": "voiceover",
+   "t": 90.377,
+   "duration": 6.08,
+   "text": "STE-80 has more rules than these three: short sentences, one meaning per word, and no filler.",
+   "bookmarks": {},
+   "scene": "Ste80"
+  },
+  {
+   "kind": "voiceover_end",
+   "t": 96.444,
    "issues": [],
    "scene": "Ste80"
   }

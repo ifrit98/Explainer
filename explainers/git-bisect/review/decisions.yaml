@@ -1,0 +1,97 @@
+# What the author did with each review finding (explainer decide). Read by findings --stats.
+2026-10-04T053120-coldread-prose#1:
+  decision: declined
+  note: round 2; 4-6 were HTML comments (the prompt now skips them)
+2026-10-04T053120-coldread-prose#10:
+  decision: adopted
+  note: round 2; 4-6 were HTML comments (the prompt now skips them)
+2026-10-04T053120-coldread-prose#11:
+  decision: adopted
+  note: round 2; 4-6 were HTML comments (the prompt now skips them)
+2026-10-04T053120-coldread-prose#12:
+  decision: declined
+  note: round 2; 4-6 were HTML comments (the prompt now skips them)
+2026-10-04T053120-coldread-prose#13:
+  decision: declined
+  note: round 2; 4-6 were HTML comments (the prompt now skips them)
+2026-10-04T053120-coldread-prose#14:
+  decision: declined
+  note: round 2; 4-6 were HTML comments (the prompt now skips them)
+2026-10-04T053120-coldread-prose#15:
+  decision: declined
+  note: round 2; 4-6 were HTML comments (the prompt now skips them)
+2026-10-04T053120-coldread-prose#16:
+  decision: adopted
+  note: round 2; 4-6 were HTML comments (the prompt now skips them)
+2026-10-04T053120-coldread-prose#2:
+  decision: declined
+  note: round 2; 4-6 were HTML comments (the prompt now skips them)
+2026-10-04T053120-coldread-prose#3:
+  decision: declined
+  note: round 2; 4-6 were HTML comments (the prompt now skips them)
+2026-10-04T053120-coldread-prose#4:
+  decision: declined
+  note: round 2; 4-6 were HTML comments (the prompt now skips them)
+2026-10-04T053120-coldread-prose#5:
+  decision: declined
+  note: round 2; 4-6 were HTML comments (the prompt now skips them)
+2026-10-04T053120-coldread-prose#6:
+  decision: declined
+  note: round 2; 4-6 were HTML comments (the prompt now skips them)
+2026-10-04T053120-coldread-prose#7:
+  decision: declined
+  note: round 2; 4-6 were HTML comments (the prompt now skips them)
+2026-10-04T053120-coldread-prose#8:
+  decision: declined
+  note: round 2; 4-6 were HTML comments (the prompt now skips them)
+2026-10-04T053120-coldread-prose#9:
+  decision: declined
+  note: round 2; 4-6 were HTML comments (the prompt now skips them)
+2026-10-04T060028-quiz-prose#1:
+  decision: declined
+  note: blind-test audit; all edge for this reader
+2026-10-04T060028-quiz-prose#10:
+  decision: declined
+  note: blind-test audit; all edge for this reader
+2026-10-04T060028-quiz-prose#11:
+  decision: declined
+  note: blind-test audit; all edge for this reader
+2026-10-04T060028-quiz-prose#12:
+  decision: declined
+  note: blind-test audit; all edge for this reader
+2026-10-04T060028-quiz-prose#13:
+  decision: declined
+  note: blind-test audit; all edge for this reader
+2026-10-04T060028-quiz-prose#14:
+  decision: declined
+  note: blind-test audit; all edge for this reader
+2026-10-04T060028-quiz-prose#15:
+  decision: declined
+  note: blind-test audit; all edge for this reader
+2026-10-04T060028-quiz-prose#16:
+  decision: declined
+  note: blind-test audit; all edge for this reader
+2026-10-04T060028-quiz-prose#2:
+  decision: declined
+  note: blind-test audit; all edge for this reader
+2026-10-04T060028-quiz-prose#3:
+  decision: declined
+  note: blind-test audit; all edge for this reader
+2026-10-04T060028-quiz-prose#4:
+  decision: declined
+  note: blind-test audit; all edge for this reader
+2026-10-04T060028-quiz-prose#5:
+  decision: declined
+  note: blind-test audit; all edge for this reader
+2026-10-04T060028-quiz-prose#6:
+  decision: declined
+  note: blind-test audit; all edge for this reader
+2026-10-04T060028-quiz-prose#7:
+  decision: declined
+  note: blind-test audit; all edge for this reader
+2026-10-04T060028-quiz-prose#8:
+  decision: declined
+  note: blind-test audit; all edge for this reader
+2026-10-04T060028-quiz-prose#9:
+  decision: declined
+  note: blind-test audit; all edge for this reader

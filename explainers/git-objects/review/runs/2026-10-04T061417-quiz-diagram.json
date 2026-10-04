@@ -1,0 +1,224 @@
+{
+ "tool": "quiz",
+ "rendering": "diagram",
+ "slug": "git-objects",
+ "at": "2026-10-04T06:14:08",
+ "model": "default",
+ "prompt_sha": "5c2aa46c63eb",
+ "reply": {
+  "answers": {
+   "1": "Four object kinds: blob (one file's content, without its name), tree (one directory: names, modes and the IDs of its entries), commit (root tree ID, parent IDs, author, time, message) and tag (annotated: tagger, message, points to one object). There are also refs (HEAD, main). Refs are names that point to objects; they are not objects themselves. Every object is stored under its ID, which is the hash of its content.",
+   "2": "A ref points to a commit (HEAD → main → commit 7f3a…). A commit points to one root tree and to zero, one or several parent commits. A tree maps names to blobs (files) or to other trees (subdirectories). A blob points to nothing. A tag points to one object, usually a commit. Because the ID comes from the content, trees in different commits can point to the same blob or tree. In the diagram, both root trees point to README blob a3f2….",
+   "3": "An object's ID is the hash of its content, so identical content means one shared stored object. Changing a file creates a new blob ID. That changes the content, and so the ID, of every tree above it, up to the root tree and then the commit.",
+   "4": "The key variable is a file's content. If it changes, its blob gets a new ID. Each parent tree stores that ID, so each parent tree's content and ID change too, all the way up to the root tree and the commit. Siblings that did not change keep their IDs and are reused. If the content stays the same, the ID stays the same and nothing new is stored.",
+   "5": "Simplification: 'Hashes are shortened and made up' in the diagram. The diagram also leaves out the tag object. Established fact: 'Git stores each object under its ID, the hash of its content. Same content gives the same ID.' Also: `git show` computes the diff against the parent only when you ask for it.",
+   "6": "Git does not store a commit as a diff. A commit points to a complete root tree, which is a snapshot of the whole project. Trees map names to blobs (file contents) and to subtrees, and each object is stored under the hash of its content. So unchanged files and directories have the same IDs and are simply reused. A changed file gets a new blob, and new IDs ripple up through each parent tree to the root tree and the commit. Diffs are computed on demand, and packfile compression is a storage detail, not what a commit means.",
+   "7": "The hardest part was step 5: how a new ID ripples upward. It was clear for one level (src/), but the reader has to infer it for deeper nesting. Showing a second subdirectory that did not change would make the contrast clear: an unchanged subtree being shared, not only a blob. A short sentence on what a 'hash' is would also help, because the whole argument rests on 'same content → same ID'.",
+   "8": "A snapshot. The commit points to a whole tree. Diffs are computed on demand, for example by `git show`.",
+   "9": "It points to the same blob, the one with the same ID as in the first commit, as README.md → a3f2… does in both trees. If the unchanged item is a whole directory, the text implies (but does not show) that the same subtree is reused.",
+   "10": "These get new IDs: the file's blob, every tree on the path from it up to the root (src/ and any intermediate directories, then the root tree) and the commit. Blobs and subtrees that did not change keep their IDs. The parent commit keeps its ID.",
+   "11": "An object is stored under the hash of its content. An unchanged file has the same content, so it has the same ID and is the same stored object. The new tree just stores that existing ID, and nothing new is written. On top of that, packfiles compress similar objects against each other, but the explanation does not quantify this."
+  },
+  "audit": {
+   "terms": [
+    "'ID' (line 5, line 42, table) vs 'hash' (line 5 'the hash of its content', line 9 'Hashes are shortened', line 17 diagram labels): one concept, two words",
+    "'full snapshot' (line 5) vs 'whole tree' (line 53) vs 'complete tree' (line 53): one concept, three words",
+    "'root tree' (lines 5, 20, 43) vs 'its tree's ID' / 'one tree' (table, line 49)",
+    "'tag' (line 5) vs 'tag (annotated)' (table, line 50): the qualifier appears only in the table and is not explained"
+   ],
+   "unexplained": [
+    "'modes' (table, line 48: 'names, modes, and the IDs of its entries'): never says what a mode is or what it changes",
+    "Diagram hashes such as '7f3a…' and 'a3f2…' (lines 17–29): the text says they are shortened and made up, but never says how long a real ID is or what it is computed with"
+   ],
+   "missing_why": [
+    "Line 5 'Git stores each object under its ID, the hash of its content': does not say why a content hash guarantees that the same content gives the same ID, or what keeps different content from colliding",
+    "Table line 49: the commit stores its parents' IDs, but the text never says why, or that this makes the commit's ID depend on its history",
+    "Line 53 'packfiles compress similar objects against each other': gives no reason this does not contradict 'a commit is not a diff', beyond calling it 'storage'",
+    "Table line 50, tag: never says why a separate tag object exists alongside refs"
+   ],
+   "excess": [
+    "Lines 5 and 50: the tag object is introduced but appears in neither the diagram nor the argument, and no question uses it",
+    "Line 39 'HEAD and main are refs: names, not objects' repeats the legend in line 9",
+    "Line 53, last sentence ('Making one writes only the objects that are new… reused') restates line 5 and step 5 without adding anything new",
+    "Line 43 restates line 5's 'a changed file changes the ID of every tree above it'",
+    "HTML comments (lines 3, 7, 8, 52) are authoring notes the reader does not need"
+   ]
+  },
+  "gaps": [
+   "Never says what a hash is, or that it is deterministic and practically unique. Both claims of the explanation (sharing and ripple) rest on this.",
+   "No unchanged subtree is shown being shared. Only a shared blob appears, so the reader has to infer that a whole directory with no changes is reused.",
+   "A one-line edit to a large file creates a whole new blob. The text only hints at packfiles and does not say how much space this costs, which leaves Q11's follow-up worry open.",
+   "The ripple is shown for only one level of nesting. That it applies to deeper paths is stated in general terms but not shown.",
+   "'modes' and 'annotated' tag are undefined.",
+   "Never says whether the commit's own ID is the hash of its content, which would include the parent IDs. This is implied but not stated."
+  ]
+ },
+ "grade": {
+  "scores": {
+   "1": 2,
+   "2": 2,
+   "3": 2,
+   "4": 2,
+   "5": 1,
+   "6": 2,
+   "7": 2,
+   "8": 2,
+   "9": 2,
+   "10": 2,
+   "11": 2
+  },
+  "reasons": {
+   "5": "It names the rendering's simplifications (shortened hashes, no tag object) and correctly states that content-addressing and diff-on-demand are facts. It does not cover the model's other epistemic distinctions: packfile deltas are an implementation detail (compression, not the data model), and the hash is SHA-1 by default with SHA-256 possible. Only part of the fact / implementation-detail split is covered."
+  },
+  "pass": true
+ },
+ "findings": [
+  {
+   "n": 1,
+   "severity": "gap",
+   "kind": "terms",
+   "text": "'ID' (line 5, line 42, table) vs 'hash' (line 5 'the hash of its content', line 9 'Hashes are shortened', line 17 diagram labels): one concept, two words"
+  },
+  {
+   "n": 2,
+   "severity": "gap",
+   "kind": "terms",
+   "text": "'full snapshot' (line 5) vs 'whole tree' (line 53) vs 'complete tree' (line 53): one concept, three words"
+  },
+  {
+   "n": 3,
+   "severity": "gap",
+   "kind": "terms",
+   "text": "'root tree' (lines 5, 20, 43) vs 'its tree's ID' / 'one tree' (table, line 49)"
+  },
+  {
+   "n": 4,
+   "severity": "gap",
+   "kind": "terms",
+   "text": "'tag' (line 5) vs 'tag (annotated)' (table, line 50): the qualifier appears only in the table and is not explained"
+  },
+  {
+   "n": 5,
+   "severity": "gap",
+   "kind": "unexplained",
+   "text": "'modes' (table, line 48: 'names, modes, and the IDs of its entries'): never says what a mode is or what it changes"
+  },
+  {
+   "n": 6,
+   "severity": "gap",
+   "kind": "unexplained",
+   "text": "Diagram hashes such as '7f3a…' and 'a3f2…' (lines 17–29): the text says they are shortened and made up, but never says how long a real ID is or what it is computed with"
+  },
+  {
+   "n": 7,
+   "severity": "gap",
+   "kind": "missing_why",
+   "text": "Line 5 'Git stores each object under its ID, the hash of its content': does not say why a content hash guarantees that the same content gives the same ID, or what keeps different content from colliding"
+  },
+  {
+   "n": 8,
+   "severity": "gap",
+   "kind": "missing_why",
+   "text": "Table line 49: the commit stores its parents' IDs, but the text never says why, or that this makes the commit's ID depend on its history"
+  },
+  {
+   "n": 9,
+   "severity": "gap",
+   "kind": "missing_why",
+   "text": "Line 53 'packfiles compress similar objects against each other': gives no reason this does not contradict 'a commit is not a diff', beyond calling it 'storage'"
+  },
+  {
+   "n": 10,
+   "severity": "gap",
+   "kind": "missing_why",
+   "text": "Table line 50, tag: never says why a separate tag object exists alongside refs"
+  },
+  {
+   "n": 11,
+   "severity": "excess",
+   "kind": "excess",
+   "text": "Lines 5 and 50: the tag object is introduced but appears in neither the diagram nor the argument, and no question uses it"
+  },
+  {
+   "n": 12,
+   "severity": "excess",
+   "kind": "excess",
+   "text": "Line 39 'HEAD and main are refs: names, not objects' repeats the legend in line 9"
+  },
+  {
+   "n": 13,
+   "severity": "excess",
+   "kind": "excess",
+   "text": "Line 53, last sentence ('Making one writes only the objects that are new… reused') restates line 5 and step 5 without adding anything new"
+  },
+  {
+   "n": 14,
+   "severity": "excess",
+   "kind": "excess",
+   "text": "Line 43 restates line 5's 'a changed file changes the ID of every tree above it'"
+  },
+  {
+   "n": 15,
+   "severity": "excess",
+   "kind": "excess",
+   "text": "HTML comments (lines 3, 7, 8, 52) are authoring notes the reader does not need"
+  },
+  {
+   "n": 16,
+   "severity": "gap",
+   "kind": "gap",
+   "text": "Never says what a hash is, or that it is deterministic and practically unique. Both claims of the explanation (sharing and ripple) rest on this."
+  },
+  {
+   "n": 17,
+   "severity": "gap",
+   "kind": "gap",
+   "text": "No unchanged subtree is shown being shared. Only a shared blob appears, so the reader has to infer that a whole directory with no changes is reused."
+  },
+  {
+   "n": 18,
+   "severity": "gap",
+   "kind": "gap",
+   "text": "A one-line edit to a large file creates a whole new blob. The text only hints at packfiles and does not say how much space this costs, which leaves Q11's follow-up worry open."
+  },
+  {
+   "n": 19,
+   "severity": "gap",
+   "kind": "gap",
+   "text": "The ripple is shown for only one level of nesting. That it applies to deeper paths is stated in general terms but not shown."
+  },
+  {
+   "n": 20,
+   "severity": "gap",
+   "kind": "gap",
+   "text": "'modes' and 'annotated' tag are undefined."
+  },
+  {
+   "n": 21,
+   "severity": "gap",
+   "kind": "gap",
+   "text": "Never says whether the commit's own ID is the hash of its content, which would include the parent IDs. This is implied but not stated."
+  }
+ ],
+ "earlier_grades": [
+  {
+   "scores": {
+    "1": 2,
+    "2": 2,
+    "3": 2,
+    "4": 2,
+    "5": 2,
+    "6": 2,
+    "7": 2,
+    "8": 2,
+    "9": 2,
+    "10": 2,
+    "11": 1
+   },
+   "reasons": {
+    "11": "The mechanism is correct: same content gives the same ID, and the new tree stores the existing blob ID. But the answer gives no concrete case with numbers, such as README.md pointing to blob a3f2… in both root trees. The only quantification it mentions is about packfiles, and it says that is not quantified. A full answer needs a concrete case, so this is partial."
+   },
+   "pass": false
+  }
+ ]
+}

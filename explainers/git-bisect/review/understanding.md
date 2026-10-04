@@ -8,3 +8,8 @@ Run 2026-10-04, reading as "developers who use git daily and have not used bisec
 - **Excess, cut:** the build-metadata blockquote under the title.
 - **Added (short):** "first bad commit" defined; `git bisect bad <commit>` for when the current commit is not the bad one; the test command must fail only for this bug; a two-sentence close.
 - **Not applied (edge):** exit codes above 127; a skip near the boundary.
+
+## v0.7.0 review runs
+
+- Cold read, round 2 (`--run`): nothing blocks. Adopted 3 of 16 findings: bisect takes you off your branch; a commit cannot be tested when it does not build; the good commit must be before 300 for the second bisect to find it.
+- Blind test: **pass** after the rubric fix (the first grade failed a correct answer for not repeating the rendering's own example).

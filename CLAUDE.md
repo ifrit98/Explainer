@@ -15,7 +15,8 @@ Run the CLI through uv here: `uv run explainer <command>`. Plugin users run `exp
 ```bash
 uv run explainer new <slug> --stage 1 2 3 4   # scaffold model.md, model.yaml, narrative.md, and the chosen renderings (--quick: no narrative.md)
 uv run explainer check                        # every example against its model.yaml
-uv run explainer coldread <slug>              # first-viewing prompt for a fresh agent (narrative, then each rendering)
+uv run explainer coldread <slug> --run        # first-viewing read by a fresh agent (claude -p), saved with numbered findings
+uv run explainer findings --stats             # how many review findings authors adopt, per tool
 uv run explainer eval chat                    # chat answers under each system prompt, graded blind (needs the claude CLI)
 uv run explainer render <slug> --draft        # fast silent layout pass
 uv run explainer render <slug> --review       # 1080p60, voice, captions, chapters, review sheet

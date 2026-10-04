@@ -3,6 +3,24 @@ values:
   object_types: [blob, tree, commit, tag]
   min_parents: 0
 
+budget: {diagram: 11, reason: "two commits side by side: the shared blob only shows when both snapshots are drawn"}
+
+claims:
+  - id: mechanism-content-id
+    kind: mechanism
+    statement: "An object's ID is the hash of its content, and a tree stores the IDs of its entries, so a changed file gives a new ID to every tree above it and to the commit."
+    example: "parser.py changes: new blob c88d…, then new IDs for src/ (51aa…), the root tree (e41c…), and the commit (7f3a…)."
+  - id: guarantee-shared
+    kind: guarantee
+    statement: "An unchanged file is not stored again: the new tree points to the same blob."
+    example: "README.md did not change, so both root trees point to blob a3f2…."
+    counterexample: "Change one byte of a file and its content hash changes: the new snapshot needs a new blob for it."
+    ask: "A commit is a full snapshot. Why does an unchanged file not take more space?"
+  - id: misconception-diff
+    kind: misconception
+    statement: "A commit stores the diff against its parent."
+    correction: "A commit points to a whole tree; git show computes the diff when asked; packfiles compress similar objects, but that is storage."
+
 quiz:
   - q: "Does a commit store a diff or a snapshot?"
     expect: "A snapshot: it points to one root tree. Diffs are computed when asked."

@@ -20,7 +20,7 @@ People who write technical text. They know grammar. They do not know ASD-STE100.
 | Word count | The number of words in the sentence. A proxy for reading effort. | assumption: shorter is easier when meaning is kept |
 | Rule 1 — simple words | Replace a formal word with a common word. | fact (STE rule) |
 | Rule 2 — direct instruction | Write the instruction to the reader. Remove the abstract frame. | fact (STE rule) |
-| Rule 3 — concrete verb | Use a verb for the action, not a state plus a helper verb. | fact (STE rule) |
+| Rule 3 — concrete words | Use a verb for the action, not a state plus a helper verb, and a noun for the thing, not a vague one. | fact (STE rule) |
 
 ## Causal chain
 
@@ -34,7 +34,7 @@ each rule removes one source of decoding work  →  same instruction, fewer word
 | Step | Sentence | Words |
 |---|---|---|
 | S0 original | It is imperative that the operator ensures the hydraulic reservoir is replenished prior to commencing operation. | 16 |
-| S1 rule 1 | It is imperative that the operator ensures the hydraulic reservoir is full before starting the operation. | 16 |
+| S1 rule 1 | It is imperative that the operator ensures the hydraulic reservoir is full before starting operation. | 15 |
 | S2 rule 2 | Make sure that the hydraulic reservoir is full before you start the operation. | 13 |
 | S3 rule 3 | Fill the hydraulic reservoir before you start the machine. | 9 |
 

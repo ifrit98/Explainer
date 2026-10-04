@@ -1,0 +1,404 @@
+{
+ "tool": "coldread",
+ "rendering": "html",
+ "slug": "cdn-request",
+ "at": "2026-10-04T06:01:07",
+ "model": "default",
+ "prompt_sha": "71b79b6cb6eb",
+ "reply": {
+  "sections": [
+   {
+    "at": "header (lines 173-177)",
+    "text": "Title 'Why a CDN makes a request faster' and a lede that states the whole result: 3 round trips, each costing time in proportion to distance; a CDN moves them onto the short path to an edge; the long trip to the origin happens once on a miss and not at all on a hit.",
+    "unresolved": [],
+    "unsaid": [
+     "Eyebrow 'Explainer · Stage 3 · interactive': 'Stage 3' is never explained and means nothing to this reader."
+    ],
+    "leap": [
+     "'A new HTTPS request needs 3 round trips before the first byte arrives': the count is given as a fact here. The breakdown (TCP, TLS 1.3, request) only comes in the next section."
+    ],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Level 1 · What it is: 'Three machines, two distances' (lines 179-195)",
+    "text": "A diagram with no prose: client, edge and origin, with '300 km' between client and edge and '6,000 km' between edge and origin. Captions: 'short: every handshake' and 'long: only on a cache miss'.",
+    "unresolved": [],
+    "unsaid": [
+     "The section has no prose at all. The diagram carries everything.",
+     "The edge-to-origin line is dashed ('link long') and the client-to-edge line is solid. The text never says what the dash means.",
+     "Both km labels are live (svg-ue, svg-eo) and change when the sliders move later. Nothing says so.",
+     "'Level 1' starts a numbering scheme. Levels 2-4 reappear much later inside collapsed panels, and the scheme is never explained.",
+     "There is no line from the client to the origin, even though the next section talks about 'no CDN', where the client talks to the origin directly."
+    ],
+    "leap": [
+     "The caption 'long: only on a cache miss' assumes the reader already accepts the lede's claim. No reason is given here."
+    ],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Predict first: 'Start with no CDN' (lines 197-202 + predict script lines 532-538)",
+    "text": "Gives the inputs: 3 round trips (TCP, TLS 1.3, request), about 1 ms per 100 km round trip, 20 ms at the origin, and client-to-origin distance taken as the edge-to-origin distance. The reader must enter a number of ms before the instrument section is shown. On commit it shows 'Result: 200 ms', 'matches' or 'does not match', and '3 round trips (TCP, TLS 1.3, request) × 60 ms + 20 ms at the origin. Most of the time is distance, paid three times.'",
+    "unresolved": [],
+    "unsaid": [
+     "The prediction counts as 'matches' within ±25% of 200 ms (judge, line 536). The tolerance is never stated, so a reader who enters 180 doesn't know why it matched.",
+     "Committing a prediction reveals the next section (data-after='predict-1'). Before that, the page simply ends here with no hint that more content is hidden.",
+     "The prediction is saved per reader (localStorage). On a return visit the answer is already revealed and the input is disabled, with no explanation."
+    ],
+    "leap": [
+     "'Light in fiber goes 100 km and back in about 1 ms': no reason is given here. The reason (two thirds of vacuum speed) only comes in the Limits cards.",
+     "'TLS 1.3' is one round trip: this is given without saying why it is one rather than two. The reader knows HTTP but may not know TLS 1.3's round-trip count."
+    ],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "The instrument: 'Three paths for the same request' (lines 204-222 + render script lines 484-528)",
+    "text": "Prose: with a CDN the handshakes and request go to the edge; on a miss the edge uses an open connection to the origin, so one long round trip and no new handshakes. Two log-scale sliders ('Client to edge' 50-2,000 km with presets 50/300/2,000; 'Edge to origin' 500-15,000 km with presets 1,000/6,000/15,000). A four-colour legend. Three stacked bars (No CDN, CDN · cache miss, CDN · cache hit) with totals, plus a verdict line such as 'A hit is 20× faster than no CDN; A miss is 2.2× faster than no CDN.'",
+    "unresolved": [
+     "'processing' on the hit row is 1 ms of edge processing. The edge's 1 ms has not been stated anywhere yet; it first appears in the Limits cards. So the default hit total of '10 ms' (9 ms of round trips + 1 ms) cannot be worked out from what has been said."
+    ],
+    "unsaid": [
+     "The miss row's 'processing' segment is edge 1 ms + origin 20 ms = 21 ms, merged into one grey segment. The default miss total of 90 ms (6+3+60+21) is never broken down in words.",
+     "Bars are scaled to the largest total (scale = max of totals), so a row's length is relative to the slowest path. Not said.",
+     "Both sliders are logarithmic (log: true). Not said. The middle of the track is not the middle of the range.",
+     "The prose says only 'Move the edge closer or farther'. The second slider, 'Edge to origin', which also changes the no-CDN row, is never mentioned.",
+     "The verdict's extra sentences fire on hidden thresholds: 'The edge is not much closer than the origin here, so the gain is small.' appears when client-to-edge > edge-to-origin / 3, and 'the CDN adds distance' appears when a CDN row is slower. Neither threshold is stated.",
+     "Moving the sliders also rewrites the km labels in the Level 1 diagram above and the formula in Level 3 below. Not said.",
+     "Hovering a segment shows a title tooltip with its ms value. Not said.",
+     "The legend's 'edge ↔ origin' arrow notation and the colours are explained only by the legend itself. The prose never ties a colour to a claim (for example, 'the orange segment is the one long trip').",
+     "Sliders allow client-to-edge (up to 2,000 km) to exceed edge-to-origin (down to 500 km). Under the stated assumption (client-to-origin = edge-to-origin), that is a geometry the prose never discusses."
+    ],
+    "leap": [
+     "Why the edge 'keeps open' a connection to the origin, and so pays no handshakes, is asserted, not explained."
+    ],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Go deeper · Level 2 · how: 'The steps of one request' (lines 228-236, open by default)",
+    "text": "Four steps: DNS sends the client to a nearby edge; TCP + TLS with the edge (2 short round trips); request (1 short round trip); hit answers from cache, miss asks origin over an open connection, caches for its TTL, replies.",
+    "unresolved": [],
+    "unsaid": [
+     "The section heading 'How, why, and how it is built' and the Level 2/3/4 labels continue the 'Level 1' numbering from far above. Level 1 had no prose, so the scheme still isn't explained."
+    ],
+    "leap": [],
+    "excess": [
+     "Steps 2-4 repeat what the predict section and the instrument prose already said: 'The client opens TCP and TLS with the edge: two round trips on the short path.', 'The client sends the request: one more short round trip.', 'On a miss, the edge asks the origin over a connection it keeps open'. Only 'DNS sends the client to a nearby edge server' and 'caches the answer for its TTL' are new."
+    ],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Go deeper · Level 3 · why: 'Round trips multiply distance' (lines 237-241, collapsed)",
+    "text": "Each round trip is about 1 ms per 100 km, a new request is 3 round trips so time grows with 3 × distance, and the CDN keeps them on the short path. A live formula: 'no CDN ≈ 3 × 60 ms + 20 ms = 200 ms'.",
+    "unresolved": [],
+    "unsaid": [
+     "Two values in the formula are coloured (ex-live, orange) and update with the sliders. The colour is never explained.",
+     "The formula covers only the no-CDN row. There is no equivalent formula for the hit (3 × short + 1 ms) or the miss (3 × short + long + 21 ms), which are the cases the argument is actually about."
+    ],
+    "leap": [],
+    "excess": [
+     "'Each round trip costs about 1 ms per 100 km of fiber.' This is the third time, already given in the predict section.",
+     "'A new request costs 3 round trips, so its time grows with 3 × distance.' Already in the predict feedback: 'Most of the time is distance, paid three times.'",
+     "The formula repeats the predict feedback '3 round trips … × 60 ms + 20 ms'."
+    ],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Go deeper · Level 4 · implementation: 'What makes a hit' (lines 242-245, collapsed)",
+    "text": "Cache key (URL plus selected headers), Cache-Control: max-age sets the TTL, anycast or DNS steering, and per-user responses are usually not cached, so they are always misses.",
+    "unresolved": [
+     "'anycast' is not defined. It is also not needed for the argument."
+    ],
+    "unsaid": [],
+    "leap": [],
+    "excess": [
+     "'Many CDNs route clients to the nearest edge with anycast or DNS steering.' The latency argument doesn't need this.",
+     "'The edge stores a response under a cache key, usually the URL plus selected headers. Cache-Control: max-age from the origin sets the TTL.' A developer who deploys web apps already knows this, and it doesn't advance the latency argument. The useful sentence is the last one, about per-user pages always missing."
+    ],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Limits of this model: 'What the numbers leave out' (lines 249-259)",
+    "text": "Five tagged cards: fiber at about 2/3 of c (fact), straight paths (assumption), processing times as round numbers (estimate), a new connection per request (tagged 'simplification' but styled as assumption), and origin as far from the client as from the edge, with DNS and bandwidth left out (assumption).",
+    "unresolved": [],
+    "unsaid": [
+     "The tags fact / assumption / estimate are colour-coded, and the colour code is never explained.",
+     "The 'simplification' card uses class 'assumption', so it has the same colour as the assumptions while carrying a different word."
+    ],
+    "leap": [
+     "'1 ms at the edge' appears here for the first time, after the reader has already met the 10 ms hit total that depends on it."
+    ],
+    "excess": [
+     "'The origin is as far from the client as from the edge.' This repeats the predict section's 'this page takes that distance to be the same as the edge-to-origin distance'. Only 'DNS and bandwidth are left out; large files also depend on bandwidth' is new."
+    ],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Summary: 'Three facts' (lines 261-269)",
+    "text": "1) A new HTTPS request needs 3 round trips, each costing time in proportion to distance. 2) A CDN puts them on the short path; a faster origin would save only its 20 ms of processing. 3) A miss adds one long round trip on an open connection, so it is still faster than no CDN, as long as the edge is much closer than the origin.",
+    "unresolved": [],
+    "unsaid": [],
+    "leap": [
+     "'A faster origin would save only its 20 ms of processing.' This comparison was never made earlier and no control explores it. It is new in the summary.",
+     "'as long as the edge is much closer than the origin': 'much' is never quantified. The instrument's verdict silently uses one third as its 'small gain' threshold, and the break-even for a miss is never derived."
+    ],
+    "excess": [
+     "Item 1 restates the lede almost word for word: 'A new HTTPS request needs 3 round trips, and each one costs time in proportion to distance.' That is expected in a summary, but nothing is added."
+    ],
+    "purpose_unclear": false
+   }
+  ],
+  "blocking": [],
+  "cuts": [
+   "Level 4 (lines 242-245): cut the cache-key, Cache-Control and anycast sentences. Keep only 'Responses that differ per user … every such request is a miss.' The rest is known to this reader or off the argument.",
+   "Level 3 prose (line 239): cut the restated '1 ms per 100 km' and '3 × distance' sentences. Keep the live formula, ideally extended to hit and miss.",
+   "Level 2 steps 2-4 (lines 232-234): they repeat the predict and instrument prose. Keep only the DNS step and the TTL note.",
+   "Limits, last card (line 257): drop the repeated 'origin as far from the client as from the edge' assumption, which is already stated in the predict section. Keep the DNS and bandwidth note."
+  ],
+  "question": {
+   "text": "Why does putting a CDN edge server near the client cut the time for a new HTTPS request, and by how much on a cache hit versus a miss?",
+   "known_at": "The h1 'Why a CDN makes a request faster' and the lede (lines 175-176).",
+   "result_stated": "Yes, in words, right away in the lede: 'A new HTTPS request needs 3 round trips before the first byte arrives, and each round trip costs time in proportion to distance. A CDN moves those round trips onto the short path to a nearby edge server. The long trip to the origin happens once on a cache miss, and not at all on a hit.'"
+  },
+  "motive": "Reason to care: mostly implicit. The page never says why a deploying developer should care about request latency. The closest it comes is the predict feedback 'Most of the time is distance, paid three times.' and the verdict 'A hit is 20× faster than no CDN'. Reason for the approach: the predict-first gate ('Start with no CDN') and the instrument prose 'Move the edge closer or farther, and watch the hit and miss rows.' The page never says outright why counting round trips times distance is the right model. Only the Level 3 heading 'Round trips multiply distance' hints at it.",
+  "close": "Yes. The Summary answers the opening question with the general argument in words: 'A new HTTPS request needs 3 round trips, and each one costs time in proportion to distance.' / 'A CDN puts those round trips on the short path to a nearby edge.' / 'A miss adds one long round trip on an open connection, so it is still faster than no CDN, as long as the edge is much closer than the origin.' The condition 'much closer' is left vague.",
+  "recap": "A new HTTPS connection costs three round trips, and each round trip costs about 1 ms per 100 km, so a CDN wins by making those three trips short; even a cache miss pays the long distance only once.",
+  "strongest": "Predict first section (lines 197-202 with the feedback at line 537). The reader works out 3 × 60 + 20 = 200 ms and is told 'Most of the time is distance, paid three times.' That makes the core mechanism concrete before the instrument appears.",
+  "weakest": "The instrument's numbers (lines 204-222 with lines 489-491). The hit row's 10 ms and the miss row's 21 ms 'processing' rely on a 1 ms edge processing time that isn't stated until the Limits cards. The second slider is never mentioned in the prose, and the verdict's 'not much closer' threshold is hidden.",
+  "suggestions": [
+   "State the 1 ms edge processing time in the 'Start with no CDN' paragraph, next to the 20 ms origin figure.",
+   "Extend the Level 3 formula to all three rows (hit ≈ 3 × short + 1 ms; miss ≈ 3 × short + long + 21 ms), and give the break-even condition for a miss (roughly 3 × short < 2 × long) instead of 'much closer'.",
+   "Add one line of prose to Level 1 explaining the dashed long link and saying that the km labels follow the sliders.",
+   "Say the prediction tolerance (±25%) near the input, and say that the instrument appears after committing a prediction.",
+   "Mention in the instrument prose that both sliders are logarithmic and that 'Edge to origin' also moves the no-CDN row.",
+   "Bring the keep-alive/HTTP/2 caveat forward. For repeat requests on an open connection the gain shrinks from 3 round trips to 1, which this reader will care about in practice.",
+   "Give the 'simplification' tag its own class or colour, or relabel it 'assumption', and add a one-line key for the tag colours."
+  ]
+ },
+ "findings": [
+  {
+   "n": 1,
+   "severity": "excess",
+   "kind": "cut",
+   "text": "Level 4 (lines 242-245): cut the cache-key, Cache-Control and anycast sentences. Keep only 'Responses that differ per user … every such request is a miss.' The rest is known to this reader or off the argument."
+  },
+  {
+   "n": 2,
+   "severity": "excess",
+   "kind": "cut",
+   "text": "Level 3 prose (line 239): cut the restated '1 ms per 100 km' and '3 × distance' sentences. Keep the live formula, ideally extended to hit and miss."
+  },
+  {
+   "n": 3,
+   "severity": "excess",
+   "kind": "cut",
+   "text": "Level 2 steps 2-4 (lines 232-234): they repeat the predict and instrument prose. Keep only the DNS step and the TTL note."
+  },
+  {
+   "n": 4,
+   "severity": "excess",
+   "kind": "cut",
+   "text": "Limits, last card (line 257): drop the repeated 'origin as far from the client as from the edge' assumption, which is already stated in the predict section. Keep the DNS and bandwidth note."
+  },
+  {
+   "n": 5,
+   "severity": "edge",
+   "kind": "unsaid",
+   "text": "header (lines 173-177): Eyebrow 'Explainer · Stage 3 · interactive': 'Stage 3' is never explained and means nothing to this reader."
+  },
+  {
+   "n": 6,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "header (lines 173-177): 'A new HTTPS request needs 3 round trips before the first byte arrives': the count is given as a fact here. The breakdown (TCP, TLS 1.3, request) only comes in the next section."
+  },
+  {
+   "n": 7,
+   "severity": "edge",
+   "kind": "unsaid",
+   "text": "Level 1 · What it is: 'Three machines, two distances' (lines 179-195): The section has no prose at all. The diagram carries everything."
+  },
+  {
+   "n": 8,
+   "severity": "edge",
+   "kind": "unsaid",
+   "text": "Level 1 · What it is: 'Three machines, two distances' (lines 179-195): The edge-to-origin line is dashed ('link long') and the client-to-edge line is solid. The text never says what the dash means."
+  },
+  {
+   "n": 9,
+   "severity": "edge",
+   "kind": "unsaid",
+   "text": "Level 1 · What it is: 'Three machines, two distances' (lines 179-195): Both km labels are live (svg-ue, svg-eo) and change when the sliders move later. Nothing says so."
+  },
+  {
+   "n": 10,
+   "severity": "edge",
+   "kind": "unsaid",
+   "text": "Level 1 · What it is: 'Three machines, two distances' (lines 179-195): 'Level 1' starts a numbering scheme. Levels 2-4 reappear much later inside collapsed panels, and the scheme is never explained."
+  },
+  {
+   "n": 11,
+   "severity": "edge",
+   "kind": "unsaid",
+   "text": "Level 1 · What it is: 'Three machines, two distances' (lines 179-195): There is no line from the client to the origin, even though the next section talks about 'no CDN', where the client talks to the origin directly."
+  },
+  {
+   "n": 12,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "Level 1 · What it is: 'Three machines, two distances' (lines 179-195): The caption 'long: only on a cache miss' assumes the reader already accepts the lede's claim. No reason is given here."
+  },
+  {
+   "n": 13,
+   "severity": "edge",
+   "kind": "unsaid",
+   "text": "Predict first: 'Start with no CDN' (lines 197-202 + predict script lines 532-538): The prediction counts as 'matches' within ±25% of 200 ms (judge, line 536). The tolerance is never stated, so a reader who enters 180 doesn't know why it matched."
+  },
+  {
+   "n": 14,
+   "severity": "edge",
+   "kind": "unsaid",
+   "text": "Predict first: 'Start with no CDN' (lines 197-202 + predict script lines 532-538): Committing a prediction reveals the next section (data-after='predict-1'). Before that, the page simply ends here with no hint that more content is hidden."
+  },
+  {
+   "n": 15,
+   "severity": "edge",
+   "kind": "unsaid",
+   "text": "Predict first: 'Start with no CDN' (lines 197-202 + predict script lines 532-538): The prediction is saved per reader (localStorage). On a return visit the answer is already revealed and the input is disabled, with no explanation."
+  },
+  {
+   "n": 16,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "Predict first: 'Start with no CDN' (lines 197-202 + predict script lines 532-538): 'Light in fiber goes 100 km and back in about 1 ms': no reason is given here. The reason (two thirds of vacuum speed) only comes in the Limits cards."
+  },
+  {
+   "n": 17,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "Predict first: 'Start with no CDN' (lines 197-202 + predict script lines 532-538): 'TLS 1.3' is one round trip: this is given without saying why it is one rather than two. The reader knows HTTP but may not know TLS 1.3's round-trip count."
+  },
+  {
+   "n": 18,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "The instrument: 'Three paths for the same request' (lines 204-222 + render script lines 484-528): 'processing' on the hit row is 1 ms of edge processing. The edge's 1 ms has not been stated anywhere yet; it first appears in the Limits cards. So the default hit total of '10 ms' (9 ms of round trips + 1 ms) cannot be worked out from what has been said."
+  },
+  {
+   "n": 19,
+   "severity": "edge",
+   "kind": "unsaid",
+   "text": "The instrument: 'Three paths for the same request' (lines 204-222 + render script lines 484-528): The miss row's 'processing' segment is edge 1 ms + origin 20 ms = 21 ms, merged into one grey segment. The default miss total of 90 ms (6+3+60+21) is never broken down in words."
+  },
+  {
+   "n": 20,
+   "severity": "edge",
+   "kind": "unsaid",
+   "text": "The instrument: 'Three paths for the same request' (lines 204-222 + render script lines 484-528): Bars are scaled to the largest total (scale = max of totals), so a row's length is relative to the slowest path. Not said."
+  },
+  {
+   "n": 21,
+   "severity": "edge",
+   "kind": "unsaid",
+   "text": "The instrument: 'Three paths for the same request' (lines 204-222 + render script lines 484-528): Both sliders are logarithmic (log: true). Not said. The middle of the track is not the middle of the range."
+  },
+  {
+   "n": 22,
+   "severity": "edge",
+   "kind": "unsaid",
+   "text": "The instrument: 'Three paths for the same request' (lines 204-222 + render script lines 484-528): The prose says only 'Move the edge closer or farther'. The second slider, 'Edge to origin', which also changes the no-CDN row, is never mentioned."
+  },
+  {
+   "n": 23,
+   "severity": "edge",
+   "kind": "unsaid",
+   "text": "The instrument: 'Three paths for the same request' (lines 204-222 + render script lines 484-528): The verdict's extra sentences fire on hidden thresholds: 'The edge is not much closer than the origin here, so the gain is small.' appears when client-to-edge > edge-to-origin / 3, and 'the CDN adds distance' appears when a CDN row is slower. Neither threshold is stated."
+  },
+  {
+   "n": 24,
+   "severity": "edge",
+   "kind": "unsaid",
+   "text": "The instrument: 'Three paths for the same request' (lines 204-222 + render script lines 484-528): Moving the sliders also rewrites the km labels in the Level 1 diagram above and the formula in Level 3 below. Not said."
+  },
+  {
+   "n": 25,
+   "severity": "edge",
+   "kind": "unsaid",
+   "text": "The instrument: 'Three paths for the same request' (lines 204-222 + render script lines 484-528): Hovering a segment shows a title tooltip with its ms value. Not said."
+  },
+  {
+   "n": 26,
+   "severity": "edge",
+   "kind": "unsaid",
+   "text": "The instrument: 'Three paths for the same request' (lines 204-222 + render script lines 484-528): The legend's 'edge ↔ origin' arrow notation and the colours are explained only by the legend itself. The prose never ties a colour to a claim (for example, 'the orange segment is the one long trip')."
+  },
+  {
+   "n": 27,
+   "severity": "edge",
+   "kind": "unsaid",
+   "text": "The instrument: 'Three paths for the same request' (lines 204-222 + render script lines 484-528): Sliders allow client-to-edge (up to 2,000 km) to exceed edge-to-origin (down to 500 km). Under the stated assumption (client-to-origin = edge-to-origin), that is a geometry the prose never discusses."
+  },
+  {
+   "n": 28,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "The instrument: 'Three paths for the same request' (lines 204-222 + render script lines 484-528): Why the edge 'keeps open' a connection to the origin, and so pays no handshakes, is asserted, not explained."
+  },
+  {
+   "n": 29,
+   "severity": "edge",
+   "kind": "unsaid",
+   "text": "Go deeper · Level 2 · how: 'The steps of one request' (lines 228-236, open by default): The section heading 'How, why, and how it is built' and the Level 2/3/4 labels continue the 'Level 1' numbering from far above. Level 1 had no prose, so the scheme still isn't explained."
+  },
+  {
+   "n": 30,
+   "severity": "edge",
+   "kind": "unsaid",
+   "text": "Go deeper · Level 3 · why: 'Round trips multiply distance' (lines 237-241, collapsed): Two values in the formula are coloured (ex-live, orange) and update with the sliders. The colour is never explained."
+  },
+  {
+   "n": 31,
+   "severity": "edge",
+   "kind": "unsaid",
+   "text": "Go deeper · Level 3 · why: 'Round trips multiply distance' (lines 237-241, collapsed): The formula covers only the no-CDN row. There is no equivalent formula for the hit (3 × short + 1 ms) or the miss (3 × short + long + 21 ms), which are the cases the argument is actually about."
+  },
+  {
+   "n": 32,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "Go deeper · Level 4 · implementation: 'What makes a hit' (lines 242-245, collapsed): 'anycast' is not defined. It is also not needed for the argument."
+  },
+  {
+   "n": 33,
+   "severity": "edge",
+   "kind": "unsaid",
+   "text": "Limits of this model: 'What the numbers leave out' (lines 249-259): The tags fact / assumption / estimate are colour-coded, and the colour code is never explained."
+  },
+  {
+   "n": 34,
+   "severity": "edge",
+   "kind": "unsaid",
+   "text": "Limits of this model: 'What the numbers leave out' (lines 249-259): The 'simplification' card uses class 'assumption', so it has the same colour as the assumptions while carrying a different word."
+  },
+  {
+   "n": 35,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "Limits of this model: 'What the numbers leave out' (lines 249-259): '1 ms at the edge' appears here for the first time, after the reader has already met the 10 ms hit total that depends on it."
+  },
+  {
+   "n": 36,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "Summary: 'Three facts' (lines 261-269): 'A faster origin would save only its 20 ms of processing.' This comparison was never made earlier and no control explores it. It is new in the summary."
+  },
+  {
+   "n": 37,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "Summary: 'Three facts' (lines 261-269): 'as long as the edge is much closer than the origin': 'much' is never quantified. The instrument's verdict silently uses one third as its 'small gain' threshold, and the break-even for a miss is never derived."
+  }
+ ]
+}

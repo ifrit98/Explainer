@@ -1,0 +1,213 @@
+{
+ "tool": "coldread",
+ "rendering": "diagram",
+ "slug": "git-objects",
+ "at": "2026-10-04T06:00:35",
+ "model": "default",
+ "prompt_sha": "ccf9f8aedc9c",
+ "reply": {
+  "diagrams": [
+   {
+    "at": "Title and intro (lines 1–9), Mermaid diagram (lines 11–35), 'Read the diagram' list (lines 37–43), object table (lines 45–50)",
+    "text": "The intro says a commit is a full snapshot and that an unchanged file is not stored again. It says each object's ID is the hash of its content and that a change ripples up through every tree above the file. A legend follows. The diagram shows HEAD → main → commit 7f3a… → parent commit 2b91…. Each commit points to a root tree. Both root trees point via 'README.md' to the same blob a3f2… (thick border). Through 'src/' they reach different subtrees, which point via 'parser.py' to blob v1 and blob v2. Five numbered reading steps and a table of the four object types come next.",
+    "unresolved": [
+     "'four kinds of objects' (line 5): the four are never listed before the diagram, and only three appear in it. 'tag' first shows up in the table.",
+     "'object' (lines 5, 9): used as a technical term before it is explained. The reader has to infer 'a thing git stores under its ID' from 'Same content gives the same ID, so the same object'.",
+     "'tree' (line 5, diagram nodes): not explained until step 3 after the diagram ('A tree maps names to blobs (files) or to other trees (directories)').",
+     "'blob' (line 9 legend 'marks a blob', diagram nodes): not explained until step 3, and then only as the parenthetical '(files)'. The fact that it holds content only and no name comes later still, in the table.",
+     "'root tree' (edge labels C2/C1 → T2/T1): what 'root' means is never stated (the top-level project directory).",
+     "Edge labels 'README.md', 'src/', 'parser.py' on tree → child arrows: the legend doesn't say that an arrow label is the entry's name inside the tree. Only step 3 implies it.",
+     "'modes' (table, tree row): never explained.",
+     "'tag (annotated)' and 'tagger' (table): not explained and not shown in the diagram."
+    ],
+    "leap": [
+     "'Same content gives the same ID, so the same object' (line 5) → 'an unchanged file is not stored again': the reader isn't told that git keeps objects in a store looked up by ID. Without that, it isn't clear why the same ID means it is stored only once.",
+     "'a changed file changes the ID of every tree above it' (line 5): stated with no reason why this matters to the reader (e.g., that a single commit ID pins down the whole snapshot). It comes across as a fact with no payoff.",
+     "The arrow 'C2 -->|parent| C1' points from newer to older. A reader who pictures history moving forward may expect the opposite. Step 2 states the fact but doesn't give the reason: a commit stores its parent's ID, so it can only point back.",
+     "The diagram looks like it shows commit 2b91 as a full snapshot, but the reader still can't see what C2 'costs'. Nothing marks which objects are new in C2 (B3, S2, T2, C2) and which are reused (B1)."
+    ],
+    "excess": [
+     "Step 4 '(thick border)' repeats the legend's 'the thick border marks a blob that two trees share' and adds nothing new.",
+     "Step 5 'Each tree above it stores that new ID, so its own content and ID change too' repeats line 5 'a changed file changes the ID of every tree above it'. The added value is only the concrete path.",
+     "Step 1 '`HEAD` and `main` are refs: names, not objects' repeats the legend 'refs (names that point to an object)'.",
+     "Table commit row 'its tree's ID, its parents' IDs' repeats step 2. The table as a whole largely restates steps 1–3.",
+     "Table row 'tag (annotated) | tagger, message | one object, usually a commit': not needed for the snapshot-vs-diff argument.",
+     "Table 'no parent (first commit), one, or several (a merge)': merge detail the argument doesn't use.",
+     "'Hashes are shortened and made up' (line 9): useful, but minor."
+    ],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Closing paragraph (line 53)",
+    "text": "Answers 'is a commit a diff?' with No. A commit points to a whole tree. git show computes diffs when you ask. Packfiles compress on disk, but that is storage. A commit stores only what changed because everything else is the same object.",
+    "unresolved": [
+     "'packfiles' (line 53): never explained."
+    ],
+    "leap": [
+     "'A commit stores only what changed (new blobs, and new trees on the path to them)' (line 53) seems to contradict the headline 'A commit is a full snapshot' (line 5), and it echoes the misconception the piece set out to correct. The reader needs to be told that 'stores' here means 'adds new objects to the repository', not 'the commit object contains'."
+    ],
+    "excess": [
+     "'On disk, packfiles compress similar objects against each other, but that is storage, not what a commit means': this defends against an objection the reader may not have, using a term that is never explained."
+    ],
+    "purpose_unclear": false
+   }
+  ],
+  "blocking": [
+   "Line 53: 'A commit stores only what changed'. Coming last, this reads as confirming the 'commit = diff' model the reader started with. It undercuts 'A commit is a full snapshot' (line 5) unless the two senses of 'stores' are separated.",
+   "Lines 5 and 9 and the diagram nodes: 'tree' and 'blob' are used throughout the intro, legend and diagram but only explained afterwards (step 3). On first reading, the reader can't parse the picture's main labels.",
+   "Line 5: 'Same content gives the same ID, so the same object'. Without the idea of a store keyed by ID, the core step from content hash to 'not stored again' isn't justified."
+  ],
+  "cuts": [
+   "Most of the table (lines 45–50), especially the tag row and the merge/parent-count detail. It restates steps 1–3 and adds unexplained terms ('modes', 'tagger').",
+   "The packfiles sentence in line 53, or reduce it to a short note that explains the term.",
+   "Step 1 (repeats the legend) and '(thick border)' in step 4.",
+   "The second half of line 5 ('a tree stores the IDs ... every tree above it'), since step 5 shows the same thing concretely; or drop the generic part of step 5 instead."
+  ],
+  "question": {
+   "text": "What does git actually store when you commit, if not a diff? Answer: a full snapshot made of content-addressed objects, where unchanged files are shared.",
+   "known_at": "Title (line 1) 'What git stores when you commit', and line 5 'If you think of a commit as a diff, git stores something else.'",
+   "result_stated": "Yes, up front in bold at line 5: 'A commit is a full snapshot of the project, and an unchanged file is not stored again.' It is restated at line 53: 'No. A commit points to a whole tree.'"
+  },
+  "motive": "Reason to care about the question: only implied by 'If you think of a commit as a diff, git stores something else' (line 5). It names the misconception but never says what goes wrong if you hold it. Reason for the approach (content hashing / IDs): missing. It is stated as fact ('each object's ID is the hash of its content'), with no explanation of why git identifies objects this way.",
+  "close": "Yes, line 53: 'So, is a commit a diff? No. A commit points to a whole tree. `git show` computes the diff against the parent when you ask.' The general argument is stated in words ('everything else is the same object as before'). But the final clause 'A commit stores only what changed' muddies the answer.",
+  "recap": "A git commit points to a full tree of the project, but because every object is named by the hash of its content, unchanged files and folders are just the same objects reused, so each commit only adds the parts that changed.",
+  "strongest": "Diagram plus step 4 (lines 23, 25, 42): two different root trees both point to the single shared README blob a3f2…, marked with a thick border. It shows 'full snapshot, but not stored again' in one glance.",
+  "weakest": "Line 53's last sentence 'A commit stores only what changed', which comes close to restating the misconception at the very end. The runner-up is that 'tree'/'blob' are used before they are explained (lines 5–35).",
+  "suggestions": [
+   "Name the three object types the diagram uses (blob = file content, tree = directory listing, commit = snapshot + parent + message) before the diagram, and move tags to a footnote.",
+   "Add one sentence saying git keeps every object in a store keyed by its ID, so writing an object whose ID already exists adds nothing.",
+   "Mark the objects that are new in commit 7f3a… (e.g., a different fill or a 'new in this commit' note) so the reader can see the cost of the second commit.",
+   "Reword the end: 'The commit object always names a whole tree; what a new commit adds to the repository is only the new blobs and trees on the path to the change.'",
+   "Give a motive, e.g., why snapshots make checkout, branch switching, or comparing any two commits cheap, or why the hash ripple means one commit ID verifies the whole project.",
+   "Explain or drop 'modes' and 'packfiles'."
+  ]
+ },
+ "findings": [
+  {
+   "n": 1,
+   "severity": "blocking",
+   "kind": "blocking",
+   "text": "Line 53: 'A commit stores only what changed'. Coming last, this reads as confirming the 'commit = diff' model the reader started with. It undercuts 'A commit is a full snapshot' (line 5) unless the two senses of 'stores' are separated."
+  },
+  {
+   "n": 2,
+   "severity": "blocking",
+   "kind": "blocking",
+   "text": "Lines 5 and 9 and the diagram nodes: 'tree' and 'blob' are used throughout the intro, legend and diagram but only explained afterwards (step 3). On first reading, the reader can't parse the picture's main labels."
+  },
+  {
+   "n": 3,
+   "severity": "blocking",
+   "kind": "blocking",
+   "text": "Line 5: 'Same content gives the same ID, so the same object'. Without the idea of a store keyed by ID, the core step from content hash to 'not stored again' isn't justified."
+  },
+  {
+   "n": 4,
+   "severity": "excess",
+   "kind": "cut",
+   "text": "Most of the table (lines 45–50), especially the tag row and the merge/parent-count detail. It restates steps 1–3 and adds unexplained terms ('modes', 'tagger')."
+  },
+  {
+   "n": 5,
+   "severity": "excess",
+   "kind": "cut",
+   "text": "The packfiles sentence in line 53, or reduce it to a short note that explains the term."
+  },
+  {
+   "n": 6,
+   "severity": "excess",
+   "kind": "cut",
+   "text": "Step 1 (repeats the legend) and '(thick border)' in step 4."
+  },
+  {
+   "n": 7,
+   "severity": "excess",
+   "kind": "cut",
+   "text": "The second half of line 5 ('a tree stores the IDs ... every tree above it'), since step 5 shows the same thing concretely; or drop the generic part of step 5 instead."
+  },
+  {
+   "n": 8,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "Title and intro (lines 1–9), Mermaid diagram (lines 11–35), 'Read the diagram' list (lines 37–43), object table (lines 45–50): 'four kinds of objects' (line 5): the four are never listed before the diagram, and only three appear in it. 'tag' first shows up in the table."
+  },
+  {
+   "n": 9,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "Title and intro (lines 1–9), Mermaid diagram (lines 11–35), 'Read the diagram' list (lines 37–43), object table (lines 45–50): 'object' (lines 5, 9): used as a technical term before it is explained. The reader has to infer 'a thing git stores under its ID' from 'Same content gives the same ID, so the same object'."
+  },
+  {
+   "n": 10,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "Title and intro (lines 1–9), Mermaid diagram (lines 11–35), 'Read the diagram' list (lines 37–43), object table (lines 45–50): 'tree' (line 5, diagram nodes): not explained until step 3 after the diagram ('A tree maps names to blobs (files) or to other trees (directories)')."
+  },
+  {
+   "n": 11,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "Title and intro (lines 1–9), Mermaid diagram (lines 11–35), 'Read the diagram' list (lines 37–43), object table (lines 45–50): 'blob' (line 9 legend 'marks a blob', diagram nodes): not explained until step 3, and then only as the parenthetical '(files)'. The fact that it holds content only and no name comes later still, in the table."
+  },
+  {
+   "n": 12,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "Title and intro (lines 1–9), Mermaid diagram (lines 11–35), 'Read the diagram' list (lines 37–43), object table (lines 45–50): 'root tree' (edge labels C2/C1 → T2/T1): what 'root' means is never stated (the top-level project directory)."
+  },
+  {
+   "n": 13,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "Title and intro (lines 1–9), Mermaid diagram (lines 11–35), 'Read the diagram' list (lines 37–43), object table (lines 45–50): Edge labels 'README.md', 'src/', 'parser.py' on tree → child arrows: the legend doesn't say that an arrow label is the entry's name inside the tree. Only step 3 implies it."
+  },
+  {
+   "n": 14,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "Title and intro (lines 1–9), Mermaid diagram (lines 11–35), 'Read the diagram' list (lines 37–43), object table (lines 45–50): 'modes' (table, tree row): never explained."
+  },
+  {
+   "n": 15,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "Title and intro (lines 1–9), Mermaid diagram (lines 11–35), 'Read the diagram' list (lines 37–43), object table (lines 45–50): 'tag (annotated)' and 'tagger' (table): not explained and not shown in the diagram."
+  },
+  {
+   "n": 16,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "Title and intro (lines 1–9), Mermaid diagram (lines 11–35), 'Read the diagram' list (lines 37–43), object table (lines 45–50): 'Same content gives the same ID, so the same object' (line 5) → 'an unchanged file is not stored again': the reader isn't told that git keeps objects in a store looked up by ID. Without that, it isn't clear why the same ID means it is stored only once."
+  },
+  {
+   "n": 17,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "Title and intro (lines 1–9), Mermaid diagram (lines 11–35), 'Read the diagram' list (lines 37–43), object table (lines 45–50): 'a changed file changes the ID of every tree above it' (line 5): stated with no reason why this matters to the reader (e.g., that a single commit ID pins down the whole snapshot). It comes across as a fact with no payoff."
+  },
+  {
+   "n": 18,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "Title and intro (lines 1–9), Mermaid diagram (lines 11–35), 'Read the diagram' list (lines 37–43), object table (lines 45–50): The arrow 'C2 -->|parent| C1' points from newer to older. A reader who pictures history moving forward may expect the opposite. Step 2 states the fact but doesn't give the reason: a commit stores its parent's ID, so it can only point back."
+  },
+  {
+   "n": 19,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "Title and intro (lines 1–9), Mermaid diagram (lines 11–35), 'Read the diagram' list (lines 37–43), object table (lines 45–50): The diagram looks like it shows commit 2b91 as a full snapshot, but the reader still can't see what C2 'costs'. Nothing marks which objects are new in C2 (B3, S2, T2, C2) and which are reused (B1)."
+  },
+  {
+   "n": 20,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "Closing paragraph (line 53): 'packfiles' (line 53): never explained."
+  },
+  {
+   "n": 21,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "Closing paragraph (line 53): 'A commit stores only what changed (new blobs, and new trees on the path to them)' (line 53) seems to contradict the headline 'A commit is a full snapshot' (line 5), and it echoes the misconception the piece set out to correct. The reader needs to be told that 'stores' here means 'adds new objects to the repository', not 'the commit object contains'."
+  }
+ ]
+}

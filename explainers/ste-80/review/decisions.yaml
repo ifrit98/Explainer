@@ -1,0 +1,445 @@
+# What the author did with each review finding (explainer decide). Read by findings --stats.
+2026-10-04T060623-coldread-video#1:
+  decision: adopted
+  note: round 3
+2026-10-04T060623-coldread-video#10:
+  decision: declined
+  note: round 3
+2026-10-04T060623-coldread-video#11:
+  decision: declined
+  note: round 3
+2026-10-04T060623-coldread-video#12:
+  decision: declined
+  note: round 3
+2026-10-04T060623-coldread-video#13:
+  decision: declined
+  note: round 3
+2026-10-04T060623-coldread-video#14:
+  decision: declined
+  note: round 3
+2026-10-04T060623-coldread-video#15:
+  decision: declined
+  note: round 3
+2026-10-04T060623-coldread-video#16:
+  decision: adopted
+  note: round 3
+2026-10-04T060623-coldread-video#17:
+  decision: declined
+  note: round 3
+2026-10-04T060623-coldread-video#18:
+  decision: declined
+  note: round 3
+2026-10-04T060623-coldread-video#19:
+  decision: declined
+  note: round 3
+2026-10-04T060623-coldread-video#2:
+  decision: adopted
+  note: round 3
+2026-10-04T060623-coldread-video#20:
+  decision: declined
+  note: round 3
+2026-10-04T060623-coldread-video#21:
+  decision: declined
+  note: round 3
+2026-10-04T060623-coldread-video#22:
+  decision: declined
+  note: round 3
+2026-10-04T060623-coldread-video#23:
+  decision: declined
+  note: round 3
+2026-10-04T060623-coldread-video#24:
+  decision: declined
+  note: round 3
+2026-10-04T060623-coldread-video#25:
+  decision: declined
+  note: round 3
+2026-10-04T060623-coldread-video#26:
+  decision: declined
+  note: round 3
+2026-10-04T060623-coldread-video#27:
+  decision: declined
+  note: round 3
+2026-10-04T060623-coldread-video#28:
+  decision: declined
+  note: round 3
+2026-10-04T060623-coldread-video#29:
+  decision: declined
+  note: round 3
+2026-10-04T060623-coldread-video#3:
+  decision: adopted
+  note: round 3
+2026-10-04T060623-coldread-video#30:
+  decision: declined
+  note: round 3
+2026-10-04T060623-coldread-video#31:
+  decision: declined
+  note: round 3
+2026-10-04T060623-coldread-video#32:
+  decision: declined
+  note: round 3
+2026-10-04T060623-coldread-video#33:
+  decision: declined
+  note: round 3
+2026-10-04T060623-coldread-video#34:
+  decision: declined
+  note: round 3
+2026-10-04T060623-coldread-video#35:
+  decision: adopted
+  note: round 3
+2026-10-04T060623-coldread-video#36:
+  decision: declined
+  note: round 3
+2026-10-04T060623-coldread-video#37:
+  decision: adopted
+  note: round 3
+2026-10-04T060623-coldread-video#38:
+  decision: declined
+  note: round 3
+2026-10-04T060623-coldread-video#39:
+  decision: adopted
+  note: round 3
+2026-10-04T060623-coldread-video#4:
+  decision: declined
+  note: round 3
+2026-10-04T060623-coldread-video#5:
+  decision: declined
+  note: round 3
+2026-10-04T060623-coldread-video#6:
+  decision: declined
+  note: round 3
+2026-10-04T060623-coldread-video#7:
+  decision: declined
+  note: round 3
+2026-10-04T060623-coldread-video#8:
+  decision: adopted
+  note: round 3
+2026-10-04T060623-coldread-video#9:
+  decision: declined
+  note: round 3
+2026-10-04T060635-quiz-video#1:
+  decision: declined
+  note: round 3; 13-16 by moving the swap bookmarks
+2026-10-04T060635-quiz-video#10:
+  decision: declined
+  note: round 3; 13-16 by moving the swap bookmarks
+2026-10-04T060635-quiz-video#11:
+  decision: declined
+  note: round 3; 13-16 by moving the swap bookmarks
+2026-10-04T060635-quiz-video#12:
+  decision: adopted
+  note: round 3; 13-16 by moving the swap bookmarks
+2026-10-04T060635-quiz-video#13:
+  decision: adopted
+  note: round 3; 13-16 by moving the swap bookmarks
+2026-10-04T060635-quiz-video#14:
+  decision: adopted
+  note: round 3; 13-16 by moving the swap bookmarks
+2026-10-04T060635-quiz-video#15:
+  decision: adopted
+  note: round 3; 13-16 by moving the swap bookmarks
+2026-10-04T060635-quiz-video#16:
+  decision: adopted
+  note: round 3; 13-16 by moving the swap bookmarks
+2026-10-04T060635-quiz-video#17:
+  decision: declined
+  note: round 3; 13-16 by moving the swap bookmarks
+2026-10-04T060635-quiz-video#18:
+  decision: declined
+  note: round 3; 13-16 by moving the swap bookmarks
+2026-10-04T060635-quiz-video#19:
+  decision: declined
+  note: round 3; 13-16 by moving the swap bookmarks
+2026-10-04T060635-quiz-video#2:
+  decision: declined
+  note: round 3; 13-16 by moving the swap bookmarks
+2026-10-04T060635-quiz-video#20:
+  decision: declined
+  note: round 3; 13-16 by moving the swap bookmarks
+2026-10-04T060635-quiz-video#21:
+  decision: declined
+  note: round 3; 13-16 by moving the swap bookmarks
+2026-10-04T060635-quiz-video#22:
+  decision: declined
+  note: round 3; 13-16 by moving the swap bookmarks
+2026-10-04T060635-quiz-video#23:
+  decision: declined
+  note: round 3; 13-16 by moving the swap bookmarks
+2026-10-04T060635-quiz-video#24:
+  decision: declined
+  note: round 3; 13-16 by moving the swap bookmarks
+2026-10-04T060635-quiz-video#25:
+  decision: declined
+  note: round 3; 13-16 by moving the swap bookmarks
+2026-10-04T060635-quiz-video#26:
+  decision: declined
+  note: round 3; 13-16 by moving the swap bookmarks
+2026-10-04T060635-quiz-video#3:
+  decision: adopted
+  note: round 3; 13-16 by moving the swap bookmarks
+2026-10-04T060635-quiz-video#4:
+  decision: declined
+  note: round 3; 13-16 by moving the swap bookmarks
+2026-10-04T060635-quiz-video#5:
+  decision: adopted
+  note: round 3; 13-16 by moving the swap bookmarks
+2026-10-04T060635-quiz-video#6:
+  decision: declined
+  note: round 3; 13-16 by moving the swap bookmarks
+2026-10-04T060635-quiz-video#7:
+  decision: declined
+  note: round 3; 13-16 by moving the swap bookmarks
+2026-10-04T060635-quiz-video#8:
+  decision: declined
+  note: round 3; 13-16 by moving the swap bookmarks
+2026-10-04T060635-quiz-video#9:
+  decision: declined
+  note: round 3; 13-16 by moving the swap bookmarks
+2026-10-04T061422-coldread-video#1:
+  decision: adopted
+  note: round 4
+2026-10-04T061422-coldread-video#10:
+  decision: declined
+  note: round 4
+2026-10-04T061422-coldread-video#11:
+  decision: declined
+  note: round 4
+2026-10-04T061422-coldread-video#12:
+  decision: declined
+  note: round 4
+2026-10-04T061422-coldread-video#13:
+  decision: declined
+  note: round 4
+2026-10-04T061422-coldread-video#14:
+  decision: declined
+  note: round 4
+2026-10-04T061422-coldread-video#15:
+  decision: declined
+  note: round 4
+2026-10-04T061422-coldread-video#16:
+  decision: declined
+  note: round 4
+2026-10-04T061422-coldread-video#17:
+  decision: declined
+  note: round 4
+2026-10-04T061422-coldread-video#18:
+  decision: declined
+  note: round 4
+2026-10-04T061422-coldread-video#19:
+  decision: declined
+  note: round 4
+2026-10-04T061422-coldread-video#2:
+  decision: adopted
+  note: round 4
+2026-10-04T061422-coldread-video#20:
+  decision: declined
+  note: round 4
+2026-10-04T061422-coldread-video#21:
+  decision: declined
+  note: round 4
+2026-10-04T061422-coldread-video#22:
+  decision: declined
+  note: round 4
+2026-10-04T061422-coldread-video#23:
+  decision: declined
+  note: round 4
+2026-10-04T061422-coldread-video#24:
+  decision: declined
+  note: round 4
+2026-10-04T061422-coldread-video#25:
+  decision: declined
+  note: round 4
+2026-10-04T061422-coldread-video#26:
+  decision: declined
+  note: round 4
+2026-10-04T061422-coldread-video#27:
+  decision: declined
+  note: round 4
+2026-10-04T061422-coldread-video#28:
+  decision: declined
+  note: round 4
+2026-10-04T061422-coldread-video#29:
+  decision: declined
+  note: round 4
+2026-10-04T061422-coldread-video#3:
+  decision: declined
+  note: round 4
+2026-10-04T061422-coldread-video#30:
+  decision: declined
+  note: round 4
+2026-10-04T061422-coldread-video#31:
+  decision: declined
+  note: round 4
+2026-10-04T061422-coldread-video#32:
+  decision: declined
+  note: round 4
+2026-10-04T061422-coldread-video#33:
+  decision: declined
+  note: round 4
+2026-10-04T061422-coldread-video#34:
+  decision: declined
+  note: round 4
+2026-10-04T061422-coldread-video#35:
+  decision: declined
+  note: round 4
+2026-10-04T061422-coldread-video#36:
+  decision: declined
+  note: round 4
+2026-10-04T061422-coldread-video#37:
+  decision: declined
+  note: round 4
+2026-10-04T061422-coldread-video#38:
+  decision: declined
+  note: round 4
+2026-10-04T061422-coldread-video#4:
+  decision: declined
+  note: round 4
+2026-10-04T061422-coldread-video#5:
+  decision: declined
+  note: round 4
+2026-10-04T061422-coldread-video#6:
+  decision: declined
+  note: round 4
+2026-10-04T061422-coldread-video#7:
+  decision: declined
+  note: round 4
+2026-10-04T061422-coldread-video#8:
+  decision: declined
+  note: round 4
+2026-10-04T061422-coldread-video#9:
+  decision: declined
+  note: round 4
+2026-10-04T061424-quiz-video#1:
+  decision: declined
+  note: 'round 4: pass'
+2026-10-04T061424-quiz-video#10:
+  decision: declined
+  note: 'round 4: pass'
+2026-10-04T061424-quiz-video#11:
+  decision: declined
+  note: 'round 4: pass'
+2026-10-04T061424-quiz-video#12:
+  decision: declined
+  note: 'round 4: pass'
+2026-10-04T061424-quiz-video#13:
+  decision: declined
+  note: 'round 4: pass'
+2026-10-04T061424-quiz-video#14:
+  decision: declined
+  note: 'round 4: pass'
+2026-10-04T061424-quiz-video#15:
+  decision: declined
+  note: 'round 4: pass'
+2026-10-04T061424-quiz-video#16:
+  decision: declined
+  note: 'round 4: pass'
+2026-10-04T061424-quiz-video#17:
+  decision: declined
+  note: 'round 4: pass'
+2026-10-04T061424-quiz-video#18:
+  decision: declined
+  note: 'round 4: pass'
+2026-10-04T061424-quiz-video#19:
+  decision: declined
+  note: 'round 4: pass'
+2026-10-04T061424-quiz-video#2:
+  decision: declined
+  note: 'round 4: pass'
+2026-10-04T061424-quiz-video#20:
+  decision: declined
+  note: 'round 4: pass'
+2026-10-04T061424-quiz-video#21:
+  decision: declined
+  note: 'round 4: pass'
+2026-10-04T061424-quiz-video#3:
+  decision: declined
+  note: 'round 4: pass'
+2026-10-04T061424-quiz-video#4:
+  decision: declined
+  note: 'round 4: pass'
+2026-10-04T061424-quiz-video#5:
+  decision: declined
+  note: 'round 4: pass'
+2026-10-04T061424-quiz-video#6:
+  decision: declined
+  note: 'round 4: pass'
+2026-10-04T061424-quiz-video#7:
+  decision: declined
+  note: 'round 4: pass'
+2026-10-04T061424-quiz-video#8:
+  decision: declined
+  note: 'round 4: pass'
+2026-10-04T061424-quiz-video#9:
+  decision: declined
+  note: 'round 4: pass'
+2026-10-04T062208-coldread-video#1:
+  decision: declined
+  note: 'round 6: nothing blocks'
+2026-10-04T062208-coldread-video#10:
+  decision: declined
+  note: 'round 6: nothing blocks'
+2026-10-04T062208-coldread-video#11:
+  decision: declined
+  note: 'round 6: nothing blocks'
+2026-10-04T062208-coldread-video#12:
+  decision: declined
+  note: 'round 6: nothing blocks'
+2026-10-04T062208-coldread-video#13:
+  decision: declined
+  note: 'round 6: nothing blocks'
+2026-10-04T062208-coldread-video#14:
+  decision: declined
+  note: 'round 6: nothing blocks'
+2026-10-04T062208-coldread-video#15:
+  decision: declined
+  note: 'round 6: nothing blocks'
+2026-10-04T062208-coldread-video#16:
+  decision: declined
+  note: 'round 6: nothing blocks'
+2026-10-04T062208-coldread-video#17:
+  decision: declined
+  note: 'round 6: nothing blocks'
+2026-10-04T062208-coldread-video#18:
+  decision: declined
+  note: 'round 6: nothing blocks'
+2026-10-04T062208-coldread-video#19:
+  decision: declined
+  note: 'round 6: nothing blocks'
+2026-10-04T062208-coldread-video#2:
+  decision: declined
+  note: 'round 6: nothing blocks'
+2026-10-04T062208-coldread-video#20:
+  decision: declined
+  note: 'round 6: nothing blocks'
+2026-10-04T062208-coldread-video#21:
+  decision: declined
+  note: 'round 6: nothing blocks'
+2026-10-04T062208-coldread-video#22:
+  decision: declined
+  note: 'round 6: nothing blocks'
+2026-10-04T062208-coldread-video#23:
+  decision: declined
+  note: 'round 6: nothing blocks'
+2026-10-04T062208-coldread-video#24:
+  decision: declined
+  note: 'round 6: nothing blocks'
+2026-10-04T062208-coldread-video#3:
+  decision: declined
+  note: 'round 6: nothing blocks'
+2026-10-04T062208-coldread-video#4:
+  decision: declined
+  note: 'round 6: nothing blocks'
+2026-10-04T062208-coldread-video#5:
+  decision: declined
+  note: 'round 6: nothing blocks'
+2026-10-04T062208-coldread-video#6:
+  decision: declined
+  note: 'round 6: nothing blocks'
+2026-10-04T062208-coldread-video#7:
+  decision: declined
+  note: 'round 6: nothing blocks'
+2026-10-04T062208-coldread-video#8:
+  decision: declined
+  note: 'round 6: nothing blocks'
+2026-10-04T062208-coldread-video#9:
+  decision: declined
+  note: 'round 6: nothing blocks'

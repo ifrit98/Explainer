@@ -171,7 +171,7 @@ main.ex { max-width: 980px; margin: 0 auto; padding-inline: 20px; padding-block:
 <main class="ex">
 
 <header>
-  <span class="ex-eyebrow">Explainer · Stage 3 · interactive</span>
+  <span class="ex-eyebrow">Explainer · interactive</span>
   <h1>Why a CDN makes a request faster</h1>
   <p class="ex-lede">A new HTTPS request needs 3 round trips before the first byte arrives, and each round trip costs time in proportion to distance. A CDN moves those round trips onto the short path to a nearby edge server. The long trip to the origin happens once on a cache miss, and not at all on a hit.</p>
 </header>
@@ -262,16 +262,16 @@ main.ex { max-width: 980px; margin: 0 auto; padding-inline: 20px; padding-block:
   <span class="ex-eyebrow">Summary</span>
   <h2 id="h-summary">Three facts</h2>
   <ol class="ex-summary">
-    <li>A new HTTPS request needs 3 round trips, and each one costs time in proportion to distance.</li>
-    <li>A CDN puts those round trips on the short path to a nearby edge.</li>
-    <li>A miss adds one long round trip on an open connection, so it is still faster than no CDN, as long as the edge is much closer than the origin.</li>
+    <li data-claim="mechanism-round-trips">A new HTTPS request needs 3 round trips, and each one costs time in proportion to distance.</li>
+    <li data-claim="why-edge">A CDN puts those round trips on the short path to a nearby edge. A faster origin would save only its 20 ms of processing.</li>
+    <li data-claim="guarantee-miss">A miss adds one long round trip on an open connection, so it is still faster than no CDN, as long as the edge is less than about two thirds as far as the origin. With the edge 2,000 km away and the origin 1,000 km, a miss takes 91 ms against 50 ms with no CDN.</li>
   </ol>
 </section>
 
 <footer>Rendered from <a href="https://github.com/ifrit98/Explainer/blob/main/explainers/cdn-request/model.md">model.md</a>. All times are model estimates. <a href="../../">All examples</a>.</footer>
 </main>
 
-<script type="application/json" id="explainer-model">{"rtt_ms_per_100km": 1, "rtt_distance_unit_km": 100, "tls_version": 1.3, "fiber_speed_km_per_s": 200000, "round_trips_new_request": {"tcp": 1, "tls13": 1, "request": 1, "total": 3}, "edge_processing_ms": 1, "origin_processing_ms": 20, "defaults": {"client_to_edge_km": 300, "edge_to_origin_km": 6000}, "default_results_ms": {"no_cdn": 200, "miss": 90, "hit": 10, "rtt_edge": 3, "rtt_origin": 60}, "sliders": {"client_to_edge_km": [50, 2000], "edge_to_origin_km": [500, 15000]}}</script>
+<script type="application/json" id="explainer-model">{"rtt_ms_per_100km": 1, "rtt_distance_unit_km": 100, "tls_version": 1.3, "fiber_speed_km_per_s": 200000, "round_trips_new_request": {"tcp": 1, "tls13": 1, "request": 1, "total": 3}, "edge_processing_ms": 1, "origin_processing_ms": 20, "defaults": {"client_to_edge_km": 300, "edge_to_origin_km": 6000}, "default_results_ms": {"no_cdn": 200, "miss": 90, "hit": 10, "rtt_edge": 3, "rtt_origin": 60}, "sliders": {"client_to_edge_km": [50, 2000], "edge_to_origin_km": [500, 15000]}, "far_edge": {"client_to_edge_km": 2000, "edge_to_origin_km": 1000, "no_cdn": 50, "miss": 91, "hit": 61}}</script>
 <script id="explainer-toolkit-js">
 /* Explainer web toolkit · inlined by `explainer sync`. Edit explainer_kit/web/explainer.js, not a page copy.
  *
@@ -519,8 +519,7 @@ const Explainer = (() => {
       [["A hit", hit], ["a miss", miss]].map(([n, t]) => t < none
         ? `${n} is ${(none / t).toFixed(t * 10 > none ? 1 : 0)}× faster than no CDN`
         : `${n} is slower than no CDN`).join("; ").replace(/^a/, "A") + "." +
-      (hit >= none || miss >= none ? " The edge is not closer than the origin here, so the CDN adds distance."
-        : ue.get() > eo.get() / 3 ? " The edge is not much closer than the origin here, so the gain is small." : "");
+      (miss >= none ? " The edge is not close enough: the three short round trips plus one long one cost more than three long ones." : "");
     document.getElementById("svg-ue").textContent = fmtKm(ue.get());
     document.getElementById("svg-eo").textContent = fmtKm(eo.get());
     document.getElementById("law").innerHTML =

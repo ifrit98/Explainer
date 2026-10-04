@@ -1,0 +1,234 @@
+{
+ "tool": "coldread",
+ "rendering": "diagram",
+ "slug": "sky-blue",
+ "at": "2026-10-04T06:00:38",
+ "model": "default",
+ "prompt_sha": "f85472810dd6",
+ "reply": {
+  "diagrams": [
+   {
+    "at": "Title, bold summary and Terms line (lines 1–7)",
+    "text": "The title asks why the sky is blue and the setting Sun red. A bold summary gives the answer: air molecules scatter blue about six times more than red, the scattered light is the sky, and what stays in the beam is the Sun's color. The Terms line defines beam, ω = 2πc/λ and air mass (1 overhead, 38 at the horizon).",
+    "unresolved": [
+     "c (in \"ω = 2πc / λ\") is never said to be the speed of light. This reader can likely guess it, so it is a small point."
+    ],
+    "leap": [
+     "\"scatter blue light about six times more than red\" is stated here with no reason yet. That is fine for a summary, because the diagram that follows supplies the reason."
+    ],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Diagram 1 (main flowchart: Sunlight → molecule → acceleration → scattered power → sky light / Sun's color)",
+    "text": "Sunlight drives the electrons of a 0.3 nm air molecule. The light is far below the electrons' ultraviolet natural frequency, so every color gets nearly the same amplitude. Acceleration = ω² × amplitude is therefore larger for blue. The radiated field is ∝ acceleration and power ∝ field², so scattered power ∝ ω⁴ ∝ 1/λ⁴, which makes blue at 450 nm 5.86 × red at 700 nm. The scattered light becomes the blue sky. What stays in the beam is the Sun's color: each air mass keeps the same fraction, so overhead (air mass 1) blue 80% and red 96% get through (white), and at the horizon (air mass 38) blue 0.02% and red 25% get through (red).",
+    "unresolved": [
+     "\"ultraviolet natural frequency\": the reader knows natural frequency from mechanics, but nothing says that the electrons in a molecule are bound like oscillators on springs, or that their natural frequency lies in the ultraviolet.",
+     "\"radiated field ∝ acceleration\": this reader does not know that accelerating charges radiate, or that the radiated field scales with acceleration.",
+     "\"Air molecule, 0.3 nm\": the size is given, but this diagram never says why it matters. That only comes in the final prose.",
+     "\"air mass\" values 1 and 38 are defined, but the reader is not told where 38 comes from."
+    ],
+    "leap": [
+     "\"far below their ultraviolet natural frequency: nearly the same amplitude for every color\": nothing says why driving an oscillator well below its resonance gives an amplitude that is almost independent of frequency.",
+     "\"radiated field ∝ acceleration, power ∝ field²\": both are stated with no reason. They carry the whole ω⁴ result.",
+     "\"each air mass keeps the same fraction\": this implies exponential loss with path length (0.80^38 ≈ 0.02%), but the rule is not explained. The per-air-mass figures 80% and 96% are given with no source.",
+     "\"Sky light / mostly blue: a blue sky\": nothing says the scattered light goes off in all directions, so that it reaches us from the whole sky. The diagram also does not say why the sky is blue rather than violet, even though 1/λ⁴ favors violet even more.",
+     "\"blue 80%, red 96% get through: white\": the reader is not told why losing 20% of the blue still looks white.",
+     "The step from \"blue 0.02%, red 25%\" to \"red\" is easy enough, but the 25% does not quite match 0.96^38 ≈ 21%. Presumably this is rounding of the 96% figure, but it is unexplained."
+    ],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Diagram 2 (\"Why acceleration, not amplitude\")",
+    "text": "If scattered power followed the amplitude (1.052 for blue, 1.021 for red), blue would be only 1.06 × red, giving a nearly white sky.",
+    "unresolved": [
+     "\"1.052 for blue, 1.021 for red\": the reader is not told what these are relative to. Presumably it is the amplitude compared with a static (zero-frequency) push, but that is never stated."
+    ],
+    "leap": [
+     "\"followed the amplitude\" → \"1.06 × red\": 1.06 is (1.052/1.021)², so this assumes power ∝ amplitude². The label says power \"followed the amplitude\", which does not match.",
+     "The heading promises a reason (\"Why acceleration, not amplitude\"), but the diagram only shows what would happen otherwise. It never says physically why the radiated power depends on acceleration."
+    ],
+    "excess": [
+     "Diagram 1 already says \"nearly the same amplitude for every color\". This diagram mostly repeats that point with numbers."
+    ],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Diagram 3 (\"When the rule fails: large scatterers\")",
+    "text": "A 10 µm cloud droplet is 22 × larger than 450 nm. Waves from its different parts arrive out of step and interfere, so every color scatters about equally, which is why clouds are white.",
+    "unresolved": [
+     "\"arrive out of step and interfere\": the opposite case, where the waves from a small scatterer add in step, has not been introduced yet. It only appears in the prose that follows."
+    ],
+    "leap": [
+     "The diagram does not say why out-of-step interference makes every color scatter equally, rather than just reducing the scattering."
+    ],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Closing prose (line 38)",
+    "text": "A molecule is 1,500 times smaller than the wavelength, so all its electrons move together and their waves add. So the sky is blue because the scatterers are small and their power follows the acceleration, and the low Sun is red because a long path removes the blue from its beam.",
+    "unresolved": [],
+    "leap": [
+     "\"all its electrons move together and their waves add\" is the precondition for the 1/λ⁴ law in Diagram 1, but it only arrives here, after the reader has already accepted that diagram."
+    ],
+    "excess": [],
+    "purpose_unclear": false
+   }
+  ],
+  "blocking": [
+   "Diagram 1, the edge from the molecule to the acceleration node: \"far below their ultraviolet natural frequency: nearly the same amplitude for every color\". The reader does not know that the electrons are bound oscillators, or why driving them far below resonance makes the amplitude independent of color.",
+   "Diagram 1, the edge from acceleration to scattered power: \"radiated field ∝ acceleration, power ∝ field²\". This is the core step that produces ω⁴, and it is stated with no reason. Diagram 2's heading \"Why acceleration, not amplitude\" promises the reason but does not give it."
+  ],
+  "cuts": [
+   "Diagram 2 adds little beyond Diagram 1's \"nearly the same amplitude\", and its unexplained numbers (1.052, 1.021) and implied amplitude² cost the reader time. Either cut it, or turn it into one sentence such as \"amplitude alone would make blue only 1.06 × red\"."
+  ],
+  "question": {
+   "text": "Why is the sky blue and the setting Sun red? In other words, what makes air scatter short wavelengths more, and how does path length change the Sun's color?",
+   "known_at": "Title, line 1: \"Why is the sky blue, and the setting Sun red?\"",
+   "result_stated": "Yes, in the bold line 5: \"Air molecules scatter blue light about six times more than red. The scattered light is the blue sky; what stays in the Sun's beam is the Sun's color.\""
+  },
+  "motive": "Missing. There is no reason to care beyond the everyday question in the title, and no reason is given for choosing the driven-oscillator approach.",
+  "close": "Yes. Line 38: \"So the sky is blue because the scatterers are small and their power follows the acceleration; the low Sun is red because a long path removes the blue from its beam.\"",
+  "recap": "Sunlight shakes the electrons in tiny air molecules, and they re-radiate with a power that goes as 1/λ⁴, so blue is scattered about 6× more than red. That scattered blue fills the sky, and the long horizon path strips the blue out of the Sun's beam, leaving it red.",
+  "strongest": "Diagram 1's horizon/overhead branch, \"overhead, air mass 1 / blue 80%, red 96% get through: white\" and \"horizon, air mass 38 / blue 0.02%, red 25% get through: red\". The concrete numbers make both colors of the Sun easy to see.",
+  "weakest": "Diagram 2, \"If scattered power followed the amplitude (1.052 for blue, 1.021 for red)\". Its heading promises a reason it never gives, its numbers have no stated reference, and it quietly assumes power ∝ amplitude².",
+  "suggestions": [
+   "Say early on that the electrons are bound in the molecule like masses on springs, with a natural frequency in the ultraviolet. Then 'driven far below resonance → amplitude ≈ the static amplitude' follows from school mechanics.",
+   "Give a one-line reason for radiated field ∝ acceleration: a charge moving at constant velocity carries its field along and does not radiate, while a change in its velocity sends a ripple outward.",
+   "Move the line 38 condition (molecule 1,500× smaller than the wavelength, so the electrons move together and their waves add) to before or inside Diagram 1, where it is actually needed.",
+   "Say that scattered light goes off in all directions, which is why the whole sky glows.",
+   "Briefly explain why the sky is blue rather than violet: the Sun gives off less violet, some is absorbed, and the eye is less sensitive to it.",
+   "State the exponential rule (the fraction left = the per-air-mass fraction raised to the power of the air mass) and give the source of 80% and 96%, so the reader can check 0.02% and 25%."
+  ]
+ },
+ "findings": [
+  {
+   "n": 1,
+   "severity": "blocking",
+   "kind": "blocking",
+   "text": "Diagram 1, the edge from the molecule to the acceleration node: \"far below their ultraviolet natural frequency: nearly the same amplitude for every color\". The reader does not know that the electrons are bound oscillators, or why driving them far below resonance makes the amplitude independent of color."
+  },
+  {
+   "n": 2,
+   "severity": "blocking",
+   "kind": "blocking",
+   "text": "Diagram 1, the edge from acceleration to scattered power: \"radiated field ∝ acceleration, power ∝ field²\". This is the core step that produces ω⁴, and it is stated with no reason. Diagram 2's heading \"Why acceleration, not amplitude\" promises the reason but does not give it."
+  },
+  {
+   "n": 3,
+   "severity": "excess",
+   "kind": "cut",
+   "text": "Diagram 2 adds little beyond Diagram 1's \"nearly the same amplitude\", and its unexplained numbers (1.052, 1.021) and implied amplitude² cost the reader time. Either cut it, or turn it into one sentence such as \"amplitude alone would make blue only 1.06 × red\"."
+  },
+  {
+   "n": 4,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "Title, bold summary and Terms line (lines 1–7): c (in \"ω = 2πc / λ\") is never said to be the speed of light. This reader can likely guess it, so it is a small point."
+  },
+  {
+   "n": 5,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "Title, bold summary and Terms line (lines 1–7): \"scatter blue light about six times more than red\" is stated here with no reason yet. That is fine for a summary, because the diagram that follows supplies the reason."
+  },
+  {
+   "n": 6,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "Diagram 1 (main flowchart: Sunlight → molecule → acceleration → scattered power → sky light / Sun's color): \"ultraviolet natural frequency\": the reader knows natural frequency from mechanics, but nothing says that the electrons in a molecule are bound like oscillators on springs, or that their natural frequency lies in the ultraviolet."
+  },
+  {
+   "n": 7,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "Diagram 1 (main flowchart: Sunlight → molecule → acceleration → scattered power → sky light / Sun's color): \"radiated field ∝ acceleration\": this reader does not know that accelerating charges radiate, or that the radiated field scales with acceleration."
+  },
+  {
+   "n": 8,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "Diagram 1 (main flowchart: Sunlight → molecule → acceleration → scattered power → sky light / Sun's color): \"Air molecule, 0.3 nm\": the size is given, but this diagram never says why it matters. That only comes in the final prose."
+  },
+  {
+   "n": 9,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "Diagram 1 (main flowchart: Sunlight → molecule → acceleration → scattered power → sky light / Sun's color): \"air mass\" values 1 and 38 are defined, but the reader is not told where 38 comes from."
+  },
+  {
+   "n": 10,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "Diagram 1 (main flowchart: Sunlight → molecule → acceleration → scattered power → sky light / Sun's color): \"far below their ultraviolet natural frequency: nearly the same amplitude for every color\": nothing says why driving an oscillator well below its resonance gives an amplitude that is almost independent of frequency."
+  },
+  {
+   "n": 11,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "Diagram 1 (main flowchart: Sunlight → molecule → acceleration → scattered power → sky light / Sun's color): \"radiated field ∝ acceleration, power ∝ field²\": both are stated with no reason. They carry the whole ω⁴ result."
+  },
+  {
+   "n": 12,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "Diagram 1 (main flowchart: Sunlight → molecule → acceleration → scattered power → sky light / Sun's color): \"each air mass keeps the same fraction\": this implies exponential loss with path length (0.80^38 ≈ 0.02%), but the rule is not explained. The per-air-mass figures 80% and 96% are given with no source."
+  },
+  {
+   "n": 13,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "Diagram 1 (main flowchart: Sunlight → molecule → acceleration → scattered power → sky light / Sun's color): \"Sky light / mostly blue: a blue sky\": nothing says the scattered light goes off in all directions, so that it reaches us from the whole sky. The diagram also does not say why the sky is blue rather than violet, even though 1/λ⁴ favors violet even more."
+  },
+  {
+   "n": 14,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "Diagram 1 (main flowchart: Sunlight → molecule → acceleration → scattered power → sky light / Sun's color): \"blue 80%, red 96% get through: white\": the reader is not told why losing 20% of the blue still looks white."
+  },
+  {
+   "n": 15,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "Diagram 1 (main flowchart: Sunlight → molecule → acceleration → scattered power → sky light / Sun's color): The step from \"blue 0.02%, red 25%\" to \"red\" is easy enough, but the 25% does not quite match 0.96^38 ≈ 21%. Presumably this is rounding of the 96% figure, but it is unexplained."
+  },
+  {
+   "n": 16,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "Diagram 2 (\"Why acceleration, not amplitude\"): \"1.052 for blue, 1.021 for red\": the reader is not told what these are relative to. Presumably it is the amplitude compared with a static (zero-frequency) push, but that is never stated."
+  },
+  {
+   "n": 17,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "Diagram 2 (\"Why acceleration, not amplitude\"): \"followed the amplitude\" → \"1.06 × red\": 1.06 is (1.052/1.021)², so this assumes power ∝ amplitude². The label says power \"followed the amplitude\", which does not match."
+  },
+  {
+   "n": 18,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "Diagram 2 (\"Why acceleration, not amplitude\"): The heading promises a reason (\"Why acceleration, not amplitude\"), but the diagram only shows what would happen otherwise. It never says physically why the radiated power depends on acceleration."
+  },
+  {
+   "n": 19,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "Diagram 3 (\"When the rule fails: large scatterers\"): \"arrive out of step and interfere\": the opposite case, where the waves from a small scatterer add in step, has not been introduced yet. It only appears in the prose that follows."
+  },
+  {
+   "n": 20,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "Diagram 3 (\"When the rule fails: large scatterers\"): The diagram does not say why out-of-step interference makes every color scatter equally, rather than just reducing the scattering."
+  },
+  {
+   "n": 21,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "Closing prose (line 38): \"all its electrons move together and their waves add\" is the precondition for the 1/λ⁴ law in Diagram 1, but it only arrives here, after the reader has already accepted that diagram."
+  }
+ ]
+}

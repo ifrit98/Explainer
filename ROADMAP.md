@@ -19,6 +19,7 @@ Status: `proposed` · `next` · `in progress` · `done`
 | 11 | [Review findings become rules](#11-review-findings-become-rules) | done (v0.4.0) |
 | 12 | [The narrative pass](#12-the-narrative-pass) | done (v0.5.0), with open items |
 | 13 | [Rebalance: omission and excess both cost](#13-rebalance-omission-and-excess-both-cost) | done (v0.6.0), with open items |
+| 14 | [Reviews that run themselves](#14-reviews-that-run-themselves) | done (v0.7.0), with open items |
 
 ---
 
@@ -151,7 +152,7 @@ Rounds 2 and 3 also produced general rules: names match pictures (call it an L o
 - The ledger check covers video symbols only. Prose and pages rely on the cold read.
 - The rebuilt video is 4 min 21 s, up from 59 s. Measure whether a shorter cut keeps the cold read clean.
 - odd-squares edge items from round 3: say what yellow and the colors mean at their first use; call the first tile an L when it appears; give the "where does the sum stop" section a stronger reason, or end the rule card in (2n − 1).
-- The review sheet captures some frames mid-animation, and cold readers report them as overlaps. Take each frame after the animation it starts has finished.
+- ~~The review sheet captures some frames mid-animation, and cold readers report them as overlaps. Take each frame after the animation it starts has finished.~~ Done in v0.7.0.
 - ~~The cold read never runs out of findings. Grade findings by whether they are on the main line of the argument, and stop when only edge items remain.~~ Done in v0.6.0 (§13): findings are blocking or edge, and the read stops when nothing blocks.
 
 ## 13. Rebalance: omission and excess both cost
@@ -181,7 +182,31 @@ Rounds 2 and 3 also produced general rules: names match pictures (call it an L o
 
 **Next.**
 
-- The probe and the blind-test audit still over-report: 9 of 16 gaps "main", 30 audit items for 650 words. Measure how many findings an author adopts, per tool, and tune the prompts toward that.
+- ~~The probe and the blind-test audit still over-report. Measure how many findings an author adopts, per tool, and tune the prompts toward that.~~ Done in v0.7.0 (§14).
 - ~~Backfill `narrative.md` and a cold read for git-bisect, git-objects, cdn-request, and ste-80.~~ Done: every cold read had blocking findings, two of them errors (a bisect remedy that could not find the bug; a CDN verdict that said "faster" over bars that showed slower). Records in each `review/understanding.md`.
-- A diagram budget: the first-level diagram's node count (target 5–9).
+- ~~A diagram budget: the first-level diagram's node count (target 5–9).~~ Done in v0.7.0.
 - Run the chat eval on each principles change, and on more than one model.
+
+## 14. Reviews that run themselves
+
+**Problem.** Every review (probe, cold read, blind test) was a prompt pasted by hand into a subagent. That is slow and error-prone (one agent once received a placeholder instead of its prompt), and it left no record of which findings an author acted on, so "the audits over-report" was an impression, not a measurement. Six renderings fixed after one cold read had never been read again, four examples had never had a blind test since their fixes, and three had no claims.
+
+**Built.**
+
+- `explainer probe|coldread|quiz <slug> … --run`: a fresh `claude -p` agent that may read only the explainer's folder, with no settings, MCP servers, CLAUDE.md, or stdin (`explainer_kit/agent.py`). Runs are saved with numbered findings, frozen at save time. The blind test is scored by a second fresh call; `--regrade` re-scores saved answers.
+- `explainer decide` and `explainer findings --stats`: the adoption log, per tool and severity.
+- The diagram budget (first diagram ≤ 9 nodes) and review-sheet frames taken after each animation.
+- `rates-inflation`: the first example with toggleable assumptions and claims marked disputed.
+
+**Evidence.**
+
+- Adoption, first measurement: cold-read blocking 100% (15 of 15), probe main 83%, cold-read edge 3% (9 of 260 decided), blind-test audit gaps 9%. The edge lists and the audit were noise; their prompts now ask only for what this reader would stop at, and at most five items per list.
+- The grader was too strict: three blind tests "failed" because correct answers did not repeat the rendering's own example. With a corrected rubric and a re-grade, git-bisect, git-objects, cdn-request, ste-80, and rates-inflation all pass.
+- Second reads found new blocking problems in five of the six renderings fixed after one read, several introduced by the first fixes (git-objects closed on "a commit stores only what changed", which undid its own point). One read is not enough after a fix.
+- ste-80 needed five cold-read rounds. Each round found two or three blocking items, smaller each time; the last ones were real (a noun change under a rule about verbs had been an edge finding since round 1).
+
+**Next.**
+
+- Measure adoption again under the tuned prompts; if edge findings stay under 10%, drop the per-unit edge lists and keep only blocking findings and cuts.
+- The cold read on a video re-reads its review sheet from scratch each round; a round could read only the changed captions.
+- Run review rounds on more than one model, as with the chat eval.

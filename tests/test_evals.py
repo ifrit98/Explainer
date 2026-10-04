@@ -1,6 +1,10 @@
 """The chat eval, without calling the claude CLI."""
 
+from pathlib import Path
+
 from explainer_kit import evals
+
+ROOT = Path(__file__).resolve().parent.parent
 
 
 def test_questions_have_points_a_misconception_and_a_budget():
@@ -44,7 +48,16 @@ def test_answers_never_read_stdin(monkeypatch):
         seen.update(kw, cmd=cmd)
         return Done()
 
-    monkeypatch.setattr(evals.subprocess, "run", fake_run)
+    from explainer_kit import agent
+    monkeypatch.setattr(agent.subprocess, "run", fake_run)
     assert evals.ask("system", "question") == "ok"
-    assert seen["stdin"] is evals.subprocess.DEVNULL
-    assert "--strict-mcp-config" in seen["cmd"] and "--tools" in seen["cmd"]
+    assert seen["stdin"] is agent.subprocess.DEVNULL
+    assert "--strict-mcp-config" in seen["cmd"] and seen["cmd"][seen["cmd"].index("--tools") + 1] == ""
+    agent.ask("system", "question", read=[ROOT])
+    assert seen["cmd"][seen["cmd"].index("--tools") + 1] == "Read" and "--add-dir" in seen["cmd"]
+
+
+def test_parse_json_takes_the_largest_object():
+    from explainer_kit.agent import parse_json
+    assert parse_json('Here: {"a": {"b": 1}, "n": 2} then {"c": 2}') == {"a": {"b": 1}, "n": 2}
+    assert parse_json('```json\n{"x": [1, 2]}\n```') == {"x": [1, 2]}

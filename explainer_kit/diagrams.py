@@ -84,3 +84,28 @@ def validate(blocks: list[Block]) -> list[tuple[Block, str]]:
                              next((ln for ln in lines if ln and not ln.startswith("at ")), "render failed"))
                 failures.append((block, error))
     return failures
+
+
+# ---------------------------------------------------------------- size of the first-level diagram
+
+KEYWORDS = {"flowchart", "graph", "subgraph", "end", "classDef", "class", "style", "linkStyle", "direction",
+            "TD", "TB", "LR", "RL", "BT", "click"}
+NODE_DEF = re.compile(r"(?<![\w\"'])([A-Za-z_][\w]*)\s*(?:\[|\(|\{|>)")
+EDGE_END = re.compile(r"(?:-->|---|-\.->|==>|-\.-|--o|--x)\s*(?:\|[^|]*\|\s*)?([A-Za-z_][\w]*)")
+EDGE_START = re.compile(r"(?:^|&|\s)([A-Za-z_][\w]*)\s*(?:-->|---|-\.->|==>|-\.-|--o|--x|--\s*[\"\w])")
+
+
+def flowchart_nodes(source: str) -> set[str]:
+    """Node ids of a Mermaid flowchart (empty for other diagram types)."""
+    lines = [l.strip() for l in source.splitlines() if l.strip() and not l.strip().startswith("%%")]
+    if not lines or not re.match(r"(flowchart|graph)\b", lines[0]):
+        return set()
+    nodes: set[str] = set()
+    for line in lines[1:]:
+        if re.match(r"(classDef|class|style|linkStyle|click|subgraph)\b", line):
+            continue
+        text = re.sub(r'"[^"]*"', '""', line)          # labels can contain anything
+        text = re.sub(r"\[[^\]]*\]|\([^)]*\)|\{[^}]*\}", "[]", text)
+        for rx in (NODE_DEF, EDGE_END, EDGE_START):
+            nodes.update(m.group(1) for m in rx.finditer(text))
+    return nodes - KEYWORDS

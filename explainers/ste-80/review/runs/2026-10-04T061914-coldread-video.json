@@ -1,0 +1,534 @@
+{
+ "tool": "coldread",
+ "rendering": "video",
+ "slug": "ste-80",
+ "at": "2026-10-04T06:19:14",
+ "model": "default",
+ "prompt_sha": "b6ca366fa8e4",
+ "reply": {
+  "captions": [
+   {
+    "at": "1 (00:00:00)",
+    "text": "This is STE-80. It is a writing style for technical text.",
+    "unresolved": [
+     "STE-80"
+    ],
+    "unsaid": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "2 (00:00:04)",
+    "text": "It comes from ASD-STE100, Simplified Technical English, a standard for",
+    "unresolved": [
+     "ASD-STE100 (\"ASD\" and \"100\" are never explained; only \"Simplified Technical English\" is given)"
+    ],
+    "unsaid": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "3 (00:00:10)",
+    "text": "aircraft maintenance manuals.",
+    "unresolved": [],
+    "unsaid": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "4 (00:00:12)",
+    "text": "The eighty means about eighty percent of the way to strict STE:",
+    "unresolved": [
+     "strict STE (\"STE\" was never linked to \"Simplified Technical English\"; the reader has to guess)"
+    ],
+    "unsaid": [],
+    "leap": [
+     "\"about eighty percent of the way\": eighty percent of what? Nothing says how this is measured"
+    ],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "5 (00:00:16)",
+    "text": "it keeps the writing rules and drops the approved dictionary.",
+    "unresolved": [
+     "the approved dictionary (what it is or does is never said)",
+     "the writing rules (not yet named)"
+    ],
+    "unsaid": [],
+    "leap": [
+     "why drop the dictionary? No reason is given, and the video never comes back to it"
+    ],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "6 (00:00:20)",
+    "text": "Manuals are read under time pressure, often in a second language, so",
+    "unresolved": [],
+    "unsaid": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "7 (00:00:24)",
+    "text": "every word must help.",
+    "unresolved": [],
+    "unsaid": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "8 (00:00:26)",
+    "text": "Here is a typical sentence from a manual. It has sixteen words:",
+    "unresolved": [],
+    "unsaid": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "9 (00:00:30)",
+    "text": "the orange bar counts them. Some of the words do not help the reader.",
+    "unresolved": [],
+    "unsaid": [],
+    "leap": [
+     "\"Some of the words do not help the reader\": we are not told which words, or why, until later"
+    ],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "10 (00:00:34)",
+    "text": "Rule one. Use simple words: the common word, not the formal one.",
+    "unresolved": [],
+    "unsaid": [
+     "a rule list starts in the top-left corner (\"1 Use simple words\"). It only repeats the narration, so it does no harm"
+    ],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "11 (00:00:38)",
+    "text": "The words in red change. Replenished becomes full.",
+    "unresolved": [],
+    "unsaid": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "12 (00:00:42)",
+    "text": "Prior to becomes before. Commencing becomes starting.",
+    "unresolved": [],
+    "unsaid": [
+     "the new words turn green. The color is never mentioned, but it reads as 'replacement'"
+    ],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "13 (00:00:46)",
+    "text": "Only one word goes, but each word is easier to read.",
+    "unresolved": [],
+    "unsaid": [],
+    "leap": [
+     "\"each word is easier to read\" is asserted, not shown (for example by word frequency or by second-language readers)"
+    ],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "14 (00:00:50)",
+    "text": "Rule two. Give the instruction directly.",
+    "unresolved": [],
+    "unsaid": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "15 (00:00:54)",
+    "text": "Cut the opening that only says the instruction matters.",
+    "unresolved": [],
+    "unsaid": [
+     "\"the operator ensures\" and \"starting\" are also marked red, but the narration only explains cutting \"It is imperative that\""
+    ],
+    "leap": [
+     "why \"the operator ensures\" goes and why the sentence moves from third person to 'you' is not explained"
+    ],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "16 (00:00:57)",
+    "text": "Tell the reader what to do instead: make sure, before you start.",
+    "unresolved": [],
+    "unsaid": [
+     "\"starting\" becoming \"you start the\" (shown in green) is only hinted at"
+    ],
+    "leap": [
+     "the switch to an imperative addressed to 'you' is the real change, but it is never named as a rule"
+    ],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "17 (00:01:01)",
+    "text": "Thirteen words.",
+    "unresolved": [],
+    "unsaid": [],
+    "leap": [],
+    "excess": [
+     "\"Thirteen words.\" The bar already shows \"13 words\""
+    ],
+    "purpose_unclear": false
+   },
+   {
+    "at": "18 (00:01:02)",
+    "text": "Rule three. Use a concrete verb.",
+    "unresolved": [],
+    "unsaid": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "19 (00:01:05)",
+    "text": "Make sure that it is full asks the reader to check a result.",
+    "unresolved": [],
+    "unsaid": [
+     "\"operation\" is also marked red here, before the narration mentions it"
+    ],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "20 (00:01:09)",
+    "text": "The verb fill names the action.",
+    "unresolved": [],
+    "unsaid": [
+     "an in-between frame shows \"12 words\" with overlapping text, and it is never mentioned"
+    ],
+    "leap": [
+     "why naming the action is better than stating the result is not argued",
+     "\"make sure it is full\" and \"fill\" mean different things when the reservoir is already full. The video says nothing about this change of meaning"
+    ],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "21 (00:01:11)",
+    "text": "And the vague noun operation becomes the machine you start.",
+    "unresolved": [],
+    "unsaid": [],
+    "leap": [
+     "a noun change is placed under the rule 'Use a concrete verb', which does not cover it",
+     "the video assumes that \"operation\" means \"the machine\"; this changes the meaning"
+    ],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "22 (00:01:15)",
+    "text": "Nine words.",
+    "unresolved": [],
+    "unsaid": [],
+    "leap": [],
+    "excess": [
+     "\"Nine words.\" The bar shows it, and caption 23 says it again"
+    ],
+    "purpose_unclear": false
+   },
+   {
+    "at": "23 (00:01:17)",
+    "text": "Sixteen words became nine.",
+    "unresolved": [],
+    "unsaid": [
+     "the original sentence comes back, faded, above the new one. This works as a comparison"
+    ],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "24 (00:01:19)",
+    "text": "The reader still fills the reservoir before starting the machine, with",
+    "unresolved": [],
+    "unsaid": [],
+    "leap": [
+     "\"still\" says the meaning stayed the same, but the original said 'ensure it is replenished', not 'fill'"
+    ],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "25 (00:01:23)",
+    "text": "less work to read it. The bar counts words, but the goal is less work:",
+    "unresolved": [],
+    "unsaid": [],
+    "leap": [
+     "the video has measured progress with the bar all along. Only now does it say the bar is not the goal, and it never measures 'work'"
+    ],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "26 (00:01:27)",
+    "text": "rule one cut only one word and still helped.",
+    "unresolved": [],
+    "unsaid": [],
+    "leap": [],
+    "excess": [
+     "\"rule one cut only one word and still helped\" repeats caption 13 (\"Only one word goes, but each word is easier to read\")"
+    ],
+    "purpose_unclear": false
+   },
+   {
+    "at": "27 (00:01:31)",
+    "text": "STE-80 has more rules than these three:",
+    "unresolved": [],
+    "unsaid": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "28 (00:01:33)",
+    "text": "short sentences, one meaning per word, and no filler.",
+    "unresolved": [
+     "one meaning per word (no example given)"
+    ],
+    "unsaid": [],
+    "leap": [
+     "how \"no filler\" differs from rule two is not said"
+    ],
+    "excess": [],
+    "purpose_unclear": true
+   }
+  ],
+  "blocking": [
+   "Caption 19-20: \"Make sure that it is full asks the reader to check a result. The verb fill names the action.\" Spoken without quotation marks, the quoted phrase is hard to parse. The change also alters the instruction (a reservoir that is already full needs no filling), which conflicts with caption 24's \"The reader still fills the reservoir\".",
+   "Caption 21: \"the vague noun operation becomes the machine you start\" sits under the rule \"Use a concrete verb\". The rule's label does not match the change shown."
+  ],
+  "cuts": [
+   "Caption 26 \"rule one cut only one word and still helped\" (repeats caption 13)",
+   "Caption 17 \"Thirteen words.\" and caption 22 \"Nine words.\" (the bar shows these numbers)",
+   "Caption 4 \"about eighty percent of the way to strict STE\" (an unmeasured number; caption 5 gives the real difference)"
+  ],
+  "question": {
+   "text": "What is STE-80, and how do its rules make a technical instruction easier to read?",
+   "known_at": "Caption 1 names the topic. The reason it matters comes at captions 6-7 (\"so every word must help\").",
+   "result_stated": "Partly, at caption 25: \"The bar counts words, but the goal is less work\", with caption 23 \"Sixteen words became nine.\""
+  },
+  "motive": "Reason to care: \"Manuals are read under time pressure, often in a second language, so every word must help\" (captions 6-7). Reason for the approach (rewriting one sentence rule by rule): missing. The video never says why one worked example is used.",
+  "close": "Not really. The ending lists rules that were not shown (\"short sentences, one meaning per word, and no filler\") and does not come back to the motive or to what dropping the dictionary means. The closest general statement is caption 25: \"the goal is less work\".",
+  "recap": "STE-80 is a lighter version of Simplified Technical English: it uses plain words, gives direct commands and uses action verbs, so a hurried, non-native reader of a manual has less work to do.",
+  "strongest": "Captions 10-12 (rule one): the red-to-green swap of \"replenished prior to commencing\" into \"full before starting\". It is clear, it is shown and said at the same time, and the bar shows the small change.",
+  "weakest": "Captions 19-21 (rule three): the narration quotes phrases without quotation marks, the rewrite changes the meaning, and a noun change is filed under the verb rule.",
+  "suggestions": [
+   "Explain what the ASD-STE100 approved dictionary is (a controlled list of allowed words, each with one meaning), so that dropping it means something.",
+   "Replace or remove \"eighty percent of the way\", or say how it is measured.",
+   "Name the rule-two change as 'use the imperative' instead of only 'cut the opening'.",
+   "Check that rule three keeps the meaning (for example 'Fill the reservoir if needed'), or say openly that the rewrite also makes the instruction clearer.",
+   "Move 'operation becomes the machine' under a rule about specific nouns, or under rule one.",
+   "End by restating the reader's problem (time pressure, second language) and how the three rules solve it, instead of listing new rules with no examples."
+  ]
+ },
+ "findings": [
+  {
+   "n": 1,
+   "severity": "blocking",
+   "kind": "blocking",
+   "text": "Caption 19-20: \"Make sure that it is full asks the reader to check a result. The verb fill names the action.\" Spoken without quotation marks, the quoted phrase is hard to parse. The change also alters the instruction (a reservoir that is already full needs no filling), which conflicts with caption 24's \"The reader still fills the reservoir\"."
+  },
+  {
+   "n": 2,
+   "severity": "blocking",
+   "kind": "blocking",
+   "text": "Caption 21: \"the vague noun operation becomes the machine you start\" sits under the rule \"Use a concrete verb\". The rule's label does not match the change shown."
+  },
+  {
+   "n": 3,
+   "severity": "excess",
+   "kind": "cut",
+   "text": "Caption 26 \"rule one cut only one word and still helped\" (repeats caption 13)"
+  },
+  {
+   "n": 4,
+   "severity": "excess",
+   "kind": "cut",
+   "text": "Caption 17 \"Thirteen words.\" and caption 22 \"Nine words.\" (the bar shows these numbers)"
+  },
+  {
+   "n": 5,
+   "severity": "excess",
+   "kind": "cut",
+   "text": "Caption 4 \"about eighty percent of the way to strict STE\" (an unmeasured number; caption 5 gives the real difference)"
+  },
+  {
+   "n": 6,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "1 (00:00:00): STE-80"
+  },
+  {
+   "n": 7,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "2 (00:00:04): ASD-STE100 (\"ASD\" and \"100\" are never explained; only \"Simplified Technical English\" is given)"
+  },
+  {
+   "n": 8,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "4 (00:00:12): strict STE (\"STE\" was never linked to \"Simplified Technical English\"; the reader has to guess)"
+  },
+  {
+   "n": 9,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "4 (00:00:12): \"about eighty percent of the way\": eighty percent of what? Nothing says how this is measured"
+  },
+  {
+   "n": 10,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "5 (00:00:16): the approved dictionary (what it is or does is never said)"
+  },
+  {
+   "n": 11,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "5 (00:00:16): the writing rules (not yet named)"
+  },
+  {
+   "n": 12,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "5 (00:00:16): why drop the dictionary? No reason is given, and the video never comes back to it"
+  },
+  {
+   "n": 13,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "9 (00:00:30): \"Some of the words do not help the reader\": we are not told which words, or why, until later"
+  },
+  {
+   "n": 14,
+   "severity": "edge",
+   "kind": "unsaid",
+   "text": "10 (00:00:34): a rule list starts in the top-left corner (\"1 Use simple words\"). It only repeats the narration, so it does no harm"
+  },
+  {
+   "n": 15,
+   "severity": "edge",
+   "kind": "unsaid",
+   "text": "12 (00:00:42): the new words turn green. The color is never mentioned, but it reads as 'replacement'"
+  },
+  {
+   "n": 16,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "13 (00:00:46): \"each word is easier to read\" is asserted, not shown (for example by word frequency or by second-language readers)"
+  },
+  {
+   "n": 17,
+   "severity": "edge",
+   "kind": "unsaid",
+   "text": "15 (00:00:54): \"the operator ensures\" and \"starting\" are also marked red, but the narration only explains cutting \"It is imperative that\""
+  },
+  {
+   "n": 18,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "15 (00:00:54): why \"the operator ensures\" goes and why the sentence moves from third person to 'you' is not explained"
+  },
+  {
+   "n": 19,
+   "severity": "edge",
+   "kind": "unsaid",
+   "text": "16 (00:00:57): \"starting\" becoming \"you start the\" (shown in green) is only hinted at"
+  },
+  {
+   "n": 20,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "16 (00:00:57): the switch to an imperative addressed to 'you' is the real change, but it is never named as a rule"
+  },
+  {
+   "n": 21,
+   "severity": "edge",
+   "kind": "unsaid",
+   "text": "19 (00:01:05): \"operation\" is also marked red here, before the narration mentions it"
+  },
+  {
+   "n": 22,
+   "severity": "edge",
+   "kind": "unsaid",
+   "text": "20 (00:01:09): an in-between frame shows \"12 words\" with overlapping text, and it is never mentioned"
+  },
+  {
+   "n": 23,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "20 (00:01:09): why naming the action is better than stating the result is not argued"
+  },
+  {
+   "n": 24,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "20 (00:01:09): \"make sure it is full\" and \"fill\" mean different things when the reservoir is already full. The video says nothing about this change of meaning"
+  },
+  {
+   "n": 25,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "21 (00:01:11): a noun change is placed under the rule 'Use a concrete verb', which does not cover it"
+  },
+  {
+   "n": 26,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "21 (00:01:11): the video assumes that \"operation\" means \"the machine\"; this changes the meaning"
+  },
+  {
+   "n": 27,
+   "severity": "edge",
+   "kind": "unsaid",
+   "text": "23 (00:01:17): the original sentence comes back, faded, above the new one. This works as a comparison"
+  },
+  {
+   "n": 28,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "24 (00:01:19): \"still\" says the meaning stayed the same, but the original said 'ensure it is replenished', not 'fill'"
+  },
+  {
+   "n": 29,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "25 (00:01:23): the video has measured progress with the bar all along. Only now does it say the bar is not the goal, and it never measures 'work'"
+  },
+  {
+   "n": 30,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "28 (00:01:33): one meaning per word (no example given)"
+  },
+  {
+   "n": 31,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "28 (00:01:33): how \"no filler\" differs from rule two is not said"
+  }
+ ]
+}

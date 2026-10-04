@@ -1,0 +1,322 @@
+{
+ "tool": "quiz",
+ "rendering": "html",
+ "slug": "rates-inflation",
+ "at": "2026-10-04T06:15:40",
+ "model": "default",
+ "prompt_sha": "4947de1aa173",
+ "reply": {
+  "answers": {
+   "1": "The central bank and its policy rate (the overnight rate between banks that it sets); market rates (loan, mortgage and savings rates); expected inflation; the real rate (an interest rate minus expected inflation); demand or spending; the output gap (how far output is below or above the level that doesn't speed up inflation, in %); inflation, measured as its gap from the target. The scenario parts are an energy (supply) shock, the cost channel and the neo-Fisherian view. The page also names four channels: borrowing, saving and assets, the currency, and expectations.",
+   "2": "The policy rate moves market rates. Market rates minus expected inflation give the real rate. A higher real rate lowers borrowing and spending, which pushes the output gap below zero. A negative gap slows price and wage rises, so inflation falls. Expected inflation feeds straight into inflation, because wages and prices are set for the months ahead. In the toy model, expected inflation is a share (1−w) of last quarter's inflation. The share is small when expectations are anchored and larger when they are weakly anchored. Two disputed links push the other way. In the cost channel, a hike adds directly to inflation. In the neo-Fisherian view, expected inflation rises with the rate, so the real rate and demand stay the same.",
+   "3": "A higher policy rate raises market rates and, as long as expected inflation does not rise with it, the real cost of borrowing. That lowers demand and opens a negative output gap, and inflation then falls, last of all, typically one to two years later.",
+   "4": "The key variable is the policy rate, or more exactly the real rate. Raise it and the output gap turns negative. In the toy model, the gap keeps falling while the hike lasts and is lowest at quarter 9. Inflation falls with a delay and is lowest at quarter 11, because wages, prices and many loans are fixed for a while. A larger hike gives a bigger fall in the same order: by the equations, the model is linear, though the page never says the effects scale. If expected inflation rose one for one with the rate (the neo-Fisherian case), the real rate would not move, demand would not fall, and inflation would end up higher by the size of the hike.",
+   "5": "Assumption or simplification: the toy model's coefficients are chosen, not estimated. Market rates move fully and at once with the policy rate. Expectations look only backward, so the hike itself never lowers expected inflation and the expectations channel is left out. Established: the direction is labelled 'established'. The policy rate moves market rates, a higher real rate lowers demand, and lower demand slows price and wage rises.",
+   "6": "A central bank raises its policy rate. Market and real borrowing costs rise, households and firms spend less, and the economy runs below what it can sustain. With weaker demand, firms and workers raise prices and wages more slowly, so inflation falls, but only after spending has fallen, typically one to two years later. What matters is the real rate: if expected inflation rose as much as the rate, nothing would change, and that is the minority neo-Fisherian view, under which inflation ends higher. Anchored expectations make shocks such as an energy price jump fade instead of feeding on themselves, which is why central banks guard their credibility. Some studies find prices rise briefly after a hike (the price puzzle, maybe a cost channel), but the direction of the main effect is established, while its size and lag are estimates.",
+   "7": "The anchoring toggle was hardest. The page says anchored expectations 'make the job easier' and that central banks guard credibility. Yet in the toy model, the same hike lowers inflation less when expectations are anchored (lowest −0.31, −0.06 at q16) than when they are weakly anchored (lowest −0.69, −0.43 at q16), and the page never explains why. It also says the model leaves out the expectations channel that the chain and Level 2 describe. Two additions would help: one sentence saying that with weak anchoring, falling inflation lowers expected inflation, which raises the real rate and feeds back into inflation; and a clear note that 'anchored' here means stuck near the target, not 'believes the hike will work'.",
+   "8": "Quarter 11. The hike lowers demand first. The output gap reacts one quarter after the rate, keeps falling while the hike is held (quarters 1–8), and is lowest at quarter 9, just after the hike ends. In the model, inflation responds to the output gap two quarters late (the y(t−2) term), so its low comes two quarters after the gap's low. The page's reason for the lag is that prices are set in contracts and menus and wages are agreed once a year.",
+   "9": "Yes, in two disputed views. (1) The cost channel, or price puzzle: firms pass on higher financing costs, so inflation rises briefly. In the toy model it reaches about +0.16 at quarter 3 before falling. Some studies instead blame the price puzzle on studies that miss what the central bank knew when it moved. (2) The neo-Fisherian view, a minority view: a permanently higher rate raises expected inflation one for one, so the real rate and demand do not change, and inflation ends higher. In the toy model it ends 1 point higher after a 1-point hike.",
+   "10": "The page only partly lets me answer this. In the toy model, with anchored expectations a 1-point hike lowers inflation to −0.31 at quarter 11, and inflation is back near target (−0.06) at quarter 16. With weakly anchored expectations, the fall is deeper (−0.69) and lasts longer (−0.43 at q16), and the output gap is also deeper (−0.90). So anchoring makes the hike's effect on inflation smaller and shorter. The page doesn't explain why. The page also says credibility would lower expected inflation directly, but that channel is left out of the model, so the page can't show what a credible bank's hike does through expectations.",
+   "11": "Wages and prices are set for the months ahead, so they carry the inflation people expect. If expectations stay near the target, a supply shock fades. In the toy model, a 2-point energy shock is back to 0 by quarter 16 with no hike. If expectations follow past inflation, the same shock feeds on itself: it peaks at +2.40 and is still +0.44 at quarter 16. Credibility also lets expected inflation fall when the bank acts, which lowers inflation directly."
+  },
+  "audit": {
+   "terms": [
+    "The policy rate goes by several names: 'the one rate it sets' (lede), 'policy rate' (chain), 'its rate' (predict section), 'Rate hike' (slider label) and 'Δi … the change in the policy rate' (Level 4).",
+    "Market rates go by 'Loan and savings rates' (lede), 'market rates' (chain and Level 4) and 'Variable-rate loans … fixed-rate mortgages' (Level 2).",
+    "'demand' (chain, Summary), 'spending' (Level 3: 'spending turns first'), 'output' (Level 3: 'output keeps falling … and turns when it ends, at quarter 9') and 'output gap' (chain, chart) are used as if they were the same thing. Yet the chain lists 'demand ↓' and 'output gap < 0' as separate steps, and quarter 9 is the output gap's low.",
+    "Weak anchoring is described three ways: 'weakly anchored' (Level 4), 'Expected inflation follows last quarter's inflation' (toggle note) and 'When they follow last year's inflation' (Level 3). Last quarter versus last year is inconsistent, and the formula uses 0.6 of last quarter's inflation, not all of it.",
+    "Anchoring is described as 'Expectations anchored' (toggle), 'people expect inflation near the target' (predict section), 'if people believe the bank' (chain side note), 'credibility' (Level 3) and 'w how strongly expectations are anchored to the target' (Level 4). Note that 'anchored' in the model is not the same thing as 'believing the bank will bring inflation down'.",
+    "The shock is called 'An energy price shock' (toggle), 'a supply shock' and 'a 2-point energy shock' (Level 3), and '[shock]' (Level 4).",
+    "'Cost channel' (toggle, Summary) and 'The price puzzle' (trust card) name the same disputed claim. The card gives the cost channel as only one of two possible explanations.",
+    "Inflation is described as 'a change from a steady state with inflation at target' (instrument text) but as 'π the change in inflation' (Level 4). The second reads like a change from one quarter to the next.",
+    "The neo-Fisherian view appears as 'Neo-Fisherian long run' (toggle), 'A permanently higher rate raises inflation in the long run' (trust card) and 'or for good' (Summary). In the model, though, inflation jumps by the full amount at quarter 1.",
+    "The tag labelled 'scenario' uses the 'estimate' style, 'constructed' uses the 'assumption' style, and 'established' uses the 'fact' style, so the labels and their styling disagree."
+   ],
+   "unexplained": [
+    "The equation coefficients 0.7, 0.25, 0.35 and 0.15 (Level 4) are called 'chosen' but are never interpreted. For example, the page doesn't say what a higher 0.7 would do (a longer-lasting slump) or what a higher 0.35 would do (inflation reacting more strongly to demand).",
+    "'w = 0.9 anchored, 0.4 weakly anchored' (Level 4): the page doesn't say that w is the weight on the target, or what moving w up or down does to how long inflation stays off target.",
+    "Readouts 'Inflation, lowest', 'Inflation, highest' and 'Inflation, quarter 16' are shown without units (percentage points from target), while the output gap gets '%'. The page also doesn't say what a non-zero value at quarter 16 means (the effect is still lasting).",
+    "The anchored versus weak hike results (−0.31 vs −0.69 lowest, −0.06 vs −0.43 at q16, gap −0.80 vs −0.90) appear only as readouts, and the page never explains why they differ.",
+    "Cost channel '+0.16 at quarter 3' (toggle note): the page doesn't say whether this size is meaningful or why it peaks at quarter 3.",
+    "Shock '+2.40' peak and '+0.44 at quarter 16' (Level 3): the peak arrives at quarter 2 (readout data), and why the peak is later and higher isn't explained.",
+    "'shrinks by 40% each quarter' (energy shock): the page doesn't say what a faster or slower fade would change.",
+    "The slider runs from 0 to 3 points, and the page doesn't say whether results scale with the size of the hike.",
+    "'one to two years' lag (lede, trust card, Level 4): there is no comparison with the toy model's 11 quarters, which is close to three years."
+   ],
+   "missing_why": [
+    "Output gap equation y(t) = 0.7·y(t−1) − 0.25·(Δi(t−1) − πe(t−1)): the real-rate term is explained in Level 3, but the reasons for the one-quarter delay and for the gap carrying over (0.7 persistence) are not.",
+    "Inflation equation π(t) = πe(t) + 0.35·y(t−2): the two-quarter lag on the output gap causes the quarter 9 → 11 delay in the predict answer, but the page doesn't tie this specific form to the contracts, menus and annual wages it mentions.",
+    "πe(t) = (1 − w)·π(t−1): the page doesn't say why expected inflation is a weighted mix of the target (0) and last quarter's inflation.",
+    "Neo-Fisherian 'πe(t) = Δi(t), and demand does not respond' and the trust card's 'because expected inflation adjusts to it': the page doesn't say why expected inflation would follow the rate.",
+    "Price puzzle 'so could studies that miss what the central bank knew when it moved' (trust card): the page doesn't say how missing that information would make prices appear to rise after a hike.",
+    "Why weak anchoring makes a hike lower inflation more and for longer (instrument readouts) is never explained.",
+    "The cost channel term '0.15·Δi(t−1)': the page doesn't say why financing costs pass straight into inflation with a one-quarter delay.",
+    "'Higher rates attract money from abroad, the currency rises' (Level 2) is stated without a reason."
+   ],
+   "excess": [
+    "Chain side note: 'The policy rate is the rate the central bank sets on overnight money between banks.' This reader follows central bank news and already knows this.",
+    "Level 2, 'The currency' channel, and most of 'Saving and assets': the model leaves them out ('Market rates move fully and at once') and none of the questions use them.",
+    "'one to two years' is repeated in the lede, the trust card ('The size and the lag'), Level 4 ('their lags for inflation are one to two years') and Summary item 2, with nothing new after the first time.",
+    "The header's second paragraph ('How large the effect is, how long it takes, and two claims … are disputed') previews the trust cards, which repeat it.",
+    "'Not covered: quantitative easing; fiscal policy; how the neutral rate is estimated; exchange-rate regimes' names a term ('neutral rate') that the page never uses."
+   ]
+  },
+  "gaps": [
+   "The page says anchored expectations and credibility make a central bank's job easier. Yet in its own model, a hike lowers inflation less when expectations are anchored, and this tension is never resolved.",
+   "The expectations channel is described in the chain and in Level 2 but is left out of the model, so the reader can't see how credibility changes a hike's effect.",
+   "The weak-anchoring rule is described as following 'last quarter's' inflation (toggle note) and 'last year's' (Level 3), but the formula uses 60% of last quarter's.",
+   "The neo-Fisherian view is called a 'long run' effect, but the model shows inflation jumping by the full amount immediately. The toggle also quietly makes the hike permanent, even though the slider says 'held for 8 quarters'.",
+   "The second explanation of the price puzzle (missed central-bank information) is opaque to a reader without economics training.",
+   "The toy model's lag (inflation lowest at quarter 11, nearly three years) is never set against the stated real-world lag of one to two years."
+  ]
+ },
+ "grade": {
+  "scores": {
+   "1": 2,
+   "2": 2,
+   "3": 2,
+   "4": 2,
+   "5": 2,
+   "6": 2,
+   "7": 2,
+   "8": 2,
+   "9": 2,
+   "10": 1,
+   "11": 2
+  },
+  "reasons": {
+   "10": "The numbers are right: anchored −0.31, near 0 (−0.06) by q16; weakly anchored −0.69, still −0.43 at q16. The direction (smaller, temporary vs larger, lasting) is also right. But the answer gives no mechanism. It is missing the expected reason: expected inflation follows actual inflation, so falling inflation lowers expectations, which raises the real rate and deepens the fall. The reviewer says the page doesn't explain why. That is a rendering gap, which item 7 also flags."
+  },
+  "pass": false
+ },
+ "findings": [
+  {
+   "n": 1,
+   "severity": "gap",
+   "kind": "terms",
+   "text": "The policy rate goes by several names: 'the one rate it sets' (lede), 'policy rate' (chain), 'its rate' (predict section), 'Rate hike' (slider label) and 'Δi … the change in the policy rate' (Level 4)."
+  },
+  {
+   "n": 2,
+   "severity": "gap",
+   "kind": "terms",
+   "text": "Market rates go by 'Loan and savings rates' (lede), 'market rates' (chain and Level 4) and 'Variable-rate loans … fixed-rate mortgages' (Level 2)."
+  },
+  {
+   "n": 3,
+   "severity": "gap",
+   "kind": "terms",
+   "text": "'demand' (chain, Summary), 'spending' (Level 3: 'spending turns first'), 'output' (Level 3: 'output keeps falling … and turns when it ends, at quarter 9') and 'output gap' (chain, chart) are used as if they were the same thing. Yet the chain lists 'demand ↓' and 'output gap < 0' as separate steps, and quarter 9 is the output gap's low."
+  },
+  {
+   "n": 4,
+   "severity": "gap",
+   "kind": "terms",
+   "text": "Weak anchoring is described three ways: 'weakly anchored' (Level 4), 'Expected inflation follows last quarter's inflation' (toggle note) and 'When they follow last year's inflation' (Level 3). Last quarter versus last year is inconsistent, and the formula uses 0.6 of last quarter's inflation, not all of it."
+  },
+  {
+   "n": 5,
+   "severity": "gap",
+   "kind": "terms",
+   "text": "Anchoring is described as 'Expectations anchored' (toggle), 'people expect inflation near the target' (predict section), 'if people believe the bank' (chain side note), 'credibility' (Level 3) and 'w how strongly expectations are anchored to the target' (Level 4). Note that 'anchored' in the model is not the same thing as 'believing the bank will bring inflation down'."
+  },
+  {
+   "n": 6,
+   "severity": "gap",
+   "kind": "terms",
+   "text": "The shock is called 'An energy price shock' (toggle), 'a supply shock' and 'a 2-point energy shock' (Level 3), and '[shock]' (Level 4)."
+  },
+  {
+   "n": 7,
+   "severity": "gap",
+   "kind": "terms",
+   "text": "'Cost channel' (toggle, Summary) and 'The price puzzle' (trust card) name the same disputed claim. The card gives the cost channel as only one of two possible explanations."
+  },
+  {
+   "n": 8,
+   "severity": "gap",
+   "kind": "terms",
+   "text": "Inflation is described as 'a change from a steady state with inflation at target' (instrument text) but as 'π the change in inflation' (Level 4). The second reads like a change from one quarter to the next."
+  },
+  {
+   "n": 9,
+   "severity": "gap",
+   "kind": "terms",
+   "text": "The neo-Fisherian view appears as 'Neo-Fisherian long run' (toggle), 'A permanently higher rate raises inflation in the long run' (trust card) and 'or for good' (Summary). In the model, though, inflation jumps by the full amount at quarter 1."
+  },
+  {
+   "n": 10,
+   "severity": "gap",
+   "kind": "terms",
+   "text": "The tag labelled 'scenario' uses the 'estimate' style, 'constructed' uses the 'assumption' style, and 'established' uses the 'fact' style, so the labels and their styling disagree."
+  },
+  {
+   "n": 11,
+   "severity": "gap",
+   "kind": "unexplained",
+   "text": "The equation coefficients 0.7, 0.25, 0.35 and 0.15 (Level 4) are called 'chosen' but are never interpreted. For example, the page doesn't say what a higher 0.7 would do (a longer-lasting slump) or what a higher 0.35 would do (inflation reacting more strongly to demand)."
+  },
+  {
+   "n": 12,
+   "severity": "gap",
+   "kind": "unexplained",
+   "text": "'w = 0.9 anchored, 0.4 weakly anchored' (Level 4): the page doesn't say that w is the weight on the target, or what moving w up or down does to how long inflation stays off target."
+  },
+  {
+   "n": 13,
+   "severity": "gap",
+   "kind": "unexplained",
+   "text": "Readouts 'Inflation, lowest', 'Inflation, highest' and 'Inflation, quarter 16' are shown without units (percentage points from target), while the output gap gets '%'. The page also doesn't say what a non-zero value at quarter 16 means (the effect is still lasting)."
+  },
+  {
+   "n": 14,
+   "severity": "gap",
+   "kind": "unexplained",
+   "text": "The anchored versus weak hike results (−0.31 vs −0.69 lowest, −0.06 vs −0.43 at q16, gap −0.80 vs −0.90) appear only as readouts, and the page never explains why they differ."
+  },
+  {
+   "n": 15,
+   "severity": "gap",
+   "kind": "unexplained",
+   "text": "Cost channel '+0.16 at quarter 3' (toggle note): the page doesn't say whether this size is meaningful or why it peaks at quarter 3."
+  },
+  {
+   "n": 16,
+   "severity": "gap",
+   "kind": "unexplained",
+   "text": "Shock '+2.40' peak and '+0.44 at quarter 16' (Level 3): the peak arrives at quarter 2 (readout data), and why the peak is later and higher isn't explained."
+  },
+  {
+   "n": 17,
+   "severity": "gap",
+   "kind": "unexplained",
+   "text": "'shrinks by 40% each quarter' (energy shock): the page doesn't say what a faster or slower fade would change."
+  },
+  {
+   "n": 18,
+   "severity": "gap",
+   "kind": "unexplained",
+   "text": "The slider runs from 0 to 3 points, and the page doesn't say whether results scale with the size of the hike."
+  },
+  {
+   "n": 19,
+   "severity": "gap",
+   "kind": "unexplained",
+   "text": "'one to two years' lag (lede, trust card, Level 4): there is no comparison with the toy model's 11 quarters, which is close to three years."
+  },
+  {
+   "n": 20,
+   "severity": "gap",
+   "kind": "missing_why",
+   "text": "Output gap equation y(t) = 0.7·y(t−1) − 0.25·(Δi(t−1) − πe(t−1)): the real-rate term is explained in Level 3, but the reasons for the one-quarter delay and for the gap carrying over (0.7 persistence) are not."
+  },
+  {
+   "n": 21,
+   "severity": "gap",
+   "kind": "missing_why",
+   "text": "Inflation equation π(t) = πe(t) + 0.35·y(t−2): the two-quarter lag on the output gap causes the quarter 9 → 11 delay in the predict answer, but the page doesn't tie this specific form to the contracts, menus and annual wages it mentions."
+  },
+  {
+   "n": 22,
+   "severity": "gap",
+   "kind": "missing_why",
+   "text": "πe(t) = (1 − w)·π(t−1): the page doesn't say why expected inflation is a weighted mix of the target (0) and last quarter's inflation."
+  },
+  {
+   "n": 23,
+   "severity": "gap",
+   "kind": "missing_why",
+   "text": "Neo-Fisherian 'πe(t) = Δi(t), and demand does not respond' and the trust card's 'because expected inflation adjusts to it': the page doesn't say why expected inflation would follow the rate."
+  },
+  {
+   "n": 24,
+   "severity": "gap",
+   "kind": "missing_why",
+   "text": "Price puzzle 'so could studies that miss what the central bank knew when it moved' (trust card): the page doesn't say how missing that information would make prices appear to rise after a hike."
+  },
+  {
+   "n": 25,
+   "severity": "gap",
+   "kind": "missing_why",
+   "text": "Why weak anchoring makes a hike lower inflation more and for longer (instrument readouts) is never explained."
+  },
+  {
+   "n": 26,
+   "severity": "gap",
+   "kind": "missing_why",
+   "text": "The cost channel term '0.15·Δi(t−1)': the page doesn't say why financing costs pass straight into inflation with a one-quarter delay."
+  },
+  {
+   "n": 27,
+   "severity": "gap",
+   "kind": "missing_why",
+   "text": "'Higher rates attract money from abroad, the currency rises' (Level 2) is stated without a reason."
+  },
+  {
+   "n": 28,
+   "severity": "excess",
+   "kind": "excess",
+   "text": "Chain side note: 'The policy rate is the rate the central bank sets on overnight money between banks.' This reader follows central bank news and already knows this."
+  },
+  {
+   "n": 29,
+   "severity": "excess",
+   "kind": "excess",
+   "text": "Level 2, 'The currency' channel, and most of 'Saving and assets': the model leaves them out ('Market rates move fully and at once') and none of the questions use them."
+  },
+  {
+   "n": 30,
+   "severity": "excess",
+   "kind": "excess",
+   "text": "'one to two years' is repeated in the lede, the trust card ('The size and the lag'), Level 4 ('their lags for inflation are one to two years') and Summary item 2, with nothing new after the first time."
+  },
+  {
+   "n": 31,
+   "severity": "excess",
+   "kind": "excess",
+   "text": "The header's second paragraph ('How large the effect is, how long it takes, and two claims … are disputed') previews the trust cards, which repeat it."
+  },
+  {
+   "n": 32,
+   "severity": "excess",
+   "kind": "excess",
+   "text": "'Not covered: quantitative easing; fiscal policy; how the neutral rate is estimated; exchange-rate regimes' names a term ('neutral rate') that the page never uses."
+  },
+  {
+   "n": 33,
+   "severity": "gap",
+   "kind": "gap",
+   "text": "The page says anchored expectations and credibility make a central bank's job easier. Yet in its own model, a hike lowers inflation less when expectations are anchored, and this tension is never resolved."
+  },
+  {
+   "n": 34,
+   "severity": "gap",
+   "kind": "gap",
+   "text": "The expectations channel is described in the chain and in Level 2 but is left out of the model, so the reader can't see how credibility changes a hike's effect."
+  },
+  {
+   "n": 35,
+   "severity": "gap",
+   "kind": "gap",
+   "text": "The weak-anchoring rule is described as following 'last quarter's' inflation (toggle note) and 'last year's' (Level 3), but the formula uses 60% of last quarter's."
+  },
+  {
+   "n": 36,
+   "severity": "gap",
+   "kind": "gap",
+   "text": "The neo-Fisherian view is called a 'long run' effect, but the model shows inflation jumping by the full amount immediately. The toggle also quietly makes the hike permanent, even though the slider says 'held for 8 quarters'."
+  },
+  {
+   "n": 37,
+   "severity": "gap",
+   "kind": "gap",
+   "text": "The second explanation of the price puzzle (missed central-bank information) is opaque to a reader without economics training."
+  },
+  {
+   "n": 38,
+   "severity": "gap",
+   "kind": "gap",
+   "text": "The toy model's lag (inflation lowest at quarter 11, nearly three years) is never set against the stated real-world lag of one to two years."
+  }
+ ]
+}

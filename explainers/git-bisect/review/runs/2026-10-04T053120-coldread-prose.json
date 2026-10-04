@@ -1,0 +1,313 @@
+{
+ "tool": "coldread",
+ "rendering": "prose",
+ "slug": "git-bisect",
+ "at": "2026-10-04T05:31:20",
+ "model": "default",
+ "prompt_sha": "701d94454ff2",
+ "reply": {
+  "paragraphs": [
+   {
+    "at": "Title (line 1)",
+    "text": "# Find the commit that introduced a bug",
+    "unresolved": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "HTML comments (lines 3, 5)",
+    "text": "<!-- Stage 1, rendered from model.md: a linear procedure, so numbered steps. --> / <!-- claim: why-halving -->",
+    "unresolved": [
+     "model.md",
+     "Stage 1",
+     "claim: why-halving"
+    ],
+    "leap": [],
+    "excess": [
+     "Stage 1, rendered from model.md: a linear procedure, so numbered steps.",
+     "claim: why-halving"
+    ],
+    "purpose_unclear": true
+   },
+   {
+    "at": "Opening paragraph (line 6)",
+    "text": "`git bisect` finds the first bad commit ... by binary search. ... For 1,000 commits you test about 10 times ...",
+    "unresolved": [],
+    "leap": [
+     "\"If it is bad, the first bad commit is at or before it; if it is good, the first bad commit is after it.\" This only holds if the bug stays once it appears. That assumption is not stated until the Limit section (line 66), so here the rule is given without its reason."
+    ],
+    "excess": [
+     "1,000 → 500 → 250 → 125 → 63 → 32 → 16 → 8 → 4 → 2 → 1: a reader who knows binary search gets this from \"about 10 times\". The chain does make the count concrete, but it is longer than it needs to be."
+    ],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Before you start (line 10)",
+    "text": "Find one commit where the bug is absent (*good*) and one where it is present (*bad*). The current commit is often the bad one.",
+    "unresolved": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Procedure step 1",
+    "text": "Start the session: git bisect start",
+    "unresolved": [
+     "session: it is not said what state a bisect session puts the repository in"
+    ],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Procedure step 2",
+    "text": "Mark the current commit as bad (or name a bad commit: `git bisect bad <commit>`)",
+    "unresolved": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Procedure step 3",
+    "text": "git bisect good v2.3.0 / Git checks out a commit halfway between the two.",
+    "unresolved": [],
+    "leap": [
+     "\"halfway between the two\": the reader knows history can branch and merge, and it is not said what \"halfway\" means when it does"
+    ],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Procedure step 4",
+    "text": "Test this commit.",
+    "unresolved": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Procedure step 5",
+    "text": "git bisect good # the bug is absent / git bisect bad # the bug is present / Git checks out the next midpoint.",
+    "unresolved": [],
+    "leap": [],
+    "excess": [
+     "# the bug is absent / # the bug is present: this repeats the definitions of good and bad from line 10. It is cheap, though."
+    ],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Procedure step 6",
+    "text": "Repeat steps 4–5 until git prints `<hash> is the first bad commit`.",
+    "unresolved": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Procedure step 7",
+    "text": "Return to your branch: git bisect reset",
+    "unresolved": [],
+    "leap": [
+     "\"Return to your branch\" implies bisect moved you off your branch, but no earlier step says so. Steps 3 and 5 say only that git checks out commits."
+    ],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "If a commit cannot be tested (line 42)",
+    "text": "Skip it. Git selects a nearby commit. git bisect skip",
+    "unresolved": [
+     "cannot be tested: no example of why a commit could not be tested (for instance, it does not build)"
+    ],
+    "leap": [
+     "It is not said what skipping costs, or whether bisect can still name a single first bad commit if the skipped commit is next to it"
+    ],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Automate the test (line 50)",
+    "text": "Give git a command. Git runs it at each step and marks the result from the exit code. `git bisect start <bad> <good>` does steps 1–3 in one line. The command must fail only for this bug ...",
+    "unresolved": [],
+    "leap": [
+     "How exit codes map to good, bad and skip is only given in the table further down, so \"marks the result from the exit code\" is open until then"
+    ],
+    "excess": [
+     "`git bisect start <bad> <good>` does steps 1–3 in one line: a useful shortcut, but it splits the description of the command from its warning and belongs with the procedure"
+    ],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Automate code block (lines 53–54)",
+    "text": "git bisect start HEAD v2.3.0 / git bisect run npm test",
+    "unresolved": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Exit code table (lines 57–61)",
+    "text": "0 good / 125 skip / 1–127, except 125 bad",
+    "unresolved": [],
+    "leap": [
+     "Codes above 127 are not covered, so the reader cannot tell what happens if the command exits with one",
+     "Why 125 in particular means skip is not explained (minor)"
+    ],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Limit (line 66)",
+    "text": "Bisect assumes that the bug appears once and stays. If the bug comes and goes, bisect can name the wrong commit.",
+    "unresolved": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Limit example (line 68)",
+    "text": "Example: across 1,000 commits, the bug is present in commits 300–400, gone, and back from 900. ... bisect again between your good commit and 350, and it names 300.",
+    "unresolved": [],
+    "leap": [
+     "\"your good commit\" must be before 300 for the fix to work, and this is not stated"
+    ],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "In short (line 72)",
+    "text": "Each good or bad mark rules out half the suspects, because a bug that appears once stays. About 10 tests find the first bad commit among 1,000.",
+    "unresolved": [],
+    "leap": [],
+    "excess": [
+     "About 10 tests find the first bad commit among 1,000: this repeats line 6 word for word in substance. That is acceptable in a summary."
+    ],
+    "purpose_unclear": false
+   }
+  ],
+  "blocking": [
+   "No finding stops this reader following the main line. The nearest is the opening paragraph (line 6): \"If it is bad, the first bad commit is at or before it\" depends on the bug staying once it appears, and that assumption only comes at line 66. A careful reader may stall on why one test rules out half."
+  ],
+  "cuts": [
+   "Remove the HTML comments (lines 3 and 5). They are authoring notes; in raw markdown they are noise.",
+   "Shorten the halving chain on line 6 to \"about 10 tests (2^10 ≈ 1,000)\".",
+   "Move \"`git bisect start <bad> <good>` does steps 1–3 in one line\" out of the Automate paragraph and into the procedure."
+  ],
+  "question": {
+   "text": "How do you find the commit that introduced a bug quickly, without testing every commit?",
+   "known_at": "The title, line 1: \"Find the commit that introduced a bug\"",
+   "result_stated": "Yes, at line 6: \"`git bisect` finds the first bad commit, the earliest commit where the bug is present, by binary search.\""
+  },
+  "motive": "There is a reason for the approach: \"For 1,000 commits you test about 10 times ... against up to 1,000 tests one by one\" (line 6). There is no explicit reason to care about the question, such as a regression scenario; the title implies it.",
+  "close": "Yes. Line 72: \"Each good or bad mark rules out half the suspects, because a bug that appears once stays. About 10 tests find the first bad commit among 1,000.\" It states the general argument in words and brings in the assumption.",
+  "recap": "git bisect does a binary search through history: you mark the midpoint good or bad, and about 10 tests find the commit that broke things among 1,000, as long as the bug didn't come and go.",
+  "strongest": "The Limit example (line 68). It uses concrete commit numbers to show exactly how a bug that comes and goes misleads bisect, and gives a fix.",
+  "weakest": "The opening paragraph (line 6). It states the halving rule without the assumption that makes it true, which comes 60 lines later. The Automate paragraph (line 50) is a close second, because the shortcut is mixed in with the run instructions.",
+  "suggestions": [
+   "In line 6, add \"because once the bug appears it stays (see Limit)\" after the halving rule.",
+   "Say in step 3 that bisect leaves you in detached HEAD, so that step 7's \"Return to your branch\" makes sense.",
+   "Say what skipping can cost: git may report a range of possible first bad commits instead of one.",
+   "Note that exit codes above 127 stop the bisect run.",
+   "Mention that `git bisect log` / `git bisect replay` let you recover from a wrong mark."
+  ]
+ },
+ "findings": [
+  {
+   "n": 1,
+   "severity": "excess",
+   "kind": "cut",
+   "text": "Remove the HTML comments (lines 3 and 5). They are authoring notes; in raw markdown they are noise."
+  },
+  {
+   "n": 2,
+   "severity": "excess",
+   "kind": "cut",
+   "text": "Shorten the halving chain on line 6 to \"about 10 tests (2^10 ≈ 1,000)\"."
+  },
+  {
+   "n": 3,
+   "severity": "excess",
+   "kind": "cut",
+   "text": "Move \"`git bisect start <bad> <good>` does steps 1–3 in one line\" out of the Automate paragraph and into the procedure."
+  },
+  {
+   "n": 4,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "HTML comments (lines 3, 5): model.md"
+  },
+  {
+   "n": 5,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "HTML comments (lines 3, 5): Stage 1"
+  },
+  {
+   "n": 6,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "HTML comments (lines 3, 5): claim: why-halving"
+  },
+  {
+   "n": 7,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "Opening paragraph (line 6): \"If it is bad, the first bad commit is at or before it; if it is good, the first bad commit is after it.\" This only holds if the bug stays once it appears. That assumption is not stated until the Limit section (line 66), so here the rule is given without its reason."
+  },
+  {
+   "n": 8,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "Procedure step 1: session: it is not said what state a bisect session puts the repository in"
+  },
+  {
+   "n": 9,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "Procedure step 3: \"halfway between the two\": the reader knows history can branch and merge, and it is not said what \"halfway\" means when it does"
+  },
+  {
+   "n": 10,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "Procedure step 7: \"Return to your branch\" implies bisect moved you off your branch, but no earlier step says so. Steps 3 and 5 say only that git checks out commits."
+  },
+  {
+   "n": 11,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "If a commit cannot be tested (line 42): cannot be tested: no example of why a commit could not be tested (for instance, it does not build)"
+  },
+  {
+   "n": 12,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "If a commit cannot be tested (line 42): It is not said what skipping costs, or whether bisect can still name a single first bad commit if the skipped commit is next to it"
+  },
+  {
+   "n": 13,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "Automate the test (line 50): How exit codes map to good, bad and skip is only given in the table further down, so \"marks the result from the exit code\" is open until then"
+  },
+  {
+   "n": 14,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "Exit code table (lines 57–61): Codes above 127 are not covered, so the reader cannot tell what happens if the command exits with one"
+  },
+  {
+   "n": 15,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "Exit code table (lines 57–61): Why 125 in particular means skip is not explained (minor)"
+  },
+  {
+   "n": 16,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "Limit example (line 68): \"your good commit\" must be before 300 for the fix to work, and this is not stated"
+  }
+ ]
+}
