@@ -1,0 +1,28 @@
+# Machine-readable half of model.md. The scene replays exactly this run.
+values:
+  start: A
+  nodes: {A: [-5.0, 0.0], B: [-2.4, 1.9], C: [-2.4, -1.9], D: [0.6, 1.9], E: [0.6, -1.9], F: [3.2, 0.0]}
+  edges: [[A, B, 4], [A, C, 2], [B, C, 1], [B, D, 5], [C, D, 8], [C, E, 10], [D, E, 2], [D, F, 6], [E, F, 3]]
+  run:
+    - {settle: A, at: 0, relax: [[B, 4], [C, 2]]}
+    - {settle: C, at: 2, relax: [[B, 3], [D, 10], [E, 12]]}
+    - {settle: B, at: 3, relax: [[D, 8]]}
+    - {settle: D, at: 8, relax: [[E, 10], [F, 14]]}
+    - {settle: E, at: 10, relax: [[F, 13]]}
+    - {settle: F, at: 13, relax: []}
+  final: {A: 0, B: 3, C: 2, D: 8, E: 10, F: 13}
+  path_to_F: [A, C, B, D, E, F]
+  path_length: 13
+
+require:
+  - path: final
+    in: [video]
+
+quiz:
+  - q: "B is first reached with distance 4. Why is its final distance 3?"
+    expect: "After C is settled at 2, the path through C gives 2 + 1 = 3, which is shorter, so B's estimate is improved to 3."
+    misconception: "The first path found to a node is its shortest path."
+  - q: "Which node is settled after D, and why that one?"
+    expect: "E, at 10: it has the smallest estimate among the unsettled nodes (E 10, F 14)."
+  - q: "What assumption does the algorithm need, and what breaks without it?"
+    expect: "All edge lengths are non-negative; with a negative length a settled distance can later turn out not to be the shortest."

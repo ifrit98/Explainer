@@ -55,8 +55,8 @@ def cmd_setup(args) -> None:
     print(f"{'ok' if tex else 'missing':8} {'latex':8} optional: MathTex / Tex{f'  ({tex})' if tex else ''}")
     if not tex:
         print("\nMathTex needs LaTeX. A user-level install (no password):\n"
-              "  curl -sL https://yihui.org/tinytex/install-bin-unix.sh | sh\n"
-              "  ~/Library/TinyTeX/bin/*/tlmgr install standalone preview dvisvgm   # Linux: ~/.TinyTeX/...")
+              "  curl -sL https://yihui.org/tinytex/install-bin-unix.sh -o tinytex.sh && sh tinytex.sh \"\" --no-path\n"
+              "  ~/Library/TinyTeX/bin/*/tlmgr install standalone preview dvisvgm babel-english   # Linux: ~/.TinyTeX/...")
     print(f"\nproject   {project_root()}")
 
 

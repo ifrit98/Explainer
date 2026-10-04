@@ -38,6 +38,18 @@ Each `model.md` uses one template ([`explainer_kit/templates/model.md`](../expla
 | Confusion points | What do readers usually get wrong? |
 | Representation decision | Which stage, and why? |
 
+## The model is checked, not trusted
+
+Each explainer also has `model.yaml`: the values its renderings show, numbers the renderings may use for structure (`allow`), values each rendering must show (`require`), and quiz items for the blind test.
+
+`explainer check` reads every rendering the way a reader meets it and fails when:
+
+- a reader sees a number that the model does not contain (at the precision shown: 0.84 matches 0.842; 2 does not stand for 2.5);
+- a rendering omits a value that `require` lists;
+- a page embeds an out-of-date copy of the model.
+
+Scenes and pages can also read the model directly (`load_model(__file__)` in Python, `Explainer.model` in a page). Then they cannot drift. In the tests, changing one logit in `softmax-temperature/model.yaml` makes the check fail on the prose and the diagram until both are updated, and flags the page until it is re-synced.
+
 ## Four stages, and when to escalate
 
 Start with the cheapest representation that can work. Escalate only when the current one forces the reader to do mental work that a richer medium would remove.
@@ -84,11 +96,15 @@ Prose uses STE-80, a house style based on [ASD-STE100 Simplified Technical Engli
 | It is imperative that the operator ensures the hydraulic reservoir is replenished prior to commencing operation. | Fill the hydraulic reservoir before you start the machine. |
 | One potential limitation concerns situations in which X may become relatively large compared with Y. | The model fails when X exceeds Y. |
 
-Narration uses the same style. Short sentences sound clear when spoken, and sentence ends are natural sync points. Full rules: [`writing.md`](../.claude/skills/explain/references/writing.md).
+Narration uses the same style. Short sentences sound clear when spoken, and sentence ends are natural sync points. Full rules: [`writing.md`](../plugin/skills/explain/references/writing.md).
 
 ## Epistemic clarity
 
 Every non-trivial claim carries a status: observation, established fact, mathematical consequence, assumption, estimate, model output, disputed interpretation, or speculation. Interactive pages show the status as tags and, where practical, expose assumptions as toggles. Examples: the shift-invariance toggle and the "loose description" tag in the [softmax page](https://ifrit98.github.io/Explainer/explainers/softmax-temperature/).
+
+## Predict first
+
+For learners, a result is worth more after a prediction. Pages put a predict gate before each important result: the reader commits a number or a choice, and only then the answer and its explanation appear. Videos call `self.predict(...)`: the frame dims, the narration asks the question, and web players stop there until the viewer commits. See the `cdn-request` page and the `odd-squares` and `dijkstra` videos.
 
 ## The understanding test
 
@@ -104,11 +120,16 @@ Before an explanation is done, it is checked against seven questions:
 
 A "no" means revise, or escalate one stage.
 
+### Blind understanding test
+
+An author grading their own explanation is a weak test. `explainer quiz <slug> --rendering <r>` prints a prompt for a fresh agent that sees only one rendering. It answers the seven questions plus the model's quiz items, and its answers are scored against `explainer quiz <slug> --rubric`. A test must also be able to fail: in the first run, a deliberately broken copy of the softmax prose (it claimed a high temperature can change which token is first) scored 0 on the quiz item about that claim, while the real prose passed. Results live in `explainers/<slug>/review/understanding.md`.
+
 ## Where the rules live
 
 | File | Read by | Contents |
 |---|---|---|
-| [`CLAUDE.md`](../CLAUDE.md) | the agent, every session | the always-on rules above, in short form |
-| [`.claude/skills/explain/`](../.claude/skills/explain/) | the agent, on demand | the pipeline and one playbook per medium |
-| [`.claude/skills/video/`](../.claude/skills/video/) | the agent, on demand | the Stage 4 procedure |
+| [`plugin/skills/explain/references/principles.md`](../plugin/skills/explain/references/principles.md) | the agent, every explanation | the rules above, in short form |
+| [`plugin/skills/explain/`](../plugin/skills/explain/) | the agent, on demand | the pipeline and one playbook per medium |
+| [`plugin/skills/video/`](../plugin/skills/video/), [`plugin/skills/verify/`](../plugin/skills/verify/) | the agent, on demand | the Stage 4 procedure; the checks before shipping |
+| [`CLAUDE.md`](../CLAUDE.md) | the agent, in this repo | imports the principles; repo layout and commands |
 | `docs/` | people | this documentation |

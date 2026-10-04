@@ -21,13 +21,18 @@ To keep the model elsewhere, set `EXPLAINER_KOKORO_DIR`.
 
 ## `MathTex`, `Tex`, `DecimalNumber`, or `BraceLabel` fails with a LaTeX error
 
-These Manim objects need LaTeX. Install it:
+These Manim objects need LaTeX. `explainer setup` reports whether it found one. A user-level TinyTeX needs no password:
 
 ```bash
-brew install --cask basictex     # asks for your password
+curl -sL https://yihui.org/tinytex/install-bin-unix.sh -o tinytex.sh && sh tinytex.sh "" --no-path
+~/Library/TinyTeX/bin/*/tlmgr install standalone preview dvisvgm babel-english   # Linux: ~/.TinyTeX/bin/*/tlmgr
 ```
 
-Or avoid them: use `label()` for text and numbers, and `NumberLine(include_numbers=False)` with your own tick labels.
+The empty first argument matters: the installer reads its first argument as a folder for the download. `--no-path` skips a step that asks for an administrator password. The toolkit finds TinyTeX in its default folder without a PATH change.
+
+`Package babel Error` means `babel-english` is missing (Manim's default preamble loads `babel`).
+
+Or avoid LaTeX: use `label()`, `LiveNumber`, and `LabeledNumberLine`.
 
 ## `ValueError: zip() argument 2 is shorter than argument 1`
 
@@ -37,6 +42,18 @@ An animation (usually `FadeOut` or `Transform`) acts on an `always_redraw` group
 group.clear_updaters()
 self.play(FadeOut(group))
 ```
+
+## A render stops and never finishes
+
+Plain manim can hang after an exception inside an animation: its frame-writer thread keeps the process alive. `ExplainerScene` catches the exception, prints it, and exits. If you write a scene on `Scene` instead, wrap `render()` the same way, or stop the process.
+
+## `render` lists layout issues
+
+- `overlap: 'a' × 'b'` — two visible text objects overlap. Move one, or use `stagger_labels`.
+- `covered: 'a' under a Rectangle` — an opaque panel from another group hides text. Move the panel, or mark an intentional overlay with `group.explainer_overlay = True`.
+- `off-frame: 'a'` — text leaves the frame. Align it to an edge that has room.
+
+`explainer review <slug>` shows the frame where each issue happened.
 
 ## "SoX could not be found!"
 

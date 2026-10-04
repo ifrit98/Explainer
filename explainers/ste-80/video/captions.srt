@@ -1,63 +1,63 @@
 1
-00:00:00,000 --> 00:00:05,165
+00:00:00,000 --> 00:00:04,568
 This is STE-80. It is a writing style for technical text.
 
 2
-00:00:05,265 --> 00:00:08,860
+00:00:04,668 --> 00:00:08,429
 It uses most of the rules of ASD-STE100.
 
 3
-00:00:09,950 --> 00:00:13,422
+00:00:09,516 --> 00:00:13,722
 Here is a typical sentence from a manual. It has sixteen words.
 
 4
-00:00:13,522 --> 00:00:15,746
+00:00:13,822 --> 00:00:15,578
 Some of the words do not help the reader.
 
 5
-00:00:15,844 --> 00:00:19,189
+00:00:15,666 --> 00:00:20,136
 Rule one. Use simple words. Replenished becomes full.
 
 6
-00:00:19,289 --> 00:00:22,635
+00:00:20,236 --> 00:00:23,866
 Prior to becomes before. Commencing becomes starting.
 
 7
-00:00:22,735 --> 00:00:26,535
+00:00:23,966 --> 00:00:27,586
 The length does not change. But each word is easier to read.
 
 8
-00:00:27,128 --> 00:00:29,458
+00:00:28,183 --> 00:00:31,343
 Rule two. Give the instruction directly.
 
 9
-00:00:29,558 --> 00:00:33,348
+00:00:31,443 --> 00:00:34,978
 Remove the frame around the instruction, and talk to the reader.
 
 10
-00:00:33,448 --> 00:00:35,536
+00:00:35,078 --> 00:00:37,048
 The sentence now has thirteen words.
 
 11
-00:00:36,128 --> 00:00:38,155
+00:00:37,633 --> 00:00:40,494
 Rule three. Use a concrete verb.
 
 12
-00:00:38,255 --> 00:00:41,412
+00:00:40,594 --> 00:00:43,575
 The words make sure and is full describe a state.
 
 13
-00:00:41,512 --> 00:00:45,267
+00:00:43,675 --> 00:00:47,603
 The verb fill names the action. Operation becomes machine.
 
 14
-00:00:45,367 --> 00:00:47,394
+00:00:47,703 --> 00:00:49,523
 The sentence now has nine words.
 
 15
-00:00:47,994 --> 00:00:51,509
+00:00:50,116 --> 00:00:54,108
 Sixteen words became nine. The instruction did not change.
 
 16
-00:00:51,609 --> 00:00:53,130
+00:00:54,208 --> 00:00:55,559
 The reader does less work.

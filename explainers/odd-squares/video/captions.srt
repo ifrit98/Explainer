@@ -1,0 +1,59 @@
+1
+00:00:00,000 --> 00:00:04,662
+Add the odd numbers in order. One. One plus three is four.
+
+2
+00:00:04,762 --> 00:00:08,886
+Add five, and you get nine. Then sixteen, then twenty-five.
+
+3
+00:00:08,983 --> 00:00:12,826
+Every sum is a square number. Five examples show a pattern.
+
+4
+00:00:12,926 --> 00:00:15,544
+They do not prove a rule. A picture can.
+
+5
+00:00:15,633 --> 00:00:20,052
+Start with one square. Three squares wrap it into a two by two square.
+
+6
+00:00:20,152 --> 00:00:23,930
+Five more make three by three. Seven make four by four.
+
+7
+00:00:24,030 --> 00:00:25,466
+Nine make five by five.
+
+8
+00:00:25,566 --> 00:00:27,310
+Why does this always work?
+
+9
+00:00:27,410 --> 00:00:31,009
+Each L has one new row, one new column, and one corner.
+
+10
+00:00:31,109 --> 00:00:34,687
+For the fifth square, that is four, plus four, plus one: nine.
+
+11
+00:00:34,787 --> 00:00:38,621
+In general, the n-th L has two n minus one squares.
+
+12
+00:00:38,721 --> 00:00:40,989
+That is exactly the n-th odd number.
+
+13
+00:00:42,083 --> 00:00:45,874
+Pause here and predict. What is the sum of the first ten odd numbers?
+
+14
+00:00:48,966 --> 00:00:53,078
+Ten L shapes make a ten by ten square. So the sum is one hundred.
+
+15
+00:00:53,166 --> 00:00:57,269
+The rule holds for every n, because each step adds the same kind of L.

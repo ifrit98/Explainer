@@ -1,91 +1,99 @@
 1
-00:00:00,000 --> 00:00:04,460
+00:00:00,000 --> 00:00:04,452
 A language model must pick the next word. Here it has four candidates:
 
 2
-00:00:04,560 --> 00:00:05,958
+00:00:04,552 --> 00:00:05,924
 cat, dog, fox, and owl.
 
 3
-00:00:06,050 --> 00:00:10,246
+00:00:06,016 --> 00:00:10,435
 The model gives each candidate a score. The score is called a logit.
 
 4
-00:00:10,346 --> 00:00:11,889
+00:00:10,535 --> 00:00:12,099
 Cat has the highest logit.
 
 5
-00:00:11,983 --> 00:00:14,662
+00:00:12,183 --> 00:00:15,036
 Softmax turns the logits into probabilities.
 
 6
-00:00:14,762 --> 00:00:17,630
+00:00:15,136 --> 00:00:17,830
 At temperature one, cat gets sixty-one percent.
 
 7
-00:00:17,716 --> 00:00:20,850
+00:00:17,916 --> 00:00:21,260
 Temperature divides every logit before softmax.
 
 8
-00:00:20,950 --> 00:00:24,015
+00:00:21,360 --> 00:00:24,639
 At T equal to one half, the logits move apart.
 
 9
-00:00:24,115 --> 00:00:26,286
+00:00:24,739 --> 00:00:26,452
 Cat now gets eighty-four percent.
 
 10
-00:00:26,383 --> 00:00:28,017
-Now raise the temperature.
+00:00:26,550 --> 00:00:28,122
+Pause here and predict.
 
 11
-00:00:28,117 --> 00:00:30,952
-At T equal to two, the logits move together.
+00:00:28,222 --> 00:00:31,706
+When T rises to 2, does cat stay the most likely token?
 
 12
-00:00:31,052 --> 00:00:33,353
-The probabilities become more equal.
+00:00:34,800 --> 00:00:36,522
+Now raise the temperature.
 
 13
-00:00:33,450 --> 00:00:34,758
-Why does this happen?
+00:00:36,622 --> 00:00:39,773
+At T equal to two, the logits move together.
 
 14
-00:00:34,858 --> 00:00:39,252
-The ratio of two probabilities depends only on the distance between
+00:00:39,873 --> 00:00:41,778
+The probabilities become more equal.
 
 15
-00:00:39,352 --> 00:00:42,673
-their dots. A larger distance gives a larger ratio.
+00:00:41,866 --> 00:00:43,396
+Why does this happen?
 
 16
-00:00:42,773 --> 00:00:45,826
-A smaller distance gives a ratio closer to one.
+00:00:43,496 --> 00:00:47,558
+The ratio of two probabilities depends only on the distance between
 
 17
-00:00:45,916 --> 00:00:49,679
-At a very low temperature, the top token takes almost all the
+00:00:47,658 --> 00:00:51,286
+their dots. A larger distance gives a larger ratio.
 
 18
-00:00:49,779 --> 00:00:50,439
-probability.
+00:00:51,386 --> 00:00:54,315
+A smaller distance gives a ratio closer to one.
 
 19
-00:00:50,539 --> 00:00:54,238
-At a very high temperature, every token gets almost the same
+00:00:54,400 --> 00:00:58,205
+At a very low temperature, the top token takes almost all the
 
 20
-00:00:54,338 --> 00:00:54,998
+00:00:58,305 --> 00:00:59,087
 probability.
 
 21
-00:00:55,083 --> 00:00:57,574
-In every case, the order stays the same.
+00:00:59,187 --> 00:01:02,759
+At a very high temperature, every token gets almost the same
 
 22
-00:00:57,674 --> 00:01:00,425
-Cat is always first, and owl is always last.
+00:01:02,859 --> 00:01:03,482
+probability.
 
 23
-00:01:00,525 --> 00:01:02,757
+00:01:03,566 --> 00:01:06,120
+In every case, the order stays the same.
+
+24
+00:01:06,220 --> 00:01:09,329
+Cat is always first, and owl is always last.
+
+25
+00:01:09,429 --> 00:01:11,377
 Temperature changes only the spread.

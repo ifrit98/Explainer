@@ -1,69 +1,85 @@
 # Getting started
 
-Explainer is a [Claude Code](https://claude.com/claude-code) workspace. You open it, ask for an explanation, and the agent builds the representation that fits the subject: controlled prose, a diagram, an interactive page, or a narrated animation.
+Explainer is a Claude Code plugin plus a small toolkit. You ask for an explanation; the agent builds a semantic model, picks the simplest representation that keeps its structure (controlled prose, a diagram, an interactive page, or a narrated animation), renders it, and checks the rendering against the model.
 
-## 1. Requirements
+## 1. Install the plugin
+
+In Claude Code:
+
+```text
+/plugin marketplace add ifrit98/Explainer
+/plugin install explainer@explainer
+```
+
+Restart the session. You now have three skills:
+
+| Skill | Use it for |
+|---|---|
+| `/explainer:explain <topic>` | the full pipeline: model, stage choice, rendering, checks |
+| `/explainer:video <topic>` | straight to a 3b1b-style video with voiceover |
+| `/explainer:verify <slug>` | check an existing explainer, including a blind understanding test |
+
+The plugin puts an `explainer` command on the agent's PATH. On first use it fetches the toolkit with [uv](https://docs.astral.sh/uv/) (install uv first: `brew install uv`).
+
+Stages 1–3 (prose, diagrams, interactive pages) need nothing else.
+
+## 2. Requirements for video
 
 | Need | Why | Install (macOS) |
 |---|---|---|
-| Claude Code | runs the workflow | [claude.com/claude-code](https://claude.com/claude-code) |
-| `uv` | Python environment (3.12) | `brew install uv` |
 | Cairo, Pango, pkg-config | Manim text and vector rendering | `brew install cairo pango pkgconf` |
-| FFmpeg | video encoding, captions, contact sheets | `brew install ffmpeg` |
-| SoX | optional; silences a manim-voiceover warning, needed for `global_speed` | `brew install sox` |
-| LaTeX | optional; only for `MathTex`, `Tex`, `DecimalNumber` | `brew install --cask basictex` |
+| FFmpeg | encoding, captions, chapters, review sheets | `brew install ffmpeg` |
+| Kokoro voice model | local narration, no API key | `explainer setup` (about 350 MB, once) |
+| LaTeX | optional: `MathTex`, `Tex` | TinyTeX, no password: see `explainer setup` |
+| SoX | optional: silences a manim-voiceover warning | `brew install sox` |
 
-On Linux, install the same libraries with your package manager (`libcairo2-dev libpango1.0-dev pkg-config ffmpeg sox`). Manim's [installation guide](https://docs.manim.community/en/stable/installation.html) lists the details per platform.
-
-Stages 1–3 (prose, diagrams, HTML) need only Claude Code. The Python setup is for Stage 4 video.
-
-## 2. Install
-
-```bash
-git clone https://github.com/ifrit98/Explainer.git
-cd Explainer
-uv sync                    # creates .venv with Manim, manim-voiceover, kokoro-onnx
-uv run explainer setup     # downloads the Kokoro voice model (~350 MB) into models/
-```
-
-`setup` also prints which optional tools are present.
+On Linux, install `libcairo2-dev libpango1.0-dev pkg-config ffmpeg`. Manim's [installation guide](https://docs.manim.community/en/stable/installation.html) lists the details per platform.
 
 ## 3. Ask for an explanation
 
-Start Claude Code in the folder:
-
-```bash
-claude
+```text
+/explainer:explain how does a bloom filter work
+/explainer:video why the derivative of sin is cos
 ```
 
-Then ask in plain words, or use a skill:
+The agent states the stage it chose and why, then writes `explainers/<slug>/` in your project:
 
 ```text
-/explain how does a bloom filter work
-/video why the derivative of sin is cos
+explainers/<slug>/
+  model.md          the semantic model, in prose
+  model.yaml        the values every rendering must agree with
+  explanation.md    Stage 1
+  diagram.md        Stage 2 (Mermaid; GitHub renders it)
+  index.html        Stage 3 (one self-contained page)
+  video/out.mp4     Stage 4
 ```
 
-`/explain` runs the full pipeline. It builds a semantic model, chooses the stage, states the reason in one line, renders, and checks the result against the understanding test. `/video` fixes the stage at 4.
-
-Output goes to `explainers/<slug>/`.
-
-## 4. Make a video by hand
-
-You can use the toolkit without the agent.
+## 4. Work with the toolkit directly
 
 ```bash
-uv run explainer new my-topic             # scaffold model.md, storyboard.md, scene.py
-$EDITOR explainers/my-topic/video/scene.py
-uv run explainer render my-topic --draft  # 480p, silent narration with estimated timing: check layout
-uv run explainer render my-topic          # 1080p60, Kokoro voice, mastered audio, captions
-open explainers/my-topic/video/out.mp4
+explainer new my-topic --stage 3 4     # scaffold the model, a page, and a video scene
+explainer check my-topic               # renderings against model.yaml
+explainer sync my-topic                # inline the web toolkit and the model into the page
+explainer render my-topic --draft      # 480p, silent narration: check the layout
+explainer render my-topic --review     # 1080p60, Kokoro voice, captions, chapters, review sheet
 ```
 
-The scaffold is a working scene. Read [`video-pipeline.md`](video-pipeline.md) for the API, and [`explainers/softmax-temperature/video/scene.py`](../explainers/softmax-temperature/video/scene.py) for a complete example.
+The scaffolds are working files. Read [video-pipeline.md](video-pipeline.md) for the scene API and [concepts.md](concepts.md) for the model and the checks.
 
-## 5. Next
+## 5. Develop Explainer itself
 
-- [Concepts](concepts.md): the explanation compiler, the four stages, and STE-80.
+```bash
+git clone https://github.com/ifrit98/Explainer.git && cd Explainer
+uv sync && uv run explainer setup
+uv run pytest -q                         # toolkit tests, links, plugin, every example against its model
+claude                                   # the repo loads the same skills from plugin/skills/
+```
+
+To test the plugin wrapper against your checkout from another project, set `EXPLAINER_SOURCE=/path/to/Explainer`.
+
+## Next
+
+- [Concepts](concepts.md): the explanation compiler, the model and its checks, predict-first, STE-80.
 - [Video pipeline](video-pipeline.md): how narration and animation stay in sync.
 - [CLI reference](cli.md)
 - [Troubleshooting](troubleshooting.md)

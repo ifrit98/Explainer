@@ -1,0 +1,208 @@
+{
+ "duration": 72.967,
+ "events": [
+  {
+   "kind": "voiceover",
+   "t": 0.0,
+   "duration": 6.025,
+   "text": "A language model must pick the next word. Here it has four candidates: cat, dog, fox, and owl.",
+   "bookmarks": {},
+   "scene": "SoftmaxTemperature"
+  },
+  {
+   "kind": "voiceover_end",
+   "t": 6.017,
+   "issues": [],
+   "scene": "SoftmaxTemperature"
+  },
+  {
+   "kind": "voiceover",
+   "t": 6.017,
+   "duration": 6.183,
+   "text": "The model gives each candidate a score. The score is called a logit. Cat has the highest logit.",
+   "bookmarks": {
+    "line": 8.46
+   },
+   "scene": "SoftmaxTemperature"
+  },
+  {
+   "kind": "bookmark",
+   "t": 8.45,
+   "mark": "line",
+   "issues": [],
+   "scene": "SoftmaxTemperature"
+  },
+  {
+   "kind": "voiceover_end",
+   "t": 12.183,
+   "issues": [],
+   "scene": "SoftmaxTemperature"
+  },
+  {
+   "kind": "voiceover",
+   "t": 12.183,
+   "duration": 5.747,
+   "text": "Softmax turns the logits into probabilities. At temperature one, cat gets sixty-one percent.",
+   "bookmarks": {
+    "bars": 15.072
+   },
+   "scene": "SoftmaxTemperature"
+  },
+  {
+   "kind": "bookmark",
+   "t": 15.067,
+   "mark": "bars",
+   "issues": [],
+   "scene": "SoftmaxTemperature"
+  },
+  {
+   "kind": "voiceover_end",
+   "t": 17.917,
+   "issues": [],
+   "scene": "SoftmaxTemperature"
+  },
+  {
+   "kind": "voiceover",
+   "t": 17.917,
+   "duration": 8.636,
+   "text": "Temperature divides every logit before softmax. At T equal to one half, the logits move apart. Cat now gets eighty-four percent.",
+   "bookmarks": {
+    "cold": 21.29
+   },
+   "scene": "SoftmaxTemperature"
+  },
+  {
+   "kind": "bookmark",
+   "t": 21.283,
+   "mark": "cold",
+   "issues": [],
+   "scene": "SoftmaxTemperature"
+  },
+  {
+   "kind": "voiceover_end",
+   "t": 26.55,
+   "issues": [],
+   "scene": "SoftmaxTemperature"
+  },
+  {
+   "kind": "predict",
+   "t": 26.55,
+   "question": "When T rises to 2, does cat stay the most likely token?",
+   "scene": "SoftmaxTemperature"
+  },
+  {
+   "kind": "voiceover",
+   "t": 26.55,
+   "duration": 5.257,
+   "text": "Pause here and predict. When T rises to 2, does cat stay the most likely token?",
+   "bookmarks": {},
+   "scene": "SoftmaxTemperature"
+  },
+  {
+   "kind": "voiceover_end",
+   "t": 31.8,
+   "issues": [],
+   "scene": "SoftmaxTemperature"
+  },
+  {
+   "kind": "voiceover",
+   "t": 34.8,
+   "duration": 7.079,
+   "text": "Now raise the temperature. At T equal to two, the logits move together. The probabilities become more equal.",
+   "bookmarks": {
+    "hot": 36.557
+   },
+   "scene": "SoftmaxTemperature"
+  },
+  {
+   "kind": "bookmark",
+   "t": 36.55,
+   "mark": "hot",
+   "issues": [],
+   "scene": "SoftmaxTemperature"
+  },
+  {
+   "kind": "voiceover_end",
+   "t": 41.867,
+   "issues": [],
+   "scene": "SoftmaxTemperature"
+  },
+  {
+   "kind": "voiceover",
+   "t": 41.867,
+   "duration": 12.549,
+   "text": "Why does this happen? The ratio of two probabilities depends only on the distance between their dots. A larger distance gives a larger ratio. A smaller distance gives a ratio closer to one.",
+   "bookmarks": {
+    "gap": 43.426,
+    "move": 48.393
+   },
+   "scene": "SoftmaxTemperature"
+  },
+  {
+   "kind": "bookmark",
+   "t": 43.417,
+   "mark": "gap",
+   "issues": [],
+   "scene": "SoftmaxTemperature"
+  },
+  {
+   "kind": "bookmark",
+   "t": 48.383,
+   "mark": "move",
+   "issues": [],
+   "scene": "SoftmaxTemperature"
+  },
+  {
+   "kind": "voiceover_end",
+   "t": 54.4,
+   "issues": [],
+   "scene": "SoftmaxTemperature"
+  },
+  {
+   "kind": "voiceover",
+   "t": 54.4,
+   "duration": 9.182,
+   "text": "At a very low temperature, the top token takes almost all the probability. At a very high temperature, every token gets almost the same probability.",
+   "bookmarks": {
+    "uni": 59.124
+   },
+   "scene": "SoftmaxTemperature"
+  },
+  {
+   "kind": "bookmark",
+   "t": 59.117,
+   "mark": "uni",
+   "issues": [],
+   "scene": "SoftmaxTemperature"
+  },
+  {
+   "kind": "voiceover_end",
+   "t": 63.567,
+   "issues": [],
+   "scene": "SoftmaxTemperature"
+  },
+  {
+   "kind": "voiceover",
+   "t": 63.567,
+   "duration": 7.911,
+   "text": "In every case, the order stays the same. Cat is always first, and owl is always last. Temperature changes only the spread.",
+   "bookmarks": {
+    "formula": 69.36
+   },
+   "scene": "SoftmaxTemperature"
+  },
+  {
+   "kind": "bookmark",
+   "t": 69.35,
+   "mark": "formula",
+   "issues": [],
+   "scene": "SoftmaxTemperature"
+  },
+  {
+   "kind": "voiceover_end",
+   "t": 71.467,
+   "issues": [],
+   "scene": "SoftmaxTemperature"
+  }
+ ]
+}

@@ -1,0 +1,27 @@
+# Machine-readable half of model.md. The page computes every time from these values.
+values:
+  rtt_ms_per_100km: 1
+  rtt_distance_unit_km: 100   # "1 ms per 100 km"
+  tls_version: 1.3
+  fiber_speed_km_per_s: 200000
+  round_trips_new_request: {tcp: 1, tls13: 1, request: 1, total: 3}
+  edge_processing_ms: 1
+  origin_processing_ms: 20
+  defaults: {client_to_edge_km: 300, edge_to_origin_km: 6000}
+  default_results_ms: {no_cdn: 200, miss: 90, hit: 10, rtt_edge: 3, rtt_origin: 60}
+  sliders: {client_to_edge_km: [50, 2000], edge_to_origin_km: [500, 15000]}
+
+allow: [2, 3]      # "two thirds"; "3 ×" round trips in formulas
+
+require:
+  - path: default_results_ms
+    in: [html]
+
+quiz:
+  - q: "With no CDN and an origin 6,000 km away, about how long does a new HTTPS request take in this model, and why?"
+    expect: "About 200 ms: three round trips (TCP, TLS, request) of about 60 ms each, plus 20 ms of origin processing."
+  - q: "Why is a cache miss through the CDN still faster than no CDN?"
+    expect: "The handshakes happen on the short client–edge path, and the edge reuses an open connection to the origin, so the miss adds one long round trip instead of three."
+    misconception: "A miss is as slow as having no CDN."
+  - q: "When does a CDN help little?"
+    expect: "When the client is far from every edge (the edge is not much closer than the origin) or when responses cannot be cached."

@@ -1,0 +1,14 @@
+#!/bin/sh
+# Explainer CLI for plugin users. The plugin puts this file on PATH.
+#
+# It runs the explainer toolkit with uv, pinned to the release that matches this plugin
+# (uv caches it after the first run). To use a local checkout instead, set
+#   EXPLAINER_SOURCE=/path/to/Explainer
+# Video needs Cairo, Pango, and FFmpeg on the system; see docs/getting-started.md.
+set -e
+if ! command -v uvx >/dev/null 2>&1; then
+  echo "explainer: needs uv — https://docs.astral.sh/uv/getting-started/installation/" >&2
+  exit 127
+fi
+SOURCE="${EXPLAINER_SOURCE:-git+https://github.com/ifrit98/Explainer@v0.2.0}"
+exec uvx --quiet --python 3.12 --from "$SOURCE" explainer "$@"

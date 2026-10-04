@@ -1,90 +1,72 @@
 # Roadmap
 
-Proposed improvements, in priority order. Each item names the problem it solves and how to tell that it is done.
+Each item names the problem it solves and how to tell that it is done.
 
 Status: `proposed` · `next` · `in progress` · `done`
 
 | # | Item | Status |
 |---|---|---|
-| 1 | [Enforce model consistency](#1-enforce-model-consistency) | next |
-| 2 | [Automate review and the understanding test](#2-automate-review-and-the-understanding-test) | next |
-| 3 | [Ship as a Claude Code plugin, with CI](#3-ship-as-a-claude-code-plugin-with-ci) | proposed |
-| 4 | [Deepen the video toolkit](#4-deepen-the-video-toolkit) | proposed |
-| 5 | [Add a Stage 3 toolkit](#5-add-a-stage-3-toolkit) | proposed |
-| 6 | [Broaden the gallery](#6-broaden-the-gallery) | proposed |
-
-Items 1 and 2 go first. They test the central claim of the project, and they make every later example cheaper to build and verify.
+| 1 | [Enforce model consistency](#1-enforce-model-consistency) | done (v0.2.0) |
+| 2 | [Automate review and the understanding test](#2-automate-review-and-the-understanding-test) | done (v0.2.0) |
+| 3 | [Ship as a Claude Code plugin, with CI](#3-ship-as-a-claude-code-plugin-with-ci) | done (v0.2.0) |
+| 4 | [Deepen the video toolkit](#4-deepen-the-video-toolkit) | done, except word-level timing |
+| 5 | [Add a Stage 3 toolkit](#5-add-a-stage-3-toolkit) | done (v0.2.0) |
+| 6 | [Broaden the gallery](#6-broaden-the-gallery) | done (v0.2.0) |
+| 7 | [Predict-first renderings](#7-predict-first-renderings) | done (v0.2.0) |
+| 8 | [A first real user outside this repo](#8-a-first-real-user-outside-this-repo) | done (v0.2.0) |
+| 9 | [Open items from reviews](#9-open-items-from-reviews) | proposed |
 
 ---
 
 ## 1. Enforce model consistency
 
-**Problem.** The project claims that every rendering agrees with `model.md`. Today that is a convention only. In `softmax-temperature`, the numbers were copied by hand into the prose, the diagrams, the HTML, and the scene.
+**Problem.** The numbers in `softmax-temperature` were copied by hand into four renderings.
 
-**Proposal.**
+**Built.** `model.yaml` (values, allow, require, quiz). `explainer check` reads each rendering as a reader meets it and fails on a number the model does not explain, a required value that is missing, or a stale page. Scenes use `load_model(__file__)`; pages get the model through `explainer sync`.
 
-- Add a machine-readable part to the model: `model.yaml` (or front matter in `model.md`) with entities, quantities, and worked values.
-- Make `scene.py` and `index.html` read values from the model instead of restating them.
-- Add `explainer check <slug>`: report each term or number in a rendering that the model does not contain.
-
-**Done when.** `explainer check softmax-temperature` passes, and a changed logit in the model makes the check fail until each rendering is updated.
+**Done when** — met. Changing one logit in the model fails the prose and the diagram and flags the page as stale (`tests/test_model.py`). Building the check also exposed bugs in the check itself (fence parsing, integers standing in for fractions), each now covered by a test.
 
 ## 2. Automate review and the understanding test
 
-**Problem.** Review is manual. For each video, frames at bookmark times were extracted and read by hand, captions were read, and pages were screenshotted at two widths. The seven-question understanding test is graded by the same agent that made the rendering.
+**Built.** Scenes log a timeline and check visible text at every bookmark and line end (overlap, covered by an opaque panel, off-frame). `explainer review` makes a sheet with one frame per line, bookmark, and predict pause. `explainer quiz` prints a blind-test prompt and a rubric; the `verify` skill runs it with a fresh subagent.
 
-**Proposal.**
-
-- `explainer review <slug>`: one sheet with a frame at each bookmark, the narration line under each frame, and flags for overlapping text.
-- Blind understanding test: give a fresh subagent only the rendering. Ask the seven questions and one prediction (for example, "what happens at T = 3?"). Score the answers against `model.md`.
-
-**Done when.** Both checks run on every example, and the blind test catches a deliberately broken rendering.
+**Done when** — met. The blind test passed the published softmax prose and failed a deliberately broken copy (0 on the misconception item). The layout check caught a real off-frame equation in `odd-squares` and a covered label in `softmax-temperature`.
 
 ## 3. Ship as a Claude Code plugin, with CI
 
-**Problem.** To use the workflow, people must clone this repository. This limits reach.
+**Built.** `plugin/` holds the skills (`explain`, `video`, `verify`) and `bin/explainer`, which runs the pinned toolkit release with uv. The repo root is the marketplace. `.claude/skills/` links to the plugin's skills, so the repo and the plugin share one copy. CI runs the tests (toolkit, links, plugin manifest, every example against its model), `explainer check`, and a draft render.
 
-**Proposal.**
-
-- Package `/explain`, `/video`, the playbooks, and `explainer_kit` as an installable Claude Code plugin.
-- Add CI: unit tests for bookmark segmentation, caption chunking, and word diffs; link checks; Mermaid validation; a draft render of one example.
-
-**Done when.** A user installs the plugin in an unrelated project and makes a draft video with `/video`.
+**Done when** — met for the CLI: the wrapper scaffolded, synced, and checked an explainer in an unrelated project. Install with `/plugin marketplace add ifrit98/Explainer`.
 
 ## 4. Deepen the video toolkit
 
-**Problem.** Equations are the signature of 3b1b-style video, but LaTeX is not installed, so `MathTex` is not available. Common patterns from the softmax scene (bars driven by a tracker, live numbers, staggered labels) are written inline in that scene, not in the toolkit.
+**Built.** LaTeX through a user-level TinyTeX that the toolkit finds without a PATH change. `explainer_kit.components`: `TrackerBars`, `LiveNumber`, `LabeledNumberLine`, `stagger_labels`. The softmax scene uses them and is shorter. Captions start at each sentence's real audio time. Scenes fail fast instead of hanging after an animation error.
 
-**Proposal.**
-
-- LaTeX support. Install with `brew install --cask basictex` (the user runs this; it asks for a password).
-- Reusable components in `explainer_kit`: tracker-driven bar chart, live number, labeled number line, camera moves.
-- Word-level timing from the PyTorch Kokoro build: word-by-word captions and highlighting of words as they are spoken.
-
-**Done when.** The softmax scene uses the shared components and gets shorter, and one example uses `MathTex`.
+**Deferred: word-level timing.** The ONNX Kokoro model returns audio only, without phoneme durations. Word timing needs the PyTorch Kokoro build (a large dependency) or a forced aligner. Sentence and bookmark timing are exact.
 
 ## 5. Add a Stage 3 toolkit
 
-**Problem.** Stage 4 has `explainer_kit`. Stage 3 pages are written from zero. The slider bug in the softmax page (presets rounded to the slider step, so T = 0.5 showed 0.841) came from hand-written code.
+**Built.** `explainer_kit/web/`: CSS with light and dark tokens, and JS for a shared tracker, a slider with exact presets, identity-preserving bars, a predict gate, a video player with predict pauses, progressive-disclosure levels, and epistemic tags. `explainer new --stage 3` starts from a working template.
 
-**Proposal.** A shared HTML template: theme tokens for light and dark, a slider with exact presets, tracker-driven charts, epistemic tags, and a progressive-disclosure section pattern.
-
-**Done when.** A new interactive page starts from the template and passes the phone-width and dark-mode checks with no fixes.
+**Done when** — met. `cdn-request` was built from the template and passed the phone-width and dark-mode checks; its only fix was a page-specific diagram size.
 
 ## 6. Broaden the gallery
 
-**Problem.** The current examples cover machine learning, git, and writing. They do not show an algorithm that runs, a system with drill-down levels, or mathematics.
+**Built.** `odd-squares` (a proof, with LaTeX and a predict pause), `dijkstra` (an algorithm replayed from the model's run), `cdn-request` (a drill-down page with four levels).
 
-**Proposal.**
+## 7. Predict-first renderings
 
-- An algorithm that runs: Dijkstra's shortest path (Stage 4).
-- A drill-down system: a request through a CDN (Stage 3, four levels).
-- A short proof, after LaTeX support (Stage 4).
+**Problem.** A learner who only watches a result learns less than one who predicts it first.
 
-**Done when.** The gallery has at least one example for each of these kinds.
+**Built.** `Explainer.predict` gates (pages), `self.predict` pauses (videos, with MP4 chapters), and `Explainer.video`, which stops at each pause and asks for a prediction. Principle 8 makes it the default for learners.
 
----
+## 8. A first real user outside this repo
 
-## Pending suggestions
+**Built.** A private curriculum project used the plugin wrapper, with no setup in that project, to build a predict-first companion page for one lesson. It surfaced three fixes: slow and noisy imports for non-video commands (now lazy), SVG text sizing in letterboxed diagrams, and the rule that curriculum renderings use worked examples, never the learner's own problem.
 
-More suggestions from the maintainer will be added here.
+## 9. Open items from reviews
+
+- `dijkstra`: show the finality argument with a concrete competing path; show one negative-edge counterexample; define "relax" in the narration (blind-test gaps).
+- `softmax-temperature` prose: one line of intuition for why softmax uses exp (blind-test gap).
+- Validate Mermaid blocks in CI (today they are checked by hand in a browser).
+- Landing page: play the videos with the predict-pause player.

@@ -53,46 +53,55 @@ If five sentences explain it, the answer is five sentences.
 
 | | |
 |---|---|
-| [![Softmax temperature interactive page](docs/assets/softmax-interactive.png)](https://ifrit98.github.io/Explainer/explainers/softmax-temperature/) | **[Softmax temperature](explainers/softmax-temperature/)**: the compiler demo. One model rendered as [prose](explainers/softmax-temperature/explanation.md), [diagrams](explainers/softmax-temperature/diagram.md), an [interactive page](https://ifrit98.github.io/Explainer/explainers/softmax-temperature/) (slider, sampler, assumption toggle), and a [narrated video](explainers/softmax-temperature/video/out.mp4). |
-| [![STE-80 video frame](docs/assets/ste-80-video.png)](explainers/ste-80/video/out.mp4) | **[STE-80 rewrite](explainers/ste-80/)** (Stage 4): one manual sentence goes through three Simplified Technical English rules, 16 → 9 words. Kept words move; removed words fade. The narration is itself in STE. |
-| **[git bisect](explainers/git-bisect/explanation.md)** (Stage 1) | A procedure, so the router picks numbered steps and stops there. |
-| **[git objects](explainers/git-objects/diagram.md)** (Stage 2) | Pure topology (blobs, trees, commits, refs), so the router picks one diagram. |
+| [![Softmax temperature interactive page](docs/assets/softmax-interactive.png)](https://ifrit98.github.io/Explainer/explainers/softmax-temperature/) | **[Softmax temperature](explainers/softmax-temperature/)**: the compiler demo. One model rendered as [prose](explainers/softmax-temperature/explanation.md), [diagrams](explainers/softmax-temperature/diagram.md), an [interactive page](https://ifrit98.github.io/Explainer/explainers/softmax-temperature/) (slider, sampler, assumption toggle), and a [narrated video](explainers/softmax-temperature/video/out.mp4) with a predict pause. |
+| [![Odd numbers build squares](docs/assets/odd-squares-video.png)](explainers/odd-squares/video/out.mp4) | **[Odd numbers make squares](explainers/odd-squares/)** (Stage 4, proof): each odd number is an L that grows the square by one size. LaTeX on screen, then a pause to predict the sum of the first ten odd numbers. |
+| [![Dijkstra mid-run](docs/assets/dijkstra-video.png)](explainers/dijkstra/video/out.mp4) | **[Dijkstra's shortest paths](explainers/dijkstra/)** (Stage 4, algorithm): the run in `model.yaml`, replayed step by step. B is first reached at 4 and improved to 3. [Blind-test result](explainers/dijkstra/review/understanding.md). |
+| **[Why a CDN makes a request faster](https://ifrit98.github.io/Explainer/explainers/cdn-request/)** (Stage 3) | Two distance sliders and three paths side by side (no CDN, miss, hit). The instrument opens only after you predict the no-CDN time. Four levels, from the path to cache keys and TTL. |
+| [![STE-80 video frame](docs/assets/ste-80-video.png)](explainers/ste-80/video/out.mp4) | **[STE-80 rewrite](explainers/ste-80/)** (Stage 4): one manual sentence through three Simplified Technical English rules, 16 → 9 words. Kept words move; removed words fade. |
+| **[git bisect](explainers/git-bisect/explanation.md)** (Stage 1) · **[git objects](explainers/git-objects/diagram.md)** (Stage 2) | The router at work: a procedure gets numbered steps; pure topology gets one diagram. |
 
-All examples, with the reason for each stage: [`explainers/`](explainers/).
+All examples, with the reason for each stage: [`explainers/`](explainers/). The interactive pages and videos are live at **[ifrit98.github.io/Explainer](https://ifrit98.github.io/Explainer/)**.
 
-## Quick start
+## Install
 
-```bash
-git clone https://github.com/ifrit98/Explainer.git && cd Explainer
-brew install uv cairo pango pkgconf ffmpeg sox   # Linux: see docs/getting-started.md
-uv sync
-uv run explainer setup                           # downloads the Kokoro voice (~350 MB)
-claude                                           # start Claude Code here
-```
-
-Then, in Claude Code:
+In Claude Code:
 
 ```text
-/explain how does a bloom filter work
-/video why the derivative of sin is cos
+/plugin marketplace add ifrit98/Explainer
+/plugin install explainer@explainer
 ```
 
-Or use the video toolkit directly:
+Then ask:
+
+```text
+/explainer:explain how does a bloom filter work
+/explainer:video why the derivative of sin is cos
+/explainer:verify bloom-filter
+```
+
+The plugin adds an `explainer` command that runs the toolkit through [uv](https://docs.astral.sh/uv/). Video also needs Cairo, Pango, and FFmpeg (`brew install cairo pango pkgconf ffmpeg`) and a one-time `explainer setup` for the local voice. Details: [getting started](docs/getting-started.md).
+
+## Checked, not trusted
+
+Every explainer has a `model.yaml` next to its `model.md`. The renderings are held to it:
 
 ```bash
-uv run explainer new my-topic              # scaffold model, storyboard, scene
-uv run explainer render my-topic --draft   # fast silent layout pass
-uv run explainer render my-topic           # 1080p60, voice, captions, contact sheet
+explainer check                 # a number a reader sees that the model lacks → fail
+explainer render dijkstra --review   # video + review sheet; overlapping or off-frame text is reported
+explainer quiz dijkstra --rendering video   # prompt for a blind reviewer that sees only the video
 ```
+
+- **`check`** fails on a visible number the model does not contain, a required value a rendering omits, or a page with a stale copy of the model. Scenes and pages can read the model directly, so they cannot drift.
+- **`review`** puts a frame from each narration line, bookmark, and predict pause on one sheet, with the spoken words under it. Scenes report text that overlaps, is covered, or leaves the frame.
+- **`quiz`** gives a fresh agent one rendering and asks what it understood. The first run passed the published softmax prose and failed a deliberately broken copy.
 
 ## What is in the box
 
 | | |
 |---|---|
-| **Workflow rules** · [`CLAUDE.md`](CLAUDE.md) | Model first, escalation protocol, STE-80 writing, epistemic labels, understanding test. Loaded in every session. |
-| **Skills** · [`/explain`](.claude/skills/explain/SKILL.md), [`/video`](.claude/skills/video/SKILL.md) | The pipeline, and playbooks for [writing](.claude/skills/explain/references/writing.md), [diagrams](.claude/skills/explain/references/diagrams.md), [HTML](.claude/skills/explain/references/html.md), and [video](.claude/skills/explain/references/video.md). |
-| **Video toolkit** · [`explainer_kit/`](explainer_kit/) | `ExplainerScene`, semantic colors, word-level text morphs, a Kokoro speech service with exact bookmark timing, and the `explainer` CLI. |
-| **Docs** · [`docs/`](docs/) | For people: [getting started](docs/getting-started.md), [concepts](docs/concepts.md), [video pipeline](docs/video-pipeline.md), [CLI](docs/cli.md), [troubleshooting](docs/troubleshooting.md). |
+| **Plugin** · [`plugin/`](plugin/) | Skills [`explain`](plugin/skills/explain/SKILL.md), [`video`](plugin/skills/video/SKILL.md), [`verify`](plugin/skills/verify/SKILL.md); the [principles](plugin/skills/explain/references/principles.md); playbooks for [writing](plugin/skills/explain/references/writing.md), [diagrams](plugin/skills/explain/references/diagrams.md), [HTML](plugin/skills/explain/references/html.md), and [video](plugin/skills/explain/references/video.md). |
+| **Toolkit** · [`explainer_kit/`](explainer_kit/) | The `explainer` CLI, the model check, `ExplainerScene` (voice sync, timeline, layout check, predict pauses), reusable components, word morphs, the Stage 3 web toolkit, and templates. |
+| **Docs** · [`docs/`](docs/) | [Getting started](docs/getting-started.md), [concepts](docs/concepts.md), [video pipeline](docs/video-pipeline.md), [CLI](docs/cli.md), [troubleshooting](docs/troubleshooting.md). |
 
 ### Narration that drives the animation
 
@@ -101,13 +110,14 @@ class Softmax(ExplainerScene):
     def construct(self):
         T = ValueTracker(1.0)   # drives the dots, bars, and numbers
         ...
-        with self.voiceover(text="Temperature divides every logit. <bookmark mark='cold'/> "
-                                 "At T equal to one half, the logits move apart."):
-            self.wait_until_bookmark("cold")
-            self.play(T.animate.set_value(0.5), run_time=2.5)
+        self.predict("When T rises to 2, does cat stay the most likely token?")
+        with self.voiceover(text="Now raise the temperature. <bookmark mark='hot'/> At T equal to two, "
+                                 "the logits move together."):
+            self.wait_until_bookmark("hot")
+            self.play(T.animate.set_value(2.0), run_time=3)
 ```
 
-The animation starts exactly when the voice reaches the bookmark. Local TTS engines give no word timings, so the usual fix is a second pass with Whisper. Here the Kokoro service synthesizes each bookmark segment separately and records where each one starts, so the times are exact. The render step joins the scenes, masters the audio to -16 LUFS, adds soft captions split at sentence boundaries, and writes a contact sheet of frames for review. [How it works](docs/video-pipeline.md).
+The animation starts exactly when the voice reaches the bookmark. Local TTS engines give no word timings, so the usual fix is a second pass with Whisper. Here the Kokoro service synthesizes each sentence and each bookmark segment separately and records where each one starts, so bookmark and caption times are exact. `self.predict` dims the frame and asks a question; web players stop there until the viewer commits a prediction. [How it works](docs/video-pipeline.md).
 
 ## Writing style: STE-80
 
@@ -116,22 +126,22 @@ Prose and narration use STE-80, a house style based on [ASD-STE100](https://www.
 > ~~It is imperative that the operator ensures the hydraulic reservoir is replenished prior to commencing operation.~~
 > Fill the hydraulic reservoir before you start the machine.
 
-One idea per sentence, active voice, one term per concept, and direct causal statements ("A causes B because C"). [Rules](.claude/skills/explain/references/writing.md).
+One idea per sentence, active voice, one term per concept, and direct causal statements ("A causes B because C"). [Rules](plugin/skills/explain/references/writing.md).
 
 ## Requirements
 
 - [Claude Code](https://claude.com/claude-code) for the agent workflow (Stages 1–4).
-- For video: Python 3.11–3.13 via `uv`, Cairo, Pango, pkg-config, FFmpeg. Optional: SoX; LaTeX for `MathTex`.
+- For video: Python 3.11–3.13 via `uv`, Cairo, Pango, pkg-config, FFmpeg. Optional: SoX; LaTeX for `MathTex` (a user-level TinyTeX works; see [troubleshooting](docs/troubleshooting.md)).
 - Tested on macOS (Apple silicon). Linux should work with the same libraries.
 
 ## Related
 
-- [showtime](https://github.com/FavioVazquez/showtime): a broader local video studio plugin for coding agents (HTML motion graphics, footage editing, music). It works alongside this repo; see [video playbook §7](.claude/skills/explain/references/video.md#7-optional-showtime).
+- [showtime](https://github.com/FavioVazquez/showtime): a broader local video studio plugin for coding agents (HTML motion graphics, footage editing, music). It works alongside this repo; see [video playbook §7](plugin/skills/explain/references/video.md#7-optional-showtime).
 - [Manim Community](https://www.manim.community/) · [manim-voiceover](https://github.com/ManimCommunity/manim-voiceover) · [Kokoro-82M](https://huggingface.co/hexgrad/Kokoro-82M)
 
 ## Roadmap
 
-Planned work, in priority order: [ROADMAP.md](ROADMAP.md).
+What is done, what is next, and what the reviews found: [ROADMAP.md](ROADMAP.md).
 
 ## License
 

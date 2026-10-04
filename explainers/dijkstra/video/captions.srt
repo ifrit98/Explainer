@@ -1,0 +1,111 @@
+1
+00:00:00,000 --> 00:00:04,306
+Dijkstra's algorithm finds the shortest distance from one start node
+
+2
+00:00:04,406 --> 00:00:07,832
+to every other node. The numbers on the edges are lengths.
+
+3
+00:00:07,932 --> 00:00:09,773
+Every length must be zero or more.
+
+4
+00:00:09,866 --> 00:00:12,164
+At the start, A has distance zero.
+
+5
+00:00:12,264 --> 00:00:16,640
+Every other node has distance infinity. Then repeat two steps.
+
+6
+00:00:16,740 --> 00:00:20,297
+First, settle the unsettled node with the smallest distance.
+
+7
+00:00:20,397 --> 00:00:21,872
+Second, update its neighbors:
+
+8
+00:00:21,972 --> 00:00:24,969
+if a path through it is shorter, keep the shorter distance.
+
+9
+00:00:25,066 --> 00:00:29,170
+Settle A. From A, B is four away, and C is two away.
+
+10
+00:00:29,266 --> 00:00:33,109
+The smallest estimate is now C, at two. Settle C.
+
+11
+00:00:33,209 --> 00:00:35,571
+Through C, B is two plus one: three.
+
+12
+00:00:35,671 --> 00:00:38,417
+That is shorter than four, so B becomes three.
+
+13
+00:00:38,517 --> 00:00:41,054
+D becomes ten, and E becomes twelve.
+
+14
+00:00:41,150 --> 00:00:45,462
+Settle B, at three. Through B, D is three plus five: eight.
+
+15
+00:00:45,562 --> 00:00:46,870
+Eight is shorter than ten.
+
+16
+00:00:46,966 --> 00:00:51,304
+Settle D, at eight. E becomes ten, and F becomes fourteen.
+
+17
+00:00:51,400 --> 00:00:54,346
+Pause here and predict. D is settled.
+
+18
+00:00:54,446 --> 00:00:56,970
+Which node is settled next, and at what distance?
+
+19
+00:01:00,066 --> 00:01:03,888
+E, at ten. It is the smallest unsettled estimate.
+
+20
+00:01:03,988 --> 00:01:05,765
+Through E, F becomes thirteen.
+
+21
+00:01:05,850 --> 00:01:08,916
+Settle F, at thirteen. Every node is settled.
+
+22
+00:01:09,000 --> 00:01:11,106
+Why is a settled distance final?
+
+23
+00:01:11,206 --> 00:01:15,338
+Any other path must leave the settled nodes through an unsettled node,
+
+24
+00:01:15,438 --> 00:01:17,365
+which is already at least as far.
+
+25
+00:01:17,465 --> 00:01:20,696
+With no negative lengths, the rest of that path cannot make it
+
+26
+00:01:20,796 --> 00:01:21,120
+shorter.
+
+27
+00:01:21,216 --> 00:01:25,370
+The edges that gave each final distance form the shortest-path tree.
+
+28
+00:01:25,470 --> 00:01:30,094
+The shortest path to F is A, C, B, D, E, F. Its length is thirteen.

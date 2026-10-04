@@ -4,13 +4,14 @@ Stage 4 explainers follow the 3Blue1Brown model. Objects persist, change shape i
 
 ```mermaid
 flowchart LR
-    M[model.md] --> S[storyboard.md]
+    M["model.md + model.yaml"] --> S[storyboard.md]
     S --> P["scene.py<br/>ExplainerScene"]
-    P -->|"voiceover text"| K["KokoroService<br/>per-segment TTS"]
-    K -->|"audio + bookmark times"| P
-    P -->|"manim render"| R["scene video<br/>+ .srt"]
-    R -->|"explainer render"| O["out.mp4<br/>-16 LUFS, soft captions"]
-    O --> C["contact.png<br/>review frames"]
+    M -->|"load_model()"| P
+    P -->|"voiceover text"| K["KokoroService<br/>one segment per sentence and bookmark"]
+    K -->|"audio + exact times"| P
+    P -->|"manim render"| R["scene video, .srt,<br/>timeline, layout check"]
+    R -->|"explainer render"| O["out.mp4<br/>-16 LUFS, captions, chapters"]
+    O -->|"explainer review"| C["review.png<br/>a frame per line and bookmark"]
 ```
 
 | Layer | Tool | License |
@@ -45,21 +46,23 @@ class Gradient(ExplainerScene):
 - **Time to the voice.** Use `tracker.duration`, `tracker.time_until_bookmark("x")`, `self.wait_until_bookmark("x")`, and `tracker.get_remaining_duration()`. Do not hard-code durations that must match speech.
 - **Drive related objects from one `ValueTracker`.** In [`softmax-temperature`](../explainers/softmax-temperature/video/scene.py), one tracker `T` moves the dots, resizes the bars, and updates every number.
 
-## Exact bookmark timing without Whisper
+## Exact timing without Whisper
 
 manim-voiceover places bookmarks by interpolating word boundaries. Most local TTS engines return no word timings, so the usual fix is to transcribe the audio again with Whisper.
 
-`KokoroService` avoids that step. It splits the text at each `<bookmark mark='…'/>`, synthesizes each segment separately, joins the segments with short pauses, and records one boundary at the start of each segment. Each bookmark time is therefore the exact sample offset where its segment starts.
+`KokoroService` avoids that step. It splits the text at each `<bookmark mark='…'/>` and at each sentence end, synthesizes every segment separately, joins the segments with short pauses, and records a boundary at the start of each segment. So every bookmark time and every sentence start is an exact sample offset. Captions use the sentence starts too: each caption begins when its sentence begins.
+
+From the `ste-80` render:
 
 ```text
-"Rule one. Use simple words. <bookmark mark='mark'/> Replenished becomes full. …"
- └──────── segment 1: 0.00–1.81 s ───────┘ pause └──── segment 2: from 2.16 s …
-                                                  ▲ bookmark 'mark' = 2.16 s
+"Rule one. Use simple words. <bookmark mark='mark'/> Replenished becomes full. Prior to becomes before. …"
+ 0.00 s    1.27 s                                    2.81 s                     4.57 s
+                                                     ▲ bookmark 'mark'
 ```
 
 Put bookmarks at clause or sentence boundaries. The timing is exact anywhere, but a split in the middle of a phrase breaks the intonation. STE-80 narration has short sentences, so good bookmark points are frequent.
 
-Pauses between segments: 0.35 s after `. ! ? :`, 0.12 s after `, ; —`, otherwise 0.03 s. Set them with `KokoroService(sentence_pause=…, clause_pause=…)`.
+Pauses between segments: 0.35 s after `. ! ? :`, 0.12 s after `, ; —`, otherwise 0.03 s. Set them with `KokoroService(sentence_pause=…, clause_pause=…)`. Word-level timing inside a sentence is not available: the ONNX Kokoro model returns audio without durations.
 
 ## Toolkit reference (`explainer_kit`)
 
@@ -69,11 +72,36 @@ A `VoiceoverScene` with the house background and the local voice.
 
 | Attribute | Default | Meaning |
 |---|---|---|
-| `voice` | `EXPLAINER_VOICE` or `af_heart` | Kokoro voice id (`uv run explainer voices`) |
+| `voice` | `EXPLAINER_VOICE` or `af_heart` | Kokoro voice id (`explainer voices`) |
 | `lexicon` | `{}` | written → spoken replacements for TTS only |
 | `speed` | `1.0` | speaking rate |
 
-Captions are split at sentence boundaries (then at clauses), up to 70 characters per cue.
+Captions are split at sentence boundaries (then at clauses), up to 70 characters per cue, and each cue starts at its sentence's real audio time.
+
+It also:
+
+- logs a **timeline** of narration lines, bookmarks, and predict pauses (`timeline.json`, used by `explainer review` and by web players);
+- runs a **layout check** at every bookmark and at the end of every line: visible text that overlaps other text, text covered by another group's opaque panel, and text outside the frame;
+- **fails fast**: an exception during an animation prints its traceback and exits. (Plain manim can hang after such an error.)
+
+### `load_model(__file__)`
+
+Returns the `values` of the explainer's `model.yaml`. A scene that reads its numbers and strings from the model cannot drift from it, and `explainer check` counts it as consistent by construction.
+
+### `self.predict(question)`
+
+A predict-first pause. It dims the frame, shows a "Pause and predict" card, speaks the question, and records a predict event. The MP4 gets a chapter at that point, and `Explainer.video()` in the web toolkit stops there and asks for a prediction before it continues.
+
+### Components (`explainer_kit.components`)
+
+| Component | Use |
+|---|---|
+| `TrackerBars(values_fn, names, colors, grow=None)` | bars whose heights follow a function of trackers; each bar keeps its identity and color |
+| `LiveNumber(fn, size, color, place)` | a label redrawn from `fn` every frame; `.freeze()` before you fade or transform it |
+| `LabeledNumberLine(x_range, length, labels, axis_name)` | a number line with plain-text tick labels (no LaTeX) |
+| `stagger_labels(labels, anchors)` | puts labels next to their anchors and moves colliding labels to a second row |
+
+`softmax-temperature` builds its whole scene from these.
 
 To use a cloud voice instead, override `setup()`:
 
@@ -131,25 +159,28 @@ Environment variables: `EXPLAINER_TTS`, `EXPLAINER_VOICE`, `EXPLAINER_KOKORO_DIR
 
 ## Render steps
 
-`uv run explainer render <slug>` does the following:
+`explainer render <slug>` does the following:
 
-1. Finds every `class X(ExplainerScene)` in `scene.py` and renders each one in file order.
-2. Joins the scene videos with FFmpeg and shifts each scene's captions by its start time.
+1. Renders every `class X(ExplainerScene)` in `scene.py`, in file order, with the interpreter that has the toolkit (so it also works from the plugin).
+2. Joins the scene videos and shifts each scene's captions and timeline events by its start time.
 3. Masters the narration to -16 LUFS integrated, -1.5 dBTP peak (skipped for `--draft`).
-4. Muxes `captions.srt` as a soft subtitle track.
-5. Writes `contact.png`: one frame every `--every` seconds, with timestamps.
+4. Muxes the captions as a soft subtitle track and adds a chapter for each predict pause.
+5. Writes `captions.srt` and `.vtt`, `timeline.json`, and `contact.png`, and prints any layout issues.
+6. With `--review`, builds `review.png`.
 
 Voice clips are cached in `video/media/voiceovers/`. A re-render synthesizes only the lines that changed.
 
 ## Review checklist
 
-1. Read `contact.png`. Check overlaps, legibility, and that objects persist instead of reappearing.
-2. For each bookmark, check that the visual evidence is on screen just after it. Bookmark times are in `media/voiceovers/cache.json` (`word_boundaries[].audio_offset`, in units of 10⁻⁷ s).
-3. Read `captions.srt` against the narration.
-4. Run the understanding test from [concepts](concepts.md#the-understanding-test).
+1. `explainer check <slug>`: narration and labels against `model.yaml`.
+2. Read `review.png`: one frame at each line, bookmark, and predict pause, with the spoken text under it and layout issues in red. Each frame must show the evidence for its line.
+3. Fix every layout issue. The check does not see text crossing lines or arrows; look for that in the frames.
+4. Read `captions.srt` against the narration.
+5. For a published video, run the blind understanding test (the `verify` skill). Results so far: [`dijkstra`](../explainers/dijkstra/review/understanding.md).
 
 ## Pitfalls
 
-- **`FadeOut` on an `always_redraw` group whose glyph count changes.** This raises `ValueError: zip() argument 2 is shorter than argument 1`. Call `group.clear_updaters()` before you fade it out.
-- **`DecimalNumber`, `Integer`, `MathTex`, `Tex`, `BraceLabel`, and `NumberLine(include_numbers=True)` need LaTeX.** (`Brace` alone does not.) Without LaTeX, use `always_redraw(lambda: label(f"{v.get_value():.2f}"))` and plain tick labels.
-- **Labels on moving dots collide.** Stagger them on two rows, or fade them out before the dots move and let color carry identity.
+- **Fading a live label while its text changes.** `FadeOut` or `Transform` on an `always_redraw` label whose glyph count changes raises `ValueError: zip() argument 2 is shorter than argument 1`. Call `.freeze()` (or `clear_updaters()`) first.
+- **LaTeX objects.** `MathTex`, `Tex`, `DecimalNumber`, `Integer`, `BraceLabel`, and `NumberLine(include_numbers=True)` need LaTeX (`Brace` alone does not). `explainer setup` reports whether LaTeX was found; without it, use `label()`, `LiveNumber`, and `LabeledNumberLine`.
+- **Labels on moving dots collide.** Use `stagger_labels`, or fade the labels before the dots move and let color carry identity.
+- **Tags on a graph sit on an edge.** Put node tags on the outside of the graph (above the top row, below the bottom row).

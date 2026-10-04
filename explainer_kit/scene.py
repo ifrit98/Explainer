@@ -13,12 +13,15 @@ ExplainerScene adds four things to VoiceoverScene:
 from __future__ import annotations
 
 import json
+import os
 import re
+import sys
+import traceback
 from pathlib import Path
 
 from manim import (BLUE_C, DOWN, GOLD_C, GREEN_C, GREY_A, GREY_B, GREY_D, PURPLE_B, RED_C, TEAL_C, UP, YELLOW_C,
-                   FadeIn, FadeOut, ManimColor, MathTex, MarkupText, SingleStringMathTex, SurroundingRectangle,
-                   Tex, Text, VGroup, config)
+                   FadeIn, FadeOut, ManimColor, MathTex, MarkupText, Rectangle, SingleStringMathTex, SurroundingRectangle,
+                   Tex, Text, VGroup, VMobject, config)
 from manim_voiceover import VoiceoverScene
 from manim_voiceover.helper import remove_bookmarks
 
@@ -68,6 +71,18 @@ class ExplainerScene(VoiceoverScene):
         self.camera.background_color = BACKGROUND
         self.set_speech_service(make_speech_service(voice=self.voice, lexicon=self.lexicon, speed=self.speed))
         self._timeline: list[dict] = []
+
+    def render(self, *args, **kwargs):
+        """Fail fast. An exception during an animation leaves manim's frame-writer thread waiting,
+        so the process never exits. Print the error and exit hard instead."""
+        try:
+            return super().render(*args, **kwargs)
+        except BaseException as exc:  # noqa: BLE001 — includes KeyboardInterrupt on purpose
+            if isinstance(exc, SystemExit) and not exc.code:
+                raise
+            traceback.print_exc()
+            sys.stderr.flush()
+            os._exit(1)
 
     # ------------------------------------------------------------ captions
 
@@ -130,50 +145,82 @@ class ExplainerScene(VoiceoverScene):
 
     # ------------------------------------------------------------ predict-first
 
-    def predict(self, question: str, narration: str | None = None, hold: float = 2.0, position=UP) -> None:
+    def predict(self, question: str, narration: str | None = None, hold: float = 2.0) -> None:
         """Stop for a prediction before the scene reveals the answer.
 
-        Shows a "Pause and predict" card, speaks the question, and records a predict
-        event. Players built with the web toolkit pause here and ask for a commitment.
+        Dims the frame, shows a centered "Pause and predict" card, speaks the question, and records a
+        predict event. Players built with the web toolkit pause here and ask for a commitment.
         """
+        backdrop = Rectangle(width=config.frame_width + 1, height=config.frame_height + 1, stroke_width=0)
+        backdrop.set_fill(BACKGROUND, opacity=0.86)
         head = label("PAUSE AND PREDICT", size=22, color=Role.FOCUS)
-        body = label(question, size=30)
+        body = label(question, size=32)
         if body.width > config.frame_width - 2:
             body.scale_to_fit_width(config.frame_width - 2)
-        card = VGroup(head, body).arrange(DOWN, buff=0.18).to_edge(position, buff=0.45)
-        frame = SurroundingRectangle(card, color=Role.FOCUS, buff=0.25, corner_radius=0.12, stroke_width=2)
-        frame.set_fill(BACKGROUND, opacity=0.92)
-        group = VGroup(frame, card)
+        card = VGroup(head, body).arrange(DOWN, buff=0.22)
+        frame = SurroundingRectangle(card, color=Role.FOCUS, buff=0.3, corner_radius=0.12, stroke_width=2)
+        frame.set_fill(BACKGROUND, opacity=1)
+        group = VGroup(backdrop, frame, card).set_z_index(100)  # above live labels that redraw every frame
+        group.explainer_overlay = True  # covers the scene on purpose; the layout check skips it
         self._timeline.append({"kind": "predict", "t": round(self.renderer.time, 3), "question": question})
         with self.voiceover(text=narration or f"Pause here and predict. {question}"):
-            self.play(FadeIn(group, shift=DOWN * 0.15 if position is UP else UP * 0.15))
+            self.play(FadeIn(group))
         self.wait(hold)
         self.play(FadeOut(group))
 
     # ------------------------------------------------------------ layout check
 
     def layout_issues(self, min_overlap: float = 0.2) -> list[str]:
-        """Visible text that overlaps other text, or that is partly outside the frame."""
-        boxes = []
-        for top in self.mobjects:
+        """Visible text that overlaps other text, is covered by another group's opaque panel,
+        or is partly outside the frame. Groups marked `explainer_overlay` are skipped."""
+        texts, panels = [], []  # (top-level index, name, box)
+        for k, top in enumerate(self.mobjects):
+            if getattr(top, "explainer_overlay", False):
+                continue
             for mob in _outer_texts(top):
-                if not mob.has_points() or _opacity(mob) < 0.2:
-                    continue
-                boxes.append((_name(mob), mob.get_left()[0], mob.get_bottom()[1], mob.get_right()[0], mob.get_top()[1]))
+                if mob.family_members_with_points() and _opacity(mob) >= 0.2:  # Text keeps its points in glyphs
+                    texts.append((k, _name(mob), _box(mob)))
+            for mob in _panels(top):
+                panels.append((k, type(mob).__name__, _box(mob)))
         issues = []
         hw, hh = config.frame_width / 2, config.frame_height / 2
-        for name, x0, y0, x1, y1 in boxes:
+        for _, name, (x0, y0, x1, y1) in texts:
             if x0 < -hw - 0.01 or x1 > hw + 0.01 or y0 < -hh - 0.01 or y1 > hh + 0.01:
                 issues.append(f"off-frame: {name!r}")
-        for i, a in enumerate(boxes):
-            for b in boxes[i + 1:]:
-                w = min(a[3], b[3]) - max(a[1], b[1])
-                h = min(a[4], b[4]) - max(a[2], b[2])
-                if w > 0 and h > 0:
-                    smaller = min((a[3] - a[1]) * (a[4] - a[2]), (b[3] - b[1]) * (b[4] - b[2]))
-                    if smaller > 0 and w * h / smaller > min_overlap:
-                        issues.append(f"overlap: {a[0]!r} × {b[0]!r}")
+        for i, (_, a_name, a) in enumerate(texts):
+            for _, b_name, b in texts[i + 1:]:
+                if _covered(a, b) > min_overlap:
+                    issues.append(f"overlap: {a_name!r} × {b_name!r}")
+        for pk, p_name, p in panels:
+            for tk, t_name, t in texts:
+                if pk != tk and _covered(t, p, of_first=True) > min_overlap:
+                    issues.append(f"covered: {t_name!r} under a {p_name}")
         return issues
+
+
+def _box(mob):
+    return (mob.get_left()[0], mob.get_bottom()[1], mob.get_right()[0], mob.get_top()[1])
+
+
+def _covered(a, b, of_first: bool = False) -> float:
+    """Overlap area as a share of the smaller box (or of box `a` when of_first)."""
+    w = min(a[2], b[2]) - max(a[0], b[0])
+    h = min(a[3], b[3]) - max(a[1], b[1])
+    if w <= 0 or h <= 0:
+        return 0.0
+    area = lambda r: (r[2] - r[0]) * (r[3] - r[1])  # noqa: E731
+    base = area(a) if of_first else min(area(a), area(b))
+    return w * h / base if base > 0 else 0.0
+
+
+def _panels(mob):
+    """Filled, mostly opaque shapes (not text): they hide whatever is under them."""
+    if isinstance(mob, TEXT_TYPES) or not isinstance(mob, VMobject):  # e.g. ValueTracker
+        return
+    if mob.has_points() and not mob.submobjects and mob.get_fill_opacity() >= 0.6 and mob.width > 0.5 and mob.height > 0.3:
+        yield mob
+    for sub in mob.submobjects:
+        yield from _panels(sub)
 
 
 def _outer_texts(mob):
@@ -190,7 +237,8 @@ def _opacity(mob) -> float:
 
 
 def _name(mob) -> str:
-    text = getattr(mob, "text", None) or getattr(mob, "tex_string", None) or type(mob).__name__
+    text = (getattr(mob, "original_text", None) or getattr(mob, "tex_string", None) or getattr(mob, "text", None)
+            or type(mob).__name__)
     text = " ".join(str(text).split())
     return text if len(text) <= 40 else text[:37] + "…"
 

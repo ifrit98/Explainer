@@ -1,0 +1,12 @@
+{
+  "name": "explainer",
+  "description": "Explainer: an explanation compiler for Claude Code.",
+  "owner": { "name": "ifrit98", "url": "https://github.com/ifrit98" },
+  "plugins": [
+    {
+      "name": "explainer",
+      "source": "./plugin",
+      "description": "Model-first explanations: prose, diagrams, interactive pages, and 3b1b-style narrated videos, checked against the model."
+    }
+  ]
+}

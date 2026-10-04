@@ -131,14 +131,28 @@ question -> model ─┼─ 2 · diagram
         <source src="explainers/softmax-temperature/video/out.mp4" type="video/mp4">
         <track kind="captions" src="explainers/softmax-temperature/video/captions.vtt" srclang="en" label="English">
       </video>
-      <figcaption><strong>Softmax temperature</strong> · 64 s. The distance between two dots sets their probability ratio, so the viewer sees why low T sharpens and high T flattens.</figcaption>
+      <figcaption><strong>Softmax temperature</strong> · 73 s. The distance between two dots sets their probability ratio, so the viewer sees why low T sharpens and high T flattens.</figcaption>
     </figure>
     <figure>
       <video controls preload="metadata" playsinline poster="docs/assets/ste-80-video.png">
         <source src="explainers/ste-80/video/out.mp4" type="video/mp4">
         <track kind="captions" src="explainers/ste-80/video/captions.vtt" srclang="en" label="English">
       </video>
-      <figcaption><strong>STE-80 rewrite</strong> · 54 s. One manual sentence through three Simplified Technical English rules, 16 → 9 words. Kept words move; removed words fade. The narration is in STE.</figcaption>
+      <figcaption><strong>STE-80 rewrite</strong> · 57 s. One manual sentence through three Simplified Technical English rules, 16 → 9 words. Kept words move; removed words fade. The narration is in STE.</figcaption>
+    </figure>
+    <figure>
+      <video controls preload="metadata" playsinline poster="docs/assets/odd-squares-video.png">
+        <source src="explainers/odd-squares/video/out.mp4" type="video/mp4">
+        <track kind="captions" src="explainers/odd-squares/video/captions.vtt" srclang="en" label="English">
+      </video>
+      <figcaption><strong>Odd numbers make squares</strong> · 59 s. A proof by picture: each odd number is an L that grows the square by one size, with a pause to predict the sum of the first ten.</figcaption>
+    </figure>
+    <figure>
+      <video controls preload="metadata" playsinline poster="docs/assets/dijkstra-video.png">
+        <source src="explainers/dijkstra/video/out.mp4" type="video/mp4">
+        <track kind="captions" src="explainers/dijkstra/video/captions.vtt" srclang="en" label="English">
+      </video>
+      <figcaption><strong>Dijkstra's shortest paths</strong> · 92 s. The run from the model, replayed: settle the smallest estimate, relax its edges. Pauses to ask which node settles next.</figcaption>
     </figure>
   </div>
   <p class="muted">Narration and animation stay in sync through bookmarks in the script. The local voice service synthesizes each bookmark segment separately, so every bookmark time is exact, with no Whisper pass.</p>
@@ -161,16 +175,19 @@ question -> model ─┼─ 2 · diagram
   <div class="routing">
     <div class="route s1"><span class="stage">Stage 1 · prose</span><h3><a href="https://github.com/ifrit98/Explainer/blob/main/explainers/git-bisect/explanation.md">Find the commit that introduced a bug</a></h3><p class="muted">git bisect is a linear procedure with one loop. Numbered steps carry all of it, so the router stops here.</p></div>
     <div class="route s2"><span class="stage">Stage 2 · diagram</span><h3><a href="https://github.com/ifrit98/Explainer/blob/main/explainers/git-objects/diagram.md">What git stores when you commit</a></h3><p class="muted">Blobs, trees, commits, and refs are pure topology. Nothing moves and nothing is tuned, so one diagram is enough.</p></div>
+    <div class="route s3"><span class="stage">Stage 3 · interactive</span><h3><a href="explainers/cdn-request/">Why a CDN makes a request faster</a></h3><p class="muted">Two distances and a cache state set the answer. Predict the no-CDN time, then compare three paths side by side.</p></div>
   </div>
 </section>
 
 <section aria-labelledby="h-start">
   <span class="eyebrow">Quick start</span>
-  <h2 id="h-start">Run it</h2>
-  <pre class="start">git clone https://github.com/ifrit98/Explainer.git && cd Explainer
-brew install uv cairo pango pkgconf ffmpeg sox
-uv sync && uv run explainer setup     # downloads the Kokoro voice (~350 MB)
-claude                                # then: /explain &lt;topic&gt;  or  /video &lt;topic&gt;</pre>
+  <h2 id="h-start">Install</h2>
+  <pre class="start">/plugin marketplace add ifrit98/Explainer      # in Claude Code
+/plugin install explainer@explainer
+/explainer:explain how does a bloom filter work
+/explainer:video why the derivative of sin is cos
+/explainer:verify bloom-filter                  # model check, review sheet, blind test</pre>
+  <p class="muted">Video also needs <code>brew install uv cairo pango pkgconf ffmpeg</code> and a one-time <code>explainer setup</code> for the local voice.</p>
 </section>
 
 <footer>

@@ -1,0 +1,269 @@
+{
+ "duration": 91.683,
+ "events": [
+  {
+   "kind": "voiceover",
+   "t": 0.0,
+   "duration": 9.873,
+   "text": "Dijkstra's algorithm finds the shortest distance from one start node to every other node. The numbers on the edges are lengths. Every length must be zero or more.",
+   "bookmarks": {
+    "rule": 7.876
+   },
+   "scene": "Dijkstra"
+  },
+  {
+   "kind": "bookmark",
+   "t": 7.867,
+   "mark": "rule",
+   "issues": [],
+   "scene": "Dijkstra"
+  },
+  {
+   "kind": "voiceover_end",
+   "t": 9.867,
+   "issues": [],
+   "scene": "Dijkstra"
+  },
+  {
+   "kind": "voiceover",
+   "t": 9.867,
+   "duration": 15.203,
+   "text": "At the start, A has distance zero. Every other node has distance infinity. Then repeat two steps. First, settle the unsettled node with the smallest distance. Second, update its neighbors: if a path through it is shorter, keep the shorter distance.",
+   "bookmarks": {
+    "loop": 14.854
+   },
+   "scene": "Dijkstra"
+  },
+  {
+   "kind": "bookmark",
+   "t": 14.85,
+   "mark": "loop",
+   "issues": [],
+   "scene": "Dijkstra"
+  },
+  {
+   "kind": "voiceover_end",
+   "t": 25.067,
+   "issues": [],
+   "scene": "Dijkstra"
+  },
+  {
+   "kind": "voiceover",
+   "t": 25.067,
+   "duration": 4.203,
+   "text": "Settle A. From A, B is four away, and C is two away.",
+   "bookmarks": {
+    "r0": 26.161,
+    "r1": 27.901
+   },
+   "scene": "Dijkstra"
+  },
+  {
+   "kind": "bookmark",
+   "t": 26.15,
+   "mark": "r0",
+   "issues": [],
+   "scene": "Dijkstra"
+  },
+  {
+   "kind": "bookmark",
+   "t": 27.9,
+   "mark": "r1",
+   "issues": [],
+   "scene": "Dijkstra"
+  },
+  {
+   "kind": "voiceover_end",
+   "t": 29.267,
+   "issues": [],
+   "scene": "Dijkstra"
+  },
+  {
+   "kind": "voiceover",
+   "t": 29.267,
+   "duration": 11.888,
+   "text": "The smallest estimate is now C, at two. Settle C. Through C, B is two plus one: three. That is shorter than four, so B becomes three. D becomes ten, and E becomes twelve.",
+   "bookmarks": {
+    "r0": 33.092,
+    "r1": 38.458,
+    "r2": 39.73
+   },
+   "scene": "Dijkstra"
+  },
+  {
+   "kind": "bookmark",
+   "t": 33.083,
+   "mark": "r0",
+   "issues": [],
+   "scene": "Dijkstra"
+  },
+  {
+   "kind": "bookmark",
+   "t": 38.45,
+   "mark": "r1",
+   "issues": [],
+   "scene": "Dijkstra"
+  },
+  {
+   "kind": "bookmark",
+   "t": 39.717,
+   "mark": "r2",
+   "issues": [],
+   "scene": "Dijkstra"
+  },
+  {
+   "kind": "voiceover_end",
+   "t": 41.15,
+   "issues": [],
+   "scene": "Dijkstra"
+  },
+  {
+   "kind": "voiceover",
+   "t": 41.15,
+   "duration": 5.82,
+   "text": "Settle B, at three. Through B, D is three plus five: eight. Eight is shorter than ten.",
+   "bookmarks": {
+    "r0": 42.662
+   },
+   "scene": "Dijkstra"
+  },
+  {
+   "kind": "bookmark",
+   "t": 42.65,
+   "mark": "r0",
+   "issues": [],
+   "scene": "Dijkstra"
+  },
+  {
+   "kind": "voiceover_end",
+   "t": 46.967,
+   "issues": [],
+   "scene": "Dijkstra"
+  },
+  {
+   "kind": "voiceover",
+   "t": 46.967,
+   "duration": 4.438,
+   "text": "Settle D, at eight. E becomes ten, and F becomes fourteen.",
+   "bookmarks": {
+    "r0": 48.58,
+    "r1": 49.833
+   },
+   "scene": "Dijkstra"
+  },
+  {
+   "kind": "bookmark",
+   "t": 48.567,
+   "mark": "r0",
+   "issues": [],
+   "scene": "Dijkstra"
+  },
+  {
+   "kind": "bookmark",
+   "t": 49.817,
+   "mark": "r1",
+   "issues": [],
+   "scene": "Dijkstra"
+  },
+  {
+   "kind": "voiceover_end",
+   "t": 51.4,
+   "issues": [],
+   "scene": "Dijkstra"
+  },
+  {
+   "kind": "predict",
+   "t": 51.4,
+   "question": "D is settled. Which node is settled next, and at what distance?",
+   "scene": "Dijkstra"
+  },
+  {
+   "kind": "voiceover",
+   "t": 51.4,
+   "duration": 5.671,
+   "text": "Pause here and predict. D is settled. Which node is settled next, and at what distance?",
+   "bookmarks": {},
+   "scene": "Dijkstra"
+  },
+  {
+   "kind": "voiceover_end",
+   "t": 57.067,
+   "issues": [],
+   "scene": "Dijkstra"
+  },
+  {
+   "kind": "voiceover",
+   "t": 60.067,
+   "duration": 5.799,
+   "text": "E, at ten. It is the smallest unsettled estimate. Through E, F becomes thirteen.",
+   "bookmarks": {
+    "r0": 63.923
+   },
+   "scene": "Dijkstra"
+  },
+  {
+   "kind": "bookmark",
+   "t": 63.917,
+   "mark": "r0",
+   "issues": [],
+   "scene": "Dijkstra"
+  },
+  {
+   "kind": "voiceover_end",
+   "t": 65.85,
+   "issues": [],
+   "scene": "Dijkstra"
+  },
+  {
+   "kind": "voiceover",
+   "t": 65.85,
+   "duration": 3.166,
+   "text": "Settle F, at thirteen. Every node is settled.",
+   "bookmarks": {},
+   "scene": "Dijkstra"
+  },
+  {
+   "kind": "voiceover_end",
+   "t": 69.0,
+   "issues": [],
+   "scene": "Dijkstra"
+  },
+  {
+   "kind": "voiceover",
+   "t": 69.0,
+   "duration": 12.22,
+   "text": "Why is a settled distance final? Any other path must leave the settled nodes through an unsettled node, which is already at least as far. With no negative lengths, the rest of that path cannot make it shorter.",
+   "bookmarks": {},
+   "scene": "Dijkstra"
+  },
+  {
+   "kind": "voiceover_end",
+   "t": 81.217,
+   "issues": [],
+   "scene": "Dijkstra"
+  },
+  {
+   "kind": "voiceover",
+   "t": 81.217,
+   "duration": 8.977,
+   "text": "The edges that gave each final distance form the shortest-path tree. The shortest path to F is A, C, B, D, E, F. Its length is thirteen.",
+   "bookmarks": {
+    "path": 85.41
+   },
+   "scene": "Dijkstra"
+  },
+  {
+   "kind": "bookmark",
+   "t": 85.4,
+   "mark": "path",
+   "issues": [],
+   "scene": "Dijkstra"
+  },
+  {
+   "kind": "voiceover_end",
+   "t": 90.183,
+   "issues": [],
+   "scene": "Dijkstra"
+  }
+ ]
+}

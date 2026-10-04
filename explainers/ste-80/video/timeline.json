@@ -1,0 +1,158 @@
+{
+ "duration": 56.65,
+ "events": [
+  {
+   "kind": "voiceover",
+   "t": 0.0,
+   "duration": 8.529,
+   "text": "This is STE-80. It is a writing style for technical text. It uses most of the rules of ASD-STE100.",
+   "bookmarks": {},
+   "scene": "Ste80"
+  },
+  {
+   "kind": "voiceover_end",
+   "t": 8.517,
+   "issues": [],
+   "scene": "Ste80"
+  },
+  {
+   "kind": "voiceover",
+   "t": 9.517,
+   "duration": 6.161,
+   "text": "Here is a typical sentence from a manual. It has sixteen words. Some of the words do not help the reader.",
+   "bookmarks": {
+    "count": 12.067
+   },
+   "scene": "Ste80"
+  },
+  {
+   "kind": "bookmark",
+   "t": 12.083,
+   "mark": "count",
+   "issues": [],
+   "scene": "Ste80"
+  },
+  {
+   "kind": "voiceover_end",
+   "t": 15.667,
+   "issues": [],
+   "scene": "Ste80"
+  },
+  {
+   "kind": "voiceover",
+   "t": 15.667,
+   "duration": 12.02,
+   "text": "Rule one. Use simple words. Replenished becomes full. Prior to becomes before. Commencing becomes starting. The length does not change. But each word is easier to read.",
+   "bookmarks": {
+    "mark": 18.397,
+    "swap": 23.903
+   },
+   "scene": "Ste80"
+  },
+  {
+   "kind": "bookmark",
+   "t": 18.383,
+   "mark": "mark",
+   "issues": [],
+   "scene": "Ste80"
+  },
+  {
+   "kind": "bookmark",
+   "t": 23.9,
+   "mark": "swap",
+   "issues": [],
+   "scene": "Ste80"
+  },
+  {
+   "kind": "voiceover_end",
+   "t": 27.683,
+   "issues": [],
+   "scene": "Ste80"
+  },
+  {
+   "kind": "voiceover",
+   "t": 28.183,
+   "duration": 8.965,
+   "text": "Rule two. Give the instruction directly. Remove the frame around the instruction, and talk to the reader. The sentence now has thirteen words.",
+   "bookmarks": {
+    "mark": 31.381,
+    "swap": 35.024
+   },
+   "scene": "Ste80"
+  },
+  {
+   "kind": "bookmark",
+   "t": 31.367,
+   "mark": "mark",
+   "issues": [],
+   "scene": "Ste80"
+  },
+  {
+   "kind": "bookmark",
+   "t": 35.017,
+   "mark": "swap",
+   "issues": [],
+   "scene": "Ste80"
+  },
+  {
+   "kind": "voiceover_end",
+   "t": 37.133,
+   "issues": [],
+   "scene": "Ste80"
+  },
+  {
+   "kind": "voiceover",
+   "t": 37.633,
+   "duration": 11.99,
+   "text": "Rule three. Use a concrete verb. The words make sure and is full describe a state. The verb fill names the action. Operation becomes machine. The sentence now has nine words.",
+   "bookmarks": {
+    "mark": 40.519,
+    "swap": 47.631
+   },
+   "scene": "Ste80"
+  },
+  {
+   "kind": "bookmark",
+   "t": 40.517,
+   "mark": "mark",
+   "issues": [],
+   "scene": "Ste80"
+  },
+  {
+   "kind": "bookmark",
+   "t": 47.617,
+   "mark": "swap",
+   "issues": [],
+   "scene": "Ste80"
+  },
+  {
+   "kind": "voiceover_end",
+   "t": 49.617,
+   "issues": [],
+   "scene": "Ste80"
+  },
+  {
+   "kind": "voiceover",
+   "t": 50.117,
+   "duration": 5.543,
+   "text": "Sixteen words became nine. The instruction did not change. The reader does less work.",
+   "bookmarks": {
+    "compare": 52.059
+   },
+   "scene": "Ste80"
+  },
+  {
+   "kind": "bookmark",
+   "t": 52.05,
+   "mark": "compare",
+   "issues": [],
+   "scene": "Ste80"
+  },
+  {
+   "kind": "voiceover_end",
+   "t": 55.65,
+   "issues": [],
+   "scene": "Ste80"
+  }
+ ]
+}

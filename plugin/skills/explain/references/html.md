@@ -4,6 +4,20 @@ Create a self-contained HTML explainer when exploration communicates the materia
 
 Treat the page as an educational instrument, not as a decorated document.
 
+Start from the template: `explainer new <slug> --stage 3` creates `index.html` on the **web toolkit** (`explainer_kit/web/`), then `explainer sync <slug>` inlines the toolkit and the model's values. The page stays one self-contained file.
+
+| Toolkit piece | Use |
+|---|---|
+| `Explainer.model` | the values from `model.yaml`. Compute from these; never retype a model number in the script. |
+| `Explainer.tracker(v)` | one shared value; every view subscribes with `.on(fn)` |
+| `Explainer.slider(el, t, {min, max, log, presets, format})` | range input bound to a tracker. Presets set the exact value. |
+| `Explainer.bars(el, {labels, colors, format})` | bars that keep their identity; returns `update(values)` |
+| `Explainer.predict(el, {id, question, type, answer, judge, explain})` | predict-first gate; hides `[data-after=id]` until the reader commits |
+| `Explainer.video(el, {src, captions, timeline})` | video that pauses at each predict event of the render's `timeline.json` |
+| `.ex-level` details, `.ex-tag` (fact, derived, assumption, estimate, loose) | progressive disclosure, epistemic labels |
+
+The toolkit CSS defines light and dark tokens. Page-specific colors go in the page's own `<style>`, as tokens with dark values too.
+
 Load the `artifact-design` skill before you write the page. It defines the page contract (title, theming tokens, allowed CDNs, phone layout). If the page includes a diagram, also load `artifact-diagramming`. If it includes charts, load `dataviz`.
 
 ## 1. Page structure
@@ -68,7 +82,9 @@ Assumptions
 
 ## 5. Verify and deliver
 
+Run `explainer check <slug>` first: it fails on any visible number the model does not explain, and on a stale model or toolkit block.
+
 1. Open the page with Playwright. Use every control once. Check the console for errors.
 2. Take screenshots at desktop and phone width. Look at them.
-3. Run the seven understanding questions from `CLAUDE.md` §7.
+3. Run the seven understanding questions from `principles.md` §7, and the `verify` skill before you publish.
 4. Publish with the Artifact tool and give the user the link.
