@@ -1,5 +1,5 @@
 {
- "duration": 72.967,
+ "duration": 91.617,
  "events": [
   {
    "kind": "voiceover",
@@ -50,49 +50,49 @@
   },
   {
    "kind": "bookmark",
-   "t": 15.067,
+   "t": 15.072,
    "mark": "bars",
    "issues": [],
    "scene": "SoftmaxTemperature"
   },
   {
    "kind": "voiceover_end",
-   "t": 17.917,
+   "t": 17.922,
    "issues": [],
    "scene": "SoftmaxTemperature"
   },
   {
    "kind": "voiceover",
-   "t": 17.917,
+   "t": 17.922,
    "duration": 8.636,
    "text": "Temperature divides every logit before softmax. At T equal to one half, the logits move apart. Cat now gets eighty-four percent.",
    "bookmarks": {
-    "cold": 21.29
+    "cold": 21.295
    },
    "scene": "SoftmaxTemperature"
   },
   {
    "kind": "bookmark",
-   "t": 21.283,
+   "t": 21.288,
    "mark": "cold",
    "issues": [],
    "scene": "SoftmaxTemperature"
   },
   {
    "kind": "voiceover_end",
-   "t": 26.55,
+   "t": 26.555,
    "issues": [],
    "scene": "SoftmaxTemperature"
   },
   {
    "kind": "predict",
-   "t": 26.55,
+   "t": 26.555,
    "question": "When T rises to 2, does cat stay the most likely token?",
    "scene": "SoftmaxTemperature"
   },
   {
    "kind": "voiceover",
-   "t": 26.55,
+   "t": 26.555,
    "duration": 5.257,
    "text": "Pause here and predict. When T rises to 2, does cat stay the most likely token?",
    "bookmarks": {},
@@ -100,107 +100,150 @@
   },
   {
    "kind": "voiceover_end",
-   "t": 31.8,
+   "t": 31.805,
    "issues": [],
    "scene": "SoftmaxTemperature"
   },
   {
    "kind": "voiceover",
-   "t": 34.8,
+   "t": 34.805,
    "duration": 7.079,
    "text": "Now raise the temperature. At T equal to two, the logits move together. The probabilities become more equal.",
    "bookmarks": {
-    "hot": 36.557
+    "hot": 36.562
    },
    "scene": "SoftmaxTemperature"
   },
   {
    "kind": "bookmark",
-   "t": 36.55,
+   "t": 36.555,
    "mark": "hot",
    "issues": [],
    "scene": "SoftmaxTemperature"
   },
   {
    "kind": "voiceover_end",
-   "t": 41.867,
+   "t": 41.884,
    "issues": [],
    "scene": "SoftmaxTemperature"
   },
   {
    "kind": "voiceover",
-   "t": 41.867,
+   "t": 41.884,
    "duration": 12.549,
    "text": "Why does this happen? The ratio of two probabilities depends only on the distance between their dots. A larger distance gives a larger ratio. A smaller distance gives a ratio closer to one.",
    "bookmarks": {
-    "gap": 43.426,
-    "move": 48.393
+    "gap": 43.443,
+    "move": 48.411
    },
    "scene": "SoftmaxTemperature"
   },
   {
    "kind": "bookmark",
-   "t": 43.417,
+   "t": 43.443,
    "mark": "gap",
    "issues": [],
    "scene": "SoftmaxTemperature"
   },
   {
    "kind": "bookmark",
-   "t": 48.383,
+   "t": 48.41,
    "mark": "move",
    "issues": [],
    "scene": "SoftmaxTemperature"
   },
   {
    "kind": "voiceover_end",
-   "t": 54.4,
+   "t": 54.426,
    "issues": [],
    "scene": "SoftmaxTemperature"
   },
   {
    "kind": "voiceover",
-   "t": 54.4,
-   "duration": 9.182,
-   "text": "At a very low temperature, the top token takes almost all the probability. At a very high temperature, every token gets almost the same probability.",
+   "t": 54.426,
+   "duration": 18.155,
+   "text": "Why exp, and not something simpler? Divide each logit by their sum, and owl gets minus zero point four. A probability cannot be negative. Exp makes every weight positive and keeps the order. And it turns a gap into a ratio. That is why only the distance between the dots matters.",
    "bookmarks": {
-    "uni": 59.124
+    "alt": 56.718,
+    "exp": 63.9
    },
    "scene": "SoftmaxTemperature"
   },
   {
    "kind": "bookmark",
-   "t": 59.117,
+   "t": 56.71,
+   "mark": "alt",
+   "issues": [],
+   "scene": "SoftmaxTemperature"
+  },
+  {
+   "kind": "bookmark",
+   "t": 63.893,
+   "mark": "exp",
+   "issues": [],
+   "scene": "SoftmaxTemperature"
+  },
+  {
+   "kind": "claim",
+   "t": 63.893,
+   "id": "why-exp",
+   "scene": "SoftmaxTemperature"
+  },
+  {
+   "kind": "voiceover_end",
+   "t": 72.576,
+   "issues": [],
+   "scene": "SoftmaxTemperature"
+  },
+  {
+   "kind": "voiceover",
+   "t": 73.076,
+   "duration": 9.182,
+   "text": "At a very low temperature, the top token takes almost all the probability. At a very high temperature, every token gets almost the same probability.",
+   "bookmarks": {
+    "uni": 77.801
+   },
+   "scene": "SoftmaxTemperature"
+  },
+  {
+   "kind": "bookmark",
+   "t": 77.793,
    "mark": "uni",
    "issues": [],
    "scene": "SoftmaxTemperature"
   },
   {
    "kind": "voiceover_end",
-   "t": 63.567,
+   "t": 82.243,
    "issues": [],
    "scene": "SoftmaxTemperature"
   },
   {
    "kind": "voiceover",
-   "t": 63.567,
+   "t": 82.243,
    "duration": 7.911,
    "text": "In every case, the order stays the same. Cat is always first, and owl is always last. Temperature changes only the spread.",
    "bookmarks": {
-    "formula": 69.36
+    "formula": 88.036
    },
    "scene": "SoftmaxTemperature"
   },
   {
+   "kind": "claim",
+   "t": 84.243,
+   "id": "guarantee-order",
+   "scene": "SoftmaxTemperature"
+  },
+  {
    "kind": "bookmark",
-   "t": 69.35,
+   "t": 88.026,
    "mark": "formula",
    "issues": [],
    "scene": "SoftmaxTemperature"
   },
   {
    "kind": "voiceover_end",
-   "t": 71.467,
+   "t": 90.143,
    "issues": [],
    "scene": "SoftmaxTemperature"
   }

@@ -7,6 +7,9 @@ Each explainer has `model.md` (prose for people) and `model.yaml` (data for tool
     require:     # values each listed rendering must show, unless it loads the model
       - {path: logits, in: [prose, diagram, html, video]}  # '/' nests: probabilities/T=1.0
     quiz:        # blind understanding test: questions with expected answers
+    claims:      # the ideas the explanation must convey, each marked where a rendering covers it
+      - {id: why-exp, kind: why, about: [exp], statement: ..., alternative: ..., counterexample: ...}
+    accept_unjustified: {log: "reason"}   # functions deliberately left without a why claim
 
 Renderings are found by name: explanation.md (prose), diagram.md (diagram),
 index.html (html), video/scene.py (video). A rendering *loads the model* when
@@ -16,7 +19,12 @@ the scene calls `load_model(...)`, or the page has a synced
 `explainer check` reports:
 1. numbers a reader sees that no model value or allowance explains;
 2. required values that a rendering does not show;
-3. pages whose embedded model block is out of date (fix: `explainer sync`).
+3. pages whose embedded model block is out of date (fix: `explainer sync`);
+4. incomplete claims: a `why` without the alternative it beats, a `guarantee` without an example and a
+   counterexample, a `mechanism` without a worked example;
+5. claims a rendering does not cover (markers: `<!-- claim: id -->` in Markdown, `data-claim="id"` in
+   HTML, `self.claim("id")` in a scene);
+6. functions in model.md (exp, log, sqrt, …) that no `why` claim justifies.
 """
 
 from __future__ import annotations
@@ -59,6 +67,8 @@ def read_model(path: Path) -> dict:
     data.setdefault("allow", [])
     data.setdefault("require", [])
     data.setdefault("quiz", [])
+    data.setdefault("claims", [])
+    data.setdefault("accept_unjustified", {})
     return data
 
 
@@ -118,9 +128,26 @@ WORD_RE = re.compile(r"\b(?:(?:%s)(?:[-\s]+(?:%s|hundred|thousand|and|point|half
                      % ("|".join([*UNITS, *TENS, "a half"]), "|".join([*UNITS, *TENS])), re.I)
 
 
+SUPERSCRIPT = str.maketrans("⁰¹²³⁴⁵⁶⁷⁸⁹⁻⁺", "0123456789-+")
+# 6.0 × 10⁻⁶, 6.0e-6, 2e-3. The e-form needs a decimal point or a signed exponent, so hash fragments
+# such as "4e10" stay identifiers.
+SCI_RE = re.compile(r"(?<![\w.])([-−]?\d+(?:\.\d+)?)\s*[×x·]\s*10([⁻⁺]?[⁰¹²³⁴⁵⁶⁷⁸⁹]+)"
+                    r"|(?<![\w.])([-−]?\d+\.\d+[eE][-+]?\d+|[-−]?\d+[eE][-+]\d+)(?!\w)")
+
+
 def extract_numbers(text: str, where: str = "", words: bool = False) -> list[Num]:
     """Numbers a reader sees in `text`. Skips stage/step/rule numbers, years, and identifiers."""
     found = []
+    for m in SCI_RE.finditer(text):  # 6.0 × 10⁻⁶ and 6.0e-6 are one number each
+        if m.group(1):
+            mant, exponent = m.group(1).replace("−", "-"), int(m.group(2).translate(SUPERSCRIPT))
+        else:
+            mant, exp_text = re.split(r"[eE]", m.group(3).replace("−", "-"))
+            exponent = int(exp_text)
+        value = float(mant) * 10 ** exponent
+        decimals = max(0, -exponent + (len(mant.split(".")[1]) if "." in mant else 0))
+        found.append(Num(value, decimals, False, m.group(0), where))
+    text = SCI_RE.sub(" ", text)
     for m in NUM_RE.finditer(text):
         before = text[max(0, m.start() - 24):m.start()]
         if IGNORE_BEFORE.search(before):
@@ -280,6 +307,74 @@ def shows_value(text: str, value, words: bool) -> bool:
 
 # ---------------------------------------------------------------- check and sync
 
+# ---------------------------------------------------------------- completeness
+
+CLAIM_KINDS = {
+    "why": ("statement", "alternative", "counterexample"),   # why this form, and what the simpler form breaks
+    "guarantee": ("statement", "example", "counterexample"),  # holds here (numbers); fails when the assumption goes
+    "mechanism": ("statement", "example"),                     # a step, with a worked example
+    "definition": ("statement",),
+    "limit": ("statement",),
+    "misconception": ("statement", "correction"),
+}
+FUNCTION_WORDS = ["exp", "log", "ln", "sqrt", "√", "sigmoid", "tanh", "softmax", "argmax", "relu"]
+
+
+def claim_marked(kind: str, text: str, claim_id: str) -> bool:
+    cid = re.escape(claim_id)
+    if kind in ("prose", "diagram"):
+        return bool(re.search(rf"<!--\s*claim:\s*{cid}\s*-->", text))
+    if kind == "html":
+        return bool(re.search(rf'data-claim="{cid}"', text))
+    return bool(re.search(rf"""\.claim\(\s*["']{cid}["']""", text))
+
+
+def all_markers(kind: str, text: str) -> set[str]:
+    if kind in ("prose", "diagram"):
+        return set(re.findall(r"<!--\s*claim:\s*([\w-]+)\s*-->", text))
+    if kind == "html":
+        return set(re.findall(r'data-claim="([\w-]+)"', text))
+    return set(re.findall(r"""\.claim\(\s*["']([\w-]+)["']""", text))
+
+
+def functions_used(model_md: str) -> set[str]:
+    """Named functions that model.md uses in formulas or prose (exp(…), log₂, √, softmax, …)."""
+    found = set()
+    for f in FUNCTION_WORDS:
+        pattern = re.escape(f) if f == "√" else rf"(?<![\w-]){re.escape(f)}(?=[\s(₂₁₀_^]|$)"
+        if re.search(pattern, model_md, re.I | re.M):
+            found.add(f.lower())
+    return found
+
+
+def completeness(folder: Path, model: dict, present: dict[str, Path], rep: "Report") -> None:
+    claims = model["claims"]
+    ids = [c.get("id") for c in claims]
+    for c in claims:
+        cid, kind = c.get("id"), c.get("kind")
+        if not cid or kind not in CLAIM_KINDS:
+            rep.problems.append(f"model.yaml: claim {cid!r} needs an id and a kind ({', '.join(CLAIM_KINDS)})")
+            continue
+        missing = [f for f in CLAIM_KINDS[kind] if not str(c.get(f, "")).strip()]
+        if missing:
+            rep.problems.append(f"model.yaml: {kind} claim '{cid}' has no {' or '.join(missing)}")
+        for r in c.get("in", list(present)):
+            path = present.get(r)
+            if path is not None and not claim_marked(r, path.read_text(), cid):
+                rep.problems.append(f"{path.relative_to(folder)}: does not cover claim '{cid}'")
+    for r, path in present.items():
+        for marker in all_markers(r, path.read_text()) - set(ids):
+            rep.problems.append(f"{path.relative_to(folder)}: marks unknown claim '{marker}'")
+    md = folder / "model.md"
+    if md.exists():
+        justified = {str(a).lower() for c in claims if c.get("kind") == "why"
+                     for a in ([c.get("about")] if isinstance(c.get("about"), str) else c.get("about") or [])}
+        accepted = {str(k).lower() for k in model["accept_unjustified"]}
+        for f in sorted(functions_used(md.read_text()) - justified - accepted):
+            rep.problems.append(f"model.md uses {f} but no `why` claim says why (add one, or accept_unjustified "
+                                f"with a reason)")
+
+
 @dataclass
 class Report:
     slug: str
@@ -321,6 +416,8 @@ def check(folder: Path) -> Report:
             from explainer_kit.web_toolkit import toolkit_current
             if not toolkit_current(path.read_text()):
                 rep.problems.append(f"{rel}: inlined web toolkit is out of date — run `explainer sync {folder.name}`")
+
+    completeness(folder, model, present, rep)
 
     for req in model["require"]:
         try:

@@ -104,3 +104,15 @@ When the reader is learning (a course, a tutor session, a self-study unit), ask 
 ## 9. Check before you deliver
 
 Run `explainer check <slug>` before you call an explainer done. It fails when a rendering shows a number that the model does not contain, omits a required value, or embeds an out-of-date model. For a video, also read the review sheet (`explainer review <slug>`), and fix every layout issue it reports.
+
+## 10. Complete the chain
+
+An explanation fails most often by omission: it states a formula without saying why that form, or a guarantee without showing it hold and fail. Before rendering:
+
+- **Every operation has a why.** Name the simplest alternative and show it failing with numbers. (Why does softmax use exp? Dividing by the sum of logits gives owl −1 / 2.5 = −0.4, a negative probability, and T cancels out.)
+- **Every guarantee has two cases.** One instance with numbers where it holds, and one where its assumption is removed and it breaks. (Dijkstra with a negative edge: A→B 2, A→C 3, C→B −2 settles B at 2; the true distance is 1.)
+- **Every mechanism step has a worked example** with real numbers.
+- **Every term is defined** before a rendering uses it.
+- **Scope is declared.** What the explanation leaves out is listed with a pointer, so a learner's next question lands somewhere.
+
+Run `explainer probe <slug>` and give the prompt to a fresh agent that sees only `model.md`. Recompute every number it suggests before you add it. Then record the ideas as `claims` in `model.yaml`; `explainer check` fails while a claim is incomplete or a rendering does not cover it.

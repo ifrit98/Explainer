@@ -59,6 +59,8 @@ def review_sheet(slug: str, draft: bool = False) -> Path:
             shots.append((e["t"] + 0.5, f"bookmark '{e['mark']}'", "", e.get("issues", [])))
         elif e["kind"] == "predict":
             shots.append((e["t"] + 1.0, "PREDICT", e["question"], []))
+        elif e["kind"] == "claim":
+            shots.append((e["t"] + 0.6, f"claim '{e['id']}'", "", []))
         elif e["kind"] == "voiceover_end" and e.get("issues"):
             shots.append((max(e["t"] - 0.05, 0), "end of line", "", e["issues"]))
     shots.sort(key=lambda s: s[0])
@@ -100,6 +102,44 @@ def review_sheet(slug: str, draft: bool = False) -> Path:
     return out
 
 
+# ---------------------------------------------------------------- probe (before rendering)
+
+PROBE_RULES = [
+    "Why this form. For every formula, function, or operation, does the model say why it is this form and not "
+    "a simpler alternative? Name the most natural alternative and what would go wrong with it.",
+    "Guarantees. For every guarantee, invariant, or 'always / never' claim, does the model give a concrete "
+    "instance with numbers where it holds, AND a concrete instance where removing its assumption breaks it?",
+    "Terms. Is every term defined before it is used?",
+    "Worked examples. Does every mechanism step have a worked example with real numbers?",
+    "Next questions. What are the next five questions a learner would ask, most important first? Mark each one "
+    "the model cannot answer, and each one its Scope section already declares out of scope.",
+]
+
+
+def probe_prompt(slug: str) -> str:
+    """Prompt for a fresh agent that reads only model.md and lists what the explanation will omit."""
+    model_md = explainer_dir(slug) / "model.md"
+    if not model_md.exists():
+        sys.exit(f"missing {display(model_md)}")
+    return "\n".join([
+        "You are a curious, careful learner and a skeptical reviewer. The file below is the semantic model for "
+        "an explanation: the plan that its renderings will follow. Find what it omits BEFORE anything is rendered.",
+        "",
+        "Read ONLY this file. Do not open other files and do not search the web:",
+        f"- {model_md}",
+        "",
+        "Check it against these rules:",
+        *[f"{i}. {r}" for i, r in enumerate(PROBE_RULES, 1)],
+        "",
+        "Use your own knowledge of the subject to judge what is missing, but report only gaps in the file. "
+        "Give numbers in every suggested addition; they will be recomputed before use.",
+        "",
+        'Reply with JSON only: {"gaps": [{"rule": 1-5, "about": "...", "why_it_matters": "...", '
+        '"suggested_addition": "..."}], "next_questions": [{"q": "...", "answered_by_model": true|false, '
+        '"declared_out_of_scope": true|false}]}',
+    ])
+
+
 # ---------------------------------------------------------------- blind test
 
 def quiz_prompt(slug: str, rendering: str) -> str:
@@ -110,7 +150,7 @@ def quiz_prompt(slug: str, rendering: str) -> str:
     if missing:
         sys.exit(f"missing for a {rendering} blind test: {', '.join(missing)}"
                  + (f" (run: explainer review {slug})" if rendering == "video" else ""))
-    questions = UNDERSTANDING + [q["q"] for q in model["quiz"]]
+    questions = UNDERSTANDING + [q["q"] for q in model["quiz"]] + [c["ask"] for c in model["claims"] if c.get("ask")]
     lines = [
         "You are a blind reviewer for an explanation. You know nothing about it except the files below.",
         "",
@@ -144,5 +184,10 @@ def quiz_rubric(slug: str) -> str:
         lines += [f"{i}. {q['q']}", f"   expect: {q['expect']}"]
         if q.get("misconception"):
             lines.append(f"   wrong if it says: {q['misconception']}")
+    for i, c in enumerate([c for c in model["claims"] if c.get("ask")], n + len(model["quiz"]) + 1):
+        lines += [f"{i}. {c['ask']}", f"   expect: {c['statement']}"]
+        for field in ("example", "counterexample"):
+            if c.get(field):
+                lines.append(f"   a full answer also gives the {field}: {c[field]}")
     lines += ["", "A rendering passes when every quiz item scores 2 and no general item scores 0."]
     return "\n".join(lines)

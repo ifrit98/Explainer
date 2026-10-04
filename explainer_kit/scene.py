@@ -143,6 +143,11 @@ class ExplainerScene(VoiceoverScene):
         out.parent.mkdir(parents=True, exist_ok=True)
         out.write_text(json.dumps({"scene": type(self).__name__, "events": self._timeline}, indent=1))
 
+    def claim(self, claim_id: str) -> None:
+        """Mark that the scene covers a claim from model.yaml here. `explainer check` looks for these marks;
+        the review sheet shows where each one happens."""
+        self._timeline.append({"kind": "claim", "t": round(self.renderer.time, 3), "id": claim_id})
+
     # ------------------------------------------------------------ predict-first
 
     def predict(self, question: str, narration: str | None = None, hold: float = 2.0) -> None:

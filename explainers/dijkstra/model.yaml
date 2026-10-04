@@ -13,10 +13,41 @@ values:
   final: {A: 0, B: 3, C: 2, D: 8, E: 10, F: 13}
   path_to_F: [A, C, B, D, E, F]
   path_length: 13
+  finality_check: {settled: B, at: 3, unsettled: {D: 10, E: 12}, cheapest_other_route_at_least: 10}
+  bfs_counterexample: {B_first: 4, B_true: 3, via_C: [2, 1]}
+  negative_example:
+    edges: [[A, B, 2], [A, C, 3], [C, B, -2]]
+    dijkstra_B: 2
+    via_C: 1
+  complexity: "O((V + E) log V)"
 
 require:
   - path: final
     in: [video]
+
+accept_unjustified:
+  log: "only the out-of-scope running time uses it"
+
+claims:
+  - id: definition-relax
+    kind: definition
+    statement: "To relax an edge u–v: if dist(u) + w < dist(v), replace dist(v) with the smaller value and record u as v's predecessor; otherwise keep dist(v)."
+  - id: why-smallest
+    kind: why
+    statement: "Settle the unsettled node with the smallest estimate: no other route can reach it more cheaply, because every other route passes an estimate at least as large."
+    alternative: "Settle nodes in the order they are reached (breadth-first)."
+    counterexample: "A reaches B with 4 and C with 2. Settling B first fixes it at 4, but A → C → B = 2 + 1 = 3."
+    ask: "Why does Dijkstra settle the node with the smallest estimate, and not simply the next node it reached?"
+  - id: guarantee-final
+    kind: guarantee
+    statement: "With lengths ≥ 0, a node's estimate is final when it is settled."
+    example: "B settles at 3 while D, E, F are at 10, 12, ∞; any other path to B passes one of them and costs at least 10."
+    counterexample: "Directed A→B 2, A→C 3, C→B −2: B settles at 2, then C gives 3 − 2 = 1 < 2 after B is final."
+    ask: "Show with numbers why a settled distance cannot improve later, and give a graph where it does."
+  - id: mechanism-path
+    kind: mechanism
+    statement: "Each node keeps the predecessor that gave its final estimate; following predecessors back from a node gives its shortest path."
+    example: "From F: E, D, B, C, A. Reversed: A → C → B → D → E → F, length 2 + 1 + 5 + 2 + 3 = 13."
 
 quiz:
   - q: "B is first reached with distance 4. Why is its final distance 3?"

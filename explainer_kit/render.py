@@ -155,6 +155,8 @@ def render(slug: str, scene: str | None = None, quality: str | None = None, draf
 
     sheet = contact_sheet(out, video / f"{prefix}contact.png", every)
     issues = sorted({i for e in events for i in e.get("issues", [])})
+    lines = [e["text"] for e in events if e["kind"] == "voiceover"]
+    issues += sorted({f"repeated narration: {t[:50]!r}" for t in lines if lines.count(t) > 1})
     print(f"\nvideo     {display(out)}  ({ffprobe_duration(out):.1f}s)")
     print(f"captions  {display(captions)}  ({len(cues)} cues, .srt + .vtt)")
     print(f"timeline  {display(timeline)}  ({len(events)} events, {len(chapters) - 1} predict pauses)")

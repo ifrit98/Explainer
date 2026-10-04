@@ -6,7 +6,8 @@ With the plugin installed, run `explainer <command>` from any project. In the Ex
 |---|---|
 | `explainer setup` | Download the Kokoro voice (about 350 MB) and report which tools are present, including LaTeX. |
 | `explainer new <slug> [--stage 1 2 3 4]` | Create `model.md`, `model.yaml`, and the chosen renderings from templates. Default stage: 4. Existing files are kept. |
-| `explainer check [slug ...]` | Hold renderings to `model.yaml`. No slug: every explainer. Exit code 1 on any problem. `-v` lists notes. |
+| `explainer check [slug ...]` | Hold renderings to `model.yaml`: numbers, required values, claims. No slug: every explainer. Exit code 1 on any problem. `-v` lists notes. |
+| `explainer probe <slug>` | Print a prompt for a fresh agent that reads only `model.md` and lists what the explanation will omit. |
 | `explainer sync <slug>` | Write the model's values and the current web toolkit into the slug's HTML pages. |
 | `explainer render <slug> [options]` | Render the video: voice, mastered audio, captions, chapters, timeline, contact sheet. |
 | `explainer review <slug> [--draft]` | Build the review sheet: one frame at each narration line, bookmark, and predict pause. |
@@ -26,11 +27,17 @@ With the plugin installed, run `explainer <command>` from any project. In the Ex
 | `index.html` | visible text. The page loads the model when it has a synced `explainer-model` block. |
 | `video/scene.py` | string constants: narration, labels, on-screen math. Spoken numbers count ("sixty-one percent" is 61%). The scene loads the model when it calls `load_model(...)`. |
 
-It reports three kinds of problem:
+It reports these problems (full list with fixes: [model reference](model-reference.md#what-explainer-check-reports)):
 
 1. **A number the model does not explain.** Compared at the shown precision: 0.84 matches 0.842, 84% matches 0.842, 2 does not stand for 2.5. Stage, step, rule, and section numbers, years, and identifiers (STE-80, v2.3.0, SHA-256) are skipped.
 2. **A required value that a rendering does not show.** From `require` in `model.yaml`. A rendering that loads the model passes by construction.
 3. **A stale page.** The embedded model or the inlined toolkit differs from the current one. Fix with `explainer sync`.
+4. **An incomplete or uncovered claim.** A `why` claim without its alternative and counterexample, a `guarantee` without an example and a counterexample, or a rendering that does not mark a claim it should cover.
+5. **A function with no why.** `model.md` names exp, log, sqrt, sigmoid, … and no `why` claim justifies it (or `accept_unjustified` gives a reason).
+
+## `probe`
+
+`explainer probe <slug>` prints a prompt for a fresh agent with no other context. The agent reads only `model.md` and reports, against five rules (why this form, guarantees with two cases, terms, worked examples, next questions), what the explanation will omit. Recompute every number it suggests. See the [authoring guide](authoring.md#2-probe-the-model).
 
 ## `render` options
 
@@ -42,7 +49,7 @@ It reports three kinds of problem:
 | `--review` | off | Also build the review sheet. |
 | `--every N` | `4` | Seconds between contact-sheet frames. |
 
-`render` prints any layout issue the scene found: text that overlaps text, text covered by another group's opaque panel, or text outside the frame.
+`render` prints any layout issue the scene found (text that overlaps text, text covered by another group's opaque panel, text outside the frame) and any narration line spoken twice.
 
 ## Output of a video
 

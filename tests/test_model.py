@@ -67,10 +67,10 @@ def test_examples_pass(softmax_copy):
 
 def test_changed_model_value_fails_until_renderings_follow(softmax_copy):
     model = softmax_copy / "model.yaml"
-    model.write_text(model.read_text().replace("logits: {cat: 2.0,", "logits: {cat: 2.5,"))
+    model.write_text(model.read_text().replace("logits: {cat: 2.0,", "logits: {cat: 2.2,"))
     problems = check(softmax_copy).problems
-    assert any("explanation.md: does not show logits/cat = 2.5" in p for p in problems)
-    assert any("diagram.md: does not show logits/cat = 2.5" in p for p in problems)
+    assert any("explanation.md: does not show logits/cat = 2.2" in p for p in problems)
+    assert any("diagram.md: does not show logits/cat = 2.2" in p for p in problems)
     assert any("index.html: embedded model is out of date" in p for p in problems)
 
 
@@ -78,3 +78,9 @@ def test_corrupted_rendering_number_fails(softmax_copy):
     prose = softmax_copy / "explanation.md"
     prose.write_text(prose.read_text().replace("| 1.0 | 0.609 |", "| 1.0 | 0.619 |"))
     assert any("'0.619' is not a model value" in p for p in check(softmax_copy).problems)
+
+
+def test_scientific_notation_is_one_number():
+    nums = extract_numbers("owl is 6.0 × 10⁻⁶ here, and 6.0e-6 there. Hash blob 4e10… is an identifier.")
+    assert [round(n.value, 9) for n in nums] == [6e-6, 6e-6]
+    assert all(matches(n, [6.019e-6]) for n in nums)

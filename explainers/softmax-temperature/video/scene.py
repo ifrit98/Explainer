@@ -93,12 +93,32 @@ class SoftmaxTemperature(ExplainerScene):
             self.play(T.animate.set_value(0.5), run_time=2.5)
             self.play(T.animate.set_value(4.0), run_time=2.5)
 
+        # 6b — why exp: the simpler normalizer fails; exp turns a gap into a ratio
+        gap.clear_updaters()  # freeze before fading: its glyph count changes with T
+        S = M["sum_normalization"]
+        # each alternative value sits in its token's column, so −0.4 reads as owl's
+        values = VGroup(*[label(f"{S[t]:.1f}", size=28, color=Role.BAD if S[t] < 0 else Role.TEXT)
+                          .move_to([bars.names[i].get_x(), -0.15, 0]) for i, t in enumerate(TOKENS)])
+        alt = VGroup(label("÷ sum of logits:", size=24).next_to(values, LEFT, buff=0.5), values)
+        law = MathTex(r"\frac{e^{a}}{e^{b}} = e^{a-b}", color=Role.FOCUS).move_to(DOWN * 0.15)
+        with self.voiceover(text="Why exp, and not something simpler? <bookmark mark='alt'/> Divide each logit "
+                                 "by their sum, and owl gets minus zero point four. A probability cannot be "
+                                 "negative. <bookmark mark='exp'/> Exp makes every weight positive and keeps "
+                                 "the order. And it turns a gap into a ratio. That is why only the distance "
+                                 "between the dots matters."):
+            self.play(FadeOut(gap), run_time=0.5)
+            self.wait_until_bookmark("alt")
+            self.play(FadeIn(alt, shift=UP * 0.1))
+            self.play(Indicate(alt[1][3], color=Role.BAD))
+            self.wait_until_bookmark("exp")
+            self.claim("why-exp")
+            self.play(FadeOut(alt), Write(law))
+        self.play(FadeOut(law), run_time=0.5)
+
         # 7 — limits
         with self.voiceover(text="At a very low temperature, the top token takes almost all the probability. "
                                  "<bookmark mark='uni'/> At a very high temperature, every token gets almost "
                                  "the same probability."):
-            gap.clear_updaters()  # freeze before fading: its glyph count changes with T
-            self.play(FadeOut(gap), run_time=0.5)
             self.play(T.animate.set_value(0.25), run_time=2.5)
             self.wait_until_bookmark("uni")
             self.play(T.animate.set_value(10.0), run_time=3)
@@ -108,6 +128,7 @@ class SoftmaxTemperature(ExplainerScene):
         with self.voiceover(text="In every case, the order stays the same. Cat is always first, and owl is "
                                  "always last. <bookmark mark='formula'/> Temperature changes only the spread."):
             self.play(T.animate.set_value(1.0), run_time=2)
+            self.claim("guarantee-order")
             self.play(Indicate(bars.names[0], color=Role.FOCUS), Indicate(bars.names[3], color=Role.FOCUS))
             self.wait_until_bookmark("formula")
             self.play(FadeOut(context, shift=UP * 0.2), Write(formula))

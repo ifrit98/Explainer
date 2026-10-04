@@ -49,6 +49,26 @@ A → B → C
 |---|---|---|
 | | | |
 
+## Why this form
+
+For each formula, function, or operation: why this form and not the simplest alternative? Show the alternative failing with numbers. Each entry becomes a `why` claim in model.yaml.
+
+| Operation | Simplest alternative | What the alternative breaks (with numbers) |
+|---|---|---|
+| | | |
+
+## Concrete cases
+
+For each guarantee or "always / never" claim: one instance with numbers where it holds, and one where removing its assumption breaks it. For each mechanism step: one worked example with numbers. Each entry becomes a `guarantee` or `mechanism` claim.
+
+| Claim | Holds here (numbers) | Breaks here, without its assumption (numbers) |
+|---|---|---|
+| | | |
+
+## Terms
+
+Every term a rendering uses, defined in one sentence, in the order a reader meets them.
+
 ## Epistemic status
 
 - **Observed / established:** …
@@ -61,6 +81,12 @@ A → B → C
 ## Confusion points
 
 - <Likely misunderstanding> → <correction>
+
+## Scope
+
+What this explanation deliberately leaves out, and where a reader should look next. A learner's next question should land here or in the model, never in silence.
+
+- **Out of scope:** <topic> — <one-line pointer>
 
 ## Representation decision
 

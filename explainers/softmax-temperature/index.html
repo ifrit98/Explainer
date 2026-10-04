@@ -96,6 +96,8 @@ tbody tr:last-child td { border-bottom: 0; }
 .counts { display: flex; flex-wrap: wrap; gap: 16px; font: 0.9rem var(--mono); }
 
 .toggle { display: flex; gap: 10px; align-items: flex-start; }
+.toggles { display: grid; gap: 10px; }
+.norms { display: flex; flex-wrap: wrap; gap: 8px; }  /* not .presets: those buttons set T */
 .toggle input { margin-top: 5px; width: 18px; height: 18px; accent-color: var(--bar); }
 
 .limits { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; }
@@ -145,11 +147,12 @@ footer { font-size: 0.85rem; color: var(--muted); border-top: 1px solid var(--ru
         <div class="tokens" id="tokens"></div>
       </div>
       <div class="readouts">
-        <div class="readout">
+        <div class="readout" data-claim="definition-entropy">
           <span class="label">Entropy (spread)</span>
           <span class="value" id="entropy">1.46 bits</span>
           <div class="meter" aria-hidden="true"><div id="entropy-bar"></div></div>
           <span class="muted" style="font-size:.8rem">0 = certain · 2 bits = uniform</span>
+          <span class="muted" style="font-size:.8rem" id="choices"></span>
         </div>
         <div class="readout">
           <span class="label">cat : dog ratio</span>
@@ -161,10 +164,10 @@ footer { font-size: 0.85rem; color: var(--muted); border-top: 1px solid var(--ru
   </div>
 </section>
 
-<section aria-labelledby="h-how">
+<section aria-labelledby="h-how" data-claim="mechanism-step">
   <span class="eyebrow">Level 2 · How</span>
   <h2 id="h-how">Divide, exponentiate, normalize</h2>
-  <p>The sampler does three operations on the logits. The table updates with the slider. The last column is the bar chart above, as numbers.</p>
+  <p>The sampler does three operations on the logits. The table updates with the slider. The last column is the bar chart above, as numbers. Press the 2.0 preset to see the worked example from the prose.</p>
   <div class="table-wrap">
     <table>
       <thead><tr>
@@ -177,17 +180,39 @@ footer { font-size: 0.85rem; color: var(--muted); border-top: 1px solid var(--ru
       <tbody id="pipeline"></tbody>
     </table>
   </div>
-  <label class="toggle" for="shift">
-    <input type="checkbox" id="shift">
-    <span><strong>Test an assumption:</strong> add +5 to every logit. <span class="muted">Softmax is shift-invariant: the z/T and exp columns change, but the probabilities do not.</span></span>
-  </label>
+  <p class="muted" id="sum-line"></p>
+  <div class="toggles" data-claim="guarantee-shift">
+    <label class="toggle" for="shift">
+      <input type="checkbox" id="shift">
+      <span><strong>Add 10 to every logit.</strong> <span class="muted">The z/T and exp columns change. The probabilities do not: the constant cancels in every ratio.</span></span>
+    </label>
+    <label class="toggle" for="scale">
+      <input type="checkbox" id="scale">
+      <span><strong>Multiply every logit by 2.</strong> <span class="muted">Now the probabilities change. Doubling every gap is the same as halving T: compare with the 0.5 preset.</span></span>
+    </label>
+  </div>
 </section>
 
-<section aria-labelledby="h-why">
+<section aria-labelledby="h-why" data-claim="why-divide-t">
   <span class="eyebrow">Level 3 · Why</span>
   <h2 id="h-why">Only the gap matters, and T divides the gap</h2>
   <p>The ratio of two probabilities depends on the gap between their logits, divided by T. A small T makes the gap large, so the top token dominates. A large T makes the gap small, so the ratio goes toward 1.</p>
   <div class="law" id="law">p<sub>cat</sub> / p<sub>dog</sub> = exp((2.0 − 1.0) / <span class="live">1.00</span>) = <span class="live">2.72</span></div>
+  <p>Put another way, every ratio becomes its T = 1 value raised to the power 1/T. At T = 2: (0.609 / 0.224)^(1/2) = 1.65. Adding T to every logit would do nothing, as the toggle above shows; dividing is what scales the gaps.</p>
+</section>
+
+<section aria-labelledby="h-exp" data-claim="why-exp">
+  <span class="eyebrow">Level 3 · Why exp</span>
+  <h2 id="h-exp">Try a simpler normalizer</h2>
+  <p>Softmax uses exp because exp turns every logit into a positive weight, keeps the order, and turns a gap into a ratio: e^(a−b) = e^a / e^b. Pick another way to turn the scaled logits into shares, and see what breaks. Move T too.</p>
+  <div class="norms" role="group" aria-label="Normalizer">
+    <button type="button" data-norm="exp" aria-pressed="true">exp, then ÷ sum (softmax)</button>
+    <button type="button" data-norm="sum">÷ sum of the logits</button>
+    <button type="button" data-norm="square">square, then ÷ sum</button>
+  </div>
+  <div class="table-wrap"><table><thead><tr><th>normalizer</th><th>cat</th><th>dog</th><th>fox</th><th>owl</th></tr></thead><tbody id="norm-table"></tbody></table></div>
+  <p id="norm-verdict"></p>
+  <p class="muted">The name comes from physics: the Boltzmann distribution is p ∝ exp(−E / kT). A logit plays the role of −E, and T is the temperature.</p>
 </section>
 
 <section aria-labelledby="h-sample">
@@ -203,7 +228,7 @@ footer { font-size: 0.85rem; color: var(--muted); border-top: 1px solid var(--ru
   <span class="eyebrow">Limits and common errors</span>
   <h2 id="h-limits">What temperature does not do</h2>
   <div class="limits">
-    <div class="limit"><span class="tag fact">mathematical fact</span><strong>The ranking never changes.</strong><p class="muted">Division by a positive T keeps the order of the logits. Cat is first at every temperature.</p></div>
+    <div class="limit" data-claim="guarantee-order"><span class="tag fact">mathematical fact</span><strong>The ranking never changes, for T above 0.</strong><p class="muted">Division by a positive T keeps the order of the logits. Cat is first at every temperature. A negative T would reverse it: at T = −1, owl becomes most likely (0.71). APIs do not allow T below 0.</p></div>
     <div class="limit"><span class="tag fact">implementation</span><strong>T = 0 is greedy, not random.</strong><p class="muted">Division by 0 is undefined. APIs pick the top token every time.</p></div>
     <div class="limit"><span class="tag assume">simplification</span><strong>Four tokens, not 100,000.</strong><p class="muted">Real vocabularies are much larger. Many APIs also apply top-k or top-p after temperature. The behavior shown here is the same.</p></div>
     <div class="limit"><span class="tag loose">loose description</span><strong>“Temperature controls creativity.”</strong><p class="muted">It controls spread only. A flatter distribution gives more varied output. It adds no knowledge.</p></div>
@@ -223,7 +248,7 @@ footer { font-size: 0.85rem; color: var(--muted); border-top: 1px solid var(--ru
 <footer>Rendered from <a href="https://github.com/ifrit98/Explainer/blob/main/explainers/softmax-temperature/model.md">model.md</a>. The same model is also rendered as <a href="https://github.com/ifrit98/Explainer/blob/main/explainers/softmax-temperature/explanation.md">prose</a>, <a href="https://github.com/ifrit98/Explainer/blob/main/explainers/softmax-temperature/diagram.md">diagrams</a>, and a <a href="video/out.mp4">narrated video</a>. <a href="../../">All examples</a>.</footer>
 </main>
 
-<script type="application/json" id="explainer-model">{"context": "The ___ sat on the mat.", "tokens": ["cat", "dog", "fox", "owl"], "logits": {"cat": 2.0, "dog": 1.0, "fox": 0.5, "owl": -1.0}, "probabilities": {"T=0.25": {"cat": 0.98, "dog": 0.018, "fox": 0.002, "owl": 0.0}, "T=0.5": {"cat": 0.842, "dog": 0.114, "fox": 0.042, "owl": 0.002}, "T=1.0": {"cat": 0.609, "dog": 0.224, "fox": 0.136, "owl": 0.03}, "T=2.0": {"cat": 0.434, "dog": 0.263, "fox": 0.205, "owl": 0.097}, "T=4.0": {"cat": 0.34, "dog": 0.265, "fox": 0.234, "owl": 0.161}, "T=10": {"cat": 0.285, "dog": 0.258, "fox": 0.245, "owl": 0.211}}, "entropy_bits": {"T=0.25": 0.15, "T=0.5": 0.78, "T=1.0": 1.46, "T=2.0": 1.82, "T=4.0": 1.95, "T=10": 1.99}, "cat_dog_ratio": {"T=0.25": 54.6, "T=0.5": 7.39, "T=1.0": 2.72, "T=2.0": 1.65, "T=4.0": 1.28, "T=10": 1.11}, "max_entropy_bits": 2, "uniform_probability": 0.25, "slider": {"min": 0.1, "max": 10}, "shift_test": 5}</script>
+<script type="application/json" id="explainer-model">{"context": "The ___ sat on the mat.", "tokens": ["cat", "dog", "fox", "owl"], "logits": {"cat": 2.0, "dog": 1.0, "fox": 0.5, "owl": -1.0}, "probabilities": {"T=0.25": {"cat": 0.98, "dog": 0.018, "fox": 0.002, "owl": 0.0}, "T=0.5": {"cat": 0.842, "dog": 0.114, "fox": 0.042, "owl": 0.002}, "T=1.0": {"cat": 0.609, "dog": 0.224, "fox": 0.136, "owl": 0.03}, "T=2.0": {"cat": 0.434, "dog": 0.263, "fox": 0.205, "owl": 0.097}, "T=4.0": {"cat": 0.34, "dog": 0.265, "fox": 0.234, "owl": 0.161}, "T=10": {"cat": 0.285, "dog": 0.258, "fox": 0.245, "owl": 0.211}}, "entropy_bits": {"T=0.25": 0.15, "T=0.5": 0.78, "T=1.0": 1.46, "T=2.0": 1.82, "T=4.0": 1.95, "T=10": 1.99}, "cat_dog_ratio": {"T=0.25": 54.6, "T=0.5": 7.39, "T=1.0": 2.72, "T=2.0": 1.65, "T=4.0": 1.28, "T=10": 1.11}, "max_entropy_bits": 2, "uniform_probability": 0.25, "slider": {"min": 0.1, "max": 10}, "sum_normalization": {"sum": 2.5, "cat": 0.8, "dog": 0.4, "fox": 0.2, "owl": -0.4}, "squares_normalization": {"cat": 0.64, "dog": 0.16, "fox": 0.04, "owl": 0.16}, "worked_T2": {"scaled": [1.0, 0.5, 0.25, -0.5], "exp": [2.718, 1.649, 1.284, 0.607], "sum": 6.258}, "shift_example": {"add": 10, "logits": [12, 11, 10.5, 9]}, "scale_example": {"factor": 2, "logits": [4, 2, 1, -2]}, "negative_T": {"T": -1, "scaled": [-2, -1, -0.5, 1], "owl": 0.71}, "effective_choices_T1": 2.76, "e": 2.718, "owl_T025_exact": 6e-06, "low_T_presets": [0, 0.3]}</script>
 <script>
 (() => {
   // Logits come from model.yaml via `explainer sync`, so the page cannot drift from the model.
@@ -234,6 +259,8 @@ footer { font-size: 0.85rem; color: var(--muted); border-top: 1px solid var(--ru
   let greedy = false;
   let tExact = 1; // presets set T exactly; the slider only approximates it
   let shift = 0;
+  let scale = 1;
+  let norm = "exp";
   let lastProbs = [];
 
   // Build bars once; update heights so each bar keeps its identity.
@@ -256,7 +283,7 @@ footer { font-size: 0.85rem; color: var(--muted); border-top: 1px solid var(--ru
   const fmtT = (t) => (greedy ? "0" : t < 10 ? t.toFixed(2) : t.toFixed(1));
 
   function compute(t) {
-    const zs = TOKENS.map(([, z]) => z + shift);
+    const zs = TOKENS.map(([, z]) => (z + shift) * scale);
     if (greedy) {
       const top = zs.indexOf(Math.max(...zs));
       return { zs, scaled: zs.map(() => NaN), ex: zs.map(() => NaN), p: zs.map((_, i) => (i === top ? 1 : 0)) };
@@ -289,6 +316,9 @@ footer { font-size: 0.85rem; color: var(--muted); border-top: 1px solid var(--ru
     });
     const H = -p.reduce((a, x) => a + (x > 0 ? x * Math.log2(x) : 0), 0);
     $("entropy").textContent = `${H.toFixed(2)} bits`;
+    $("choices").textContent = `≈ ${(2 ** H).toFixed(2)} equally likely choices`;
+    $("sum-line").textContent = greedy ? "T = 0: greedy, no division." : `Sum of the exp column: ${ex.reduce((a, b) => a + b, 0).toFixed(3)}. Each probability is its exp value ÷ this sum.`;
+    renderNorm(t);
     $("entropy-bar").style.width = `${(H / 2) * 100}%`;
     $("ratio").textContent = greedy ? "∞ : 1" : `${Math.exp(1 / t).toFixed(2)} : 1`;
     $("state").textContent = stateText(t, H);
@@ -323,7 +353,29 @@ footer { font-size: 0.85rem; color: var(--muted); border-top: 1px solid var(--ru
     if (!greedy) { tExact = bt; slider.value = Math.log10(bt); }
     render();
   }));
-  $("shift").addEventListener("change", (e) => { shift = e.target.checked ? MODEL.shift_test : 0; render(); });
+  $("shift").addEventListener("change", (e) => { shift = e.target.checked ? MODEL.shift_example.add : 0; render(); });
+  $("scale").addEventListener("change", (e) => { scale = e.target.checked ? MODEL.scale_example.factor : 1; render(); });
+
+  // Why exp: compare normalizers on the model's logits (no shift or scale) at the current T.
+  function shares(kind, t) {
+    const v = TOKENS.map(([, z]) => z / t);
+    const w = kind === "exp" ? v.map(Math.exp) : kind === "square" ? v.map((x) => x * x) : v;
+    const sum = w.reduce((a, b) => a + b, 0);
+    return w.map((x) => x / sum);
+  }
+  function renderNorm(t) {
+    if (greedy) t = 1;
+    const p = shares(norm, t);
+    const order = (q) => q.every((x, i) => i === 0 || q[i - 1] >= x);
+    $("norm-table").innerHTML = `<tr><td>${norm === "exp" ? "softmax" : norm === "sum" ? "÷ sum" : "square, ÷ sum"}</td>` +
+      p.map((x) => `<td${x < 0 ? ' style="color:var(--tag-loose)"' : ""}>${x.toFixed(3)}</td>`).join("") + "</tr>";
+    $("norm-verdict").textContent =
+      norm === "sum" ? `Owl gets ${p[3].toFixed(2)}: a negative share is not a probability. Move T: nothing changes, because T cancels in (z/T) ÷ Σ(z/T).`
+      : norm === "square" ? (order(p) ? "At this T the order happens to hold. Try T = 1." : `Every share is positive, but owl (${p[3].toFixed(2)}) beats fox (${p[2].toFixed(2)}): the order breaks. T cancels here too: (z/T)² ÷ Σ(z/T)² = z² ÷ Σz².`)
+      : `Every share is positive, the order is kept, and the cat : dog ratio is exp(1 / T) = ${Math.exp(1 / t).toFixed(2)}.`;
+    document.querySelectorAll("[data-norm]").forEach((b) => b.setAttribute("aria-pressed", String(b.dataset.norm === norm)));
+  }
+  document.querySelectorAll("[data-norm]").forEach((b) => b.addEventListener("click", () => { norm = b.dataset.norm; render(); }));
 
   $("draw").addEventListener("click", () => {
     const counts = TOKENS.map(() => 0); const out = [];

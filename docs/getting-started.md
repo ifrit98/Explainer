@@ -42,7 +42,7 @@ On Linux, install `libcairo2-dev libpango1.0-dev pkg-config ffmpeg`. Manim's [in
 /explainer:video why the derivative of sin is cos
 ```
 
-The agent states the stage it chose and why, then writes `explainers/<slug>/` in your project:
+The agent drafts the model, has a fresh agent probe it for omissions, states the stage it chose and why, renders, and checks every rendering against the model. It writes `explainers/<slug>/` in your project:
 
 ```text
 explainers/<slug>/
@@ -58,7 +58,8 @@ explainers/<slug>/
 
 ```bash
 explainer new my-topic --stage 3 4     # scaffold the model, a page, and a video scene
-explainer check my-topic               # renderings against model.yaml
+explainer probe my-topic               # a prompt for a fresh agent: what does the model omit?
+explainer check my-topic               # renderings against model.yaml: numbers and claims
 explainer sync my-topic                # inline the web toolkit and the model into the page
 explainer render my-topic --draft      # 480p, silent narration: check the layout
 explainer render my-topic --review     # 1080p60, Kokoro voice, captions, chapters, review sheet
@@ -80,6 +81,8 @@ To test the plugin wrapper against your checkout from another project, set `EXPL
 ## Next
 
 - [Concepts](concepts.md): the explanation compiler, the model and its checks, predict-first, STE-80.
+- [Authoring guide](authoring.md): how to write an explanation that does not omit the important connections.
+- [Model reference](model-reference.md) and [web toolkit](web-toolkit.md).
 - [Video pipeline](video-pipeline.md): how narration and animation stay in sync.
 - [CLI reference](cli.md)
 - [Troubleshooting](troubleshooting.md)

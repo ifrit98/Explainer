@@ -15,7 +15,7 @@ Run the checks in order. Stop and fix at the first failure. Record what you ran 
 explainer check <slug>
 ```
 
-It fails when a rendering shows a number the model does not explain, omits a value that `require` lists, or embeds an out-of-date model (`explainer sync <slug>` fixes the last one). A number that is right but missing from the model goes into `values` or `allow`. Never silence a real disagreement.
+It fails when a rendering shows a number the model does not explain, omits a value that `require` lists, embeds an out-of-date model (`explainer sync <slug>` fixes that), leaves a claim incomplete or uncovered, or when `model.md` uses a function that no `why` claim justifies. A number that is right but missing from the model goes into `values` or `allow`. Never silence a real disagreement.
 
 ## 2. Each medium
 

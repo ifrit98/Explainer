@@ -14,7 +14,8 @@ Status: `proposed` · `next` · `in progress` · `done`
 | 6 | [Broaden the gallery](#6-broaden-the-gallery) | done (v0.2.0) |
 | 7 | [Predict-first renderings](#7-predict-first-renderings) | done (v0.2.0) |
 | 8 | [A first real user outside this repo](#8-a-first-real-user-outside-this-repo) | done (v0.2.0) |
-| 9 | [Open items from reviews](#9-open-items-from-reviews) | proposed |
+| 9 | [Open items from reviews](#9-open-items-from-reviews) | partly done (v0.3.0) |
+| 10 | [Complete the chain: claims and the probe](#10-complete-the-chain-claims-and-the-probe) | done (v0.3.0) |
 
 ---
 
@@ -66,7 +67,27 @@ Status: `proposed` · `next` · `in progress` · `done`
 
 ## 9. Open items from reviews
 
-- `dijkstra`: show the finality argument with a concrete competing path; show one negative-edge counterexample; define "relax" in the narration (blind-test gaps).
-- `softmax-temperature` prose: one line of intuition for why softmax uses exp (blind-test gap).
+Done in v0.3.0:
+
+- `softmax-temperature`: why softmax uses exp, in every rendering. The page lets the reader try divide-by-sum and squares; the video shows owl at −0.4. The blind re-test now answers "why exp" in full.
+- `dijkstra`: finality shown with this run's numbers at the moment B settles; a negative-edge chapter; "relax" defined; why the smallest estimate settles first; the path read back through predecessors. Blind re-test: pass on all five quiz items.
+
+Still open:
+
+- `dijkstra`: use one word ("estimate") for one concept; the narration also says "distance". Slow down the finality segment (about ten seconds).
+- `softmax-temperature`: a sentence of intuition for entropy beyond "2.76 equally likely choices".
 - Validate Mermaid blocks in CI (today they are checked by hand in a browser).
 - Landing page: play the videos with the predict-pause player.
+
+## 10. Complete the chain: claims and the probe
+
+**Problem.** An explanation can pass every number check and still omit the idea that makes it click. The first softmax prose never said why it uses exp; the first Dijkstra video stated a guarantee without showing it hold or fail. The blind test only noticed these as side notes, after rendering.
+
+**Built.**
+
+- **Claims** in `model.yaml`, with required fields per kind: a `why` needs the simplest alternative and its failure; a `guarantee` needs an example and a counterexample; a `mechanism` needs a worked example. Renderings mark where they cover each claim; `explainer check` fails on an incomplete or uncovered claim.
+- **The function rule:** a function in `model.md` (exp, log, sqrt, …) with no `why` claim fails the check. This rule alone would have caught "why exp".
+- **`explainer probe`:** a fresh agent reads only `model.md` and lists omissions, before anything is rendered. On the old softmax model its first finding was "why exp", with the divide-by-sum counterexample; on the old Dijkstra model it proposed the same negative-edge graph used in the video. Its numbers are suggestions: in one run it gave two different values for one probability, so every number is recomputed.
+- **Model template** sections Why this form, Concrete cases, Terms, Scope; principle 10.
+
+**Done when** — met. The updated softmax prose and Dijkstra video pass blind re-tests that include the claim questions; the reviewers now answer "why exp" and "why is a settled distance final" with the counterexamples.

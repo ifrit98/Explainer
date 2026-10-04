@@ -65,6 +65,38 @@ Context: "The ___ sat on the mat." Four candidate tokens. Logits: cat 2.0, dog 1
 
 Maximum entropy for 4 tokens: log₂ 4 = 2 bits (all p = 0.25).
 
+## Why this form
+
+| Operation | Simplest alternative | What the alternative breaks |
+|---|---|---|
+| exp before normalizing | divide each logit by the sum of the logits | Logits 2.0, 1.0, 0.5, −1.0 sum to 2.5, so owl gets −1.0 / 2.5 = −0.4: a negative probability. With z/T in place of z, T cancels: (z/T) / Σ(z/T) = z / Σz, so temperature would do nothing. |
+| exp before normalizing | square each logit, then normalize | z² / Σz² gives 0.64, 0.16, 0.04, 0.16: owl (−1)² ties dog and beats fox. The order of the tokens breaks. T cancels here too: (z/T)² / Σ(z/T)² = z² / Σz². |
+| divide the logits by T | add T to every logit | Adding one number to every logit changes nothing (shift invariance), so T would have no effect. |
+
+Why exp works: it turns every logit, positive or negative, into a positive weight; it keeps the order; and it turns a difference of logits into a ratio of weights, e^(a−b) = e^a / e^b. That ratio property is the whole temperature law: pᵢ / pⱼ = exp((zᵢ − zⱼ) / T). Dividing by T scales each gap by 1/T, so every ratio becomes its T = 1 value raised to the power 1/T: p(T) ∝ p(1)^(1/T). Example: (0.609 / 0.224)^(1/2) = 1.65, the cat : dog ratio at T = 2.
+
+Origin of the name: physics writes the Boltzmann distribution as p ∝ exp(−E / kT). A logit plays the role of −E, and T is the temperature.
+
+## Concrete cases
+
+| Claim | Holds here | Breaks here, without its assumption |
+|---|---|---|
+| For T > 0 the order of the tokens never changes. | cat > dog > fox > owl in every row of the table. | T = −1: z/T = −2, −1, −0.5, 1, and owl becomes the most likely token (0.71). |
+| Adding the same number to every logit changes nothing. | +10: logits 12, 11, 10.5, 9 still give 0.609, 0.224, 0.136, 0.030 at T = 1. | Multiplying is different: ×2 gives logits 4, 2, 1, −2 and the T = 0.5 row, 0.842, 0.114, 0.042, 0.002. |
+| One decoding step (mechanism), worked at T = 2. | z/T = 1.0, 0.5, 0.25, −0.5 → exp = 2.718, 1.649, 1.284, 0.607 → sum 6.258 → p = 0.434, 0.263, 0.205, 0.097. | — |
+| Entropy measures spread. | 1.46 bits at T = 1 equals the spread of 2^1.46 = 2.76 equally likely choices. | — |
+
+Probabilities are never exactly 0 for finite T: owl at T = 0.25 is 6.0 × 10⁻⁶, shown as 0.000 after rounding.
+
+## Terms
+
+- **Token:** one unit of text the model can output (a word or part of a word).
+- **Logit:** the raw score the model gives one candidate token.
+- **exp:** the exponential function e^x, with e ≈ 2.718.
+- **Softmax:** exp of each scaled logit, divided by the sum of those values.
+- **Greedy decoding:** always pick the most likely token.
+- **Entropy (bits):** H = −Σ p log₂ p. 0 bits = certain; 2 bits = four equally likely tokens.
+
 ## Alternative states
 
 | State | What happens | Why |
@@ -87,6 +119,12 @@ Maximum entropy for 4 tokens: log₂ 4 = 2 bits (all p = 0.25).
 - "High T makes the model pick a different best token." → No. The ranking stays the same. Only the spread changes.
 - "T = 0 means random." → No. T = 0 means greedy: always the top token.
 - "Temperature changes the logits." → It changes only the scaled logits for this step. The model's output does not change.
+
+## Scope
+
+- **Out of scope:** which T to choose for a task — API defaults are usually near 1; extraction and code often use 0 to 0.3.
+- **Out of scope:** top-k and top-p filtering and their order relative to temperature — see the provider's sampling documentation.
+- **Out of scope:** why T = 0 can still vary in practice (ties, nondeterministic GPU arithmetic).
 
 ## Representation decision
 

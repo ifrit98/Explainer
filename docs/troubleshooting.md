@@ -82,3 +82,15 @@ The house font is Avenir Next (macOS). Pango falls back to another sans-serif fo
 - Iterate with `--draft` (480p15, no TTS).
 - Render one chapter with `--scene Name -q m`.
 - `always_redraw` rebuilds its object every frame. Keep the redraw function small.
+
+## `does not cover claim 'x'`
+
+The rendering should present claim `x` from `model.yaml` but has no mark for it. Present the idea, with its case, and mark the place: `<!-- claim: x -->` (Markdown), `data-claim="x"` (HTML), `self.claim("x")` (scene). If the claim does not belong in that rendering, set `in:` on the claim.
+
+## `model.md uses exp but no 'why' claim says why`
+
+Add a `why` claim with `about: [exp]`: the simplest alternative and what it breaks, with numbers. If the function only names a readout that the explanation does not derive, list it under `accept_unjustified` with that reason.
+
+## The check passed, but a changed value is still wrong somewhere
+
+The check matches values, not meanings. If the new value equals another number the rendering shows for a different reason (a logit of 2.5 and a sum of 2.5), the check cannot tell them apart. Make the rendering load the model (`load_model`, `Explainer.model`), or check that passage by hand.

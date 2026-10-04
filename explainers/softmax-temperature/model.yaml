@@ -15,7 +15,18 @@ values:
   max_entropy_bits: 2
   uniform_probability: 0.25
   slider: {min: 0.1, max: 10}
-  shift_test: 5             # constant added to every logit in the shift-invariance toggle
+
+  # worked cases from model.md (Why this form, Concrete cases)
+  sum_normalization: {sum: 2.5, cat: 0.8, dog: 0.4, fox: 0.2, owl: -0.4}
+  squares_normalization: {cat: 0.64, dog: 0.16, fox: 0.04, owl: 0.16}
+  worked_T2: {scaled: [1.0, 0.5, 0.25, -0.5], exp: [2.718, 1.649, 1.284, 0.607], sum: 6.258}
+  shift_example: {add: 10, logits: [12, 11, 10.5, 9]}
+  scale_example: {factor: 2, logits: [4, 2, 1, -2]}
+  negative_T: {T: -1, scaled: [-2, -1, -0.5, 1], owl: 0.71}
+  effective_choices_T1: 2.76
+  e: 2.718
+  owl_T025_exact: 6.0e-6
+  low_T_presets: [0, 0.3]   # Scope: extraction and code
 
 allow: [4, 60, 100000]      # four tokens, 60 sampled draws, a 100,000-token vocabulary
 
@@ -24,6 +35,45 @@ require:
     in: [prose, diagram, html, video]
   - path: probabilities/T=1.0
     in: [prose, diagram, html]
+
+accept_unjustified:
+  log: "log₂ only defines entropy, a readout; the explanation does not derive it"
+
+claims:
+  - id: why-exp
+    kind: why
+    about: [exp, softmax]
+    statement: "exp turns every logit into a positive weight, keeps the order, and turns a difference of logits into a ratio of weights (e^(a−b) = e^a / e^b). So only gaps matter, and dividing by T scales every ratio."
+    alternative: "Divide each logit by the sum of the logits (or square the logits, then normalize)."
+    counterexample: "Logits 2.0, 1.0, 0.5, −1.0 sum to 2.5, so owl gets −0.4, a negative probability; with z/T, T cancels and temperature does nothing. Squares give owl 0.16 > fox 0.04: the order breaks."
+    ask: "Why does softmax use exp, instead of dividing each logit by the sum of the logits?"
+  - id: why-divide-t
+    kind: why
+    statement: "Dividing by T scales every gap by 1/T, so each probability ratio becomes its T = 1 value raised to the power 1/T: p(T) ∝ p(1)^(1/T)."
+    alternative: "Add T to every logit."
+    counterexample: "Adding one number to every logit changes nothing (+10 still gives 0.609, 0.224, 0.136, 0.030), so T would have no effect."
+    example: "(0.609 / 0.224)^(1/2) = 1.65, the cat : dog ratio at T = 2."
+    in: [prose, html]
+  - id: guarantee-order
+    kind: guarantee
+    statement: "For any T > 0 the order of the tokens never changes; only the spread does."
+    example: "cat > dog > fox > owl in every row, from T = 0.25 to T = 10."
+    counterexample: "At T = −1 the scaled logits are −2, −1, −0.5, 1 and owl becomes most likely (0.71)."
+  - id: guarantee-shift
+    kind: guarantee
+    statement: "Adding the same number to every logit changes nothing; multiplying every logit does."
+    example: "+10 (logits 12, 11, 10.5, 9) still gives 0.609, 0.224, 0.136, 0.030 at T = 1."
+    counterexample: "×2 (logits 4, 2, 1, −2) gives 0.842, 0.114, 0.042, 0.002, the T = 0.5 row."
+    in: [prose, html]
+  - id: mechanism-step
+    kind: mechanism
+    statement: "One decoding step: divide each logit by T, apply exp, divide by the sum, sample."
+    example: "T = 2: z/T = 1.0, 0.5, 0.25, −0.5; exp = 2.718, 1.649, 1.284, 0.607; sum 6.258; p = 0.434, 0.263, 0.205, 0.097."
+    in: [prose, diagram, html]
+  - id: definition-entropy
+    kind: definition
+    statement: "Entropy H = −Σ p log₂ p measures spread in bits; 2^H is the number of equally likely choices with the same spread (1.46 bits ≈ 2.76 choices at T = 1)."
+    in: [prose, html]
 
 quiz:
   - q: "If the temperature rises from 1 to 3, what happens to the probability of the most likely token, and does the order of the tokens change?"

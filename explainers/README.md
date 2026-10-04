@@ -21,7 +21,7 @@ The interactive pages and the videos are live at [ifrit98.github.io/Explainer](h
 ```text
 <slug>/
   model.md          semantic model: entities, causal chain, quantities, epistemic status, decision
-  model.yaml        values the renderings must agree with, plus quiz items for the blind test
+  model.yaml        values and claims the renderings must agree with, plus quiz items for the blind test
   explanation.md    Stage 1: STE-80 prose
   diagram.md        Stage 2: Mermaid diagrams (GitHub renders them)
   index.html        Stage 3: self-contained interactive page

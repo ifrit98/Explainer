@@ -2,7 +2,8 @@
 
 > Stage 1 (controlled prose), rendered from [`model.md`](model.md). Routing: a linear procedure → numbered steps. No diagram, page, or video is needed.
 
-`git bisect` finds the first bad commit by binary search. Each test halves the range. For 1,000 commits, you test about 10.
+<!-- claim: why-halving -->
+`git bisect` finds the first bad commit by binary search. Each test halves the range of suspect commits. For 1,000 commits you test about 10 times: 1,000 → 500 → 250 → 125 → 63 → 32 → 16 → 8 → 4 → 2 → 1. Testing the commits one by one could take 1,000 tests.
 
 ## Before you start
 
@@ -61,4 +62,7 @@ git bisect run npm test
 
 ## Limit
 
+<!-- claim: guarantee-first-bad -->
 Bisect assumes that the bug appears once and stays. If the bug comes and goes, bisect can name the wrong commit.
+
+Example: across 1,000 commits, the bug is present in commits 300–400, gone, and back from 900. The first test, at 500, is good. Bisect now searches only 500–1,000 and names 900. The bug first appeared at 300. If you suspect this, test a few commits before the named one by hand.

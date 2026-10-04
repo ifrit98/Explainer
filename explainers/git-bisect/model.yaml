@@ -3,6 +3,22 @@ values:
   example_range_commits: 1000
   example_steps: 10            # about log2(1000)
   exit_codes: {good: 0, skip: 125, bad_min: 1, bad_max: 127}
+  halving: [1000, 500, 250, 125, 63, 32, 16, 8, 4, 2, 1]
+  flaky_example: {present: [300, 400], back_from: 900, first_test: 500, named: 900, first_bad: 300}
+
+claims:
+  - id: why-halving
+    kind: why
+    about: [log]
+    statement: "Each test halves the range of suspect commits, so N commits need about log₂ N tests."
+    alternative: "Test the commits one by one, oldest first."
+    counterexample: "1,000 commits can take up to 1,000 tests one by one; halving takes 10 (1,000 → 500 → … → 1)."
+  - id: guarantee-first-bad
+    kind: guarantee
+    statement: "Bisect names the first bad commit, provided the bug appears once and stays."
+    example: "Good at 0, bad from 300 on, 1,000 commits: bisect names 300 after 10 tests."
+    counterexample: "Bug in 300–400, gone, back from 900: the first test (500) is good, so bisect names 900, not 300."
+    ask: "When can git bisect name the wrong commit? Give an example."
 
 quiz:
   - q: "About how many tests does git bisect need for 1,000 commits, and why?"

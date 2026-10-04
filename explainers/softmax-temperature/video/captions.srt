@@ -23,77 +23,101 @@ Softmax turns the logits into probabilities.
 At temperature one, cat gets sixty-one percent.
 
 7
-00:00:17,916 --> 00:00:21,260
+00:00:17,921 --> 00:00:21,265
 Temperature divides every logit before softmax.
 
 8
-00:00:21,360 --> 00:00:24,639
+00:00:21,365 --> 00:00:24,644
 At T equal to one half, the logits move apart.
 
 9
-00:00:24,739 --> 00:00:26,452
+00:00:24,744 --> 00:00:26,457
 Cat now gets eighty-four percent.
 
 10
-00:00:26,550 --> 00:00:28,122
+00:00:26,555 --> 00:00:28,127
 Pause here and predict.
 
 11
-00:00:28,222 --> 00:00:31,706
+00:00:28,227 --> 00:00:31,711
 When T rises to 2, does cat stay the most likely token?
 
 12
-00:00:34,800 --> 00:00:36,522
+00:00:34,805 --> 00:00:36,527
 Now raise the temperature.
 
 13
-00:00:36,622 --> 00:00:39,773
+00:00:36,627 --> 00:00:39,778
 At T equal to two, the logits move together.
 
 14
-00:00:39,873 --> 00:00:41,778
+00:00:39,878 --> 00:00:41,783
 The probabilities become more equal.
 
 15
-00:00:41,866 --> 00:00:43,396
+00:00:41,883 --> 00:00:43,413
 Why does this happen?
 
 16
-00:00:43,496 --> 00:00:47,558
+00:00:43,513 --> 00:00:47,576
 The ratio of two probabilities depends only on the distance between
 
 17
-00:00:47,658 --> 00:00:51,286
+00:00:47,676 --> 00:00:51,303
 their dots. A larger distance gives a larger ratio.
 
 18
-00:00:51,386 --> 00:00:54,315
+00:00:51,403 --> 00:00:54,332
 A smaller distance gives a ratio closer to one.
 
 19
-00:00:54,400 --> 00:00:58,205
-At a very low temperature, the top token takes almost all the
+00:00:54,426 --> 00:00:56,681
+Why exp, and not something simpler?
 
 20
-00:00:58,305 --> 00:00:59,087
-probability.
+00:00:56,781 --> 00:01:01,532
+Divide each logit by their sum, and owl gets minus zero point four.
 
 21
-00:00:59,187 --> 00:01:02,759
-At a very high temperature, every token gets almost the same
+00:01:01,632 --> 00:01:03,866
+A probability cannot be negative.
 
 22
-00:01:02,859 --> 00:01:03,482
-probability.
+00:01:03,966 --> 00:01:07,310
+Exp makes every weight positive and keeps the order.
 
 23
-00:01:03,566 --> 00:01:06,120
-In every case, the order stays the same.
+00:01:07,410 --> 00:01:09,558
+And it turns a gap into a ratio.
 
 24
-00:01:06,220 --> 00:01:09,329
-Cat is always first, and owl is always last.
+00:01:09,658 --> 00:01:12,481
+That is why only the distance between the dots matters.
 
 25
-00:01:09,429 --> 00:01:11,377
+00:01:13,076 --> 00:01:16,881
+At a very low temperature, the top token takes almost all the
+
+26
+00:01:16,981 --> 00:01:17,763
+probability.
+
+27
+00:01:17,863 --> 00:01:21,435
+At a very high temperature, every token gets almost the same
+
+28
+00:01:21,535 --> 00:01:22,158
+probability.
+
+29
+00:01:22,242 --> 00:01:24,796
+In every case, the order stays the same.
+
+30
+00:01:24,896 --> 00:01:28,005
+Cat is always first, and owl is always last.
+
+31
+00:01:28,105 --> 00:01:30,053
 Temperature changes only the spread.

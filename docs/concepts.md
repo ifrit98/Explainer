@@ -50,6 +50,16 @@ Each explainer also has `model.yaml`: the values its renderings show, numbers th
 
 Scenes and pages can also read the model directly (`load_model(__file__)` in Python, `Explainer.model` in a page). Then they cannot drift. In the tests, changing one logit in `softmax-temperature/model.yaml` makes the check fail on the prose and the diagram until both are updated, and flags the page until it is re-synced.
 
+## Complete the chain
+
+An explanation can pass every number check and still omit the idea that makes it click. The first softmax prose stated `p = exp(z/T) / Σ exp(z/T)` and never said why exp. So the model also records **claims**: the ideas a reader must take away, each with the evidence it needs.
+
+- A **why** claim names the simplest alternative and shows it failing (dividing by the sum of the logits gives owl −0.4, and T cancels).
+- A **guarantee** shows a case where it holds and a case where it breaks without its assumption (Dijkstra with C→B −2 answers 2 for a true distance of 1).
+- A **mechanism** has a worked example in numbers.
+
+Renderings mark where they cover each claim, and `explainer check` fails while a claim is incomplete or uncovered, or while `model.md` uses a function (exp, log, sqrt, …) that no claim justifies. Before rendering, `explainer probe` gives the model to a fresh agent that lists what is missing. The [authoring guide](authoring.md) walks through the method on `softmax-temperature`.
+
 ## Four stages, and when to escalate
 
 Start with the cheapest representation that can work. Escalate only when the current one forces the reader to do mental work that a richer medium would remove.
@@ -128,7 +138,7 @@ An author grading their own explanation is a weak test. `explainer quiz <slug> -
 
 | File | Read by | Contents |
 |---|---|---|
-| [`plugin/skills/explain/references/principles.md`](../plugin/skills/explain/references/principles.md) | the agent, every explanation | the rules above, in short form |
+| [`plugin/skills/explain/references/principles.md`](../plugin/skills/explain/references/principles.md) | the agent, every explanation | the rules above, in short form (10 principles) |
 | [`plugin/skills/explain/`](../plugin/skills/explain/) | the agent, on demand | the pipeline and one playbook per medium |
 | [`plugin/skills/video/`](../plugin/skills/video/), [`plugin/skills/verify/`](../plugin/skills/verify/) | the agent, on demand | the Stage 4 procedure; the checks before shipping |
 | [`CLAUDE.md`](../CLAUDE.md) | the agent, in this repo | imports the principles; repo layout and commands |

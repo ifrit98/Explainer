@@ -15,6 +15,21 @@ require: []
 #  - path: example_quantity
 #    in: [prose, diagram, html, video]
 
+claims: []
+#  The ideas the explanation must convey. `explainer check` requires the fields per kind and a coverage
+#  mark in each rendering: <!-- claim: id --> (Markdown), data-claim="id" (HTML), self.claim("id") (scene).
+#  - id: why-exp
+#    kind: why                 # why | guarantee | mechanism | definition | limit | misconception
+#    about: [exp]              # functions it justifies (a function in model.md with no why claim fails the check)
+#    statement: "..."
+#    alternative: "..."        # why: the simplest alternative
+#    counterexample: "..."     # why/guarantee: the alternative or the broken assumption failing, with numbers
+#    example: "..."            # guarantee/mechanism: an instance with numbers
+#    ask: "..."                # optional: becomes a blind-test question
+#    in: [prose, html]         # optional: default is every rendering present
+
+accept_unjustified: {}        # e.g. {log: "only names the unit of entropy"}
+
 quiz: []
 #  - q: "What happens to X when Y doubles?"
 #    expect: "X halves, because ..."

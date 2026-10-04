@@ -2,6 +2,7 @@
 
 > Rendered from [`model.md`](model.md). Other renderings: [prose](explanation.md) · [interactive](index.html) · [video](video/out.mp4).
 
+<!-- claim: mechanism-step -->
 ## Level 1 — Where temperature acts in one decoding step
 
 ```mermaid
@@ -56,6 +57,20 @@ xychart-beta
 
 The ranking is the same in all three charts. Only the spread changes.
 
+## Level 3 — Why exp, and not something simpler
+
+<!-- claim: why-exp -->
+```mermaid
+flowchart TB
+    Z["Logits z<br/>2.0 · 1.0 · 0.5 · −1.0"]
+    Z --> A["Divide by the sum (2.5)<br/>0.8 · 0.4 · 0.2 · −0.4"]
+    Z --> B["Square, then normalize<br/>0.64 · 0.16 · 0.04 · 0.16"]
+    Z --> C["exp, then normalize (softmax)<br/>0.609 · 0.224 · 0.136 · 0.030"]
+    A --> AX["✗ owl is negative<br/>✗ T cancels: (z/T) / Σ(z/T) = z / Σz"]
+    B --> BX["✗ owl beats fox: the order breaks"]
+    C --> CX["✓ every weight positive<br/>✓ order kept<br/>✓ a gap becomes a ratio: e^(a−b) = e^a / e^b"]
+```
+
 ## Level 3 — Why: the causal chain
 
 ```mermaid
@@ -65,6 +80,9 @@ flowchart LR
     C --> D["Distribution flattens<br/>(entropy rises)"]
     D --> E["Samples vary more"]
 ```
+
+<!-- claim: guarantee-order -->
+For every T above 0 the order is cat > dog > fox > owl. Only a negative T, which APIs do not allow, would reverse it (T = −1 puts owl first, at 0.71).
 
 ## Limit states
 

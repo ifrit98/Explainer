@@ -88,6 +88,10 @@ It also:
 
 Returns the `values` of the explainer's `model.yaml`. A scene that reads its numbers and strings from the model cannot drift from it, and `explainer check` counts it as consistent by construction.
 
+### `self.claim(id)`
+
+Marks the moment the scene presents a claim from `model.yaml`. `explainer check` requires a mark for each claim the video should cover, and the review sheet shows a frame at each mark, so you can see what is on screen when the idea is presented.
+
 ### `self.predict(question)`
 
 A predict-first pause. It dims the frame, shows a "Pause and predict" card, speaks the question, and records a predict event. The MP4 gets a chapter at that point, and `Explainer.video()` in the web toolkit stops there and asks for a prediction before it continues.
@@ -176,7 +180,8 @@ Voice clips are cached in `video/media/voiceovers/`. A re-render synthesizes onl
 2. Read `review.png`: one frame at each line, bookmark, and predict pause, with the spoken text under it and layout issues in red. Each frame must show the evidence for its line.
 3. Fix every layout issue. The check does not see text crossing lines or arrows; look for that in the frames.
 4. Read `captions.srt` against the narration.
-5. For a published video, run the blind understanding test (the `verify` skill). Results so far: [`dijkstra`](../explainers/dijkstra/review/understanding.md).
+5. Check each claim frame: does the screen show the claim's case at that moment? In `dijkstra`, the narration said "D is ten" while the screen showed D = 8; only the frame showed it.
+6. For a published video, run the blind understanding test (the `verify` skill). Results so far: [`dijkstra`](../explainers/dijkstra/review/understanding.md).
 
 ## Pitfalls
 

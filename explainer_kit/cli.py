@@ -6,6 +6,7 @@
   explainer sync <slug>                 write model values and the web toolkit into the slug's HTML pages
   explainer render <slug> [--draft]     render the video: voice, captions, chapters, timeline, contact sheet
   explainer review <slug>               review sheet: a frame at each line, bookmark, and predict pause
+  explainer probe <slug>                prompt for a fresh agent that reads model.md and lists what it omits
   explainer quiz <slug> --rendering R   blind-test prompt for one rendering (R: prose, diagram, html, video)
   explainer quiz <slug> --rubric        expected answers, for scoring the blind test
   explainer voices / say "<text>"       list voices / audition a line
@@ -135,6 +136,12 @@ def cmd_quiz(args) -> None:
         sys.exit("give --rendering {prose,diagram,html,video} or --rubric")
 
 
+def cmd_probe(args) -> None:
+    from explainer_kit.review import probe_prompt
+
+    print(probe_prompt(args.slug))
+
+
 def cmd_frames(args) -> None:
     from explainer_kit.render import contact_sheet
 
@@ -205,6 +212,10 @@ def main() -> None:
     p.add_argument("--rendering", choices=["prose", "diagram", "html", "video"])
     p.add_argument("--rubric", action="store_true")
     p.set_defaults(fn=cmd_quiz)
+
+    p = sub.add_parser("probe", help="gap-finding prompt for the model, before rendering")
+    p.add_argument("slug")
+    p.set_defaults(fn=cmd_probe)
 
     p = sub.add_parser("frames", help="rebuild the contact sheet")
     p.add_argument("slug")

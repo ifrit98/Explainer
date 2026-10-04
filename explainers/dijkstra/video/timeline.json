@@ -1,5 +1,5 @@
 {
- "duration": 91.683,
+ "duration": 150.683,
  "events": [
   {
    "kind": "voiceover",
@@ -27,10 +27,11 @@
   {
    "kind": "voiceover",
    "t": 9.867,
-   "duration": 15.203,
-   "text": "At the start, A has distance zero. Every other node has distance infinity. Then repeat two steps. First, settle the unsettled node with the smallest distance. Second, update its neighbors: if a path through it is shorter, keep the shorter distance.",
+   "duration": 20.617,
+   "text": "At the start, A has distance zero. Every other node has distance infinity. Then repeat two steps. First, settle the unsettled node with the smallest distance. Second, relax its edges. To relax an edge, check whether the path through the settled node is shorter. If it is, keep the shorter distance, and remember where it came from.",
    "bookmarks": {
-    "loop": 14.854
+    "loop": 14.854,
+    "relax": 22.354
    },
    "scene": "Dijkstra"
   },
@@ -42,144 +43,215 @@
    "scene": "Dijkstra"
   },
   {
+   "kind": "bookmark",
+   "t": 22.35,
+   "mark": "relax",
+   "issues": [],
+   "scene": "Dijkstra"
+  },
+  {
+   "kind": "claim",
+   "t": 22.35,
+   "id": "definition-relax",
+   "scene": "Dijkstra"
+  },
+  {
    "kind": "voiceover_end",
-   "t": 25.067,
+   "t": 30.483,
    "issues": [],
    "scene": "Dijkstra"
   },
   {
    "kind": "voiceover",
-   "t": 25.067,
+   "t": 30.483,
    "duration": 4.203,
    "text": "Settle A. From A, B is four away, and C is two away.",
    "bookmarks": {
-    "r0": 26.161,
-    "r1": 27.901
+    "r0": 31.577,
+    "r1": 33.317
    },
    "scene": "Dijkstra"
   },
   {
    "kind": "bookmark",
-   "t": 26.15,
+   "t": 31.567,
    "mark": "r0",
    "issues": [],
    "scene": "Dijkstra"
   },
   {
    "kind": "bookmark",
-   "t": 27.9,
+   "t": 33.317,
    "mark": "r1",
    "issues": [],
    "scene": "Dijkstra"
   },
   {
    "kind": "voiceover_end",
-   "t": 29.267,
+   "t": 34.683,
    "issues": [],
    "scene": "Dijkstra"
   },
   {
    "kind": "voiceover",
-   "t": 29.267,
+   "t": 34.683,
    "duration": 11.888,
    "text": "The smallest estimate is now C, at two. Settle C. Through C, B is two plus one: three. That is shorter than four, so B becomes three. D becomes ten, and E becomes twelve.",
    "bookmarks": {
-    "r0": 33.092,
-    "r1": 38.458,
-    "r2": 39.73
+    "r0": 38.509,
+    "r1": 43.875,
+    "r2": 45.146
    },
    "scene": "Dijkstra"
   },
   {
    "kind": "bookmark",
-   "t": 33.083,
+   "t": 38.5,
    "mark": "r0",
    "issues": [],
    "scene": "Dijkstra"
   },
   {
    "kind": "bookmark",
-   "t": 38.45,
+   "t": 43.867,
    "mark": "r1",
    "issues": [],
    "scene": "Dijkstra"
   },
   {
    "kind": "bookmark",
-   "t": 39.717,
+   "t": 45.133,
    "mark": "r2",
    "issues": [],
    "scene": "Dijkstra"
   },
   {
    "kind": "voiceover_end",
-   "t": 41.15,
+   "t": 46.567,
    "issues": [],
    "scene": "Dijkstra"
   },
   {
    "kind": "voiceover",
-   "t": 41.15,
-   "duration": 5.82,
-   "text": "Settle B, at three. Through B, D is three plus five: eight. Eight is shorter than ten.",
+   "t": 46.567,
+   "duration": 12.604,
+   "text": "This is why the algorithm settles the smallest estimate, and not the first node it reached. Had it settled B at four, as soon as A reached it, the answer would be wrong. The path through C costs two plus one, which is three.",
    "bookmarks": {
-    "r0": 42.662
+    "w": 51.851
    },
    "scene": "Dijkstra"
   },
   {
    "kind": "bookmark",
-   "t": 42.65,
+   "t": 51.85,
+   "mark": "w",
+   "issues": [],
+   "scene": "Dijkstra"
+  },
+  {
+   "kind": "claim",
+   "t": 51.85,
+   "id": "why-smallest",
+   "scene": "Dijkstra"
+  },
+  {
+   "kind": "voiceover_end",
+   "t": 59.167,
+   "issues": [],
+   "scene": "Dijkstra"
+  },
+  {
+   "kind": "voiceover",
+   "t": 59.867,
+   "duration": 15.459,
+   "text": "Settle B, at three. It is now final. Every unsettled estimate is at least three: D is ten, E is twelve, and F is infinity. Any other path to B must pass one of them, and no length is negative. So no other path can cost less than three.",
+   "bookmarks": {
+    "f": 62.873
+   },
+   "scene": "Dijkstra"
+  },
+  {
+   "kind": "bookmark",
+   "t": 62.867,
+   "mark": "f",
+   "issues": [],
+   "scene": "Dijkstra"
+  },
+  {
+   "kind": "claim",
+   "t": 62.867,
+   "id": "guarantee-final",
+   "scene": "Dijkstra"
+  },
+  {
+   "kind": "voiceover_end",
+   "t": 75.317,
+   "issues": [],
+   "scene": "Dijkstra"
+  },
+  {
+   "kind": "voiceover",
+   "t": 75.817,
+   "duration": 6.161,
+   "text": "Now relax B's edges. Through B, D is three plus five: eight. Eight is shorter than ten.",
+   "bookmarks": {
+    "r0": 77.658
+   },
+   "scene": "Dijkstra"
+  },
+  {
+   "kind": "bookmark",
+   "t": 77.65,
    "mark": "r0",
    "issues": [],
    "scene": "Dijkstra"
   },
   {
    "kind": "voiceover_end",
-   "t": 46.967,
+   "t": 81.967,
    "issues": [],
    "scene": "Dijkstra"
   },
   {
    "kind": "voiceover",
-   "t": 46.967,
+   "t": 81.967,
    "duration": 4.438,
    "text": "Settle D, at eight. E becomes ten, and F becomes fourteen.",
    "bookmarks": {
-    "r0": 48.58,
-    "r1": 49.833
+    "r0": 83.58,
+    "r1": 84.833
    },
    "scene": "Dijkstra"
   },
   {
    "kind": "bookmark",
-   "t": 48.567,
+   "t": 83.567,
    "mark": "r0",
    "issues": [],
    "scene": "Dijkstra"
   },
   {
    "kind": "bookmark",
-   "t": 49.817,
+   "t": 84.817,
    "mark": "r1",
    "issues": [],
    "scene": "Dijkstra"
   },
   {
    "kind": "voiceover_end",
-   "t": 51.4,
+   "t": 86.4,
    "issues": [],
    "scene": "Dijkstra"
   },
   {
    "kind": "predict",
-   "t": 51.4,
+   "t": 86.4,
    "question": "D is settled. Which node is settled next, and at what distance?",
    "scene": "Dijkstra"
   },
   {
    "kind": "voiceover",
-   "t": 51.4,
+   "t": 86.4,
    "duration": 5.671,
    "text": "Pause here and predict. D is settled. Which node is settled next, and at what distance?",
    "bookmarks": {},
@@ -187,36 +259,36 @@
   },
   {
    "kind": "voiceover_end",
-   "t": 57.067,
+   "t": 92.067,
    "issues": [],
    "scene": "Dijkstra"
   },
   {
    "kind": "voiceover",
-   "t": 60.067,
+   "t": 95.067,
    "duration": 5.799,
    "text": "E, at ten. It is the smallest unsettled estimate. Through E, F becomes thirteen.",
    "bookmarks": {
-    "r0": 63.923
+    "r0": 98.923
    },
    "scene": "Dijkstra"
   },
   {
    "kind": "bookmark",
-   "t": 63.917,
+   "t": 98.917,
    "mark": "r0",
    "issues": [],
    "scene": "Dijkstra"
   },
   {
    "kind": "voiceover_end",
-   "t": 65.85,
+   "t": 100.85,
    "issues": [],
    "scene": "Dijkstra"
   },
   {
    "kind": "voiceover",
-   "t": 65.85,
+   "t": 100.85,
    "duration": 3.166,
    "text": "Settle F, at thirteen. Every node is settled.",
    "bookmarks": {},
@@ -224,46 +296,157 @@
   },
   {
    "kind": "voiceover_end",
-   "t": 69.0,
+   "t": 104.0,
    "issues": [],
    "scene": "Dijkstra"
   },
   {
    "kind": "voiceover",
-   "t": 69.0,
-   "duration": 12.22,
-   "text": "Why is a settled distance final? Any other path must leave the settled nodes through an unsettled node, which is already at least as far. With no negative lengths, the rest of that path cannot make it shorter.",
-   "bookmarks": {},
-   "scene": "Dijkstra"
-  },
-  {
-   "kind": "voiceover_end",
-   "t": 81.217,
-   "issues": [],
-   "scene": "Dijkstra"
-  },
-  {
-   "kind": "voiceover",
-   "t": 81.217,
-   "duration": 8.977,
-   "text": "The edges that gave each final distance form the shortest-path tree. The shortest path to F is A, C, B, D, E, F. Its length is thirteen.",
+   "t": 104.0,
+   "duration": 12.421,
+   "text": "Each node remembers the neighbor that gave its final distance. Follow them back from F: E, D, B, C, and then A. So the shortest path to F is A, C, B, D, E, F. Its length is thirteen.",
    "bookmarks": {
-    "path": 85.41
+    "back": 107.663,
+    "path": 111.325
    },
    "scene": "Dijkstra"
   },
   {
    "kind": "bookmark",
-   "t": 85.4,
+   "t": 107.65,
+   "mark": "back",
+   "issues": [],
+   "scene": "Dijkstra"
+  },
+  {
+   "kind": "claim",
+   "t": 107.65,
+   "id": "mechanism-path",
+   "scene": "Dijkstra"
+  },
+  {
+   "kind": "bookmark",
+   "t": 111.317,
    "mark": "path",
    "issues": [],
    "scene": "Dijkstra"
   },
   {
    "kind": "voiceover_end",
-   "t": 90.183,
+   "t": 116.417,
    "issues": [],
    "scene": "Dijkstra"
+  },
+  {
+   "kind": "voiceover",
+   "t": 117.917,
+   "duration": 7.667,
+   "text": "Why must every length be zero or more? Here is a small graph with one negative edge, from C to B, of length minus two.",
+   "bookmarks": {
+    "g": 120.463
+   },
+   "scene": "NegativeEdge"
+  },
+  {
+   "kind": "bookmark",
+   "t": 120.45,
+   "mark": "g",
+   "issues": [],
+   "scene": "NegativeEdge"
+  },
+  {
+   "kind": "voiceover_end",
+   "t": 125.584,
+   "issues": [],
+   "scene": "NegativeEdge"
+  },
+  {
+   "kind": "voiceover",
+   "t": 125.584,
+   "duration": 4.225,
+   "text": "Settle A. From A, B is two away, and C is three away.",
+   "bookmarks": {
+    "c": 128.394
+   },
+   "scene": "NegativeEdge"
+  },
+  {
+   "kind": "bookmark",
+   "t": 128.384,
+   "mark": "c",
+   "issues": [],
+   "scene": "NegativeEdge"
+  },
+  {
+   "kind": "voiceover_end",
+   "t": 129.8,
+   "issues": [],
+   "scene": "NegativeEdge"
+  },
+  {
+   "kind": "voiceover",
+   "t": 129.8,
+   "duration": 5.342,
+   "text": "B has the smallest estimate, so the algorithm settles B at two. It is now final.",
+   "bookmarks": {},
+   "scene": "NegativeEdge"
+  },
+  {
+   "kind": "voiceover_end",
+   "t": 135.134,
+   "issues": [],
+   "scene": "NegativeEdge"
+  },
+  {
+   "kind": "voiceover",
+   "t": 135.134,
+   "duration": 10.979,
+   "text": "Then it settles C, at three. Through C, B costs three minus two: one. That is shorter, but B is already final. The algorithm answers two. The true distance is one.",
+   "bookmarks": {
+    "late": 136.977,
+    "wrong": 142.646
+   },
+   "scene": "NegativeEdge"
+  },
+  {
+   "kind": "bookmark",
+   "t": 136.967,
+   "mark": "late",
+   "issues": [],
+   "scene": "NegativeEdge"
+  },
+  {
+   "kind": "bookmark",
+   "t": 142.634,
+   "mark": "wrong",
+   "issues": [],
+   "scene": "NegativeEdge"
+  },
+  {
+   "kind": "claim",
+   "t": 142.634,
+   "id": "guarantee-final",
+   "scene": "NegativeEdge"
+  },
+  {
+   "kind": "voiceover_end",
+   "t": 146.1,
+   "issues": [],
+   "scene": "NegativeEdge"
+  },
+  {
+   "kind": "voiceover",
+   "t": 146.1,
+   "duration": 3.584,
+   "text": "With negative lengths, use the Bellman-Ford algorithm instead.",
+   "bookmarks": {},
+   "scene": "NegativeEdge"
+  },
+  {
+   "kind": "voiceover_end",
+   "t": 149.684,
+   "issues": [],
+   "scene": "NegativeEdge"
   }
  ]
 }

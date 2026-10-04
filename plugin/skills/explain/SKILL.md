@@ -15,7 +15,10 @@ Read `references/principles.md` first. It holds the rules that apply to every ex
 2. Choose the stage (Step 2), then scaffold: `explainer new <slug> --stage <stages>`. This creates `explainers/<slug>/model.md`, `model.yaml`, and the chosen renderings from templates.
 3. Fill `model.md`: entities, relationships, causal chain, quantities, alternative states, epistemic status, confusion points, representation decision.
 4. Fill `model.yaml`: every number a rendering will show goes in `values`. Add `require` for values each rendering must show, and 2–3 `quiz` items (question, expected answer, likely misconception) for the blind test.
-5. Reduce the model. Remove each entity that the explanation does not need.
+5. Fill the completeness sections of `model.md`: **Why this form** (each operation's simplest alternative failing, with numbers), **Concrete cases** (each guarantee holding and breaking; each mechanism worked), **Terms**, **Scope** (principles §10).
+6. **Probe.** Run `explainer probe <slug>` and give the prompt, unchanged, to a fresh subagent. Recompute every number it suggests. Turn each finding into a claim, a Scope entry, or nothing.
+7. Record the ideas as `claims` in `model.yaml` (`why`, `guarantee`, `mechanism`, `definition`, …) with their required fields. Add `ask` to the claims a learner most needs; they become blind-test questions.
+8. Reduce the model. Remove each entity that the explanation does not need.
 
 For a Stage 1 answer in chat, do this step internally and skip the files.
 
@@ -38,7 +41,7 @@ Load the playbook for the medium. Render only what is in the model.
 | 3 Interactive | `references/html.md` + `references/diagrams.md` | `index.html` from the template, on the web toolkit; load `artifact-design` |
 | 4 Animation | `references/video.md` + `references/diagrams.md` | follow the `video` skill |
 
-Use the exact entity names from the model in every label, caption, heading, and narration line. Scenes read values with `load_model(__file__)`. Pages read `Explainer.model`, filled by `explainer sync <slug>`.
+Use the exact entity names from the model in every label, caption, heading, and narration line. Present each claim with its case (the alternative failing, the counterexample, the worked numbers), and mark it: `<!-- claim: id -->`, `data-claim="id"`, or `self.claim("id")`. Scenes read values with `load_model(__file__)`. Pages read `Explainer.model`, filled by `explainer sync <slug>`.
 
 ## Step 4 — Progressive disclosure and predict-first
 

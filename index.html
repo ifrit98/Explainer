@@ -131,7 +131,7 @@ question -> model ─┼─ 2 · diagram
         <source src="explainers/softmax-temperature/video/out.mp4" type="video/mp4">
         <track kind="captions" src="explainers/softmax-temperature/video/captions.vtt" srclang="en" label="English">
       </video>
-      <figcaption><strong>Softmax temperature</strong> · 73 s. The distance between two dots sets their probability ratio, so the viewer sees why low T sharpens and high T flattens.</figcaption>
+      <figcaption><strong>Softmax temperature</strong> · 92 s. The distance between two dots sets their probability ratio, so the viewer sees why low T sharpens and high T flattens, and why softmax needs exp: dividing by the sum gives owl −0.4.</figcaption>
     </figure>
     <figure>
       <video controls preload="metadata" playsinline poster="docs/assets/ste-80-video.png">
@@ -152,7 +152,7 @@ question -> model ─┼─ 2 · diagram
         <source src="explainers/dijkstra/video/out.mp4" type="video/mp4">
         <track kind="captions" src="explainers/dijkstra/video/captions.vtt" srclang="en" label="English">
       </video>
-      <figcaption><strong>Dijkstra's shortest paths</strong> · 92 s. The run from the model, replayed: settle the smallest estimate, relax its edges. Pauses to ask which node settles next.</figcaption>
+      <figcaption><strong>Dijkstra's shortest paths</strong> · 2 min 31 s. The run from the model, replayed: why the smallest estimate settles first, why a settled distance is final, and one negative edge that breaks it.</figcaption>
     </figure>
   </div>
   <p class="muted">Narration and animation stay in sync through bookmarks in the script. The local voice service synthesizes each bookmark segment separately, so every bookmark time is exact, with no Whisper pass.</p>
