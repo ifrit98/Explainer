@@ -1,5 +1,10 @@
 # Changelog
 
+## Unreleased
+
+- **Every example has a `narrative.md` and a v0.6.0 cold read.** The backfill for git-bisect, git-objects, cdn-request, and ste-80 found blocking problems in all four, two of them errors: the git-bisect remedy for a bug that comes and goes could not find the bug in its own example, and the CDN page said "faster" over bars that showed the CDN slower. Fixed, with records in each `review/understanding.md`. ste-80 re-rendered (16 → 15 → 13 → 9 words, with the count now honest; 83 s).
+- **GitHub page:** the README and the landing page lead with first-principles answers and the chat eval, with an interactive page next to a video at the top; repository description and topics updated.
+
 ## 0.6.0 — 2026-10-04
 
 Rebalance: the reader's effort has two sources, omission and excess, and the checks now push against both. From v0.3 to v0.5 every check caught omission and none caught excess, so every review round added words (principles 947 → 1,802 words, softmax prose 412 → 1,234, odd-squares video 59 s → 4 min 21 s).

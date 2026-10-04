@@ -173,12 +173,12 @@ main.ex { max-width: 980px; margin: 0 auto; padding-inline: 20px; padding-block:
 <header>
   <span class="ex-eyebrow">Explainer · Stage 3 · interactive</span>
   <h1>Why a CDN makes a request faster</h1>
-  <p class="ex-lede">A new HTTPS request needs several round trips before the first byte arrives. A CDN moves those round trips onto a short path. The long trip to the origin happens once, only on a cache miss, or not at all.</p>
+  <p class="ex-lede">A new HTTPS request needs 3 round trips before the first byte arrives, and each round trip costs time in proportion to distance. A CDN moves those round trips onto the short path to a nearby edge server. The long trip to the origin happens once on a cache miss, and not at all on a hit.</p>
 </header>
 
 <section aria-labelledby="h-path">
   <span class="ex-eyebrow">Level 1 · What it is</span>
-  <h2 id="h-path">Three servers, two distances</h2>
+  <h2 id="h-path">Three machines, two distances</h2>
   <div class="ex-panel">
     <div class="path-wrap"><svg class="path-svg" viewBox="0 0 640 120" role="img" aria-label="Client, edge server 300 km away, origin server 6,000 km away">
       <line class="link" x1="70" y1="60" x2="250" y2="60"/>
@@ -197,12 +197,14 @@ main.ex { max-width: 980px; margin: 0 auto; padding-inline: 20px; padding-block:
 <section aria-labelledby="h-predict">
   <span class="ex-eyebrow">Predict first</span>
   <h2 id="h-predict">Start with no CDN</h2>
+  <p>What a new request costs: a new connection needs 3 round trips (TCP, TLS 1.3, then the request itself). Light in fiber goes 100 km and back in about 1 ms. The origin takes about 20 ms to answer. Without a CDN, the client talks to the origin directly; this page takes that distance to be the same as the edge-to-origin distance.</p>
   <div id="predict-1"></div>
 </section>
 
 <section aria-labelledby="h-instrument" data-after="predict-1">
   <span class="ex-eyebrow">The instrument</span>
   <h2 id="h-instrument">Three paths for the same request</h2>
+  <p>With a CDN, the handshakes and the request go to the edge. On a miss, the edge asks the origin over a connection it keeps open: one long round trip, with no new handshakes. Move the edge closer or farther, and watch the hit and miss rows.</p>
   <div class="ex-panel">
     <div class="sliders">
       <div id="s-ue"></div>
@@ -251,7 +253,8 @@ main.ex { max-width: 980px; margin: 0 auto; padding-inline: 20px; padding-block:
     <div class="ex-card"><span class="ex-tag fact">fact</span><strong>Light in fiber is slower than in vacuum.</strong><p class="ex-muted">About two thirds of its vacuum speed, so 100 km of fiber costs about 1 ms per round trip.</p></div>
     <div class="ex-card"><span class="ex-tag assumption">assumption</span><strong>Straight paths.</strong><p class="ex-muted">Real routes are longer than the straight line, so real round trips take longer.</p></div>
     <div class="ex-card"><span class="ex-tag estimate">estimate</span><strong>Processing times.</strong><p class="ex-muted">1 ms at the edge and 20 ms at the origin are round numbers, not measurements.</p></div>
-    <div class="ex-card"><span class="ex-tag assumption">simplification</span><strong>No DNS, bandwidth, or session resumption.</strong><p class="ex-muted">TLS 1.3 with resumption can save a round trip. Large files also depend on bandwidth.</p></div>
+    <div class="ex-card"><span class="ex-tag assumption">simplification</span><strong>A new connection for each request.</strong><p class="ex-muted">A request on a connection that is already open (keep-alive, HTTP/2) needs 1 round trip, not 3. TLS 1.3 resumption can also save a round trip.</p></div>
+    <div class="ex-card"><span class="ex-tag assumption">assumption</span><strong>The origin is as far from the client as from the edge.</strong><p class="ex-muted">So the no-CDN time depends only on the edge-to-origin distance. DNS and bandwidth are left out; large files also depend on bandwidth.</p></div>
   </div>
 </section>
 
@@ -261,7 +264,7 @@ main.ex { max-width: 980px; margin: 0 auto; padding-inline: 20px; padding-block:
   <ol class="ex-summary">
     <li>A new HTTPS request needs 3 round trips, and each one costs time in proportion to distance.</li>
     <li>A CDN puts those round trips on the short path to a nearby edge.</li>
-    <li>A miss adds one long round trip on an open connection, so it is still faster than no CDN.</li>
+    <li>A miss adds one long round trip on an open connection, so it is still faster than no CDN, as long as the edge is much closer than the origin.</li>
   </ol>
 </section>
 
@@ -513,8 +516,11 @@ const Explainer = (() => {
     });
     const [none, miss, hit] = totals;
     document.getElementById("verdict").textContent =
-      `A hit is ${(none / hit).toFixed(0)}× faster than no CDN; a miss is ${(none / miss).toFixed(1)}× faster.` +
-      (ue.get() > eo.get() / 3 ? " The edge is not much closer than the origin here, so the gain is small." : "");
+      [["A hit", hit], ["a miss", miss]].map(([n, t]) => t < none
+        ? `${n} is ${(none / t).toFixed(t * 10 > none ? 1 : 0)}× faster than no CDN`
+        : `${n} is slower than no CDN`).join("; ").replace(/^a/, "A") + "." +
+      (hit >= none || miss >= none ? " The edge is not closer than the origin here, so the CDN adds distance."
+        : ue.get() > eo.get() / 3 ? " The edge is not much closer than the origin here, so the gain is small." : "");
     document.getElementById("svg-ue").textContent = fmtKm(ue.get());
     document.getElementById("svg-eo").textContent = fmtKm(eo.get());
     document.getElementById("law").innerHTML =

@@ -6,22 +6,20 @@
 [![Live site](https://img.shields.io/badge/live-ifrit98.github.io%2FExplainer-2F5F8F)](https://ifrit98.github.io/Explainer/)
 [![Claude Code plugin](https://img.shields.io/badge/Claude%20Code-plugin-D97757)](#install)
 
-**An explanation compiler for Claude Code.** Ask a question. The agent builds a small semantic model of the subject, writes the path a first-time reader takes through it, and compiles both into the simplest representation that keeps the important structure: controlled prose, a diagram, an interactive page, or a 3Blue1Brown-style video with synchronized narration. Then it checks the result against the model, and has fresh agents read it cold.
-
-The video pipeline runs on one machine: Manim for animation, a local Kokoro voice, and no API keys.
+**An explanation compiler for Claude Code.** Ask how something works, and get the explanation that costs you the least effort to understand. Usually that is a short answer in precise, plain prose, built from first principles. When the structure needs it, the answer becomes a diagram, an interactive page, or a narrated 3Blue1Brown-style video. Behind each artifact sits a small model of the subject, and every rendering is checked against it, both for what it leaves out and for what it says that you did not need.
 
 <table>
 <tr>
+<td width="50%"><a href="https://ifrit98.github.io/Explainer/explainers/attention/"><img src="docs/assets/attention-interactive.png" alt="Interactive self-attention page: the word 'it' attends to 'animal' with weight 0.808. A slider sets what 'it' looks for, from animate to place; checkboxes remove one part of attention at a time."></a></td>
 <td width="50%"><a href="explainers/softmax-temperature/video/out.mp4"><img src="docs/assets/softmax-temperature.gif" alt="As temperature T falls from 1 to 0.5, four dots on a z/T number line spread apart and the cat bar grows from 0.61 to 0.84; as T rises to 2 the dots gather and the bars flatten."></a></td>
-<td width="50%"><a href="explainers/odd-squares/video/out.mp4"><img src="docs/assets/odd-squares.gif" alt="A 5 by 5 square of colored tiles. Braces mark the L around the 4 by 4 square as 4 + 4 + 1 = 9, then a faint next L around the 5 by 5 square as 5 + 5 + 1 = 11."></a></td>
 </tr>
 <tr>
-<td><sub><a href="explainers/softmax-temperature/"><b>Softmax temperature</b></a>: one value, T, drives every object. <a href="explainers/softmax-temperature/video/out.mp4">Video with narration, 93 s</a>.</sub></td>
-<td><sub><a href="explainers/odd-squares/"><b>Odd numbers make squares</b></a>: compiled beat by beat from a <a href="explainers/odd-squares/narrative.md">narrative</a>. <a href="explainers/odd-squares/video/out.mp4">Video with narration, 4 min 21 s</a>.</sub></td>
+<td><sub><a href="https://ifrit98.github.io/Explainer/explainers/attention/"><b>Self-attention</b></a> (interactive): remove one part at a time (the content weights, a separate query, √d, the mask) and see what breaks.</sub></td>
+<td><sub><a href="explainers/softmax-temperature/"><b>Softmax temperature</b></a> (video, 93 s): one value, T, drives every object. The voice is local, and no API keys are needed.</sub></td>
 </tr>
 </table>
 
-**[Live site: videos that stop for your prediction, and interactive pages](https://ifrit98.github.io/Explainer/)** · Inspired by [Andrej Karpathy's post](https://x.com/karpathy/status/2105819303471976479) on understanding LLM output through richer formats.
+**[Live site: interactive pages, and videos that stop for your prediction](https://ifrit98.github.io/Explainer/)** · Inspired by [Andrej Karpathy's post](https://x.com/karpathy/status/2105819303471976479) on understanding LLM output through richer formats.
 
 ## Install
 
@@ -41,6 +39,18 @@ Then ask:
 ```
 
 The plugin adds an `explainer` command that runs the toolkit through [uv](https://docs.astral.sh/uv/). Stages 1–3 need nothing else. Video also needs Cairo, Pango, and FFmpeg (`brew install cairo pango pkgconf ffmpeg`) and a one-time `explainer setup` for the local voice. Details: [getting started](docs/getting-started.md).
+
+## Most questions need no artifact
+
+The principles also shape plain chat answers: answer first, give the mechanism and why it has its form, add one case with numbers, then stop. `explainer eval chat` measures that. It asks six questions about phenomena (why ice floats, why TCP starts slowly, how a wing makes lift, …), answers each one under three system prompts, and has a fresh model grade them blind:
+
+| System prompt | Score /10 | Words | Passages the reader did not need | Ranked best |
+|---|---|---|---|---|
+| none | 6.3 | 399 | 4.7 per answer | 0 of 6 |
+| v0.5.0 principles | 7.2 | 544 | 5.0 | 1 of 6 |
+| current principles | **7.8** | **292** | **1.5** | **5 of 6** |
+
+The first run showed that the principles made answers 50% longer. The answers carried Scope sections, status tags on textbook facts, and extra cases. One rule fixed it: a chat answer is not a small artifact. [Evals](docs/evals.md).
 
 ## How it works
 
@@ -74,6 +84,8 @@ flowchart LR
 
 Every rendering is compiled from the same model and narrative, so prose, diagram, page, and video use the same terms and numbers.
 
+The checks push in both directions. A fresh agent probes the model for omissions. A cold read follows each rendering in order, as the audience the model names, and reports both what that reader was not given and what they did not need. `explainer check` holds every number and term to the model, and holds each rendering to a length budget. The process scales with the stakes: an answer in chat, a quick artifact with one check, or a published explainer with the full pipeline.
+
 ## Examples
 
 | | |
@@ -81,11 +93,11 @@ Every rendering is compiled from the same model and narrative, so prose, diagram
 | [![Softmax temperature interactive page](docs/assets/softmax-interactive.png)](https://ifrit98.github.io/Explainer/explainers/softmax-temperature/) | **[Softmax temperature](explainers/softmax-temperature/)**: one model rendered as [prose](explainers/softmax-temperature/explanation.md), [diagrams](explainers/softmax-temperature/diagram.md), an [interactive page](https://ifrit98.github.io/Explainer/explainers/softmax-temperature/), and a [narrated video](explainers/softmax-temperature/video/out.mp4). Why exp (divide by the sum instead and owl gets −0.4), why divide by T, and entropy as average surprise. |
 | [![Odd numbers build squares](docs/assets/odd-squares-video.png)](explainers/odd-squares/video/out.mp4) | **[Odd numbers make squares](explainers/odd-squares/)** (proof): each odd number is an L that grows the square by one, and each L is two bigger than the last. The reference for the narrative pass: [narrative](explainers/odd-squares/narrative.md), [cold-read record](explainers/odd-squares/review/understanding.md). |
 | [![Dijkstra mid-run](docs/assets/dijkstra-video.png)](explainers/dijkstra/video/out.mp4) | **[Dijkstra's shortest paths](explainers/dijkstra/)** (algorithm): the run in `model.yaml`, replayed. Why the smallest estimate settles first, why a settled estimate is final, one step at a time, and a negative edge that breaks it. [Blind-test results](explainers/dijkstra/review/understanding.md). |
-| **[Why a CDN makes a request faster](https://ifrit98.github.io/Explainer/explainers/cdn-request/)** (interactive) | Two distance sliders and three paths side by side (no CDN, miss, hit). The instrument opens only after you predict the no-CDN time. |
-| [![STE-80 video frame](docs/assets/ste-80-video.png)](explainers/ste-80/video/out.mp4) | **[STE-80 rewrite](explainers/ste-80/)** (video): one manual sentence through three Simplified Technical English rules, 16 → 9 words. |
+| **[Why a CDN makes a request faster](https://ifrit98.github.io/Explainer/explainers/cdn-request/)** (interactive) | Three round trips, priced by distance: predict the no-CDN time from the model, then compare no CDN, a miss, and a hit while you move the edge. [Cold read](explainers/cdn-request/review/understanding.md). |
+| [![STE-80 video frame](docs/assets/ste-80-video.png)](explainers/ste-80/video/out.mp4) | **[STE-80 rewrite](explainers/ste-80/)** (video, 83 s): one manual sentence through three Simplified Technical English rules, 16 → 15 → 13 → 9 words, and what each rule changes for the reader. [Cold read](explainers/ste-80/review/understanding.md). |
 | **[Self-attention](https://ifrit98.github.io/Explainer/explainers/attention/)** (interactive) | One token, four levels. Remove one part at a time (content weights, a separate query, √d, the causal mask) and see what breaks, with every number from the model. |
 | **[Why the sky is blue](explainers/sky-blue/explanation.md)** (prose + [diagram](explainers/sky-blue/diagram.md)) | A phenomenon from first principles in 650 words: scattered power goes with the electron's acceleration squared, so blue scatters 5.86 times more than red; losses multiply along a sunset's 38 air masses. |
-| **[git bisect](explainers/git-bisect/explanation.md)** (prose) · **[git objects](explainers/git-objects/diagram.md)** (diagram) | The router at work: a procedure gets numbered steps; pure topology gets one diagram. |
+| **[git bisect](explainers/git-bisect/explanation.md)** (prose) · **[git objects](explainers/git-objects/diagram.md)** (diagram) | The router at work: a procedure gets numbered steps; pure topology gets one diagram. Their cold reads found a remedy that could not work and a missing "because" ([bisect](explainers/git-bisect/review/understanding.md), [objects](explainers/git-objects/review/understanding.md)). |
 
 All examples, with the reason for each stage: [`explainers/`](explainers/).
 

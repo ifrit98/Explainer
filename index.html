@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Explainer</title>
-<meta name="description" content="An explanation compiler for Claude Code: one semantic model, rendered as controlled prose, diagrams, interactive pages, or 3Blue1Brown-style videos with local voiceover.">
+<meta name="description" content="An explanation compiler for Claude Code: first-principles explanations in controlled prose, diagrams, interactive pages, or 3Blue1Brown-style videos, checked for what they leave out and for what they say that you did not need.">
 <meta property="og:title" content="Explainer">
 <meta property="og:description" content="One semantic model, compiled into prose, diagrams, interactive pages, or narrated 3b1b-style videos.">
 <meta property="og:image" content="https://ifrit98.github.io/Explainer/docs/assets/social-preview.png">
@@ -105,7 +105,7 @@ footer { font-size: 0.85rem; color: var(--muted); border-top: 1px solid var(--ru
 <header>
   <span class="eyebrow">An explanation compiler for Claude Code</span>
   <h1>Explainer</h1>
-  <p class="lede">Ask a question. The agent builds a small model of the subject, then renders it in the simplest form that keeps the important structure: controlled prose, a diagram, an interactive page, or a narrated animation.</p>
+  <p class="lede">Ask how something works, and get the explanation that costs you the least effort: usually a short answer in precise, plain prose, built from first principles; a diagram, an interactive page, or a narrated animation when the structure needs one. Every artifact is checked against a small model of the subject, for what it leaves out and for what it says that you did not need.</p>
   <p class="muted">Inspired by <a href="https://x.com/karpathy/status/2105819303471976479">Andrej Karpathy's post</a> on the ladder from STE-style writing to diagrams, HTML, and 3b1b-style explainer videos.</p>
   <div class="actions">
     <a class="btn primary" href="https://github.com/ifrit98/Explainer">View on GitHub</a>
@@ -140,6 +140,23 @@ then: check · review sheet · cold read · blind test</pre>
   </div>
 </section>
 
+<section aria-labelledby="h-both">
+  <span class="eyebrow">Omission and excess</span>
+  <h2 id="h-both">Checked in both directions</h2>
+  <p>An explanation costs the reader effort in two ways: what it leaves out, and what it says that the reader did not need. A fresh agent reads every published explainer cold, as its stated audience, and reports both. <code>explainer check</code> holds every number to the model and every rendering to a length budget. In chat, the same principles give shorter, better answers. <code>explainer eval chat</code> graded six answers about phenomena blind (score out of 10; unneeded passages per answer):</p>
+  <div class="stages-wrap">
+    <table class="stages">
+      <thead><tr><th>Principles</th><th>Score</th><th>Words</th><th>Unneeded</th></tr></thead>
+      <tbody>
+        <tr><td>none</td><td>6.3</td><td>399</td><td>4.7</td></tr>
+        <tr><td>v0.5.0</td><td>7.2</td><td>544</td><td>5.0</td></tr>
+        <tr><td>current</td><td><strong>7.8</strong></td><td><strong>292</strong></td><td><strong>1.5</strong></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="muted">The cold reads also found real errors: a Dijkstra argument that said "reaching D costs at least ten" seconds before D became eight, and a git bisect remedy that could not find the bug it was meant to find. <a href="https://github.com/ifrit98/Explainer/blob/main/docs/evals.md">Evals</a> · <a href="https://github.com/ifrit98/Explainer/blob/main/docs/concepts.md#omission-and-excess">Concepts</a></p>
+</section>
+
 <section aria-labelledby="h-videos">
   <span class="eyebrow">Stage 4 · Manim + local Kokoro voice · no API keys</span>
   <h2 id="h-videos">Videos</h2>
@@ -154,7 +171,7 @@ then: check · review sheet · cold read · blind test</pre>
       <div class="player" data-src="explainers/ste-80/video/out.mp4" data-poster="docs/assets/ste-80-video.png" data-captions="explainers/ste-80/video/captions.vtt" data-timeline="explainers/ste-80/video/timeline.json">
         <noscript><a href="explainers/ste-80/video/out.mp4">Watch the video (MP4)</a></noscript>
       </div>
-      <figcaption><strong>STE-80 rewrite</strong> · 57 s. One manual sentence through three Simplified Technical English rules, 16 → 9 words. Kept words move; removed words fade. The narration is in STE.</figcaption>
+      <figcaption><strong>STE-80 rewrite</strong> · 83 s. One manual sentence through three Simplified Technical English rules, 16 → 9 words. Kept words move; removed words fade. The narration is in STE.</figcaption>
     </figure>
     <figure>
       <div class="player" data-src="explainers/odd-squares/video/out.mp4" data-poster="docs/assets/odd-squares-video.png" data-captions="explainers/odd-squares/video/captions.vtt" data-timeline="explainers/odd-squares/video/timeline.json">

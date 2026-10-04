@@ -1,9 +1,9 @@
 # Find the commit that introduced a bug
 
-> Stage 1 (controlled prose), rendered from [`model.md`](model.md). Routing: a linear procedure → numbered steps. No diagram, page, or video is needed.
+<!-- Stage 1, rendered from model.md: a linear procedure, so numbered steps. -->
 
 <!-- claim: why-halving -->
-`git bisect` finds the first bad commit by binary search. Each test halves the range of suspect commits. For 1,000 commits you test about 10 times: 1,000 → 500 → 250 → 125 → 63 → 32 → 16 → 8 → 4 → 2 → 1. Testing the commits one by one could take 1,000 tests.
+`git bisect` finds the first bad commit, the earliest commit where the bug is present, by binary search. You test the commit halfway between a good one and a bad one. If it is bad, the first bad commit is at or before it; if it is good, the first bad commit is after it. Either way half the suspects are gone. For 1,000 commits you test about 10 times: 1,000 → 500 → 250 → 125 → 63 → 32 → 16 → 8 → 4 → 2 → 1, against up to 1,000 tests one by one.
 
 ## Before you start
 
@@ -15,7 +15,7 @@ Find one commit where the bug is absent (*good*) and one where it is present (*b
    ```bash
    git bisect start
    ```
-2. Mark the current commit as bad:
+2. Mark the current commit as bad (or name a bad commit: `git bisect bad <commit>`):
    ```bash
    git bisect bad
    ```
@@ -47,7 +47,7 @@ git bisect skip
 
 ## Automate the test
 
-Give git a command. Git runs it at each step and marks the result from the exit code.
+Give git a command. Git runs it at each step and marks the result from the exit code. `git bisect start <bad> <good>` does steps 1–3 in one line. The command must fail only for this bug: a test that fails for another reason marks a commit bad.
 
 ```bash
 git bisect start HEAD v2.3.0
@@ -65,4 +65,8 @@ git bisect run npm test
 <!-- claim: guarantee-first-bad -->
 Bisect assumes that the bug appears once and stays. If the bug comes and goes, bisect can name the wrong commit.
 
-Example: across 1,000 commits, the bug is present in commits 300–400, gone, and back from 900. The first test, at 500, is good. Bisect now searches only 500–1,000 and names 900. The bug first appeared at 300. If you suspect this, test a few commits before the named one by hand.
+Example: across 1,000 commits, the bug is present in commits 300–400, gone, and back from 900. The first test, at 500, is good. Bisect now searches only 500–1,000 and names 900. The bug first appeared at 300. Testing next to 900 does not reveal this: those commits are good. If you suspect it, test a few commits spread across the earlier history. In the example, 350 is bad; bisect again between your good commit and 350, and it names 300.
+
+## In short
+
+Each good or bad mark rules out half the suspects, because a bug that appears once stays. About 10 tests find the first bad commit among 1,000.

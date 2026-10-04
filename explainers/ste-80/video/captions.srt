@@ -1,63 +1,91 @@
 1
-00:00:00,000 --> 00:00:04,568
+00:00:00,000 --> 00:00:04,218
 This is STE-80. It is a writing style for technical text.
 
 2
-00:00:04,668 --> 00:00:08,429
-It uses most of the rules of ASD-STE100.
+00:00:04,316 --> 00:00:09,412
+It uses about eighty percent of the rules of ASD-STE100, Simplified
 
 3
-00:00:09,516 --> 00:00:13,722
-Here is a typical sentence from a manual. It has sixteen words.
+00:00:09,512 --> 00:00:14,380
+Technical English, a standard for aircraft maintenance manuals.
 
 4
-00:00:13,822 --> 00:00:15,578
-Some of the words do not help the reader.
+00:00:14,480 --> 00:00:18,436
+Manuals are read under time pressure, often in a second language, so
 
 5
-00:00:15,666 --> 00:00:20,136
-Rule one. Use simple words. Replenished becomes full.
+00:00:18,536 --> 00:00:19,670
+every word must help.
 
 6
-00:00:20,236 --> 00:00:23,866
-Prior to becomes before. Commencing becomes starting.
+00:00:20,766 --> 00:00:24,689
+Here is a typical sentence from a manual. It has sixteen words:
 
 7
-00:00:23,966 --> 00:00:27,586
-The length does not change. But each word is easier to read.
+00:00:24,789 --> 00:00:28,342
+the orange bar counts them. Some of the words do not help the reader.
 
 8
-00:00:28,183 --> 00:00:31,343
-Rule two. Give the instruction directly.
+00:00:28,433 --> 00:00:32,903
+Rule one. Use simple words. The words in red go.
 
 9
-00:00:31,443 --> 00:00:34,978
-Remove the frame around the instruction, and talk to the reader.
+00:00:33,003 --> 00:00:36,504
+Replenished becomes full. Prior to becomes before.
 
 10
-00:00:35,078 --> 00:00:37,048
-The sentence now has thirteen words.
+00:00:36,604 --> 00:00:38,390
+Commencing becomes starting.
 
 11
-00:00:37,633 --> 00:00:40,494
-Rule three. Use a concrete verb.
+00:00:38,490 --> 00:00:41,654
+Only one word goes, but each word is easier to read.
 
 12
-00:00:40,594 --> 00:00:43,575
-The words make sure and is full describe a state.
+00:00:42,250 --> 00:00:45,410
+Rule two. Give the instruction directly.
 
 13
-00:00:43,675 --> 00:00:47,603
-The verb fill names the action. Operation becomes machine.
+00:00:45,510 --> 00:00:49,836
+Remove the frame, it is imperative that the operator ensures, and tell
 
 14
-00:00:47,703 --> 00:00:49,523
-The sentence now has nine words.
+00:00:49,936 --> 00:00:54,250
+the reader what to do: make sure, before you start. Thirteen words.
 
 15
-00:00:50,116 --> 00:00:54,108
-Sixteen words became nine. The instruction did not change.
+00:00:55,166 --> 00:00:58,028
+Rule three. Use a concrete verb.
 
 16
-00:00:54,208 --> 00:00:55,559
-The reader does less work.
+00:00:58,128 --> 00:01:01,556
+Make sure that it is full asks the reader to check a result.
+
+17
+00:01:01,656 --> 00:01:03,549
+The verb fill names the action.
+
+18
+00:01:03,649 --> 00:01:07,227
+And the vague noun operation becomes the machine you start.
+
+19
+00:01:07,327 --> 00:01:08,272
+Nine words.
+
+20
+00:01:09,266 --> 00:01:11,180
+Sixteen words became nine.
+
+21
+00:01:11,280 --> 00:01:15,030
+The reader still fills the reservoir before starting the machine, with
+
+22
+00:01:15,130 --> 00:01:17,800
+less work to read it. Full STE has more rules:
+
+23
+00:01:17,900 --> 00:01:21,962
+short sentences, one meaning per word, and an approved dictionary.

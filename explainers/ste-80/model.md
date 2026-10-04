@@ -40,7 +40,7 @@ each rule removes one source of decoding work  →  same instruction, fewer word
 
 ## Quantities
 
-16 → 16 → 13 → 9 words. Rule 1 does not shorten the sentence; it makes the words easier. Rules 2 and 3 shorten it.
+16 → 15 → 13 → 9 words. Rule 1 removes one word (prior to → before); its point is easier words. Rules 2 and 3 shorten the sentence.
 
 ## Epistemic status
 

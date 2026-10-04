@@ -4,7 +4,7 @@ values:
   example_steps: 10            # about log2(1000)
   exit_codes: {good: 0, skip: 125, bad_min: 1, bad_max: 127}
   halving: [1000, 500, 250, 125, 63, 32, 16, 8, 4, 2, 1]
-  flaky_example: {present: [300, 400], back_from: 900, first_test: 500, named: 900, first_bad: 300}
+  flaky_example: {present: [300, 400], back_from: 900, first_test: 500, named: 900, first_bad: 300, spot_check: 350}
 
 claims:
   - id: why-halving

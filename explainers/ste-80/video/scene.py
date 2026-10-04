@@ -24,11 +24,22 @@ class Ste80(ExplainerScene):
         # 1 — What is STE-80?
         title = label("STE-80", size=80, color=Role.ENTITY)
         subtitle = label("a writing style for technical text", size=32).next_to(title, DOWN, buff=0.35)
-        with self.voiceover(text="This is STE-80. It is a writing style for technical text. "
-                                 "It uses most of the rules of ASD-STE100.") as tracker:
+        with self.voiceover(text="This is STE-80. It is a writing style for technical text.") as tracker:
             self.play(Write(title), run_time=1.5)
             self.play(FadeIn(subtitle, shift=UP * 0.2))
-        self.play(title.animate.scale(0.4).to_corner(UL), FadeOut(subtitle))
+        source = VGroup(label("ASD-STE100: Simplified Technical English", size=30),
+                        label("a standard for aircraft maintenance manuals", size=26, color=Role.MUTED),
+                        ).arrange(DOWN, buff=0.18).next_to(subtitle, DOWN, buff=0.6)
+        readers = label("read under time pressure, often in a second language", size=26, color=Role.FOCUS
+                        ).next_to(source, DOWN, buff=0.45)
+        with self.voiceover(text="It uses about eighty percent of the rules of ASD-STE100, Simplified Technical "
+                                 "English, a standard for aircraft maintenance manuals. <bookmark mark='who'/> "
+                                 "Manuals are read under time pressure, often in a second language, so every word "
+                                 "must help.") as tracker:
+            self.play(FadeIn(source, shift=UP * 0.15))
+            self.wait_until_bookmark("who")
+            self.play(FadeIn(readers, shift=UP * 0.15))
+        self.play(title.animate.scale(0.4).to_corner(UL), FadeOut(subtitle), FadeOut(source), FadeOut(readers))
 
         # 2 — What is the problem?
         words = sentence(S[0]).move_to(SENTENCE_POS)
@@ -40,7 +51,7 @@ class Ste80(ExplainerScene):
         number = always_redraw(lambda: label(f"{round(self.count.get_value())} words", size=28,
                                              color=Role.QUANTITY).next_to(bar, RIGHT, buff=0.25))
         with self.voiceover(text="Here is a typical sentence from a manual. <bookmark mark='count'/> "
-                                 "It has sixteen words. Some of the words do not help the reader.") as tracker:
+                                 "It has sixteen words: the orange bar counts them. Some of the words do not help the reader.") as tracker:
             self.play(LaggedStart(*[FadeIn(w, shift=UP * 0.1) for w in words], lag_ratio=0.08),
                       run_time=tracker.time_until_bookmark("count"))
             self.wait_until_bookmark("count")
@@ -52,22 +63,25 @@ class Ste80(ExplainerScene):
         self.tags.arrange(DOWN, aligned_edge=LEFT, buff=0.22).next_to(title, DOWN, aligned_edge=LEFT, buff=0.45)
 
         words = self.rewrite(words, S[1], 0,
-                             "Rule one. Use simple words. <bookmark mark='mark'/> Replenished becomes full. "
-                             "Prior to becomes before. Commencing becomes starting. <bookmark mark='swap'/> "
-                             "The length does not change. But each word is easier to read.")
+                             "Rule one. Use simple words. <bookmark mark='mark'/> The words in red go. "
+                             "Replenished becomes full. Prior to becomes before. Commencing becomes starting. "
+                             "<bookmark mark='swap'/> Only one word goes, but each word is easier to read.")
         words = self.rewrite(words, S[2], 1,
                              "Rule two. Give the instruction directly. <bookmark mark='mark'/> "
-                             "Remove the frame around the instruction, and talk to the reader. "
-                             "<bookmark mark='swap'/> The sentence now has thirteen words.")
+                             "Remove the frame, it is imperative that the operator ensures, and tell the reader "
+                             "what to do: make sure, before you start. <bookmark mark='swap'/> Thirteen words.")
         words = self.rewrite(words, S[3], 2,
                              "Rule three. Use a concrete verb. <bookmark mark='mark'/> "
-                             "The words make sure and is full describe a state. The verb fill names the action. Operation becomes machine. "
-                             "<bookmark mark='swap'/> The sentence now has nine words.")
+                             "Make sure that it is full asks the reader to check a result. The verb fill names "
+                             "the action. And the vague noun operation becomes the machine you start. "
+                             "<bookmark mark='swap'/> Nine words.")
 
         # 6 — What changed overall?
         before = sentence(S[0], size=26, color=Role.TEXT).set_opacity(0.4).move_to(UP * 2.0)
         with self.voiceover(text="Sixteen words became nine. <bookmark mark='compare'/> "
-                                 "The instruction did not change. The reader does less work.") as tracker:
+                                 "The reader still fills the reservoir before starting the machine, with less "
+                                 "work to read it. Full STE has more rules: short sentences, one meaning per "
+                                 "word, and an approved dictionary.") as tracker:
             self.play(FadeOut(self.tags), run_time=0.6)
             self.wait_until_bookmark("compare")
             self.play(FadeIn(before, shift=DOWN * 0.2), words.animate.scale(1.15).move_to(DOWN * 0.4))

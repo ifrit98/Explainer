@@ -511,7 +511,7 @@ const Explainer = (() => {
 
   const notes = {
     content: (on, r) => on ? "Each weight comes from the query · key score." : `Equal weights: animal ${f(r.w[0])}, street ${f(r.w[1])}. "it" cannot choose.`,
-    separate: (on, r) => on ? 'The query of "it" is its own projection of x.' : `Query = its own vector (0.5, 0.5): animal ${f(r.w[0])}, street ${f(r.w[1])}, a tie.`,
+    separate: (on, r) => on ? 'The query of "it" comes from its own matrix, W_Q.' : `Query = its own vector (0.5, 0.5): animal ${f(r.w[0])}, street ${f(r.w[1])}, a tie.`,
     scale: (on, r) => on ? `Scores divided by √${M.d}.` : `Not divided: the top weight rises to ${f(Math.max(...r.w))}. At d = 64 the effect is far larger (Level 3).`,
     mask: (on, r) => on ? `"tired" comes after "it", so its weight is 0.` : 'Off: "it" also sees the later token "tired" (an encoder).',
   };

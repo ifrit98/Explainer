@@ -33,7 +33,7 @@ After the video, the viewer can apply three STE rules to a sentence and predict 
 | Title "STE-80" | ENTITY | 1 | 1–6 | corner label |
 | Sentence words | TEXT | 2 | 2–6 | kept words move; others fade (BAD out, GOOD in) |
 | "hydraulic reservoir" | TEXT | 2 | 2–6 | never changes — the anchor |
-| Word meter (bar + number) | QUANTITY | 2 | 2–6 | 16 → 16 → 13 → 9 |
+| Word meter (bar + number) | QUANTITY | 2 | 2–6 | 16 → 15 → 13 → 9 |
 | Rule tags 1–3 | ENTITY / MUTED | 3, 4, 5 | to 6 | active tag in FOCUS, older tags MUTED |
 
 ## 5. Timing

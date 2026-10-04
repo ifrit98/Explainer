@@ -147,7 +147,7 @@ Rounds 2 and 3 also produced general rules: names match pictures (call it an L o
 
 **Next.**
 
-- Backfill `narrative.md` for the other examples (softmax-temperature, dijkstra, git-bisect, ste-80, git-objects, cdn-request), and cold-read each rendering.
+- ~~Backfill `narrative.md` for the other examples (softmax-temperature, dijkstra, git-bisect, ste-80, git-objects, cdn-request), and cold-read each rendering.~~ Done (v0.6.0, after release): every example has a `narrative.md` and a v0.6.0 cold read.
 - The ledger check covers video symbols only. Prose and pages rely on the cold read.
 - The rebuilt video is 4 min 21 s, up from 59 s. Measure whether a shorter cut keeps the cold read clean.
 - odd-squares edge items from round 3: say what yellow and the colors mean at their first use; call the first tile an L when it appears; give the "where does the sum stop" section a stronger reason, or end the rule card in (2n − 1).
@@ -182,6 +182,6 @@ Rounds 2 and 3 also produced general rules: names match pictures (call it an L o
 **Next.**
 
 - The probe and the blind-test audit still over-report: 9 of 16 gaps "main", 30 audit items for 650 words. Measure how many findings an author adopts, per tool, and tune the prompts toward that.
-- Backfill `narrative.md` and a cold read for git-bisect, git-objects, cdn-request, and ste-80.
+- ~~Backfill `narrative.md` and a cold read for git-bisect, git-objects, cdn-request, and ste-80.~~ Done: every cold read had blocking findings, two of them errors (a bisect remedy that could not find the bug; a CDN verdict that said "faster" over bars that showed slower). Records in each `review/understanding.md`.
 - A diagram budget: the first-level diagram's node count (target 5–9).
 - Run the chat eval on each principles change, and on more than one model.

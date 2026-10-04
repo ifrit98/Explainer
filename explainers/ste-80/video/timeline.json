@@ -1,156 +1,179 @@
 {
- "duration": 56.65,
+ "duration": 83.05,
  "events": [
   {
    "kind": "voiceover",
    "t": 0.0,
-   "duration": 8.529,
-   "text": "This is STE-80. It is a writing style for technical text. It uses most of the rules of ASD-STE100.",
+   "duration": 4.318,
+   "text": "This is STE-80. It is a writing style for technical text.",
    "bookmarks": {},
    "scene": "Ste80"
   },
   {
    "kind": "voiceover_end",
-   "t": 8.517,
+   "t": 4.317,
    "issues": [],
    "scene": "Ste80"
   },
   {
    "kind": "voiceover",
-   "t": 9.517,
-   "duration": 6.161,
-   "text": "Here is a typical sentence from a manual. It has sixteen words. Some of the words do not help the reader.",
+   "t": 4.317,
+   "duration": 15.454,
+   "text": "It uses about eighty percent of the rules of ASD-STE100, Simplified Technical English, a standard for aircraft maintenance manuals. Manuals are read under time pressure, often in a second language, so every word must help.",
    "bookmarks": {
-    "count": 12.067
+    "who": 14.404
    },
    "scene": "Ste80"
   },
   {
    "kind": "bookmark",
-   "t": 12.083,
+   "t": 14.4,
+   "mark": "who",
+   "issues": [],
+   "scene": "Ste80"
+  },
+  {
+   "kind": "voiceover_end",
+   "t": 19.767,
+   "issues": [],
+   "scene": "Ste80"
+  },
+  {
+   "kind": "voiceover",
+   "t": 20.767,
+   "duration": 7.676,
+   "text": "Here is a typical sentence from a manual. It has sixteen words: the orange bar counts them. Some of the words do not help the reader.",
+   "bookmarks": {
+    "count": 23.317
+   },
+   "scene": "Ste80"
+  },
+  {
+   "kind": "bookmark",
+   "t": 23.333,
    "mark": "count",
    "issues": [],
    "scene": "Ste80"
   },
   {
    "kind": "voiceover_end",
-   "t": 15.667,
+   "t": 28.433,
    "issues": [],
    "scene": "Ste80"
   },
   {
    "kind": "voiceover",
-   "t": 15.667,
-   "duration": 12.02,
-   "text": "Rule one. Use simple words. Replenished becomes full. Prior to becomes before. Commencing becomes starting. The length does not change. But each word is easier to read.",
+   "t": 28.433,
+   "duration": 13.321,
+   "text": "Rule one. Use simple words. The words in red go. Replenished becomes full. Prior to becomes before. Commencing becomes starting. Only one word goes, but each word is easier to read.",
    "bookmarks": {
-    "mark": 18.397,
-    "swap": 23.903
+    "mark": 31.164,
+    "swap": 38.428
    },
    "scene": "Ste80"
   },
   {
    "kind": "bookmark",
-   "t": 18.383,
+   "t": 31.15,
    "mark": "mark",
    "issues": [],
    "scene": "Ste80"
   },
   {
    "kind": "bookmark",
-   "t": 23.9,
+   "t": 38.417,
    "mark": "swap",
    "issues": [],
    "scene": "Ste80"
   },
   {
    "kind": "voiceover_end",
-   "t": 27.683,
+   "t": 41.75,
    "issues": [],
    "scene": "Ste80"
   },
   {
    "kind": "voiceover",
-   "t": 28.183,
-   "duration": 8.965,
-   "text": "Rule two. Give the instruction directly. Remove the frame around the instruction, and talk to the reader. The sentence now has thirteen words.",
+   "t": 42.25,
+   "duration": 12.101,
+   "text": "Rule two. Give the instruction directly. Remove the frame, it is imperative that the operator ensures, and tell the reader what to do: make sure, before you start. Thirteen words.",
    "bookmarks": {
-    "mark": 31.381,
-    "swap": 35.024
+    "mark": 45.448,
+    "swap": 53.179
    },
    "scene": "Ste80"
   },
   {
    "kind": "bookmark",
-   "t": 31.367,
+   "t": 45.433,
    "mark": "mark",
    "issues": [],
    "scene": "Ste80"
   },
   {
    "kind": "bookmark",
-   "t": 35.017,
+   "t": 53.167,
    "mark": "swap",
    "issues": [],
    "scene": "Ste80"
   },
   {
    "kind": "voiceover_end",
-   "t": 37.133,
+   "t": 54.667,
    "issues": [],
    "scene": "Ste80"
   },
   {
    "kind": "voiceover",
-   "t": 37.633,
-   "duration": 11.99,
-   "text": "Rule three. Use a concrete verb. The words make sure and is full describe a state. The verb fill names the action. Operation becomes machine. The sentence now has nine words.",
+   "t": 55.167,
+   "duration": 13.206,
+   "text": "Rule three. Use a concrete verb. Make sure that it is full asks the reader to check a result. The verb fill names the action. And the vague noun operation becomes the machine you start. Nine words.",
    "bookmarks": {
-    "mark": 40.519,
-    "swap": 47.631
+    "mark": 58.052,
+    "swap": 67.267
    },
    "scene": "Ste80"
   },
   {
    "kind": "bookmark",
-   "t": 40.517,
+   "t": 58.05,
    "mark": "mark",
    "issues": [],
    "scene": "Ste80"
   },
   {
    "kind": "bookmark",
-   "t": 47.617,
+   "t": 67.267,
    "mark": "swap",
    "issues": [],
    "scene": "Ste80"
   },
   {
    "kind": "voiceover_end",
-   "t": 49.617,
+   "t": 68.767,
    "issues": [],
    "scene": "Ste80"
   },
   {
    "kind": "voiceover",
-   "t": 50.117,
-   "duration": 5.543,
-   "text": "Sixteen words became nine. The instruction did not change. The reader does less work.",
+   "t": 69.267,
+   "duration": 12.796,
+   "text": "Sixteen words became nine. The reader still fills the reservoir before starting the machine, with less work to read it. Full STE has more rules: short sentences, one meaning per word, and an approved dictionary.",
    "bookmarks": {
-    "compare": 52.059
+    "compare": 71.209
    },
    "scene": "Ste80"
   },
   {
    "kind": "bookmark",
-   "t": 52.05,
+   "t": 71.2,
    "mark": "compare",
    "issues": [],
    "scene": "Ste80"
   },
   {
    "kind": "voiceover_end",
-   "t": 55.65,
+   "t": 82.05,
    "issues": [],
    "scene": "Ste80"
   }
