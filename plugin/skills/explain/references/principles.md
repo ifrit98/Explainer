@@ -4,6 +4,8 @@ Act as an **explanation compiler**. Your objective is to minimize the effort a r
 
 Do not ask "What should I say?" Ask "What representation lets a human understand this system most efficiently?" Then produce that representation.
 
+Effort has two sources, and both count. **Omission** makes the reader work out a step, a reason, or a term that you left out. **Excess** makes the reader read what they already know, what was said before, or what the argument does not need. Fix an omission without adding excess: prefer a fix that replaces words to one that adds them.
+
 ## 1. Separate the model from the rendering
 
 ```text
@@ -15,25 +17,18 @@ Question → Model → Narrative ─┼─ diagram
 
 1. Build the semantic model first (Pass 1).
 2. Select the representation second (Pass 2).
-3. Compile the narrative third (Pass 3, §11): the path a first-time reader takes through the model.
+3. Compile the narrative third (Pass 3, §11): the path a reader takes through the model.
 4. Render every representation from the same model and narrative. Prose, diagram, page, and video must not disagree.
 
 The model is the source of truth. If a rendering needs a fact that the model does not contain, add the fact to the model first.
 
 ## 2. Pass 1 — build the semantic model
 
-Identify:
+Identify the **central question**, the minimum **entities** and **definitions**, **relationships** and **dependencies**, **causal** and **temporal links**, **quantities**, **alternative states**, **epistemic status**, and **confusion points**. Reduce the subject to the smallest model that still explains the phenomenon correctly.
 
-- **Central question** — the one question the explanation answers.
-- **Entities** and **definitions** — the minimum concepts.
-- **Relationships** and **dependencies** — what interacts, and what must be understood first.
-- **Causal links** and **temporal links** — what causes what, what happens in which order.
-- **Quantities** — equations, magnitudes, ratios, thresholds, tradeoffs.
-- **Alternative states** — cases, scenarios, configurations.
-- **Epistemic status** — what is observed, derived, assumed, estimated, disputed, or unknown.
-- **Confusion points** — the parts most likely to cause misunderstanding.
+**Explain from first principles.** Give the mechanism that makes the result true, not only the result. Stop at the level the reader already trusts.
 
-Reduce the subject to the smallest model that still explains the phenomenon correctly.
+**Calibrate to the reader.** Name the audience and what it already knows. Unless told otherwise, the reader is technical (school mathematics and science, basic programming) and new to this subject. Define what this reader does not know. Do not explain what they do.
 
 For short answers, keep the model internal. For artifacts, write it to `explainers/<slug>/model.md` (prose) and `model.yaml` (values the renderings must agree with).
 
@@ -48,45 +43,38 @@ Start with the lowest-cost representation that is likely to succeed. Escalate on
 | 3 | Interactive HTML | multi-dimensional, parameterized, multi-scenario, multi-level, drill-down, simulation |
 | 4 | Animated explainer | movement, transformation, iteration, propagation, emergence, state A → state B |
 
-Decision tests:
-
 - If the reader must hold three or more relationships at the same time, consider a diagram.
 - If the reader must explore states, parameters, layers, or alternatives, consider interactive HTML.
 - If understanding depends on seeing how state A becomes state B, prefer animation.
 
-State the selected stage and the reason in one line before you build anything above Stage 1.
+State the selected stage and the reason in one line before you build anything above Stage 1. Organize anything above Stage 1 in levels: L1 what it is, L2 how it works, L3 why it works, L4 how it is implemented.
 
 ## 4. No gratuitous artifacts
 
-Do not create software because software can be created. A richer artifact is justified only when it reduces cognitive load, ambiguity, memory load, mental simulation, comparison difficulty, or navigation difficulty.
+A richer artifact is justified only when it reduces cognitive load, ambiguity, memory load, mental simulation, comparison difficulty, or navigation difficulty. If five sentences explain the idea better than an application, write five sentences.
 
-If five sentences explain the idea better than an application, write five sentences.
-
-When an artifact is justified, treat it as **disposable explanatory software**. Optimize for correctness, clarity, immediate usability, self-containment, and fast iteration. Do not apply production architecture unless the user asks. A program that is useful for ten minutes can be worth building.
+A justified artifact is **disposable explanatory software**: correct, clear, self-contained, fast to change. A program useful for ten minutes can be worth building.
 
 ## 5. Writing mode: STE-80
 
-Write prose in an ASD-STE100-inspired style, about 80% of strict STE. Do not claim formal STE compliance. Full rules: `references/writing.md` (in the explain skill).
+Write prose in an ASD-STE100-inspired style, about 80% of strict STE. Do not claim formal STE compliance. Full rules, and where STE-80 gives way to explanatory power: `references/writing.md`.
 
 - One principal idea per sentence. Active voice. Simple present tense.
 - Imperative verbs for procedures. Put the instruction before its explanation.
 - Concrete verbs, not abstract noun constructions.
-- One term per concept. No synonyms for variety.
-- Define each technical term when you first use it.
+- One term per concept. No synonyms for variety. Define each technical term when you first use it.
 - Noun clusters ≤ 3 words. No ambiguous pronouns. No idioms or filler.
-- "use" not "utilize"; "before" not "prior to"; "start" not "commence"; "to" not "in order to".
-- Targets: procedural sentence ≤ 20 words; descriptive sentence ≤ 25 words; paragraph ≤ 6 sentences. Break a target when technical accuracy requires it.
-- Numbered steps for procedures. Tables for comparisons. Diagrams for complex relationships.
+- Targets, not limits: procedural sentence ≤ 20 words; descriptive sentence ≤ 25 words; paragraph ≤ 6 sentences.
 
-**Semantic compression.** Write "A causes B because C." Do not write "The relationship between A and B can be understood in the context of C." Expose mechanisms, constraints, and consequences directly.
+**Semantic compression.** Write "A causes B because C." Do not write "The relationship between A and B can be understood in the context of C."
+
+The style serves the explanation. Keep a precise term of art and define it; do not replace it with a vaguer common word. Keep a cause and its effect in one sentence when splitting them hides the link.
 
 ## 6. Epistemic clarity
 
-Label claims as one of: observation, established fact, mathematical consequence, assumption, estimate, model output, disputed interpretation, speculation. In interactive artifacts, expose assumptions as toggles where practical.
+Label claims whose status a reader could mistake: observation, established fact, mathematical consequence, assumption, estimate, model output, disputed interpretation, speculation. Do not tag settled textbook facts. In interactive artifacts, expose assumptions as toggles where practical.
 
 ## 7. Verify understanding before you finish
-
-Check the result against these questions:
 
 1. Can the reader identify the main objects?
 2. Can the reader explain how the objects relate?
@@ -95,46 +83,42 @@ Check the result against these questions:
 5. Can the reader separate assumptions from observations?
 6. Can the reader rebuild the high-level explanation without the exact wording?
 7. Does the representation impose mental simulation that a different medium would remove?
+8. Could anything be cut with no loss?
 
-If an answer is "no", revise the representation or escalate one stage.
+If not, revise the representation or escalate one stage.
 
 ## 8. Predict first, for learners
 
-When the reader is learning (a course, a tutor session, a self-study unit), ask for a prediction before you reveal a result. Pages use the predict gate (`Explainer.predict`); videos use `self.predict(...)`, which pauses players built with the web toolkit. A prediction that the reader commits to, then checks, teaches more than a result they only watch.
+When the reader is learning, ask for a prediction before you reveal a result (`Explainer.predict` on pages, `self.predict(...)` in videos).
 
 ## 9. Check before you deliver
 
-Run `explainer check <slug>` before you call an explainer done. It fails when a rendering shows a number that the model does not contain, omits a required value, embeds an out-of-date model, uses a second name for a concept, or plays a video without its predict pauses. Add `--diagrams` to render every Mermaid block once. For a video, also read the review sheet (`explainer review <slug>`), and fix every layout and pace issue it reports.
+Run `explainer check <slug>` before you call an explainer done: numbers, names, claims, and length against the model. For a video, also read the review sheet (`explainer review <slug>`).
 
 ## 10. Complete the chain
 
-An explanation fails most often by omission: it states a formula without saying why that form, or a guarantee without showing it hold and fail. Before rendering:
+An explanation fails most often by omission: a formula without why that form, a guarantee without a case where it fails.
 
-- **Every operation has a why.** Name the simplest alternative and show it failing with numbers. (Why does softmax use exp? Dividing by the sum of logits gives owl −1 / 2.5 = −0.4, a negative probability, and T cancels out.)
-- **Every guarantee has two cases.** One instance with numbers where it holds, and one where its assumption is removed and it breaks. (Dijkstra with a negative edge: A→B 2, A→C 3, C→B −2 settles B at 2; the true distance is 1.)
+- **Every operation has a why:** name the simplest alternative and show it failing with numbers.
+- **Every guarantee has two cases:** one where it holds and one where its assumption is removed and it breaks.
 - **Every mechanism step has a worked example** with real numbers.
-- **Every term is defined** before a rendering uses it, and **one concept has one name**. Close concepts get different words, and renderings keep them apart. (Dijkstra: an *estimate* can still drop; the *distance* is final. "A has distance zero" mixes them.)
-- **Every quantity has a meaning.** A number the reader sees comes with what it tells them, at a low value and a high one. (Entropy 1.46 bits: the average surprise of one draw, like a choice between 2.76 equally likely tokens; 0.15 bits at T = 0.25, where cat wins 98% of draws.)
-- **Every key claim gets time.** In a video, one picture per step of the argument, and a pause after the claim. A guarantee told in one 12-second line over one picture does not land.
-- **Scope is declared.** What the explanation leaves out is listed with a pointer, so a learner's next question lands somewhere.
+- **Every quantity has a meaning:** what the number tells the reader, at a low value and a high one.
+- **Scope is declared:** what is left out, with a pointer.
 
-Run `explainer probe <slug>` and give the prompt to a fresh agent that sees only `model.md`. Recompute every number it suggests before you add it. Then record the ideas as `claims` in `model.yaml`, and the one-word rules as `terms`; `explainer check` fails while a claim is incomplete, a rendering does not cover it, or a rendering uses a term's avoided phrase.
-
-**Turn each review finding into a rule.** When a blind test or a reader finds a gap, fix the rendering, then ask which check, probe rule, or template line would have caught it in any explanation. Add that too. A finding fixed only in one example comes back in the next one.
+Details, examples, and the probe: `references/completeness.md`.
 
 ## 11. Compile the narrative
 
-The model says what is true. It does not say the path a first-time reader takes to it. A correct model with every claim covered can still lose the reader: the odd-squares video passed its blind test while it used "the n-th L" without saying what n is, and never said its own result aloud. After the model, write `narrative.md` (Pass 3): the beats a reader goes through, in order. An explainer's power comes from the model and the narrative together, not from the animation.
+The model says what is true. The narrative is the path a reader takes to it: the question and the result in words first, a reason to care, each beat answering the question the last one raised, each new term grounded by an instance, and a close that answers the opening question. Do not prove with examples. Details and the cold read: `references/narrative.md`.
 
-- **Question first, in words.** State the question, and the result itself, in words before you explain it. Answer it again at the end in the same words.
-- **Motive.** Give a reason to care, and a reason for the approach. ("A square number is a square of tiles. Each sum adds one odd number. So ask what one more odd number adds to a square.")
-- **Earn every reference.** Each term, symbol, name, and visual convention (a color, a highlight, a brace) is shown, named, and grounded by an instance before its first use. Keep one meaning per letter. If n is a count, it stays a count, or the narration says aloud that the count and the side are the same number.
-- **Concrete, then symbol.** Work an instance with numbers, say the binding aloud ("here n is 5"), then write the symbol.
-- **Say what you show; show what you say.** Read or explain every label and formula on screen, or remove it. Give everything you say a picture.
-- **Names match pictures, and each case gets its own picture.** If you call a shape an L, draw an L. Show a counterexample on its own small picture, not on the large one from another beat.
-- **Each beat answers the question the last one raised.** Write the bridge: so, but, therefore.
-- **Do not prove with examples.** After "five examples do not prove it", each general step needs a reason, not three more cases.
-- **Close the loop.** Answer the opening question with the general argument said aloud, then give the payoff and one connection.
+## 12. Match the process to the stakes
 
-Run `explainer coldread <slug>` on the narrative before you render, and on each rendering after. A fresh agent meets the explanation for the first time and reports, in order, every reference it was not given, everything shown but not said, and every leap. `explainer check` fails a scene that shows a symbol the narrative's introduction ledger does not list.
+| Tier | When | What to do |
+|---|---|---|
+| Answer | a question in chat | These principles, with the model kept internal. No files. |
+| Quick artifact | a diagram, page, or video for one person, now | `model.md` (the main sections), `model.yaml` values, one rendering, `explainer check`. |
+| Published | an example, course material, anything shared widely | The full pipeline: probe, narrative, cold read, blind test. |
 
+Choose the lowest tier that fits. The checks find gaps; they are not the goal.
+
+**A chat answer is not a small artifact.** Apply §10 to the central question only: the mechanism, why it has this form if the reader would ask, and one case with numbers. Do not add a Scope section, a list of predictions, a second guarantee case, history, or related phenomena unless the user asks. No headings in an answer under about 300 words. Most answers about one phenomenon need 150–300 words. End when the question is answered; offer one follow-up in a line if there is an obvious next question.

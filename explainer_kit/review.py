@@ -44,6 +44,11 @@ AUDIT_VIDEO = {
             "result gets no pause to absorb it (give the time from the review sheet).",
 }
 
+AUDIT_EXCESS = {
+    "excess": "Every passage this reader did not need: what they already know, a repeat with nothing new, or a "
+              "detour the questions and the argument do not use.",
+}
+
 # Pace: a key claim needs a picture per step and a pause after it. Measured from the timeline.
 HOLD_AFTER_CLAIM = 1.0     # s of silence after the line that makes a claim
 ONE_PICTURE_LIMIT = 10.0   # s of narration after a claim mark with no further bookmark
@@ -192,9 +197,14 @@ def probe_prompt(slug: str) -> str:
         "Use your own knowledge of the subject to judge what is missing, but report only gaps in the file. "
         "Give numbers in every suggested addition; they will be recomputed before use.",
         "",
-        'Reply with JSON only: {"gaps": [{"rule": 1-6, "about": "...", "why_it_matters": "...", '
-        '"suggested_addition": "..."}], "next_questions": [{"q": "...", "answered_by_model": true|false, '
-        '"declared_out_of_scope": true|false}]}',
+        "Judge every gap for the audience the file names (its 'Audience' section). Do not ask for what that "
+        "audience already knows. Mark a gap 'main' if a reader of that audience cannot follow the central "
+        "question's answer without it, else 'edge'. Also list 'excess': entries in the file that this audience "
+        "does not need for the central question.",
+        "",
+        'Reply with JSON only: {"gaps": [{"rule": 1-6, "severity": "main|edge", "about": "...", '
+        '"why_it_matters": "...", "suggested_addition": "..."}], "excess": ["..."], "next_questions": '
+        '[{"q": "...", "answered_by_model": true|false, "declared_out_of_scope": true|false}]}',
     ])
 
 
@@ -220,8 +230,11 @@ def quiz_prompt(slug: str, rendering: str) -> str:
                   "at each narration line, with the spoken text under it. Look at the image."]
     if rendering == "html":
         lines += ["", "The page is interactive. Read its visible text and its script to learn what the controls do."]
-    audit = {**AUDIT, **(AUDIT_VIDEO if rendering == "video" else {})}
+    audit = {**AUDIT, **(AUDIT_VIDEO if rendering == "video" else {}), **AUDIT_EXCESS}
     lines += [
+        "",
+        f"Read as this reader: {prior_knowledge(slug)} In the audit, report only gaps this reader would hit; "
+        "do not ask for what they already know.",
         "",
         "Answer from the explanation alone. If it does not let you answer, say so: that is useful evidence.",
         "Do not use outside knowledge to fill gaps, even when you know the subject.",
@@ -254,8 +267,13 @@ UNITS = {
 }
 
 
+DEFAULT_READER = ("a technical reader: comfortable with school mathematics and science and with basic programming, "
+                  "and new to this subject")
+
+
 def prior_knowledge(slug: str) -> str:
-    """What the reader may assume: the Before line of narrative.md, else model.md's audience section."""
+    """The reader the cold read plays: the Before line of narrative.md, else model.md's audience section,
+    else the default technical reader."""
     folder = explainer_dir(slug)
     narrative = folder / "narrative.md"
     if narrative.exists():
@@ -265,15 +283,16 @@ def prior_knowledge(slug: str) -> str:
     model_md = folder / "model.md"
     if model_md.exists():
         m = re.search(r"^## Audience and prior knowledge\s*$(.*?)(?=^## |\Z)", model_md.read_text(), re.M | re.S)
-        if m and m.group(1).strip():
+        if m and m.group(1).strip() and not m.group(1).strip().startswith("<"):
             return " ".join(m.group(1).split())
-    return "general school knowledge only"
+    return DEFAULT_READER
 
 
 def coldread_prompt(slug: str, rendering: str) -> str:
-    """Prompt for a fresh agent that meets one rendering for the first time and reports, moment by moment,
-    every reference it has not been given yet. The blind test asks what the reader understood at the end;
-    the cold read finds where, in order, a first-time reader was handed something unexplained."""
+    """Prompt for a fresh agent that meets one rendering for the first time, as the explainer's audience, and
+    reports moment by moment where that reader is slowed down: by something missing (a reference not given yet,
+    a step without its reason) or by something extra (what the reader already knows, a repeat, a detour). The
+    blind test asks what the reader understood at the end; the cold read finds where, in order, it cost effort."""
     folder = explainer_dir(slug)
     files = [folder / f for f in BLIND_FILES[rendering]]
     missing = [display(f) for f in files if not f.exists()]
@@ -283,29 +302,34 @@ def coldread_prompt(slug: str, rendering: str) -> str:
     unit, how = UNITS[rendering]
     shown = rendering in ("video", "html", "narrative")
     return "\n".join([
-        "You are meeting an explanation for the first time. Report, moment by moment, where a first-time reader "
-        "is given a word, phrase, symbol, or picture that they have not been given yet.",
+        "You are meeting an explanation for the first time, as the reader described below. Report, moment by "
+        "moment, where this reader is slowed down: by something missing, or by something they did not need.",
         "",
         "Read ONLY these files. Do not open any other file, and do not search the web:",
         *[f"- {f}" for f in files],
         "",
         how,
         "",
-        f"What the reader knows before they start: {prior_knowledge(slug)}"
-        + ("" if "nothing else counts as known" in prior_knowledge(slug).lower() else " Nothing else counts as known.")
-        + " A letter such as n, a name, or a color code is NOT known until the explanation says what it stands for.",
+        f"The reader: {prior_knowledge(slug)}",
+        "Count as known everything this reader knows. A letter such as n, a name, or a color code that the "
+        "explanation itself introduces is NOT known until the explanation says what it stands for.",
         "",
         f"Go through it in order, one {unit} at a time. Pretend you have not seen anything after the current "
         f"{unit}. At each {unit}, report:",
-        "- unresolved: every word, phrase, symbol, name, or visual convention here that the reader has not been "
-        "given (not prior knowledge, and not explained earlier). Quote it exactly.",
+        "- unresolved: every word, phrase, symbol, name, or visual convention here that this reader does not know "
+        "and has not been given earlier. Quote it exactly.",
         *(["- unsaid: anything shown here (a label, a formula, a highlight, a color change) that the words do not "
            "mention or explain."] if shown else []),
         "- leap: any step whose reason is not given here or earlier (\"why does this follow?\").",
-        f"- purpose_unclear: true if a first-time reader could not say what question this {unit} answers, or why "
-        "it comes now.",
+        "- excess: anything here that this reader already knows but is told anyway, anything said earlier and "
+        "said again with nothing new, and anything the argument does not need. Quote it.",
+        f"- purpose_unclear: true if this reader could not say what question this {unit} answers, or why it "
+        "comes now.",
         "",
         "Then answer:",
+        "- blocking: the findings, from any " + unit + ", that stop this reader following the main line of the "
+        "argument. Quote each with its location. Everything else is an edge finding.",
+        "- cuts: the cuts that would save this reader the most time with no loss, largest first.",
         "- question: the question the explanation sets out to answer, in your words, and where a reader first "
         "knows it. Is the result itself stated in words? Quote where.",
         "- motive: a reason to care about the question, and a reason for the approach it uses. Quote them, or say "
@@ -318,17 +342,19 @@ def coldread_prompt(slug: str, rendering: str) -> str:
         "",
         f'Reply with JSON only: {{"{unit}s": [{{"at": "...", "text": "...", "unresolved": ["..."], '
         + ('"unsaid": ["..."], ' if shown else "")
-        + '"leap": ["..."], "purpose_unclear": false}], "question": {"text": "...", "known_at": "...", '
-        '"result_stated": "..."}, "motive": "...", "close": "...", "recap": "...", "strongest": "...", '
-        '"weakest": "...", "suggestions": ["..."]}',
+        + '"leap": ["..."], "excess": ["..."], "purpose_unclear": false}], "blocking": ["..."], "cuts": ["..."], '
+        '"question": {"text": "...", "known_at": "...", "result_stated": "..."}, "motive": "...", "close": "...", '
+        '"recap": "...", "strongest": "...", "weakest": "...", "suggestions": ["..."]}',
     ])
 
 
 COLDREAD_PASS = (
-    "A cold read passes when: no reference is unresolved; nothing shown is unsaid; no leap remains on the main "
-    "line of the argument; the result is stated in words before the explanation and the question is known in "
-    "the first beat; the motive and the approach both have a reason; the close answers the opening question; "
-    "and the recap matches the After line of narrative.md. Fix each finding in narrative.md first, then in the "
+    "A cold read passes when: no finding is blocking; the question is known in the first beat and the result is "
+    "stated in words early; the motive and the approach both have a reason; the close answers the opening "
+    "question; and the recap matches the After line of narrative.md. Then: fix an edge finding (unresolved, "
+    "unsaid, leap) when the fix is short; cut each excess finding unless it carries a step of the argument; "
+    "prefer a fix that replaces words to one that adds them. Stop when no finding blocks: past that point, added "
+    "words cost the reader more than the gaps they close. Fix findings in narrative.md first, then in the "
     "renderings."
 )
 

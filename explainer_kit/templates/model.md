@@ -9,7 +9,7 @@
 
 ## Audience and prior knowledge
 
-<Who reads this. What they already know. What they do not know.>
+<Who reads this. What they already know. What they do not know. Default: a technical reader (school mathematics and science, basic programming) who is new to this subject. Renderings define what this reader does not know, and do not explain what they do.>
 
 ## Entities
 

@@ -1,6 +1,6 @@
-# {{slug}} — Stage 1: controlled prose
+# <Title: the question, in the reader's words>
 
-> Rendered from [`model.md`](model.md) in STE-80.
+<!-- Stage 1, rendered from model.md in STE-80. Notes for the author go in comments, not in the text. -->
 
 **<One-sentence answer to the central question.>**
 

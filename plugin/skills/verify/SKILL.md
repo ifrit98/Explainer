@@ -5,7 +5,7 @@ description: Check an explainer before it ships — renderings against model.yam
 
 # Verify — is the explanation right, and does it teach?
 
-Run the checks in order. Stop and fix at the first failure. Record what you ran in `explainers/<slug>/review/understanding.md`.
+Run the checks in order. Stop and fix at the first failure. A quick artifact needs §1 and §2 only; a published one needs all of them (principles §12). Record what you ran in `explainers/<slug>/review/understanding.md`.
 
 **CLI.** `explainer <command>` with the plugin; `uv run explainer <command>` inside the Explainer repo.
 
@@ -15,7 +15,7 @@ Run the checks in order. Stop and fix at the first failure. Record what you ran 
 explainer check <slug>
 ```
 
-It fails when a rendering shows a number the model does not explain, omits a value that `require` lists, embeds an out-of-date model (`explainer sync <slug>` fixes that), leaves a claim incomplete or uncovered, uses a phrase a `terms` entry avoids, or plays the video without its predict pauses, or when `model.md` uses a function that no `why` claim justifies. A number that is right but missing from the model goes into `values` or `allow`. Never silence a real disagreement.
+It fails when a rendering shows a number the model does not explain, is longer than its declared `budget`, omits a value that `require` lists, embeds an out-of-date model (`explainer sync <slug>` fixes that), leaves a claim incomplete or uncovered, uses a phrase a `terms` entry avoids, or plays the video without its predict pauses, or when `model.md` uses a function that no `why` claim justifies. A number that is right but missing from the model goes into `values` or `allow`. Never silence a real disagreement. A `!` line is a warning: a rendering over the default length (600 words of prose, 150 s of video). Cut it, or set `budget` with a reason.
 
 Add `--diagrams` when the explainer has Mermaid blocks: each block is rendered once with the Mermaid CLI (`mmdc`, or `npx` with Node).
 
@@ -27,12 +27,13 @@ Add `--diagrams` when the explainer has Mermaid blocks: each block is rendered o
 
 ## 3. Cold read (first viewing, in order)
 
-The blind test asks what a reader understood at the end. The cold read finds where, in order, a first-time reader was handed something unexplained. A rendering can pass the blind test and fail the cold read: the reviewer fills gaps from context.
+The blind test asks what a reader understood at the end. The cold read finds where, in order, the reader paid effort: for something missing (a reference not given, a step without its reason) or for something extra (what they already know, a repeat, a detour). A rendering can pass the blind test and fail the cold read: the reviewer fills gaps from context.
 
-1. Print the prompt: `explainer coldread <slug> --rendering <narrative|prose|diagram|html|video>`.
+1. Print the prompt: `explainer coldread <slug> --rendering <narrative|prose|diagram|html|video>`. It plays the audience from `narrative.md` or `model.md`; set that audience first.
 2. Give it, unchanged, to a fresh subagent.
-3. Apply the pass rule (`explainer coldread <slug> --rubric`): no unresolved reference, nothing shown but unsaid, no leap on the main line, the result stated in words early, a motive and a reason for the approach, and a close that answers the opening question.
-4. Fix findings in `narrative.md` first, then in the renderings. Record them in `review/understanding.md`.
+3. Apply the pass rule (`explainer coldread <slug> --rubric`): no blocking finding; the question known early and the result stated in words; a motive and a reason for the approach; a close that answers the opening question.
+4. Fix every blocking finding. Cut each excess finding unless it carries a step of the argument. Fix an edge finding only when the fix is short. Prefer fixes that replace words to fixes that add them. Fix in `narrative.md` first, then in the renderings.
+5. Stop when nothing blocks. Record the findings and what you did not apply in `review/understanding.md`.
 
 ## 4. Blind understanding test
 

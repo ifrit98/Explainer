@@ -53,4 +53,14 @@ Round 1 audit, fixed before round 2:
 
 Round 2 audit, fixed after it: why the sampler picks at random (one sentence in step 4); each entropy in the table now has its number of choices.
 
-Accepted: the Example table comes after the sections that cite it (they now say "below"); the Boltzmann aside does not define E and k (it only explains the name); there is no T = 3 row (the question tests prediction).
+Accepted at the time: the Example table comes after the sections that cite it (they now say "below"); the Boltzmann aside does not define E and k (it only explains the name); there is no T = 3 row (the question tests prediction).
+
+## Cold read with excess (v0.6.0, prose)
+
+Run 2026-10-04 with the v0.6.0 cold read: it reads as the audience in `model.md` and reports excess and blocking findings, not only gaps. The blind tests above passed; this read found what they and the old cold read had accepted.
+
+- **Blocking (4):** the formula used z, i, j, and Σ without saying what they are; "steps 2 and 3 are softmax" while the formula also divides by T; and four forward references to a table of T = 1 values that came after the argument which used them.
+- **Excess:** the Boltzmann aside (undefined symbols, unused), a second statement of the ratio rule, the log-additivity aside, a T = 10 case that repeated the T = 0.25 point, the rendering meta line.
+- **Missing:** a reason for this reader to care (the API parameter), and a close that answers the opening question.
+
+Fixed: the table moved up to follow the worked example; z, i, j defined; "steps 1 to 3 are softmax with temperature"; the cuts above; one line of motive; an "In short" close. 924 → 830 words. The model's six claims set a budget of 850 words (`budget` in `model.yaml`).

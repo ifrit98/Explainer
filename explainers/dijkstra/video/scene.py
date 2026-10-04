@@ -20,7 +20,7 @@ STEPS = {
          "three. That is shorter than four, so B becomes three. <bookmark mark='r1'/> D becomes two plus eight: ten. "
          "<bookmark mark='r2'/> E becomes two plus ten: twelve.",
     "B": "Now relax B's edges. <bookmark mark='r0'/> Through B, D is three plus five: eight. "
-         "Eight is shorter than ten.",
+         "Eight is shorter than ten: the bound of ten held only for paths that leave A and C at D.",
     "D": "D, at eight, is now the smallest estimate. Settle D. <bookmark mark='r0'/> E becomes eight plus two: ten. "
          "<bookmark mark='r1'/> F becomes eight plus six: fourteen.",
     "E": "E, at ten. It is the smallest unsettled estimate. <bookmark mark='r0'/> Through E, F becomes ten plus "
@@ -37,8 +37,7 @@ class Dijkstra(ExplainerScene):
         a, b, c = M["bfs_counterexample"]["B_first"], M["bfs_counterexample"]["B_true"], M["bfs_counterexample"]["via_C"]
         with self.voiceover(text="This is why the algorithm settles the smallest estimate, and not the first node "
                                  "it reached. <bookmark mark='w'/> Had it settled B at four, as soon as A reached it, "
-                                 "the answer would be wrong. <bookmark mark='via'/> The path through C costs two plus "
-                                 "one, which is three."):
+                                 "the answer would be wrong: <bookmark mark='via'/> the path through C is three."):
             self.wait_until_bookmark("w")
             self.claim("why-smallest")
             self.play(ShowPassingFlash(edge_lines[frozenset("AB")].copy().set_stroke(Role.BAD, 10), time_width=0.8),
@@ -55,31 +54,27 @@ class Dijkstra(ExplainerScene):
         region = DashedVMobject(SurroundingRectangle(VGroup(nodes["A"], nodes["C"], tags["A"], tags["C"]),
                                                      color=Role.GOOD, buff=0.25, corner_radius=0.2), num_dashes=40)
         region_label = label("settled", size=22, color=Role.GOOD).next_to(region, DOWN, buff=0.1).align_to(region, LEFT)
-        with self.voiceover(text="B has the smallest estimate, three. Can a path found later still beat three? "
-                                 "<bookmark mark='d'/> Look at the other unsettled estimates. D is ten, "
-                                 "<bookmark mark='e'/> E is twelve, <bookmark mark='f'/> and F is infinity. "
-                                 "All of them are at least three."):
+        with self.voiceover(text="B has the smallest estimate, three. Can a path found later still beat three?"):
             self.play(Create(region), FadeIn(region_label))
-            for n in "DEF":
-                self.wait_until_bookmark(n.lower())
-                self.play(Indicate(tags[n], color=Role.FOCUS, scale_factor=1.4), run_time=0.8)
         self.wait(0.6)
-        exit_edges = [frozenset("CD"), frozenset("CE")]
-        with self.voiceover(text="Any other path to B must leave the settled nodes, A and C, <bookmark mark='leave'/> "
-                                 "through D or E. F has no edge to A or C. Each estimate is already the cheapest "
-                                 "way there through settled nodes, because every settled node has relaxed its "
-                                 "edges. So reaching D costs at least ten, and reaching E at least twelve. "
-                                 "<bookmark mark='grow'/> No length is negative, so the rest of the path can only add."):
+        exit_edges = [frozenset("AB"), frozenset("BC"), frozenset("CD"), frozenset("CE")]
+        with self.voiceover(text="Any path to B starts in the settled nodes, A and C. <bookmark mark='leave'/> "
+                                 "Follow it to the first node outside them. If that node is B, B's estimate already "
+                                 "counts the path: three. <bookmark mark='de'/> If it is D or E, the path so far "
+                                 "costs at least D's estimate, ten, or E's, twelve, because A and C have relaxed "
+                                 "their edges. <bookmark mark='grow'/> No length is negative, so the rest of the "
+                                 "path can only add."):
             self.wait_until_bookmark("leave")
             self.play(LaggedStart(*[ShowPassingFlash(edge_lines[k].copy().set_stroke(Role.FOCUS, 10), time_width=0.8)
-                                    for k in exit_edges], lag_ratio=0.4), run_time=1.6)
+                                    for k in exit_edges], lag_ratio=0.3), run_time=1.8)
+            self.wait_until_bookmark("de")
             self.play(Indicate(tags["D"], color=Role.FOCUS, scale_factor=1.4),
                       Indicate(tags["E"], color=Role.FOCUS, scale_factor=1.4), run_time=1.0)
             self.wait_until_bookmark("grow")
-            at_least = label("any other path to B costs ≥ 10 > 3", size=26, color=Role.FOCUS).to_edge(UP, buff=0.35)
+            at_least = label("first step out at D or E: ≥ 10 > 3", size=26, color=Role.FOCUS).to_edge(UP, buff=0.35)
             self.play(FadeIn(at_least, shift=UP * 0.1))
         with self.voiceover(text="So no other path can cost less than three. <bookmark mark='final'/> Settle B. "
-                                 "Its estimate is its final distance, and it never changes again."):
+                                 "Its estimate never changes again."):
             self.wait_until_bookmark("final")
             self.claim("guarantee-final")
             self.play(*settle, run_time=0.7)
@@ -116,7 +111,7 @@ class Dijkstra(ExplainerScene):
                                  "estimate zero. Every other node has estimate infinity: no path found yet. "
                                  "<bookmark mark='loop'/> "
                                  "Then repeat two steps. First, settle the unsettled node with the smallest "
-                                 "estimate. A settled estimate is the final distance. Second, relax its edges. "
+                                 "estimate. A settled estimate is final: it is the node's distance. We check why below. Second, relax its edges. "
                                  "<bookmark mark='relax'/> To relax an edge, check whether the path through the "
                                  "settled node is shorter. <bookmark mark='keep'/> If it is, keep the shorter "
                                  "estimate, and remember where it came from."):

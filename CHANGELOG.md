@@ -1,5 +1,19 @@
 # Changelog
 
+## 0.6.0 — 2026-10-04
+
+Rebalance: the reader's effort has two sources, omission and excess, and the checks now push against both. From v0.3 to v0.5 every check caught omission and none caught excess, so every review round added words (principles 947 → 1,802 words, softmax prose 412 → 1,234, odd-squares video 59 s → 4 min 21 s).
+
+- **Principles** cut to about 1,340 words; the detail of §10 and §11 moved to `references/completeness.md` and `references/narrative.md`. New: effort has two sources; explain from first principles; calibrate to the reader (default: a technical reader new to the subject); "could anything be cut?" in the understanding test; tag only claims whose status a reader could mistake; §12, three tiers (answer, quick artifact, published), and "a chat answer is not a small artifact".
+- **Where STE-80 gives way** (`writing.md`): a term of art, a cause and its effect in one sentence, a labeled analogy, a formula, no definitions for what the reader knows. Plus "calibrate to the reader".
+- **Cold read** reads as the audience in `model.md`, reports **excess** (already known, repeated, a detour) and marks **blocking** findings. Pass rule: nothing blocks; fix edge findings only when short; cut excess; prefer fixes that replace words; stop when nothing blocks.
+- **Probe and blind test** read as the audience: the probe marks gaps main or edge and lists model entries the audience does not need; the blind-test audit gains `excess`.
+- **Length budget** in `explainer check`: a warning (`!`) above 600 words of prose or 150 s of video; `budget` in `model.yaml` declares another length with a reason and fails the check when exceeded.
+- **Tiers** in the `explain` skill (Step 0) and `verify`; `explainer new --quick` skips `narrative.md`. Templates drop "Stage 1: controlled prose" from visible titles and default the audience.
+- **`explainer eval chat`**: six questions about phenomena answered by fresh `claude -p` calls under several system prompts and graded blind. It found that the principles made chat answers 50% longer, and that v0.6's first changes did not help chat. A chat rule fixed it: the current principles now give the best-scored and shortest answers (7.8/10, 292 words, against 6.3 and 399 with no system prompt). [docs/evals.md](docs/evals.md).
+- **New examples:** `sky-blue` (a physical phenomenon from first principles, prose and diagram, 650-word budget) and `attention` (a Stage 3 page with L1–L4 and a toggle that removes each part of attention).
+- **Fixes found by the new cold read:** the dijkstra finality argument named D and E as the only exits and said "reaching D costs at least ten" before D became eight through B (a flaw the v0.4.0 fix introduced); the argument now follows a path to its first node outside the settled set, in the model and the re-rendered video (203 s). The softmax prose leaned on a table that came after it and used undefined symbols; reordered and cut (924 → 830 words).
+
 ## 0.5.0 — 2026-10-04
 
 The narrative pass: an explanation is a model plus the path a first-time reader takes through it.

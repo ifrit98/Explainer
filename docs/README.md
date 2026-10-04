@@ -9,6 +9,7 @@
 | build a narrated video | [Video pipeline](video-pipeline.md) |
 | build an interactive page | [Web toolkit](web-toolkit.md) |
 | look up a command | [CLI reference](cli.md) |
+| measure whether the principles improve chat answers | [Evals](evals.md) |
 | fix an error | [Troubleshooting](troubleshooting.md) |
 | contribute an example or a change | [Contributing](../CONTRIBUTING.md) |
 

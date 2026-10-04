@@ -40,3 +40,11 @@ Each round: a fresh cold read of the rendered video, fixes in `narrative.md` fir
 **Result: converged, not a strict pass.** Round 3 meets every part of the pass rule except "no reference unresolved, nothing shown but unsaid": a handful of edge items remain, listed in the roadmap. Each round finds less, and smaller: the old video's cold read found the result never said and n never introduced; round 3 finds a highlight color explained four seconds late.
 
 The question, the result in words, the motive, the reason for the approach, and the close were present from round 1 on. The strongest moment in every round was the mechanism (row + column + corner, then "two bigger").
+
+## Cold read with excess (v0.6.0, narrative)
+
+Run 2026-10-04 with the v0.6.0 cold read (reads as the audience, reports excess, marks blocking findings).
+
+- **Blocking: none.** Under the v0.6.0 pass rule the narrative passes. The edge items above stay edge items.
+- **Excess:** beat 10 lists the five new Ls and a second route to 19 that beat 12 repeats; beat 2 grounds n with the same instance twice and reads all five squares aloud to a reader who knows them; "each in its own color" in beat 1 before the colors have a use; "One more thing:".
+- **Not applied.** The video is frozen as the reference for `narrative.md` (ROADMAP §13). At 4 min 21 s it is over the default 150 s budget; `budget` in `model.yaml` records why (no algebra assumed: every letter and convention is introduced). If it is rendered again, apply the cuts above first.

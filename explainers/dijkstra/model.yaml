@@ -21,6 +21,8 @@ values:
     via_C: 1
   complexity: "O((V + E) log V)"
 
+budget: {video: 210, reason: "an algorithm run step by step, a finality argument with one picture per step, and a counterexample on its own graph"}
+
 require:
   - path: final
     in: [video]
@@ -46,7 +48,7 @@ claims:
   - id: guarantee-final
     kind: guarantee
     statement: "With lengths ≥ 0, a node's estimate is final when it is settled."
-    example: "B (3) is the smallest unsettled estimate; A and C are settled. Any other path to B leaves {A, C} through D (10) or E (12), and reaching either costs at least its estimate, so the path costs at least 10 > 3."
+    example: "B (3) is the smallest unsettled estimate; A and C are settled. Follow any path to B to its first node outside {A, C}. If that node is B, B's estimate (3) already counts the path. If it is D (10) or E (12), the path so far costs at least that estimate, because A and C have relaxed their edges, and no length is negative, so the path costs at least 10 > 3."
     counterexample: "Directed A→B 2, A→C 3, C→B −2: B settles at 2, then C gives 3 − 2 = 1 < 2 after B is final."
     ask: "Show with numbers why a settled estimate cannot improve later, and give a graph where it does."
   - id: mechanism-path

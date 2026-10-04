@@ -5,10 +5,10 @@ With the plugin installed, run `explainer <command>` from any project. In the Ex
 | Command | Does |
 |---|---|
 | `explainer setup` | Download the Kokoro voice (about 350 MB) and report which tools are present, including LaTeX. |
-| `explainer new <slug> [--stage 1 2 3 4]` | Create `model.md`, `model.yaml`, `narrative.md`, and the chosen renderings from templates. Default stage: 4. Existing files are kept. |
-| `explainer check [slug ...]` | Hold renderings to `model.yaml`: numbers, required values, claims. No slug: every explainer. Exit code 1 on any problem. `-v` lists notes. |
-| `explainer probe <slug>` | Print a prompt for a fresh agent that reads only `model.md` and lists what the explanation will omit. |
-| `explainer coldread <slug> [--rendering R]` | Print a first-viewing prompt: a fresh agent meets one rendering (`narrative` by default, or `prose`, `diagram`, `html`, `video`) in order and reports every reference it was not given, everything shown but unsaid, and every leap. `--rubric` prints the pass rule. |
+| `explainer new <slug> [--stage 1 2 3 4] [--quick]` | Create `model.md`, `model.yaml`, `narrative.md`, and the chosen renderings from templates. Default stage: 4. Existing files are kept. `--quick` skips `narrative.md` (the quick-artifact tier, principles §12). |
+| `explainer check [slug ...]` | Hold renderings to `model.yaml`: numbers, required values, claims, terms, length. No slug: every explainer. Exit code 1 on any problem; `!` lines are warnings. `-v` lists notes. |
+| `explainer probe <slug>` | Print a prompt for a fresh agent that reads only `model.md` and lists what the explanation will omit, for the audience the model names: each gap main or edge, and model entries the audience does not need. |
+| `explainer coldread <slug> [--rendering R]` | Print a first-viewing prompt: a fresh agent reads one rendering (`narrative` by default, or `prose`, `diagram`, `html`, `video`) in order, as the audience in `model.md`, and reports every reference it was not given, everything shown but unsaid, every leap, and every excess: what it already knew, a repeat, a detour. It marks the findings that block the main line. `--rubric` prints the pass rule. |
 | `explainer sync <slug>` | Write the model's values and the current web toolkit into the slug's HTML pages. |
 | `explainer render <slug> [options]` | Render the video: voice, mastered audio, captions, chapters, timeline, contact sheet. |
 | `explainer review <slug> [--draft]` | Build the review sheet: one frame at each narration line, bookmark, and predict pause. |
@@ -17,6 +17,7 @@ With the plugin installed, run `explainer <command>` from any project. In the Ex
 | `explainer voices [--all]` | List Kokoro voices. English by default. |
 | `explainer say "<text>" [--voice V] [--speed S]` | Synthesize one line and play it. Use it to choose a voice or test a lexicon spelling. |
 | `explainer frames <slug> [--draft] [--every N]` | Rebuild the contact sheet from an existing render. |
+| `explainer eval chat [--conditions name=source ...]` | Answer the questions in `evals/chat/questions.yaml` under several system prompts with fresh `claude -p` calls, grade them blind, and write a report. See [Evals](evals.md). |
 
 ## `check`
 
@@ -38,12 +39,13 @@ It reports these problems (full list with fixes: [model reference](model-referen
 6. **A second name for a concept.** A rendering uses a phrase that a `terms` entry avoids.
 7. **A video without its predict pauses.** `index.html` plays a video that has predict pauses through a plain `<video>`; use `Explainer.video`.
 8. **A symbol the narrative does not introduce.** With a `narrative.md`, a single-letter symbol in the scene's on-screen math or labels, or spoken as "the n-th", must be listed in the introduction ledger.
+9. **Length.** A warning (`!`) when the prose is over 600 words or the video over 150 s; a failure when a rendering exceeds a `budget` declared in `model.yaml`. Length is a cost to the reader too: cut what this reader does not need, or declare the length with a reason.
 
 `--diagrams` also renders every Mermaid block (Markdown fences and `<pre class="mermaid">`) with the Mermaid CLI: `mmdc` on PATH, else `npx` with a pinned version. It needs Node. CI runs it.
 
 ## `probe`
 
-`explainer probe <slug>` prints a prompt for a fresh agent with no other context. The agent reads only `model.md` and reports, against six rules (why this form, guarantees with two cases, terms and one name per concept, worked examples, the meaning of each quantity, next questions), what the explanation will omit. Recompute every number it suggests. See the [authoring guide](authoring.md#2-probe-the-model).
+`explainer probe <slug>` prints a prompt for a fresh agent with no other context. The agent reads only `model.md` and reports, against six rules (why this form, guarantees with two cases, terms and one name per concept, worked examples, the meaning of each quantity, next questions), what the explanation will omit for the audience the model names. It marks each gap main or edge, and lists model entries that audience does not need. Recompute every number it suggests, and adopt a finding only when this reader needs it: a probe always finds more than an explanation should say. See the [authoring guide](authoring.md#2-probe-the-model).
 
 ## `render` options
 

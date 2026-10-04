@@ -70,7 +70,20 @@ A correct, complete model can still lose the reader on the way. The odd-squares 
 - An **introduction ledger** lists every term, symbol, name, and visual convention, with the instance that grounds it. `explainer check` fails a scene symbol the ledger does not list.
 - **Beats** come in order. Each answers the question the last one raised, says what it shows, and shows what it says.
 
-`explainer coldread` gives the narrative, or any rendering, to a fresh agent that meets it for the first time and reports, in order, every reference it was not given. The blind test measures what a reader understood at the end; the cold read finds where, along the way, a reader was handed something unexplained. The [authoring guide](authoring.md#the-narrative-pass-odd-squares) shows the pass on odd-squares.
+`explainer coldread` gives the narrative, or any rendering, to a fresh agent that reads it for the first time as the audience in `model.md` and reports, in order, every reference it was not given and every passage it did not need. The blind test measures what a reader understood at the end; the cold read finds where, along the way, the reader paid effort. It marks the findings that block the main line, and the read stops when nothing blocks. The [authoring guide](authoring.md#the-narrative-pass-odd-squares) shows the pass on odd-squares.
+
+## Omission and excess
+
+The objective is the reader's total effort, and effort has two sources. **Omission** makes the reader work out a step, a reason, or a term that was left out. **Excess** makes the reader read what they already know, what was said before, or what the argument does not need.
+
+Most checks catch omission, and a review that only finds gaps only ever adds words. Explainer pushes back in four places:
+
+- **The reader.** `model.md` names the audience. Unless told otherwise it is a technical reader new to the subject. The probe, the cold read, and the blind test read as that reader and do not ask for what it knows.
+- **Excess findings.** The cold read and the blind-test audit report what this reader did not need, next to what they missed.
+- **Blocking or edge.** The cold read marks findings that stop the reader following the main line. Fix those; fix an edge finding only when the fix is short; stop when nothing blocks.
+- **A length budget.** `explainer check` warns above 600 words of prose or 150 s of video, and fails above a `budget` declared in `model.yaml`.
+
+**Match the process to the stakes** (principles §12). A question in chat gets an answer, with the model kept in mind. A diagram or page for one person now gets a model, one rendering, and `explainer check`. Only a published explainer gets the full pipeline: probe, narrative, cold read, blind test.
 
 ## Four stages, and when to escalate
 
@@ -119,6 +132,8 @@ Prose uses STE-80, a house style based on [ASD-STE100 Simplified Technical Engli
 | One potential limitation concerns situations in which X may become relatively large compared with Y. | The model fails when X exceeds Y. |
 
 Narration uses the same style. Short sentences sound clear when spoken, and sentence ends are natural sync points. Full rules: [`writing.md`](../plugin/skills/explain/references/writing.md).
+
+The other 20% is there to keep explanatory power. STE-80 gives way when following a rule costs the reader more than breaking it: keep a precise term of art ("logit", "dipole") and define it once; keep a cause and its effect in one sentence when splitting them hides the link; use a labeled analogy for a mechanism the reader cannot see; show a formula when it is more exact than words; do not define what the reader already knows. One term per concept, no ambiguous pronouns, and no filler never give way.
 
 ## Epistemic clarity
 

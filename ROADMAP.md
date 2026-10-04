@@ -18,6 +18,7 @@ Status: `proposed` · `next` · `in progress` · `done`
 | 10 | [Complete the chain: claims and the probe](#10-complete-the-chain-claims-and-the-probe) | done (v0.3.0) |
 | 11 | [Review findings become rules](#11-review-findings-become-rules) | done (v0.4.0) |
 | 12 | [The narrative pass](#12-the-narrative-pass) | done (v0.5.0), with open items |
+| 13 | [Rebalance: omission and excess both cost](#13-rebalance-omission-and-excess-both-cost) | done (v0.6.0), with open items |
 
 ---
 
@@ -151,4 +152,36 @@ Rounds 2 and 3 also produced general rules: names match pictures (call it an L o
 - The rebuilt video is 4 min 21 s, up from 59 s. Measure whether a shorter cut keeps the cold read clean.
 - odd-squares edge items from round 3: say what yellow and the colors mean at their first use; call the first tile an L when it appears; give the "where does the sum stop" section a stronger reason, or end the rule card in (2n − 1).
 - The review sheet captures some frames mid-animation, and cold readers report them as overlaps. Take each frame after the animation it starts has finished.
-- The cold read never runs out of findings. Grade findings by whether they are on the main line of the argument, and stop when only edge items remain.
+- ~~The cold read never runs out of findings. Grade findings by whether they are on the main line of the argument, and stop when only edge items remain.~~ Done in v0.6.0 (§13): findings are blocking or edge, and the read stops when nothing blocks.
+
+## 13. Rebalance: omission and excess both cost
+
+**Problem.** The mission is to minimize the reader's effort, and effort has two sources: what is missing and what is extra. From v0.3 to v0.5, every check added caught omission and none caught excess, so every review round added words: `principles.md` grew from 947 to 1,802 words, the softmax prose from 412 to 1,234, and the odd-squares video from 59 s to 4 min 21 s. The cold read treated the reader as knowing nothing ("nothing else counts as known"), so it asked for "n with a small two" in a video for adults. Every artifact ran the full pipeline whatever the stakes. And six of seven examples were math or CS, none a physical phenomenon, none with real assumptions to toggle.
+
+**Built.**
+
+- **Principles** cut to about 1,340 words, with the detail of §10 and §11 in `references/completeness.md` and `references/narrative.md`. New: effort has two sources; explain from first principles; calibrate to the reader (default: a technical reader new to the subject); question 8 of the understanding test ("could anything be cut?"); tags only on claims whose status a reader could mistake; §12, three tiers (answer, quick artifact, published), and "a chat answer is not a small artifact".
+- **Where STE-80 gives way** (`writing.md`): keep a term of art and define it; keep a cause and its effect in one sentence; a labeled analogy; a formula when it is more exact; no definition for what the reader knows. Plus "calibrate to the reader": answer first, cut what the reader loses nothing without.
+- **Cold read** plays the audience from `model.md` (or the default technical reader), reports **excess** next to unresolved, unsaid, and leap, and marks **blocking** findings. The pass rule: nothing blocks; fix an edge finding only when the fix is short; cut excess unless it carries a step; prefer fixes that replace words; stop when nothing blocks.
+- **Probe and blind test** read as the audience too: the probe marks each gap main or edge and lists model entries the audience does not need; the blind-test audit gains `excess`.
+- **Length budget** in `explainer check`: a warning over the defaults (600 words of prose, 150 s of video); `budget` in `model.yaml` declares a different length with a reason, and the check fails when a rendering exceeds it.
+- **Tiers:** the `explain` skill starts with Step 0, choose the tier; `explainer new --quick` skips `narrative.md`; `verify` says what each tier needs.
+- **Templates:** no "Stage 1: controlled prose" in the visible title (the cold read flagged it as excess); the audience default in `model.md`; the narrative ledger lists only what is new to the reader.
+- **Examples:** `sky-blue` (a physical phenomenon from first principles, prose and diagram) and `attention` (a Stage 3 page with L1–L4 and a toggle for each part of attention).
+- **Chat eval** (`explainer eval chat`): six questions about phenomena, answered by fresh `claude -p` calls under several system prompts (none, the v0.5.0 principles, the current principles), graded blind under shuffled labels for points made, misconceptions, answer first, errors, excess, and unclear passages.
+
+**Evidence.**
+
+- The new cold read on the softmax prose found what three earlier rounds had accepted: the argument leaned on a table that came after it (four forward references), the formula used z, i, j without saying what they are, and the Boltzmann aside used undefined symbols to explain only a name. Fixed: 924 → 830 words.
+- On the dijkstra video it found a flaw in the main argument that the v0.4.0 fix had introduced: "reaching D costs at least ten", then D becomes eight through B. The bound holds for paths whose first node outside the settled set is D. Fixed in the model and the video.
+- On the odd-squares narrative: no blocking finding, and the cuts it lists are small. The video stays as the narrative reference; its budget records why it is long.
+- sky-blue: the probe marked 9 of 16 gaps "main"; 5 were adopted as a clause each. The declared budget (650 words) failed twice after review fixes and forced cuts each time. The blind test passed.
+- attention: the blind test passed; the cold read found that Level 1 was an instrument with no words.
+- Chat eval, run a: the principles raised the score (6.5 → 7.2) and made answers 50% longer, and v0.6's first changes did not help: the answers applied artifact rules in chat (Scope sections, tags on textbook facts, extra cases). The rule "a chat answer is not a small artifact" followed. Run b: 7.8 at 292 words, against 7.2 at 544 (v0.5) and 6.3 at 399 (no system prompt); best on five of six questions. [docs/evals.md](docs/evals.md).
+
+**Next.**
+
+- The probe and the blind-test audit still over-report: 9 of 16 gaps "main", 30 audit items for 650 words. Measure how many findings an author adopts, per tool, and tune the prompts toward that.
+- Backfill `narrative.md` and a cold read for git-bisect, git-objects, cdn-request, and ste-80.
+- A diagram budget: the first-level diagram's node count (target 5–9).
+- Run the chat eval on each principles change, and on more than one model.

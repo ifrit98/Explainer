@@ -1,6 +1,6 @@
-# {{slug}} — Stage 2: diagrams
+# <Title: the question, in the reader's words>
 
-> Rendered from [`model.md`](model.md). Use the model's entity names on every node.
+<!-- Stage 2, rendered from model.md. Use the model's entity names on every node. -->
 
 ## Level 1 — What it is
 

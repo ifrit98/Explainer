@@ -1,0 +1,63 @@
+# Chat eval: questions about phenomena, answered in chat with no files (the "Answer" tier, principles §12).
+# Each item lists what a good answer must contain for this reader, the misconception it must not teach,
+# and a word budget: a longer answer is not penalized for length alone, but every sentence over budget
+# must earn its place (the grader counts excess).
+#
+# Run: uv run explainer eval chat   (needs the `claude` CLI; see docs/evals.md)
+
+reader: "A technical reader: comfortable with school mathematics and science and with basic programming, and new to this subject."
+
+questions:
+  - id: ice-floats
+    q: "Why does ice float on water?"
+    must:
+      - "Ice is less dense than liquid water (about 0.92 vs 1.00 g/cm³, about 9% less)."
+      - "Mechanism: in ice, hydrogen bonds hold each molecule to four neighbors in an open hexagonal lattice with empty space; in the liquid the bonds keep breaking, so molecules pack closer."
+      - "This is unusual: most substances are denser as solids."
+    misconception: "Ice floats because it contains trapped air bubbles."
+    budget: 200
+
+  - id: tcp-slow-start
+    q: "Why does a new TCP connection send slowly at first?"
+    must:
+      - "The sender does not know how much capacity the path has, and sending too much causes loss and congestion collapse."
+      - "Mechanism: a congestion window starts small (a few segments, typically 10 today) and doubles about every round trip until loss or a threshold."
+      - "The growth is exponential, so 'slow start' is slow only at the start."
+    misconception: "Slow start increases the sending rate linearly."
+    budget: 220
+
+  - id: wing-lift
+    q: "How does an airplane wing make lift?"
+    must:
+      - "The wing turns the airflow downward (downwash); by Newton's third law the air pushes the wing up."
+      - "Equivalently, pressure is lower above the wing than below it; the pressure difference times the area is the lift."
+      - "Lift grows with angle of attack and with the square of speed, until the wing stalls."
+    misconception: "Air over the top must travel farther and meet the bottom air at the trailing edge at the same time (equal transit time)."
+    budget: 250
+
+  - id: hash-table
+    q: "Why is a hash table lookup fast on average, and when is it slow?"
+    must:
+      - "The hash function maps a key straight to a bucket index, so a lookup checks one bucket instead of searching."
+      - "Collisions put several keys in one bucket; the table keeps the load factor (keys per bucket) low by resizing, so buckets stay short: O(1) on average."
+      - "Worst case: many keys collide (a bad or attacked hash), and a lookup scans them all: O(n)."
+    misconception: "Hash table lookups are always O(1)."
+    budget: 220
+
+  - id: moon-face
+    q: "Why do we always see the same side of the Moon?"
+    must:
+      - "The Moon rotates once per orbit (both about 27.3 days): it is tidally locked."
+      - "Mechanism: Earth's gravity raised tidal bulges on the Moon; while the Moon spun faster, Earth's pull on the bulges made a torque that slowed its spin until the bulges stayed pointed at Earth."
+      - "Small wobbles (libration) let us see about 59% of the surface over time."
+    misconception: "The Moon does not rotate."
+    budget: 220
+
+  - id: road-salt
+    q: "Why does salt melt ice on roads?"
+    must:
+      - "Dissolved salt lowers the freezing point of water: at 0 °C the ice still melts, but the water no longer refreezes as fast, so the ice shrinks."
+      - "Mechanism in terms of particles: dissolved ions dilute the water, so fewer water molecules per second join the ice than leave it."
+      - "It has a limit: NaCl stops working below about −21 °C."
+    misconception: "Salt melts ice because the reaction gives off heat."
+    budget: 220

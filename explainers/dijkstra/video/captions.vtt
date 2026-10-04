@@ -17,15 +17,15 @@ The numbers on the edges are lengths, and each edge works in both
 directions. Every length must be zero or more.
 
 5
-00:00:14.148 --> 00:00:17.875
+00:00:14.148 --> 00:00:17.876
 Each node has an estimate: the shortest length found so far.
 
 6
-00:00:17.975 --> 00:00:20.273
+00:00:17.976 --> 00:00:20.274
 At the start, A has estimate zero.
 
 7
-00:00:20.373 --> 00:00:24.186
+00:00:20.374 --> 00:00:24.186
 Every other node has estimate infinity: no path found yet.
 
 8
@@ -33,201 +33,197 @@ Every other node has estimate infinity: no path found yet.
 Then repeat two steps.
 
 9
-00:00:26.108 --> 00:00:29.771
+00:00:26.108 --> 00:00:29.772
 First, settle the unsettled node with the smallest estimate.
 
 10
-00:00:29.871 --> 00:00:34.653
-A settled estimate is the final distance. Second, relax its edges.
+00:00:29.872 --> 00:00:33.386
+A settled estimate is final: it is the node's distance.
 
 11
-00:00:34.753 --> 00:00:38.368
-To relax an edge, check whether the path through the settled node is
+00:00:33.486 --> 00:00:37.051
+We check why below. Second, relax its edges.
 
 12
-00:00:38.468 --> 00:00:38.907
-shorter.
+00:00:37.151 --> 00:00:40.766
+To relax an edge, check whether the path through the settled node is
 
 13
-00:00:39.007 --> 00:00:42.811
-If it is, keep the shorter estimate, and remember where it came from.
+00:00:40.866 --> 00:00:41.305
+shorter.
 
 14
-00:00:44.498 --> 00:00:48.601
-Settle A. From A, B is four away, and C is two away.
+00:00:41.405 --> 00:00:45.209
+If it is, keep the shorter estimate, and remember where it came from.
 
 15
-00:00:48.698 --> 00:00:52.541
-The smallest estimate is now C, at two. Settle C.
+00:00:46.898 --> 00:00:51.002
+Settle A. From A, B is four away, and C is two away.
 
 16
-00:00:52.641 --> 00:00:55.003
-Through C, B is two plus one: three.
+00:00:51.092 --> 00:00:54.935
+The smallest estimate is now C, at two. Settle C.
 
 17
-00:00:55.103 --> 00:00:57.849
-That is shorter than four, so B becomes three.
+00:00:55.035 --> 00:00:57.397
+Through C, B is two plus one: three.
 
 18
-00:00:57.949 --> 00:01:02.380
-D becomes two plus eight: ten. E becomes two plus ten: twelve.
+00:00:57.497 --> 00:01:00.243
+That is shorter than four, so B becomes three.
 
 19
-00:01:02.465 --> 00:01:06.328
-This is why the algorithm settles the smallest estimate, and not the
+00:01:00.343 --> 00:01:04.774
+D becomes two plus eight: ten. E becomes two plus ten: twelve.
 
 20
-00:01:06.428 --> 00:01:07.707
-first node it reached.
+00:01:04.868 --> 00:01:08.731
+This is why the algorithm settles the smallest estimate, and not the
 
 21
-00:01:07.807 --> 00:01:11.606
-Had it settled B at four, as soon as A reached it, the answer would be
+00:01:08.831 --> 00:01:10.110
+first node it reached.
 
 22
-00:01:11.706 --> 00:01:14.969
-wrong. The path through C costs two plus one, which is three.
+00:01:10.210 --> 00:01:14.048
+Had it settled B at four, as soon as A reached it, the answer would be
 
 23
-00:01:16.765 --> 00:01:19.105
-B has the smallest estimate, three.
+00:01:14.148 --> 00:01:15.942
+wrong: the path through C is three.
 
 24
-00:01:19.205 --> 00:01:21.397
-Can a path found later still beat three?
+00:01:17.834 --> 00:01:20.175
+B has the smallest estimate, three.
 
 25
-00:01:21.497 --> 00:01:23.816
-Look at the other unsettled estimates.
+00:01:20.275 --> 00:01:22.116
+Can a path found later still beat three?
 
 26
-00:01:23.916 --> 00:01:27.734
-D is ten, E is twelve, and F is infinity.
+00:01:22.801 --> 00:01:26.016
+Any path to B starts in the settled nodes, A and C.
 
 27
-00:01:27.834 --> 00:01:29.291
-All of them are at least three.
+00:01:26.116 --> 00:01:28.500
+Follow it to the first node outside them.
 
 28
-00:01:29.981 --> 00:01:34.268
-Any other path to B must leave the settled nodes, A and C, through D
+00:01:28.600 --> 00:01:32.647
+If that node is B, B's estimate already counts the path: three.
 
 29
-00:01:34.368 --> 00:01:36.845
-or E. F has no edge to A or C.
+00:01:32.747 --> 00:01:37.393
+If it is D or E, the path so far costs at least D's estimate, ten, or
 
 30
-00:01:36.945 --> 00:01:41.056
-Each estimate is already the cheapest way there through settled nodes,
+00:01:37.493 --> 00:01:41.189
+E's, twelve, because A and C have relaxed their edges.
 
 31
-00:01:41.156 --> 00:01:44.022
-because every settled node has relaxed its edges.
-
-32
-00:01:44.122 --> 00:01:47.999
-So reaching D costs at least ten, and reaching E at least twelve.
-
-33
-00:01:48.099 --> 00:01:51.433
+00:01:41.289 --> 00:01:44.624
 No length is negative, so the rest of the path can only add.
 
-34
-00:01:51.522 --> 00:01:55.386
+32
+00:01:44.718 --> 00:01:48.582
 So no other path can cost less than three. Settle B.
 
-35
-00:01:55.486 --> 00:01:59.140
-Its estimate is its final distance, and it never changes again.
+33
+00:01:48.682 --> 00:01:50.608
+Its estimate never changes again.
 
-36
-00:02:01.224 --> 00:02:05.877
+34
+00:01:52.701 --> 00:01:57.354
 Now relax B's edges. Through B, D is three plus five: eight.
 
-37
-00:02:05.977 --> 00:02:07.285
-Eight is shorter than ten.
+35
+00:01:57.454 --> 00:01:58.925
+Eight is shorter than ten:
 
-38
-00:02:07.381 --> 00:02:11.480
+36
+00:01:59.025 --> 00:02:02.474
+the bound of ten held only for paths that leave A and C at D.
+
+37
+00:02:02.568 --> 00:02:06.666
 D, at eight, is now the smallest estimate. Settle D.
 
-39
-00:02:11.580 --> 00:02:16.331
+38
+00:02:06.766 --> 00:02:11.518
 E becomes eight plus two: ten. F becomes eight plus six: fourteen.
 
-40
-00:02:16.431 --> 00:02:19.378
+39
+00:02:11.601 --> 00:02:14.548
 Pause here and predict. D is settled.
 
-41
-00:02:19.478 --> 00:02:22.002
+40
+00:02:14.648 --> 00:02:17.172
 Which node is settled next, and at what distance?
 
-42
-00:02:25.098 --> 00:02:28.919
+41
+00:02:20.268 --> 00:02:24.089
 E, at ten. It is the smallest unsettled estimate.
 
-43
-00:02:29.019 --> 00:02:32.235
+42
+00:02:24.189 --> 00:02:27.404
 Through E, F becomes ten plus three: thirteen.
 
-44
-00:02:32.335 --> 00:02:33.771
+43
+00:02:27.504 --> 00:02:28.940
 That is shorter than fourteen.
 
-45
-00:02:33.865 --> 00:02:36.931
+44
+00:02:29.034 --> 00:02:32.100
 Settle F, at thirteen. Every node is settled.
 
-46
-00:02:37.015 --> 00:02:40.635
+45
+00:02:32.184 --> 00:02:35.805
 Each node remembers the neighbor that gave its final distance.
 
-47
-00:02:40.735 --> 00:02:44.313
+46
+00:02:35.905 --> 00:02:39.483
 Follow them back from F: E, D, B, C, and then A.
 
-48
-00:02:44.413 --> 00:02:49.335
+47
+00:02:39.583 --> 00:02:44.505
 So the shortest path to F is A, C, B, D, E, F. Its length is thirteen.
 
-49
-00:02:50.900 --> 00:02:53.411
+48
+00:02:46.067 --> 00:02:48.578
 Why must every length be zero or more?
 
-50
-00:02:53.511 --> 00:02:58.074
+49
+00:02:48.678 --> 00:02:53.241
 Here is a small graph with one negative edge, from C to B, of length
 
-51
-00:02:58.174 --> 00:03:01.228
+50
+00:02:53.341 --> 00:02:56.395
 minus two. Here each edge works in one direction only.
 
-52
-00:03:01.312 --> 00:03:05.437
+51
+00:02:56.495 --> 00:03:00.619
 Settle A. From A, B is two away, and C is three away.
 
-53
-00:03:05.523 --> 00:03:09.613
+52
+00:03:00.719 --> 00:03:04.809
 B has the smallest estimate, so the algorithm settles B at two.
 
-54
-00:03:09.713 --> 00:03:10.765
+53
+00:03:04.909 --> 00:03:05.961
 It is now final.
 
-55
-00:03:10.865 --> 00:03:15.604
+54
+00:03:06.061 --> 00:03:10.800
 Then it settles C, at three. Through C, B costs three minus two: one.
 
-56
-00:03:15.704 --> 00:03:20.229
+55
+00:03:10.900 --> 00:03:15.425
 That is shorter, but B is already final. The algorithm answers two.
 
-57
-00:03:20.329 --> 00:03:21.744
+56
+00:03:15.525 --> 00:03:16.940
 The true distance is one.
 
-58
-00:03:23.328 --> 00:03:26.812
+57
+00:03:18.540 --> 00:03:22.024
 With negative lengths, use the Bellman-Ford algorithm instead.

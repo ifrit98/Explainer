@@ -51,3 +51,15 @@ Round 1 audit, fixed before round 2: the "settled" box held B while the narratio
 Round 2 audit, fixed after it (not re-tested): why each estimate is already the cheapest route through settled nodes (every settled node has relaxed its edges); why F is not an exit (no edge to A or C); the negative-edge graph is directed.
 
 Open: the predict card covers the estimates a viewer needs to answer; the colors are not explained; the relax test on screen uses u and v, which the narration does not name; Bellman-Ford is named without a why (a scope pointer).
+
+## Cold read with excess (v0.6.0, video)
+
+Run 2026-10-04 with the v0.6.0 cold read (reads as the audience in `model.md`, reports excess, marks blocking findings). The blind tests above passed; this read found a flaw in the main argument.
+
+- **Blocking:** at 1:44 "reaching D costs at least ten" is false as said: at 2:01 D becomes eight through B. The bound holds only for paths that leave the settled nodes {A, C} without passing through B. Also blocking: "any other path to B must leave the settled nodes through D or E" has no reason (the direct edges A–B and C–B also leave the set, and B's estimate already counts them); "the cheapest way there through settled nodes" adds a qualifier to "estimate" without notice; "a settled estimate is the final distance" at 0:30 sounds like a definition, not a claim the video will prove.
+- **Excess (about 12 s):** the D, E, F estimates read aloud again at 1:24; "the path through C costs two plus one" repeats 0:52; "its estimate is its final distance" repeats 0:30; "D is settled" repeats 2:07.
+- **Edge:** visual conventions never named (orange estimate, green settled, yellow current); green and red each carry two meanings; u and v on screen are never said; the final distances other than F are never said; the counterexample is not tied to the step it breaks.
+
+**Fixed (v0.6.0).** The argument now follows a path to its first node outside {A, C}: if that node is B, B's estimate already counts the path; if it is D or E, the path so far costs at least D's estimate (10) or E's (12). All four exit edges flash, then D and E. Relaxing B adds "the bound of ten held only for paths that leave A and C at D", so D = 8 no longer reads as a contradiction. The model had the same flaw and has the same fix. "A settled estimate is final" is now announced as a claim checked later. Cuts: the D, E, F estimates read aloud again, the repeated "two plus one", the repeated "its estimate is its final distance". 208 s → 203 s; no layout or pace issues.
+
+The v0.4.0 fix of this argument introduced the flaw: it named D and E as the only exits and forgot that a path can leave {A, C} straight to B. The blind tests passed both versions; the v0.6.0 cold read, reading as a developer with no proof background, found it.

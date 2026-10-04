@@ -38,6 +38,8 @@ values:            # the facts renderings show: nested numbers and strings
 
 allow: [4, 60]     # numbers renderings may show that are not model facts (counts, sample sizes)
 
+budget: {prose: 850, reason: "six claims, each with a case in numbers"}   # optional; see below
+
 require:           # values each listed rendering must show, unless it loads the model
   - path: logits                   # '/' nests: probabilities/T=1.0
     in: [prose, diagram, html, video]
@@ -64,6 +66,12 @@ quiz:              # blind-test questions with expected answers
     expect: "It falls toward 0.25; the order does not change."
     misconception: "A different token becomes the most likely one."
 ```
+
+### Budget
+
+`budget` sets the length a rendering may have: `prose` in words (the visible words of `explanation.md`) and `video` in seconds (from the final `timeline.json`). Without it, `explainer check` warns above 600 words or 150 s. With it, the check fails above the declared length, and the budget needs a `reason`.
+
+A reader pays for every sentence. Review rounds add words: each gap a reviewer finds is fixed by saying more. The budget is the counterweight. When a fix pushes a rendering over its budget, cut something this reader does not need.
 
 ### Claims
 
@@ -119,6 +127,9 @@ A mark is a promise, not proof: the blind understanding test checks that the ide
 | A video without its predict pauses | `index.html: plays the video with a plain <video>, which skips its 1 predict pause(s)` | play it with `Explainer.video` |
 | A symbol the narrative does not introduce | `video/scene.py: shows the symbol 'n', which the introduction ledger in narrative.md does not introduce` | add it to the ledger with its grounding instance, and introduce it in that beat |
 | A Mermaid syntax error (with `--diagrams`) | `diagram.md:24: Error: Parse error on line 3` | fix the block; the line is where the block starts |
+| Over a declared length budget | `explanation.md: 702 words, over its budget of 650 words` | cut what this reader does not need |
+| A budget with no reason | `model.yaml: budget needs a reason` | say why this explanation needs this length |
+| Over the default length (a warning, `!`) | `video: 208 s, over the default budget of 150 s` | cut, or declare `budget` with a reason |
 
 Numbers are compared at the precision shown: 0.84 matches 0.842, "84%" and "eighty-four percent" match 0.842, 6.0 × 10⁻⁶ is one number, and 2 never stands for 2.5. Stage, step, and section numbers, years, versions, and hash fragments are skipped.
 

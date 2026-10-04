@@ -76,6 +76,7 @@ def read_model(path: Path) -> dict:
     data.setdefault("claims", [])
     data.setdefault("accept_unjustified", {})
     data.setdefault("terms", [])
+    data.setdefault("budget", {})
     return data
 
 
@@ -459,6 +460,39 @@ def narrative_ledger(folder: Path, present: dict[str, Path], rep: "Report") -> N
                                 f"narrative.md does not introduce")
 
 
+# Length is a cost too. A default budget asks whether a length was chosen; a declared budget is a commitment.
+DEFAULT_BUDGET = {"prose": 600, "video": 150}
+BUDGET_UNIT = {"prose": "words", "video": "s"}
+
+
+def rendering_length(kind: str, folder: Path, path: Path) -> float | None:
+    """Words a reader reads (prose), or seconds a viewer watches (video, from the final timeline)."""
+    if kind == "prose":
+        return len(re.findall(r"[A-Za-z][A-Za-z'’-]*", visible_markdown(path.read_text())))
+    if kind == "video":
+        timeline = folder / "video" / "timeline.json"
+        if timeline.exists():
+            return round(json.loads(timeline.read_text()).get("duration", 0))
+    return None
+
+
+def length_budget(folder: Path, model: dict, present: dict[str, Path], rep: "Report") -> None:
+    budget = model["budget"]
+    if budget and not str(budget.get("reason", "")).strip():
+        rep.problems.append("model.yaml: budget needs a reason (why this explanation needs this length)")
+    for kind, default in DEFAULT_BUDGET.items():
+        if kind not in present or (size := rendering_length(kind, folder, present[kind])) is None:
+            continue
+        rel, unit = present[kind].relative_to(folder) if kind == "prose" else "video", BUDGET_UNIT[kind]
+        if kind in budget:
+            if size > budget[kind]:
+                rep.problems.append(f"{rel}: {size:g} {unit}, over its budget of {budget[kind]} {unit} (budget in "
+                                    f"model.yaml); cut what this reader does not need")
+        elif size > default:
+            rep.warnings.append(f"{rel}: {size:g} {unit}, over the default budget of {default} {unit}; cut what "
+                                f"this reader does not need, or set budget.{kind} with a reason in model.yaml")
+
+
 def predict_pauses(folder: Path) -> int:
     timeline = folder / "video" / "timeline.json"
     if not timeline.exists():
@@ -481,6 +515,7 @@ def plain_video_with_pauses(page_source: str, pauses: int) -> bool:
 class Report:
     slug: str
     problems: list[str] = field(default_factory=list)
+    warnings: list[str] = field(default_factory=list)
     notes: list[str] = field(default_factory=list)
 
     @property
@@ -523,6 +558,7 @@ def check(folder: Path) -> Report:
     if not model["claims"] and present:
         rep.notes.append("no claims: completeness is not checked (principles §10)")
     terminology(folder, model, present, rep)
+    length_budget(folder, model, present, rep)
     narrative_ledger(folder, present, rep)
     if "html" in present and plain_video_with_pauses(present["html"].read_text(), n := predict_pauses(folder)):
         rep.problems.append(f"index.html: plays the video with a plain <video>, which skips its {n} predict "

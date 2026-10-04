@@ -9,13 +9,15 @@ This is the explain pipeline with the stage fixed to 4. Read `../explain/referen
 
 If the subject has no dynamic change (no transformation, motion, iteration, or propagation), say so in one line and propose a lower stage. Make the video anyway if the user confirms.
 
+A video costs the viewer its full length; they cannot skim it. Aim for the shortest video that carries the argument: the default budget is 150 s. Above that, set `budget.video` with a reason in `model.yaml`.
+
 **CLI.** `explainer <command>` with the plugin; `uv run explainer <command>` inside the Explainer repo. Run `explainer setup` once: it downloads the voice and reports whether LaTeX is available for `MathTex`.
 
 ## Procedure
 
 1. **Scaffold.** `explainer new <slug> --stage 4`.
 2. **Model.** Fill `model.md` and `model.yaml` (values the narration and labels use, `claims`, `require`, `quiz`). Run `explainer probe <slug>` with a fresh subagent before you storyboard; recompute its numbers.
-3. **Narrative.** Fill `narrative.md` (principles §11): question and motive, the introduction ledger, and the beats with what is shown and said. Run `explainer coldread <slug> --rendering narrative` with a fresh subagent and fix what it finds before you storyboard.
+3. **Narrative.** Fill `narrative.md` (principles §11): question and motive, the introduction ledger, and the beats with what is shown and said. Run `explainer coldread <slug> --rendering narrative` with a fresh subagent. Fix what blocks and cut what is excess before you storyboard.
 4. **Storyboard.** Fill `video/storyboard.md` from the beats: scene table with bookmarks, object inventory, timing, predict pauses. Write the narration in STE-80.
 5. **Scene code.** Write `video/scene.py` on `ExplainerScene`. Read values with `load_model(__file__)`. One voiceover block per statement; time animations to the tracker and bookmarks. Use `explainer_kit.components` (TrackerBars, LiveNumber, LabeledNumberLine, stagger_labels) before writing your own. Add `self.predict(...)` before the result a learner should predict. Call `self.claim("id")` where each claim is shown, with its case on screen.
 6. **Check.** `explainer check <slug>`. Fix every number the model does not explain.

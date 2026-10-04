@@ -1,0 +1,571 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Self-attention</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Sans+Condensed:wght@600&display=swap">
+<!-- Filled by `explainer sync`: the shared toolkit CSS. Page-specific styles go in the second <style>. -->
+<style id="explainer-toolkit-css">
+/* Explainer web toolkit · inlined by `explainer sync`. Do not edit in a page; edit explainer_kit/web/explainer.css. */
+:root {
+  --bg: #F5F7FA; --surface: #FFFFFF; --fg: #13171D; --muted: #5A6372; --rule: #DDE2E9;
+  --accent: #2F5F8F; --bar: #2F5F8F; --bar-soft: #DCE7F2; --cold: #3478D4; --hot: #D9622B; --focus: #B4530F;
+  --good: #2E6B45; --bad: #B23A3A;
+  --tag-fact: #2E6B45; --tag-derived: #2F5F8F; --tag-assume: #6E4C9A; --tag-estimate: #8A5A12; --tag-loose: #9A4A2E;
+  --display: "IBM Plex Sans Condensed", "Arial Narrow", system-ui, sans-serif;
+  --body: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #0E1116; --surface: #161A21; --fg: #E5E9EF; --muted: #98A2B0; --rule: #272D36;
+  --accent: #74A6DB; --bar: #74A6DB; --bar-soft: #1F2C3B; --cold: #5D9DF0; --hot: #F0894E; --focus: #F2A65E;
+  --good: #7CC498; --bad: #F08080;
+  --tag-fact: #7CC498; --tag-derived: #74A6DB; --tag-assume: #B79BE0; --tag-estimate: #E2B25F; --tag-loose: #E59A7A;
+  color-scheme: dark; } }
+:root[data-theme="dark"] {
+  --bg: #0E1116; --surface: #161A21; --fg: #E5E9EF; --muted: #98A2B0; --rule: #272D36;
+  --accent: #74A6DB; --bar: #74A6DB; --bar-soft: #1F2C3B; --cold: #5D9DF0; --hot: #F0894E; --focus: #F2A65E;
+  --good: #7CC498; --bad: #F08080;
+  --tag-fact: #7CC498; --tag-derived: #74A6DB; --tag-assume: #B79BE0; --tag-estimate: #E2B25F; --tag-loose: #E59A7A;
+  color-scheme: dark; }
+
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body { margin: 0; background: var(--bg); color: var(--fg); font: 16px/1.55 var(--body); }
+main.ex { max-width: 980px; margin: 0 auto; padding-inline: 20px; padding-block: 32px 64px; display: grid; gap: 56px; }
+.ex h1, .ex h2, .ex h3 { font-family: var(--display); font-weight: 600; letter-spacing: -0.01em; text-wrap: balance; margin: 0; }
+.ex h1 { font-size: clamp(2rem, 5vw, 3rem); line-height: 1.05; }
+.ex h2 { font-size: 1.5rem; }
+.ex h3 { font-size: 1.1rem; }
+.ex p { margin: 0; max-width: 65ch; }
+.ex a { color: var(--accent); }
+.ex section, .ex header { display: grid; gap: 16px; }
+.ex code, .ex .num { font-family: var(--mono); font-variant-numeric: tabular-nums; }
+.ex :focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+.ex-eyebrow, .ex .ex-eyebrow { font: 500 0.75rem/1 var(--mono); letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+.ex-lede { font-size: 1.15rem; }
+.ex-muted { color: var(--muted); }
+
+/* Panel: the instrument */
+.ex-panel { background: var(--surface); border: 1px solid var(--rule); border-radius: 10px; padding: 20px; display: grid; gap: 20px; min-width: 0; }
+.ex-row { display: grid; grid-template-columns: minmax(0, 1fr) 220px; gap: 24px; align-items: end; }
+@media (max-width: 680px) { .ex-row { grid-template-columns: minmax(0, 1fr); } }
+
+/* Slider */
+.ex-control { display: grid; gap: 8px; }
+.ex-control-head { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 8px; }
+.ex-value { font: 500 1.6rem/1 var(--mono); font-variant-numeric: tabular-nums; }
+.ex input[type=range] { width: 100%; appearance: none; height: 8px; border-radius: 4px; background: var(--track, linear-gradient(90deg, var(--bar-soft), var(--bar))); }
+.ex input[type=range].ex-thermal { --track: linear-gradient(90deg, var(--cold), var(--muted) 50%, var(--hot)); }
+.ex input[type=range]::-webkit-slider-thumb { appearance: none; width: 22px; height: 22px; border-radius: 50%; background: var(--surface); border: 2px solid var(--fg); cursor: pointer; }
+.ex input[type=range]::-moz-range-thumb { width: 18px; height: 18px; border-radius: 50%; background: var(--surface); border: 2px solid var(--fg); cursor: pointer; }
+.ex-scale { display: flex; justify-content: space-between; font: 0.75rem var(--mono); color: var(--muted); }
+.ex-presets { display: flex; flex-wrap: wrap; gap: 8px; }
+.ex button, .ex .ex-button { font: 500 0.85rem var(--mono); color: var(--fg); background: transparent; border: 1px solid var(--rule); border-radius: 6px; padding: 6px 10px; cursor: pointer; }
+.ex button:hover { border-color: var(--muted); }
+.ex button[aria-pressed="true"], .ex button.ex-primary { background: var(--fg); color: var(--surface); border-color: var(--fg); }
+.ex button:disabled { opacity: 0.45; cursor: not-allowed; }
+
+/* Bars */
+.ex-bars { position: relative; display: grid; grid-template-columns: repeat(var(--n, 4), 1fr); gap: 12px; height: 240px; align-items: end;
+  border-bottom: 1px solid var(--rule); background-image: linear-gradient(var(--rule) 1px, transparent 1px); background-size: 100% 25%; }
+.ex-bar-col { position: relative; height: 100%; display: flex; flex-direction: column; justify-content: flex-end; align-items: center; outline: none; }
+.ex-bar { width: min(56px, 70%); background: var(--c, var(--bar)); border-radius: 4px 4px 0 0; min-height: 1px; transition: height 220ms ease; }
+.ex-bar-val { font: 500 0.85rem var(--mono); font-variant-numeric: tabular-nums; margin-bottom: 4px; }
+.ex-bar-labels { display: grid; grid-template-columns: repeat(var(--n, 4), 1fr); gap: 12px; text-align: center; font: 500 0.95rem var(--mono); padding-top: 6px; }
+.ex-bar-labels small { display: block; color: var(--muted); font-weight: 400; font-size: 0.75rem; }
+.ex-tip { position: absolute; z-index: 2; pointer-events: none; background: var(--fg); color: var(--surface); font: 0.78rem/1.4 var(--mono); padding: 6px 8px; border-radius: 6px; white-space: nowrap; transform: translate(-50%, -100%); }
+
+/* Readouts */
+.ex-readouts { display: grid; gap: 16px; }
+.ex-readout { display: grid; gap: 4px; }
+.ex-readout .ex-label { font: 500 0.72rem var(--mono); letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); }
+.ex-readout .ex-value { font-size: 1.25rem; }
+.ex-meter { height: 6px; background: var(--bar-soft); border-radius: 3px; overflow: hidden; }
+.ex-meter > div { height: 100%; background: var(--bar); border-radius: 3px; transition: width 220ms ease; }
+
+/* Tables and formulas */
+.ex-table-wrap { overflow-x: auto; border: 1px solid var(--rule); border-radius: 10px; background: var(--surface); }
+.ex table { border-collapse: collapse; width: 100%; font: 0.9rem var(--mono); font-variant-numeric: tabular-nums; }
+.ex th, .ex td { padding: 10px 14px; text-align: right; border-bottom: 1px solid var(--rule); white-space: nowrap; }
+.ex th:first-child, .ex td:first-child { text-align: left; }
+.ex thead th { font-weight: 500; color: var(--muted); font-size: 0.78rem; }
+.ex tbody tr:last-child td { border-bottom: 0; }
+.ex-law { font: 500 clamp(1rem, 3vw, 1.35rem) var(--mono); padding: 16px 20px; background: var(--surface); border: 1px solid var(--rule); border-radius: 10px; overflow-x: auto; white-space: nowrap; }
+.ex-live { color: var(--focus); }
+@media (max-width: 520px) { .ex th, .ex td { padding: 8px; } .ex table { font-size: 0.8rem; } }
+
+/* Epistemic tags */
+.ex-tag { justify-self: start; display: inline-block; font: 500 0.7rem var(--mono); letter-spacing: 0.06em; text-transform: uppercase; padding: 2px 6px; border: 1px solid currentColor; border-radius: 4px; color: var(--muted); }
+.ex-tag.fact { color: var(--tag-fact); } .ex-tag.derived { color: var(--tag-derived); } .ex-tag.assumption { color: var(--tag-assume); }
+.ex-tag.estimate { color: var(--tag-estimate); } .ex-tag.loose { color: var(--tag-loose); }
+.ex-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; }
+.ex-card { display: grid; gap: 6px; align-content: start; padding-top: 12px; border-top: 2px solid var(--rule); min-width: 0; }
+
+/* Predict-first gate */
+.ex-predict { border: 2px solid var(--focus); border-radius: 10px; padding: 16px 20px; display: grid; gap: 12px; background: var(--surface); }
+.ex-predict .ex-predict-head { font: 500 0.75rem var(--mono); letter-spacing: 0.08em; text-transform: uppercase; color: var(--focus); }
+.ex-predict form { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+.ex-predict input[type=number], .ex-predict input[type=text] { font: 1rem var(--mono); padding: 6px 10px; border: 1px solid var(--rule); border-radius: 6px; background: var(--bg); color: var(--fg); width: 10em; }
+.ex-predict label.ex-choice { display: inline-flex; gap: 6px; align-items: center; padding: 6px 10px; border: 1px solid var(--rule); border-radius: 6px; cursor: pointer; }
+.ex-predict .ex-result { font-family: var(--mono); }
+.ex-predict .ex-result .ex-good { color: var(--good); } .ex-predict .ex-result .ex-bad { color: var(--bad); }
+.ex-gated[hidden] { display: none !important; }
+
+/* Progressive disclosure */
+.ex-levels { display: grid; gap: 12px; }
+.ex-level { border: 1px solid var(--rule); border-radius: 10px; background: var(--surface); }
+.ex-level > summary { cursor: pointer; padding: 14px 18px; list-style: none; display: flex; gap: 12px; align-items: baseline; }
+.ex-level > summary::-webkit-details-marker { display: none; }
+.ex-level > summary .ex-level-n { font: 500 0.72rem var(--mono); color: var(--muted); letter-spacing: 0.06em; text-transform: uppercase; white-space: nowrap; }
+.ex-level > summary h3 { font-size: 1.05rem; }
+.ex-level > .ex-level-body { padding: 0 18px 18px; display: grid; gap: 12px; }
+.ex-level[open] > summary { border-bottom: 1px solid var(--rule); margin-bottom: 14px; }
+
+/* Video with predict pauses */
+.ex-video { position: relative; display: grid; gap: 10px; }
+.ex-video video { width: 100%; max-width: 100%; aspect-ratio: 16 / 9; background: #0E0E12; border-radius: 8px; display: block; }
+.ex-video .ex-overlay { position: absolute; inset: 0 0 auto 0; aspect-ratio: 16 / 9; display: grid; place-items: center; background: rgba(14, 14, 18, 0.82); border-radius: 8px; padding: 16px; }
+.ex-video .ex-overlay[hidden] { display: none; }
+.ex-video .ex-overlay .ex-predict { max-width: 520px; width: 100%; }
+.ex-chapters { display: flex; flex-wrap: wrap; gap: 8px; }
+
+.ex-summary { display: grid; gap: 8px; padding-left: 1.2em; margin: 0; max-width: 65ch; }
+.ex footer { font-size: 0.85rem; color: var(--muted); border-top: 1px solid var(--rule); padding-top: 16px; }
+@media (prefers-reduced-motion: reduce) { .ex-bar, .ex-meter > div { transition: none; } }
+</style>
+<style>
+:root { --pick: #2F5F8F; --pick-ink: #FFFFFF; --off: #B23A3A; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --pick: #74A6DB; --pick-ink: #0E1116; --off: #F08080; } }
+:root[data-theme="dark"] { --pick: #74A6DB; --pick-ink: #0E1116; --off: #F08080; }
+
+.sentence { font: 1.15rem/2.2 var(--body); max-width: 65ch; }
+.tok { font-family: var(--mono); font-size: 0.95em; padding: 3px 7px; border-radius: 6px; border: 1px solid var(--rule);
+  background: color-mix(in srgb, var(--pick) calc(var(--w, 0) * 100%), transparent);
+  color: var(--fg); transition: background 220ms ease; }
+.tok.heavy { color: var(--pick-ink); }
+.tok.self { outline: 2px solid var(--focus); outline-offset: 1px; }
+.tok.masked { text-decoration: line-through; color: var(--muted); }
+.parts { display: grid; gap: 10px; }
+.part { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 4px 10px; align-items: start; }
+.part input { margin-top: 5px; width: 18px; height: 18px; accent-color: var(--fg); }
+.part label { font-weight: 600; cursor: pointer; }
+.part .note { grid-column: 2; color: var(--muted); font-size: 0.92rem; }
+.part .note.broken { color: var(--off); }
+.instrument { display: grid; grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr); gap: 28px; }
+@media (max-width: 760px) { .instrument { grid-template-columns: minmax(0, 1fr); } }
+.out { display: grid; gap: 10px; }
+.out .row { display: grid; grid-template-columns: 4.5em minmax(0, 1fr) 3.5em; gap: 10px; align-items: center; font: 0.9rem var(--mono); }
+.out .row span:last-child { text-align: right; font-variant-numeric: tabular-nums; }
+td.masked { color: var(--muted); }
+.why-grid { display: grid; gap: 18px; }
+.why-grid .ex-card p { max-width: 65ch; }
+</style>
+</head>
+<body>
+<main class="ex">
+<header>
+  <span class="ex-eyebrow">Explainer · interactive · transformers</span>
+  <h1>How self-attention works</h1>
+  <p class="ex-lede">Each token builds its new vector as a weighted average of the tokens' <em>values</em>. The weights come from how well its <em>query</em> matches each token's <em>key</em>.</p>
+  <p>The problem it solves: the vector for "it" is the same in every sentence. In "The animal didn't cross the street because it was too tired", "it" must mix in information from "animal" to know what it means. <em>Self</em>-attention does this with queries, keys, and values that all come from the same sentence.</p>
+</header>
+
+<section aria-labelledby="h-instrument">
+  <span class="ex-eyebrow">Level 1 · what it is</span>
+  <h2 id="h-instrument">One token, attending</h2>
+  <p>Below, four tokens of that sentence have small vectors made by hand, so you can see every number. A key k says what a token offers and a query q what a token looks for, each with two entries: (animate, place). The key of "animal" is (2, 0); the query of "it" is (2, 0), so it looks for something animate.</p>
+  <p>The <em>score</em> of a token is q · k divided by √d, where d is the number of entries in q and k (here 2). Softmax turns the scores into <em>weights</em>. A value v says what a token passes on; here each value marks one token, so the output of "it" (Σ weight × value) reads as its share of each token.</p>
+  <div id="predict-1"></div>
+  <p data-after="predict-1">The query decides what a token finds. The keys did not change; only the question "it" asks did. Try it with the slider.</p>
+  <div class="ex-panel">
+    <p class="sentence" id="sentence" aria-live="polite">The <span class="tok" data-t="0">animal</span> didn't cross the <span class="tok" data-t="1">street</span> because <span class="tok self" data-t="2">it</span> was too <span class="tok" data-t="3">tired</span>.</p>
+    <div class="instrument">
+      <div class="ex-panel" style="padding:0;border:0;gap:16px">
+        <div id="look"></div>
+        <div id="weights"></div>
+      </div>
+      <div class="parts" role="group" aria-labelledby="h-parts">
+        <h3 id="h-parts">Remove a part, see what breaks</h3>
+        <div class="part"><input type="checkbox" id="p-content" checked><label for="p-content">Weights from query · key</label><p class="note" id="n-content"></p></div>
+        <div class="part"><input type="checkbox" id="p-separate" checked><label for="p-separate">A separate query and key</label><p class="note" id="n-separate"></p></div>
+        <div class="part"><input type="checkbox" id="p-scale" checked><label for="p-scale">Divide by √d</label><p class="note" id="n-scale"></p></div>
+        <div class="part"><input type="checkbox" id="p-mask"><label for="p-mask">Causal mask (GPT-style)</label><p class="note" id="n-mask"></p></div>
+      </div>
+    </div>
+    <div class="ex-table-wrap">
+      <table aria-describedby="h-instrument">
+        <thead><tr><th>token</th><th>key k (animate, place)</th><th>q · k</th><th>score</th><th>weight</th><th>value v</th></tr></thead>
+        <tbody id="rows"></tbody>
+      </table>
+    </div>
+    <div class="out" aria-live="polite">
+      <span class="ex-label ex-eyebrow">Output of "it": Σ weight × value, as shares of each token's value</span>
+      <div id="out"></div>
+    </div>
+  </div>
+</section>
+
+<section aria-labelledby="h-levels">
+  <span class="ex-eyebrow">Go deeper</span>
+  <h2 id="h-levels">How, why, and in practice</h2>
+  <div class="ex-levels">
+
+    <details class="ex-level" open data-claim="mechanism-attention"><summary><span class="ex-level-n">Level 2 · how</span><h3>Query · key → softmax → weighted sum</h3></summary>
+      <div class="ex-level-body">
+        <p>Each token vector x makes three vectors with three learned matrices: a query q = x W<sub>Q</sub> (what it looks for), a key k = x W<sub>K</sub> (what it offers), and a value v = x W<sub>V</sub> (what it passes on). For the token "it":</p>
+        <ol>
+          <li>Take the dot product of its query with every key. The query (2, 0) gives 4, 0, 1, 0.</li>
+          <li>Divide by √d, where d is the number of entries in q and k. Here d = 2, so the scores are 2.83, 0, 0.71, 0.</li>
+          <li>Apply softmax to the scores. The weights are 0.808, 0.048, 0.097, 0.048: positive, and they sum to 1.</li>
+          <li>Add up the values, each times its weight. The output is (0.808, 0.048, 0.048): "it" now carries 81% of the animal's value. The 0.097 that "it" gives itself adds nothing, because its value here is (0, 0, 0).</li>
+        </ol>
+        <p>Every token does the same at the same time, with its own query. The output goes on to the next layer.</p>
+      </div></details>
+
+    <details class="ex-level"><summary><span class="ex-level-n">Level 3 · why</span><h3>Why each part is there</h3></summary>
+      <div class="ex-level-body why-grid">
+        <div class="ex-card" data-claim="why-content-weights"><span class="ex-tag derived">derived</span><strong>Weights from the content</strong>
+          <p>The simplest mix gives every token the same weight. Then "it" gets 0.25 of the animal and 0.25 of the street, and it cannot tell which noun it refers to. Scores from query · key let each token choose.</p></div>
+        <div class="ex-card" data-claim="why-separate-qk"><span class="ex-tag derived">derived</span><strong>A query separate from the key</strong>
+          <p>What a token looks for is not what it is. If the query of "it" is its own vector (0.5, 0.5), it matches animal and street equally: q · k is 1 for both, weights 0.313 each, a tie. A separate W<sub>Q</sub> lets "it" ask for something animate.</p></div>
+        <div class="ex-card" data-claim="why-softmax"><span class="ex-tag fact">fact</span><strong>Softmax, not a plain division</strong>
+          <p>Dividing each score by the row sum fails as soon as a score is negative: the scores one and minus one sum to zero, and the division has no answer; one, minus one, and one give weights of one, minus one, and one. Softmax always gives positive weights that sum to 1, so the output is a weighted average of the values.</p></div>
+        <div class="ex-card" data-claim="why-sqrt-d"><span class="ex-tag derived">derived</span><strong>Divide by √d</strong>
+          <p>If the d numbers in a query and a key are independent, with mean 0 and variance 1, their dot product has variance d. Its standard deviation is √d: 8 at d = 64. Softmax then puts almost all the weight on one token: 0.996 in the demo below, which starts from four scores 1.2, −0.3, 0.5, −0.9 at d = 1 and multiplies them by √d. Then training gets almost no gradient for the other tokens. Dividing by √d keeps the spread near 1: the top weight stays 0.543 at every d.</p>
+          <div id="spread-d"></div>
+          <span class="ex-eyebrow">Weights of four tokens, scores not divided by √d</span>
+          <div id="spread-raw"></div>
+          <p class="ex-muted" id="spread-note"></p></div>
+      </div></details>
+
+    <details class="ex-level" data-claim="guarantee-mask"><summary><span class="ex-level-n">Level 4 · in practice</span><h3>Matrices, heads, and the mask</h3></summary>
+      <div class="ex-level-body">
+        <div class="ex-law">Attention(Q, K, V) = softmax(Q Kᵀ / √d) V</div>
+        <p>Stack the token vectors as the rows of a matrix X. Then Q = X W<sub>Q</sub>, K = X W<sub>K</sub>, V = X W<sub>V</sub>, and Q Kᵀ holds every score at once: row i is token i's query against every key. Softmax runs along each row.</p>
+        <p><strong>Heads.</strong> A layer runs several heads in parallel, each with its own W<sub>Q</sub>, W<sub>K</sub>, W<sub>V</sub>, so each head can look for something different. Their outputs are joined end to end and projected back. GPT-2 small has 12 heads of d = 64 per layer; 12 × 64 = 768, the number of entries in its token vectors.</p>
+        <p><strong>Causal mask.</strong> A decoder (GPT-style) predicts the next token, so a token may attend only to itself and earlier tokens: when it generates, the later tokens do not exist yet, and in training, seeing them would give away the answer. The mask sets the scores for later tokens to −∞ before softmax, so their weights are 0. "It" comes before "tired": with the mask its weights are 0.848, 0.050, 0.102, and 0 for "tired". Without the mask (an encoder, such as BERT), "it" also gives 0.048 to "tired".</p>
+      </div></details>
+  </div>
+</section>
+
+<section aria-labelledby="h-limits">
+  <span class="ex-eyebrow">What to trust</span>
+  <h2 id="h-limits">What is fact, and what is this page's simplification</h2>
+  <div class="ex-cards">
+    <div class="ex-card"><span class="ex-tag fact">fact</span><strong>The formulas.</strong><p class="ex-muted">Query, key, value, softmax(Q Kᵀ / √d) V, heads, and the mask are the transformer's attention (Vaswani et al., 2017).</p></div>
+    <div class="ex-card"><span class="ex-tag assumption">constructed</span><strong>Every vector on this page.</strong><p class="ex-muted">Made by hand: keys and queries with d = 2 named entries (animate, place), values that mark one token each. A trained model learns its vectors, and its dimensions have no names.</p></div>
+    <div class="ex-card"><span class="ex-tag loose">interpretation</span><strong>"A query is what a token looks for."</strong><p class="ex-muted">It describes what the math allows. A trained head need not use it that way.</p></div>
+    <div class="ex-card"><span class="ex-tag fact">observation</span><strong>Some heads track a clear relation.</strong><p class="ex-muted">In trained models, some heads attend to the previous token, or from a pronoun to its noun. Many heads have no simple description.</p></div>
+  </div>
+</section>
+
+<section aria-labelledby="h-summary">
+  <span class="ex-eyebrow">In short</span>
+  <h2 id="h-summary">Summary</h2>
+  <ol class="ex-summary">
+    <li>Each token's output is a weighted average of the values of the tokens it can see.</li>
+    <li>The weights are softmax(query · key / √d): the query decides what a token finds.</li>
+    <li>Separate queries and keys let a token look for something other than itself; √d keeps softmax from putting all the weight on one token.</li>
+    <li>So "it" ends up carrying 81% of the animal's value: its query asks for something animate, and the animal's key offers it.</li>
+  </ol>
+  <p class="ex-muted">Not covered: how W<sub>Q</sub>, W<sub>K</sub>, W<sub>V</sub> are learned; how the model knows token order (positional encodings); the MLP, residual connections, and layer norm.</p>
+</section>
+
+</main>
+<!-- Filled by `explainer sync` from model.yaml. Read it as Explainer.model. -->
+<script type="application/json" id="explainer-model">{"tokens": ["animal", "street", "it", "tired"], "d": 2, "sqrt_d": 1.41, "keys": {"animal": [2, 0], "street": [0, 2], "it": [0.5, 0.5], "tired": [0, 0]}, "values": {"animal": [1, 0, 0], "street": [0, 1, 0], "it": [0, 0, 0], "tired": [0, 0, 1]}, "query_it": {"animate": [2, 0], "place": [0, 2]}, "it_row": {"scores": [4, 0, 1, 0], "scaled": [2.83, 0, 0.71, 0], "weights": [0.808, 0.048, 0.097, 0.048], "unscaled_weights": [0.92, 0.017, 0.046, 0.017], "masked_weights": [0.848, 0.05, 0.102], "animal_share_pct": 81}, "equal_weight": 0.25, "same_qk": {"it_x": [0.5, 0.5], "scores": [1, 1, 0.5, 0], "weights": [0.313, 0.313, 0.22, 0.154]}, "spread": {"d": [1, 4, 16, 64, 128], "top_weight": [0.543, 0.763, 0.94, 0.996, 1.0], "std_at_64": 8, "z": [1.2, -0.3, 0.5, -0.9]}, "gpt2_small": {"d_model": 768, "heads": 12, "d_head": 64}, "year": 2017}</script>
+<script id="explainer-toolkit-js">
+/* Explainer web toolkit · inlined by `explainer sync`. Edit explainer_kit/web/explainer.js, not a page copy.
+ *
+ * Explainer.model          values from model.yaml (the page's <script id="explainer-model"> block)
+ * Explainer.tracker(v)     one shared value; .get() .set(v) .on(fn)
+ * Explainer.slider(el, t, opts)   range input bound to a tracker; presets set the value exactly
+ * Explainer.bars(el, opts) bar chart that keeps each bar's identity; returns update(values)
+ * Explainer.predict(el, opts)     predict-first gate: hides [data-after=id] until the reader commits
+ * Explainer.video(el, opts)       video that stops at predict pauses from the render's timeline.json
+ * Explainer.store                 per-reader storage that never throws (private windows, blocked storage)
+ */
+const Explainer = (() => {
+  const store = {
+    get(key, fallback = null) {
+      try { const v = localStorage.getItem(key); return v === null ? fallback : JSON.parse(v); } catch { return fallback; }
+    },
+    set(key, value) { try { localStorage.setItem(key, JSON.stringify(value)); } catch { /* storage unavailable */ } },
+  };
+
+  const model = (() => {
+    try { return JSON.parse(document.getElementById("explainer-model")?.textContent || "{}"); } catch { return {}; }
+  })();
+
+  function tracker(initial) {
+    let value = initial;
+    const subs = new Set();
+    return {
+      get: () => value,
+      set(v) { if (v === value) return; value = v; subs.forEach((fn) => fn(value)); },
+      on(fn) { subs.add(fn); fn(value); return () => subs.delete(fn); },
+    };
+  }
+
+  // Escape text that comes from the reader (typed predictions). Author strings may contain markup like <sub>.
+  const esc = (x) => String(x).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c]);
+
+  function el(tag, attrs = {}, html = "") {
+    const node = document.createElement(tag);
+    for (const [k, v] of Object.entries(attrs)) node.setAttribute(k, v);
+    if (html) node.innerHTML = html;
+    return node;
+  }
+
+  /* Slider. With `log`, the input moves in log10 space. Presets set the tracker to the exact preset value,
+   * not to the nearest slider step (a 0.005 step would turn 0.5 into 0.501). */
+  function slider(root, t, { id, label, min, max, log = false, step, presets = [], format = (x) => x.toFixed(2),
+                              thermal = false, scale } = {}) {
+    id = id || `ex-slider-${Math.random().toString(36).slice(2, 8)}`;
+    const toInput = (v) => (log ? Math.log10(v) : v);
+    const fromInput = (x) => (log ? 10 ** x : x);
+    root.classList.add("ex-control");
+    root.innerHTML = `<div class="ex-control-head"><label for="${id}">${label}</label>
+      <span class="ex-value" aria-live="polite"></span></div>
+      <input type="range" id="${id}" ${thermal ? 'class="ex-thermal"' : ""} min="${toInput(min)}" max="${toInput(max)}"
+        step="${step ?? (toInput(max) - toInput(min)) / 400}">
+      ${scale ? `<div class="ex-scale" aria-hidden="true">${scale.map((s) => `<span>${s}</span>`).join("")}</div>` : ""}
+      ${presets.length ? `<div class="ex-presets" role="group" aria-label="${label} presets">${presets
+        .map((p) => `<button type="button" data-v="${p.value ?? p}">${p.label ?? format(p.value ?? p)}</button>`).join("")}</div>` : ""}`;
+    const input = root.querySelector("input");
+    const out = root.querySelector(".ex-value");
+    input.addEventListener("input", () => t.set(fromInput(parseFloat(input.value))));
+    root.querySelectorAll(".ex-presets button").forEach((b) => b.addEventListener("click", () => t.set(parseFloat(b.dataset.v))));
+    t.on((v) => {
+      if (Number.isFinite(v)) input.value = toInput(Math.min(Math.max(v, min), max));
+      out.textContent = format(v);
+      input.setAttribute("aria-valuetext", format(v));
+      root.querySelectorAll(".ex-presets button").forEach((b) =>
+        b.setAttribute("aria-pressed", String(Math.abs(parseFloat(b.dataset.v) - v) < 1e-12)));
+    });
+    return input;
+  }
+
+  /* Bars. `labels` is fixed; update(values) changes heights so each bar stays the same object. */
+  function bars(root, { labels, sublabels = [], colors = [], max = 1, format = (x) => x.toFixed(3), tip } = {}) {
+    root.innerHTML = "";
+    const chart = el("div", { class: "ex-bars", role: "img", "aria-label": `Bar chart: ${labels.join(", ")}` });
+    chart.style.setProperty("--n", labels.length);
+    const names = el("div", { class: "ex-bar-labels" });
+    names.style.setProperty("--n", labels.length);
+    const tipEl = el("div", { class: "ex-tip" });
+    tipEl.hidden = true;
+    let current = labels.map(() => 0);
+    const cols = labels.map((name, i) => {
+      const col = el("div", { class: "ex-bar-col", tabindex: "0" }, `<span class="ex-bar-val num"></span><div class="ex-bar"></div>`);
+      if (colors[i]) col.querySelector(".ex-bar").style.setProperty("--c", colors[i]);
+      const show = () => {
+        tipEl.textContent = tip ? tip(i, current[i]) : `${name} · ${format(current[i])}`;
+        tipEl.style.left = `${col.offsetLeft + col.offsetWidth / 2}px`;
+        tipEl.style.top = `${col.offsetTop + col.offsetHeight * (1 - Math.min(current[i] / max, 1)) - 28}px`;
+        tipEl.hidden = false;
+      };
+      ["mouseenter", "focus"].forEach((e) => col.addEventListener(e, show));
+      ["mouseleave", "blur"].forEach((e) => col.addEventListener(e, () => (tipEl.hidden = true)));
+      chart.appendChild(col);
+      names.appendChild(el("span", {}, `${name}${sublabels[i] ? `<small>${sublabels[i]}</small>` : ""}`));
+      return col;
+    });
+    chart.appendChild(tipEl);
+    root.append(chart, names);
+    return function update(values) {
+      current = values;
+      cols.forEach((col, i) => {
+        col.querySelector(".ex-bar").style.height = `${Math.max((values[i] / max) * 100, 0.4)}%`;
+        col.querySelector(".ex-bar-val").textContent = format(values[i]);
+      });
+    };
+  }
+
+  /* Predict-first gate. The reader commits a prediction before the answer appears.
+   * Elements with data-after="<id>" stay hidden until then. The prediction is kept per reader. */
+  function predict(root, { id, question, type = "number", choices = [], unit = "", answer, judge, explain = "" }) {
+    const key = `explainer:${location.pathname}:predict:${id}`;
+    root.classList.add("ex-predict");
+    root.innerHTML = `<span class="ex-predict-head">Predict first</span><p>${question}</p>
+      <form>${type === "choice"
+        ? choices.map((c, i) => `<label class="ex-choice"><input type="radio" name="${id}" value="${i}" required> ${c}</label>`).join("")
+        : `<input type="${type === "number" ? "number" : "text"}" step="any" name="${id}" aria-label="Your prediction" required> ${unit}`}
+        <button type="submit" class="ex-primary">Commit prediction</button></form>
+      <div class="ex-result" aria-live="polite" hidden></div>`;
+    const form = root.querySelector("form");
+    const result = root.querySelector(".ex-result");
+    const gated = () => document.querySelectorAll(`[data-after="${id}"]`);
+    gated().forEach((g) => { g.classList.add("ex-gated"); g.hidden = true; });
+
+    function reveal(guess) {
+      const shown = type === "choice" ? choices[guess] : `${esc(guess)} ${unit}`.trim();
+      const correct = answer === undefined ? null : judge ? judge(guess) : type === "choice" ? guess === answer : null;
+      const verdict = correct === null ? "" : correct ? '<span class="ex-good">matches</span>' : '<span class="ex-bad">does not match</span>';
+      const answerText = answer === undefined ? "" : type === "choice" ? choices[answer] : `${answer} ${unit}`.trim();
+      result.innerHTML = `Your prediction: <strong>${shown}</strong>${answerText ? ` · Result: <strong>${answerText}</strong> ${verdict}` : ""}${explain ? `<br>${explain}` : ""}`;
+      result.hidden = false;
+      form.querySelectorAll("input, button").forEach((x) => (x.disabled = true));
+      gated().forEach((g) => (g.hidden = false));
+      root.dispatchEvent(new CustomEvent("predicted", { detail: { guess } }));
+    }
+
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const data = new FormData(form).get(id);
+      const guess = type === "choice" ? Number(data) : type === "number" ? Number(data) : String(data);
+      store.set(key, guess);
+      reveal(guess);
+    });
+    const saved = store.get(key);
+    if (saved !== null) reveal(saved);
+    return { reveal };
+  }
+
+  /* Video with predict pauses. `timeline` is the render's timeline.json (object or URL). At each predict
+   * event the video pauses and asks for a prediction; the reader continues after committing one. */
+  async function video(root, { src, poster, captions, timeline }) {
+    root.classList.add("ex-video");
+    root.innerHTML = `<video controls preload="metadata" playsinline ${poster ? `poster="${poster}"` : ""}>
+        <source src="${src}" type="video/mp4">${captions ? `<track kind="captions" src="${captions}" srclang="en" label="English">` : ""}
+      </video><div class="ex-overlay" hidden><div></div></div><div class="ex-chapters"></div>`;
+    const v = root.querySelector("video");
+    const overlay = root.querySelector(".ex-overlay");
+    let events = [];
+    try {
+      const data = typeof timeline === "string" ? await (await fetch(timeline)).json() : timeline;
+      events = (data?.events || []).filter((e) => e.kind === "predict");
+    } catch { /* no timeline: plain video */ }
+    const done = new Set();
+    const chapters = root.querySelector(".ex-chapters");
+    events.forEach((e, i) => {
+      const b = el("button", { type: "button" }, `Predict ${i + 1} · ${Math.floor(e.t / 60)}:${String(Math.floor(e.t % 60)).padStart(2, "0")}`);
+      b.addEventListener("click", () => { v.currentTime = Math.max(e.t - 0.5, 0); v.play(); });
+      chapters.appendChild(b);
+    });
+    v.addEventListener("timeupdate", () => {
+      const e = events.find((e, i) => !done.has(i) && v.currentTime >= e.t + 1.2 && v.currentTime < e.t + 6);
+      if (!e) return;
+      const i = events.indexOf(e);
+      done.add(i);
+      v.pause();
+      const box = overlay.firstElementChild;
+      predict(box, { id: `video-${i}`, question: e.question, type: "text" });
+      box.addEventListener("predicted", () => {
+        const go = el("button", { type: "button", class: "ex-primary" }, "Continue the video");
+        go.addEventListener("click", () => { overlay.hidden = true; v.play(); });
+        box.appendChild(go);
+        go.focus();
+      }, { once: true });
+      overlay.hidden = false;
+    });
+    return v;
+  }
+
+  return { model, store, tracker, slider, bars, predict, video };
+})();
+</script>
+<script>
+(() => {
+  const M = Explainer.model;
+  const names = M.tokens;
+  const keys = names.map((n) => M.keys[n]);
+  const vals = names.map((n) => M.values[n]);
+  const self = names.indexOf("it");
+  const R = Math.hypot(...M.query_it.animate);           // query length
+  const dot = (a, b) => a.reduce((s, x, i) => s + x * b[i], 0);
+  const softmax = (xs) => { const m = Math.max(...xs); const e = xs.map((x) => Math.exp(x - m)); const s = e.reduce((a, b) => a + b, 0); return e.map((x) => x / s); };
+  const f = (x, n = 3) => (Math.abs(x) < 5e-4 ? "0" : x.toFixed(n).replace(/\.?0+$/, "") || "0");
+  const vec = (v) => `(${v.map((x) => f(x, 2)).join(", ")})`;
+
+  const parts = { content: true, separate: true, scale: true, mask: false };
+  const look = Explainer.tracker(0);                       // 0 = animate, 1 = place
+  const query = (t) => (parts.separate ? [R * Math.cos(t * Math.PI / 2), R * Math.sin(t * Math.PI / 2)] : M.keys.it);
+
+  Explainer.slider(document.getElementById("look"), look, {
+    label: 'What "it" looks for', min: 0, max: 1, scale: ["animate", "place"],
+    presets: [{ value: 0, label: "animate" }, { value: 0.5, label: "both" }, { value: 1, label: "place" }],
+    format: (t) => `q = ${vec(query(t))}`,
+  });
+  const updateBars = Explainer.bars(document.getElementById("weights"), {
+    labels: names, sublabels: keys.map((k) => `k = ${vec(k)}`), format: (x) => f(x),
+  });
+
+  function compute(t) {
+    const q = query(t);
+    const raw = keys.map((k) => dot(q, k));
+    const scores = raw.map((s) => (parts.scale ? s / Math.sqrt(M.d) : s));
+    const visible = names.map((_, j) => !(parts.mask && j > self));
+    const idx = names.map((_, j) => j).filter((j) => visible[j]);
+    const sm = parts.content ? softmax(idx.map((j) => scores[j])) : idx.map(() => 1 / idx.length);
+    const w = names.map(() => 0);
+    idx.forEach((j, i) => (w[j] = sm[i]));
+    const out = vals[0].map((_, c) => w.reduce((s, wj, j) => s + wj * vals[j][c], 0));
+    return { q, raw, scores, visible, w, out };
+  }
+
+  const notes = {
+    content: (on, r) => on ? "Each weight comes from the query · key score." : `Equal weights: animal ${f(r.w[0])}, street ${f(r.w[1])}. "it" cannot choose.`,
+    separate: (on, r) => on ? 'The query of "it" is its own projection of x.' : `Query = its own vector (0.5, 0.5): animal ${f(r.w[0])}, street ${f(r.w[1])}, a tie.`,
+    scale: (on, r) => on ? `Scores divided by √${M.d}.` : `Not divided: the top weight rises to ${f(Math.max(...r.w))}. At d = 64 the effect is far larger (Level 3).`,
+    mask: (on, r) => on ? `"tired" comes after "it", so its weight is 0.` : 'Off: "it" also sees the later token "tired" (an encoder).',
+  };
+  const broken = { content: false, separate: false, scale: false, mask: null };   // the mask changes the model; it breaks nothing
+
+  function render() {
+    const r = compute(look.get());
+    updateBars(r.w);
+    document.querySelectorAll("#sentence .tok").forEach((el) => {
+      const j = +el.dataset.t;
+      el.style.setProperty("--w", r.w[j].toFixed(3));
+      el.classList.toggle("heavy", r.w[j] > 0.5);
+      el.classList.toggle("masked", !r.visible[j]);
+    });
+    document.getElementById("rows").innerHTML = names.map((n, j) => r.visible[j]
+      ? `<tr><td>${n}</td><td>${vec(keys[j])}</td><td>${f(r.raw[j], 2)}</td><td>${f(r.scores[j], 2)}</td><td>${f(r.w[j])}</td><td>${vec(vals[j])}</td></tr>`
+      : `<tr><td class="masked">${n}</td><td>${vec(keys[j])}</td><td class="masked" colspan="3">masked: later token</td><td>${vec(vals[j])}</td></tr>`).join("");
+    document.getElementById("out").innerHTML = ["animal", "street", "tired"].map((lab, c) =>
+      `<div class="row"><span>${lab}</span><div class="ex-meter"><div style="width:${(r.out[c] * 100).toFixed(1)}%"></div></div><span>${f(r.out[c])}</span></div>`).join("");
+    for (const k of Object.keys(parts)) {
+      const n = document.getElementById(`n-${k}`);
+      n.textContent = notes[k](parts[k], r);
+      n.classList.toggle("broken", parts[k] === broken[k]);
+    }
+    document.querySelector("#look input").disabled = !parts.separate;
+  }
+  for (const k of Object.keys(parts)) {
+    document.getElementById(`p-${k}`).addEventListener("change", (e) => { parts[k] = e.target.checked; render(); look.set(look.get()); });
+  }
+  look.on(render);
+
+  // Level 3: the same four scores, spread as at dimension d.
+  const dT = Explainer.tracker(1);
+  Explainer.slider(document.getElementById("spread-d"), dT, {
+    label: "Dimension d", min: 1, max: 128, log: true, presets: M.spread.d, format: (d) => `d = ${Math.round(d)}`,
+  });
+  const rawBars = Explainer.bars(document.getElementById("spread-raw"), {
+    labels: ["1st", "2nd", "3rd", "4th"], format: (x) => f(x),
+  });
+  dT.on((d) => {
+    d = Math.round(d);
+    const raw = softmax(M.spread.z.map((z) => z * Math.sqrt(d)));
+    const scaled = softmax(M.spread.z);
+    rawBars(raw);
+    document.getElementById("spread-note").textContent =
+      `Not divided, the top weight is ${f(Math.max(...raw))}. Divided by √d, it is ${f(Math.max(...scaled))} at every d.`;
+  });
+
+  Explainer.predict(document.getElementById("predict-1"), {
+    id: "predict-1", type: "choice", choices: names, answer: 1,
+    question: 'Turn the query of "it" from (2, 0), animate, to (0, 2), place. Which token gets the most weight?',
+    explain: "street. Its key (0, 2) now matches the query (0, 2) the way animal's key matched (2, 0): weight 0.808.",
+  });
+})();
+</script>
+</body>
+</html>

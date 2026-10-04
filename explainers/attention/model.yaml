@@ -1,0 +1,101 @@
+# Machine-readable half of model.md. `explainer check attention` holds the page to it.
+# The page computes every weight live from these vectors; the numbers in its text must match.
+
+values:
+  tokens: [animal, street, it, tired]
+  d: 2
+  sqrt_d: 1.41
+  keys:
+    animal: [2, 0]
+    street: [0, 2]
+    it: [0.5, 0.5]
+    tired: [0, 0]
+  values:
+    animal: [1, 0, 0]
+    street: [0, 1, 0]
+    it: [0, 0, 0]
+    tired: [0, 0, 1]
+  query_it: {animate: [2, 0], place: [0, 2]}
+  it_row:
+    scores: [4, 0, 1, 0]
+    scaled: [2.83, 0, 0.71, 0]
+    weights: [0.808, 0.048, 0.097, 0.048]
+    unscaled_weights: [0.92, 0.017, 0.046, 0.017]
+    masked_weights: [0.848, 0.050, 0.102]
+    animal_share_pct: 81
+  equal_weight: 0.25
+  same_qk:
+    it_x: [0.5, 0.5]
+    scores: [1, 1, 0.5, 0]
+    weights: [0.313, 0.313, 0.22, 0.154]
+  spread:
+    d: [1, 4, 16, 64, 128]
+    top_weight: [0.543, 0.763, 0.94, 0.996, 1.000]
+    std_at_64: 8
+    z: [1.2, -0.3, 0.5, -0.9]     # four scores at spread 1; at dimension d they spread as z × √d
+  gpt2_small: {d_model: 768, heads: 12, d_head: 64}
+  year: 2017
+
+allow: [3]   # three numbers per value vector
+
+require:
+  - path: it_row/weights
+    in: [html]
+  - path: same_qk/weights
+    in: [html]
+
+claims:
+  - id: mechanism-attention
+    kind: mechanism
+    statement: "A token's output is a weighted average of all tokens' values; the weights are the softmax of its query's dot products with every key, divided by √d."
+    example: "'it' with query (2, 0): scores 4, 0, 1, 0; divided by √2: 2.83, 0, 0.71, 0; weights 0.808, 0.048, 0.097, 0.048; output (0.808, 0.048, 0.048): 81% of the animal's value."
+  - id: why-content-weights
+    kind: why
+    about: []
+    statement: "The weights come from the content of the tokens, so a token can pick which others to use."
+    alternative: "Equal weights, 1/n for every token."
+    counterexample: "'it' gets 0.25 of the animal and 0.25 of the street: it cannot tell which noun it refers to."
+    ask: "Why does attention compute weights from queries and keys, instead of averaging all tokens equally?"
+  - id: why-separate-qk
+    kind: why
+    about: []
+    statement: "A token's query (what it looks for) is a different projection from its key (what it offers)."
+    alternative: "Use the token vector x as both query and key."
+    counterexample: "x for 'it' is (0.5, 0.5); it scores animal 1 and street 1, a tie: 0.313 each."
+    ask: "What goes wrong if a token's query is just its own vector?"
+  - id: why-softmax
+    kind: why
+    about: [softmax]
+    statement: "Softmax turns any row of scores into positive weights that sum to 1, so the output is a weighted average of values."
+    alternative: "Divide each score by the sum of the row."
+    counterexample: "The row 4, 0, 1, 0 has zeros, and a row can sum to 0 or below; such a division gives no weights or negative ones."
+  - id: why-sqrt-d
+    kind: why
+    about: [sqrt, √]
+    statement: "Dividing by √d keeps the scores' spread near 1 for any d, so softmax does not saturate."
+    alternative: "No division."
+    counterexample: "The same four scores spread as at d = 64 give a top weight of 0.996: one token takes almost all the weight, and training gets almost no gradient for the others. Scaled, the top weight is 0.543 at every d."
+    ask: "Why are the scores divided by √d?"
+  - id: guarantee-mask
+    kind: guarantee
+    statement: "With the causal mask, a token's output depends only on itself and earlier tokens."
+    example: "'it' comes before 'tired': with the mask, its weights are 0.848, 0.050, 0.102 over animal, street, it, and 0 for tired."
+    counterexample: "Without the mask (an encoder, such as BERT), 'it' also gives 0.048 to 'tired', a later token."
+
+terms:
+  - term: weight
+    means: "softmax of a row of scores; positive, and the row sums to 1"
+    avoid: [attention score, attention probability]
+  - term: score
+    means: "query · key / √d, before softmax"
+    avoid: [similarity score, attention value]
+
+quiz:
+  - q: "In the example, if the query of 'it' points to 'place' instead of 'animate', which token gets most of its weight, and about how much?"
+    expect: "street, about 0.808 (81%)"
+    misconception: "animal, because 'it' refers to the animal"
+  - q: "In a GPT-style decoder, can the token 'it' use information from the word 'tired' that comes after it? Why?"
+    expect: "No. The causal mask sets its weight for later tokens to 0, because a decoder predicts the next token and may not look ahead."
+  - q: "What happens to the weights if d grows from 2 to 64 and nothing divides the scores by √d?"
+    expect: "The scores spread out (standard deviation about √d, 8 at d = 64), softmax saturates, and one token takes almost all the weight (0.996 in the example)."
+    misconception: "Nothing changes, because softmax normalizes the scores anyway"

@@ -5,6 +5,8 @@
 # allow:   structural numbers that are not model values (item counts, slider ends, sample sizes).
 # require: values that each listed rendering must show, unless it loads the model.
 # quiz:    blind understanding test. `misconception` is a wrong answer the rendering must prevent.
+# budget:  optional length limits. Defaults (a warning when exceeded): prose 600 words, video 150 s.
+#          A declared budget fails the check when exceeded, and needs a reason.
 
 values:
   example_quantity: 1.0
@@ -35,6 +37,8 @@ terms: []
 #  - term: estimate
 #    means: "the shortest length found so far; 'distance' means only the final value"
 #    avoid: [smallest distance, has distance]
+
+# budget: {prose: 900, video: 240, reason: "two guarantees, each with a case that breaks"}
 
 quiz: []
 #  - q: "What happens to X when Y doubles?"

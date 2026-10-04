@@ -67,6 +67,28 @@ STE reduces grammatical complexity. It does not reduce conceptual density. Also 
 | The relationship between A and B can be understood in the context of C. | A causes B because C. |
 | One potential limitation concerns situations in which X may become relatively large compared with Y. | The model fails when X exceeds Y. |
 
+## Where STE-80 gives way
+
+The 20% that is not strict STE is there to keep explanatory power. Break a rule when following it costs the reader more than breaking it.
+
+| Situation | Do this |
+|---|---|
+| A precise term of art exists ("logit", "invariant", "dipole") | Keep it and define it once. A vaguer common word costs precision every time it appears. |
+| A cause and its effect are split into two sentences and the link gets lost | Keep them in one sentence: "Blue scatters more because the electrons follow faster oscillations with larger accelerations." |
+| A short analogy carries a mechanism the reader cannot see | Use it, label it as an analogy, and say where it breaks. |
+| A formula says it more exactly than words | Show the formula, then one sentence on what it means. |
+| The reader already knows a term (the audience in `model.md`) | Use it without a definition. |
+
+Rules that never give way: one term per concept, no ambiguous pronouns, no filler, and the direct causal statement over the indirect one.
+
+## Calibrate to the reader
+
+Write for the audience in `model.md`. Unless told otherwise, it is a technical reader (school mathematics and science, basic programming) who is new to this subject.
+
+- Define each term this reader does not know. Do not define the ones they do.
+- Put the answer first: the result in one to three sentences, then the mechanism, then the evidence and edge cases.
+- Cut a sentence when the reader loses nothing without it. Restating a point "for clarity" is excess unless the restatement adds a case or a number.
+
 ## Worked example
 
 - **Before:** It is imperative that the operator ensures the hydraulic reservoir is replenished prior to commencing operation.

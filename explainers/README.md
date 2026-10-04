@@ -4,6 +4,8 @@ Each folder holds one `model.md` (the source of truth) and the renderings compil
 
 | Example | Stage | Why this stage | Files |
 |---|---|---|---|
+| [sky-blue](sky-blue/) | 1 + 2 · prose, diagram | A phenomenon from first principles: a six-link causal chain (prose) and two light paths and two scatterer sizes (diagram). Built with the v0.6.0 process: audience-aware probe and cold read, a 650-word budget. | [prose](sky-blue/explanation.md) · [diagram](sky-blue/diagram.md) · [review](sky-blue/review/understanding.md) |
+| [attention](attention/) | 3 · interactive | One mechanism under four alternatives (remove a part, see what breaks), at four levels. A static diagram shows one state. | [page (live)](https://ifrit98.github.io/Explainer/explainers/attention/) · [review](attention/review/understanding.md) |
 | [git-bisect](git-bisect/) | 1 · prose | A linear procedure with one loop. Numbered steps carry all of it. | [explanation](git-bisect/explanation.md) |
 | [git-objects](git-objects/) | 2 · diagram | Five object types and four pointer relations, held at once. Nothing moves. | [diagram](git-objects/diagram.md) |
 | [cdn-request](cdn-request/) | 3 · interactive | Two distances and a cache state set the result; the reader compares three paths. Built from the Stage 3 template. | [page (live)](https://ifrit98.github.io/Explainer/explainers/cdn-request/) |

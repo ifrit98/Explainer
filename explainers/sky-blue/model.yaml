@@ -1,0 +1,96 @@
+# Machine-readable half of model.md. `explainer check sky-blue` holds every rendering to it.
+
+values:
+  wavelength_nm: {violet: 400, blue: 450, green: 550, red: 700}
+  visible_nm: [400, 700]
+  molecule_nm: 0.3
+  molecule_smaller: 1500          # 450 nm / 0.3 nm
+  droplet_um: 10
+  droplet_larger: 22              # 10 µm / 450 nm
+  scatter_ratio:
+    blue_vs_red: 5.86             # (700 / 450)^4
+    violet_vs_blue: 1.60          # (450 / 400)^4
+  omega_ratio_blue_red: 1.56      # 700 / 450
+  acceleration_ratio: 2.42        # 1.56^2
+  natural_wavelength_nm: 100      # estimate
+  amplitude_factor: {blue: 1.052, red: 1.021}
+  amplitude_only_ratio: 1.06      # (1.052 / 1.021)^2
+  optical_depth: {blue: 0.22, green: 0.097, red: 0.037}
+  air_mass: {overhead: 1, horizon: 38}
+  keep_per_air_mass_blue: 0.80
+  beam_loss_overhead_pct: {blue: 20, red: 4}
+  sky_blue_vs_red: 5           # 20% / 4%
+  through_pct:
+    overhead: {blue: 80, green: 91, red: 96}
+    horizon: {blue: 0.02, green: 2.5, red: 25}
+
+allow: [2, 4]                     # squares and fourth powers: a², λ⁴, ω⁴, ω², 1/λ⁴
+
+require:
+  - path: scatter_ratio/blue_vs_red
+    in: [prose, diagram]
+  - path: through_pct/horizon/blue
+    in: [prose, diagram]
+  - path: through_pct/horizon/red
+    in: [prose, diagram]
+
+budget: {prose: 650, reason: "a six-link causal chain plus two failure cases (white clouds, a white noon Sun)"}
+
+claims:
+  - id: mechanism-dipole
+    kind: mechanism
+    statement: "Light's electric field drives the bound electrons; acceleration is ω² times the amplitude, and radiated power is proportional to acceleration squared, so scattered power ∝ ω⁴ ∝ 1/λ⁴."
+    example: "Blue's ω is 1.56 times red's: acceleration 1.56² = 2.42 times larger, scattered power 2.42² = 5.86 times larger."
+  - id: why-acceleration
+    kind: why
+    about: []
+    statement: "Scattered power depends on the electron's acceleration, not only its amplitude."
+    alternative: "Scattered power follows the amplitude of the electron's motion."
+    counterexample: "The amplitude is nearly the same for every color (1.052 at 450 nm, 1.021 at 700 nm), so blue would scatter only 1.06 times more than red: a nearly white sky."
+    ask: "Why does blue light scatter more than red, if the electrons move about as far for every color?"
+  - id: why-multiply
+    kind: why
+    about: []
+    statement: "Each air mass keeps the same fraction of the light still in the beam, so losses multiply."
+    alternative: "Losses add: the beam loses 20% of its blue for each air mass."
+    counterexample: "At the horizon, 38 × 20% would remove 760% of the blue, which is impossible; multiplying gives 0.80^38 ≈ 0.02%."
+    in: [prose]
+  - id: guarantee-small-scatterer
+    kind: guarantee
+    statement: "Scattered power ∝ 1/λ⁴ holds when the scatterer is much smaller than the wavelength."
+    example: "N₂, 0.3 nm across, 1,500 times smaller than 450 nm: blue scatters 5.86 times more than red."
+    counterexample: "A cloud droplet, 10 µm across, 22 times larger than 450 nm: waves from different parts of the droplet interfere, all colors scatter about equally, and clouds are white."
+    ask: "Why are clouds white when the sky is blue?"
+  - id: guarantee-path
+    kind: guarantee
+    statement: "A long path through air removes the blue from the Sun's beam, so the low Sun is red."
+    example: "Sun on the horizon, air mass 38: 0.02% of the blue and 25% of the red gets through."
+    counterexample: "Sun overhead, air mass 1: 80% of the blue and 96% of the red gets through, so the Sun looks white."
+  - id: misconception-absorb
+    kind: misconception
+    statement: "Air absorbs the other colors, so the light left over is blue."
+    correction: "Air scatters blue light out of the beam into the sky; it does not absorb it. The sky on the Moon, with no air, is black in daylight."
+    in: [prose]
+  - id: misconception-violet
+    kind: misconception
+    statement: "Shorter wavelengths scatter more, so the sky should be violet."
+    correction: "Violet scatters 1.60 times more than blue, but sunlight has less violet, the eye is less sensitive to it, and the eye sees the scattered mix as pale blue."
+    in: [prose]
+
+terms:
+  - term: scattered power
+    means: "the power one molecule sends out of the beam"
+    avoid: [scattering strength, scattered intensity]
+  - term: scattering
+    means: "light taken out of the beam and sent out in other directions; not absorption"
+    avoid: [air absorbs blue, absorbs the blue]
+
+quiz:
+  - q: "On a planet with the same air but a star that emits only red light (700 nm), what color is the daytime sky?"
+    expect: "Red (dim): only red light is there to scatter; 1/λ⁴ changes how much scatters, not which colors exist."
+    misconception: "Blue, because air is blue"
+  - q: "Why is the Sun red at sunset but white at noon?"
+    expect: "At the horizon its light crosses about 38 times more air; scattering removes the blue (0.02% gets through) and leaves the red (25%). At noon 80% of the blue gets through."
+    misconception: "Because the air absorbs the blue light"
+  - q: "Would the sky be blue if air molecules were the size of cloud droplets?"
+    expect: "No: particles much larger than the wavelength scatter all colors about equally, so the sky would be white, like a cloud."

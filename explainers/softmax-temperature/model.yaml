@@ -33,6 +33,9 @@ values:
 
 allow: [4, 60, 100000]      # four tokens, 60 sampled draws, a 100,000-token vocabulary
 
+# The compiler demo carries six claims (three whys, two guarantees, one mechanism), each with its numbers.
+budget: {prose: 850, reason: "six claims, each with a case in numbers"}
+
 require:
   - path: logits
     in: [prose, diagram, html, video]

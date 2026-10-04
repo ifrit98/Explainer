@@ -6,7 +6,7 @@
 
 ## 1. Reader before and after
 
-- **Before:** <prior knowledge, from model.md. Nothing else counts as known: not a letter, not a name, not a color.>
+- **Before:** <the audience and its prior knowledge, from model.md. The cold read plays this reader: it skips what they know and flags what they do not. A letter, name, or color this explanation introduces is not known until it is explained.>
 - **After:** <the one sentence the reader can say afterwards. The recap beat says it.>
 
 ## 2. Question and motive
@@ -17,7 +17,7 @@
 
 ## 3. Introduction ledger
 
-Every term with a special meaning, every symbol and name, and every visual convention (a color, a shape, a highlight) that a rendering uses. Each one is shown, named, and grounded by a concrete instance before its first use. One word per meaning. `explainer check` fails a scene that shows a symbol this table does not list.
+Every term, symbol, name, and visual convention (a color, a shape, a highlight) that a rendering uses and this reader does not already know. Each one is shown, named, and grounded by a concrete instance before its first use. One word per meaning. `explainer check` fails a scene that shows a symbol this table does not list.
 
 | Reference | Means | Grounded by (a concrete instance) | Beat |
 |---|---|---|---|
@@ -25,7 +25,7 @@ Every term with a special meaning, every symbol and name, and every visual conve
 
 ## 4. Beats
 
-Each beat answers the question the beat before it raised. Write the bridge: "so…", "but…", "therefore…". Each beat says what it shows, and shows what it says.
+Each beat answers the question the beat before it raised. Write the bridge: "so…", "but…", "therefore…". Each beat says what it shows, and shows what it says. A beat that tells this reader nothing new is cut.
 
 Kinds: hook, instance, notice, name, objection, approach, mechanism, generalize, test (predict), close, payoff, recap.
 

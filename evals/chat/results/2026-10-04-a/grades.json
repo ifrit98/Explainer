@@ -1,0 +1,542 @@
+{
+  "ice-floats": {
+    "key": {
+      "A": "none",
+      "B": "v0.6",
+      "C": "v0.5"
+    },
+    "why_best": "A covers all three required points accurately and in the fewest words, close to the budget, and its detours are the shortest of the three answers.",
+    "rank": [
+      "none",
+      "v0.5",
+      "v0.6"
+    ],
+    "grades": {
+      "none": {
+        "must": [
+          2,
+          2,
+          2
+        ],
+        "misconception": "absent",
+        "answer_first": true,
+        "errors": [],
+        "excess": [
+          "That's where the phrase \"tip of the iceberg\" comes from.",
+          "Water is densest at about **4 °C**, so in cold lakes the bottom water often stays around that temperature.",
+          "The expansion on freezing is also why **pipes burst** and why freeze-thaw cycles crack rocks and roads.",
+          "By **Archimedes' principle**, a floating object sinks until it displaces a weight of water equal to its own weight. Since ice is about 92% as dense as water, roughly 90% of a floating chunk of ice sits below the surface."
+        ],
+        "unclear": [
+          "hydrogen-bonded to four neighbors in a tetrahedral arrangement",
+          "Since ice is about 92% as dense as water, roughly 90% of a floating chunk of ice sits below the surface."
+        ],
+        "score": 8
+      },
+      "v0.6": {
+        "must": [
+          2,
+          2,
+          2
+        ],
+        "misconception": "absent",
+        "answer_first": true,
+        "errors": [
+          "Solid wax, metal, and carbon dioxide all sink in their own liquid."
+        ],
+        "excess": [
+          "**Worked example:** 1 cm³ of ice has a mass of 0.917 g. It floats when it displaces 0.917 g of water, which is 0.917 cm³. So about 92% of floating ice is below the surface. This is why most of an iceberg is hidden.",
+          "- If a fully submerged object weighs more than the water it displaces, it sinks.\n- If it weighs less, it rises until the displaced water's weight equals its own weight. Then it floats.",
+          "The claim \"ice floats\" depends on the open hexagonal lattice. Remove that condition, and the result changes. At very high pressures (thousands of atmospheres), water freezes into other crystal forms, such as ice VI and ice VII. Pressure forces their molecules into compact arrangements. These forms are denser than liquid water and sink. They do not form on Earth's surface, but they probably exist deep inside some icy moons.",
+          "Liquid water is densest at about 4 °C. In winter, lake water at 4 °C sinks to the bottom. Ice forms on top and floats there. The ice layer insulates the water below, so lakes rarely freeze solid, and aquatic life survives the winter.",
+          "That 9% expansion is also the reason frozen pipes burst."
+        ],
+        "unclear": [
+          "Parts of the lattice collapse."
+        ],
+        "score": 6
+      },
+      "v0.5": {
+        "must": [
+          2,
+          2,
+          2
+        ],
+        "misconception": "absent",
+        "answer_first": true,
+        "errors": [],
+        "excess": [
+          "This is Archimedes' principle, an established fact.",
+          "These are measured values:",
+          "Seawater is denser (about 1.025 g/cm³), so in the sea the submerged fraction drops to about 89%.",
+          "Two cases test the explanation:\n- **Holds:** In normal ice, the open lattice gives 0.917 g/cm³, so ice floats.\n- **Breaks when you change the mass, not the structure:** Heavy-water ice (D₂O) has the same open lattice, but deuterium is heavier than hydrogen. Its density is about 1.02 g/cm³, so heavy-water ice **sinks** in ordinary water. Floating depends on density, not on the word \"ice.\"",
+          "Liquid water is densest at about **4 °C**. In winter, a lake's 4 °C water sinks to the bottom, and ice forms on top. The ice then insulates the water below, so lakes freeze from the top down and fish survive the winter.",
+          "**Not covered here:** high-pressure ice forms (for example, ice VII inside some planets) use denser packings and do sink. Look up \"phases of ice\" for details."
+        ],
+        "unclear": [
+          "**Breaks when you change the mass, not the structure:**",
+          "The lattice collapses partly, and molecules slip into the gaps.",
+          "because it can push aside its own weight of liquid before it is fully submerged"
+        ],
+        "score": 7
+      }
+    },
+    "words": {
+      "none": 257,
+      "v0.5": 450,
+      "v0.6": 501
+    }
+  },
+  "tcp-slow-start": {
+    "key": {
+      "A": "v0.6",
+      "B": "v0.5",
+      "C": "none"
+    },
+    "why_best": "B defines segment, RTT, and cwnd before using them, grounds the reason in a concrete collapse example, shows exponential doubling with a correct worked table, and explicitly contrasts it with +1-per-RTT growth to explain why 'slow' only describes the start.",
+    "rank": [
+      "v0.5",
+      "v0.6",
+      "none"
+    ],
+    "grades": {
+      "v0.6": {
+        "must": [
+          2,
+          2,
+          1
+        ],
+        "misconception": "absent",
+        "answer_first": true,
+        "errors": [],
+        "excess": [
+          "## Scope\n\nThis answer leaves out these topics:\n\n- The receiver's own limit (the receive window). The sender uses the smaller of the two windows.\n- Fast retransmit and fast recovery.\n- Other congestion-control algorithms. CUBIC, the Linux default, keeps slow start but changes the growth after it. BBR estimates bandwidth and RTT directly and has its own start-up phase.",
+          "This is one reason why HTTP/2 and HTTP/3 reuse one connection, and why CDNs place servers close to users.",
+          "*(Historical fact.)*",
+          "The ACKs act as a probe. Each ACK shows that the path delivered one more packet, so the sender can safely add more.",
+          "| Throughput (approx.) |"
+        ],
+        "unclear": [
+          "Its overshoot past the limit is at most one window, so a loss gives a fast and bounded signal.",
+          "A full window of ACKs arrives each round-trip time (RTT)",
+          "Modern systems use 10 segments (the term 'segment' is never defined)",
+          "when cwnd reaches a threshold (ssthresh)"
+        ],
+        "score": 7
+      },
+      "v0.5": {
+        "must": [
+          2,
+          2,
+          2
+        ],
+        "misconception": "corrected",
+        "answer_first": true,
+        "errors": [],
+        "excess": [
+          "(observation)",
+          "(established fact)",
+          "QUIC uses the same slow-start idea over UDP.",
+          "**Out of scope:** the receive window (the receiver's limit, separate from cwnd), loss recovery details (fast retransmit), and newer controllers such as BBR, which estimate bandwidth directly instead of waiting for loss.",
+          "- **Connection reuse helps.** HTTP keep-alive and HTTP/2 reuse a connection after its cwnd has grown, so they skip the ramp-up."
+        ],
+        "unclear": [
+          "Stop doubling when cwnd reaches a threshold (ssthresh)",
+          "| 7 | 640 | 685 ✓ | (cwnd 640 but only 55 more segments are needed, which the table does not explain)"
+        ],
+        "score": 8
+      },
+      "none": {
+        "must": [
+          2,
+          2,
+          2
+        ],
+        "misconception": "corrected",
+        "answer_first": true,
+        "errors": [],
+        "excess": [
+          "### Related details\n- **Slow start after idle:** many stacks reset cwnd after a connection sits idle, because the old estimate may be stale. On Linux this is `net.ipv4.tcp_slow_start_after_idle`.\n- **Algorithm differences:** CUBIC (Linux and macOS default) and BBR handle the post-slow-start phase differently. BBR models bandwidth and RTT directly instead of reacting only to loss.",
+          "### Common mitigations (whole section)",
+          "**Larger initial windows** where appropriate (e.g., `ip route ... initcwnd` on Linux).",
+          "**Fewer handshake round trips** with TLS 1.3, TCP Fast Open, or QUIC/HTTP/3. QUIC still does congestion control but starts sending sooner.",
+          "Disable slow-start-after-idle for long-lived, bursty connections.",
+          "Older stacks used 1 to 4.",
+          "In short: TCP starts conservatively because it can't know the network's capacity in advance, then ramps up quickly while watching for signs of congestion."
+        ],
+        "unclear": [
+          "This is separate from the receiver's advertised window.",
+          "**Packet loss** is detected (or ECN marks arrive).",
+          "It hits the receiver's window limit.",
+          "Because of **TCP slow start**, a congestion-control mechanism that makes a new connection probe the network's capacity instead of assuming it.",
+          "segments (never defined)"
+        ],
+        "score": 6
+      }
+    },
+    "words": {
+      "none": 440,
+      "v0.5": 530,
+      "v0.6": 625
+    }
+  },
+  "wing-lift": {
+    "key": {
+      "A": "none",
+      "B": "v0.5",
+      "C": "v0.6"
+    },
+    "why_best": "C gives a clean causal chain from angle of attack to curved flow to the pressure difference, places Bernoulli correctly as a consequence, refutes equal transit time, and backs the speed-squared and angle dependence with correct worked numbers.",
+    "rank": [
+      "v0.6",
+      "none",
+      "v0.5"
+    ],
+    "grades": {
+      "none": {
+        "must": [
+          2,
+          2,
+          2
+        ],
+        "misconception": "corrected",
+        "answer_first": true,
+        "errors": [],
+        "excess": [
+          "Air density: Thinner air (high altitude, hot days) gives less lift, so planes need longer runways in Denver in summer.",
+          "Wing shape and area: Flaps and slats extend during takeoff and landing to increase camber and area, giving more lift at low speeds.",
+          "In short: the wing's shape and tilt bend the airflow downward, creating low pressure above and higher pressure below, and that pressure difference holds the plane up."
+        ],
+        "unclear": [
+          "The tilted lower surface slows and slightly compresses the oncoming air",
+          "lift coefficient"
+        ],
+        "score": 7
+      },
+      "v0.5": {
+        "must": [
+          2,
+          2,
+          2
+        ],
+        "misconception": "corrected",
+        "answer_first": true,
+        "errors": [
+          "The cruise speed is about 50 m/s."
+        ],
+        "excess": [
+          "The ASCII wing diagram",
+          "The pressure difference is small. A Boeing 747 weighs about 3.9 MN at takeoff and has 525 m² of wing. The mean pressure difference is about 7,500 Pa, or about 7% of atmospheric pressure.",
+          "Out of scope: This answer does not cover these topics: Circulation and the Kutta condition... Induced drag and wingtip vortices... Flaps and slats... Compressibility effects near the speed of sound.",
+          "(Observation.)"
+        ],
+        "unclear": [
+          "Where the guarantee breaks: stall",
+          "Lift has two descriptions, a pressure description and a momentum description.",
+          "The ASCII diagram is garbled and hard to read as a wing shape"
+        ],
+        "score": 6
+      },
+      "v0.6": {
+        "must": [
+          2,
+          2,
+          2
+        ],
+        "misconception": "corrected",
+        "answer_first": true,
+        "errors": [],
+        "excess": [
+          "Fly at higher altitude → the air is less dense, so the aircraft must fly faster or at a larger angle.",
+          "Scope: I left out how lift is distributed along the span, wingtip vortices, induced drag, and the math of circulation (Kutta–Joukowski theorem). Any aerodynamics textbook covers these next. Anderson's Introduction to Flight is one example.",
+          "The sharp trailing edge makes the flow from the top and the bottom leave smoothly in the same direction."
+        ],
+        "unclear": [
+          "Below the wing, the air is pushed down and aside, so the pressure there is higher.",
+          "At the same time, the wing has given the air downward momentum each second. These two quantities are equal (momentum conservation).",
+          "the pressure the oncoming air can supply"
+        ],
+        "score": 8
+      }
+    },
+    "words": {
+      "none": 431,
+      "v0.5": 766,
+      "v0.6": 716
+    }
+  },
+  "hash-table": {
+    "key": {
+      "A": "none",
+      "B": "v0.6",
+      "C": "v0.5"
+    },
+    "why_best": "B leads with a direct answer, builds the mechanism, the load factor, and the O(n) worst case with concrete numbers, and stays more focused than C and more grounded for this reader than A, though all three run well past the 220-word budget.",
+    "rank": [
+      "v0.6",
+      "v0.5",
+      "none"
+    ],
+    "grades": {
+      "none": {
+        "must": [
+          2,
+          2,
+          2
+        ],
+        "misconception": "corrected",
+        "answer_first": false,
+        "errors": [],
+        "excess": [
+          "(or a bitmask if capacity is a power of two)",
+          "Some designs resize incrementally to avoid it.",
+          "Some languages cache string hashes to soften this.",
+          "**5. Cache behavior** Hash tables scatter data randomly in memory, so each lookup may be a cache miss. Chaining with linked lists is especially bad because of pointer chasing. For small n, a linear scan of a compact array can beat a hash table in practice. This is why modern designs such as Swiss tables (Abseil, Rust's `HashMap`) use flat, cache-friendly layouts with SIMD probing.",
+          "That matters for latency-sensitive systems.",
+          "The summary table, which repeats the sections above."
+        ],
+        "unclear": [
+          "**Jump straight there**: array access by index is O(1)",
+          "each bucket holds about a constant number of items (the term 'bucket' is never defined)",
+          "*Open addressing*: probe nearby slots.",
+          "to DoS a server",
+          "Amortized over all inserts it's still O(1)",
+          "*clustering* makes runs of occupied slots grow and merge",
+          "pointer chasing",
+          "SIMD probing"
+        ],
+        "score": 6
+      },
+      "v0.6": {
+        "must": [
+          2,
+          2,
+          2
+        ],
+        "misconception": "absent",
+        "answer_first": true,
+        "errors": [
+          "The key is in slot 7 or nowhere. (This is false under the open addressing the answer describes later, where a colliding key sits in a later slot.)"
+        ],
+        "excess": [
+          "In 2011, this attack slowed web servers that put request parameters in hash tables.",
+          "**Scope.** This answer leaves out cache effects. For example, chaining follows pointers, which is slower in practice than probing a contiguous array, even when both take O(1) steps. It also leaves out perfect hashing and cuckoo hashing, which guarantee O(1) worst-case lookups for fixed or carefully managed key sets.",
+          "This follows mathematically from the uniform-hashing assumption."
+        ],
+        "unclear": [
+          "Expected probes for a key that is absent (the word 'probe' is not defined)",
+          "or deleted entries fill an open-addressing table",
+          "chaining follows pointers",
+          "O(n²) to insert n keys"
+        ],
+        "score": 8
+      },
+      "v0.5": {
+        "must": [
+          2,
+          2,
+          2
+        ],
+        "misconception": "corrected",
+        "answer_first": true,
+        "errors": [
+          "Because the table doubles each time, the total resize work spread over all inserts is a constant per insert. So the expected lookup cost stays constant as the table grows. (Lookup cost stays constant because the load factor is bounded, not because resize work is amortized. This is a non sequitur.)"
+        ],
+        "excess": [
+          "**Not covered here:** how specific hash functions work, other open-addressing schemes (quadratic probing, double hashing, cuckoo, Robin Hood), and the formal proof of the average-case bound. A standard algorithms text (CLRS, Chapter 11) covers all three.",
+          "Lookups themselves are not slowed.",
+          "(an established result, from Knuth)",
+          "The summary table, which largely repeats the sections above.",
+          "**α = 5** (10,000 keys, 2,000 buckets): a bucket holds 5 keys on average, so a lookup checks several keys."
+        ],
+        "unclear": [
+          "the expected number of slots that a failed lookup checks is about ½(1 + 1/(1 − α)²)",
+          "A chained table also follows pointers to scattered memory, and each cache miss can cost more than many comparisons. ('chained' and 'cache miss' are not defined)"
+        ],
+        "score": 7
+      }
+    },
+    "words": {
+      "none": 549,
+      "v0.5": 821,
+      "v0.6": 532
+    }
+  },
+  "moon-face": {
+    "key": {
+      "A": "none",
+      "B": "v0.6",
+      "C": "v0.5"
+    },
+    "why_best": "B gives the most complete causal model: why a 1:1 match hides one side, the bulge-torque-friction mechanism with its zero-torque end state and stability, and a libration explanation that says why the Moon appears to rock (constant spin against varying orbital speed). It loses points for an off-topic Earth section and its annotation tags.",
+    "rank": [
+      "v0.6",
+      "v0.5",
+      "none"
+    ],
+    "grades": {
+      "none": {
+        "must": [
+          2,
+          2,
+          2
+        ],
+        "misconception": "corrected",
+        "answer_first": true,
+        "errors": [],
+        "excess": [
+          "This likely happened relatively quickly in the Moon's history, within perhaps tens of millions of years.",
+          "**The \"dark side\" isn't dark.** The far side gets just as much sunlight as the near side. It's only \"dark\" in the sense that it was unknown until the Soviet Luna 3 probe photographed it in 1959.",
+          "**Tidal locking is common.** Most large moons in the solar system are tidally locked to their planets, and Pluto and its moon Charon are locked to *each other*.",
+          "**Earth is slowly being affected too.** The Moon's tides are gradually slowing Earth's rotation, lengthening our day by roughly 2 milliseconds per century. The Moon is also drifting away from us at about 3.8 cm per year.",
+          "We always see the same side of the Moon because of **tidal locking**, also called synchronous rotation."
+        ],
+        "unclear": [
+          "If it didn't spin at all, we'd see all sides of it over the course of a month.",
+          "As it spun, its bulges were carried slightly out of line with Earth.",
+          "with a \"tidal bulge\" pointing roughly toward Earth"
+        ],
+        "score": 6
+      },
+      "v0.6": {
+        "must": [
+          2,
+          2,
+          2
+        ],
+        "misconception": "corrected",
+        "answer_first": true,
+        "errors": [
+          "a **torque**, a twisting force"
+        ],
+        "excess": [
+          "## 4. The same process is acting on Earth",
+          "**Days get longer**, by about 2 milliseconds per century. *(Observation from ancient eclipse records and coral growth bands.)*",
+          "**The Moon moves away**, by about 3.8 cm per year. Spin that Earth loses goes into the Moon's orbit. *(Observation from laser reflectors left on the Moon.)*",
+          "Earth is much more massive, so it locks far more slowly. Pluto and its moon Charon have finished this process. Each always shows the other the same face.",
+          "**Scope:** This answer leaves out the orbital mechanics of Earth–Moon recession and the debate about how the Moon formed.",
+          "*(Estimate: it depends on the early Moon's interior and distance.)*",
+          "*(Observation.)*",
+          "**If the Moon rotated faster**, we would also see every side, just faster."
+        ],
+        "unclear": [
+          "After one lap, you have also turned once to face every wall of the room."
+        ],
+        "score": 7
+      },
+      "v0.5": {
+        "must": [
+          2,
+          2,
+          1
+        ],
+        "misconception": "corrected",
+        "answer_first": true,
+        "errors": [
+          "Earth is not locked yet, because Earth is much larger and the Moon's pull on it is weaker.",
+          "a **torque**, a twisting force"
+        ],
+        "excess": [
+          "This is the causal chain. Observations and physics support it as established fact.",
+          "## The same effect works in the other direction",
+          "Earth's day becomes longer by about 2 milliseconds per century. This is an established measurement.",
+          "The Moon moves away from Earth by about 3.8 cm per year. Lunar laser ranging measures this.",
+          "Earth is not locked yet, because Earth is much larger and the Moon's pull on it is weaker. Pluto and its moon Charon show the end state: each always shows the same face to the other.",
+          "**Not covered here:** the mathematics of tidal torque, and why the far side looks different (it has fewer dark lava plains). Search \"tidal locking timescale\" and \"lunar far side crust\" for these topics.",
+          "Published estimates are uncertain, but they are short compared to the Moon's age of about 4.5 billion years."
+        ],
+        "unclear": [
+          "The Moon's orbit is slightly elliptical, and its axis is slightly tilted. The Moon therefore appears to rock a little over each month.",
+          "it turns by the same angle that it moves around Earth"
+        ],
+        "score": 7
+      }
+    },
+    "words": {
+      "none": 383,
+      "v0.5": 529,
+      "v0.6": 562
+    }
+  },
+  "road-salt": {
+    "key": {
+      "A": "v0.5",
+      "B": "none",
+      "C": "v0.6"
+    },
+    "why_best": "A gives the correct two-rate mechanism, the −21 °C limit, and an explicit refutation of the heat misconception in a tight numbered sequence, with less detour and repetition than C.",
+    "rank": [
+      "v0.5",
+      "v0.6",
+      "none"
+    ],
+    "grades": {
+      "v0.5": {
+        "must": [
+          2,
+          2,
+          2
+        ],
+        "misconception": "corrected",
+        "answer_first": true,
+        "errors": [],
+        "excess": [
+          "## Scope\n\nThis answer leaves out salt damage to cars, concrete, and plants. It also leaves out the deeper thermodynamic reason, chemical potential, behind step 3. Look up \"freezing-point depression\" and \"colligative properties\" for the full derivation.",
+          "| −30 °C | Fails. The ice stays solid, and crews use sand for grip. |",
+          "The measured value is about 3.4 °C, because ions in real brine do not act fully independently."
+        ],
+        "unclear": [
+          "Brine can stay liquid down to well below −5 °C.",
+          "the mixture gets *colder* than the ice was"
+        ],
+        "score": 8
+      },
+      "none": {
+        "must": [
+          2,
+          2,
+          2
+        ],
+        "misconception": "absent",
+        "answer_first": true,
+        "errors": [
+          "Ice always has a thin layer of liquid water on it."
+        ],
+        "excess": [
+          "**Downsides**\n\nRoad salt corrodes cars and bridges, damages concrete, and runs off into soil and waterways, where it can harm plants and aquatic life. Some areas use alternatives like beet juice brine mixtures to reduce these effects.",
+          "In extreme cold, road crews switch to calcium chloride or magnesium chloride, or use sand for traction instead."
+        ],
+        "unclear": [
+          "Melting outpaces freezing. With more molecules leaving the ice than joining it, the ice melts."
+        ],
+        "score": 6
+      },
+      "v0.6": {
+        "must": [
+          2,
+          2,
+          2
+        ],
+        "misconception": "corrected",
+        "answer_first": true,
+        "errors": [],
+        "excess": [
+          "# Why salt melts ice on roads",
+          "(This is the molecular picture. The formal explanation uses entropy: dissolved particles make the liquid state more favourable. Both give the same result.)",
+          "## Why not some other substance?\n\nBecause only the particle count matters, sugar also lowers the freezing point. But a sugar molecule weighs about 342 g/mol and does not split, so it gives about 12 times fewer particles per gram than salt. Salt is cheap, very soluble, and gives two particles per unit.",
+          "**Salt has a temperature limit.** Below about −10 °C, road crews often use sand for grip instead, or switch to CaCl₂."
+        ],
+        "unclear": [
+          "Usually a thin film of water is always present on ice, or sunlight and traffic make one.",
+          "The formal explanation uses entropy: dissolved particles make the liquid state more favourable."
+        ],
+        "score": 7
+      }
+    },
+    "words": {
+      "none": 296,
+      "v0.5": 447,
+      "v0.6": 543
+    }
+  }
+}

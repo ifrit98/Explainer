@@ -71,10 +71,36 @@ def test_coldread_prompt_walks_in_order_from_prior_knowledge():
     assert '"unsaid"' in narrative                                   # beats have a Shown column
     prose = coldread_prompt("softmax-temperature", "prose")
     assert "one paragraph" in prose and '"unsaid"' not in prose
-    assert "Audience" not in prose and "Nothing else counts as known" in prose
+    assert "Audience" not in prose and "Developers who use LLM APIs" in prose   # model.md's audience
+
+
+def test_coldread_reports_excess_and_blocking_findings():
+    prompt = coldread_prompt("softmax-temperature", "prose")
+    assert '"excess"' in prompt and '"blocking"' in prompt and '"cuts"' in prompt
+    assert "already knows" in prompt
+
+
+def test_coldread_reader_defaults_to_a_technical_reader(tmp_path, monkeypatch):
+    from explainer_kit import review
+    folder = tmp_path / "explainers" / "x"
+    folder.mkdir(parents=True)
+    (folder / "model.md").write_text("## Audience and prior knowledge\n\n<Who reads this.>\n")
+    monkeypatch.setattr(review, "explainer_dir", lambda slug: folder)
+    assert review.prior_knowledge("x") == review.DEFAULT_READER
 
 
 def test_reference_examples_with_a_narrative_introduce_every_symbol():
     for narrative in ROOT.glob("explainers/*/narrative.md"):
         rep = check(narrative.parent)
         assert not [p for p in rep.problems if "introduction ledger" in p], narrative.parent.name
+
+
+def test_new_quick_skips_the_narrative(tmp_path, monkeypatch):
+    import subprocess, sys
+    (tmp_path / "explainers").mkdir()
+    out = subprocess.run([sys.executable, "-m", "explainer_kit.cli", "--root", str(tmp_path), "new", "q-demo",
+                          "--stage", "1", "--quick"], capture_output=True, text=True)
+    assert out.returncode == 0, out.stderr
+    folder = tmp_path / "explainers" / "q-demo"
+    assert (folder / "model.md").exists() and (folder / "explanation.md").exists()
+    assert not (folder / "narrative.md").exists()

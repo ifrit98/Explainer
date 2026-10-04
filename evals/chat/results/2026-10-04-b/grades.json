@@ -1,0 +1,505 @@
+{
+  "ice-floats": {
+    "key": {
+      "A": "none",
+      "B": "v0.6",
+      "C": "v0.5"
+    },
+    "why_best": "B covers density, the hydrogen-bond lattice mechanism and the rarity of the effect with correct numbers and a clear buoyancy link, close to the word budget and with the least detour.",
+    "rank": [
+      "v0.6",
+      "v0.5",
+      "none"
+    ],
+    "grades": {
+      "none": {
+        "must": [
+          2,
+          2,
+          2
+        ],
+        "misconception": "absent",
+        "answer_first": true,
+        "errors": [],
+        "excess": [
+          "That's where the phrase \"tip of the iceberg\" comes from.",
+          "**Freeze-thaw weathering.** Water expanding in rock cracks breaks rocks apart over time.",
+          "**Burst pipes.** Freezing water expands with enough force to crack metal.",
+          "A related quirk: liquid water is densest at about **4 °C**. Below that temperature, molecules begin forming the open, ice-like arrangement even before freezing."
+        ],
+        "unclear": [
+          "in a fixed tetrahedral arrangement",
+          "By Archimedes' principle, an object floats if it's less dense than the fluid it's in."
+        ],
+        "score": 6
+      },
+      "v0.6": {
+        "must": [
+          2,
+          2,
+          2
+        ],
+        "misconception": "absent",
+        "answer_first": true,
+        "errors": [],
+        "excess": [
+          "If you like, I can explain why liquid water is densest at 4 °C, not at 0 °C.",
+          "**Why it matters.** Lakes freeze from the top down. The surface ice insulates the liquid water below it, so fish survive the winter."
+        ],
+        "unclear": [
+          "in a fixed tetrahedral geometry",
+          "The lattice collapses, and molecules move into the gaps."
+        ],
+        "score": 8
+      },
+      "v0.5": {
+        "must": [
+          2,
+          2,
+          2
+        ],
+        "misconception": "absent",
+        "answer_first": true,
+        "errors": [],
+        "excess": [
+          "Density is mass per volume, so a less dense solid floats.",
+          "The causal chain: hydrogen bonds → open, rigid lattice in ice → more volume per molecule → lower density → ice floats.",
+          "Liquid water is densest at about 4 °C, not at 0 °C. Below 4 °C, small ice-like clusters start to form and the water expands slightly. So in winter, 4 °C water sinks to the bottom of a lake, and ice forms at the top. The ice layer insulates the water below, so lakes rarely freeze solid, and fish survive.",
+          "**Not covered here:** high-pressure forms of ice (some are denser than water and sink), and the quantum-chemistry details of the hydrogen bond. Ask if you want either one."
+        ],
+        "unclear": [
+          "Water is different because its hydrogen bonds force a spacing that is *wider* than close packing."
+        ],
+        "score": 7
+      }
+    },
+    "words": {
+      "none": 252,
+      "v0.5": 376,
+      "v0.6": 253
+    }
+  },
+  "tcp-slow-start": {
+    "key": {
+      "A": "v0.6",
+      "B": "v0.5",
+      "C": "none"
+    },
+    "why_best": "A covers the reason, the doubling mechanism, and exponential growth, with one correct worked example and close to the word budget, giving the newcomer an accurate model with almost no surplus text.",
+    "rank": [
+      "v0.6",
+      "v0.5",
+      "none"
+    ],
+    "grades": {
+      "v0.6": {
+        "must": [
+          2,
+          2,
+          2
+        ],
+        "misconception": "corrected",
+        "answer_first": true,
+        "errors": [],
+        "excess": [
+          "If useful, I can explain what happens to cwnd after a loss."
+        ],
+        "unclear": [
+          "Slow start ends when a packet is lost or cwnd reaches a threshold (ssthresh)."
+        ],
+        "score": 9
+      },
+      "v0.5": {
+        "must": [
+          2,
+          2,
+          2
+        ],
+        "misconception": "corrected",
+        "answer_first": true,
+        "errors": [],
+        "excess": [
+          "cwnd reaches the receiver's advertised window. That is a separate limit set by the receiver, not by the network.",
+          "## Where the assumption breaks\n\nSlow start assumes that **loss means congestion**. On a wired network, this is usually true. On lossy Wi-Fi or cellular links, packets can be lost from radio noise while the path has spare capacity. The sender then shrinks cwnd for no good reason, and throughput drops.",
+          "## Not covered here\n\n- Congestion avoidance and fast recovery after a loss (Reno, CUBIC).\n- Model-based algorithms such as BBR, which estimate bandwidth and RTT instead of reacting only to loss.\n- QUIC, which runs similar congestion control over UDP.",
+          "This is why HTTP reuses connections, and why servers raised the initial cwnd from 1–4 segments to 10."
+        ],
+        "unclear": [
+          "Exponential growth finds the capacity in a number of RTTs that grows with log₂(capacity)."
+        ],
+        "score": 8
+      },
+      "none": {
+        "must": [
+          2,
+          2,
+          2
+        ],
+        "misconception": "corrected",
+        "answer_first": false,
+        "errors": [],
+        "excess": [
+          "## Related factors\n\n- **The handshake.** Before any data flows, the TCP 3-way handshake costs one RTT, and TLS adds one or two more.\n- **Slow start after idle.** Many stacks reset cwnd after a connection sits idle (on Linux, `net.ipv4.tcp_slow_start_after_idle`), so even a reused connection can start slowly again.\n- **Algorithm choice.** CUBIC, the default on Linux, macOS, and Windows, and BBR handle the post-slow-start phase differently. BBR probes bandwidth and RTT directly instead of relying only on loss.",
+          "## Mitigations\n\n- **Reuse connections**: HTTP keep-alive, HTTP/2 multiplexing, connection pooling.\n- **Raise the initial window**: on Linux, `ip route change ... initcwnd 10`, or higher for controlled environments.\n- **Reduce RTT**: CDNs and edge servers put content closer to users, so each doubling happens faster.\n- **Use QUIC/HTTP/3**: it still uses congestion control but combines the transport and TLS handshakes, and supports 0-RTT resumption.\n- **Disable slow-start-after-idle** on servers with long-lived connections.",
+          "In short, TCP starts slowly as a safety mechanism. It probes the network's capacity instead of assuming it, trading a little startup latency for stability across the whole Internet.",
+          "Older stacks used 1 to 4 segments."
+        ],
+        "unclear": [
+          "A new TCP connection starts slowly because of **slow start**, part of TCP's congestion control.",
+          "The initial window (initcwnd)",
+          "cuts cwnd (and sets ssthresh lower), and backs off."
+        ],
+        "score": 6
+      }
+    },
+    "words": {
+      "none": 478,
+      "v0.5": 503,
+      "v0.6": 292
+    }
+  },
+  "wing-lift": {
+    "key": {
+      "A": "none",
+      "B": "v0.5",
+      "C": "v0.6"
+    },
+    "why_best": "B gives a clear causal chain linking downwash and pressure difference. It makes 'pressure × area = lift' concrete with a worked Cessna example, covers angle of attack, v² and stall, and refutes equal transit time with evidence, though it is well over the word budget.",
+    "rank": [
+      "v0.5",
+      "none",
+      "v0.6"
+    ],
+    "grades": {
+      "none": {
+        "must": [
+          2,
+          1,
+          2
+        ],
+        "misconception": "corrected",
+        "answer_first": true,
+        "errors": [],
+        "excess": [
+          "**In short:** the wing is a device for turning airflow downward. That turning creates low pressure above and higher pressure below, and the net result is an upward force.",
+          "Many textbooks claim that",
+          "**S (wing area):** bigger wings give more lift."
+        ],
+        "unclear": [
+          "That pressure difference is the force we call lift.",
+          "To make air follow a curved path, there must be a pressure gradient across the flow",
+          "This alone forces air downward off the bottom surface and makes the air flowing over the top follow a downward-curving path."
+        ],
+        "score": 8
+      },
+      "v0.5": {
+        "must": [
+          2,
+          2,
+          2
+        ],
+        "misconception": "corrected",
+        "answer_first": true,
+        "errors": [
+          "Paper airplanes and aerobatic airplanes that fly upside down show this."
+        ],
+        "excess": [
+          "(Established fact.)",
+          "(Observation.)",
+          "## What this explanation leaves out\n\n- **Why the air follows the curved surface, and how much lift results.** The full answer uses *circulation* and the *Kutta condition* (the rule that flow leaves the sharp trailing edge smoothly). Look up \"Kutta–Joukowski theorem.\"\n- **Wingtip vortices and induced drag.** These are a cost of making lift with a wing of finite length.\n- **Supersonic flight**, where air compressibility changes the picture.",
+          "For the Cessna at about 55 m/s: ½ × 1.225 × 55² ≈ 1,850 Pa. The wing needs 670 Pa, so C_L ≈ 0.36."
+        ],
+        "unclear": [
+          "The full answer uses *circulation* and the *Kutta condition*",
+          "The equal-transit argument only gives a wrong reason for the speed."
+        ],
+        "score": 8
+      },
+      "v0.6": {
+        "must": [
+          2,
+          2,
+          0
+        ],
+        "misconception": "corrected",
+        "answer_first": true,
+        "errors": [],
+        "excess": [
+          "A natural next question: why does a wing stall when the angle of attack gets too large?"
+        ],
+        "unclear": [
+          "Below the wing, the air is slowed and pushed down, so the pressure there rises above atmospheric pressure."
+        ],
+        "score": 6
+      }
+    },
+    "words": {
+      "none": 448,
+      "v0.5": 679,
+      "v0.6": 299
+    }
+  },
+  "hash-table": {
+    "key": {
+      "A": "none",
+      "B": "v0.6",
+      "C": "v0.5"
+    },
+    "why_best": "B covers all three required points correctly, with concrete numbers and plain definitions, in close to the word budget and without detours.",
+    "rank": [
+      "v0.6",
+      "v0.5",
+      "none"
+    ],
+    "grades": {
+      "none": {
+        "must": [
+          2,
+          2,
+          2
+        ],
+        "misconception": "absent",
+        "answer_first": false,
+        "errors": [
+          "\"the expected probes for an unsuccessful search grow roughly like 1/(1−α)². At α = 0.9 that is about 50 probes\": 1/(1−0.9)² is 100. About 50 comes from Knuth's ½(1 + 1/(1−α)²), and that formula applies to linear probing, not open addressing in general."
+        ],
+        "excess": [
+          "\"Linear probing is especially prone to *primary clustering*, where occupied runs grow and merge.\"",
+          "\"This is why Python, Rust, and others use **randomized/keyed hashes** like SipHash.\"",
+          "\"Some implementations rehash incrementally to avoid the pause; Redis is one example.\"",
+          "\"**4. Expensive hashing or comparison.** ... Caching hash values (Java's `String` does this) helps.\"",
+          "\"**5. Poor cache behavior.** In the constant factors, chaining with linked lists causes pointer-chasing and cache misses. Open addressing with flat arrays tends to be much faster in practice. That is why modern designs like Swiss Tables (Abseil, Rust's `hashbrown`) use them.\"",
+          "\"**6. Operations hash tables aren't built for.** Ordered iteration, range queries ... A balanced BST or B-tree is the right tool there.\"",
+          "The summary table, which repeats the body.",
+          "\"turning O(1) into O(n) per operation and O(n²) overall\""
+        ],
+        "unclear": [
+          "\"**Separate chaining:** one bucket's linked list holds everything.\" (chaining is never defined)",
+          "\"**Open addressing:** long probe sequences form.\" (open addressing and probing are never defined)",
+          "\"This is constant time for fixed-size keys, or O(k) for a key of length k\"",
+          "\"Worst (treeified buckets) | O(log n)\"",
+          "\"In the constant factors, chaining with linked lists causes pointer-chasing and cache misses.\"",
+          "\"using `x % capacity` when keys share a common factor with the capacity\""
+        ],
+        "score": 5
+      },
+      "v0.6": {
+        "must": [
+          2,
+          2,
+          2
+        ],
+        "misconception": "absent",
+        "answer_first": true,
+        "errors": [],
+        "excess": [
+          "\"A possible follow-up is how a good hash function spreads keys evenly.\""
+        ],
+        "unclear": [
+          "\"This is a linear search, O(n).\" (big-O notation is used without explanation for a reader new to the subject)",
+          "\"Some languages use randomized hash seeds to block this attack.\" (it does not say how a random seed blocks the attack)"
+        ],
+        "score": 8
+      },
+      "v0.5": {
+        "must": [
+          2,
+          2,
+          2
+        ],
+        "misconception": "corrected",
+        "answer_first": true,
+        "errors": [],
+        "excess": [
+          "\"(*established fact*: \\\"hash flooding\\\" attacks on web servers, 2011)\"",
+          "\"This holds if the hash function spreads keys evenly, which is an *assumption*. Under that assumption, the result is a *mathematical consequence*.\"",
+          "\"**Out of scope:** cuckoo and Robin Hood hashing (bounded or smoothed probe lengths), cache effects (open addressing is often faster in practice than chaining, despite similar O-costs), and universal hashing (the formal basis for the \\\"even spread\\\" assumption).\"",
+          "The table row \"**Expensive hash or compare**\"",
+          "The \"## Summary\" paragraph, which restates the opening lines.",
+          "\"**The guarantee, held and broken.** Hold: keys spread evenly at α = 0.5 give about 1.25 comparisons.\" (repeats the worked example)"
+        ],
+        "unclear": [
+          "\"Under that assumption, the result is a *mathematical consequence*.\" (which result is meant is unclear)",
+          "\"**The guarantee, held and broken.**\"",
+          "\"(*established fact*: \\\"hash flooding\\\" attacks on web servers, 2011)\""
+        ],
+        "score": 7
+      }
+    },
+    "words": {
+      "none": 555,
+      "v0.5": 640,
+      "v0.6": 306
+    }
+  },
+  "moon-face": {
+    "key": {
+      "A": "none",
+      "B": "v0.6",
+      "C": "v0.5"
+    },
+    "why_best": "B covers all three required points and explicitly refutes the 'Moon does not rotate' misconception with a simple thought experiment, while staying closest to the word budget with little detour.",
+    "rank": [
+      "v0.6",
+      "none",
+      "v0.5"
+    ],
+    "grades": {
+      "none": {
+        "must": [
+          2,
+          2,
+          2
+        ],
+        "misconception": "absent",
+        "answer_first": true,
+        "errors": [],
+        "excess": [
+          "The \"far side\" isn't the \"dark side.\" The far side gets just as much sunlight as the near side. It's only \"dark\" in the sense that it was unknown until the Soviet Luna 3 probe photographed it in 1959.",
+          "It's common in the solar system. Most large moons are tidally locked to their planets, including Jupiter's Galilean moons and Saturn's Titan. Pluto and its moon Charon are *mutually* locked, each always showing the same face to the other.",
+          "Earth is slowly being affected too. The Moon's tides are gradually slowing Earth's rotation, lengthening our day by about 2 milliseconds per century. The Moon is also drifting away by roughly 3.8 cm per year."
+        ],
+        "unclear": [
+          "Its rotation kept carrying the bulges out of alignment with Earth.",
+          "there's no more net torque"
+        ],
+        "score": 7
+      },
+      "v0.6": {
+        "must": [
+          2,
+          2,
+          2
+        ],
+        "misconception": "corrected",
+        "answer_first": true,
+        "errors": [],
+        "excess": [
+          "A body that started spinning too slowly would be sped up by the same torque. Either way, the stable end state is a locked spin.",
+          "The Moon locked early, probably within its first hundred million years or less (estimate).",
+          "If you like, I can explain how the same tides slow Earth's day and push the Moon about 3.8 cm farther away each year."
+        ],
+        "unclear": [
+          "Its rotation would carry the bulges ahead of the Earth–Moon line.",
+          "The Moon also had far less spin to lose."
+        ],
+        "score": 8
+      },
+      "v0.5": {
+        "must": [
+          2,
+          2,
+          2
+        ],
+        "misconception": "corrected",
+        "answer_first": true,
+        "errors": [],
+        "excess": [
+          "(an established fact; the early details are estimates)",
+          "This happened early in the Moon's history, probably within its first few hundred million years at most (estimate). It happened to the Moon first because Earth's tidal effect on the Moon is about 20 times stronger than the Moon's effect on Earth. Earth is 81 times more massive, and the Moon is only 0.27 times Earth's radius.",
+          "The far side is not always dark. It gets as much sunlight as the near side. At new Moon, the far side is fully lit.",
+          "Locking is common. Most large moons in the Solar System are tidally locked to their planets. Pluto and its moon Charon are locked to *each other*: each always shows the same face to the other.",
+          "## 4. The process continues on Earth ... That would take far longer than the Sun's remaining lifetime (model output).",
+          "Not covered here: the full libration geometry, and how the Moon formed. Ask about either if you want more detail.",
+          "A useful comparison: walk around a chair while you keep your face toward it. You also turn once around yourself on every lap."
+        ],
+        "unclear": [
+          "The marker still points the same direction in space, which is now *away* from Earth.",
+          "Earth's tidal effect on the Moon is about 20 times stronger than the Moon's effect on Earth. Earth is 81 times more massive, and the Moon is only 0.27 times Earth's radius."
+        ],
+        "score": 6
+      }
+    },
+    "words": {
+      "none": 336,
+      "v0.5": 645,
+      "v0.6": 314
+    }
+  },
+  "road-salt": {
+    "key": {
+      "A": "v0.5",
+      "B": "none",
+      "C": "v0.6"
+    },
+    "why_best": "C gives the clearest causal chain: dilution slows refreezing while melting continues. It then adds one worked number and the −21 °C floor, and refutes the heat misconception, all with almost no detours.",
+    "rank": [
+      "v0.6",
+      "v0.5",
+      "none"
+    ],
+    "grades": {
+      "v0.5": {
+        "must": [
+          2,
+          2,
+          2
+        ],
+        "misconception": "corrected",
+        "answer_first": true,
+        "errors": [
+          "Sun, traffic, and pressure keep a small amount of water liquid."
+        ],
+        "excess": [
+          "Sugar would also work, but each sugar molecule stays as one particle, and salt gives two.",
+          "| −5 °C | Works. Brine can stay liquid well below this temperature. |",
+          "This is why salt and ice chill the cream in an ice-cream maker.",
+          "Below this temperature, crews use calcium chloride (CaCl₂). CaCl₂ gives three ions per unit and stays effective to roughly −30 °C.",
+          "(established fact)"
+        ],
+        "unclear": [
+          "To restore the balance, the temperature must drop further. That lower temperature is the new freezing point of the salty water (the *brine*).",
+          "More salt past this point does not dissolve."
+        ],
+        "score": 7
+      },
+      "none": {
+        "must": [
+          2,
+          1,
+          2
+        ],
+        "misconception": "absent",
+        "answer_first": true,
+        "errors": [],
+        "excess": [
+          "Traffic also helps by grinding the salt in.",
+          "They also release heat when they dissolve, which helps jump-start melting.",
+          "Bonus: the same principle elsewhere",
+          "Salt is added to ice in **homemade ice cream makers** to make the ice-water mix colder than 0°C, so it can freeze the cream.",
+          "The ocean freezes at about −2°C because of its salt content.",
+          "4. **The result is brine.** Salty water has a lower freezing point than pure water. Water would need to get colder than 0°C to freeze again."
+        ],
+        "unclear": [
+          "Dissolved ions interfere with water molecules trying to lock back into the ice crystal.",
+          "Why it's a colligative property"
+        ],
+        "score": 6
+      },
+      "v0.6": {
+        "must": [
+          2,
+          2,
+          2
+        ],
+        "misconception": "corrected",
+        "answer_first": true,
+        "errors": [
+          "Calcium chloride splits into 3 ions instead of 2, so it works at colder temperatures."
+        ],
+        "excess": [
+          "or use sand for grip instead"
+        ],
+        "unclear": [
+          "The system settles at a new, lower temperature where the two rates match again."
+        ],
+        "score": 8
+      }
+    },
+    "words": {
+      "none": 323,
+      "v0.5": 424,
+      "v0.6": 287
+    }
+  }
+}

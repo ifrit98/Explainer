@@ -111,6 +111,16 @@ A gap fixed only in one example comes back in the next one. For each real findin
 | The landing page played videos with a plain `<video>`, which skipped the predict pauses. | A page that embeds a video with predict pauses plays it with `Explainer.video`. | `explainer check` |
 | Mermaid blocks were checked by hand in a browser. | Every Mermaid block renders once before delivery. | `explainer check --diagrams`; CI |
 
+## The other half: excess
+
+Every step above finds something missing, and every fix adds words. Left alone, that only goes one way: from v0.3 to v0.5 the softmax prose grew from 412 to 1,234 words and the odd-squares video from 59 s to 4 min 21 s. Since v0.6.0 the method pushes back:
+
+- **Name the reader** in `model.md`. The probe, the cold read, and the blind test read as that reader, and do not ask for what it knows. The default is a technical reader new to the subject.
+- **Adopt findings, do not collect them.** On sky-blue, the probe marked 9 of 16 gaps "main"; five were adopted, each as a clause or a replacement. A probe always finds more than an explanation should say.
+- **Cut what the cold read marks as excess.** On the softmax prose it found the Boltzmann aside (undefined symbols, used only to explain a name), a second statement of the ratio rule, and an aside on log additivity.
+- **Fix blocking findings first, and stop when nothing blocks.** Edge findings are fixed only when the fix is short.
+- **Set the length.** `explainer check` warns above 600 words or 150 s; `budget` in `model.yaml` declares a different length with a reason, and the check fails above it. On sky-blue, the review fixes pushed the prose to 702 words against a budget of 650, and the cuts that followed removed nothing the reader needed.
+
 ## The narrative pass: odd-squares
 
 The odd-squares video (v0.4.0) had a correct model and passed its blind test: all three quiz items scored 2. The reviewer explained the n-th L correctly. A cold read of the same video found what the blind test absorbed:

@@ -29,6 +29,7 @@ import subprocess
 import sys
 import tempfile
 import urllib.request
+from datetime import date
 from pathlib import Path
 
 from explainer_kit.paths import TEMPLATES, display, explainer_dir, explainers_dir, latex_bin, model_dir, project_root
@@ -70,7 +71,9 @@ def cmd_new(args) -> None:
         sys.exit("slug must be kebab-case, for example: attention-heads")
     root = explainer_dir(slug)
     class_name = "".join(part.capitalize() for part in slug.split("-"))
-    files = [("model.md", "model.md"), ("model.yaml", "model.yaml"), ("narrative.md", "narrative.md")]
+    files = [("model.md", "model.md"), ("model.yaml", "model.yaml")]
+    if not args.quick:  # the quick tier skips the narrative pass
+        files.append(("narrative.md", "narrative.md"))
     for stage in sorted(set(args.stage)):
         files += STAGE_FILES[stage]
     for rel, template in files:
@@ -98,6 +101,8 @@ def cmd_check(args) -> None:
         print(f"{'ok  ' if rep.ok else 'FAIL'}  {rep.slug}")
         for p in rep.problems:
             print(f"      ✗ {p}")
+        for w in rep.warnings:
+            print(f"      ! {w}")
         if args.verbose:
             for n in rep.notes:
                 print(f"      · {n}")
@@ -172,6 +177,14 @@ def cmd_probe(args) -> None:
     print(probe_prompt(args.slug))
 
 
+def cmd_eval(args) -> None:
+    from explainer_kit.evals import run
+
+    conditions = dict(c.split("=", 1) if "=" in c else (c, c) for c in args.conditions)
+    out = Path(args.out) if args.out else project_root() / "evals" / "chat" / "results" / date.today().isoformat()
+    run(conditions, out, model=args.model, workers=args.workers)
+
+
 def cmd_frames(args) -> None:
     from explainer_kit.render import contact_sheet
 
@@ -214,6 +227,7 @@ def main() -> None:
                    help="renderings to scaffold: 1 prose, 2 diagram, 3 interactive, 4 video (default: 4)")
     p.set_defaults(fn=cmd_new)
 
+    p.add_argument("--quick", action="store_true", help="quick artifact: no narrative.md (principles §12)")
     p = sub.add_parser("check", help="check renderings against model.yaml")
     p.add_argument("slugs", nargs="*")
     p.add_argument("-v", "--verbose", action="store_true")
@@ -253,6 +267,15 @@ def main() -> None:
     p = sub.add_parser("probe", help="gap-finding prompt for the model, before rendering")
     p.add_argument("slug")
     p.set_defaults(fn=cmd_probe)
+
+    p = sub.add_parser("eval", help="chat eval: answer questions under several system prompts, grade blind")
+    p.add_argument("suite", choices=["chat"])
+    p.add_argument("--conditions", nargs="+", default=["none", "v0.5=git:v0.5.0", "v0.6=principles"],
+                   help="name=source; source is none, principles, git:<rev>, or a file")
+    p.add_argument("--model", help="model for answers and grading (default: the claude CLI default)")
+    p.add_argument("--out", help="output folder (default: evals/chat/results/<date>)")
+    p.add_argument("--workers", type=int, default=6)
+    p.set_defaults(fn=cmd_eval)
 
     p = sub.add_parser("frames", help="rebuild the contact sheet")
     p.add_argument("slug")

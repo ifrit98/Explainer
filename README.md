@@ -83,6 +83,8 @@ Every rendering is compiled from the same model and narrative, so prose, diagram
 | [![Dijkstra mid-run](docs/assets/dijkstra-video.png)](explainers/dijkstra/video/out.mp4) | **[Dijkstra's shortest paths](explainers/dijkstra/)** (algorithm): the run in `model.yaml`, replayed. Why the smallest estimate settles first, why a settled estimate is final, one step at a time, and a negative edge that breaks it. [Blind-test results](explainers/dijkstra/review/understanding.md). |
 | **[Why a CDN makes a request faster](https://ifrit98.github.io/Explainer/explainers/cdn-request/)** (interactive) | Two distance sliders and three paths side by side (no CDN, miss, hit). The instrument opens only after you predict the no-CDN time. |
 | [![STE-80 video frame](docs/assets/ste-80-video.png)](explainers/ste-80/video/out.mp4) | **[STE-80 rewrite](explainers/ste-80/)** (video): one manual sentence through three Simplified Technical English rules, 16 → 9 words. |
+| **[Self-attention](https://ifrit98.github.io/Explainer/explainers/attention/)** (interactive) | One token, four levels. Remove one part at a time (content weights, a separate query, √d, the causal mask) and see what breaks, with every number from the model. |
+| **[Why the sky is blue](explainers/sky-blue/explanation.md)** (prose + [diagram](explainers/sky-blue/diagram.md)) | A phenomenon from first principles in 650 words: scattered power goes with the electron's acceleration squared, so blue scatters 5.86 times more than red; losses multiply along a sunset's 38 air masses. |
 | **[git bisect](explainers/git-bisect/explanation.md)** (prose) · **[git objects](explainers/git-objects/diagram.md)** (diagram) | The router at work: a procedure gets numbered steps; pure topology gets one diagram. |
 
 All examples, with the reason for each stage: [`explainers/`](explainers/).
@@ -94,10 +96,13 @@ Every check below has caught a real problem in this repo. Each finding then beca
 | Check | When | Catches | It found |
 |---|---|---|---|
 | `explainer probe` | before rendering | what the model omits: a formula with no why, a guarantee with no failure case, an undefined term | the first softmax model never said why it uses exp |
-| `explainer coldread` | on the narrative before rendering, on each rendering after | every word, symbol, or picture a first-time reader meets before it is introduced; things shown but never said; leaps | odd-squares used "the n-th L" without saying what n is, and never said its own result aloud |
-| `explainer check` | always; CI | a number the model does not contain, a stale page, an incomplete or uncovered claim, a second name for one concept, a symbol the narrative never introduces, a Mermaid block that does not render (`--diagrams`) | Dijkstra's narration called a value that can still drop a "distance" |
+| `explainer coldread` | on the narrative before rendering, on each rendering after | read as the audience: every word, symbol, or picture met before it is introduced; things shown but never said; leaps; and **excess**, what this reader did not need. Findings that block the main line come first. | odd-squares used "the n-th L" without saying what n is; Dijkstra's finality argument claimed "reaching D costs at least ten", then D became eight |
+| `explainer check` | always; CI | a number the model does not contain, a stale page, an incomplete or uncovered claim, a second name for one concept, a symbol the narrative never introduces, a rendering over its length budget, a Mermaid block that does not render (`--diagrams`) | Dijkstra's narration called a value that can still drop a "distance"; the sky-blue prose went over its 650 words twice after review fixes |
 | `explainer render` · `review` | every video render | text that overlaps, touches, or leaves the frame; a key claim with no pause; narration over one picture for too long; a repeated line | Dijkstra said "D is ten" while the screen showed 8; two softmax labels touched |
 | `explainer quiz` | before publishing | what a fresh reader understood, scored against the model's quiz and claims | passed the softmax prose and failed a deliberately broken copy |
+| `explainer eval chat` | when the principles change | whether the principles make chat answers better for a technical reader, graded blind against no system prompt and the last release | the principles made answers 50% longer; with a chat rule they now score 7.8/10 at 292 words, against 6.3 at 399 with no system prompt ([evals](docs/evals.md)) |
+
+Effort has two sources, and the checks push against both: what is missing and what is extra. Without the second, every review adds words. ([Concepts: omission and excess](docs/concepts.md#omission-and-excess).)
 
 The blind test and the cold read measure different things. The old odd-squares video passed the blind test (a capable reviewer fills gaps from context) and failed the cold read. The [authoring guide](docs/authoring.md#the-narrative-pass-odd-squares) tells the whole story, including how the narrative's cold read changed the proof itself.
 
@@ -128,7 +133,7 @@ Prose and narration use STE-80, a house style based on [ASD-STE100](https://www.
 > ~~It is imperative that the operator ensures the hydraulic reservoir is replenished prior to commencing operation.~~
 > Fill the hydraulic reservoir before you start the machine.
 
-One idea per sentence, active voice, one term per concept, and direct causal statements ("A causes B because C"). [Rules](plugin/skills/explain/references/writing.md).
+One idea per sentence, active voice, one term per concept, and direct causal statements ("A causes B because C"). The other 20% keeps explanatory power: a precise term of art stays (and is defined once), a cause stays in the sentence with its effect, and nothing the reader already knows is defined. [Rules](plugin/skills/explain/references/writing.md).
 
 ## What is in the box
 
