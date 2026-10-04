@@ -9,3 +9,4 @@ explainers/*/video/*.mp4
 explainers/*/video/*contact.png
 .playwright-mcp/
 media/
+.claude/scheduled_tasks.lock
