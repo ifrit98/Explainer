@@ -6,7 +6,7 @@ Measure the toolkit, not the examples.
 
 - **`explainer eval artifact`**: 30 held-out subjects (10 dev, 20 test) with fixed quizzes. A fresh agent builds each explainer under each condition (no guidance, the principles, the explain skill at the quick or published tier); a second answers the quiz from the renderings alone, quoting the passage behind each answer (unquotable answers score 0); a third grades blind. [docs/evals.md](docs/evals.md#the-artifact-eval).
 - The examples are frozen as reference implementations and regression fixtures (ROADMAP §15).
-- [What the artifact eval found](docs/evals.md#what-the-artifact-eval-found): the quiz is at its ceiling, the principles carry the measurable value, and the skill tiers add cost without a measured gain. A person's ranking has to confirm the grader before it steers a change.
+- [What the artifact eval found](docs/evals.md#what-the-artifact-eval-found), on the 10 dev subjects: the quiz is at its ceiling; the principles carry the measurable value (40% shorter, best mean effort rank, lowest cost); the quick tier makes the most errors; the published tier costs 13 times as much with no consistent measured gain. A person's ranking has to confirm the grader before it steers a change.
 - `AGENTS.md` for agents other than Claude Code: no `@` imports, no `.claude/` paths.
 - Docs: the author's eight understanding questions and the blind test's seven are described as two sets; "at least three dev subjects" everywhere.
 

@@ -33,14 +33,14 @@ Dev baseline, 2026-10-04, v0.7.0 principles and skills; builder, reader, and gra
 |---|---|---|---|---|---|---|---|
 | none | 3.1–3.3 | 100% | 95% | 1,689 | 3–4 | $0.28 | 1.5 |
 | principles | 1.7–1.9 | 99% | 98% | 1,006 | 1–4 | $0.21 | 1.0 |
-| quick (skill) | 2.5–2.9 | 95% | 94% | 606 | 6–9 | $0.46 | 1.6 |
+| quick (skill) | 2.5–2.9 | 95% | 94% | 606 | 4–9 | $0.46 | 1.6 |
 | published (skill) | 2.2–2.5 | 95% | 95% | 1,016 | 1–2 | $2.81 | 11.8 |
 
-Effort rank: the grader's ranking of each subject's four explanations by the reader's effort, averaged over 10 subjects; the range covers three grading passes. Errors: factual errors the grader found, in all 10 explanations. Cost: the builder plus the reviews it ran.
+Effort rank: the grader's ranking of each subject's four explanations by the reader's effort, averaged over 10 subjects; the range covers three grading passes. Errors: factual errors the grader found, in all 10 explanations; the range covers the same three grading passes. Cost: the builder plus the reviews it ran.
 
 - **The quiz is at its ceiling.** Every condition scores 94–100%, with a strong reader and with Haiku. A model reader answers from any competent explanation, so the quiz cannot rank the conditions. The published tier's own blind test is the same kind of instrument, so it is weak for the same reason.
 - **The principles carry the measurable value.** Appended to the system prompt, they cut length by 40% (1,689 → 1,006 words), came first in the effort ranking in all three passes, and cost the least: a shorter explanation is cheaper to write.
-- **The skill adds cost without a measured gain over the principles.** The quick tier is the shortest (606 words) but ranks below the principles and has the most errors, several from compression ("three spheres meet at a point"; they meet at two). The published tier costs 13 times as much as the principles and takes 12 times as long, for a lower rank and the same length.
+- **The skill adds cost without a consistent measured gain over the principles.** The quick tier is the shortest (606 words) but ranks below the principles and has the most errors, several from compression ("three spheres meet at a point"; they meet at two). The published tier costs 13 times as much as the principles and takes 12 times as long, for a lower rank and the same length; its errors (1–2) overlap the principles' (1–4), fewer in one pass and more in another.
 - **Almost everything is prose.** With no guidance, 5 of 10 builders made a page; with the principles, none did; the skill made 3 diagrams in 20 builds. These subjects may simply be prose-shaped; the eval does not test video.
 - **The ranking is a model's taste, and it is noisy.** Changing only what the grader saw (Markdown as written instead of stripped of inline code) moved the quick tier from 2.5 to 2.9. The principles-first and none-last results held in every pass; the order of quick and published did not. A person's ranking of a sample has to confirm it before it steers a change.
 

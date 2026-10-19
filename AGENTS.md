@@ -23,7 +23,7 @@ uv run explainer render <slug> --draft        # fast silent layout pass
 uv run pytest -q                              # toolkit tests
 ```
 
-The review and eval commands (`coldread`, `blindtest`, and `probe` with `--run`, and `eval`) call the Claude CLI (`claude -p`). They need it installed and signed in, whichever agent runs them.
+The review and eval commands (`probe`, `coldread`, and `quiz` with `--run`, and `eval`) call the Claude CLI (`claude -p`). They need it installed and signed in, whichever agent runs them.
 
 Reference implementations by stage are indexed in `explainers/README.md`.
 
