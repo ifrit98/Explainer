@@ -145,21 +145,26 @@ For learners, a result is worth more after a prediction. Pages put a predict gat
 
 ## The understanding test
 
-Before an explanation is done, it is checked against seven questions:
+There are two sets of questions, and they are not the same.
+
+**The author's checklist** ([principles.md](../plugin/skills/explain/references/principles.md) §7) has eight questions. The author asks them while writing:
 
 1. Can the reader identify the main objects?
-2. Can the reader explain how they relate?
+2. Can the reader explain how the objects relate?
 3. Can the reader see the central causal chain?
 4. Can the reader predict what changes when an important variable changes?
 5. Can the reader separate assumptions from observations?
-6. Can the reader rebuild the explanation without the exact wording?
-7. Does the representation impose mental simulation that another medium would remove?
+6. Can the reader rebuild the high-level explanation without the exact wording?
+7. Does the representation impose mental simulation that a different medium would remove?
+8. Could anything be cut with no loss?
 
 A "no" means revise, or escalate one stage.
 
+**The blind test** asks a fresh reader seven questions, defined in [`explainer_kit/review.py`](../explainer_kit/review.py) (`UNDERSTANDING`). They overlap with the checklist, but they are a different set. The reader names the main objects, states how they relate and the central causal chain, predicts the effect of the most important variable, separates an assumption from an observation, and rebuilds the explanation in at most five sentences. The seventh asks which part was hardest to follow and what would have made it easier. The blind test does not ask the cut question.
+
 ### Blind understanding test
 
-An author grading their own explanation is a weak test. `explainer quiz <slug> --rendering <r>` prints a prompt for a fresh agent that sees only one rendering. It answers the seven questions plus the model's quiz items, and its answers are scored against `explainer quiz <slug> --rubric`. A test must also be able to fail: in the first run, a deliberately broken copy of the softmax prose (it claimed a high temperature can change which token is first) scored 0 on the quiz item about that claim, while the real prose passed. Results live in `explainers/<slug>/review/understanding.md`.
+An author grading their own explanation is a weak test. `explainer quiz <slug> --rendering <r>` prints a prompt for a fresh agent that sees only one rendering. It answers the blind test's seven questions plus the model's quiz items, and its answers are scored against `explainer quiz <slug> --rubric`. A test must also be able to fail: in the first run, a deliberately broken copy of the softmax prose (it claimed a high temperature can change which token is first) scored 0 on the quiz item about that claim, while the real prose passed. Results live in `explainers/<slug>/review/understanding.md`.
 
 ## Where the rules live
 
