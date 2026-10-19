@@ -13,7 +13,9 @@ SKIP = {".venv", "media", "models", "node_modules", ".playwright-mcp", ".git", "
 
 
 def markdown_files():
-    return [p for p in ROOT.rglob("*.md") if not SKIP & set(p.relative_to(ROOT).parts)]
+    # Eval output (evals/*/results/*/work and shown) is generated, kept as a record; it is not documentation.
+    return [p for p in ROOT.rglob("*.md") if not SKIP & set(p.relative_to(ROOT).parts)
+            and not ("results" in p.parts and {"work", "shown"} & set(p.parts))]
 
 
 @pytest.mark.parametrize("md", markdown_files(), ids=lambda p: str(p.relative_to(ROOT)))
@@ -43,6 +45,17 @@ def test_plugin_manifest_and_skills():
         assert (ROOT / ".claude/skills" / skill / "SKILL.md").exists(), f".claude/skills/{skill} link is missing"
     for ref in re.findall(r"`(references/[\w.-]+)`", (ROOT / "plugin/skills/explain/SKILL.md").read_text()):
         assert (ROOT / "plugin/skills/explain" / ref).exists(), ref
+
+
+def test_agents_md_is_self_contained():
+    """AGENTS.md is read by agents other than Claude Code: no @ imports, no paths that do not exist."""
+    text = (ROOT / "AGENTS.md").read_text()
+    assert not re.search(r"^@", text, re.M), "AGENTS.md uses Claude Code @ imports, which other agents ignore"
+    paths = [p for p in re.findall(r"`([\w.\-/]+/[\w.\-/]*)`", text) if not p.startswith("http")]
+    missing = [p for p in paths if not (ROOT / p.rstrip("/")).exists()]
+    assert not missing, f"AGENTS.md names paths that do not exist: {missing}"
+    assert "plugin/skills/explain/references/principles.md" in text
+    assert "claude -p" in text
 
 
 @pytest.mark.parametrize("folder", sorted(d for d in (ROOT / "explainers").iterdir() if (d / "model.yaml").exists()),
