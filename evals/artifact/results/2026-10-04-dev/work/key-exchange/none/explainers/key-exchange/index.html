@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Diffie–Hellman key exchange: try it</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+  body { font: 16px/1.5 system-ui, sans-serif; max-width: 960px; margin: 2rem auto; padding: 0 1rem; color: #222; }
+  h1 { font-size: 1.5rem; }
+  .row { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1rem; margin: 1rem 0; }
+  .card { border: 1px solid #ccc; border-radius: 8px; padding: 0.8rem 1rem; }
+  .alice { background: #fff3f0; border-color: #e0a090; }
+  .bob   { background: #f0f5ff; border-color: #90a8e0; }
+  .eve   { background: #f4f4f4; }
+  .mallory { background: #fff8e0; border-color: #d8b850; }
+  .secret { color: #b00; font-weight: 600; }
+  .public { color: #060; font-weight: 600; }
+  code, .num { font-family: ui-monospace, monospace; }
+  label { display: block; margin: 0.4rem 0; }
+  input[type=number] { width: 7rem; font: inherit; }
+  select, button { font: inherit; }
+  .big { font-size: 1.3rem; }
+  .ok { color: #060; } .bad { color: #b00; }
+  .note { color: #555; font-size: 0.9rem; }
+  table.steps { border-collapse: collapse; font-family: ui-monospace, monospace; font-size: 0.85rem; }
+  table.steps td { padding: 0 0.5rem; }
+</style>
+</head>
+<body>
+<h1>Agreeing on a secret over a public channel</h1>
+<p>Alice and Bob each pick a <span class="secret">secret number</span> and never send it. They send only
+<span class="public">public values</span> computed from it. Eve can see everything in green. Change the numbers and
+see that Alice and Bob always end up with the same key. Then see how hard Eve has to work to get it.
+(The written explanation is in <code>explanation.md</code>.)</p>
+
+<div class="card">
+  <strong>Public settings (everyone knows these)</strong>
+  <label>Prime p and base g:
+    <select id="preset">
+      <option value="23,5">p = 23, g = 5 (tiny textbook example)</option>
+      <option value="101,2">p = 101, g = 2</option>
+      <option value="7919,7">p = 7919, g = 7</option>
+      <option value="1000003,2">p = 1,000,003, g = 2</option>
+      <option value="2147483647,7">p = 2,147,483,647, g = 7 (31-bit)</option>
+    </select>
+  </label>
+  <span class="note">Real systems use a prime of about 2048 bits (≈ 617 digits), or elliptic curves.</span>
+</div>
+
+<div class="row">
+  <div class="card alice">
+    <strong>Alice</strong>
+    <label>Secret a: <input type="number" id="a" value="6" min="1"></label>
+    <button data-rand="a">random</button>
+    <p>Sends A = g<sup>a</sup> mod p = <span class="public num" id="Aout"></span></p>
+  </div>
+  <div class="card eve">
+    <strong>Public channel (Eve sees this)</strong>
+    <p class="num">p = <span class="public" id="pv"></span><br>
+       g = <span class="public" id="gv"></span><br>
+       A = <span class="public" id="Av"></span> (Alice → Bob)<br>
+       B = <span class="public" id="Bv"></span> (Bob → Alice)</p>
+  </div>
+  <div class="card bob">
+    <strong>Bob</strong>
+    <label>Secret b: <input type="number" id="b" value="15" min="1"></label>
+    <button data-rand="b">random</button>
+    <p>Sends B = g<sup>b</sup> mod p = <span class="public num" id="Bout"></span></p>
+  </div>
+</div>
+
+<div class="row">
+  <div class="card alice">
+    Alice computes B<sup>a</sup> mod p<br>
+    <span class="big num" id="sA"></span>
+  </div>
+  <div class="card" id="match"></div>
+  <div class="card bob">
+    Bob computes A<sup>b</sup> mod p<br>
+    <span class="big num" id="sB"></span>
+  </div>
+</div>
+
+<details class="card">
+  <summary><strong>How Alice computes g<sup>a</sup> mod p quickly (repeated squaring)</strong></summary>
+  <p class="note">Square repeatedly and reduce mod p every time. Then multiply together the squares that match the 1-bits of a.
+  The number of steps grows with the <em>number of digits</em> of a, not with a itself.</p>
+  <table class="steps" id="sq"></table>
+</details>
+
+<h2>Eve's attack: undo the exponent</h2>
+<p>Eve knows g, p and A. She needs some x with g<sup>x</sup> mod p = A. With no shortcut, she tries x = 1, 2, 3, … .
+(Any x that gives A works for her, because then B<sup>x</sup> = A<sup>b</sup>.)</p>
+<button id="brute">Run Eve's brute-force search</button>
+<p id="bruteOut"></p>
+<p class="note" id="scale"></p>
+
+<h2>But what if the attacker can <em>change</em> messages?</h2>
+<label><input type="checkbox" id="mitm"> Put Mallory in the middle. She swaps A and B for her own value M = g<sup>m</sup> mod p.</label>
+<div id="mitmBox" style="display:none">
+  <label>Mallory's secret m: <input type="number" id="m" value="9" min="1"></label>
+  <div class="row">
+    <div class="card alice">Alice receives M = <span class="num" id="Ma"></span> (she thinks it's B)<br>Her key: <span class="big num" id="kA"></span></div>
+    <div class="card mallory">Mallory computes A<sup>m</sup> = <span class="num" id="kMA"></span> (Alice's key)<br>and B<sup>m</sup> = <span class="num" id="kMB"></span> (Bob's key)</div>
+    <div class="card bob">Bob receives M = <span class="num" id="Mb"></span> (he thinks it's A)<br>His key: <span class="big num" id="kB"></span></div>
+  </div>
+  <p>Alice and Bob each share a key with <strong>Mallory</strong>, not with each other. Mallory can decrypt, read, re-encrypt and pass
+  everything along without being noticed. The exchange alone can't stop this. Bob must <em>prove</em> that B came from him,
+  for example with a digital signature backed by a certificate.</p>
+</div>
+
+<script>
+const $ = id => document.getElementById(id);
+function modpow(base, exp, mod) {
+  let r = 1n, b = base % mod, e = exp;
+  while (e > 0n) { if (e & 1n) r = r * b % mod; b = b * b % mod; e >>= 1n; }
+  return r;
+}
+let p, g;
+function params() {
+  [p, g] = $('preset').value.split(',').map(BigInt);
+}
+function clampSecret(id) {
+  let v = BigInt(Math.max(1, Math.floor(Number($(id).value) || 1)));
+  if (v > p - 2n) v = p - 2n;
+  $(id).value = v.toString();
+  return v;
+}
+function update() {
+  params();
+  const a = clampSecret('a'), b = clampSecret('b');
+  const A = modpow(g, a, p), B = modpow(g, b, p);
+  const sA = modpow(B, a, p), sB = modpow(A, b, p);
+  $('Aout').textContent = $('Av').textContent = A;
+  $('Bout').textContent = $('Bv').textContent = B;
+  $('pv').textContent = p; $('gv').textContent = g;
+  $('sA').textContent = sA; $('sB').textContent = sB;
+  $('match').innerHTML = sA === sB
+    ? '<span class="ok big">Same key: ' + sA + '</span><br><span class="note">(g<sup>b</sup>)<sup>a</sup> = (g<sup>a</sup>)<sup>b</sup> = g<sup>ab</sup>. a and b never crossed the channel.</span>'
+    : '<span class="bad">Mismatch (should never happen)</span>';
+
+  // repeated squaring trace
+  let rows = '<tr><td>bit</td><td>g^(2^i) mod p</td><td>running product</td></tr>';
+  let sq = g % p, r = 1n, e = a, i = 0;
+  while (e > 0n) {
+    const bit = e & 1n;
+    if (bit) r = r * sq % p;
+    rows += `<tr><td>${bit}</td><td>g^${2n ** BigInt(i)} = ${sq}</td><td>${bit ? r : '—'}</td></tr>`;
+    sq = sq * sq % p; e >>= 1n; i++;
+  }
+  $('sq').innerHTML = rows;
+  $('bruteOut').textContent = '';
+  $('scale').textContent = '';
+
+  // MITM
+  $('mitmBox').style.display = $('mitm').checked ? '' : 'none';
+  const m = clampSecret('m');
+  const M = modpow(g, m, p);
+  $('Ma').textContent = $('Mb').textContent = M;
+  $('kA').textContent = modpow(M, a, p);
+  $('kB').textContent = modpow(M, b, p);
+  $('kMA').textContent = modpow(A, m, p);
+  $('kMB').textContent = modpow(B, m, p);
+}
+$('brute').onclick = () => {
+  params();
+  const A = BigInt($('Av').textContent);
+  const t0 = performance.now();
+  if (p > 10000000n && !confirm('With a 31-bit prime this can take up to ~2 billion tries and may freeze the page for several seconds. Continue?')) return;
+  // Use Number arithmetic when products stay exact (p * g < 2^53)
+  let tries = 0, found = null;
+  if (p * g < 9007199254740992n) {
+    const P = Number(p), G = Number(g), T = Number(A);
+    let v = 1;
+    for (let x = 1; x < P; x++) { v = v * G % P; tries++; if (v === T) { found = x; break; } }
+  } else {
+    let v = 1n;
+    for (let x = 1n; x < p; x++) { v = v * g % p; tries++; if (v === A) { found = x; break; } }
+  }
+  const ms = performance.now() - t0;
+  $('bruteOut').innerHTML = found === null ? 'Not found.' :
+    `Eve found x = <strong>${found}</strong> after <strong>${tries.toLocaleString()}</strong> tries in ${ms.toFixed(1)} ms. ` +
+    `Her key: B<sup>x</sup> mod p = <strong>${modpow(BigInt($('Bv').textContent), BigInt(found), p)}</strong>. Broken.`;
+  const bits = p.toString(2).length;
+  $('scale').textContent =
+    `This p has ${bits} bits, so there are at most about 2^${bits} values to try. Each extra bit doubles the work. ` +
+    `A real 2048-bit p would need about 2^2048 tries this way. Cleverer algorithms (number field sieve) do far better than that, ` +
+    `but at 2048 bits they still need roughly 2^110 operations, far beyond all the computers on Earth. ` +
+    `Alice's own work grows only with the number of bits: about ${bits} squarings here, a few thousand at 2048 bits.`;
+};
+document.querySelectorAll('[data-rand]').forEach(btn => btn.onclick = () => {
+  params();
+  $(btn.dataset.rand).value = 1 + Math.floor(Math.random() * Number(p - 2n));
+  update();
+});
+['preset', 'a', 'b', 'm', 'mitm'].forEach(id => $(id).addEventListener('input', update));
+$('mitm').addEventListener('change', update);
+update();
+</script>
+</body>
+</html>

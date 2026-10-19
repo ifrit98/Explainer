@@ -1,0 +1,59 @@
+{
+  "key": {
+    "A": "quick",
+    "B": "none",
+    "C": "principles",
+    "D": "published"
+  },
+  "grades": {
+    "quick": {
+      "quiz": [
+        2,
+        2,
+        2,
+        2
+      ],
+      "misconception": "absent",
+      "errors": [
+        "Three spheres meet at a point. (Three spheres generally meet at two points; the receiver discards one of them.)"
+      ]
+    },
+    "none": {
+      "quiz": [
+        2,
+        2,
+        2,
+        2
+      ],
+      "misconception": "absent",
+      "errors": []
+    },
+    "principles": {
+      "quiz": [
+        2,
+        2,
+        2,
+        2
+      ],
+      "misconception": "corrected",
+      "errors": []
+    },
+    "published": {
+      "quiz": [
+        2,
+        2,
+        2,
+        2
+      ],
+      "misconception": "corrected",
+      "errors": []
+    }
+  },
+  "rank": [
+    "published",
+    "principles",
+    "quick",
+    "none"
+  ],
+  "why_best": "D builds each idea in order with no detours: it says the receiver only listens, makes the clock bias b concrete with a small 1-D worked example, sets a nanosecond budget, and explains why a shared b cannot absorb satellite drift that differs between satellites."
+}

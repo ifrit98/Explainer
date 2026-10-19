@@ -1,0 +1,99 @@
+# Machine-readable half of model.md. `explainer check float-sum` holds every rendering to it.
+
+values:
+  bits: 53
+  printed_sum: 0.30000000000000004
+  gap_u: 5.55e-17
+  stored:
+    p1: 0.10000000000000000555
+    p2: 0.20000000000000001110
+    p3: 0.29999999999999998890
+    exact_sum: 0.30000000000000001665
+    rounded_sum: 0.30000000000000004441
+  units:
+    p1_exact: 1801439850948198.4
+    p1_stored: 1801439850948198.5
+    p2_exact: 3602879701896396.8
+    p2_stored: 3602879701896397
+    p3_exact: 5404319552844595.2
+    p3_stored: 5404319552844595
+    exact_sum: 5404319552844595.5
+    rounded_sum: 5404319552844596
+  errors:
+    p1: 5.55e-18
+    p2: 1.11e-17
+    p3: -1.11e-17
+  binary_tenth: 0.000110011001100110011
+  exponent_u: -54
+  sum_exact_u: 5404319552844595.5
+  sum_rounded_u: 5404319552844596
+  p3_stored_u: 5404319552844595
+
+allow: ["0011", -2, 52, 54, -55, 198.5, 595, 596, 15, 0.25, 0.5, 0.75, 0.125, 0.0625, 1, 2, 3, 4, 5, 8, 10, 16, 17, 64, 754, 0.3333, 0.6666, 0.6667, 1e-9, 0.011]
+
+require:
+  - path: printed_sum
+    in: [prose]
+  - path: sum_exact_u
+    in: [prose]
+  - path: sum_rounded_u
+    in: [prose]
+  - path: p3_stored_u
+    in: [prose]
+  - path: gap_u
+    in: [prose]
+
+claims:
+  - id: tenth-not-binary
+    kind: mechanism
+    statement: "A fraction ends in binary only if its denominator is a power of two; 1/10 has a factor 5, so 0.1 has no finite binary expansion."
+    example: "3/8 = 0.011 in binary ends; 1/10 = 0.000110011… repeats, because 2^k / 10 is never a whole number."
+    ask: "Why can a double hold 0.75 exactly but not 0.1?"
+  - id: stored-values
+    kind: mechanism
+    statement: "Each literal becomes the nearest double; 0.1 and 0.2 round up, 0.3 rounds down."
+    example: "In units of u = 2^-54: 0.1 = 1801439850948198.4 → .5; 0.2 = 3602879701896396.8 → 3602879701896397; 0.3 = 5404319552844595.2 → 5404319552844595."
+  - id: sum-rounds-up
+    kind: mechanism
+    statement: "The exact sum of the stored values lands exactly halfway between two doubles and rounds to the upper one, one gap above stored 0.3."
+    example: "1801439850948198.5 + 3602879701896397 = 5404319552844595.5 → tie → 5404319552844596 (even); stored 0.3 is 5404319552844595."
+    ask: "The stored 0.1 and stored 0.2 are each very close to 0.1 and 0.2. Why is their sum not the same double as stored 0.3?"
+  - id: exact-when-binary
+    kind: guarantee
+    statement: "When every number is a binary fraction, float addition is exact and == behaves as in school arithmetic."
+    example: "0.5 + 0.25 == 0.75 is true."
+    counterexample: "0.1 + 0.2 == 0.3 is false: 1/10 is not a binary fraction."
+  - id: printing-hides
+    kind: misconception
+    correction: "The stored value of 0.1 is 0.10000000000000000555; printing hides the error."
+    statement: "print(0.1) shows 0.1 because languages print the shortest decimal that rounds back to the same double, not the exact stored value."
+    example: "\"0.1\" picks out stored 0.1, so one digit suffices; for the rounded sum, \"0.3\" picks out the wrong double, so 17 digits are needed: 0.30000000000000004."
+    ask: "If 0.1 is not stored exactly, why does print(0.1) show 0.1?"
+  - id: why-tolerance
+    kind: why
+    statement: "Compare floats with a tolerance, or use a decimal type, instead of ==."
+    alternative: "Compare with =="
+    counterexample: "0.1 + 0.2 == 0.3 is false although the difference is only 5.55e-17; abs((0.1 + 0.2) - 0.3) < 1e-9 is true."
+
+accept_unjustified: {}
+
+terms:
+  - term: stored value
+    means: "the double held for a literal; never plain '0.1 is stored'"
+    avoid: [stored exactly as 0.1]
+  - term: rounded sum
+    means: "the result of +, after rounding; 'exact sum' is before rounding"
+    avoid: [the true result of +]
+
+budget: {prose: 900, reason: "the mechanism needs a five-row number table, the binary argument, and the printing step"}
+
+quiz:
+  - q: "Does 0.5 + 0.25 == 0.75 evaluate to true or false with doubles, and why?"
+    expect: "True: 1/2, 1/4, 3/4 have power-of-two denominators, so all are stored exactly and the sum is exact."
+    misconception: "False, because floats are always inexact."
+  - q: "Is the + operation itself making an error that the hardware could avoid? Where does the difference come from?"
+    expect: "No; + gives the nearest double to the exact sum of its inputs. The inputs were already not 0.1 and 0.2 (1/10 does not end in binary), and their small errors push the exact sum to a point that rounds to a different double than 0.3 does."
+    misconception: "The addition circuit is imprecise / it is a bug."
+  - q: "Would 0.1 + 0.2 == 0.3 be true using Python's Decimal type with Decimal('0.1') etc.? Why?"
+    expect: "Yes: Decimal stores base-10 digits, where 1/10 ends, so no rounding occurs."
+    misconception: "No, computers can never represent 0.1."

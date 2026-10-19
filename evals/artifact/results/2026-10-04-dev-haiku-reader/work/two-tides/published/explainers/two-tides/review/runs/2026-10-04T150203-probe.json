@@ -1,0 +1,224 @@
+{
+ "tool": "probe",
+ "rendering": null,
+ "slug": "two-tides",
+ "at": "2026-10-04T15:02:03",
+ "model": "default",
+ "prompt_sha": "4e0747130ed6",
+ "reply": {
+  "gaps": [
+   {
+    "rule": 4,
+    "severity": "main",
+    "about": "The step where the 'sideways part' of the tidal acceleration moves water into the bulges has no numbers and no worked example.",
+    "why_it_matters": "The model says the 1.1 µm/s² vertical part 'cannot lift water against gravity directly' and that the sideways part does the work. But it never gives that sideways part's size or where on Earth it peaks. Without that, the reader is told the vertical push is too weak and is never shown what actually piles the water up.",
+    "suggested_addition": "Horizontal tidal acceleration = (3/2)(GM/d³)R·sin2θ, where θ is the angle from the sub-Moon point. It is 0 at θ = 0° and 90°, and largest at θ = 45°: 1.5 × 0.55 = 0.82 µm/s², pointing toward the nearer bulge. A table at θ = 0°, 45°, 90°, 135°, 180° with values 0, +0.82, 0, −0.82, 0 µm/s² would show water being pushed from the sides toward both bulges."
+   },
+   {
+    "rule": 4,
+    "severity": "main",
+    "about": "The inward squeeze at the sides (0.55 µm/s², 'half the size') is stated, but never calculated or explained.",
+    "why_it_matters": "The low tide and the 'two bulges, not one' shape depend on the sides being pulled inward. But the three-point table only covers points on the Earth–Moon line. The reader sees no subtraction for the side points, so the squeeze looks asserted rather than derived.",
+    "suggested_addition": "At a side point, the distance to the Moon is ≈ √(384,400² + 6371²) ≈ 384,453 km, so the pull is ≈ 33.18 µm/s², almost the same as at the centre. But it points at the Moon, which is tilted by R/d = 0.01657 rad from the centre's pull direction. Subtracting the vectors leaves ≈ 33.19 × 0.01657 = 0.55 µm/s², pointing toward Earth's centre. Add a fourth row, 'side', to the table: pull 33.18, difference 0.55 inward."
+   },
+   {
+    "rule": 1,
+    "severity": "edge",
+    "about": "The approximation 2GMR/d³ (and the 1/d³ law) is given without saying why it has this form instead of the direct difference.",
+    "why_it_matters": "The Sun-versus-Moon argument depends on 'differences fall as 1/d³'. The reader can do the direct subtraction but is never shown where the cube comes from, or why it gives 1.10 when the exact values are 1.13 and 1.07.",
+    "suggested_addition": "GM/(d−R)² − GM/d² ≈ GM/d² × 2R/d = 2GMR/d³ = 33.19 × 2 × 0.01657 = 1.10 µm/s². The exact near and far values (1.13, 1.07) differ by about ±3%, because of higher terms of order 3R/d ≈ 0.05. Then the Sun: d is 389× larger and GM is 2.71×10⁷× larger, so 2.71×10⁷ / 389³ ≈ 0.46."
+   },
+   {
+    "rule": 2,
+    "severity": "main",
+    "about": "The argument names the wrong object: the Relationships row says free fall 'cancels the average Moon's pull', but the operation is subtracting the pull at the centre.",
+    "why_it_matters": "The pull at the centre (33.19) is not the average of the near and far values ((34.32 + 32.12)/2 = 33.22). Giving the same idea two names here also leaves implicit the key step: the water is measured relative to an Earth whose centre accelerates at exactly 33.19 µm/s².",
+    "suggested_addition": "Change the row to: 'Earth's free fall cancels the Moon's pull at the centre (33.19 µm/s²)'. Add one sentence: Earth's centre and the oceans all accelerate toward the Moon, and the centre's acceleration is 33.19 µm/s². Relative to the centre, each point only feels its own pull minus 33.19."
+   },
+   {
+    "rule": 2,
+    "severity": "edge",
+    "about": "The 'uniform pull gives no tide' claim and the 'tidally locked' break case have no numbers.",
+    "why_it_matters": "Each guarantee should have a numeric case where it holds and one where it breaks. These two rows are bare statements.",
+    "suggested_addition": "Uniform pull: 33.19 at every point, so 33.19 − 33.19 = 0 everywhere, so no bulge. Tidally locked: the Moon's rotation period equals its orbital period (27.3 days), so relative to Earth the 'lunar day' is infinite and the number of high tides per day is 0. Contrast Earth: 1 rotation per 24 h 50 min relative to the Moon gives 2 per 24 h 50 min."
+   },
+   {
+    "rule": 2,
+    "severity": "edge",
+    "about": "The confusion point 'the bulge would exist even if Earth fell straight at the Moon with no orbit' has no worked case.",
+    "why_it_matters": "This is the model's main rebuttal of the centrifugal story, and the reader is asked to accept it without numbers.",
+    "suggested_addition": "With no orbit (straight fall from rest at d = 384,400 km), the centre still accelerates at 33.19, the near side at 34.32 and the far side at 32.12. The differences are still +1.13 and −1.07, the same as in orbit. So both bulges appear without any rotation of the Earth–Moon pair."
+   },
+   {
+    "rule": 4,
+    "severity": "edge",
+    "about": "The lunar day of 24 h 50 min is asserted without a worked calculation.",
+    "why_it_matters": "The 12 h 25 min spacing is one of the model's observable predictions. The reader is told only that 'the Moon moves along its orbit', with no numbers.",
+    "suggested_addition": "The Moon goes once around relative to the Sun every 29.53 days, about 12.2° per day, in the same direction Earth spins. Earth must turn an extra 12.2°, which at 15° per hour takes about 0.81 h ≈ 49–50 min. So the lunar day is ≈ 24 h 50 min, and half of it is 12 h 25 min."
+   },
+   {
+    "rule": 3,
+    "severity": "edge",
+    "about": "One concept has many names: 'tidal acceleration', 'pull minus centre's pull', 'difference', 'tide-raising force', 'differential acceleration' (Audience section), 'the differences'. The centre's pull is also called 'the average Moon's pull'.",
+    "why_it_matters": "A new reader may think 'tide-raising force' or 'the difference' is a different quantity from 'tidal acceleration'.",
+    "suggested_addition": "Use only 'tidal acceleration' after it is defined, and only 'the Moon's pull at the centre (33.19 µm/s²)' for the subtracted term."
+   },
+   {
+    "rule": 3,
+    "severity": "edge",
+    "about": "Terms used before they are defined, or never defined: 'equilibrium tide' (in the Entities table, defined only in Epistemic status), 'lunar day' (used in Relationships, missing from Entities), 'sides (90° from the Moon)', 'tidally locked', 'spring tides'.",
+    "why_it_matters": "These are new to the stated audience.",
+    "suggested_addition": "Add Entities rows: 'side point: a surface point 90° from the near side, ≈ 384,453 km from the Moon'; 'lunar day: 24 h 50 min'; 'equilibrium tide: the ocean shape that would balance the tidal acceleration instantly'. Define 'tidally locked' (the same face always points at the other body, period 27.3 days for the Moon) or remove it."
+   },
+   {
+    "rule": 3,
+    "severity": "edge",
+    "about": "The definition of 'bulge' says the tidal acceleration 'pushed' water, which contradicts the confusion point 'the Moon pushes the far side away → No'.",
+    "why_it_matters": "It plants the very misconception the model is trying to correct.",
+    "suggested_addition": "Bulge: water gathered on the Earth–Moon line because the tidal acceleration there points outward (+1.13 / −1.07 µm/s² relative to the centre), and along the surface it points toward the line (up to 0.82 µm/s²)."
+   },
+   {
+    "rule": 5,
+    "severity": "edge",
+    "about": "The bulge height (0.36 m) and the tidal acceleration (1.1 µm/s²) are never linked, and the near/far asymmetry (1.13 vs 1.07) is never given a meaning.",
+    "why_it_matters": "The reader sees a tiny acceleration and a height of 0.36 m but not how one leads to the other, or whether the near-side bulge is noticeably higher.",
+    "suggested_addition": "Equilibrium: the ocean surface tilts until Earth's gravity along the slope balances the horizontal tidal acceleration, a slope of about 0.82e-6 / 9.81 ≈ 8×10⁻⁸. Over about 6,000 km from bulge to side, that gives a rise and fall of order 0.5 m (range 0.54 m, peak 0.36 m above the mean). The near-side tidal acceleration is about 5% larger than the far side's, so the near bulge is about 5% taller, roughly 2 cm. That is too small to notice."
+   },
+   {
+    "rule": 5,
+    "severity": "edge",
+    "about": "The Sun/Moon tidal ratio of 0.46 is not turned into something the reader can observe.",
+    "why_it_matters": "A ratio is more meaningful when it predicts something measurable.",
+    "suggested_addition": "Aligned (spring tide): 1 + 0.46 = 1.46× the Moon-only range. At right angles (neap tide): 1 − 0.46 = 0.54×. So spring ranges are about 2.7× neap ranges in the equilibrium model."
+   }
+  ],
+  "excess": [
+   "The 'Sun and Moon in line (spring tides)' row in Alternative states: Scope declares spring tides out of scope.",
+   "Scope's 'Tidal friction and the Moon moving away' line is harmless but adds nothing to the central question.",
+   "The tidally locked Moon example, unless 'tidally locked' is defined; as it stands it adds a new idea just to show a break case."
+  ],
+  "next_questions": [
+   {
+    "q": "If the tidal acceleration is only 1 ten-millionth of g, how does it move the ocean at all, and how high does each bulge get?",
+    "answered_by_model": false,
+    "declared_out_of_scope": false
+   },
+   {
+    "q": "Why are the two high tides in a day often different heights, and why do some places get only one?",
+    "answered_by_model": false,
+    "declared_out_of_scope": true
+   },
+   {
+    "q": "Why are real tides metres high, and why does high tide come hours after the Moon is overhead?",
+    "answered_by_model": false,
+    "declared_out_of_scope": true
+   },
+   {
+    "q": "Does the solid Earth also stretch into two bulges, and if so, why do we see the ocean rise relative to the land?",
+    "answered_by_model": false,
+    "declared_out_of_scope": false
+   },
+   {
+    "q": "Isn't the far bulge really caused by centrifugal force from the Earth–Moon orbit, as I was taught?",
+    "answered_by_model": true,
+    "declared_out_of_scope": false
+   }
+  ]
+ },
+ "usage": {
+  "cost": 0.17102900000000001,
+  "seconds": 65
+ },
+ "findings": [
+  {
+   "n": 1,
+   "severity": "main",
+   "kind": "rule 4",
+   "text": "The step where the 'sideways part' of the tidal acceleration moves water into the bulges has no numbers and no worked example. → Horizontal tidal acceleration = (3/2)(GM/d³)R·sin2θ, where θ is the angle from the sub-Moon point. It is 0 at θ = 0° and 90°, and largest at θ = 45°: 1.5 × 0.55 = 0.82 µm/s², pointing toward the nearer bulge. A table at θ = 0°, 45°, 90°, 135°, 180° with values 0, +0.82, 0, −0.82, 0 µm/s² would show water being pushed from the sides toward both bulges."
+  },
+  {
+   "n": 2,
+   "severity": "main",
+   "kind": "rule 4",
+   "text": "The inward squeeze at the sides (0.55 µm/s², 'half the size') is stated, but never calculated or explained. → At a side point, the distance to the Moon is ≈ √(384,400² + 6371²) ≈ 384,453 km, so the pull is ≈ 33.18 µm/s², almost the same as at the centre. But it points at the Moon, which is tilted by R/d = 0.01657 rad from the centre's pull direction. Subtracting the vectors leaves ≈ 33.19 × 0.01657 = 0.55 µm/s², pointing toward Earth's centre. Add a fourth row, 'side', to the table: pull 33.18, difference 0.55 inward."
+  },
+  {
+   "n": 3,
+   "severity": "edge",
+   "kind": "rule 1",
+   "text": "The approximation 2GMR/d³ (and the 1/d³ law) is given without saying why it has this form instead of the direct difference. → GM/(d−R)² − GM/d² ≈ GM/d² × 2R/d = 2GMR/d³ = 33.19 × 2 × 0.01657 = 1.10 µm/s². The exact near and far values (1.13, 1.07) differ by about ±3%, because of higher terms of order 3R/d ≈ 0.05. Then the Sun: d is 389× larger and GM is 2.71×10⁷× larger, so 2.71×10⁷ / 389³ ≈ 0.46."
+  },
+  {
+   "n": 4,
+   "severity": "main",
+   "kind": "rule 2",
+   "text": "The argument names the wrong object: the Relationships row says free fall 'cancels the average Moon's pull', but the operation is subtracting the pull at the centre. → Change the row to: 'Earth's free fall cancels the Moon's pull at the centre (33.19 µm/s²)'. Add one sentence: Earth's centre and the oceans all accelerate toward the Moon, and the centre's acceleration is 33.19 µm/s². Relative to the centre, each point only feels its own pull minus 33.19."
+  },
+  {
+   "n": 5,
+   "severity": "edge",
+   "kind": "rule 2",
+   "text": "The 'uniform pull gives no tide' claim and the 'tidally locked' break case have no numbers. → Uniform pull: 33.19 at every point, so 33.19 − 33.19 = 0 everywhere, so no bulge. Tidally locked: the Moon's rotation period equals its orbital period (27.3 days), so relative to Earth the 'lunar day' is infinite and the number of high tides per day is 0. Contrast Earth: 1 rotation per 24 h 50 min relative to the Moon gives 2 per 24 h 50 min."
+  },
+  {
+   "n": 6,
+   "severity": "edge",
+   "kind": "rule 2",
+   "text": "The confusion point 'the bulge would exist even if Earth fell straight at the Moon with no orbit' has no worked case. → With no orbit (straight fall from rest at d = 384,400 km), the centre still accelerates at 33.19, the near side at 34.32 and the far side at 32.12. The differences are still +1.13 and −1.07, the same as in orbit. So both bulges appear without any rotation of the Earth–Moon pair."
+  },
+  {
+   "n": 7,
+   "severity": "edge",
+   "kind": "rule 4",
+   "text": "The lunar day of 24 h 50 min is asserted without a worked calculation. → The Moon goes once around relative to the Sun every 29.53 days, about 12.2° per day, in the same direction Earth spins. Earth must turn an extra 12.2°, which at 15° per hour takes about 0.81 h ≈ 49–50 min. So the lunar day is ≈ 24 h 50 min, and half of it is 12 h 25 min."
+  },
+  {
+   "n": 8,
+   "severity": "edge",
+   "kind": "rule 3",
+   "text": "One concept has many names: 'tidal acceleration', 'pull minus centre's pull', 'difference', 'tide-raising force', 'differential acceleration' (Audience section), 'the differences'. The centre's pull is also called 'the average Moon's pull'. → Use only 'tidal acceleration' after it is defined, and only 'the Moon's pull at the centre (33.19 µm/s²)' for the subtracted term."
+  },
+  {
+   "n": 9,
+   "severity": "edge",
+   "kind": "rule 3",
+   "text": "Terms used before they are defined, or never defined: 'equilibrium tide' (in the Entities table, defined only in Epistemic status), 'lunar day' (used in Relationships, missing from Entities), 'sides (90° from the Moon)', 'tidally locked', 'spring tides'. → Add Entities rows: 'side point: a surface point 90° from the near side, ≈ 384,453 km from the Moon'; 'lunar day: 24 h 50 min'; 'equilibrium tide: the ocean shape that would balance the tidal acceleration instantly'. Define 'tidally locked' (the same face always points at the other body, period 27.3 days for the Moon) or remove it."
+  },
+  {
+   "n": 10,
+   "severity": "edge",
+   "kind": "rule 3",
+   "text": "The definition of 'bulge' says the tidal acceleration 'pushed' water, which contradicts the confusion point 'the Moon pushes the far side away → No'. → Bulge: water gathered on the Earth–Moon line because the tidal acceleration there points outward (+1.13 / −1.07 µm/s² relative to the centre), and along the surface it points toward the line (up to 0.82 µm/s²)."
+  },
+  {
+   "n": 11,
+   "severity": "edge",
+   "kind": "rule 5",
+   "text": "The bulge height (0.36 m) and the tidal acceleration (1.1 µm/s²) are never linked, and the near/far asymmetry (1.13 vs 1.07) is never given a meaning. → Equilibrium: the ocean surface tilts until Earth's gravity along the slope balances the horizontal tidal acceleration, a slope of about 0.82e-6 / 9.81 ≈ 8×10⁻⁸. Over about 6,000 km from bulge to side, that gives a rise and fall of order 0.5 m (range 0.54 m, peak 0.36 m above the mean). The near-side tidal acceleration is about 5% larger than the far side's, so the near bulge is about 5% taller, roughly 2 cm. That is too small to notice."
+  },
+  {
+   "n": 12,
+   "severity": "edge",
+   "kind": "rule 5",
+   "text": "The Sun/Moon tidal ratio of 0.46 is not turned into something the reader can observe. → Aligned (spring tide): 1 + 0.46 = 1.46× the Moon-only range. At right angles (neap tide): 1 − 0.46 = 0.54×. So spring ranges are about 2.7× neap ranges in the equilibrium model."
+  },
+  {
+   "n": 13,
+   "severity": "excess",
+   "kind": "model entry",
+   "text": "The 'Sun and Moon in line (spring tides)' row in Alternative states: Scope declares spring tides out of scope."
+  },
+  {
+   "n": 14,
+   "severity": "excess",
+   "kind": "model entry",
+   "text": "Scope's 'Tidal friction and the Moon moving away' line is harmless but adds nothing to the central question."
+  },
+  {
+   "n": 15,
+   "severity": "excess",
+   "kind": "model entry",
+   "text": "The tidally locked Moon example, unless 'tidally locked' is defined; as it stands it adds a new idea just to show a break case."
+  }
+ ]
+}

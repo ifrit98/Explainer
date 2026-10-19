@@ -1,0 +1,59 @@
+{
+  "key": {
+    "A": "none",
+    "B": "published",
+    "C": "principles",
+    "D": "quick"
+  },
+  "grades": {
+    "none": {
+      "quiz": [
+        2,
+        2,
+        2,
+        2
+      ],
+      "misconception": "corrected",
+      "errors": []
+    },
+    "published": {
+      "quiz": [
+        2,
+        2,
+        0,
+        2
+      ],
+      "misconception": "absent",
+      "errors": []
+    },
+    "principles": {
+      "quiz": [
+        2,
+        2,
+        2,
+        2
+      ],
+      "misconception": "absent",
+      "errors": []
+    },
+    "quick": {
+      "quiz": [
+        2,
+        2,
+        2,
+        2
+      ],
+      "misconception": "absent",
+      "errors": [
+        "\"so the infrared escapes to space only from high, cold air\""
+      ]
+    }
+  },
+  "rank": [
+    "principles",
+    "quick",
+    "none",
+    "published"
+  ],
+  "why_best": "C gives this reader every step the quiz needs in order: the 255 K budget, the visible-versus-infrared split, the dipole reason, the one-layer model and why it fails, then emission height with the lapse rate. It shows its arithmetic, and it avoids A's blank equations and companion-page detours, D's raw flowchart code and inconsistent numbers (3.8 vs 3.7 W/m², 1 K vs 1.2 K), and B's missing molecular explanation."
+}

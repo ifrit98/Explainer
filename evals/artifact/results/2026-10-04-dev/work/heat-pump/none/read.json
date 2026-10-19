@@ -1,0 +1,46 @@
+{
+  "answers": {
+    "1": {
+      "answer": "It comes from the outside air (or the ground). The heat is already there, and the heat pump moves it inside rather than creating it. In the typical example, 1 kWh of electricity plus 2 kWh taken from outdoors gives 3 kWh delivered to the house. The outdoor air ends up slightly colder.",
+      "quote": "It uses electricity to **move** heat that already exists, taking it from somewhere cold (the outside air, the ground) and releasing it somewhere warm (your house)."
+    },
+    "2": {
+      "answer": "In the outdoor evaporator, the refrigerant is at low pressure and boils at about −8 °C, soaking up heat from the colder-feeling but warmer 0 °C air. The compressor, driven by electricity, squeezes the gas to high pressure, which heats it to about 60 °C. In the indoor condenser, it condenses at about 40 °C and gives up heat to the 35 °C water: the latent heat picked up outdoors plus the compressor's energy. At the expansion valve its pressure drops, part of it flashes to vapour, and it cools back to about −8 °C, ready to go outside again.",
+      "quote": "The machine cheats by changing the refrigerant's temperature between the two exchangers. It makes the refrigerant colder than the outside air when it needs to absorb heat, then hotter than the house when it needs to release it."
+    },
+    "3": {
+      "answer": "The temperature lift between outdoors and the delivered water is bigger. The Carnot limit, T_hot/(T_hot − T_cold), shrinks as that gap grows, so each unit of heat needs more work. The COP still stays above 1.",
+      "quote": "**Colder weather means a lower COP.** The lift is bigger. But it stays above 1, so the heat pump still beats an electric heater."
+    },
+    "4": {
+      "answer": "Neither case is in the table, so I used the Carnot formula with T_hot = 308 K. On a 5 °C day (278 K): 308/30 ≈ 10.3. On a −15 °C day (258 K): 308/50 ≈ 6.2. So the ideal COP on the −15 °C day is about 40% lower (roughly 0.6 times the 5 °C value), because the lift goes from 30 K to 50 K. At about 45% of Carnot, that would be roughly 4.6 versus 2.8.",
+      "quote": "COP = Q_hot / W  ≤  T_hot / (T_hot − T_cold)        (the Carnot limit)"
+    }
+  },
+  "stops": [
+    "Entropy is introduced with no intuition for what it is: \"When heat *Q* moves in or out of something at absolute temperature *T*, it carries entropy *Q / T*.\"",
+    "No reason is given for this claim: \"A machine running in a steady cycle can't store entropy\"",
+    "The algebra is skipped: \"Substitute that in and rearrange:\"",
+    "\"latent heat\" is only named in brackets, not explained.",
+    "\"part of it flashes to vapour\" is unexplained, and so is why a pressure drop makes the liquid cold.",
+    "Confusing pair of temperatures: \"The gas leaves hotter than the house water, say 60 °C\" vs \"condenses at about 40 °C\". Which temperature does the water actually see?",
+    "The ASCII diagram's arrows from compressor to condenser to expansion valve are hard to follow.",
+    "\"The expansion valve wastes some energy\" gives no reason.",
+    "\"a seasonal COP of about **3**\" is not explained: how is the averaging done?"
+  ],
+  "excess": [
+    "\"at about 70 °C on top of Everest, and at 120 °C inside a pressure cooker\"",
+    "\"If you want to play with the numbers, this snippet reproduces the table:\"",
+    "\"**Run backwards, it's an air conditioner.**\"",
+    "\"A fridge is exactly this machine.\"",
+    "\"**It's not perpetual motion.** No energy is created.\" repeats the short answer.",
+    "\"**Ground-source heat pumps** draw from soil that stays around 10 °C all winter\"",
+    "\"Calling it \\\"300 % efficient\\\" is a loose way of saying COP = 3.\""
+  ],
+  "grounded": {
+    "1": true,
+    "2": true,
+    "3": true,
+    "4": true
+  }
+}

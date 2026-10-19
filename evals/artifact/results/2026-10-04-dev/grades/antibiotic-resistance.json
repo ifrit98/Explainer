@@ -1,0 +1,60 @@
+{
+  "key": {
+    "A": "published",
+    "B": "principles",
+    "C": "quick",
+    "D": "none"
+  },
+  "grades": {
+    "published": {
+      "quiz": [
+        2,
+        2,
+        2,
+        2
+      ],
+      "misconception": "corrected",
+      "errors": []
+    },
+    "principles": {
+      "quiz": [
+        2,
+        2,
+        2,
+        2
+      ],
+      "misconception": "corrected",
+      "errors": []
+    },
+    "quick": {
+      "quiz": [
+        2,
+        2,
+        2,
+        2
+      ],
+      "misconception": "corrected",
+      "errors": [
+        "Then every cell would have the same chance to survive. Instead, a rare fraction survives, and those cells were resistant before they met the drug.",
+        "Change the target | The target protein changes shape, so the drug cannot bind | MRSA makes a cell-wall enzyme that penicillin-type drugs do not bind"
+      ]
+    },
+    "none": {
+      "quiz": [
+        2,
+        2,
+        2,
+        2
+      ],
+      "misconception": "corrected",
+      "errors": []
+    }
+  },
+  "rank": [
+    "published",
+    "principles",
+    "quick",
+    "none"
+  ],
+  "why_best": "A covers variation, selection, and cross-species plasmid transfer in the fewest words, and its worked numbers and Luria–Delbrück variance argument show directly why the drug selects resistant cells rather than creating them."
+}

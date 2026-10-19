@@ -58,13 +58,16 @@ def run_review(slug: str, tool: str, rendering: str | None = None, model: str | 
     folder = explainer_dir(slug)
     prompt = _prompt(slug, tool, rendering)
     files = _files(slug, tool, rendering)
-    reply = parse_json(ask(REVIEWER, prompt, model=model, read=sorted({f.parent for f in files})))
+    usage: dict = {}
+    reply = parse_json(ask(REVIEWER, prompt, model=model, read=sorted({f.parent for f in files}), usage=usage))
     record = {
         "tool": tool, "rendering": rendering, "slug": slug, "at": datetime.now().isoformat(timespec="seconds"),
         "model": model or "default", "prompt_sha": hashlib.sha1(prompt.encode()).hexdigest()[:12], "reply": reply,
     }
     if tool == "quiz":
-        record["grade"] = parse_json(ask(GRADER, grade_prompt(slug, reply.get("answers", {})), model=model))
+        record["grade"] = parse_json(ask(GRADER, grade_prompt(slug, reply.get("answers", {})), model=model,
+                                         usage=usage))
+    record["usage"] = usage
     record["findings"] = extract(record)   # frozen: decisions refer to these numbers
     out = folder / "review" / "runs" / f"{datetime.now():%Y-%m-%dT%H%M%S}-{tool}{f'-{rendering}' if rendering else ''}.json"
     out.parent.mkdir(parents=True, exist_ok=True)

@@ -1,0 +1,485 @@
+# What the author did with each review finding (explainer decide). Read by findings --stats.
+2026-10-04T150833-probe#1:
+  decision: adopted
+  note: 7 to Scope; 10 adds length without changing the argument; 15 is required template
+    metadata
+2026-10-04T150833-probe#10:
+  decision: declined
+  note: 7 to Scope; 10 adds length without changing the argument; 15 is required template
+    metadata
+2026-10-04T150833-probe#11:
+  decision: adopted
+  note: 7 to Scope; 10 adds length without changing the argument; 15 is required template
+    metadata
+2026-10-04T150833-probe#12:
+  decision: adopted
+  note: 7 to Scope; 10 adds length without changing the argument; 15 is required template
+    metadata
+2026-10-04T150833-probe#13:
+  decision: adopted
+  note: 7 to Scope; 10 adds length without changing the argument; 15 is required template
+    metadata
+2026-10-04T150833-probe#14:
+  decision: adopted
+  note: 7 to Scope; 10 adds length without changing the argument; 15 is required template
+    metadata
+2026-10-04T150833-probe#15:
+  decision: declined
+  note: 7 to Scope; 10 adds length without changing the argument; 15 is required template
+    metadata
+2026-10-04T150833-probe#2:
+  decision: adopted
+  note: 7 to Scope; 10 adds length without changing the argument; 15 is required template
+    metadata
+2026-10-04T150833-probe#3:
+  decision: adopted
+  note: 7 to Scope; 10 adds length without changing the argument; 15 is required template
+    metadata
+2026-10-04T150833-probe#4:
+  decision: adopted
+  note: 7 to Scope; 10 adds length without changing the argument; 15 is required template
+    metadata
+2026-10-04T150833-probe#5:
+  decision: adopted
+  note: 7 to Scope; 10 adds length without changing the argument; 15 is required template
+    metadata
+2026-10-04T150833-probe#6:
+  decision: adopted
+  note: 7 to Scope; 10 adds length without changing the argument; 15 is required template
+    metadata
+2026-10-04T150833-probe#7:
+  decision: declined
+  note: 7 to Scope; 10 adds length without changing the argument; 15 is required template
+    metadata
+2026-10-04T150833-probe#8:
+  decision: adopted
+  note: 7 to Scope; 10 adds length without changing the argument; 15 is required template
+    metadata
+2026-10-04T150833-probe#9:
+  decision: adopted
+  note: 7 to Scope; 10 adds length without changing the argument; 15 is required template
+    metadata
+2026-10-04T151129-coldread-narrative#1:
+  decision: adopted
+  note: Said column written out in full; L1/L3/scope are level labels the rendering
+    names in headings
+2026-10-04T151129-coldread-narrative#10:
+  decision: declined
+  note: Said column written out in full; L1/L3/scope are level labels the rendering
+    names in headings
+2026-10-04T151129-coldread-narrative#11:
+  decision: adopted
+  note: Said column written out in full; L1/L3/scope are level labels the rendering
+    names in headings
+2026-10-04T151129-coldread-narrative#12:
+  decision: adopted
+  note: Said column written out in full; L1/L3/scope are level labels the rendering
+    names in headings
+2026-10-04T151129-coldread-narrative#13:
+  decision: adopted
+  note: Said column written out in full; L1/L3/scope are level labels the rendering
+    names in headings
+2026-10-04T151129-coldread-narrative#14:
+  decision: adopted
+  note: Said column written out in full; L1/L3/scope are level labels the rendering
+    names in headings
+2026-10-04T151129-coldread-narrative#15:
+  decision: adopted
+  note: Said column written out in full; L1/L3/scope are level labels the rendering
+    names in headings
+2026-10-04T151129-coldread-narrative#16:
+  decision: adopted
+  note: Said column written out in full; L1/L3/scope are level labels the rendering
+    names in headings
+2026-10-04T151129-coldread-narrative#17:
+  decision: adopted
+  note: Said column written out in full; L1/L3/scope are level labels the rendering
+    names in headings
+2026-10-04T151129-coldread-narrative#18:
+  decision: adopted
+  note: Said column written out in full; L1/L3/scope are level labels the rendering
+    names in headings
+2026-10-04T151129-coldread-narrative#19:
+  decision: declined
+  note: Said column written out in full; L1/L3/scope are level labels the rendering
+    names in headings
+2026-10-04T151129-coldread-narrative#2:
+  decision: adopted
+  note: Said column written out in full; L1/L3/scope are level labels the rendering
+    names in headings
+2026-10-04T151129-coldread-narrative#20:
+  decision: adopted
+  note: Said column written out in full; L1/L3/scope are level labels the rendering
+    names in headings
+2026-10-04T151129-coldread-narrative#21:
+  decision: adopted
+  note: Said column written out in full; L1/L3/scope are level labels the rendering
+    names in headings
+2026-10-04T151129-coldread-narrative#22:
+  decision: adopted
+  note: Said column written out in full; L1/L3/scope are level labels the rendering
+    names in headings
+2026-10-04T151129-coldread-narrative#23:
+  decision: adopted
+  note: Said column written out in full; L1/L3/scope are level labels the rendering
+    names in headings
+2026-10-04T151129-coldread-narrative#24:
+  decision: adopted
+  note: Said column written out in full; L1/L3/scope are level labels the rendering
+    names in headings
+2026-10-04T151129-coldread-narrative#25:
+  decision: adopted
+  note: Said column written out in full; L1/L3/scope are level labels the rendering
+    names in headings
+2026-10-04T151129-coldread-narrative#26:
+  decision: adopted
+  note: Said column written out in full; L1/L3/scope are level labels the rendering
+    names in headings
+2026-10-04T151129-coldread-narrative#27:
+  decision: adopted
+  note: Said column written out in full; L1/L3/scope are level labels the rendering
+    names in headings
+2026-10-04T151129-coldread-narrative#28:
+  decision: adopted
+  note: Said column written out in full; L1/L3/scope are level labels the rendering
+    names in headings
+2026-10-04T151129-coldread-narrative#29:
+  decision: adopted
+  note: Said column written out in full; L1/L3/scope are level labels the rendering
+    names in headings
+2026-10-04T151129-coldread-narrative#3:
+  decision: adopted
+  note: Said column written out in full; L1/L3/scope are level labels the rendering
+    names in headings
+2026-10-04T151129-coldread-narrative#30:
+  decision: adopted
+  note: Said column written out in full; L1/L3/scope are level labels the rendering
+    names in headings
+2026-10-04T151129-coldread-narrative#31:
+  decision: adopted
+  note: Said column written out in full; L1/L3/scope are level labels the rendering
+    names in headings
+2026-10-04T151129-coldread-narrative#32:
+  decision: declined
+  note: Said column written out in full; L1/L3/scope are level labels the rendering
+    names in headings
+2026-10-04T151129-coldread-narrative#33:
+  decision: adopted
+  note: Said column written out in full; L1/L3/scope are level labels the rendering
+    names in headings
+2026-10-04T151129-coldread-narrative#34:
+  decision: adopted
+  note: Said column written out in full; L1/L3/scope are level labels the rendering
+    names in headings
+2026-10-04T151129-coldread-narrative#35:
+  decision: adopted
+  note: Said column written out in full; L1/L3/scope are level labels the rendering
+    names in headings
+2026-10-04T151129-coldread-narrative#36:
+  decision: adopted
+  note: Said column written out in full; L1/L3/scope are level labels the rendering
+    names in headings
+2026-10-04T151129-coldread-narrative#37:
+  decision: declined
+  note: Said column written out in full; L1/L3/scope are level labels the rendering
+    names in headings
+2026-10-04T151129-coldread-narrative#38:
+  decision: adopted
+  note: Said column written out in full; L1/L3/scope are level labels the rendering
+    names in headings
+2026-10-04T151129-coldread-narrative#39:
+  decision: adopted
+  note: Said column written out in full; L1/L3/scope are level labels the rendering
+    names in headings
+2026-10-04T151129-coldread-narrative#4:
+  decision: adopted
+  note: Said column written out in full; L1/L3/scope are level labels the rendering
+    names in headings
+2026-10-04T151129-coldread-narrative#40:
+  decision: adopted
+  note: Said column written out in full; L1/L3/scope are level labels the rendering
+    names in headings
+2026-10-04T151129-coldread-narrative#41:
+  decision: adopted
+  note: Said column written out in full; L1/L3/scope are level labels the rendering
+    names in headings
+2026-10-04T151129-coldread-narrative#42:
+  decision: adopted
+  note: Said column written out in full; L1/L3/scope are level labels the rendering
+    names in headings
+2026-10-04T151129-coldread-narrative#43:
+  decision: adopted
+  note: Said column written out in full; L1/L3/scope are level labels the rendering
+    names in headings
+2026-10-04T151129-coldread-narrative#44:
+  decision: adopted
+  note: Said column written out in full; L1/L3/scope are level labels the rendering
+    names in headings
+2026-10-04T151129-coldread-narrative#45:
+  decision: adopted
+  note: Said column written out in full; L1/L3/scope are level labels the rendering
+    names in headings
+2026-10-04T151129-coldread-narrative#46:
+  decision: declined
+  note: Said column written out in full; L1/L3/scope are level labels the rendering
+    names in headings
+2026-10-04T151129-coldread-narrative#47:
+  decision: adopted
+  note: Said column written out in full; L1/L3/scope are level labels the rendering
+    names in headings
+2026-10-04T151129-coldread-narrative#5:
+  decision: adopted
+  note: Said column written out in full; L1/L3/scope are level labels the rendering
+    names in headings
+2026-10-04T151129-coldread-narrative#6:
+  decision: adopted
+  note: Said column written out in full; L1/L3/scope are level labels the rendering
+    names in headings
+2026-10-04T151129-coldread-narrative#7:
+  decision: adopted
+  note: Said column written out in full; L1/L3/scope are level labels the rendering
+    names in headings
+2026-10-04T151129-coldread-narrative#8:
+  decision: adopted
+  note: Said column written out in full; L1/L3/scope are level labels the rendering
+    names in headings
+2026-10-04T151129-coldread-narrative#9:
+  decision: adopted
+  note: Said column written out in full; L1/L3/scope are level labels the rendering
+    names in headings
+2026-10-04T151329-coldread-diagram#1:
+  decision: adopted
+  note: '2: 1 bar gives the pressures a meaning'
+2026-10-04T151329-coldread-diagram#2:
+  decision: declined
+  note: '2: 1 bar gives the pressures a meaning'
+2026-10-04T151329-coldread-diagram#3:
+  decision: adopted
+  note: '2: 1 bar gives the pressures a meaning'
+2026-10-04T151329-coldread-diagram#4:
+  decision: adopted
+  note: '2: 1 bar gives the pressures a meaning'
+2026-10-04T151329-coldread-diagram#5:
+  decision: adopted
+  note: '2: 1 bar gives the pressures a meaning'
+2026-10-04T151455-quiz-diagram#1:
+  decision: adopted
+  note: '3: names given together once; 5: separated by definition; 7,9,10,12,13,15,21,23,25:
+    depth beyond this reader''s question, estimates labelled; 16,18: carry confusion
+    point and tie entropy to known rule; 19,20: close and connection required by narrative'
+2026-10-04T151455-quiz-diagram#10:
+  decision: declined
+  note: '3: names given together once; 5: separated by definition; 7,9,10,12,13,15,21,23,25:
+    depth beyond this reader''s question, estimates labelled; 16,18: carry confusion
+    point and tie entropy to known rule; 19,20: close and connection required by narrative'
+2026-10-04T151455-quiz-diagram#11:
+  decision: adopted
+  note: '3: names given together once; 5: separated by definition; 7,9,10,12,13,15,21,23,25:
+    depth beyond this reader''s question, estimates labelled; 16,18: carry confusion
+    point and tie entropy to known rule; 19,20: close and connection required by narrative'
+2026-10-04T151455-quiz-diagram#12:
+  decision: declined
+  note: '3: names given together once; 5: separated by definition; 7,9,10,12,13,15,21,23,25:
+    depth beyond this reader''s question, estimates labelled; 16,18: carry confusion
+    point and tie entropy to known rule; 19,20: close and connection required by narrative'
+2026-10-04T151455-quiz-diagram#13:
+  decision: declined
+  note: '3: names given together once; 5: separated by definition; 7,9,10,12,13,15,21,23,25:
+    depth beyond this reader''s question, estimates labelled; 16,18: carry confusion
+    point and tie entropy to known rule; 19,20: close and connection required by narrative'
+2026-10-04T151455-quiz-diagram#14:
+  decision: adopted
+  note: '3: names given together once; 5: separated by definition; 7,9,10,12,13,15,21,23,25:
+    depth beyond this reader''s question, estimates labelled; 16,18: carry confusion
+    point and tie entropy to known rule; 19,20: close and connection required by narrative'
+2026-10-04T151455-quiz-diagram#15:
+  decision: declined
+  note: '3: names given together once; 5: separated by definition; 7,9,10,12,13,15,21,23,25:
+    depth beyond this reader''s question, estimates labelled; 16,18: carry confusion
+    point and tie entropy to known rule; 19,20: close and connection required by narrative'
+2026-10-04T151455-quiz-diagram#16:
+  decision: declined
+  note: '3: names given together once; 5: separated by definition; 7,9,10,12,13,15,21,23,25:
+    depth beyond this reader''s question, estimates labelled; 16,18: carry confusion
+    point and tie entropy to known rule; 19,20: close and connection required by narrative'
+2026-10-04T151455-quiz-diagram#17:
+  decision: declined
+  note: '3: names given together once; 5: separated by definition; 7,9,10,12,13,15,21,23,25:
+    depth beyond this reader''s question, estimates labelled; 16,18: carry confusion
+    point and tie entropy to known rule; 19,20: close and connection required by narrative'
+2026-10-04T151455-quiz-diagram#18:
+  decision: declined
+  note: '3: names given together once; 5: separated by definition; 7,9,10,12,13,15,21,23,25:
+    depth beyond this reader''s question, estimates labelled; 16,18: carry confusion
+    point and tie entropy to known rule; 19,20: close and connection required by narrative'
+2026-10-04T151455-quiz-diagram#19:
+  decision: declined
+  note: '3: names given together once; 5: separated by definition; 7,9,10,12,13,15,21,23,25:
+    depth beyond this reader''s question, estimates labelled; 16,18: carry confusion
+    point and tie entropy to known rule; 19,20: close and connection required by narrative'
+2026-10-04T151455-quiz-diagram#2:
+  decision: adopted
+  note: '3: names given together once; 5: separated by definition; 7,9,10,12,13,15,21,23,25:
+    depth beyond this reader''s question, estimates labelled; 16,18: carry confusion
+    point and tie entropy to known rule; 19,20: close and connection required by narrative'
+2026-10-04T151455-quiz-diagram#20:
+  decision: declined
+  note: '3: names given together once; 5: separated by definition; 7,9,10,12,13,15,21,23,25:
+    depth beyond this reader''s question, estimates labelled; 16,18: carry confusion
+    point and tie entropy to known rule; 19,20: close and connection required by narrative'
+2026-10-04T151455-quiz-diagram#21:
+  decision: declined
+  note: '3: names given together once; 5: separated by definition; 7,9,10,12,13,15,21,23,25:
+    depth beyond this reader''s question, estimates labelled; 16,18: carry confusion
+    point and tie entropy to known rule; 19,20: close and connection required by narrative'
+2026-10-04T151455-quiz-diagram#22:
+  decision: adopted
+  note: '3: names given together once; 5: separated by definition; 7,9,10,12,13,15,21,23,25:
+    depth beyond this reader''s question, estimates labelled; 16,18: carry confusion
+    point and tie entropy to known rule; 19,20: close and connection required by narrative'
+2026-10-04T151455-quiz-diagram#23:
+  decision: declined
+  note: '3: names given together once; 5: separated by definition; 7,9,10,12,13,15,21,23,25:
+    depth beyond this reader''s question, estimates labelled; 16,18: carry confusion
+    point and tie entropy to known rule; 19,20: close and connection required by narrative'
+2026-10-04T151455-quiz-diagram#24:
+  decision: adopted
+  note: '3: names given together once; 5: separated by definition; 7,9,10,12,13,15,21,23,25:
+    depth beyond this reader''s question, estimates labelled; 16,18: carry confusion
+    point and tie entropy to known rule; 19,20: close and connection required by narrative'
+2026-10-04T151455-quiz-diagram#25:
+  decision: declined
+  note: '3: names given together once; 5: separated by definition; 7,9,10,12,13,15,21,23,25:
+    depth beyond this reader''s question, estimates labelled; 16,18: carry confusion
+    point and tie entropy to known rule; 19,20: close and connection required by narrative'
+2026-10-04T151455-quiz-diagram#3:
+  decision: declined
+  note: '3: names given together once; 5: separated by definition; 7,9,10,12,13,15,21,23,25:
+    depth beyond this reader''s question, estimates labelled; 16,18: carry confusion
+    point and tie entropy to known rule; 19,20: close and connection required by narrative'
+2026-10-04T151455-quiz-diagram#4:
+  decision: adopted
+  note: '3: names given together once; 5: separated by definition; 7,9,10,12,13,15,21,23,25:
+    depth beyond this reader''s question, estimates labelled; 16,18: carry confusion
+    point and tie entropy to known rule; 19,20: close and connection required by narrative'
+2026-10-04T151455-quiz-diagram#5:
+  decision: declined
+  note: '3: names given together once; 5: separated by definition; 7,9,10,12,13,15,21,23,25:
+    depth beyond this reader''s question, estimates labelled; 16,18: carry confusion
+    point and tie entropy to known rule; 19,20: close and connection required by narrative'
+2026-10-04T151455-quiz-diagram#6:
+  decision: adopted
+  note: '3: names given together once; 5: separated by definition; 7,9,10,12,13,15,21,23,25:
+    depth beyond this reader''s question, estimates labelled; 16,18: carry confusion
+    point and tie entropy to known rule; 19,20: close and connection required by narrative'
+2026-10-04T151455-quiz-diagram#7:
+  decision: declined
+  note: '3: names given together once; 5: separated by definition; 7,9,10,12,13,15,21,23,25:
+    depth beyond this reader''s question, estimates labelled; 16,18: carry confusion
+    point and tie entropy to known rule; 19,20: close and connection required by narrative'
+2026-10-04T151455-quiz-diagram#8:
+  decision: adopted
+  note: '3: names given together once; 5: separated by definition; 7,9,10,12,13,15,21,23,25:
+    depth beyond this reader''s question, estimates labelled; 16,18: carry confusion
+    point and tie entropy to known rule; 19,20: close and connection required by narrative'
+2026-10-04T151455-quiz-diagram#9:
+  decision: declined
+  note: '3: names given together once; 5: separated by definition; 7,9,10,12,13,15,21,23,25:
+    depth beyond this reader''s question, estimates labelled; 16,18: carry confusion
+    point and tie entropy to known rule; 19,20: close and connection required by narrative'
+2026-10-04T151658-quiz-diagram#1:
+  decision: declined
+  note: 'rest: depth beyond the question (entropy foundations, compression physics,
+    coil sizing), estimates already labelled, close and scope required'
+2026-10-04T151658-quiz-diagram#10:
+  decision: declined
+  note: 'rest: depth beyond the question (entropy foundations, compression physics,
+    coil sizing), estimates already labelled, close and scope required'
+2026-10-04T151658-quiz-diagram#11:
+  decision: declined
+  note: 'rest: depth beyond the question (entropy foundations, compression physics,
+    coil sizing), estimates already labelled, close and scope required'
+2026-10-04T151658-quiz-diagram#12:
+  decision: declined
+  note: 'rest: depth beyond the question (entropy foundations, compression physics,
+    coil sizing), estimates already labelled, close and scope required'
+2026-10-04T151658-quiz-diagram#13:
+  decision: declined
+  note: 'rest: depth beyond the question (entropy foundations, compression physics,
+    coil sizing), estimates already labelled, close and scope required'
+2026-10-04T151658-quiz-diagram#14:
+  decision: declined
+  note: 'rest: depth beyond the question (entropy foundations, compression physics,
+    coil sizing), estimates already labelled, close and scope required'
+2026-10-04T151658-quiz-diagram#15:
+  decision: declined
+  note: 'rest: depth beyond the question (entropy foundations, compression physics,
+    coil sizing), estimates already labelled, close and scope required'
+2026-10-04T151658-quiz-diagram#16:
+  decision: declined
+  note: 'rest: depth beyond the question (entropy foundations, compression physics,
+    coil sizing), estimates already labelled, close and scope required'
+2026-10-04T151658-quiz-diagram#17:
+  decision: declined
+  note: 'rest: depth beyond the question (entropy foundations, compression physics,
+    coil sizing), estimates already labelled, close and scope required'
+2026-10-04T151658-quiz-diagram#18:
+  decision: declined
+  note: 'rest: depth beyond the question (entropy foundations, compression physics,
+    coil sizing), estimates already labelled, close and scope required'
+2026-10-04T151658-quiz-diagram#19:
+  decision: declined
+  note: 'rest: depth beyond the question (entropy foundations, compression physics,
+    coil sizing), estimates already labelled, close and scope required'
+2026-10-04T151658-quiz-diagram#2:
+  decision: adopted
+  note: 'rest: depth beyond the question (entropy foundations, compression physics,
+    coil sizing), estimates already labelled, close and scope required'
+2026-10-04T151658-quiz-diagram#20:
+  decision: declined
+  note: 'rest: depth beyond the question (entropy foundations, compression physics,
+    coil sizing), estimates already labelled, close and scope required'
+2026-10-04T151658-quiz-diagram#21:
+  decision: declined
+  note: 'rest: depth beyond the question (entropy foundations, compression physics,
+    coil sizing), estimates already labelled, close and scope required'
+2026-10-04T151658-quiz-diagram#22:
+  decision: declined
+  note: 'rest: depth beyond the question (entropy foundations, compression physics,
+    coil sizing), estimates already labelled, close and scope required'
+2026-10-04T151658-quiz-diagram#23:
+  decision: declined
+  note: 'rest: depth beyond the question (entropy foundations, compression physics,
+    coil sizing), estimates already labelled, close and scope required'
+2026-10-04T151658-quiz-diagram#24:
+  decision: declined
+  note: 'rest: depth beyond the question (entropy foundations, compression physics,
+    coil sizing), estimates already labelled, close and scope required'
+2026-10-04T151658-quiz-diagram#3:
+  decision: adopted
+  note: 'rest: depth beyond the question (entropy foundations, compression physics,
+    coil sizing), estimates already labelled, close and scope required'
+2026-10-04T151658-quiz-diagram#4:
+  decision: declined
+  note: 'rest: depth beyond the question (entropy foundations, compression physics,
+    coil sizing), estimates already labelled, close and scope required'
+2026-10-04T151658-quiz-diagram#5:
+  decision: declined
+  note: 'rest: depth beyond the question (entropy foundations, compression physics,
+    coil sizing), estimates already labelled, close and scope required'
+2026-10-04T151658-quiz-diagram#6:
+  decision: declined
+  note: 'rest: depth beyond the question (entropy foundations, compression physics,
+    coil sizing), estimates already labelled, close and scope required'
+2026-10-04T151658-quiz-diagram#7:
+  decision: declined
+  note: 'rest: depth beyond the question (entropy foundations, compression physics,
+    coil sizing), estimates already labelled, close and scope required'
+2026-10-04T151658-quiz-diagram#8:
+  decision: declined
+  note: 'rest: depth beyond the question (entropy foundations, compression physics,
+    coil sizing), estimates already labelled, close and scope required'
+2026-10-04T151658-quiz-diagram#9:
+  decision: declined
+  note: 'rest: depth beyond the question (entropy foundations, compression physics,
+    coil sizing), estimates already labelled, close and scope required'

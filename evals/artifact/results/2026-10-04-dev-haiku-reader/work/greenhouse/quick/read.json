@@ -1,0 +1,50 @@
+{
+  "answers": {
+    "1": {
+      "answer": "Greenhouse gases don't absorb sunlight (which peaks at 0.5 µm where the air is transparent) but do absorb infrared heat radiation (which peaks at 10 µm). The two types of radiation have different wavelengths.",
+      "quote": "The two kinds of radiation have different wavelengths. Sunlight peaks near 0.5 µm, where the air is mostly transparent. A greenhouse gas absorbs and emits infrared."
+    },
+    "2": {
+      "answer": "Adding CO2 raises the altitude from which infrared escapes to space (the emission height) into colder air. This colder air emits less radiation, breaking energy balance. The whole atmospheric column then warms until the higher emission point reaches the equilibrium temperature, which means the surface warms too.",
+      "quote": "Add gas, and the emission height rises. Doubled CO2 lifts it about 150 m (estimate). The new emitting air is 1 K colder. The planet now gains energy. The whole column warms"
+    },
+    "3": {
+      "answer": "N2 and O2 cannot absorb infrared because they are symmetric two-atom molecules of a single element. Infrared absorption requires molecular vibrations that move electric charge unevenly, which is impossible in such symmetric molecules.",
+      "quote": "A molecule absorbs infrared only if its vibration moves electric charge unevenly; a two-atom molecule of one element cannot do that."
+    },
+    "4": {
+      "answer": "Without greenhouse gases, infrared would escape directly from the surface (not from high altitude). The surface would be at 255 K, the equilibrium temperature needed to emit enough energy (238 W/m²) to balance incoming sunlight.",
+      "quote": "Infrared that leaves near the ground gets absorbed again higher up. Infrared escapes to space only from air with little gas above it. To emit 238 W/m², a body must be at 255 K."
+    }
+  },
+  "stops": [
+    "A molecule absorbs infrared only if its vibration moves electric charge unevenly; a two-atom molecule of one element cannot do that.",
+    "The Earth catches sunlight on a disc (area πr²) but emits from a whole sphere (4πr²), so the average absorbed power is 1361 × 0.7 / 4 = 238 W/m²",
+    "The lapse rate is how fast air cools with height: about 6.5 K per km. So the emitting air sits at 288 − 6.5 × 5 ≈ 255 K.",
+    "In air of one temperature at every height, a higher emitter would be just as warm.",
+    "The average altitude of that air is the **emission height**, about 5 km today.",
+    "re-emitted downward and re-emitted upward, absorbed again",
+    "Each doubling adds about 3.7 W/m²",
+    "Doubled CO2 lifts it about 150 m (estimate)",
+    "Because emission goes as T⁴, a 1 K drop at 255 K cuts the output by 4σT³ × 1 K = 3.8 W/m²",
+    "Stefan–Boltzmann law, σ = 5.67 × 10⁻⁸ W m⁻² K⁻⁴"
+  ],
+  "excess": [
+    "Feedbacks multiply the 1.2 K. The estimated total for doubled CO2 is likely 2.5–4 K.",
+    "CO2, only 0.04% of air, absorbs strongly near 15 µm.",
+    "If you forget the 4, you get 360 K, which is wrong.",
+    "sunlight brings 1361 W/m²; 30% reflects",
+    "A glass greenhouse works mainly by stopping warm air from rising.",
+    "Warmer air holds more water vapour, a greenhouse gas; melting ice reflects less sunlight.",
+    "Near the ground, absorption is saturated.",
+    "The source is sunlight.",
+    "Predict first: a greenhouse gas absorbs infrared and emits it again. If it emits as much as it absorbs, how can more gas change anything?",
+    "Clouds and ocean heat uptake are outside this explainer."
+  ],
+  "grounded": {
+    "1": true,
+    "2": true,
+    "3": true,
+    "4": true
+  }
+}

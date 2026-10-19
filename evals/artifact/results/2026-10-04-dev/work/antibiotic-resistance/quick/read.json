@@ -1,0 +1,40 @@
+{
+  "answers": {
+    "1": {
+      "answer": "Random variation that happens before any drug is present. It comes from rare random mutations made when a cell copies its DNA (about once per billion divisions), or from genes passed between bacteria on plasmids.",
+      "quote": "A few bacteria in a large population already carry a gene that protects them, by random chance."
+    },
+    "2": {
+      "answer": "The drug does not cause resistance. It selects for it: it kills the susceptible cells, and the resistant survivors divide to fill the space, so the new population is almost all resistant.",
+      "quote": "So the antibiotic does not cause resistance. It reveals and enriches resistance that random variation already made."
+    },
+    "3": {
+      "answer": "Through gene transfer. Bacteria hand DNA to each other, often on plasmids (small circles of DNA separate from the chromosome). A plasmid can carry several resistance genes and move between species.",
+      "quote": "One plasmid can carry several resistance genes and move between species, so one transfer can give resistance to several drugs."
+    },
+    "4": {
+      "answer": "In a large infection (about 10^10 cells), one in a billion means about 10 resistant cells exist before treatment. However long the course runs, the drug kills only the susceptible cells. The resistant ones survive and divide, and about 30 doublings rebuild a population that is almost all resistant. The explanation does not say how the length of the course matters.",
+      "quote": "The antibiotic kills the susceptible cells. The 10 resistant cells survive."
+    }
+  },
+  "stops": [
+    "'A full course' and how long treatment lasts are never discussed, so it is unclear how duration interacts with selection.",
+    "\"the number of resistant bacteria varied between cultures in a way that only fits mutations that occurred before exposure\": it does not say why this variation rules out adaptation.",
+    "\"A specific error that changes the target has a chance of about 10^-9 per division\": it is unclear how a per-division rate becomes the per-cell count of 10^10 × 10^-9.",
+    "\"MRSA makes a cell-wall enzyme\": MRSA is never defined.",
+    "\"Fewer porins against several drugs\": porins are only implied by 'entry channels'.",
+    "\"Efflux pumps against tetracycline\": the term efflux is not explained.",
+    "\"The bacteria become resistant, not the patient.\": this is stated without context, and it is unclear what misconception it corrects."
+  ],
+  "excess": [
+    "\"Penicillin, for example, blocks the enzymes that build the cell wall, so the cell bursts.\"",
+    "\"Not covered here: persister cells, which survive a drug without a resistance gene; and stress responses that raise mutation rates.\"",
+    "\"At 30 minutes per doubling (a lab rate; slower in a body), that takes about 15 hours.\""
+  ],
+  "grounded": {
+    "1": true,
+    "2": true,
+    "3": true,
+    "4": true
+  }
+}

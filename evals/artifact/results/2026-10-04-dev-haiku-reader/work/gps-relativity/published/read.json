@@ -1,0 +1,44 @@
+{
+  "answers": {
+    "1": {
+      "answer": "The receiver measures the arrival time of radio signals. It subtracts the signal's timestamp (send time) from the arrival time to get travel time, then multiplies by light speed to convert to distance.",
+      "quote": "The receiver notes when each signal arrives. Then: travel time = receive time − send time; range = travel time × c, where c is light speed and the range is the true distance to the satellite."
+    },
+    "2": {
+      "answer": "The receiver's quartz clock is inaccurate (off by milliseconds, which is hundreds of kilometers). This clock error becomes an unknown to solve for, requiring a fourth satellite to provide the fourth equation.",
+      "quote": "In three dimensions the unknowns are x, y, z, and b. Four unknowns need four equations, so the receiver needs four satellites."
+    },
+    "3": {
+      "answer": "Relativity makes satellite clocks gain 38 microseconds per day. Light travels 11.4 km in 38 microseconds, so each uncorrected clock would drift 11.4 km further from correct GPS time daily.",
+      "quote": "38 µs is only 4.5 × 10⁻¹⁰ of a day, but light covers 11.4 km in 38 µs. Each uncorrected satellite clock would move 11.4 km of range further from GPS time every day."
+    },
+    "4": {
+      "answer": "A 1 microsecond clock error produces a 300 meter range error. Using three satellites while ignoring the 1 µs clock error would give roughly 300 m error in the distance measurements.",
+      "quote": "Light covers 300 m in one microsecond (1 µs = 10⁻⁶ s)"
+    }
+  },
+  "stops": [
+    "I am satellite k, I am at position P, and I sent this at time t",
+    "One range puts you somewhere on a sphere around the satellite: every point at that distance",
+    "The receiver rejects the one far out in space",
+    "GPS time, the time kept by atomic clocks at ground stations",
+    "The excess, 3 km, is b counted twice, so b = 1.5 km",
+    "It is measured, not only predicted",
+    "4.5 × 10⁻¹⁰, the fraction the clock gains in orbit"
+  ],
+  "excess": [
+    "About 30 GPS satellites orbit 20,200 km above Earth",
+    "Each one carries atomic clocks and broadcasts a signal",
+    "From a satellite directly overhead, the travel time is about 67 ms",
+    "See N. Ashby, 'Relativity in the Global Positioning System', Living Reviews in Relativity (2003)",
+    "Why a moving clock ticks slow: see the 'light clock' argument in special relativity",
+    "Each satellite clock counts the ticks of a 10.23 MHz signal",
+    "charged and humid layers of the atmosphere slow the signal"
+  ],
+  "grounded": {
+    "1": true,
+    "2": true,
+    "3": true,
+    "4": true
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "answers": {
+    "1": {
+      "answer": "A write is committed only when a strict majority of all the servers in the cluster agree to it. That majority is q = floor(n/2) + 1.",
+      "quote": "A cluster accepts a decision only when a strict majority of *all* its servers agree."
+    },
+    "2": {
+      "answer": "Any two majorities must share at least one server. That shared server votes for at most one of two conflicting writes, so two separate groups can't both decide (split brain). Smaller groups, even exactly half, can avoid overlapping.",
+      "quote": "require every deciding group to be large enough that **any two such groups share at least one server**. That shared server votes for at most one of two conflicting writes, so at most one of them can pass."
+    },
+    "3": {
+      "answer": "2 failures. The quorum is 4, and f = 6 − 4 = 2.",
+      "quote": "| 6 | 4 | 2 |"
+    },
+    "4": {
+      "answer": "Only the group of 3 can commit. 3 meets the quorum of 3 for n=5. The group of 2 is below quorum, so it refuses writes, which prevents split brain.",
+      "quote": "In the 3|2 split above, only the group of 3 can decide. The group of 2 refuses the $90 withdrawal."
+    }
+  },
+  "stops": [
+    "'decision' in the short answer isn't linked to 'write' until later: \"A cluster accepts a decision only when a strict majority\"",
+    "'commit' is never used or defined. The page says 'accept'/'decide', so the reader has to assume they mean the same: \"The cluster keeps accepting writes.\"",
+    "Not explained how the group of 2 knows it is a minority. Presumably it counts against the known n, but this isn't stated: \"The group of 2 refuses the $90 withdrawal.\"",
+    "'alive and connected' — connected to what, and to each other? Not clear for partitions: \"while at least q servers are alive and connected\"",
+    "No way to derive the probabilities is shown, so the reader can't check them: \"| 4 | 2 or more down | ≈ 0.059% |\"",
+    "Byzantine formula appears with no reason: \"n ≥ 3f + 1\""
+  ],
+  "excess": [
+    "Lists production systems the reader doesn't need: \"production clusters (etcd, ZooKeeper, Consul) normally use 3, 5, or 7 servers.\"",
+    "Out-of-scope algorithms: \"The algorithms that run the votes, such as Raft and Paxos, are also out of scope\"",
+    "Byzantine aside goes beyond the question: \"Servers that send false messages (**Byzantine faults**) need a larger cluster\"",
+    "Repeats the short answer: \"This is the answer to the original question: going from 4 to 5 servers adds a server without raising q\""
+  ],
+  "grounded": {
+    "1": true,
+    "2": true,
+    "3": true,
+    "4": true
+  }
+}

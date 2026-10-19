@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Two tides a day — interactive</title>
+<style>
+  body { font-family: system-ui, sans-serif; max-width: 1100px; margin: 1.5em auto; padding: 0 1em; color: #222; line-height: 1.45; }
+  h1 { font-size: 1.4em; margin-bottom: 0.2em; }
+  .wrap { display: flex; flex-wrap: wrap; gap: 1.5em; }
+  .panel { flex: 1 1 520px; }
+  canvas { background: #0b1526; border-radius: 8px; display: block; width: 100%; }
+  #plot { background: #fafafa; border: 1px solid #ddd; margin-top: 0.8em; }
+  fieldset { border: 1px solid #ccc; border-radius: 6px; margin: 0 0 0.8em; padding: 0.5em 0.8em; }
+  legend { font-weight: 600; font-size: 0.9em; }
+  label { display: block; margin: 0.25em 0; font-size: 0.95em; }
+  input[type=range] { width: 100%; }
+  .note { background: #f3f6fa; border-left: 4px solid #4a7fc1; padding: 0.6em 0.9em; font-size: 0.95em; }
+  .readout { font-family: ui-monospace, monospace; font-size: 0.95em; margin: 0.4em 0; }
+  button { font-size: 1em; padding: 0.3em 1em; }
+</style>
+</head>
+<body>
+<h1>Why two high tides? An interactive view</h1>
+<p>Companion to <a href="explanation.md">explanation.md</a>. The Earth is shown from above the North Pole. The Moon is kept fixed on the right, so the Earth appears to turn once every <b>24 h 50 min</b>, which is one lunar day.</p>
+
+<div class="wrap">
+  <div class="panel">
+    <canvas id="earth" width="560" height="440"></canvas>
+    <canvas id="plot" width="560" height="200"></canvas>
+    <div class="readout" id="readout"></div>
+  </div>
+
+  <div class="panel" style="flex: 1 1 320px;">
+    <fieldset>
+      <legend>1. Which arrows to show</legend>
+      <label><input type="radio" name="mode" value="total"> Moon's pull at each point (plus the pull on Earth's centre, in orange)</label>
+      <label><input type="radio" name="mode" value="diff" checked> Pull at each point <b>minus</b> pull on the centre (the tidal effect)</label>
+      <label><input type="radio" name="mode" value="none"> No arrows</label>
+    </fieldset>
+
+    <fieldset>
+      <legend>2. Moon distance (arrows only)</legend>
+      <label>Distance: <span id="dval"></span> Earth radii (real value is about 60)
+        <input type="range" id="dist" min="3" max="60" step="1" value="60"></label>
+    </fieldset>
+
+    <fieldset>
+      <legend>3. Time</legend>
+      <label>Hours: <span id="tval"></span>
+        <input type="range" id="time" min="0" max="49.68" step="0.05" value="0"></label>
+      <button id="play">▶ Play</button>
+    </fieldset>
+
+    <fieldset>
+      <legend>4. Add the Sun</legend>
+      <label><input type="checkbox" id="sunOn"> Include the Sun's tide</label>
+      <label>Days since new moon: <span id="pval"></span>
+        <input type="range" id="phase" min="0" max="29.5" step="0.1" value="0"></label>
+    </fieldset>
+
+    <div class="note">
+      <b>Things to try</b>
+      <ol>
+        <li>Choose the first arrow option and set the distance to 60. The arrows all look almost identical, because the whole Earth is pulled almost uniformly. Now drag the distance down to 3. The near-side arrows get longer and the far-side arrows get shorter.</li>
+        <li>Switch to "minus pull on the centre". Arrows point <i>out</i> toward the Moon, <i>out</i> away from the Moon, and <i>in</i> at the sides. That pattern is what makes the two bulges. It looks the same at every distance, and only its strength changes.</li>
+        <li>Press Play and watch the white dot ("you"). It passes under a bulge twice each lunar day, and the graph shows two peaks.</li>
+        <li>Turn on the Sun. Set days to 0 (new moon) or about 14.8 (full moon) for spring tides, or about 7.4 or 22 (quarter moons) for neap tides.</li>
+      </ol>
+      <p style="margin:0">The water bulge is exaggerated about 100,000 times. The heights are for an idealised ocean covering the whole planet (the "equilibrium tide"), not for any real coast. Arrows show the Moon's effect only.</p>
+    </div>
+  </div>
+</div>
+
+<script>
+const P = 24.84;               // lunar day, hours
+const AM = 0.36, AS = 0.165;   // equilibrium-tide amplitudes (m) for Moon and Sun
+const SYNODIC = 29.53;         // days from new moon to new moon
+
+const earth = document.getElementById('earth'), ec = earth.getContext('2d');
+const plot = document.getElementById('plot'), pc = plot.getContext('2d');
+const el = id => document.getElementById(id);
+
+const state = { mode: 'diff', D: 60, t: 0, playing: false, sun: false, phase: 0 };
+
+// Direction of the Sun in the Moon-fixed frame (radians, 0 = toward the Moon).
+function sunAngle() { return -2 * Math.PI * state.phase / SYNODIC; }
+
+// Equilibrium water height (m) at angle a from the Moon direction.
+function height(a) {
+  let h = AM * (1.5 * Math.cos(a) ** 2 - 0.5);
+  if (state.sun) h += AS * (1.5 * Math.cos(a - sunAngle()) ** 2 - 0.5);
+  return h;
+}
+
+function arrow(ctx, x0, y0, dx, dy, color, width = 2) {
+  const len = Math.hypot(dx, dy);
+  if (len < 0.5) return;
+  const x1 = x0 + dx, y1 = y0 + dy, ux = dx / len, uy = dy / len;
+  const head = Math.min(8, len * 0.5);
+  ctx.strokeStyle = ctx.fillStyle = color;
+  ctx.lineWidth = width;
+  ctx.beginPath(); ctx.moveTo(x0, y0); ctx.lineTo(x1, y1); ctx.stroke();
+  ctx.beginPath();
+  ctx.moveTo(x1, y1);
+  ctx.lineTo(x1 - head * ux + head * 0.5 * uy, y1 - head * uy - head * 0.5 * ux);
+  ctx.lineTo(x1 - head * ux - head * 0.5 * uy, y1 - head * uy + head * 0.5 * ux);
+  ctx.closePath(); ctx.fill();
+}
+
+function drawEarth() {
+  const W = earth.width, H = earth.height, cx = 210, cy = H / 2, R = 120;
+  ec.clearRect(0, 0, W, H);
+
+  // Ocean, with the bulge exaggerated: 60 px per metre of tide.
+  ec.beginPath();
+  for (let i = 0; i <= 360; i++) {
+    const a = i * Math.PI / 180, r = R + 60 * height(a);
+    const x = cx + r * Math.cos(a), y = cy - r * Math.sin(a);
+    i ? ec.lineTo(x, y) : ec.moveTo(x, y);
+  }
+  ec.fillStyle = '#2f7fd8'; ec.fill();
+
+  // Solid Earth
+  ec.beginPath(); ec.arc(cx, cy, R - 22, 0, 2 * Math.PI);
+  ec.fillStyle = '#6b8f4e'; ec.fill();
+
+  // Observer: Earth rotates counter-clockwise relative to the Moon.
+  const phi = 2 * Math.PI * state.t / P;
+  const rObs = R + 60 * height(phi);
+  ec.strokeStyle = 'rgba(255,255,255,0.35)'; ec.lineWidth = 1;
+  ec.beginPath(); ec.moveTo(cx, cy); ec.lineTo(cx + (R - 22) * Math.cos(phi), cy - (R - 22) * Math.sin(phi)); ec.stroke();
+  ec.beginPath(); ec.arc(cx + rObs * Math.cos(phi), cy - rObs * Math.sin(phi), 6, 0, 2 * Math.PI);
+  ec.fillStyle = '#fff'; ec.fill();
+  ec.font = '13px system-ui'; ec.fillText('you', cx + (rObs + 12) * Math.cos(phi) - 10, cy - (rObs + 12) * Math.sin(phi) + 4);
+
+  // Moon
+  const mx = cx + state.D * R;
+  ec.fillStyle = '#ddd';
+  if (mx < W - 20) {
+    ec.beginPath(); ec.arc(mx, cy, Math.max(4, R * 0.27), 0, 2 * Math.PI); ec.fill();
+    ec.fillText('Moon', mx - 16, cy - R * 0.27 - 8);
+  } else {
+    ec.beginPath(); ec.arc(W - 18, cy, 10, 0, 2 * Math.PI); ec.fill();
+    ec.fillText('to Moon →', W - 92, cy - 18);
+    ec.fillText(`(${state.D} Earth radii)`, W - 112, cy + 30);
+  }
+
+  // Sun direction marker
+  if (state.sun) {
+    const s = sunAngle(), rs = 195;
+    ec.fillStyle = '#ffd34d';
+    ec.beginPath(); ec.arc(cx + rs * Math.cos(s), cy - rs * Math.sin(s), 9, 0, 2 * Math.PI); ec.fill();
+    ec.fillText('to Sun', cx + rs * Math.cos(s) - 18, cy - rs * Math.sin(s) - 14);
+  }
+
+  // Force arrows, in Earth-radius units with the Moon at (D, 0).
+  if (state.mode === 'none') return;
+  const D = state.D;
+  const pull = (x, y) => {
+    const dx = D - x, dy = -y, r3 = Math.hypot(dx, dy) ** 3;
+    return [dx / r3, dy / r3];
+  };
+  const c = pull(0, 0);
+  const pts = [];
+  for (let k = 0; k < 16; k++) {
+    const a = k * Math.PI / 8, x = Math.cos(a), y = Math.sin(a), p = pull(x, y);
+    pts.push({ x, y, v: state.mode === 'total' ? p : [p[0] - c[0], p[1] - c[1]] });
+  }
+  let scale;
+  if (state.mode === 'total') scale = 45 / Math.hypot(...c);
+  else scale = 50 / Math.max(...pts.map(p => Math.hypot(...p.v)));
+  for (const p of pts) {
+    arrow(ec, cx + R * p.x, cy - R * p.y, p.v[0] * scale, -p.v[1] * scale, '#ffef9a');
+  }
+  if (state.mode === 'total') arrow(ec, cx, cy, c[0] * scale, 0, '#ff9a3c', 3);
+}
+
+function drawPlot() {
+  const W = plot.width, H = plot.height, L = 46, Rr = 12, T = 14, B = 30;
+  const tMax = 2 * P, hMin = -0.35, hMax = 0.6;
+  const X = t => L + (W - L - Rr) * t / tMax;
+  const Y = h => T + (H - T - B) * (hMax - h) / (hMax - hMin);
+  pc.clearRect(0, 0, W, H);
+  pc.font = '11px system-ui'; pc.fillStyle = '#555'; pc.strokeStyle = '#ccc'; pc.lineWidth = 1;
+
+  for (let h = -0.2; h <= 0.6; h += 0.2) {
+    const y = Y(h);
+    pc.beginPath(); pc.moveTo(L, y); pc.lineTo(W - Rr, y); pc.stroke();
+    pc.fillText(h.toFixed(1) + ' m', 4, y + 4);
+  }
+  for (let t = 0; t <= tMax; t += 6) {
+    const x = X(t);
+    pc.beginPath(); pc.moveTo(x, T); pc.lineTo(x, H - B); pc.stroke();
+    pc.fillText(t + 'h', x - 8, H - B + 14);
+  }
+  pc.fillText('Water height at "you" over two lunar days', L + 4, H - 4);
+
+  pc.strokeStyle = '#2f7fd8'; pc.lineWidth = 2; pc.beginPath();
+  for (let i = 0; i <= 400; i++) {
+    const t = tMax * i / 400, x = X(t), y = Y(height(2 * Math.PI * t / P));
+    i ? pc.lineTo(x, y) : pc.moveTo(x, y);
+  }
+  pc.stroke();
+
+  const x = X(state.t), y = Y(height(2 * Math.PI * state.t / P));
+  pc.strokeStyle = '#d33'; pc.beginPath(); pc.moveTo(x, T); pc.lineTo(x, H - B); pc.stroke();
+  pc.fillStyle = '#d33'; pc.beginPath(); pc.arc(x, y, 5, 0, 2 * Math.PI); pc.fill();
+}
+
+function render() {
+  el('dval').textContent = state.D;
+  el('tval').textContent = state.t.toFixed(1);
+  el('pval').textContent = state.phase.toFixed(1);
+  el('time').value = state.t;
+  const h = height(2 * Math.PI * state.t / P);
+  el('readout').textContent =
+    `t = ${state.t.toFixed(1)} h   water at "you": ${h >= 0 ? '+' : ''}${h.toFixed(2)} m   (high tides at 0, 12.4, 24.8, 37.3 h)`;
+  drawEarth(); drawPlot();
+}
+
+document.querySelectorAll('input[name=mode]').forEach(r =>
+  r.addEventListener('change', e => { state.mode = e.target.value; render(); }));
+el('dist').addEventListener('input', e => { state.D = +e.target.value; render(); });
+el('time').addEventListener('input', e => { state.t = +e.target.value; render(); });
+el('sunOn').addEventListener('change', e => { state.sun = e.target.checked; render(); });
+el('phase').addEventListener('input', e => { state.phase = +e.target.value; render(); });
+
+let last = null;
+function tick(now) {
+  if (!state.playing) { last = null; return; }
+  if (last !== null) state.t = (state.t + (now - last) / 1000 * 3) % (2 * P);  // 3 hours per second
+  last = now;
+  render();
+  requestAnimationFrame(tick);
+}
+el('play').addEventListener('click', () => {
+  state.playing = !state.playing;
+  el('play').textContent = state.playing ? '❚❚ Pause' : '▶ Play';
+  if (state.playing) requestAnimationFrame(tick);
+});
+
+render();
+</script>
+</body>
+</html>

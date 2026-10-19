@@ -1,0 +1,63 @@
+{
+  "key": {
+    "A": "none",
+    "B": "principles",
+    "C": "published",
+    "D": "quick"
+  },
+  "grades": {
+    "none": {
+      "quiz": [
+        2,
+        2,
+        2,
+        2
+      ],
+      "misconception": "absent",
+      "errors": []
+    },
+    "principles": {
+      "quiz": [
+        2,
+        2,
+        2,
+        2
+      ],
+      "misconception": "absent",
+      "errors": [
+        "Across the body's hundreds of billions of lymphocytes, the library contains millions of different shapes."
+      ]
+    },
+    "published": {
+      "quiz": [
+        2,
+        2,
+        2,
+        2
+      ],
+      "misconception": "absent",
+      "errors": [
+        "A vaccine does not stop the pathogen from entering. It shortens the race."
+      ]
+    },
+    "quick": {
+      "quiz": [
+        1,
+        2,
+        2,
+        2
+      ],
+      "misconception": "absent",
+      "errors": [
+        "Many have a better fit, because the clone mutates its receptors during expansion and the best binders are kept."
+      ]
+    }
+  },
+  "rank": [
+    "published",
+    "principles",
+    "none",
+    "quick"
+  ],
+  "why_best": "C builds the whole mechanism as one quantitative race. It defines each term at first use, and its arithmetic shows exactly why memory shortens the response from about 7 to about 3 days. It names what it leaves out instead of detouring into it, so every quiz answer follows from a single coherent model with minimal extra reading."
+}

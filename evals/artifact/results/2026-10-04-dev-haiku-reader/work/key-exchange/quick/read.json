@@ -1,0 +1,43 @@
+{
+  "answers": {
+    "1": {
+      "answer": "Modular exponentiation (g^a mod p) makes this possible. What makes it safe is that the reverse operation—computing discrete logarithm—is extremely hard.",
+      "quote": "one step is easy to do and, as far as anyone knows, very hard to undo."
+    },
+    "2": {
+      "answer": "Both compute the same value g^(ab) mod p because exponent order doesn't matter: (g^b)^a = (g^a)^b. The key itself is never transmitted.",
+      "quote": "Order does not matter: (g^b)^a = (g^a)^b = g^(ab)."
+    },
+    "3": {
+      "answer": "A man-in-the-middle attack where Mallory replaces messages. The fix is to authenticate the public values with signatures and certificates.",
+      "quote": "The fix is to authenticate the public values, for example with signatures and certificates, as HTTPS does."
+    },
+    "4": {
+      "answer": "Alice sends 8, Bob sends 19. Their shared key is 2.",
+      "quote": "Alice: A = 5^6 mod 23 = 8. Bob: B = 5^15 mod 23 = 19. The **shared key** is 2."
+    }
+  },
+  "stops": [
+    "Agree in public on a prime p and a base g.",
+    "Order does not matter: (g^b)^a = (g^a)^b = g^(ab).",
+    "Eve multiplies 7 by 14, because 5·14 mod 23 = 1.",
+    "Mod p scrambles the order: the list 5, 2, 10, 4, 20, 8 above has no pattern.",
+    "The best known methods then need about 2^112 operations, far beyond any computer.",
+    "repeated squaring needs only about 2 × 2048 multiplications."
+  ],
+  "excess": [
+    "For example, 25 mod 23 = 2.",
+    "Eve knows them too.",
+    "She finds a = 6 on try 6.",
+    "At p = 23 Eve can try every exponent: 5^1, 5^2, … mod 23 gives 5, 2, 10, 4, 20, 8.",
+    "Eve cannot combine 8 and 19 directly either. 8 × 19 gives 5^(6+15), not 5^(6·15).",
+    "Most systems today use the same idea on elliptic curves (X25519), which gives equal security with much smaller numbers.",
+    "A large quantum computer would break it (Shor's algorithm), so newer systems add post-quantum key exchange."
+  ],
+  "grounded": {
+    "1": true,
+    "2": true,
+    "3": true,
+    "4": true
+  }
+}

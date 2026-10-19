@@ -1,0 +1,42 @@
+{
+  "answers": {
+    "1": {
+      "answer": "Resistance comes from two sources. The main one before treatment is random copying errors (mutations) made when bacteria copy their DNA to divide. In a large population, a few resistant cells already exist before the first dose (about 100 in 10¹⁰ cells in the worked example). The drug does not create them. Resistance genes can also arrive by gene transfer from other bacteria.",
+      "quote": "So in a large population, resistant cells usually already exist. The drug does not create them."
+    },
+    "2": {
+      "answer": "It does not change any cell. It kills the susceptible cells and leaves the resistant ones alone. With their competition gone, the resistant cells multiply until they make up nearly the whole population. This is selection.",
+      "quote": "The resistant fraction has gone from 1 in 100 million to nearly 100%. No cell changed. The drug removed the competition."
+    },
+    "3": {
+      "answer": "Through horizontal gene transfer, which can cross species. There are three routes: conjugation (one cell passes a plasmid to another by direct contact), transformation (a cell takes up free DNA from a dead cell) and transduction (a virus carries DNA from one cell to the next). For example, a harmless gut bacterium can give a resistance gene to a dangerous one.",
+      "quote": "Transfer also crosses species: a harmless gut bacterium can give a gene to a dangerous one."
+    },
+    "4": {
+      "answer": "Applying the explanation's reasoning: in an infection of about 10¹⁰ cells, 1 in a billion is still about 10 resistant cells, and they are there before treatment starts. The drug kills the susceptible cells but does not affect the resistant ones. Those multiply quickly (24 doublings a day in the example) and replace the cells that died. So the infection can seem to improve and then come back, made of resistant bacteria the drug no longer works on.",
+      "quote": "The drug kills the susceptible cells. Suppose the immune system and the drug together reduce them to about 10⁴ within two days. The 100 resistant cells are not affected by the drug."
+    }
+  },
+  "stops": [
+    "'susceptible' is used many times but never defined: \"The drug kills the susceptible cells.\"",
+    "The cell-division count is stated without a reason: \"To grow from one cell to 10¹⁰ cells takes about 10¹⁰ cell divisions.\"",
+    "A probability is compared to a population size in a confusing way: \"1 in 10¹⁶ divisions, which is larger than the whole infection.\"",
+    "It is not explained why a dose that stops neither strain still selects at all: \"At **0.5 mg/L**, the drug stops neither. It selects only weakly.\"",
+    "The resistant cells are said to grow for a full day while the drug works for two days. How these timelines fit together is unclear: \"After one day, which is 24 doublings\"",
+    "The Luria–Delbrück reasoning goes by fast, and it is unclear how a virus experiment applies to antibiotics: \"exposed them to a killer (a virus, in their case)\"",
+    "The arithmetic step is not explained: \"its share falls by a factor of 0.95¹⁰⁰ ≈ 0.006, about 170 times\"",
+    "'porin' appears with no explanation: \"Fewer porin channels in *E. coli*\""
+  ],
+  "excess": [
+    "The intro restates the plan of the file: \"The rest of this file builds that answer in four steps.\"",
+    "The summary repeats the short answer: \"Bacteria become resistant to an antibiotic in two steps. First, variation\"",
+    "The list of excluded topics is off the question: \"**Not covered here:** *tolerance* and *persistence*\"",
+    "The point about human cells is not needed for the question about resistance: \"Human cells do not have these exact targets, so the drug harms bacteria much more than it harms the patient.\""
+  ],
+  "grounded": {
+    "1": true,
+    "2": true,
+    "3": true,
+    "4": true
+  }
+}

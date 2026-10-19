@@ -1,0 +1,57 @@
+{
+  "key": {
+    "A": "principles",
+    "B": "none",
+    "C": "published",
+    "D": "quick"
+  },
+  "grades": {
+    "principles": {
+      "quiz": [
+        2,
+        2,
+        2,
+        2
+      ],
+      "misconception": "corrected",
+      "errors": []
+    },
+    "none": {
+      "quiz": [
+        2,
+        2,
+        2,
+        2
+      ],
+      "misconception": "absent",
+      "errors": []
+    },
+    "published": {
+      "quiz": [
+        2,
+        2,
+        0,
+        2
+      ],
+      "misconception": "corrected",
+      "errors": []
+    },
+    "quick": {
+      "quiz": [
+        2,
+        2,
+        0,
+        2
+      ],
+      "misconception": "absent",
+      "errors": []
+    }
+  },
+  "rank": [
+    "principles",
+    "none",
+    "published",
+    "quick"
+  ],
+  "why_best": "A covers every quiz point in a compact sequence: free fall, a worked three-point table, the 1/d³ scaling, the lunar day and spring/neap tides. It also explicitly refutes the Earth-spin centrifugal misconception, without B's broken placeholders (missing equations, missing code, empty link) and appended UI text."
+}

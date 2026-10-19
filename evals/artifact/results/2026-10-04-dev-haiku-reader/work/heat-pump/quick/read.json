@@ -1,0 +1,44 @@
+{
+  "answers": {
+    "1": {
+      "answer": "From the outdoor air. The heat pump extracts 2 kWh of heat from the outdoor air and uses 1 kWh of electricity to deliver a total of 3 kWh to the house.",
+      "quote": "It uses electricity to *move* heat that already exists in the outdoor air into the house. For each 1 kWh of electricity, it takes about 2 kWh of heat from the air and delivers 3 kWh to the house."
+    },
+    "2": {
+      "answer": "The refrigerant circulates through four stages: it absorbs heat from the outdoor air by boiling in the evaporator, gets compressed to raise its temperature, condenses in the condenser to release heat to the house, and expands to cool back down and repeat the cycle.",
+      "quote": "The heat pump uses this to make the refrigerant colder than the outdoor air at one place and hotter than the house at another."
+    },
+    "3": {
+      "answer": "Because the temperature lift—the difference between outdoor air temperature and the house temperature—is larger on colder days, requiring more work to move each unit of heat.",
+      "quote": "The electricity pays to lift heat from a low temperature to a high one. The **temperature lift** is the condenser temperature minus the evaporator temperature. A larger lift needs more work for each kWh of heat moved."
+    },
+    "4": {
+      "answer": "The explanation does not provide specific data for a 5 °C day. However, the table shows that the Carnot limit decreases with colder outdoor air: 7.8 at 10 °C and 4.8 at −15 °C. A 5 °C day would therefore have a higher Carnot limit than −15 °C, delivering more heat per unit of electricity by the ideal limit.",
+      "quote": "**Colder outdoor air → lower COP.** The heat pump must lift the heat farther."
+    }
+  },
+  "stops": [
+    "\"R290\"—undefined term, what is this abbreviation?",
+    "\"boiling point depends on pressure\"—why does pressure affect boiling point, and what is the mechanism?",
+    "\"COP_max = T_hot ÷ (T_hot − T_cold)\"—formula given without derivation or explanation of why it works.",
+    "\"Heat flows only from hot to cold\"—principle stated without explanation of the underlying reason.",
+    "\"Squeezing the gas to 14 bar raises its temperature\"—the pressure-temperature relationship is not explained.",
+    "\"entropy and the second law\"—mentioned but explicitly out of scope, yet referenced for understanding Carnot limit.",
+    "\"A rule of thumb is that real machines reach about half of the Carnot limit\"—why specifically half, and does this vary?",
+    "\"Without this step, the refrigerant stays at 40 °C. It is then hotter than the 0 °C air, so it gives heat to the outdoors\"—the causal mechanism is unclear.",
+    "\"0 °C is 273 K, far above absolute zero\"—why is distance from absolute zero relevant to thermal energy?",
+    "How are the specific operating temperatures (−10 °C at evaporator, 40 °C at condenser) determined from the outdoor and indoor temperatures?"
+  ],
+  "excess": [
+    "\"A refrigerator uses the same loop. Its evaporator is inside the box and its condenser is the warm grille at the back.\"—tangential analogy not needed for heat pump explanation.",
+    "\"One example is propane (R290)\"—specific refrigerant example when the principle applies to any refrigerant.",
+    "\"**Out of scope:** defrost cycles, ground-source heat pumps, refrigerant choice and safety, and the derivation of the Carnot limit\"—meta-commentary already marked out of scope.",
+    "\"**Cooler indoor water → higher COP.** Large radiators or underfloor heating at 35 °C need less lift than small radiators at 55 °C.\"—optimization detail beyond the core explanation."
+  ],
+  "grounded": {
+    "1": true,
+    "2": true,
+    "3": true,
+    "4": true
+  }
+}

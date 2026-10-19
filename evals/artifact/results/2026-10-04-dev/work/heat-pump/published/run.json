@@ -1,0 +1,12 @@
+{
+  "result": "I made `explainers/heat-pump/diagram.md` because the answer depends on a loop of four parts with a temperature and pressure at each point, which a diagram with text shows better than prose. It passed the probe, the cold read and the blind test, and the leftover test copy at `explainers/heat-pump-broken/` needs your OK to delete.",
+  "error": null,
+  "cost": 2.352323,
+  "seconds": 845,
+  "turns": 77,
+  "files": [
+    "explainers/heat-pump/diagram.md"
+  ],
+  "review_cost": 1.0471,
+  "reviews": 6
+}

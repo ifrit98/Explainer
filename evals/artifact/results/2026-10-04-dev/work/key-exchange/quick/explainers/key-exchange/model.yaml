@@ -1,0 +1,68 @@
+values:
+  p: 23
+  g: 5
+  a: 6
+  b: 15
+  A: 8
+  B: 19
+  key: 2
+  mallory_m: 3
+  mallory_M: 10
+  mallory_key: 6
+  mult_A: 7
+  inverse_g: 14
+  plain_power: 15625
+  real_bits: 2048
+  real_digits: 617
+  real_cost_exp: 112
+
+allow: [1, 2, 3, 4, 10, 20, 22, 25]
+
+accept_unjustified:
+  log: "log appears only as Eve's attack on the no-mod alternative (why-mod), not as an operation of the method"
+
+require:
+  - path: p
+    in: [prose]
+  - path: g
+    in: [prose]
+  - path: A
+    in: [prose]
+  - path: B
+    in: [prose]
+  - path: key
+    in: [prose]
+
+claims:
+  - id: mech-exchange
+    kind: mechanism
+    statement: "Each side raises the other's public value to its own private number mod p; both get g^(ab) mod p."
+    example: "p=23, g=5, a=6, b=15: A=8, B=19; 19^6 mod 23 = 2 and 8^15 mod 23 = 2."
+  - id: why-exp
+    kind: why
+    about: [exponentiation]
+    statement: "Exponentiation mod p is easy forward and hard to reverse; multiplication is easy to reverse."
+    alternative: "A = g*a mod p"
+    counterexample: "A = 5*6 mod 23 = 7; Eve multiplies by 14 (inverse of 5) and gets 6 = a."
+  - id: why-mod
+    kind: why
+    about: [mod]
+    statement: "Mod p scrambles the powers so no smooth logarithm undoes them."
+    alternative: "plain powers g^a"
+    counterexample: "5^6 = 15625; log base 5 of 15625 = 6."
+  - id: guarantee-eve
+    kind: guarantee
+    statement: "A passive eavesdropper cannot compute the shared key if p is large."
+    example: "Eve sees 23, 5, 8, 19 and needs a or b; for 2048-bit p no known method finds them."
+    counterexample: "At p = 23 Eve tries all 22 exponents and finds a = 6."
+    ask: "Eve sees p, g, A and B. Why can she not compute the shared key?"
+  - id: limit-mitm
+    kind: limit
+    statement: "Without authentication, an active attacker can sit in the middle."
+    counterexample: "Mallory sends 10 instead of 19; Alice and Mallory both compute key 6."
+    ask: "What can an attacker who can change messages do, and what stops it?"
+
+terms:
+  - term: shared key
+    means: "g^(ab) mod p, computed by both sides, never sent"
+    avoid: [sends the key, send the key]

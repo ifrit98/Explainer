@@ -1,0 +1,45 @@
+{
+  "answers": {
+    "1": {
+      "answer": "The whole Earth is in free fall toward the Moon, pulled by the Moon's pull at its centre. On the far side the Moon's pull is weaker than at the centre because that side is farther away, and gravity weakens with distance. The Earth is pulled toward the Moon more than the far-side water is, so the water is left behind and rises.",
+      "quote": "the pull is weaker than at the centre, so the leftover points *away* from the Moon. The Earth is pulled toward the Moon a bit more than the water on the far side is. The water is left behind, and it rises too."
+    },
+    "2": {
+      "answer": "The bulges stay lined up with the Moon. While the Earth spins, the Moon moves about 13° along its orbit in the same direction, so one turn relative to the Moon (a lunar day) takes about 24 h 50 min. There are two highs per lunar day, which puts them about 12 h 25 min apart.",
+      "quote": "While the Earth spins, the Moon moves about 13° along its orbit in the same direction, so the Earth needs about 50 extra minutes to catch up. This \"lunar day\" lasts about **24 h 50 min**."
+    },
+    "3": {
+      "answer": "At new and full moon, when the Sun, Earth and Moon are in a line. The Sun's pair of bulges then lines up with the Moon's, the two add together, and you get spring tides. (Real coasts also differ: basins whose natural sloshing period is close to 12.4 h have much larger tides, as in the Bay of Fundy.)",
+      "quote": "When the Sun, Earth and Moon are in a line (at new and full moon), the two sets of bulges add together and you get larger **spring tides**."
+    },
+    "4": {
+      "answer": "Reasoning from the text: the extra 50 minutes comes only from the Moon moving along its orbit. Without that motion, one turn relative to the Moon would be just one Earth rotation, about 24 hours. With two highs per turn, high tides would come about every 12 hours. The explanation does not say this directly.",
+      "quote": "That is **two highs and two lows for each turn of the Earth relative to the Moon.**"
+    }
+  },
+  "stops": [
+    "Gradient is used without being defined: \"It is the *gradient* of gravity, and taking a gradient adds another power of distance.\"",
+    "The approximation is used without saying where it comes from: \"use the approximation (1 − x)⁻² ≈ 1 + 2x for small x\"",
+    "The sideways leftover is hard to picture: \"the pull there is aimed at the Moon, which is not quite parallel to the pull at the centre\"",
+    "The side result is stated without working: \"On the sides, the pull tilts inward by an angle of about R/d. That gives an inward leftover of about GMR/d³, half as large.\"",
+    "\"Up there\" is an unclear reference (does it mean the near and far points?): \"Up there it does almost nothing.\"",
+    "The 46% figure can't be checked because the Sun's mass is never given: \"The Sun's tidal effect is about 46% of the Moon's.\"",
+    "Reference frames are mentioned but never explained: \"if you are careful about reference frames, but you don't need it\"",
+    "This seems to clash with section 5 (the Moon moving along its orbit): \"The Moon is kept fixed on the right, so the Earth appears to turn once every <b>24 h 50 min</b>\"",
+    "This is asserted without a reason: \"This part is largest about 45° away from the Moon's direction.\"",
+    "The second sentence is unclear: \"In some basins the tide circulates around a point where the height hardly changes at all.\""
+  ],
+  "excess": [
+    "The Python script: \"If you'd like to check the vector picture yourself, this short Python script computes the leftover pull at points around the Earth\"",
+    "The centrifugal aside: \"The far-side bulge is often explained as a \"centrifugal effect\" of the Earth–Moon orbit.\"",
+    "The summary repeats earlier sections: \"The Earth as a whole falls toward the Moon, so the Moon's *average* pull has no effect on the oceans.\"",
+    "The diurnal-tide detail is off the main question: \"In some basins, such as parts of the Gulf of Mexico, the basin's response strengthens that once-a-day part until it dominates.\"",
+    "The opening short answer repeats the later sections: \"That difference points toward the Moon on the near side and away from the Moon on the far side. So the ocean is stretched in both directions.\""
+  ],
+  "grounded": {
+    "1": true,
+    "2": true,
+    "3": true,
+    "4": true
+  }
+}

@@ -1,0 +1,243 @@
+{
+ "tool": "quiz",
+ "rendering": "diagram",
+ "slug": "heat-pump",
+ "at": "2026-10-04T15:14:31",
+ "model": "default",
+ "prompt_sha": "c613363175a6",
+ "reply": {
+  "answers": {
+   "1": "The heat pump; the electricity it uses; the outdoor air (the cold source, giving 'outdoor heat'); the home water (35 °C, the hot side); the refrigerant (propane in the example), which moves in a closed loop through four parts: the evaporator (outdoor coil), the compressor, the condenser (indoor coil) and the expansion valve. Measures: COP, temperature lift, the ideal (Carnot) limit, and entropy.",
+   "2": "Electricity drives the compressor. The refrigerant takes heat from the outdoor air in the evaporator by boiling at low pressure (3.5 bar, −10 °C). The compressor raises it to high pressure (14 bar), which heats the vapour to about 60 °C. In the condenser it cools and condenses at 40 °C, giving heat to the 35 °C water. The expansion valve drops the pressure again, so part of the liquid boils and the rest cools to −10 °C. COP is heat delivered ÷ electricity. It is limited by the lift between the outdoor air and the water, through the entropy rule.",
+   "3": "The compressor and valve set two pressures, so the refrigerant boils below the outdoor temperature and condenses above the water temperature. Heat therefore flows naturally into the refrigerant outside and out of it inside. The electricity pays for this move, so the delivered heat is the outdoor heat plus the electricity.",
+   "4": "The temperature lift (water temperature minus outdoor temperature) matters most. If it gets larger (a colder day or hotter water), COP falls: 10 °C gives about 4, 0 °C about 3, −15 °C about 2 and −25 °C about 1.5. The ideal limit T_hot/(T_hot−T_cold) falls as the bottom of the fraction grows. Entropy explains why: heat taken in at a lower T carries more entropy per kWh, so more of the delivered heat must come from electricity.",
+   "5": "Assumptions and simplifications: the refrigerant boils 10 K below the air and condenses 5 K above the water; the real COP figures are labelled estimates; the ideal limit assumes no entropy is created. Facts: propane boils at −10 °C at about 3.5 bar and at 40 °C at about 14 bar; energy is conserved (Q_cold = Q_hot − W).",
+   "6": "A heat pump does not make heat; it moves heat from cold outdoor air into warmer home water, and the electricity pays for the move. A refrigerant's boiling point depends on pressure, so a closed loop holds it at low pressure outside (boiling below air temperature) and high pressure inside (condensing above water temperature). The compressor raises the pressure using electricity, and the valve drops it, so heat flows the normal hot-to-cold way at both coils. The delivered heat is the outdoor heat plus the compressor's energy, so COP can be about 3. Entropy limits COP to T_hot/(T_hot−T_cold), so a larger lift (colder day, hotter water) means a lower COP, and real machines get much less than this limit because they need temperature gaps at the coils and have losses.",
+   "7": "The entropy section was hardest. Entropy appears only as 'Q/T, which cannot be destroyed', with no sense of what it is or what the kWh/K unit means. The inequality also leaves out the electricity's entropy without saying why. One sentence saying electricity (work) carries no entropy, and a short intuition for what entropy measures, would have helped.",
+   "8": "No. The 3 kWh is 2 kWh of heat taken from the outdoor air plus the 1 kWh of electricity, which ends up in the vapour and then in the water. Energy in equals energy out.",
+   "9": "On the 10 °C day. The lift is 25 K instead of 50 K. The ideal limit is 12.3 instead of 6.2, and the typical COP is about 4 instead of about 2. A smaller lift means less electricity for each kWh of heat.",
+   "10": "The compressor uses electricity to squeeze the vapour from 3.5 to 14 bar, which heats it to about 60 °C, so it can condense at 40 °C above the water temperature. The expansion valve drops the pressure from 14 back to 3.5 bar through a narrow opening. About a third of the liquid boils at once, which cools all of it to −10 °C, below the air temperature; the valve adds and removes no energy. Both are needed because one fixed pressure gives one boiling point, and the fluid must be colder than the air outside and hotter than the water inside, so the loop needs a high-pressure side and a low-pressure side.",
+   "11": "From the outdoor air. Air at 0 °C (273 K) still holds heat. The refrigerant boiling at −10 °C in the outdoor coil is colder than the air, so 2 kWh flows into it.",
+   "12": "Heat flows by itself only from hot to cold. To take heat from the air, the refrigerant must be colder than the air: −10 °C against 0 °C. If it were warmer, no heat would flow in.",
+   "13": "COP falls, for example from about 3 at 0 °C to about 2 at −15 °C. The lift grows, so the ideal limit T_hot/(T_hot−T_cold) shrinks. In entropy terms, each kWh taken from colder air carries more entropy, so more electricity is needed for each kWh delivered."
+  },
+  "audit": {
+   "terms": [
+    "The cost of heat is called 'cost' in the Level 3 title ('Why the cost rises on a colder day'), 'electricity each kWh of heat costs' (line 80) and 'the more each kWh costs' (Summary), but 'Not covered here: cost and CO₂' uses cost to mean money. The two meanings conflict.",
+    "The limit has three names: 'ideal limit' (table column, line 95), 'the Carnot limit' (line 95) and 'ideal COP' (formula, line 97).",
+    "Each coil has two names: 'Evaporator' / 'outdoor coil' and 'Condenser' / 'indoor coil' (diagram and steps 1 and 3). Both names are given together, but the body text and the Level 3 section use 'coil' alone.",
+    "The electricity is called 'electricity' (Levels 1–2), 'W' and 'electricity' (line 109), and 'work' ('The work on the gas', line 68; 'do all the work', line 72). The text never says that 'work' and the electricity are the same thing.",
+    "Two lifts: 'temperature lift' or 'lift' (water minus air, line 80) and 'refrigerant lift' (line 127). They are told apart only at the end, and the table's ideal limit uses the first."
+   ],
+   "unexplained": [
+    "Entropy values in 'kWh/K' (0.00042, 0.00732, 0.00974, 0.0403, 0.0389, line 107 onward). Entropy is new to this reader, and the text never says what a larger or smaller value means beyond 'cannot be destroyed'.",
+    "The 'Typical real COP (estimate)' column (line 82): no basis is given for the estimates, or for 'COP is about 2.2' with 55 °C radiators.",
+    "'The compressor, fans, and pumps lose about half of the rest' (line 127): it is unclear what 'the rest' refers to, and why the loss is about half.",
+    "'about a third of it boils at once' (line 70): the fraction is stated without saying where it comes from.",
+    "'boils 10 K below the air … condenses 5 K above the water' (line 127): the trade-off is named (bigger gap, smaller coil), but there is no sense of what changes if the gap is smaller or larger."
+   ],
+   "missing_why": [
+    "Q_hot/T_hot ≥ Q_cold/T_cold (line 111) ignores the 1 kWh of electricity on the entropy side. The text never says that electricity (work) carries no entropy, which the derivation depends on.",
+    "'Heat Q that passes at kelvin temperature T carries entropy Q/T' (line 107) is stated without any reason why entropy has this form.",
+    "'The work on the gas heats it to about 60 °C' (line 68): there is no reason given for why compressing a gas heats it, or why to 60 °C specifically. The bicycle pump is only an analogy.",
+    "'these two pressure changes do all the work' (line 72) conflicts with 'The valve adds no energy and removes none' (line 70), and the text does not resolve this.",
+    "Why 'The refrigerant ends each cycle where it started, so it cannot store entropy' means the entropy balance must hold for each cycle is stated briefly, without that argument being spelled out."
+   ],
+   "excess": [
+    "'Air at 0 °C is 273 K above absolute zero, so it still holds heat' (line 25): this reader already knows kelvin.",
+    "'(The air around us is at 1 bar.)' (line 39): this reader already knows pressure.",
+    "The worked example of 1 kWh flowing from water to air and the entropy gain of 0.00042 (line 107) repeats the hot-to-cold rule the reader already knows.",
+    "The Summary (line 131) repeats Levels 1–3 and adds nothing new.",
+    "'A fridge uses the same loop' (line 133) is a detour that neither the questions nor the argument uses."
+   ]
+  },
+  "gaps": [
+   "Entropy is never explained as a concept; it is defined only as Q/T plus a rule that it cannot be destroyed.",
+   "The text does not say that electrical work brings no entropy, which the COP limit derivation needs.",
+   "There is no basis for the real-COP estimates, or for the 'lose about half' of the gap between 6.3 and 3.",
+   "'Cost' means electricity per kWh in the body but money in 'Not covered', which is confusing.",
+   "The text does not explain why compressing the vapour raises its temperature, beyond the bicycle-pump analogy."
+  ]
+ },
+ "grade": {
+  "scores": {
+   "1": 2,
+   "2": 2,
+   "3": 2,
+   "4": 2,
+   "5": 1,
+   "6": 2,
+   "7": 2,
+   "8": 1,
+   "9": 2,
+   "10": 2,
+   "11": 2,
+   "12": 1,
+   "13": 2
+  },
+  "reasons": {
+   "5": "The answer calls the propane pressures (about 3.5 and 14 bar) facts, but model.md lists them under Estimated. It also leaves out the main stated assumptions, 0 °C outside and 35 °C water. The real-COP estimates and the 10 K and 5 K coil gaps are labelled correctly.",
+   "8": "The answer gives the 'No' and the balance 2 + 1 = 3 correctly. It does not say that the outdoor air still holds heat even though it is cold. It also does not say that the refrigerant is made colder than the air so heat flows into it. Both are part of the expected answer.",
+   "11": "No loss. The answer names the outdoor air and the 2 kWh specifically and explains why heat flows into the refrigerant. The balance 3 = 1 + 2 is not written out but follows directly from the question's premise.",
+   "12": "The outdoor half is correct and specific: heat flows hot to cold, so the refrigerant must be colder than the air (−10 °C against 0 °C). The expected answer also covers the loop and the indoor half, where the refrigerant must be hotter than the water to give heat out. The answer leaves this out. 'No heat would flow in' is weaker than the model's point that heat would flow out to the air. Note: the expected text for this item is broader than its question asks, so the rubric may need aligning.",
+   "pass_note": "Fails because quiz items 8 and 12 score 1 instead of 2. No general item scores 0."
+  },
+  "pass": false
+ },
+ "usage": {
+  "cost": 0.2533404,
+  "seconds": 66
+ },
+ "findings": [
+  {
+   "n": 1,
+   "severity": "gap",
+   "kind": "terms",
+   "text": "The cost of heat is called 'cost' in the Level 3 title ('Why the cost rises on a colder day'), 'electricity each kWh of heat costs' (line 80) and 'the more each kWh costs' (Summary), but 'Not covered here: cost and CO₂' uses cost to mean money. The two meanings conflict."
+  },
+  {
+   "n": 2,
+   "severity": "gap",
+   "kind": "terms",
+   "text": "The limit has three names: 'ideal limit' (table column, line 95), 'the Carnot limit' (line 95) and 'ideal COP' (formula, line 97)."
+  },
+  {
+   "n": 3,
+   "severity": "gap",
+   "kind": "terms",
+   "text": "Each coil has two names: 'Evaporator' / 'outdoor coil' and 'Condenser' / 'indoor coil' (diagram and steps 1 and 3). Both names are given together, but the body text and the Level 3 section use 'coil' alone."
+  },
+  {
+   "n": 4,
+   "severity": "gap",
+   "kind": "terms",
+   "text": "The electricity is called 'electricity' (Levels 1–2), 'W' and 'electricity' (line 109), and 'work' ('The work on the gas', line 68; 'do all the work', line 72). The text never says that 'work' and the electricity are the same thing."
+  },
+  {
+   "n": 5,
+   "severity": "gap",
+   "kind": "terms",
+   "text": "Two lifts: 'temperature lift' or 'lift' (water minus air, line 80) and 'refrigerant lift' (line 127). They are told apart only at the end, and the table's ideal limit uses the first."
+  },
+  {
+   "n": 6,
+   "severity": "gap",
+   "kind": "unexplained",
+   "text": "Entropy values in 'kWh/K' (0.00042, 0.00732, 0.00974, 0.0403, 0.0389, line 107 onward). Entropy is new to this reader, and the text never says what a larger or smaller value means beyond 'cannot be destroyed'."
+  },
+  {
+   "n": 7,
+   "severity": "gap",
+   "kind": "unexplained",
+   "text": "The 'Typical real COP (estimate)' column (line 82): no basis is given for the estimates, or for 'COP is about 2.2' with 55 °C radiators."
+  },
+  {
+   "n": 8,
+   "severity": "gap",
+   "kind": "unexplained",
+   "text": "'The compressor, fans, and pumps lose about half of the rest' (line 127): it is unclear what 'the rest' refers to, and why the loss is about half."
+  },
+  {
+   "n": 9,
+   "severity": "gap",
+   "kind": "unexplained",
+   "text": "'about a third of it boils at once' (line 70): the fraction is stated without saying where it comes from."
+  },
+  {
+   "n": 10,
+   "severity": "gap",
+   "kind": "unexplained",
+   "text": "'boils 10 K below the air … condenses 5 K above the water' (line 127): the trade-off is named (bigger gap, smaller coil), but there is no sense of what changes if the gap is smaller or larger."
+  },
+  {
+   "n": 11,
+   "severity": "gap",
+   "kind": "missing_why",
+   "text": "Q_hot/T_hot ≥ Q_cold/T_cold (line 111) ignores the 1 kWh of electricity on the entropy side. The text never says that electricity (work) carries no entropy, which the derivation depends on."
+  },
+  {
+   "n": 12,
+   "severity": "gap",
+   "kind": "missing_why",
+   "text": "'Heat Q that passes at kelvin temperature T carries entropy Q/T' (line 107) is stated without any reason why entropy has this form."
+  },
+  {
+   "n": 13,
+   "severity": "gap",
+   "kind": "missing_why",
+   "text": "'The work on the gas heats it to about 60 °C' (line 68): there is no reason given for why compressing a gas heats it, or why to 60 °C specifically. The bicycle pump is only an analogy."
+  },
+  {
+   "n": 14,
+   "severity": "gap",
+   "kind": "missing_why",
+   "text": "'these two pressure changes do all the work' (line 72) conflicts with 'The valve adds no energy and removes none' (line 70), and the text does not resolve this."
+  },
+  {
+   "n": 15,
+   "severity": "gap",
+   "kind": "missing_why",
+   "text": "Why 'The refrigerant ends each cycle where it started, so it cannot store entropy' means the entropy balance must hold for each cycle is stated briefly, without that argument being spelled out."
+  },
+  {
+   "n": 16,
+   "severity": "excess",
+   "kind": "excess",
+   "text": "'Air at 0 °C is 273 K above absolute zero, so it still holds heat' (line 25): this reader already knows kelvin."
+  },
+  {
+   "n": 17,
+   "severity": "excess",
+   "kind": "excess",
+   "text": "'(The air around us is at 1 bar.)' (line 39): this reader already knows pressure."
+  },
+  {
+   "n": 18,
+   "severity": "excess",
+   "kind": "excess",
+   "text": "The worked example of 1 kWh flowing from water to air and the entropy gain of 0.00042 (line 107) repeats the hot-to-cold rule the reader already knows."
+  },
+  {
+   "n": 19,
+   "severity": "excess",
+   "kind": "excess",
+   "text": "The Summary (line 131) repeats Levels 1–3 and adds nothing new."
+  },
+  {
+   "n": 20,
+   "severity": "excess",
+   "kind": "excess",
+   "text": "'A fridge uses the same loop' (line 133) is a detour that neither the questions nor the argument uses."
+  },
+  {
+   "n": 21,
+   "severity": "gap",
+   "kind": "gap",
+   "text": "Entropy is never explained as a concept; it is defined only as Q/T plus a rule that it cannot be destroyed."
+  },
+  {
+   "n": 22,
+   "severity": "gap",
+   "kind": "gap",
+   "text": "The text does not say that electrical work brings no entropy, which the COP limit derivation needs."
+  },
+  {
+   "n": 23,
+   "severity": "gap",
+   "kind": "gap",
+   "text": "There is no basis for the real-COP estimates, or for the 'lose about half' of the gap between 6.3 and 3."
+  },
+  {
+   "n": 24,
+   "severity": "gap",
+   "kind": "gap",
+   "text": "'Cost' means electricity per kWh in the body but money in 'Not covered', which is confusing."
+  },
+  {
+   "n": 25,
+   "severity": "gap",
+   "kind": "gap",
+   "text": "The text does not explain why compressing the vapour raises its temperature, beyond the bicycle-pump analogy."
+  }
+ ]
+}

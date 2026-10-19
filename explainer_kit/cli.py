@@ -216,11 +216,21 @@ def cmd_decide(args) -> None:
 
 
 def cmd_eval(args) -> None:
-    from explainer_kit.evals import run
+    default = {"chat": ["none", "v0.5=git:v0.5.0", "v0.6=principles"],
+               "artifact": ["none", "principles", "quick", "published"]}[args.suite]
+    conditions = dict(c.split("=", 1) if "=" in c else (c, c) for c in (args.conditions or default))
+    if args.suite == "chat":
+        from explainer_kit.evals import run
 
-    conditions = dict(c.split("=", 1) if "=" in c else (c, c) for c in args.conditions)
-    out = Path(args.out) if args.out else project_root() / "evals" / "chat" / "results" / date.today().isoformat()
-    run(conditions, out, model=args.model, workers=args.workers)
+        out = Path(args.out) if args.out else project_root() / "evals" / "chat" / "results" / date.today().isoformat()
+        run(conditions, out, model=args.model, workers=args.workers)
+        return
+    from explainer_kit.artifact_eval import run
+
+    out = Path(args.out) if args.out else (project_root() / "evals" / "artifact" / "results"
+                                           / f"{date.today().isoformat()}-{args.split}")
+    run(conditions, out, split=args.split, only=args.only, model=args.model, workers=args.workers,
+        reader_model=args.reader_model)
 
 
 def cmd_frames(args) -> None:
@@ -328,13 +338,20 @@ def main() -> None:
     p.add_argument("--decline-rest", action="store_true", help="every finding not adopted or decided yet is declined")
     p.set_defaults(fn=cmd_decide)
 
-    p = sub.add_parser("eval", help="chat eval: answer questions under several system prompts, grade blind")
-    p.add_argument("suite", choices=["chat"])
-    p.add_argument("--conditions", nargs="+", default=["none", "v0.5=git:v0.5.0", "v0.6=principles"],
-                   help="name=source; source is none, principles, git:<rev>, or a file")
-    p.add_argument("--model", help="model for answers and grading (default: the claude CLI default)")
-    p.add_argument("--out", help="output folder (default: evals/chat/results/<date>)")
-    p.add_argument("--workers", type=int, default=6)
+    p = sub.add_parser("eval", help="chat: answers under several system prompts; artifact: explainers built under "
+                                     "several conditions, read and graded blind")
+    p.add_argument("suite", choices=["chat", "artifact"])
+    p.add_argument("--conditions", nargs="+",
+                   help="name=source; source is none, principles, git:<rev>, or a file; for artifact also quick or "
+                        "published (the explain skill at that tier). Default: chat none v0.5 v0.6; artifact none "
+                        "principles quick published")
+    p.add_argument("--split", choices=["dev", "test", "all"], default="dev", help="artifact: which subjects")
+    p.add_argument("--only", nargs="+", help="artifact: these subject ids only")
+    p.add_argument("--model", help="model for every agent (default: the claude CLI default)")
+    p.add_argument("--reader-model", help="artifact: model for the reader only (a weaker reader fills fewer gaps)")
+    p.add_argument("--out", help="output folder (default: evals/<suite>/results/<date>[-<split>]); "
+                                 "an existing artifact run resumes")
+    p.add_argument("--workers", type=int, default=4)
     p.set_defaults(fn=cmd_eval)
 
     p = sub.add_parser("frames", help="rebuild the contact sheet")

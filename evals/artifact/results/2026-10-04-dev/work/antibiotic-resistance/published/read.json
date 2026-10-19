@@ -1,0 +1,44 @@
+{
+  "answers": {
+    "1": {
+      "answer": "Resistance genes exist before any drug is given. They come from random copying errors (mutations) during cell division, at about 1 per 10⁸ divisions, or from genes received from another bacterium. A 10¹⁰-cell infection therefore expects about 100 resistance mutations.",
+      "quote": "a few bacteria already carry a resistance gene, made by a random copying error or received from another bacterium."
+    },
+    "2": {
+      "answer": "The drug does not create resistance or change the bacteria. It kills or halts the susceptible cells, which removes them, and the resistant cells that were already there keep dividing and take over. This is selection.",
+      "quote": "This is **selection**: the drug did not make resistant cells, it removed the susceptible cells."
+    },
+    "3": {
+      "answer": "By horizontal gene transfer, mainly through conjugation. Two bacteria touch and one copies a plasmid (a small circle of DNA that carries complete resistance genes) into the other. The same plasmid gene is found in different species, which shows it moved between them.",
+      "quote": "In **conjugation**, two bacteria touch and one copies a plasmid into the other. This is **horizontal gene transfer**: a gene from another bacterium, not from the parent cell."
+    },
+    "4": {
+      "answer": "Reasoning from the text: a serious infection can hold 10¹⁰ cells, so a one-in-a-billion rate means about 10 resistant cells are already present before treatment. The full course kills or halts the susceptible cells but cannot affect the resistant ones. These keep doubling, the immune system alone cannot keep up, and they regrow to a large infection made almost entirely of resistant cells. Finishing the course does not help, because the drug was never acting on them.",
+      "quote": "The resistant cells keep dividing. The immune system removes some, but alone it cannot keep up with a population that keeps doubling."
+    }
+  },
+  "stops": [
+    "\"Each division adds one cell, so growing to that size took about 10¹⁰ divisions.\" The reason why the number of divisions equals the number of cells is packed into a few words.",
+    "\"Early mutants have divided since, so there are at least 100 resistant cells.\" The jump from 100 mutations to 'at least 100' cells needs a moment's thought.",
+    "\"At a lab doubling time of 30 minutes, that is 13 hours.\" It is unclear whether bacteria in the body double this fast.",
+    "\"They used a virus that kills bacteria; the test asks only whether resistance arose before contact, so it applies to drugs too.\" The switch from a virus to drugs needs a reread.",
+    "\"For independent rare events with a mean of 11, the random scatter is about √11 ≈ 3.3\" The square-root rule for scatter is stated without explanation.",
+    "\"each time the susceptible cells double, the resistant cells grow only 0.95 times as much\" It is unclear what '0.95 times as much' growth means.",
+    "\"Then about 100 cells survive again.\" Why it goes back to 100 is left for the reader to work out (one event at 10⁻⁸ in 10¹⁰ cells).",
+    "\"the immune system clears the halted cells\" The immune system's role is introduced without saying how big it is."
+  ],
+  "excess": [
+    "\"<!-- Stage 1, rendered from model.md in STE-80. -->\"",
+    "\"The bacteria become resistant, not the patient's body.\"",
+    "\"| Keep the drug out | The cell loses a porin, an entry channel in its surface, so less drug gets in. |\"",
+    "\"Not covered\"",
+    "\"Course length, prescribing policy, farm use, biofilms.\"",
+    "\"**In short:** resistance genes come first, by chance or from other bacteria.\""
+  ],
+  "grounded": {
+    "1": true,
+    "2": true,
+    "3": true,
+    "4": true
+  }
+}

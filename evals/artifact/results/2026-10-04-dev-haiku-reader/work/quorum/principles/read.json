@@ -1,0 +1,43 @@
+{
+  "answers": {
+    "1": {
+      "answer": "A strict majority of all servers must agree to accept a write.",
+      "quote": "A cluster accepts a decision only when a strict majority of *all* its servers agree."
+    },
+    "2": {
+      "answer": "To prevent split brain, where two groups independently accept conflicting writes. A majority ensures any two deciding groups share at least one server, so that server can vote for at most one conflicting write.",
+      "quote": "any two such groups share at least one server. That shared server votes for at most one of two conflicting writes, so at most one can pass."
+    },
+    "3": {
+      "answer": "A 6-server cluster survives 2 failures. With n=6, the quorum q=4, so f = n−q = 2.",
+      "quote": "The cluster keeps working while at least q servers are alive and connected. So it tolerates f = n − q failures."
+    },
+    "4": {
+      "answer": "The group of 3 can commit writes, because it contains the quorum size for 5 servers. The group of 2 cannot commit because it lacks q=3.",
+      "quote": "Check with 5 servers: q = 3. In the 3|2 split above, only the group of 3 can decide. The group of 2 refuses the $90 withdrawal."
+    }
+  },
+  "stops": [
+    "any two such groups share at least one server — Why all pairs, not just neighboring groups?",
+    "q + q > n, so q > n/2 — Why does adding group sizes determine overlap?",
+    "The smallest whole number above n/2 is q = floor(n/2) + 1 — Unexplained floor function reasoning",
+    "So it tolerates f = n − q failures — Formula stated without derivation or proof",
+    "That shared server votes for at most one of two conflicting writes — Voting mechanism undefined",
+    "So any safe rule must assume that silent servers might be alive — Logical jump from observation",
+    "A majority quorum trades availability for consistency on purpose — What availability means here?",
+    "The network splits the servers into groups that cannot reach each other — Why is partition relevant to quorum rule?"
+  ],
+  "excess": [
+    "Short answer at lines 2-3 — Repeated in the detailed explanation that follows",
+    "The rest of this page explains why — Meta-framing that doesn't add content",
+    "Specific $100 balance and withdrawal amounts — Numbers are illustrative but not essential",
+    "Probability calculations in table at lines 76-82 — Beyond scope of core principle",
+    "Scope section mentioning Byzantine faults and Raft/Paxos algorithms — Extensions not needed"
+  ],
+  "grounded": {
+    "1": true,
+    "2": true,
+    "3": true,
+    "4": true
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "result": "I made `explainers/bloom-filter/explanation.md`, a prose explanation (plus its `model.md` and `model.yaml`; `explainer check` passes). I chose prose because the mechanism is a short series of steps: one 10-bit worked example, a small table of k values and one formula show the memory saving (1.2 MB instead of about 50 MB, at about 1% wrong answers) and both ways it can be wrong, so a diagram or interactive page would not add enough to justify it.",
+  "error": null,
+  "cost": 0.5246917999999999,
+  "seconds": 99,
+  "turns": 29,
+  "files": [
+    "explainers/bloom-filter/explanation.md"
+  ],
+  "review_cost": 0,
+  "reviews": 0
+}

@@ -1,0 +1,12 @@
+{
+  "result": "I made `explainers/key-exchange/explanation.md`, as prose (with its `model.md` and `model.yaml` source files), because Diffie–Hellman key exchange is a short sequence of steps that a single worked example with small numbers (p = 23, g = 5, shared key 2) carries completely; a diagram or interactive page would add nothing. It passes `explainer check` and covers why Eve fails, why powers and mod p are used, and the man-in-the-middle limit; I checked the arithmetic by hand, but the attempt to confirm it with Python wasn't approved.",
+  "error": null,
+  "cost": 0.36011959999999993,
+  "seconds": 80,
+  "turns": 14,
+  "files": [
+    "explainers/key-exchange/explanation.md"
+  ],
+  "review_cost": 0,
+  "reviews": 0
+}

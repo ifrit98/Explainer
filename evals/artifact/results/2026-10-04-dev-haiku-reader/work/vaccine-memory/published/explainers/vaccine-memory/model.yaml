@@ -1,0 +1,111 @@
+# Machine-readable half of model.md. `explainer check vaccine-memory` holds every rendering to it.
+
+values:
+  library_size: "100 million"        # different receptors in one person (estimate, lower bound)
+  human_genes: 20000
+  naive_precursors: 100              # illustrative precursor count, first meeting
+  memory_precursors: 10000           # illustrative, 100x naive
+  memory_ratio: 100
+  division_hours: 8
+  cells_needed: 1000000              # illustrative effector cells for control
+  primary_divisions: 13.3
+  primary_division_days: 4.4
+  activation_days: 2.5
+  memory_divisions: 6.6
+  memory_division_days: 2.2
+  primary_days: 7
+  memory_days: 3
+  pathogen_start: 100                # particles
+  pathogen_growth_per_day: 10
+  symptom_level: "100 million"       # particles, illustrative
+  primary_peak: "1 billion"
+  memory_peak: 100000
+  precursor_freq_low: 100000         # 1 in 100,000
+  precursor_freq_high: 1000000
+  contraction_pct: 99
+  measles_effectiveness_pct: 97
+  flu_effectiveness_low: 40
+  flu_effectiveness_high: 60
+
+allow: [1, 2, 3, 6, 10, 1000]
+
+require:
+  - path: primary_days
+    in: [prose]
+  - path: memory_days
+    in: [prose]
+  - path: naive_precursors
+    in: [prose]
+  - path: memory_precursors
+    in: [prose]
+  - path: symptom_level
+    in: [prose]
+
+claims:
+  - id: library-before
+    kind: why
+    about: [receptor library]
+    statement: "The body makes a random library of receptors before any infection, so a matching lymphocyte already exists when a new antigen arrives."
+    alternative: "One gene for each receptor, written to fit known pathogens."
+    counterexample: "About 20,000 human genes cannot list more than 100 million receptors, and genes cannot anticipate a pathogen that has not evolved yet."
+    ask: "Before a person meets a brand-new virus, does their body already have lymphocytes that can bind it? Why?"
+  - id: clonal-selection
+    kind: mechanism
+    statement: "An antigen activates only the few lymphocytes whose receptors bind it; those divide every 8 hours into a clone."
+    example: "100 matching cells × 2^13.3 ≈ 1,000,000 effector cells after about 4.4 days of division."
+  - id: primary-slow
+    kind: mechanism
+    statement: "The first response is slow because the matching clone starts at about 100 cells; it needs about 7 days to control the pathogen."
+    example: "100 → 1,000,000 needs 13.3 divisions (4.4 days) plus about 2.5 days to find the antigen and activate: about 7 days. The pathogen grows from 100 to 1 billion particles, above the symptom level of 100 million."
+  - id: memory-fast
+    kind: guarantee
+    statement: "After a response, memory cells remain, 100× more than the naive count; the next response against the same antigen takes about 3 days."
+    example: "10,000 → 1,000,000 needs 6.6 divisions (2.2 days) plus under a day to activate: about 3 days. The pathogen peaks at 100,000 particles, 1,000× below the symptom level."
+    counterexample: "Influenza changes its surface antigens each year; old memory receptors bind poorly, so the response falls back toward the slow first response, and flu vaccine effectiveness is about 40–60%."
+    ask: "Why is the second response to the same antigen faster than the first?"
+  - id: vaccine-role
+    kind: mechanism
+    statement: "A vaccine shows the antigen with a danger signal but without a pathogen that can multiply to disease, so the slow first response runs at no cost and leaves memory cells."
+    example: "Measles vaccine, two doses: about 97% effectiveness for decades."
+    ask: "What does a vaccine actually leave behind in the body that protects a person years later?"
+  - id: why-adjuvant
+    kind: why
+    about: [adjuvant]
+    statement: "A lymphocyte activates only with a danger signal as well as its antigen; a vaccine adjuvant supplies that signal."
+    alternative: "Activate on any binding."
+    counterexample: "Lymphocytes would attack harmless food proteins; and a purified protein alone often gives only a weak response."
+  - id: selection-not-instruction
+    kind: misconception
+    statement: "The vaccine teaches the body the germ's shape, and the body builds a receptor to fit it."
+    correction: "The vaccine does not teach the body a shape; it selects and multiplies lymphocytes whose random receptors already fit."
+    example: "Of about 100 million receptors, only the about 100 matching cells divide."
+  - id: fewer-beats-more
+    kind: mechanism
+    statement: "The response wins with fewer cells than pathogen particles because each effector cell removes many particles."
+    example: "One plasma cell releases thousands of antibodies per second."
+
+accept_unjustified: {}
+
+terms:
+  - term: memory cell
+    means: "a long-lived lymphocyte left after a response; it is not antibody"
+    avoid: [memory antibodies, antibody memory]
+  - term: receptor
+    means: "the binding protein on a lymphocyte; an antibody is a released copy of a B cell receptor"
+    avoid: [antibody receptor]
+  - term: precursor count
+    means: "the number of lymphocytes able to respond at the start: 100 naive, 10,000 memory"
+    avoid: [head start count, starting cells]
+
+budget: {prose: 1000, reason: "the answer needs a random library, a race with two sets of numbers, and a case where memory fails"}
+
+quiz:
+  - q: "A person gets a vaccine against a virus whose antigen does not change. Two years later the virus enters their body. Roughly how much faster is their immune response than in an unvaccinated person, and why?"
+    expect: "About 3 days instead of about 7, because memory cells start from about 100× more matching cells (fewer divisions needed) and activate faster; so the virus stays below the symptom level."
+    misconception: "The antibodies made two years ago are still there and kill the virus instantly; or the vaccine prevents the virus from entering."
+  - q: "Why do people need a new flu vaccine each year, while a measles vaccine protects for decades?"
+    expect: "The flu virus changes its surface antigens, so old memory cells' receptors no longer fit well; measles antigens stay the same."
+    misconception: "Flu vaccine memory wears off quickly."
+  - q: "How can the immune system have a matching lymphocyte for a virus that appeared only last year?"
+    expect: "The receptors are made at random, more than 100 million kinds, before any infection; by chance a few fit almost any shape. The virus selects them."
+    misconception: "The immune system designs a new receptor to fit the virus after seeing it."

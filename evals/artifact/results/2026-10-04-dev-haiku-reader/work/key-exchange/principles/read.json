@@ -1,0 +1,48 @@
+{
+  "answers": {
+    "1": {
+      "answer": "Exponentiation (raising to powers) makes it possible. The discrete logarithm problem makes it safe—finding the exponent from the result is computationally infeasible.",
+      "quote": "Use powers instead of products. To find the secret, Eve needs a or b. To get a, she must solve \"5 to what power, mod 23, gives 8?\" This is the discrete logarithm problem."
+    },
+    "2": {
+      "answer": "Both compute the same value through the mathematical property that exponent order doesn't matter: (g^b)^a equals (g^a)^b, so both get g^(a×b) mod p.",
+      "quote": "Alice computes (g^b)^a. Bob computes (g^a)^b. Both equal g^(a×b), because the order of the exponents does not matter."
+    },
+    "3": {
+      "answer": "The exchange alone cannot stop a man-in-the-middle attack by an active attacker who intercepts and replaces messages. Authentication via digital signature stops it.",
+      "quote": "The method defeats Eve, who only reads. It does not defeat Mallory, who can intercept and replace messages. The fix is authentication: Bob signs his public value with a digital signature."
+    },
+    "4": {
+      "answer": "Alice sends 8 and Bob sends 19. They share the key 2.",
+      "quote": "A = 5⁶ mod 23 = 8... B = 5¹⁵ mod 23 = 19... Alice and Bob both get 2."
+    }
+  },
+  "stops": [
+    "A method called the extended Euclidean algorithm finds this 'undo' number quickly",
+    "Both equal g^(a×b), because the order of the exponents does not matter",
+    "Repeated squaring computes g^a with about 2 multiplications per binary digit of a",
+    "This is the discrete logarithm problem",
+    "A large quantum computer running Shor's algorithm would break it",
+    "that is why newer 'post-quantum' key exchanges exist",
+    "Bob signs his public value with a digital signature",
+    "Mallory, who can intercept and replace messages"
+  ],
+  "excess": [
+    "Alice picks a key and sends it to Bob. Eve reads it. This fails at once",
+    "She finds the number that undoes '× 5' mod 23",
+    "Before you read on: can Eve get 6 back from 7?",
+    "Your browser does this each time it opens an `https://` connection",
+    "For a 2048-bit a, that is about 4,000 multiplications",
+    "At a billion billion (10¹⁸) operations per second, that is more than 100 million years",
+    "On the web, a certificate authority vouches for that key",
+    "Not covered here: elliptic-curve Diffie–Hellman, how to choose safe p and g",
+    "Multiplication is easy to undo, so it fails",
+    "for a 2048-bit p they still need roughly 2¹¹² operations"
+  ],
+  "grounded": {
+    "1": true,
+    "2": true,
+    "3": true,
+    "4": true
+  }
+}

@@ -1,0 +1,117 @@
+# Machine-readable half of model.md. `explainer check gps-relativity` holds every rendering to it.
+
+values:
+  light:
+    m_per_ns: 0.3
+    m_per_us: 300
+    km_per_us: 0.3
+  orbit:
+    altitude_km: 20200
+    speed_km_s: 3.9
+    travel_ms: 67
+    satellites: 30
+  accuracy:
+    position_m: 5
+    clock_ns: 17
+  quartz:
+    error_ms: 1
+    error_km: 300
+  example1d:
+    beacon_b_km: 30
+    receiver_km: 12
+    other_km: 18
+    t_a_us: 40
+    t_b_us: 60
+    bias_us: 5
+    meas_a_us: 45
+    meas_b_us: 65
+    pr_a_km: 13.5
+    pr_b_km: 19.5
+    sum_km: 33
+    excess_km: 3
+    bias_km: 1.5
+  relativity:
+    speed_us_day: 7
+    gravity_us_day: 45
+    net_us_day: 38
+    net_km_day: 11.4
+    speed_only_km_day: 13.5
+    fraction: 4.5e-10
+    ecc_ns: 23
+    nominal_mhz: 10.23
+    offset_mhz: 10.22999999543
+  reset:
+    day_a: 0
+    day_b: 3
+    day_read: 5
+    err_a_us: 190
+    err_a_km: 57
+    err_b_us: 76
+    err_b_km: 22.8
+    diff_km: 34
+
+allow: [1, 2, 3, 4, 10]
+
+require:
+  - path: relativity/net_us_day
+    in: [prose]
+  - path: relativity/net_km_day
+    in: [prose]
+  - path: relativity/speed_us_day
+    in: [prose]
+  - path: relativity/gravity_us_day
+    in: [prose]
+  - path: example1d/bias_km
+    in: [prose]
+
+claims:
+  - id: def-pseudorange
+    kind: definition
+    statement: "A pseudorange is light speed times (receive time on the receiver clock minus send time on the satellite clock): the range plus the receiver clock bias b."
+  - id: why-fourth-unknown
+    kind: why
+    statement: "The receiver treats its own clock error b as a fourth unknown, so it needs four satellites."
+    alternative: "Trust the receiver's quartz clock and use three satellites."
+    counterexample: "A quartz clock off by 1 ms puts every range off by 300 km; even 1 µs gives 300 m."
+    ask: "Why does a GPS receiver need signals from four satellites and not three?"
+  - id: mech-bias-1d
+    kind: mechanism
+    statement: "Pseudoranges that do not fit together reveal the clock bias."
+    example: "Beacons 30 km apart, receiver at 12 km, clock 5 µs fast: pseudoranges 13.5 and 19.5 km sum to 33 km, 3 km too much, so b = 1.5 km and x = 12 km."
+  - id: mech-clock-to-range
+    kind: mechanism
+    statement: "Every nanosecond of satellite clock error becomes 0.3 m of range error."
+    example: "5 m accuracy needs satellite clocks within about 17 ns; 38 µs gives 11.4 km."
+  - id: mech-two-effects
+    kind: mechanism
+    statement: "The orbit speed slows the satellite clock by 7 µs/day; the weaker gravity at altitude speeds it up by 45 µs/day; net, the clock gains 38 µs/day."
+    example: "−7 + 45 = +38 µs/day; 38 µs × 300 m/µs = 11.4 km per day."
+    ask: "Do GPS satellite clocks run fast or slow compared with clocks on the ground, and why?"
+  - id: guar-bias-absorbs-shared
+    kind: guarantee
+    statement: "b absorbs only an error shared equally by all satellites, so uncorrected relativistic drift still ruins positions."
+    example: "If every clock were off by exactly 38 µs, b would absorb 11.4 km and the position would be right."
+    counterexample: "Clocks set on day 0 and day 3, read on day 5: 57 km and 22.8 km off; the 34 km difference cannot go into one b."
+    ask: "The receiver already solves for a clock error. Why can that not soak up the relativity drift of the satellite clocks?"
+  - id: fix-rate-offset
+    kind: mechanism
+    statement: "Engineers set each satellite clock to tick slow before launch, so that in orbit it matches GPS time."
+    example: "10.23 MHz is set to 10.22999999543 MHz, a fraction 4.5 × 10⁻¹⁰ slower."
+
+terms:
+  - term: pseudorange
+    means: "measured travel time × c using the receiver clock; 'range' means only the true distance"
+    avoid: [measured distance, true pseudorange]
+
+budget: {prose: 1000, reason: "two mechanisms (positioning with clock bias, relativity) and one guarantee whose failing case needs its own numbers"}
+
+quiz:
+  - q: "A receiver's quartz clock is 2 µs fast. Roughly how wrong is each pseudorange, and does that make the final position wrong by that much?"
+    expect: "Each pseudorange is about 600 m too long, but the same error is in every pseudorange, so the receiver solves for it as b and the position comes out right."
+    misconception: "The position is 600 m wrong."
+  - q: "If engineers had corrected only for the satellites' speed and not for gravity, would the clocks run fast or slow, and by how much per day?"
+    expect: "Fast, by about 45 µs per day (about 13.5 km of range per day), because the gravity effect remains."
+    misconception: "Slow, because moving clocks run slow."
+  - q: "Why does a 38 µs per day clock drift matter so much for positioning?"
+    expect: "Signals travel at light speed, so 38 µs of clock error is about 11.4 km of range error, growing every day."
+    misconception: "38 µs is too small to matter."

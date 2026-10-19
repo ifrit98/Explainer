@@ -1,0 +1,12 @@
+{
+  "result": "I wrote `explainers/greenhouse/explanation.md`, plus `model.md` and `model.yaml` as the source facts. I chose prose with one small text figure because the answer is one chain of causes with numbers, which prose handles best, and the only spatial idea, how air cools with height, fits in that figure. I couldn't run `explainer check` because I had no shell, so the numbers are hand-checked only.",
+  "error": null,
+  "cost": 0.29882359999999997,
+  "seconds": 89,
+  "turns": 4,
+  "files": [
+    "explainers/greenhouse/explanation.md"
+  ],
+  "review_cost": 0,
+  "reviews": 0
+}

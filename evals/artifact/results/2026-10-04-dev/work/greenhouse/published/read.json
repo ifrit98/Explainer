@@ -1,0 +1,42 @@
+{
+  "answers": {
+    "1": {
+      "answer": "Sunlight is mostly visible light, peaking near 0.5 µm. The cooler Earth gives off infrared, near 10 µm. Greenhouse gases let most sunlight through but absorb infrared and emit it again. The page does not say why the gases behave differently at the two wavelengths; it lists that as not covered.",
+      "quote": "A **greenhouse gas** lets most sunlight pass but absorbs and emits infrared."
+    },
+    "2": {
+      "answer": "More CO2 means infrared has to start higher before little gas is left above it, so the emission height rises by about 150 m. Air there is about 1 K colder, so it emits less, about 3.7 W/m² below what the Earth absorbs. The Earth then warms until the air at the new height is back at 255 K, which leaves the surface about 1 K warmer.",
+      "quote": "More gas means the infrared must start higher before little gas remains above it. The emission height rises, on average by about 150 m (a result of radiation calculations)."
+    },
+    "3": {
+      "answer": "They barely absorb infrared. The page does not explain why at the molecular level; it lists this as not covered.",
+      "quote": "Nitrogen and oxygen, 99% of dry air, are not: they barely absorb infrared at all."
+    },
+    "4": {
+      "answer": "The heat would radiate to space straight from the surface. The surface would then have to be at the emission temperature, about 255 K (−18 °C), assuming the same sunlight and albedo as Earth.",
+      "quote": "If the surface emitted directly to space, the surface would be at 255 K."
+    }
+  },
+  "stops": [
+    "Why the gases absorb only infrared is deferred: \"Why only some molecules absorb infrared: a molecular spectroscopy text.\"",
+    "Why emission falls as T⁴ is given without a reason: \"A body at temperature T emits σT⁴ watts per square metre\"",
+    "\"emitted again, in all directions, at the temperature of that air\": it is unclear why the temperature of the air sets how much it emits.",
+    "Infrared escapes from many heights, yet a single average is used: \"Infrared really escapes from a spread of heights, which differ by wavelength. Call their average the **emission height**.\"",
+    "\"Rising air expands and cools\": no reason is given for why expanding air cools.",
+    "The heating at every height is asserted, not explained: \"so the temperature at every height rises by the same amount\"",
+    "The 150 m figure is taken on trust: \"(a result of radiation calculations)\"",
+    "\"High up, the air is thin, and infrared emitted there still escapes.\" The link to saturation needs a reread."
+  ],
+  "excess": [
+    "A process comment shows in the text: \"<!-- Stage 1, rendered from model.md in STE-80. -->\"",
+    "\"The division by 4 matters: with 1361 × 0.70 instead, T = 360 K (87 °C)\"",
+    "The surface energy budget is a side point: \"the warm air just above it emits about 330 W/m² of infrared back down (a measured value).\"",
+    "The summary repeats the opening: \"Energy balance requires the Earth to emit 240 W/m² to space, which holds the emitting air at 255 K.\""
+  ],
+  "grounded": {
+    "1": true,
+    "2": true,
+    "3": true,
+    "4": true
+  }
+}

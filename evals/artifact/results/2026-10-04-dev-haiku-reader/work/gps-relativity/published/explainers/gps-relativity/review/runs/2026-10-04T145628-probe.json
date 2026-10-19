@@ -1,0 +1,231 @@
+{
+ "tool": "probe",
+ "rendering": null,
+ "slug": "gps-relativity",
+ "at": "2026-10-04T14:56:28",
+ "model": "default",
+ "prompt_sha": "4e9abe4986eb",
+ "reply": {
+  "gaps": [
+   {
+    "rule": 2,
+    "severity": "main",
+    "about": "Why an uncorrected 38 µs/day drift would actually ruin positions, given that b absorbs any error shared by all satellites",
+    "why_it_matters": "The central 'why must it correct' answer depends on this. The file grants that b absorbs common error, then says the position error 'would still grow without limit' without saying why. All GPS satellites share roughly the same orbit radius, so the drift rate is the same for each, and a sharp reader will conclude that b cancels it. The step that makes per-satellite errors differ is missing.",
+    "suggested_addition": "Add a concrete instance where the drift is NOT common. Satellite clocks are synchronized and adjusted at different times. If satellite A was last set to GPS time on day 0 and satellite B on day 3, then on day 5 A is off by 5×38 = 190 µs (57 km) and B by 2×38 = 76 µs (22.8 km). The 34 km difference cannot be absorbed by one b. Also give the instance where it holds: if all clocks were off by exactly 38 µs, b would absorb 11.4 km, the position would come out right, and the time the receiver reports would be wrong by 38 µs."
+   },
+   {
+    "rule": 4,
+    "severity": "main",
+    "about": "Dependency step 2 ('several ranges fix a point / intersection of spheres') has no worked example",
+    "why_it_matters": "The only worked example is 1D. The reader never sees ranges intersect in 2D or 3D, or why the count of unknowns sets the number of satellites.",
+    "suggested_addition": "2D example: beacons at (0,0) and (10,0) km with true ranges 5 and √65 ≈ 8.06 km. The two circles meet at (3,4) and (3,−4): two points. A third beacon at (0,10) with range √45 ≈ 6.71 km picks (3,4). State the 3D analogue: three spheres meet at two points, and one of them is usually far from Earth's surface and gets rejected."
+   },
+   {
+    "rule": 2,
+    "severity": "main",
+    "about": "The claim 'four pseudoranges determine x, y, z, b' has no numeric instance and no breaking instance",
+    "why_it_matters": "This is the core positioning guarantee. Its assumptions are never stated: the geometry must not be degenerate, and the solution must be unique. The text also says 'three spheres meet at a point', but they meet at two.",
+    "suggested_addition": "Breaking cases: four satellites lying in one plane, or bunched close together, give a nearly singular system. For example, a timing error of 3 m that turns into 30 m of position error (geometry amplification ×10). Also fix 'three spheres meet at a point' to 'at two points'."
+   },
+   {
+    "rule": 2,
+    "severity": "edge",
+    "about": "The 1D worked example silently assumes the receiver lies between the two beacons",
+    "why_it_matters": "If the receiver is outside the segment, e.g. at x = 40 km, the pseudoranges are 40+b and 10+b. Their difference is always 30 km, whatever x is, so x and b can't be separated. The claim 'inconsistent pseudoranges reveal the bias' breaks under an assumption the file never states.",
+    "suggested_addition": "State the assumption, and give the breaking case: receiver at 40 km with a 5 µs fast clock gives 41.5 and 11.5 km. Every (x, b) with x − b = 38.5 fits, so the position is undetermined. This links to why satellite geometry matters."
+   },
+   {
+    "rule": 1,
+    "severity": "main",
+    "about": "Why the time-dilation formulas have these forms: v²/2c² and GM(1/R_earth − 1/r)/c²",
+    "why_it_matters": "The audience is new to relativity. Without the why, the formulas are unexplained magic. The natural school-physics alternative for the gravity term is g·h/c², and that gives the wrong answer.",
+    "suggested_addition": "Say that v²/2c² is the small-speed approximation of 1 − √(1 − v²/c²). At 3.87 km/s the two agree to about 10⁻²⁰. The natural alternative g·h/c² = 9.8 × 2.02×10⁷ / 8.99×10¹⁶ ≈ 2.2×10⁻⁹ (≈190 µs/day) overestimates about 4× because gravity weakens with height. The 1/r form accounts for that. Note too that the reference is a clock on the ground at R_earth, which is why R_earth appears."
+   },
+   {
+    "rule": 3,
+    "severity": "main",
+    "about": "'Time dilation' is used with no intuition for why motion slows a clock and weaker gravity speeds it up",
+    "why_it_matters": "The audience 'does not know what time dilation is'. The file gives numbers but no reason for the signs. That is the very confusion point it lists, and readers may take the result on faith.",
+    "suggested_addition": "Give one sentence per effect. A moving clock ticks slower as seen from the ground, by a fraction of about v²/2c² (8.3×10⁻¹¹ at 3.9 km/s). A clock higher in a gravity well ticks faster than one lower down, by a fraction of about the potential difference/c² (5.3×10⁻¹⁰). Add one sentence noting that both effects have been confirmed independently, e.g. Hafele–Keating (1971) and Pound–Rebka (1959)."
+   },
+   {
+    "rule": 3,
+    "severity": "edge",
+    "about": "Several concepts are given two names, and some terms are used before they are defined",
+    "why_it_matters": "Readers may think these are different things.",
+    "suggested_addition": "Pick one name each: 'orbit-shape correction' vs 'eccentricity correction'; 'factory offset' vs 'pre-set slow' vs 'clock offset built in'; 'ground time' vs 'GPS time' (GPS time is used in the Clock bias entity before Terms defines it, and it is not in Entities); 'range error' vs 'position error' vs 'ranges drift' for the 11 km figure; 'time of flight' vs 'signal travel time'; 'time dilation' as both the phenomenon (Entities) and the rate difference (Terms). Also define '10.23 MHz' as the satellite clock's nominal tick frequency, from which the signal is derived."
+   },
+   {
+    "rule": 5,
+    "severity": "edge",
+    "about": "'Nanoseconds' clock agreement (dependency 4) is not tied to an accuracy target",
+    "why_it_matters": "The reader can't tell why nanoseconds matter rather than microseconds.",
+    "suggested_addition": "State that a typical position error of about 5 m needs satellite clock errors under about 17 ns (5 m / 0.3 m per ns). Contrast with 1 µs, which gives 300 m: useless for driving directions."
+   },
+   {
+    "rule": 2,
+    "severity": "edge",
+    "about": "The 'Only special relativity applied' row explains itself as 'wrong sign of the bigger effect', which is confusing",
+    "why_it_matters": "The reasoning step is implicit. If the SR correction makes the clock run faster to cancel −7 µs/day, the remaining error is +45 µs/day because GR goes uncorrected. 'Wrong sign' does not explain that.",
+    "suggested_addition": "Rewrite as: the SR correction speeds the clock by 7 µs/day, which cancels the −7. The +45 µs/day GR gain remains uncorrected, which gives 13.5 km/day of range drift."
+   },
+   {
+    "rule": 1,
+    "severity": "edge",
+    "about": "Why one-way listening ranging rather than two-way (radar-like) ranging",
+    "why_it_matters": "Two-way ranging is the natural alternative, and it would remove the receiver clock bias altogether. The file says the receiver only listens but never says why that design was chosen.",
+    "suggested_addition": "With two-way ranging, every user transmits, so the number of users is limited and receivers become costly and detectable. One-way ranging serves unlimited users, and the price is the unknown b plus a fourth satellite."
+   },
+   {
+    "rule": 1,
+    "severity": "edge",
+    "about": "Why atomic clocks on the satellites rather than quartz",
+    "why_it_matters": "The receiver gets away with quartz because b is solved for; the reader may ask why satellites can't do the same.",
+    "suggested_addition": "A good quartz clock drifts about 10⁻⁹ per day, roughly 86 µs/day, or 26 km. Satellite clocks can't be solved for by the user, so they need atomic stability of about 10⁻¹³, roughly 9 ns/day, or 2.6 m."
+   },
+   {
+    "rule": 6,
+    "severity": "edge",
+    "about": "What happens with more than four satellites",
+    "why_it_matters": "Real receivers track 8–12 satellites. Having 5 or more equations for 4 unknowns turns the problem into a best fit and gives an error check. The file never mentions this.",
+    "suggested_addition": "With 8 satellites there are 8 equations and 4 unknowns. A least-squares fit averages down noise, and the leftover mismatch (e.g. residuals of a few metres) shows how much to trust the fix."
+   }
+  ],
+  "excess": [
+   "Orbit period ≈ 12 h: not used in any argument",
+   "Eccentricity correction (23 ns ≈ 7 m): a secondary detail, not needed to answer why relativity must be corrected",
+   "'GPS time itself must stay right for the system's timing users': a side point unless it is used to justify the correction",
+   "ISS low-orbit counterexample: useful for rule 2 but marked as not rendered"
+  ],
+  "next_questions": [
+   {
+    "q": "If every satellite clock gains the same 38 µs/day, why doesn't the receiver's b just absorb it?",
+    "answered_by_model": false,
+    "declared_out_of_scope": false
+   },
+   {
+    "q": "Why does moving fast slow a clock, and why does weaker gravity speed it up?",
+    "answered_by_model": false,
+    "declared_out_of_scope": false
+   },
+   {
+    "q": "How accurate is GPS in practice, and what limits it once relativity is corrected?",
+    "answered_by_model": false,
+    "declared_out_of_scope": true
+   },
+   {
+    "q": "How does the receiver know where each satellite is at the moment it sent its signal?",
+    "answered_by_model": false,
+    "declared_out_of_scope": true
+   },
+   {
+    "q": "What does the receiver do with more than four satellites, and how does it actually solve the nonlinear equations?",
+    "answered_by_model": false,
+    "declared_out_of_scope": true
+   }
+  ]
+ },
+ "usage": {
+  "cost": 0.18053100000000002,
+  "seconds": 70
+ },
+ "findings": [
+  {
+   "n": 1,
+   "severity": "main",
+   "kind": "rule 2",
+   "text": "Why an uncorrected 38 µs/day drift would actually ruin positions, given that b absorbs any error shared by all satellites → Add a concrete instance where the drift is NOT common. Satellite clocks are synchronized and adjusted at different times. If satellite A was last set to GPS time on day 0 and satellite B on day 3, then on day 5 A is off by 5×38 = 190 µs (57 km) and B by 2×38 = 76 µs (22.8 km). The 34 km difference cannot be absorbed by one b. Also give the instance where it holds: if all clocks were off by exactly 38 µs, b would absorb 11.4 km, the position would come out right, and the time the receiver reports would be wrong by 38 µs."
+  },
+  {
+   "n": 2,
+   "severity": "main",
+   "kind": "rule 4",
+   "text": "Dependency step 2 ('several ranges fix a point / intersection of spheres') has no worked example → 2D example: beacons at (0,0) and (10,0) km with true ranges 5 and √65 ≈ 8.06 km. The two circles meet at (3,4) and (3,−4): two points. A third beacon at (0,10) with range √45 ≈ 6.71 km picks (3,4). State the 3D analogue: three spheres meet at two points, and one of them is usually far from Earth's surface and gets rejected."
+  },
+  {
+   "n": 3,
+   "severity": "main",
+   "kind": "rule 2",
+   "text": "The claim 'four pseudoranges determine x, y, z, b' has no numeric instance and no breaking instance → Breaking cases: four satellites lying in one plane, or bunched close together, give a nearly singular system. For example, a timing error of 3 m that turns into 30 m of position error (geometry amplification ×10). Also fix 'three spheres meet at a point' to 'at two points'."
+  },
+  {
+   "n": 4,
+   "severity": "edge",
+   "kind": "rule 2",
+   "text": "The 1D worked example silently assumes the receiver lies between the two beacons → State the assumption, and give the breaking case: receiver at 40 km with a 5 µs fast clock gives 41.5 and 11.5 km. Every (x, b) with x − b = 38.5 fits, so the position is undetermined. This links to why satellite geometry matters."
+  },
+  {
+   "n": 5,
+   "severity": "main",
+   "kind": "rule 1",
+   "text": "Why the time-dilation formulas have these forms: v²/2c² and GM(1/R_earth − 1/r)/c² → Say that v²/2c² is the small-speed approximation of 1 − √(1 − v²/c²). At 3.87 km/s the two agree to about 10⁻²⁰. The natural alternative g·h/c² = 9.8 × 2.02×10⁷ / 8.99×10¹⁶ ≈ 2.2×10⁻⁹ (≈190 µs/day) overestimates about 4× because gravity weakens with height. The 1/r form accounts for that. Note too that the reference is a clock on the ground at R_earth, which is why R_earth appears."
+  },
+  {
+   "n": 6,
+   "severity": "main",
+   "kind": "rule 3",
+   "text": "'Time dilation' is used with no intuition for why motion slows a clock and weaker gravity speeds it up → Give one sentence per effect. A moving clock ticks slower as seen from the ground, by a fraction of about v²/2c² (8.3×10⁻¹¹ at 3.9 km/s). A clock higher in a gravity well ticks faster than one lower down, by a fraction of about the potential difference/c² (5.3×10⁻¹⁰). Add one sentence noting that both effects have been confirmed independently, e.g. Hafele–Keating (1971) and Pound–Rebka (1959)."
+  },
+  {
+   "n": 7,
+   "severity": "edge",
+   "kind": "rule 3",
+   "text": "Several concepts are given two names, and some terms are used before they are defined → Pick one name each: 'orbit-shape correction' vs 'eccentricity correction'; 'factory offset' vs 'pre-set slow' vs 'clock offset built in'; 'ground time' vs 'GPS time' (GPS time is used in the Clock bias entity before Terms defines it, and it is not in Entities); 'range error' vs 'position error' vs 'ranges drift' for the 11 km figure; 'time of flight' vs 'signal travel time'; 'time dilation' as both the phenomenon (Entities) and the rate difference (Terms). Also define '10.23 MHz' as the satellite clock's nominal tick frequency, from which the signal is derived."
+  },
+  {
+   "n": 8,
+   "severity": "edge",
+   "kind": "rule 5",
+   "text": "'Nanoseconds' clock agreement (dependency 4) is not tied to an accuracy target → State that a typical position error of about 5 m needs satellite clock errors under about 17 ns (5 m / 0.3 m per ns). Contrast with 1 µs, which gives 300 m: useless for driving directions."
+  },
+  {
+   "n": 9,
+   "severity": "edge",
+   "kind": "rule 2",
+   "text": "The 'Only special relativity applied' row explains itself as 'wrong sign of the bigger effect', which is confusing → Rewrite as: the SR correction speeds the clock by 7 µs/day, which cancels the −7. The +45 µs/day GR gain remains uncorrected, which gives 13.5 km/day of range drift."
+  },
+  {
+   "n": 10,
+   "severity": "edge",
+   "kind": "rule 1",
+   "text": "Why one-way listening ranging rather than two-way (radar-like) ranging → With two-way ranging, every user transmits, so the number of users is limited and receivers become costly and detectable. One-way ranging serves unlimited users, and the price is the unknown b plus a fourth satellite."
+  },
+  {
+   "n": 11,
+   "severity": "edge",
+   "kind": "rule 1",
+   "text": "Why atomic clocks on the satellites rather than quartz → A good quartz clock drifts about 10⁻⁹ per day, roughly 86 µs/day, or 26 km. Satellite clocks can't be solved for by the user, so they need atomic stability of about 10⁻¹³, roughly 9 ns/day, or 2.6 m."
+  },
+  {
+   "n": 12,
+   "severity": "edge",
+   "kind": "rule 6",
+   "text": "What happens with more than four satellites → With 8 satellites there are 8 equations and 4 unknowns. A least-squares fit averages down noise, and the leftover mismatch (e.g. residuals of a few metres) shows how much to trust the fix."
+  },
+  {
+   "n": 13,
+   "severity": "excess",
+   "kind": "model entry",
+   "text": "Orbit period ≈ 12 h: not used in any argument"
+  },
+  {
+   "n": 14,
+   "severity": "excess",
+   "kind": "model entry",
+   "text": "Eccentricity correction (23 ns ≈ 7 m): a secondary detail, not needed to answer why relativity must be corrected"
+  },
+  {
+   "n": 15,
+   "severity": "excess",
+   "kind": "model entry",
+   "text": "'GPS time itself must stay right for the system's timing users': a side point unless it is used to justify the correction"
+  },
+  {
+   "n": 16,
+   "severity": "excess",
+   "kind": "model entry",
+   "text": "ISS low-orbit counterexample: useful for rule 2 but marked as not rendered"
+  }
+ ]
+}

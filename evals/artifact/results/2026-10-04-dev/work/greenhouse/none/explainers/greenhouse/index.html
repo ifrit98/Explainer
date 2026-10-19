@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Greenhouse effect: two models you can play with</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+  body { font-family: system-ui, sans-serif; max-width: 860px; margin: 2em auto; padding: 0 1em; line-height: 1.5; color: #222; }
+  h1 { font-size: 1.6em; }
+  h2 { margin-top: 2em; border-bottom: 1px solid #ddd; padding-bottom: .2em; }
+  .panel { background: #f7f7f9; border: 1px solid #e2e2e8; border-radius: 8px; padding: 1em; margin: 1em 0; }
+  label { display: block; margin: .6em 0 .2em; font-weight: 600; }
+  input[type=range] { width: 100%; }
+  .readout { font-family: ui-monospace, monospace; background: #fff; border: 1px solid #ddd; border-radius: 6px; padding: .6em .8em; white-space: pre; overflow-x: auto; }
+  svg { width: 100%; height: auto; background: #fff; border: 1px solid #ddd; border-radius: 6px; }
+  .note { color: #555; font-size: .95em; }
+  .sun { fill: #e69500; } .ir { fill: #c0392b; }
+  code { background: #eee; padding: 0 .25em; border-radius: 3px; }
+</style>
+</head>
+<body>
+<h1>How greenhouse gases warm the Earth: interactive models</h1>
+<p class="note">This page goes with <code>explanation.md</code>. Each model below is a few lines of arithmetic. Move the sliders and the numbers and diagrams update. All fluxes are global averages in W/m².</p>
+
+<h2>Model 1: one absorbing layer</h2>
+<p>The atmosphere is modelled as one layer. Sunlight passes straight through it. It absorbs a fraction <b>ε</b> of the infrared coming up from the surface, and it emits <b>ε·σT<sub>a</sub>⁴</b> both up and down. Start at ε = 0, then increase it, and watch the surface temperature and the downward infrared.</p>
+<div class="panel">
+  <label for="eps">Infrared absorptivity ε = <span id="epsVal"></span></label>
+  <input id="eps" type="range" min="0" max="1" step="0.01" value="0.78">
+  <svg id="layerSvg" viewBox="0 0 800 380"></svg>
+  <div class="readout" id="layerOut"></div>
+  <p class="note">Things to notice: (1) at ε = 0 the surface is 255 K, the temperature set by energy balance alone. (2) Around ε ≈ 0.78 it reaches the observed 288 K. (3) The model cannot go above ε = 1. The real atmosphere is already nearly opaque at the centre of the CO₂ band and still warms when CO₂ is added, which is why Model 2 is needed.</p>
+</div>
+
+<h2>Model 2: emission height and lapse rate</h2>
+<p>Temperature falls by about <b>Γ = 6.5 K/km</b> with height. On average the Earth radiates to space from the level where the air is 255 K, about 5 km up. Adding CO₂ lifts that level into colder air, so less energy leaves the planet (the <b>forcing</b>, ΔF = 5.35·ln(C/280)). The planet warms until the outgoing radiation balances the incoming again.</p>
+<div class="panel">
+  <label for="co2">CO₂ concentration = <span id="co2Val"></span> ppm</label>
+  <input id="co2" type="range" min="140" max="1680" step="5" value="560">
+  <label for="lam">Net restoring strength λ = <span id="lamVal"></span> W/m² per K
+    <span class="note" style="font-weight:normal">(3.2 = no feedbacks; about 1.2 ≈ the best-estimate feedbacks, giving ~3 K per doubling)</span></label>
+  <input id="lam" type="range" min="0.8" max="3.2" step="0.05" value="3.2">
+  <svg id="profSvg" viewBox="0 0 800 420"></svg>
+  <div class="readout" id="profOut"></div>
+  <p class="note">Gray line: pre-industrial temperature profile. Red line: the profile after the planet has warmed by ΔT. Dots: the effective emission height. With no feedbacks (λ = 3.2), the emission level has risen by ΔT/Γ but is back at 255 K, so outgoing radiation balances again. A doubling raises it by under 200 m. The effect is small on this scale, but it accounts for all of the warming.</p>
+</div>
+
+<script>
+const SIGMA = 5.67e-8, ABS = 238, GAMMA = 6.5, H0 = 5, TE = Math.pow(ABS / SIGMA, 0.25);
+const $ = id => document.getElementById(id);
+const NS = "http://www.w3.org/2000/svg";
+function el(svg, tag, attrs, text) {
+  const e = document.createElementNS(NS, tag);
+  for (const k in attrs) e.setAttribute(k, attrs[k]);
+  if (text !== undefined) e.textContent = text;
+  svg.appendChild(e); return e;
+}
+function arrow(svg, x, y1, y2, w, cls, label) {
+  // vertical arrow from y1 to y2, width scaled with flux
+  const dir = y2 > y1 ? 1 : -1, head = 14;
+  el(svg, "rect", { x: x - w / 2, y: Math.min(y1, y2 - dir * head), width: Math.max(w, 1), height: Math.abs(y2 - y1) - head, class: cls, opacity: .8 });
+  el(svg, "polygon", { points: `${x - w / 2 - 6},${y2 - dir * head} ${x + w / 2 + 6},${y2 - dir * head} ${x},${y2}`, class: cls, opacity: .8 });
+  el(svg, "text", { x: x + w / 2 + 10, y: (y1 + y2) / 2 + 5, "font-size": 14 }, label);
+}
+
+function drawLayer() {
+  const eps = +$("eps").value;
+  $("epsVal").textContent = eps.toFixed(2);
+  const Es = ABS / (1 - eps / 2), Ea = Es / 2;
+  const Ts = Math.pow(Es / SIGMA, .25), Ta = Math.pow(Ea / SIGMA, .25);
+  const up = Es, escape = (1 - eps) * Es, absorbed = eps * Es, layerEach = eps * Ea;
+  const svg = $("layerSvg"); svg.innerHTML = "";
+  const sc = w => w / 12; // flux -> px width
+  el(svg, "text", { x: 20, y: 25, "font-size": 15, "font-weight": 600 }, "SPACE");
+  el(svg, "rect", { x: 0, y: 150, width: 800, height: 40, fill: "#9ecae1", opacity: .25 + .6 * eps });
+  el(svg, "text", { x: 20, y: 175, "font-size": 14 }, `atmosphere layer  T_a = ${Ta.toFixed(0)} K`);
+  el(svg, "rect", { x: 0, y: 330, width: 800, height: 50, fill: "#8c6d46" });
+  el(svg, "text", { x: 20, y: 362, "font-size": 15, fill: "#fff" }, `surface  T_s = ${Ts.toFixed(1)} K (${(Ts - 273.15).toFixed(1)} °C)`);
+  arrow(svg, 110, 40, 328, sc(ABS), "sun", `sunlight absorbed ${ABS}`);
+  arrow(svg, 360, 328, 192, sc(up), "ir", `surface IR ${up.toFixed(0)}`);
+  if (escape > 0.5) arrow(svg, 360, 148, 40, sc(escape), "ir", `passes through ${escape.toFixed(0)}`);
+  if (layerEach > 0.5) {
+    arrow(svg, 600, 148, 40, sc(layerEach), "ir", `layer emits up ${layerEach.toFixed(0)}`);
+    arrow(svg, 600, 192, 328, sc(layerEach), "ir", `back-radiation ${layerEach.toFixed(0)}`);
+  }
+  $("layerOut").textContent =
+`absorbed by layer      = ε·σTs⁴            = ${absorbed.toFixed(1)}
+emitted by layer       = 2·ε·σTa⁴          = ${(2 * layerEach).toFixed(1)}   (layer balances)
+out to space           = (1−ε)σTs⁴ + εσTa⁴ = ${(escape + layerEach).toFixed(1)}   (= ${ABS} in)
+surface receives       = ${ABS} sun + ${layerEach.toFixed(1)} IR = ${(ABS + layerEach).toFixed(1)}   = σTs⁴ ✓
+surface temperature    Ts = ${Ts.toFixed(1)} K   (no-greenhouse value ${TE.toFixed(1)} K)`;
+}
+
+function drawProfile() {
+  const C = +$("co2").value, lam = +$("lam").value;
+  $("co2Val").textContent = C; $("lamVal").textContent = lam.toFixed(2);
+  const dF = 5.35 * Math.log(C / 280);
+  const dT0 = dF / 3.2;          // no-feedback warming
+  const dT = dF / lam;           // warming with feedbacks
+  const dz = dT0 / GAMMA;        // rise in emission height (Planck-only picture)
+  const H1 = H0 + dz;
+  const svg = $("profSvg"); svg.innerHTML = "";
+  const L = 70, R = 770, T = 20, B = 370, zMax = 12, tMin = 200, tMax = 305;
+  const x = t => L + (t - tMin) / (tMax - tMin) * (R - L), y = z => B - z / zMax * (B - T);
+  for (let t = 200; t <= 300; t += 20) {
+    el(svg, "line", { x1: x(t), x2: x(t), y1: T, y2: B, stroke: "#eee" });
+    el(svg, "text", { x: x(t) - 12, y: B + 18, "font-size": 12 }, t);
+  }
+  for (let z = 0; z <= zMax; z += 2) {
+    el(svg, "line", { x1: L, x2: R, y1: y(z), y2: y(z), stroke: "#eee" });
+    el(svg, "text", { x: L - 30, y: y(z) + 4, "font-size": 12 }, z);
+  }
+  el(svg, "text", { x: (L + R) / 2 - 60, y: B + 40, "font-size": 13 }, "temperature (K)");
+  el(svg, "text", { x: 15, y: T + 160, "font-size": 13, transform: `rotate(-90 15 ${T + 160})` }, "height (km)");
+  const T0 = 255 + GAMMA * H0; // surface temp of baseline profile
+  const line = (Ts, col, w) => el(svg, "line", { x1: x(Ts), y1: y(0), x2: x(Ts - GAMMA * zMax), y2: y(zMax), stroke: col, "stroke-width": w });
+  line(T0, "#999", 2);
+  line(T0 + dT, "#c0392b", 2.5);
+  el(svg, "line", { x1: x(255), x2: x(255), y1: T, y2: B, stroke: "#2c7fb8", "stroke-dasharray": "5 4" });
+  el(svg, "text", { x: x(255) + 5, y: T + 14, "font-size": 12, fill: "#2c7fb8" }, "255 K: temperature needed to emit 238 W/m²");
+  el(svg, "circle", { cx: x(255), cy: y(H0), r: 6, fill: "#999" });
+  el(svg, "text", { x: x(255) - 160, y: y(H0) + 18, "font-size": 12, fill: "#666" }, `old emission height ${H0.toFixed(2)} km`);
+  el(svg, "circle", { cx: x(T0 + dT - GAMMA * H1), cy: y(H1), r: 6, fill: "#c0392b" });
+  el(svg, "text", { x: x(T0 + dT - GAMMA * H1) + 10, y: y(H1) - 8, "font-size": 12, fill: "#c0392b" }, `new emission height ${H1.toFixed(2)} km`);
+  // instantaneous: old profile at new height
+  const Tinst = T0 - GAMMA * H1;
+  $("profOut").textContent =
+`forcing        ΔF = 5.35·ln(${C}/280)          = ${dF.toFixed(2)} W/m²
+emission level rises by ΔF/(3.2·Γ)              = ${(dz * 1000).toFixed(0)} m
+  before warming, the air there is ${Tinst.toFixed(2)} K → planet emits ~${dF.toFixed(2)} W/m² too little
+no-feedback warming   ΔF/3.2                    = ${dT0.toFixed(2)} K
+warming with λ=${lam.toFixed(2)}   ΔF/λ                       = ${dT.toFixed(2)} K
+new surface temperature                         ≈ ${(T0 + dT).toFixed(1)} K`;
+}
+
+$("eps").addEventListener("input", drawLayer);
+$("co2").addEventListener("input", drawProfile);
+$("lam").addEventListener("input", drawProfile);
+drawLayer(); drawProfile();
+</script>
+</body>
+</html>

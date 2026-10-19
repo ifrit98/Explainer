@@ -1,0 +1,119 @@
+# Machine-readable half of model.md. `explainer check greenhouse` holds every rendering to it.
+
+values:
+  solar_constant_wm2: 1361
+  sunlight_avg_wm2: 340
+  albedo: 0.30
+  absorbed_wm2: 240
+  emission_temp_k: 255
+  emission_temp_c: -18
+  surface_temp_k: 288
+  surface_temp_c: 15
+  greenhouse_warming_k: 33
+  surface_emits_wm2: 390
+  surface_sun_gain_wm2: 160
+  back_radiation_wm2: 330
+  convection_wm2: 100
+  surface_budget_wm2: 490
+  sunlight_um: 0.5
+  infrared_um: 10
+  lapse_rate_k_per_km: 6.5
+  emission_height_km: 5
+  forcing_2xco2_wm2: 3.7
+  forcing_now_wm2: 2.2
+  height_rise_m: 150
+  warming_no_feedback_k: 1
+  warming_with_feedback_k: 3
+  warming_likely_range_k: [2.5, 4]
+  sigma: 5.67e-8
+  absorbed_fraction: 0.70
+  sun_temp_k: 5800
+  temp_at_2km_k: 275
+  height_rise_km: 0.15
+  emission_at_254k_wm2: 236
+  wrong_temp_k: 360
+  wrong_temp_c: 87
+  co2_1750_ppm: 280
+  co2_2024_ppm: 420
+  co2_double_ppm: 560
+  n2_o2_share_pct: 99
+
+allow: [4, 2, 1750, 2024, 254, 12, 1120]
+
+require:
+  - path: emission_temp_k
+    in: [prose]
+  - path: surface_temp_k
+    in: [prose]
+  - path: absorbed_wm2
+    in: [prose]
+  - path: lapse_rate_k_per_km
+    in: [prose]
+  - path: emission_height_km
+    in: [prose]
+  - path: forcing_2xco2_wm2
+    in: [prose]
+
+claims:
+  - id: balance-255
+    kind: mechanism
+    statement: "Energy balance fixes the temperature of whatever emits to space at 255 K: absorbed 240 W/m² = σT⁴."
+    example: "1361/4 = 340 W/m²; ×0.70 = 240 W/m²; σ·255⁴ ≈ 240 W/m². Observed surface is 288 K, 33 K warmer."
+  - id: why-divide-4
+    kind: why
+    about: [divide-by-4]
+    statement: "Sunlight is averaged over the sphere: the Earth intercepts it on a disc πR² but emits from a sphere 4πR²."
+    alternative: "Use 1361 W/m² directly."
+    counterexample: "σT⁴ = 1361 × 0.7 gives T ≈ 360 K (87 °C), as if every point faced the noon Sun all day."
+  - id: which-gases
+    kind: definition
+    statement: "Greenhouse gases absorb and emit infrared (~10 µm) but let sunlight (~0.5 µm) through; N₂ and O₂ do not absorb infrared."
+  - id: emission-height
+    kind: mechanism
+    statement: "Infrared escapes to space from the emission height, about 5 km up, where too little greenhouse gas remains above to absorb it again; the air there must be 255 K."
+    example: "Surface 288 K = 255 K + 6.5 K/km × 5.08 km."
+    ask: "Where does the infrared that reaches space mostly come from, what is the temperature there, and why that height and that temperature?"
+  - id: more-gas-warms
+    kind: guarantee
+    statement: "Adding greenhouse gas raises the emission height; because temperature falls with height, the air there is colder and emits less, so the Earth warms until that air is back at 255 K."
+    example: "Doubled CO₂: emission height rises ~150 m; that air is 1 K colder and emits ~3.7 W/m² less; the surface warms ~1 K before feedbacks."
+    counterexample: "In isothermal air the higher emitting air is still 255 K: outgoing stays 240 W/m², no warming. In the stratosphere, where temperature rises with height, added CO₂ cools."
+    ask: "Explain, step by step, how doubling CO₂ in today's atmosphere leads to a warmer surface, and when the warming stops."
+  - id: why-not-blanket
+    kind: why
+    about: [blanket]
+    statement: "The 'blanket that traps heat' picture is replaced by emission from a colder height."
+    alternative: "Gases trap heat like a blanket."
+    counterexample: "The blanket picture predicts warming in isothermal air (there is none) and predicts that saturated absorption ends the effect (each doubling still adds 3.7 W/m²)."
+  - id: surface-budget
+    kind: mechanism
+    statement: "The surface emits 390 W/m², more than the 240 W/m² that reaches space, because the air sends 330 W/m² of infrared back down."
+    example: "Gains 160 sunlight + 330 from the air = 490; loses 390 infrared + 100 convection and evaporation = 490."
+  - id: saturation
+    kind: misconception
+    statement: "Saturation does not stop the effect: more gas still raises the emission height; each doubling adds about 3.7 W/m²."
+    correction: "Escape happens high up where the gas is thin; more gas still raises the emission height. 280→560 ppm and 560→1120 ppm each give about 3.7 W/m²."
+    ask: "CO₂ already absorbs nearly all infrared at its main wavelength near the ground. Does adding more CO₂ still warm the Earth? Why?"
+
+accept_unjustified: {ln: "forcing formula 5.35 ln(C/C0) only computes numbers; why it is logarithmic is out of scope"}
+
+terms:
+  - term: emission temperature
+    means: "255 K, the temperature that emits 240 W/m²"
+    avoid: [balance temperature, no-atmosphere temperature, effective temperature]
+  - term: infrared
+    means: "the long-wave radiation the Earth emits"
+    avoid: [heat radiation, longwave radiation]
+
+budget: {prose: 1200, reason: "the mechanism needs four linked steps (balance, emission height, lapse rate, adding gas), each with numbers, plus the counterexample and the saturation misconception"}
+
+quiz:
+  - q: "Without greenhouse gases, what would the Earth's average surface temperature be, roughly, and what sets that number?"
+    expect: "About 255 K (−18 °C): absorbed sunlight (240 W/m²) must equal emitted infrared σT⁴."
+    misconception: "Absolute zero, or the same as today."
+  - q: "Adding CO₂ makes the Earth emit less infrared to space at first. Why?"
+    expect: "Infrared escapes from a higher altitude, where the air is colder, and colder air emits less (σT⁴)."
+    misconception: "CO₂ traps heat / reflects heat back like a mirror, with no role for altitude or temperature falling with height."
+  - q: "If the atmosphere had the same temperature at every height, would adding CO₂ warm the surface?"
+    expect: "No: the emission height rises but the air there is at the same temperature, so outgoing infrared does not change."
+    misconception: "Yes, because more CO₂ always traps more heat."

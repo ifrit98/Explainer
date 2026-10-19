@@ -1,0 +1,12 @@
+{
+  "result": "I made `explainers/antibiotic-resistance/explanation.md` as prose only, because the subject is a chain of causes (random variation, then selection by the drug, regrowth and spread) carried by a few worked numbers, so a diagram or interactive page wouldn't add anything. It passed the probe, the cold reads (nothing blocking) and the final blind test (all 14 items at full marks; the first run failed one item, and I fixed that); details are in `review/understanding.md`.",
+  "error": null,
+  "cost": 1.9340748,
+  "seconds": 686,
+  "turns": 81,
+  "files": [
+    "explainers/antibiotic-resistance/explanation.md"
+  ],
+  "review_cost": 0.8549,
+  "reviews": 5
+}

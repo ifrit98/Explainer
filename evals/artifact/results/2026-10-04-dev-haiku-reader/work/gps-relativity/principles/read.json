@@ -1,0 +1,50 @@
+{
+  "answers": {
+    "1": {
+      "answer": "The receiver measures the time radio signals take to arrive from each satellite. It multiplies this time by the speed of light (about 300,000 km/s) to calculate the distance to each satellite.",
+      "quote": "The receiver measures how long each signal took to arrive. Then it multiplies that time by the speed of light to get a distance."
+    },
+    "2": {
+      "answer": "Three distances alone can locate a position (spheres intersect at a point near Earth), but the receiver's cheap quartz clock has errors that shift all measured distances equally, preventing a valid solution. The fourth satellite lets the receiver solve for the clock error as an additional unknown variable.",
+      "quote": "GPS uses a better trick: treat the receiver clock error *b* as a fourth unknown. There are four unknowns (*x, y, z, b*), so the receiver needs four satellites."
+    },
+    "3": {
+      "answer": "Without relativity corrections, the satellite clocks would run about 38.5 microseconds per day faster than ground clocks. This corresponds to about 11.5 kilometers of distance error per day, far exceeding the nanosecond-level accuracy budget required for GPS.",
+      "quote": "38.5 µs × 30 cm/ns ≈ **11.5 km**. That is the distance error that one day of uncorrected drift represents."
+    },
+    "4": {
+      "answer": "A 1 microsecond clock error produces a distance error of approximately 300 meters. Since the error is the same for all satellites, all three measured distances would be wrong by about 300 m.",
+      "quote": "A timing error of 1 microsecond (1,000 ns) gives 300 m."
+    }
+  },
+  "stops": [
+    "For an orbit with eccentricity 0.02, this swings the clock by up to about ±46 ns",
+    "the difference in gravitational potential divided by *c²*",
+    "the clock loses a fraction *v²/2c²* of its time",
+    "The drift is about 0.45 ns per second, so it uses up that budget in about 10 seconds",
+    "(*GM/c²* for the Earth is a length, about 4.43 mm",
+    "The term *c·b* removes only an error that is the same for every signal",
+    "The receiver calculates this term from the broadcast orbit data and subtracts it",
+    "There are four unknowns (*x, y, z, b*), so the receiver needs four satellites",
+    "called **GPS time**, to within a few nanoseconds",
+    "A third sphere cuts that circle at two points. One point is near the Earth. The other is far out in space"
+  ],
+  "excess": [
+    "A satellite near the horizon is farther away, so its signal takes up to about 86 ms",
+    "if you are 3 km from tower A, 4 km from tower B, and 5 km from tower C, only one spot on the map fits all three",
+    "Both are measured in experiments, not only predicted",
+    "GPS satellites orbit about 20,200 km above the ground",
+    "(*GM/c²* for the Earth is a length, about 4.43 mm",
+    "Control stations track every satellite clock and upload small corrections for the remaining drift",
+    "Power grids, phone networks, and financial exchanges use GPS time and would fail",
+    "signal delays in the atmosphere, the Sagnac effect (the Earth rotates while the signal travels), how orbits are predicted, and centimetre-level methods such as RTK",
+    "The nominal clock frequency is 10.23 MHz",
+    "Real orbits are slightly elliptical. As a satellite moves closer to the Earth and then farther away, its speed and gravity change, so its clock rate changes too"
+  ],
+  "grounded": {
+    "1": true,
+    "2": true,
+    "3": true,
+    "4": true
+  }
+}

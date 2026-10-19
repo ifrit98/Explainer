@@ -1,0 +1,43 @@
+{
+  "answers": {
+    "1": {
+      "answer": "The receiver measures how long each satellite's signal took to arrive: the time it was received minus the send time, which the satellite broadcasts. It multiplies that travel time by the speed of light (c ≈ 300,000 km/s) to get the distance. Each nanosecond is 30 cm.",
+      "quote": "The receiver measures how long each signal took to arrive. Then it multiplies that time by the speed of light to get a distance."
+    },
+    "2": {
+      "answer": "Three exact distances would be enough to fix a position. But the receiver's cheap quartz clock is wrong by some unknown amount b, and that adds the same c·b to every distance. That makes four unknowns (x, y, z, b), so it needs four equations, which means four satellites.",
+      "quote": "There are four unknowns (*x, y, z, b*), so the receiver needs four satellites."
+    },
+    "3": {
+      "answer": "Orbiting clocks gain about 38.5 µs per day: about 45.7 µs faster from weaker gravity, minus about 7.2 µs slower from speed. That equals about 11.5 km of light travel per day. The drift uses up the few-nanosecond budget in about 10 seconds. The explanation adds that 'drift ~10 km/day' measures the size of the effect, not an exact forecast. The part shared by all satellites would be absorbed into b, but reported time would still drift 38.5 µs/day. The per-satellite parts (eccentricity up to about 14 m, and clocks drifting away from GPS time) would still break metre-level accuracy.",
+      "quote": "38.5 µs × 30 cm/ns ≈ **11.5 km**. That is the distance error that one day of uncorrected drift represents."
+    },
+    "4": {
+      "answer": "Each distance would be wrong by about 300 m (1 µs = 1,000 ns × 30 cm). The error is the same for every distance, so the three spheres would not meet at the right point. Reasoning from the explanation: a 1 µs fast clock makes each arrival time look about 1 µs later, so each distance would probably come out about 300 m too long. The explanation does not state the direction outright.",
+      "quote": "A timing error of 1 microsecond (1,000 ns) gives 300 m."
+    }
+  },
+  "stops": [
+    "'difference in gravitational potential' is used without being defined: \"The fraction is the difference in gravitational potential divided by *c²*\"",
+    "The units are hard to follow when mm is multiplied by 1/km: \"= 4.43 mm × (1/6,371 km − 1/26,560 km) ≈ 5.29 × 10⁻¹⁰\"",
+    "The term 'eccentricity' is not defined: \"For an orbit with eccentricity 0.02, this swings the clock by up to about ±46 ns (±14 m).\"",
+    "The net fraction 4.46 × 10⁻¹⁰ appears without being linked to the 38.5 µs/day: \"which is lower by the net fraction 4.46 × 10⁻¹⁰\"",
+    "'partly cancel' sounds like it conflicts with 'absorb it into b', which sounds complete: \"The part common to all satellites** would partly cancel.\"",
+    "No method is given for how the equations are solved: \"It solves the equations numerically, usually with more than four satellites to average out noise.\"",
+    "It's unclear why the observer matters here: \"as seen by the clock at rest\"",
+    "The direction of the error (sign of b) is not explained: \"The receiver's error adds the same amount, *c·b*, to every measured distance.\""
+  ],
+  "excess": [
+    "\"*Before you read on, predict: does a satellite clock run fast or slow compared with a clock on the ground?*\"",
+    "\"A flat version of the same idea: if you are 3 km from tower A, 4 km from tower B, and 5 km from tower C\"",
+    "\"**Not covered here:** signal delays in the atmosphere, the Sagnac effect\"",
+    "\"Below, each step follows from the one before it.\"",
+    "The Summary repeats the earlier sections: \"The receiver measures signal travel time; time × *c* = distance. 1 ns = 30 cm.\""
+  ],
+  "grounded": {
+    "1": true,
+    "2": true,
+    "3": true,
+    "4": true
+  }
+}

@@ -1,0 +1,52 @@
+# Machine-readable half of model.md. `explainer check vaccine-memory` holds every rendering to it.
+
+values:
+  match_frequency_low_inverse: 1000000
+  match_frequency_high_inverse: 100000
+  repertoire_possible_exp: 11
+  first_response_days_min: 7
+  first_response_days_max: 14
+  second_response_days_min: 2
+  second_response_days_max: 4
+  fold_increase_min: 10
+  fold_increase_max: 100
+  growth_per_day: 10
+  growth_7_days: 10000000
+  growth_3_days: 1000
+
+allow: [1, 2, 3, 4, 5, 6, 7]
+
+require:
+  - path: first_response_days_min
+    in: [prose]
+  - path: second_response_days_max
+    in: [prose]
+  - path: growth_7_days
+    in: [prose]
+
+claims:
+  - id: selection-not-design
+    kind: mechanism
+    statement: "Receptors are made at random before exposure; the vaccine antigen selects the rare matching lymphocyte, which then divides."
+    example: "About 1 in 100,000 to 1 in 1,000,000 lymphocytes binds a given antigen."
+    ask: "Does the immune system build a new receptor after it sees the vaccine?"
+  - id: why-harmless-antigen
+    kind: why
+    statement: "The vaccine gives the slow first response without the danger of the real pathogen."
+    alternative: "Meet the real pathogen first."
+    counterexample: "A pathogen that grows 10× per day grows 10,000,000-fold during a 7-day first response."
+  - id: memory-faster
+    kind: guarantee
+    statement: "Memory cells make the second response faster and larger."
+    example: "Second response in 2–4 days at 10–100 times the antibody level; pathogen grows only about 1,000-fold in 3 days."
+    counterexample: "A variant with a changed antigen fits memory receptors less well, so protection drops."
+    ask: "Why does a vaccinated person get less sick even though the pathogen still enters the body?"
+
+accept_unjustified: {}
+
+terms:
+  - term: select
+    means: "the antigen picks an existing matching cell; nothing is designed"
+    avoid: [designs an antibody, builds a new receptor to fit]
+
+quiz: []

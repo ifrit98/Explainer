@@ -1,0 +1,218 @@
+{
+ "tool": "coldread",
+ "rendering": "narrative",
+ "slug": "quorum",
+ "at": "2026-10-04T15:14:38",
+ "model": "default",
+ "prompt_sha": "46d121ad7ad5",
+ "reply": {
+  "beats": [
+   {
+    "at": "Beat 1 (hook)",
+    "text": "A cluster of n servers keeps copies of the same data. It decides a change only when more than half of all n servers accept it. 5 needs 3 so 2 can fail; 4 also needs 3 so only 1 can fail.",
+    "unresolved": [],
+    "unsaid": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Beat 2 (name)",
+    "text": "Defines accept, decide, quorum size, quorum, and stop, using x = 1 accepted by A, B, C.",
+    "unresolved": [],
+    "unsaid": [],
+    "leap": [
+     "\"the next change\" assumes the changes come in a fixed order, one slot at a time, which is never said. Beat 4's rule (\"Each server accepts only one change as the next change\") depends on this."
+    ],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Beat 3 (objection)",
+    "text": "A gets no reply from D in 500 ms: crash or partition, A can't tell. With quorum size 2, {A,B} decide x = 1 and {C,D} decide x = 2: split brain.",
+    "unresolved": [],
+    "unsaid": [
+     "The Shown column switches to 4 servers, after beat 2's 5 servers A–E. The Said column never says the cluster is now 4 servers. The reader has to work this out from the names A–D.",
+     "The question this beat answers, \"why can't the other 2 go on?\", is never asked in the words. The text jumps straight into \"A sends to D\"."
+    ],
+    "leap": [
+     "\"So suppose quorum size were 2\": the words never say that 2 is exactly what 'let the 2 survivors go on' means in a 4-server cluster, or that it is half of 4."
+    ],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Beat 4 (mechanism)",
+    "text": "Quorum size = majority size floor(n/2)+1. Two groups of 3 among 5 total 6 > 5 places, so they share C. C has already accepted x = 1, so it refuses x = 2. Count all configured servers, not the reachable ones.",
+    "unresolved": [
+     "\"6 > 5 places\": 'places' is an odd word for this counting step. It is only shown for n = 5, and the general version ('two majorities together have more than n members') is never said."
+    ],
+    "unsaid": [
+     "The Shown column has the overlapping groups {A,B,C} and {C,D,E}. The words do not say how C could be in contact with both groups, given that beat 3 framed the problem as a partition."
+    ],
+    "leap": [
+     "\"Each server accepts only one change as the next change\" is a new rule, and the whole argument depends on it. It appears here for the first time, with no reason given."
+    ],
+    "excess": [
+     "\"D and E reach only each other, and 'more than half of 2' would let them decide\" gives away the scenario that beat 5 asks the reader to predict."
+    ],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Beat 5 (test)",
+    "text": "Predict: {A,B,C} | {D,E}. A, B, C have 3 ≥ 3 and keep deciding. D, E have 2 < 3 and stop.",
+    "unresolved": [],
+    "unsaid": [],
+    "leap": [],
+    "excess": [
+     "The prediction was already answered at the end of beat 4 (\"D and E reach only each other...\"), so the test gives the reader nothing new to work out."
+    ],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Beat 6 (generalize)",
+    "text": "Tolerance = n − majority size. A table for n = 3..7 shows that 4 and 5 both need 3. Adding a server to an odd-sized cluster raises the majority size, so tolerance stays the same and each change waits for one more accept.",
+    "unresolved": [],
+    "unsaid": [
+     "The table rows for n = 3, 6 and 7 are shown but not read aloud. Minor."
+    ],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Beat 7 (close)",
+    "text": "5 survives 2 and 4 survives 1 because both need 3, and 3 is the smallest group that must share a server with any other. Use odd sizes. Assumes servers crash but never lie; see the Raft and PBFT papers.",
+    "unresolved": [
+     "\"PBFT\"",
+     "\"Raft\"",
+     "\"leader election\""
+    ],
+    "unsaid": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   }
+  ],
+  "blocking": [
+   "Beat 4: \"Each server accepts only one change as the next change\". This rule makes the shared server C refuse x = 2, and it is introduced here without warning or reason. Without it, overlapping groups prove nothing.",
+   "Beat 3: the switch from 5 servers to 4 is not said in words (it appears only in Shown), so the reader rereads to find out which cluster they are in."
+  ],
+  "cuts": [
+   "Beat 4: cut the D/E sentence (\"Count all n configured servers... would let them decide\"), or move it into beat 5's answer. It currently spoils the prediction.",
+   "Beat 7: cut \"leader election, and reads are covered in the Raft and PBFT papers\". It brings in unknown names right at the close; \"servers crash but never lie\" is enough as the scope."
+  ],
+  "question": {
+   "text": "Why can a 5-server cluster lose 2 servers while a 4-server cluster can lose only 1? Known from Beat 1, where it is the title.",
+   "known_at": "Beat 1",
+   "result_stated": "Yes, Beat 1: \"For 5 servers that is 3, so 5 − 3 = 2 servers can fail. For 4 servers it is also 3, so only 4 − 3 = 1 can fail.\""
+  },
+  "motive": "There is a reason for the approach in Beat 1, \"The rest explains why the rule is 'more than half'\", and in Beat 3's objection, \"A sees the same silence in both cases\". A reason to care about the question is missing from the words. The plan's point that \"the 4th server costs money but buys nothing\" is never said; only Beat 6's \"tolerance stays the same\" and Beat 7's \"Use odd cluster sizes\" hint at it.",
+  "close": "Yes, Beat 7: \"5 survives 2 and 4 survives 1 because both need 3 servers, and 3 is the smallest group that must share a server with any other group.\" The general argument (overlap means a shared server, and that server refuses a conflicting change) is said in words, though the refusal rule itself comes late, in Beat 4.",
+  "recap": "A cluster only decides a change when more than half of all its servers agree, so two groups can never both decide different things; that means 4 servers need 3 just like 5 do, so the 4th server buys you no extra failure tolerance.",
+  "strongest": "Beat 3: \"A sees the same silence in both cases\" makes it concrete why the survivors cannot simply carry on, and leads straight into split brain.",
+  "weakest": "Beat 4: it packs the formula, the overlap count (\"6 > 5 places\"), a brand-new one-vote-per-slot rule, and the counting caveat that gives away Beat 5 into one beat.",
+  "suggestions": [
+   "Introduce the rule \"a server accepts only one change for each slot\" in Beat 2, alongside accept.",
+   "Say the general overlap argument in words: two groups that are each more than half of n together have more than n members, so they must share a server.",
+   "Say in Beat 3's words that the cluster is now 4 servers and that a quorum of 2 is exactly half.",
+   "Add the cost motive to Beat 1: a 4th server costs money but buys no extra tolerance."
+  ]
+ },
+ "usage": {
+  "cost": 0.11751439999999999,
+  "seconds": 39
+ },
+ "findings": [
+  {
+   "n": 1,
+   "severity": "blocking",
+   "kind": "blocking",
+   "text": "Beat 4: \"Each server accepts only one change as the next change\". This rule makes the shared server C refuse x = 2, and it is introduced here without warning or reason. Without it, overlapping groups prove nothing."
+  },
+  {
+   "n": 2,
+   "severity": "blocking",
+   "kind": "blocking",
+   "text": "Beat 3: the switch from 5 servers to 4 is not said in words (it appears only in Shown), so the reader rereads to find out which cluster they are in."
+  },
+  {
+   "n": 3,
+   "severity": "excess",
+   "kind": "cut",
+   "text": "Beat 4: cut the D/E sentence (\"Count all n configured servers... would let them decide\"), or move it into beat 5's answer. It currently spoils the prediction."
+  },
+  {
+   "n": 4,
+   "severity": "excess",
+   "kind": "cut",
+   "text": "Beat 7: cut \"leader election, and reads are covered in the Raft and PBFT papers\". It brings in unknown names right at the close; \"servers crash but never lie\" is enough as the scope."
+  },
+  {
+   "n": 5,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "Beat 2 (name): \"the next change\" assumes the changes come in a fixed order, one slot at a time, which is never said. Beat 4's rule (\"Each server accepts only one change as the next change\") depends on this."
+  },
+  {
+   "n": 6,
+   "severity": "edge",
+   "kind": "unsaid",
+   "text": "Beat 3 (objection): The Shown column switches to 4 servers, after beat 2's 5 servers A–E. The Said column never says the cluster is now 4 servers. The reader has to work this out from the names A–D."
+  },
+  {
+   "n": 7,
+   "severity": "edge",
+   "kind": "unsaid",
+   "text": "Beat 3 (objection): The question this beat answers, \"why can't the other 2 go on?\", is never asked in the words. The text jumps straight into \"A sends to D\"."
+  },
+  {
+   "n": 8,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "Beat 3 (objection): \"So suppose quorum size were 2\": the words never say that 2 is exactly what 'let the 2 survivors go on' means in a 4-server cluster, or that it is half of 4."
+  },
+  {
+   "n": 9,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "Beat 4 (mechanism): \"6 > 5 places\": 'places' is an odd word for this counting step. It is only shown for n = 5, and the general version ('two majorities together have more than n members') is never said."
+  },
+  {
+   "n": 10,
+   "severity": "edge",
+   "kind": "unsaid",
+   "text": "Beat 4 (mechanism): The Shown column has the overlapping groups {A,B,C} and {C,D,E}. The words do not say how C could be in contact with both groups, given that beat 3 framed the problem as a partition."
+  },
+  {
+   "n": 11,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "Beat 4 (mechanism): \"Each server accepts only one change as the next change\" is a new rule, and the whole argument depends on it. It appears here for the first time, with no reason given."
+  },
+  {
+   "n": 12,
+   "severity": "edge",
+   "kind": "unsaid",
+   "text": "Beat 6 (generalize): The table rows for n = 3, 6 and 7 are shown but not read aloud. Minor."
+  },
+  {
+   "n": 13,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "Beat 7 (close): \"PBFT\""
+  },
+  {
+   "n": 14,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "Beat 7 (close): \"Raft\""
+  },
+  {
+   "n": 15,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "Beat 7 (close): \"leader election\""
+  }
+ ]
+}

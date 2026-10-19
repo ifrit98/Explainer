@@ -1,0 +1,51 @@
+values:
+  n5:
+    servers: 5
+    quorum: 3
+    tolerated: 2
+  n4:
+    servers: 4
+    quorum: 3
+    tolerated: 1
+  n3: {servers: 3, quorum: 2, tolerated: 1}
+  n6: {servers: 6, quorum: 4, tolerated: 2}
+  n7: {servers: 7, quorum: 4, tolerated: 3}
+  bad_quorum_4: 2
+  conflict: {a: 7, b: 9}
+
+allow: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+
+require:
+  - path: n5/tolerated
+    in: [prose]
+  - path: n4/quorum
+    in: [prose]
+
+claims:
+  - id: tolerance
+    kind: mechanism
+    statement: "Failures tolerated = servers − quorum; the cluster stops when fewer than a quorum reply."
+    example: "5 servers, quorum 3: 2 fail, 3 reply, cluster continues. 4 servers, quorum 3: 2 fail, 2 reply, cluster stops."
+  - id: why-majority
+    kind: why
+    statement: "The quorum must be a majority so that two groups cannot both decide."
+    alternative: "quorum = half of the servers (2 of 4)"
+    counterexample: "A partition splits 4 servers 2 + 2; both sides reach quorum 2; one writes x = 7, the other x = 9."
+    ask: "With 4 servers, why can the quorum not be 2?"
+  - id: silent
+    kind: definition
+    statement: "A crashed server and a cut-off server look the same: no reply."
+  - id: even-n
+    kind: guarantee
+    statement: "Adding a server to an odd cluster raises the quorum but not the tolerance."
+    example: "3 servers tolerate 1; 4 servers tolerate 1; 5 tolerate 2."
+    counterexample: "Going from 4 to 5 (even to odd) adds tolerance: 1 to 2."
+
+accept_unjustified: {log: "'log' is the Raft replicated log named in Scope, not a logarithm"}
+
+terms:
+  - term: quorum
+    means: "the minimum number of servers that must agree before a decision"
+    avoid: [majority vote count]
+
+quiz: []

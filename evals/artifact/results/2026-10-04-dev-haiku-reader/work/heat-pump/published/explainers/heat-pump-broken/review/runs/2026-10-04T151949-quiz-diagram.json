@@ -1,0 +1,159 @@
+{
+ "tool": "quiz",
+ "rendering": "diagram",
+ "slug": "heat-pump-broken",
+ "at": "2026-10-04T15:19:35",
+ "model": "default",
+ "prompt_sha": "8cabe534ead1",
+ "reply": {
+  "answers": {
+   "1": "The explanation names these objects: electricity (1 kWh), the heat pump, outdoor air (0 °C), home water (35 °C), and the refrigerant (propane). It also names the loop's four parts: evaporator, compressor, condenser and expansion valve. The table also uses COP as a measure.",
+   "2": "Electricity drives the compressor. Outdoor air gives 2 kWh of heat to the refrigerant in the evaporator, where the refrigerant boils at −10 °C and 3.5 bar. The compressor raises the pressure to 14 bar. In the condenser the refrigerant condenses at 40 °C and gives 3 kWh to the home water. The expansion valve drops the pressure back to 3.5 bar, and the refrigerant returns to the evaporator.",
+   "3": "Pressure sets the refrigerant's boiling temperature. Low pressure lets it boil colder than the outdoor air, so it picks up heat there. High pressure lets it condense hotter than the water, so it gives that heat up. The electricity pays only for raising the pressure, not for making the heat.",
+   "4": "The explanation treats outdoor temperature as the key variable. It says that as outdoor air gets colder, COP rises: about 2 at 10 °C, 3 at 0 °C and 4 at −15 °C. Its reason is that colder air is denser and holds more heat per cubic metre. I can only report this. The same section also says the temperature lift grows on colder days but never says what that does to COP, and the claim may conflict with the Level 2 logic. Level 2 implies a bigger pressure rise, and so more compressor work, when the air is colder.",
+   "5": "Simplification: the COP values are round 'typical' numbers, and the figures (exactly 2 + 1 = 3 kWh, a fixed −10 °C and 40 °C) ignore losses. Established fact: propane boils at −10 °C at 3.5 bar and at 40 °C at 14 bar, and heat flows from hot to cold.",
+   "6": "A heat pump does not make heat from electricity. It moves heat that already exists in outdoor air, even air at 0 °C, into the home water. A refrigerant circulates in a loop. At low pressure it boils below the air temperature and absorbs heat. The compressor raises its pressure so it condenses above the water temperature and releases heat. The expansion valve lowers the pressure again, so 1 kWh of electricity moves 2 kWh of outdoor heat and 3 kWh in total is delivered (COP 3).",
+   "7": "Level 3 was hardest. It defines 'temperature lift' and then never uses it. It says COP rises in colder weather, which seems to contradict Level 2: colder air would need a lower boiling point, so a bigger pressure rise. Linking lift to compressor work, and checking the claim against Level 2, would make it easier.",
+   "8": "No. Energy is conserved: 1 kWh of electricity plus 2 kWh taken from the outdoor air equals the 3 kWh delivered.",
+   "9": "According to the table, the −15 °C day (COP about 4, against about 2 at 10 °C), because colder, denser air 'holds more heat per cubic metre'. The explanation does not show why density matters, and the temperature lift is bigger on the −15 °C day (50 K against 25 K). From the text alone I cannot reconcile this answer with Level 2.",
+   "10": "The compressor raises the pressure (3.5 to 14 bar) so the refrigerant condenses at 40 °C, above the 35 °C water, and can give heat to it. The expansion valve lowers the pressure (14 to 3.5 bar) so the refrigerant boils at −10 °C, below the 0 °C air, and can take heat from it. The loop needs both because heat only flows from hot to cold: one side has to be colder than the air and the other hotter than the water.",
+   "11": "They come from the outdoor air. Air at 0 °C still holds heat, and that heat flows into the colder refrigerant (−10 °C) in the evaporator.",
+   "12": "Heat flows only from hot to cold. To absorb heat from the air, the refrigerant must be colder than the air. To give heat to the water, it must be hotter than the water.",
+   "13": "The explanation says COP rises on colder days (about 4 at −15 °C) because colder air is denser and holds more heat per cubic metre. I report this as stated, but it is not justified, and the explanation's own temperature-lift idea seems to point the other way."
+  },
+  "audit": {
+   "terms": [
+    "The working fluid is called 'refrigerant' (Level 1, Level 2) and 'Propane' (Level 2 text). The text never says that propane is the refrigerant.",
+    "The evaporator and condenser are called 'coils' only once ('at both coils', Level 2 text), and the text never says the two names mean the same parts."
+   ],
+   "unexplained": [
+    "Table 'Typical real COP' (Level 3): the values 2, 3 and 4 are given with no source and no mechanism linking them to temperature lift. They also run the opposite way to what the Level 2 reasoning suggests.",
+    "'3.5 bar' and '14 bar' (Level 2): the reader is not told how much pressure rise the compressor needs, or how that rise changes with outdoor temperature.",
+    "'Temperature lift' (Level 3): defined as 'home water minus outdoor air', but the text never says what a bigger or smaller lift does."
+   ],
+   "missing_why": [
+    "'Colder air is denser and holds more heat per cubic metre, so the heat pump collects heat more easily' (Level 3): no reason is given why density would raise COP. It ignores the evaporator needing an even lower boiling point.",
+    "'Boiling temperature depends on pressure' (Level 2): stated as a fact with no reason why.",
+    "Why the compressor is where the electricity goes, and why compressing the refrigerant costs energy (Level 2), is not explained."
+   ],
+   "excess": [
+    "'The temperature lift is home water minus outdoor air.' (Level 3): it is defined and then never used in the argument."
+   ]
+  },
+  "gaps": [
+   "Level 3's claim that COP rises as outdoor temperature falls seems to contradict the Level 2 logic. Colder air needs a lower boiling point, so a larger pressure rise and a larger lift, yet the text says the opposite and the reader is left confused about Q9 and Q13.",
+   "The text never links temperature lift or pressure ratio to how much electricity the compressor needs.",
+   "The text never says why boiling temperature depends on pressure.",
+   "It is not said that the 2 kWh of outdoor heat must be at least as large as the heat removed from the air. How much heat the air can supply, and the airflow needed, are not covered."
+  ]
+ },
+ "grade": {
+  "scores": {
+   "1": 2,
+   "2": 2,
+   "3": 2,
+   "4": 1,
+   "5": 1,
+   "6": 2,
+   "7": 2,
+   "8": 1,
+   "9": 0,
+   "10": 2,
+   "11": 2,
+   "12": 2,
+   "13": 0
+  },
+  "reasons": {
+   "4": "The answer correctly picks outdoor temperature (lift) as the key variable. It then reports the wrong direction (COP rises in the cold) with the wrong 'denser air' reason. The model says a larger lift lowers COP. The reviewer flags the conflict but does not state the correct relationship.",
+   "5": "The answer calls the propane boiling pressures (3.5 bar at −10 °C, 14 bar at 40 °C) established fact. The model lists propane pressures as estimated. It also omits that 0 °C outside and 35 °C water are assumptions.",
+   "8": "The answer gives the correct 'No' and 1 + 2 = 3 from outdoor air. It does not explain how colder outdoor air can still give heat: the air holds heat, and the refrigerant is made colder than the air so heat flows into it.",
+   "9": "The answer picks the −15 °C day, which is wrong. The COP is higher on the 10 °C day (about 4 vs about 2) because the lift is smaller (25 K vs 50 K).",
+   "13": "The answer reports that COP rises on colder days. The correct answer is that a larger lift costs more electricity per kWh of heat, so COP falls."
+  },
+  "pass": false
+ },
+ "usage": {
+  "cost": 0.12581900000000001,
+  "seconds": 39
+ },
+ "findings": [
+  {
+   "n": 1,
+   "severity": "gap",
+   "kind": "terms",
+   "text": "The working fluid is called 'refrigerant' (Level 1, Level 2) and 'Propane' (Level 2 text). The text never says that propane is the refrigerant."
+  },
+  {
+   "n": 2,
+   "severity": "gap",
+   "kind": "terms",
+   "text": "The evaporator and condenser are called 'coils' only once ('at both coils', Level 2 text), and the text never says the two names mean the same parts."
+  },
+  {
+   "n": 3,
+   "severity": "gap",
+   "kind": "unexplained",
+   "text": "Table 'Typical real COP' (Level 3): the values 2, 3 and 4 are given with no source and no mechanism linking them to temperature lift. They also run the opposite way to what the Level 2 reasoning suggests."
+  },
+  {
+   "n": 4,
+   "severity": "gap",
+   "kind": "unexplained",
+   "text": "'3.5 bar' and '14 bar' (Level 2): the reader is not told how much pressure rise the compressor needs, or how that rise changes with outdoor temperature."
+  },
+  {
+   "n": 5,
+   "severity": "gap",
+   "kind": "unexplained",
+   "text": "'Temperature lift' (Level 3): defined as 'home water minus outdoor air', but the text never says what a bigger or smaller lift does."
+  },
+  {
+   "n": 6,
+   "severity": "gap",
+   "kind": "missing_why",
+   "text": "'Colder air is denser and holds more heat per cubic metre, so the heat pump collects heat more easily' (Level 3): no reason is given why density would raise COP. It ignores the evaporator needing an even lower boiling point."
+  },
+  {
+   "n": 7,
+   "severity": "gap",
+   "kind": "missing_why",
+   "text": "'Boiling temperature depends on pressure' (Level 2): stated as a fact with no reason why."
+  },
+  {
+   "n": 8,
+   "severity": "gap",
+   "kind": "missing_why",
+   "text": "Why the compressor is where the electricity goes, and why compressing the refrigerant costs energy (Level 2), is not explained."
+  },
+  {
+   "n": 9,
+   "severity": "excess",
+   "kind": "excess",
+   "text": "'The temperature lift is home water minus outdoor air.' (Level 3): it is defined and then never used in the argument."
+  },
+  {
+   "n": 10,
+   "severity": "gap",
+   "kind": "gap",
+   "text": "Level 3's claim that COP rises as outdoor temperature falls seems to contradict the Level 2 logic. Colder air needs a lower boiling point, so a larger pressure rise and a larger lift, yet the text says the opposite and the reader is left confused about Q9 and Q13."
+  },
+  {
+   "n": 11,
+   "severity": "gap",
+   "kind": "gap",
+   "text": "The text never links temperature lift or pressure ratio to how much electricity the compressor needs."
+  },
+  {
+   "n": 12,
+   "severity": "gap",
+   "kind": "gap",
+   "text": "The text never says why boiling temperature depends on pressure."
+  },
+  {
+   "n": 13,
+   "severity": "gap",
+   "kind": "gap",
+   "text": "It is not said that the 2 kWh of outdoor heat must be at least as large as the heat removed from the air. How much heat the air can supply, and the airflow needed, are not covered."
+  }
+ ]
+}

@@ -1,0 +1,59 @@
+{
+  "key": {
+    "A": "published",
+    "B": "principles",
+    "C": "quick",
+    "D": "none"
+  },
+  "grades": {
+    "published": {
+      "quiz": [
+        2,
+        2,
+        2,
+        2
+      ],
+      "misconception": "corrected",
+      "errors": []
+    },
+    "principles": {
+      "quiz": [
+        2,
+        2,
+        2,
+        1
+      ],
+      "misconception": "corrected",
+      "errors": []
+    },
+    "quick": {
+      "quiz": [
+        2,
+        2,
+        2,
+        1
+      ],
+      "misconception": "corrected",
+      "errors": []
+    },
+    "none": {
+      "quiz": [
+        2,
+        2,
+        2,
+        2
+      ],
+      "misconception": "corrected",
+      "errors": [
+        "absolute zero, where molecular motion stops"
+      ]
+    }
+  },
+  "rank": [
+    "published",
+    "none",
+    "quick",
+    "principles"
+  ],
+  "why_best": "A builds the model in clear layers, from the energy balance to the refrigerant loop (with why each step is needed) to a worked entropy derivation of the kelvin-based ideal limit using numbers that match its example, so the reader can answer every question, including the 5 °C vs −15 °C comparison, without gaps, missing equations or errors."
+}

@@ -1,0 +1,42 @@
+{
+  "answers": {
+    "1": {
+      "answer": "Modular exponentiation: each person sends g^(private) mod p. It is safe because undoing it means solving the discrete logarithm problem, and for a large p (2048 bits) nobody knows a fast way to do that. This rests on an unproven assumption.",
+      "quote": "To get a, she must solve \"5 to what power, mod 23, gives 8?\" This is the **discrete logarithm problem**."
+    },
+    "2": {
+      "answer": "Alice computes (g^b)^a and Bob computes (g^a)^b. Both equal g^(a×b) because the order of the exponents does not matter, and taking mod p at each step does not change this.",
+      "quote": "Alice computes (g^b)^a. Bob computes (g^a)^b. Both equal g^(a×b), because the order of the exponents does not matter. Taking \"mod p\" at each step does not change this."
+    },
+    "3": {
+      "answer": "A man-in-the-middle attack, where an active attacker intercepts and replaces the public values. Authentication stops it: the public values are signed and the signature is checked against a key already trusted, such as one vouched for by a certificate authority.",
+      "quote": "The fix is **authentication**: Bob signs his public value with a digital signature, and Alice checks the signature against a key she already trusts."
+    },
+    "4": {
+      "answer": "Alice sends A = 8 and Bob sends B = 19. They share the key 2.",
+      "quote": "Alice and Bob both get **2**. Eve saw 23, 5, 8 and 19. She never saw 6, 15 or 2."
+    }
+  },
+  "stops": [
+    "\"Taking \"mod p\" at each step does not change this.\" — this is stated without a reason",
+    "\"Here, both are 5⁹⁰ mod 23 = 2.\" — a reader can't check this by hand",
+    "\"Repeated squaring computes g^a with about 2 multiplications per binary digit of a\" — repeated squaring is never explained",
+    "\"A method called the extended Euclidean algorithm finds this \"undo\" number quickly\" — the method is named but not explained",
+    "\"The best known algorithms do much better than that\" — no algorithm is named and no reason is given",
+    "\"Bob computes 10¹⁵ mod 23. Mallory computes 19³ mod 23. They share a different key.\" — the value is never given, which is uneven next to Alice's line",
+    "\"Bob signs his public value with a digital signature\" — signatures are not explained, though the text admits this is out of scope",
+    "\"elliptic-curve Diffie–Hellman (the same idea on a different group\" — \"group\" is never defined"
+  ],
+  "excess": [
+    "\"A clock does the same with 12.\"",
+    "\"A large quantum computer running Shor's algorithm would break it; that is why newer \"post-quantum\" key exchanges exist.\"",
+    "\"**Not covered here:** elliptic-curve Diffie–Hellman (the same idea on a different group, with shorter keys and the same structure)\"",
+    "\"1. Agree in public on p and g.\" — the summary repeats the steps already shown"
+  ],
+  "grounded": {
+    "1": true,
+    "2": true,
+    "3": true,
+    "4": true
+  }
+}

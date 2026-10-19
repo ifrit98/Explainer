@@ -1,0 +1,45 @@
+{
+  "answers": {
+    "1": {
+      "answer": "The receiver notes the arrival time of each signal and subtracts the broadcast transmission time to find the delay. It multiplies this delay by the speed of light to calculate distance.",
+      "quote": "Your receiver notes the time *t*ᵣ when that part of the signal arrives. Radio waves travel at the speed of light, *c* ≈ 299,792,458 m/s, so distance to satellite = c × (t_r − t_s)"
+    },
+    "2": {
+      "answer": "The receiver's clock is unknown and may be milliseconds off, causing the same error in all distance measurements. This unknown clock error is a fourth unknown alongside position coordinates x, y, z, requiring four equations and thus four satellites.",
+      "quote": "That makes **four unknowns**: *x*, *y*, *z* and *b*. Four unknowns need four equations, so you need four satellites."
+    },
+    "3": {
+      "answer": "Relativistic effects make satellite clocks gain about 38 microseconds daily (45 µs from weaker gravity minus 7 µs from orbital speed). This produces about 11 kilometers of timing error daily, vastly exceeding the nanosecond-level precision required.",
+      "quote": "38 microseconds is 38,000 nanoseconds. At 30 cm per nanosecond, that much timing error is about **11 km of light travel per day**."
+    },
+    "4": {
+      "answer": "About 300 meters. Since 1 nanosecond of timing error produces 30 cm of error, 1 microsecond (1000 nanoseconds) produces 300 meters of distance error.",
+      "quote": "Every nanosecond of timing error is about 30 cm of position error."
+    }
+  },
+  "stops": [
+    "\"Jacobian\"",
+    "\"unit vector pointing from the satellite to you\"",
+    "\"v²/(2c²)\" - formula without derivation",
+    "\"Clocks deeper in a gravitational field run slower\" - principle not explained",
+    "\"ρᵢ = |sᵢ − p| + b\" - notation introduced",
+    "\"pseudoranges\" - why called 'pseudo' unclear",
+    "\"least-squares fit\" - method not defined",
+    "\"(GM/c²) × (1/R_earth − 1/r_orbit)\" - complex formula"
+  ],
+  "excess": [
+    "Python code implementation with numpy",
+    "\"Usually 8–12 satellites are visible. With more than four, the receiver does a least-squares fit\"",
+    "\"Real receivers also correct for several known sources of error: the signal slowing down in the ionosphere and the troposphere\"",
+    "Detailed gravitational parameter values: \"GM = 3.986×10¹⁴ m³/s²\" and orbital distances",
+    "\"In the GPS specification it appears as Δt_r = F · e · √a · sin(E)\"",
+    "Sagnac effect: \"The receiver handles this by rotating each satellite's position back\"",
+    "Discussion of popular misconception: \"A note on the popular claim that 'without relativity GPS would drift 11 km a day'\""
+  ],
+  "grounded": {
+    "1": true,
+    "2": true,
+    "3": true,
+    "4": true
+  }
+}

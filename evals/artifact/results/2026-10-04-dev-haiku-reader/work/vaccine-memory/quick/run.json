@@ -1,0 +1,12 @@
+{
+  "result": "I made `explainers/vaccine-memory/explanation.md` as prose, with a supporting `model.md` and `model.yaml`; `explainer check` passes. I chose prose because the subject is one chain of steps, and a single table can hold the comparison between a first and a second response.",
+  "error": null,
+  "cost": 0.4694588000000001,
+  "seconds": 94,
+  "turns": 25,
+  "files": [
+    "explainers/vaccine-memory/explanation.md"
+  ],
+  "review_cost": 0,
+  "reviews": 0
+}

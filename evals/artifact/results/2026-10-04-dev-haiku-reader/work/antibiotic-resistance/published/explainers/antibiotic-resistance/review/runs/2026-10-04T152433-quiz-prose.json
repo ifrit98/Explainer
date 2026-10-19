@@ -1,0 +1,226 @@
+{
+ "tool": "quiz",
+ "rendering": "prose",
+ "slug": "antibiotic-resistance",
+ "at": "2026-10-04T15:24:20",
+ "model": "default",
+ "prompt_sha": "57d2fb9e88c1",
+ "reply": {
+  "answers": {
+   "1": "The main objects are: bacteria (susceptible and resistant cells and strains); the antibiotic, a molecule that kills bacteria or stops their growth; its target, a molecule the cell needs, such as the cell-wall enzymes penicillin binds; resistance genes; mutations (random copying errors); plasmids, which are small circles of DNA separate from the chromosome; conjugation and horizontal gene transfer; MIC (minimum inhibitory concentration); fitness cost; compensatory mutations; the immune system; and drug concentration in the blood.",
+   "2": "An antibiotic binds a target the cell needs. A resistance gene blocks this in one of four ways: it destroys the drug, changes the target, pumps the drug out, or keeps it out. Any of these raises the strain's MIC. If the MIC is above the drug level reached in the blood, the strain is resistant; if below, it is susceptible. A cell gets a resistance gene by mutation, which is rare (about 1 per 10^8 divisions), or by receiving a plasmid from another bacterium through conjugation. The drug removes susceptible cells, so resistant cells multiply. Without the drug, resistance often carries a fitness cost, so resistant cells lose ground. A compensatory mutation can cancel that cost, and a plasmid carrying genes for several drugs can be kept by any one of those drugs.",
+   "3": "Resistant cells already exist in a large population before treatment, from random mutation or gene transfer. The drug removes the susceptible cells, and the surviving resistant cells regrow until they make up nearly the whole infection.",
+   "4": "Population size is the key variable. Expected resistant mutants = number of divisions × mutation rate. At 10^10 cells about 100 mutants are expected, so treatment fails. At 10^6 cells only 0.01 are expected, a 1% chance that even one exists, so treatment usually succeeds. Combining two independent drugs multiplies the two chances (10^-16 per cell), so even 10^10 cells expect about 10^-6 doubly resistant cells. That fails if a single event, such as one plasmid or one pump, gives resistance to both drugs.",
+   "5": "Assumptions and simplifications: the MIC values are marked illustrative; the 30-minute lab doubling time is applied to an infection; the 5% fitness cost is a supposed value; and 10^10 cells is taken to mean about 10^10 divisions. Established observation: Luria and Delbrück (1943) grew 20 equal cultures. Eleven had 0 resistant colonies and one had 107, against a mean of about 11. That spread fits mutation before exposure, not resistance caused by the drug.",
+   "6": "Antibiotics act on a target molecule, and bacteria resist by destroying the drug, changing the target, pumping the drug out, or keeping it out, which raises the MIC above the drug level in the blood. In a large infection, rare random mutations (about 1 per 10^8 divisions) mean about 100 resistant cells exist before any drug is given, and plasmids passed between bacteria can deliver whole resistance genes in one step. The drug kills or halts the susceptible cells, and the resistant ones regrow to the full infection size in about 27 doublings. This is selection, not induction, as Luria and Delbrück showed: resistant counts across equal cultures varied far too much for resistance to be caused by exposure. Without the drug, resistance usually costs growth and fades, but compensatory mutations and multi-drug plasmids keep it around; combining two independent drugs makes double resistance extremely unlikely.",
+   "7": "The Luria–Delbrück paragraph was hardest. It uses √11 as 'random scatter' and a 5–18 range without saying why scatter equals the square root of the mean, or why the range is about two scatters wide. It also does not show the expected distribution under the mutation-first idea. A short note on the Poisson rule, or a small simulated comparison of the two ideas, would make it easier. The 0.95-per-doubling ratio step is also a little loose.",
+   "8": "About 10^10 divisions × 10^-8 means roughly 100 or more cells were already resistant to X before treatment. Drug X killed or halted the susceptible majority, so symptoms cleared. The resistant cells kept dividing, and 100 cells reach 10^10 in about 27 doublings, about 13 hours at a 30-minute doubling time. The returning infection is almost entirely resistant, so X no longer works. The drug selected these cells; it did not create them.",
+   "9": "Probably not. With 10^6 cells the expected number of resistance mutations is 0.01, about a 1% chance that even one resistant cell exists, so drug X would usually clear the infection. The exception is if a resistance plasmid arrives from another bacterium, which the size argument does not cover.",
+   "10": "Not necessarily. If resistance has a fitness cost (for example 5%), the ratio of resistant to susceptible cells shrinks by 0.95 each doubling, to about 0.006 of its starting value after 100 doublings. But a compensatory mutation can cut the cost (at 1%, about 0.37 remains after 100 doublings). Also, if the gene sits on a plasmid with resistance genes for other drugs, using any of those drugs keeps selecting it. So resistance usually declines but rarely vanishes. The explanation does not give real time scales in years.",
+   "11": "Yes. About 10^10 × 10^-8 = 100 resistance mutations are expected, and because early mutants have divided since, there are at least about 100 resistant cells, possibly many more.",
+   "12": "Because the drug removes susceptible cells; it does not create resistant ones. If exposure caused resistance, each cell would have the same small chance on contact, so equal cultures would give similar counts scattered by about √mean (about 5–18 around a mean of 11). Luria and Delbrück found 11 cultures with 0 resistant colonies and one with 107. That huge spread fits random mutations before exposure: an early mutant leaves many descendants, a late one few.",
+   "13": "By horizontal gene transfer. Through conjugation, another bacterium, even one of a different species, copies a plasmid into the cell. The plasmid carries a complete working resistance gene, such as a beta-lactamase, often along with several other resistance genes.",
+   "14": "The resistant fraction usually declines because of the fitness cost, compounding each doubling (0.95^100 ≈ 0.006 at a 5% cost). It may not disappear: compensatory mutations restore growth while keeping the resistance (0.99^100 ≈ 0.37 at a 1% cost), and multi-drug plasmids are still selected whenever any one of their drugs is used."
+  },
+  "audit": {
+   "terms": [
+    "Mutation has several names: 'random copying error' (line 5), 'mutation' (lines 11, 24), 'One DNA letter change' (table, line 16), 'one letter change' (line 47). The reader can probably map these, but the link is never stated.",
+    "Gene transfer has several names: 'received from another bacterium' (lines 5, 11), 'Genes from other bacteria' (heading, line 42), 'conjugation' and 'horizontal gene transfer' (line 45). Conjugation is one route of horizontal transfer, and that is only hinted at in 'Not covered' (line 71).",
+    "'resistance gene' (line 11) and 'resistance mutation' (line 24) are used for close but different things: a gene versus the event that makes it.",
+    "Growth being stopped has three names: 'stops their growth' (line 9), 'halts their growth' (line 33), 'inhibitory' in MIC (line 20)."
+   ],
+   "unexplained": [
+    "'At a lab doubling time of 30 minutes, that is 13 hours' (line 35): it does not say whether bacteria in a patient double this fast, or how a slower rate would change the regrowth time.",
+    "'after 100 doublings' (lines 54, 58): it does not say how long 100 doublings takes in real time, which is needed for the 'hospital stops using drug X for years' case.",
+    "'In 10¹⁰ cells, expect 10⁻⁶ such cells' (line 64): it is not translated into about a one-in-a-million chance that even one doubly resistant cell exists.",
+    "'about once per 10⁸ cell divisions' (line 24): it does not say whether this rate is typical or varies across genes and drugs, or how a rate of 10⁻⁶ or 10⁻¹⁰ would change the conclusion.",
+    "'0.95¹⁰⁰ ≈ 0.006' (line 54): this is a ratio relative to the start value, but it does not say what resistant fraction that leaves if resistance started common or rare."
+   ],
+   "missing_why": [
+    "'the random scatter is about √11 ≈ 3.3, so ... predicts most cultures between 5 and 18' (line 40): no reason is given for why scatter is the square root of the mean, or why the range is about ±2 scatters.",
+    "'each time the susceptible cells double, the resistant cells grow only 0.95 times as much' (line 54): it does not say why a 5% slower growth translates to a 0.95 factor per doubling.",
+    "'A compensatory mutation is a second change that restores growth ... so the first change, and the resistance, stay' (line 58): it does not say why the cell gains a second mutation rather than losing the first one.",
+    "'Early mutants have divided since, so there are at least 100 resistant cells' (line 28): this mixes an expected count of mutation events with a minimum number of cells, and does not say how many more there may be.",
+    "'the test asks only whether resistance arose before contact, so it applies to drugs too' (line 40): the transfer from virus to antibiotic is asserted rather than argued."
+   ],
+   "excess": [
+    "'The bacteria become resistant, not the patient's body.' (line 5): this is a common misconception, but the questions and the later argument never use it.",
+    "The 'Not covered' list (lines 68–73) names topics (persisters, SOS response, biofilms) the reader cannot use. It is harmless but adds no understanding."
+   ]
+  },
+  "gaps": [
+   "The explanation does not give real time scales for decline in a hospital after a drug is withdrawn, so 'for years' cannot be answered quantitatively.",
+   "It does not say whether plasmids themselves carry a fitness cost, or how fast they spread between cells or species.",
+   "It does not say whether bacteria divide at the lab rate inside a patient; the 13-hour regrowth depends on this.",
+   "It does not describe the expected distribution under the mutation-before-exposure idea, only that it 'explains this spread'.",
+   "It does not explain how mutation and transfer compare in importance in practice."
+  ]
+ },
+ "grade": {
+  "scores": {
+   "1": 2,
+   "2": 2,
+   "3": 2,
+   "4": 2,
+   "5": 2,
+   "6": 2,
+   "7": 2,
+   "8": 2,
+   "9": 2,
+   "10": 2,
+   "11": 2,
+   "12": 2,
+   "13": 2,
+   "14": 2
+  },
+  "reasons": {
+   "1": "No points lost: lists the model's entities with correct definitions (antibiotic, target, plasmid, MIC, fitness cost, and others).",
+   "2": "No points lost: covers target binding, the four mechanisms, MIC versus blood level, both sources, selection, fitness cost, compensatory mutations and multi-drug plasmids.",
+   "3": "No points lost: states that resistant variants exist before treatment and the drug selects them.",
+   "4": "No points lost: gives N × rate with 10^10 versus 10^6, and the two-drug 10^-16 case with its plasmid/pump exception.",
+   "5": "No points lost: separates the illustrative assumptions from the established Luria–Delbrück observation with correct numbers.",
+   "6": "No points lost: a correct, specific summary of the full causal chain, selection versus induction, cost, compensation and combination therapy.",
+   "7": "No points lost: names a specific difficulty (the unexplained √mean scatter and the 5–18 range) and proposes a concrete fix.",
+   "8": "No points lost: about 100 pre-existing resistant cells, susceptible cells removed, regrowth in about 27 doublings, and explicitly selected, not created.",
+   "9": "No points lost: 0.01 expected mutations, about a 1% chance, drug likely clears it; the plasmid caveat is consistent with the model.",
+   "10": "No points lost: declines through fitness cost (0.95^100 ≈ 0.006) but persists through compensatory mutation (0.37) and multi-drug plasmids.",
+   "11": "No points lost: 10^10 × 10^-8 = 100, with at least about 100 resistant cells because early mutants divide.",
+   "12": "No points lost: the drug removes susceptible cells, and the Luria–Delbrück evidence is given with the induction prediction (5–18) against the observation (11 zeros, one 107).",
+   "13": "No points lost: horizontal gene transfer by conjugation, a plasmid carrying a complete gene such as beta-lactamase, across species.",
+   "14": "No points lost: the fraction falls through compounding cost, and compensatory mutations and multi-drug plasmids keep it from disappearing, with correct numbers."
+  },
+  "pass": true
+ },
+ "usage": {
+  "cost": 0.2225246,
+  "seconds": 57
+ },
+ "findings": [
+  {
+   "n": 1,
+   "severity": "gap",
+   "kind": "terms",
+   "text": "Mutation has several names: 'random copying error' (line 5), 'mutation' (lines 11, 24), 'One DNA letter change' (table, line 16), 'one letter change' (line 47). The reader can probably map these, but the link is never stated."
+  },
+  {
+   "n": 2,
+   "severity": "gap",
+   "kind": "terms",
+   "text": "Gene transfer has several names: 'received from another bacterium' (lines 5, 11), 'Genes from other bacteria' (heading, line 42), 'conjugation' and 'horizontal gene transfer' (line 45). Conjugation is one route of horizontal transfer, and that is only hinted at in 'Not covered' (line 71)."
+  },
+  {
+   "n": 3,
+   "severity": "gap",
+   "kind": "terms",
+   "text": "'resistance gene' (line 11) and 'resistance mutation' (line 24) are used for close but different things: a gene versus the event that makes it."
+  },
+  {
+   "n": 4,
+   "severity": "gap",
+   "kind": "terms",
+   "text": "Growth being stopped has three names: 'stops their growth' (line 9), 'halts their growth' (line 33), 'inhibitory' in MIC (line 20)."
+  },
+  {
+   "n": 5,
+   "severity": "gap",
+   "kind": "unexplained",
+   "text": "'At a lab doubling time of 30 minutes, that is 13 hours' (line 35): it does not say whether bacteria in a patient double this fast, or how a slower rate would change the regrowth time."
+  },
+  {
+   "n": 6,
+   "severity": "gap",
+   "kind": "unexplained",
+   "text": "'after 100 doublings' (lines 54, 58): it does not say how long 100 doublings takes in real time, which is needed for the 'hospital stops using drug X for years' case."
+  },
+  {
+   "n": 7,
+   "severity": "gap",
+   "kind": "unexplained",
+   "text": "'In 10¹⁰ cells, expect 10⁻⁶ such cells' (line 64): it is not translated into about a one-in-a-million chance that even one doubly resistant cell exists."
+  },
+  {
+   "n": 8,
+   "severity": "gap",
+   "kind": "unexplained",
+   "text": "'about once per 10⁸ cell divisions' (line 24): it does not say whether this rate is typical or varies across genes and drugs, or how a rate of 10⁻⁶ or 10⁻¹⁰ would change the conclusion."
+  },
+  {
+   "n": 9,
+   "severity": "gap",
+   "kind": "unexplained",
+   "text": "'0.95¹⁰⁰ ≈ 0.006' (line 54): this is a ratio relative to the start value, but it does not say what resistant fraction that leaves if resistance started common or rare."
+  },
+  {
+   "n": 10,
+   "severity": "gap",
+   "kind": "missing_why",
+   "text": "'the random scatter is about √11 ≈ 3.3, so ... predicts most cultures between 5 and 18' (line 40): no reason is given for why scatter is the square root of the mean, or why the range is about ±2 scatters."
+  },
+  {
+   "n": 11,
+   "severity": "gap",
+   "kind": "missing_why",
+   "text": "'each time the susceptible cells double, the resistant cells grow only 0.95 times as much' (line 54): it does not say why a 5% slower growth translates to a 0.95 factor per doubling."
+  },
+  {
+   "n": 12,
+   "severity": "gap",
+   "kind": "missing_why",
+   "text": "'A compensatory mutation is a second change that restores growth ... so the first change, and the resistance, stay' (line 58): it does not say why the cell gains a second mutation rather than losing the first one."
+  },
+  {
+   "n": 13,
+   "severity": "gap",
+   "kind": "missing_why",
+   "text": "'Early mutants have divided since, so there are at least 100 resistant cells' (line 28): this mixes an expected count of mutation events with a minimum number of cells, and does not say how many more there may be."
+  },
+  {
+   "n": 14,
+   "severity": "gap",
+   "kind": "missing_why",
+   "text": "'the test asks only whether resistance arose before contact, so it applies to drugs too' (line 40): the transfer from virus to antibiotic is asserted rather than argued."
+  },
+  {
+   "n": 15,
+   "severity": "excess",
+   "kind": "excess",
+   "text": "'The bacteria become resistant, not the patient's body.' (line 5): this is a common misconception, but the questions and the later argument never use it."
+  },
+  {
+   "n": 16,
+   "severity": "excess",
+   "kind": "excess",
+   "text": "The 'Not covered' list (lines 68–73) names topics (persisters, SOS response, biofilms) the reader cannot use. It is harmless but adds no understanding."
+  },
+  {
+   "n": 17,
+   "severity": "gap",
+   "kind": "gap",
+   "text": "The explanation does not give real time scales for decline in a hospital after a drug is withdrawn, so 'for years' cannot be answered quantitatively."
+  },
+  {
+   "n": 18,
+   "severity": "gap",
+   "kind": "gap",
+   "text": "It does not say whether plasmids themselves carry a fitness cost, or how fast they spread between cells or species."
+  },
+  {
+   "n": 19,
+   "severity": "gap",
+   "kind": "gap",
+   "text": "It does not say whether bacteria divide at the lab rate inside a patient; the 13-hour regrowth depends on this."
+  },
+  {
+   "n": 20,
+   "severity": "gap",
+   "kind": "gap",
+   "text": "It does not describe the expected distribution under the mutation-before-exposure idea, only that it 'explains this spread'."
+  },
+  {
+   "n": 21,
+   "severity": "gap",
+   "kind": "gap",
+   "text": "It does not explain how mutation and transfer compare in importance in practice."
+  }
+ ]
+}

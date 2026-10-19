@@ -1,0 +1,43 @@
+{
+  "answers": {
+    "1": {
+      "answer": "The extra heat comes from the cold outdoor air. The electricity doesn't make the heat; it moves it. Of the 3 kWh delivered, 2 kWh were already in the outdoor air and 1 kWh is the electricity.",
+      "quote": "Energy is conserved. Two of the three kWh were already in the outdoor air."
+    },
+    "2": {
+      "answer": "In the evaporator outside, the liquid is at low pressure (4 bar) and boils at −5 °C, taking in heat from the warmer outdoor air. The compressor squeezes the vapour to 15 bar, and this is the only place electricity enters. In the condenser inside, the fluid condenses at 45 °C and gives off both the heat it picked up outside and the compressor work to the 35 °C heating water. The expansion valve drops the pressure back to 4 bar, and part of the liquid flashes to vapour, which cools the rest to −5 °C. Then the loop starts again.",
+      "quote": "Compressor.** An electric motor squeezes the vapour to 15 bar. This is the only place the electricity enters the loop. The work of compression also heats the vapour."
+    },
+    "3": {
+      "answer": "On a colder day the fluid has to boil at a lower temperature (−25 °C instead of −5 °C), but it still condenses at 45 °C. That makes the temperature lift bigger (70 K instead of 50 K). The work needed grows with the lift, so the COP falls: the ideal drops from 6.4 to 4.5, and the typical real value from about 3.0 to about 2.1.",
+      "quote": "Moving heat from cold to hot costs work, and the cost grows with the **temperature lift**: the gap between the temperature where the fluid condenses and where it boils."
+    },
+    "4": {
+      "answer": "If heating to 35 °C means 35 °C heating water, as in the table, the fluid condenses at 45 °C (318 K). On the 5 °C day the lift is 50 K and the ideal COP is 318/50 = 6.4. On the −15 °C day the lift is 70 K and the ideal COP is 318/70 = 4.5. So the colder day's limit is about 30% lower. If instead the fluid itself condensed at 35 °C (the underfloor case), the 5 °C day would give 7.7. The cold-day figure for that case isn't given; I worked it out as 308/60 ≈ 5.1.",
+      "quote": "| Cold day, air −15 °C | −25 °C (248 K) | 45 °C (318 K) | 70 K | 318/70 = 4.5 | ~2.1 |"
+    }
+  },
+  "stops": [
+    "'bar' is used as a pressure unit without being explained: \"Propane boils at about −5 °C at 4 bar, and at about 45 °C at 15 bar\"",
+    "It doesn't say why boiling takes in heat: \"Boiling absorbs this heat as the liquid turns to vapour.\"",
+    "It's unclear how flashing cools the liquid: \"Part of the liquid flashes to vapour, which cools the rest to −5 °C.\"",
+    "Entropy is introduced without being defined: \"carries an amount of entropy *Q/T*, and total entropy cannot decrease (established fact)\"",
+    "The derivation skips algebra steps: \"⇒  COP = Q_H / W  ≤  T_H / (T_H − T_C)\"",
+    "The 47% figure has no source or reason: \"Typical real COP (estimate, ~47% of ideal)\"",
+    "The numerator uses the condensing temperature rather than the room or water temperature, which I had to reread: \"318/50 = 6.4\"",
+    "The 10 K margin is stated but not justified: \"The fluid must be about 10 K colder than the air and about 10 K hotter than the water\""
+  ],
+  "excess": [
+    "\"Water boils below 100 °C on a mountain for this reason.\"",
+    "\"A refrigerator is the same machine. It takes heat from the food box and dumps it into the kitchen through the coil at the back.\"",
+    "\"It is 278 K, far above absolute zero.\"",
+    "The summary repeats earlier points: \"A heat pump moves heat; it does not create it. Heat out = heat from outside + electricity.\"",
+    "\"*Not covered:* defrost cycles, ground-source heat pumps, refrigerant choice, and cost or CO₂ comparisons.\""
+  ],
+  "grounded": {
+    "1": true,
+    "2": true,
+    "3": true,
+    "4": true
+  }
+}

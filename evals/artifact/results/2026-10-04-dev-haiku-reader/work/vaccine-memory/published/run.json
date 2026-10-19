@@ -1,0 +1,12 @@
+{
+  "result": "I made `explainers/vaccine-memory/explanation.md` as prose with one comparison table: the subject is a single causal chain (a random library of cells, the vaccine picking and multiplying the matching ones, the memory cells left behind) plus one before-and-after race, and prose with numbers carries that better than a diagram or page would. The supporting files `model.md`, `model.yaml` and `narrative.md` are in the same folder; the probe, cold reads and blind test (passed, full marks) all ran with `--run`, `explainer check` passes after the post-test edits, and the blind test was not re-run on those small final edits.",
+  "error": null,
+  "cost": 1.5137304,
+  "seconds": 543,
+  "turns": 65,
+  "files": [
+    "explainers/vaccine-memory/explanation.md"
+  ],
+  "review_cost": 0.6085,
+  "reviews": 4
+}

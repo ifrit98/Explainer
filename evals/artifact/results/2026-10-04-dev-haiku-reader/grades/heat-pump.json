@@ -1,0 +1,60 @@
+{
+  "key": {
+    "A": "published",
+    "B": "principles",
+    "C": "quick",
+    "D": "none"
+  },
+  "grades": {
+    "published": {
+      "quiz": [
+        2,
+        2,
+        2,
+        1
+      ],
+      "misconception": "corrected",
+      "errors": []
+    },
+    "principles": {
+      "quiz": [
+        2,
+        2,
+        2,
+        1
+      ],
+      "misconception": "corrected",
+      "errors": []
+    },
+    "quick": {
+      "quiz": [
+        2,
+        2,
+        2,
+        1
+      ],
+      "misconception": "corrected",
+      "errors": []
+    },
+    "none": {
+      "quiz": [
+        2,
+        2,
+        2,
+        1
+      ],
+      "misconception": "corrected",
+      "errors": [
+        "Air at 0 °C is at 273 K, which is 273 degrees above absolute zero, where molecular motion stops. (Motion does not stop at absolute zero: zero-point motion remains.)",
+        "The loop diagram labels the compressor-to-condenser line 'warm, high-pressure liquid' and the line into the expansion valve 'hot, high-pressure gas'. These labels are swapped: hot gas leaves the compressor, and warm liquid enters the valve."
+      ]
+    }
+  },
+  "rank": [
+    "principles",
+    "published",
+    "quick",
+    "none"
+  ],
+  "why_best": "B gives the energy balance, the pressure-dependent boiling trick, the four-step loop with numbers, and a short entropy derivation of the Carnot limit with a mild-versus-cold table, all without errors, detours or repetition."
+}

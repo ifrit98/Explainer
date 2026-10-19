@@ -1,0 +1,44 @@
+{
+  "answers": {
+    "1": {
+      "answer": "It must contain or produce the pathogen's antigen: an inactivated pathogen, one purified protein, or mRNA that makes your cells produce that one protein for a short time. It doesn't make you ill because it supplies only a harmless piece or shape of the pathogen, not the disease itself. The explanation never says why an inactivated pathogen or a single protein can't cause disease (for example, that it can't multiply).",
+      "quote": "A vaccine supplies the antigen without the disease: an inactivated pathogen, one purified protein, or mRNA that tells your cells to make that one protein briefly."
+    },
+    "2": {
+      "answer": "The first response starts from only a few rare matching cells, which need about a week to multiply into a large clone. After vaccination there are already 10–100 times more matching memory cells, and many fit better. So useful antibody appears in 2–4 days instead of 7–14, while the pathogen is still small.",
+      "quote": "When the real pathogen arrives, the response starts from a large, ready population instead of a few cells."
+    },
+    "3": {
+      "answer": "Not stated directly, so this is inferred. Each receptor binds only one shape, and the vaccine expands only the cells that match its antigen. An unrelated virus has different antigens, so the memory cells don't fit it. Its matching cells are still the rare naive ones, and the slow first response happens.",
+      "quote": "Each lymphocyte carries one **receptor** type, a protein that binds one shape."
+    },
+    "4": {
+      "answer": "Protection drops. The memory receptors were selected to fit the old shape, so they bind the changed antigen less well. The vaccine then needs an update, as with influenza each year.",
+      "quote": "Memory receptors fit the old shape. A variant with a changed antigen (as with influenza each year) binds less well, so protection drops and the vaccine needs an update."
+    }
+  },
+  "stops": [
+    "'and also gets an alarm signal' — the alarm signal is never explained (where it comes from, or why it is needed)",
+    "'a few rare naive cells' — 'naive' is used in the table but never defined",
+    "'shuffles gene segments at random' — gene segments are not explained",
+    "'(a B cell or a T cell)' — only B cells' role (making antibodies) is described; what T cells do is never said",
+    "'marks it for destruction' — destruction by what is not said",
+    "'Antibody level | baseline' — unclear what baseline means for a first meeting, or what it is measured against",
+    "'an inactivated pathogen' — why an inactivated pathogen is harmless is not explained",
+    "'the clone mutates its receptors during expansion and the best binders are kept' — the explanation does not say how the best binders are selected",
+    "'brings the antigen to the lymph nodes' — lymph nodes are not introduced, and how the vaccine gets the antigen there is not said"
+  ],
+  "excess": [
+    "'<!-- Stage 1, rendered from model.md in STE-80. -->' — internal note, not content",
+    "'<!-- claim: selection-not-design -->' — internal markup",
+    "'Boosters restore them (tetanus: about every 10 years).' — off the main question",
+    "'A person who makes few lymphocytes (for example, during chemotherapy) cannot expand a clone well' — a side case",
+    "'All day counts and frequencies are typical estimates; they vary by antigen, vaccine, and person.' — a caveat this reader did not need"
+  ],
+  "grounded": {
+    "1": true,
+    "2": true,
+    "3": true,
+    "4": true
+  }
+}

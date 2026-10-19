@@ -1,0 +1,188 @@
+{
+ "tool": "quiz",
+ "rendering": "prose",
+ "slug": "key-exchange",
+ "at": "2026-10-04T15:08:10",
+ "model": "default",
+ "prompt_sha": "bedad2b89e75",
+ "reply": {
+  "answers": {
+   "1": "Alice and Bob, the two parties. Eve, who reads every message but changes none. Mallory, who can replace messages. The public prime modulus p (23) and the public base g (5). The private numbers a and b. The public numbers A = g^a mod p and B = g^b mod p. The shared secret s = g^(ab) mod p, which becomes the encryption key. The 'mod' (remainder) operation. The one-way operation g^x mod p, whose reverse is the discrete logarithm. Authentication (digital signatures).",
+   "2": "Everyone, including Eve, knows p and g. Each party picks a private number and computes a public number from it with g^x mod p. The public numbers travel in the open. Each party raises the other's public number to its own private number, mod p, and both arrive at s. Eve sees p, g, A and B but not a, b or s. To get s she would in effect have to find a or b, which is the discrete logarithm problem. Mallory can slip in his own public number, because nothing in the exchange proves who sent a public number. Authentication fixes this.",
+   "3": "Each side sends g^(private) mod p. Each raises the other's value to its own private number, and since (g^b)^a = (g^a)^b = g^(ab), both get the same s. Eve would have to undo the mod-p power to find a or b, and no fast method for that is known when p is large.",
+   "4": "The key variable is the size of p (and of a and b). With a small p, like 23, Eve can try exponents one by one and finds a = 6 on the 6th try. With a 2048-bit p and a and b chosen at random from that range, trying them one by one is hopeless. The best known methods need about 2^112 operations, roughly 10^14 years at a trillion operations per second. Alice's own work grows only to about 4,000 steps, because repeated squaring doubles the exponent at each step. So a larger p makes Eve's job vastly harder while the honest parties' work grows only slowly.",
+   "5": "Assumption: the discrete logarithm is hard, and Eve cannot get s from A and B some other way. This is not proven; it rests on decades of failed attempts. Simplification: Eve only reads and never changes messages. Established fact: (x^a)^b = x^(ab), and taking remainders along the way does not change the final remainder. Another fact: with plain powers (no mod), a logarithm recovers the exponent.",
+   "6": "Alice and Bob agree in public on a prime p and a base g, and each secretly picks a private number. Each sends g raised to that private number, mod p. Each raises the number they receive to their own private number, mod p, and the exponent rule makes both results g^(ab) mod p, the shared secret. An eavesdropper sees only g^a and g^b mod p. Getting a or b back is the discrete logarithm problem, which is believed (but not proven) to be infeasible for a 2048-bit p, while the forward computation stays cheap. The exchange does not stop an attacker who replaces messages, so real systems add digital signatures.",
+   "7": "The hardest part was the argument that taking remainders along the way does not change the result, '(x + 23k) × y = ...', and how it extends to powers. A worked example showing (5^15 mod 23)^6 mod 23 equal to 5^90 mod 23 would help. The squaring step count ('2048 squarings plus at most 2048 multiplications') was also terse. It needed a word on reading the exponent in binary.",
+   "8": "Alice sends A = 5^3 mod 23 = 125 mod 23 = 10. Bob sends B = 5^2 mod 23 = 25 mod 23 = 2. Alice computes 2^3 mod 23 = 8. Bob computes 10^2 mod 23 = 100 mod 23 = 8. The shared secret is 8, which matches 5^6 mod 23 = 8 in the table.",
+   "9": "Without mod, A = 5^6 = 15625, and Eve takes the logarithm base 5 to get 6, because plain powers grow in order. With mod, the results jump around (5, 2, 10, 4, 20, 8, ...), so a result gives no hint of where the exponent lies. No fast reverse is known. Multiplication mod p would also fail, because Euclid's algorithm quickly finds the number that undoes it.",
+   "10": "No. Nothing in the exchange tells Alice who sent a public number. Mallory can substitute his own. Real systems add authentication, such as digital signatures and certificates.",
+   "11": "If Alice sends the key through a one-way operation (for example 5^6 mod 23 = 8), Bob receives the same 8 that Eve does. If Eve cannot recover 6 from 8, Bob cannot either. So each side needs its own private number, and each completes the other's half without undoing it.",
+   "12": "Alice sends A = 5^6 mod 23 = 8. Bob sends B = 5^15 mod 23 = 19. Alice computes 19^6 mod 23 = 2, and Bob computes 8^15 mod 23 = 2. The shared secret is 2.",
+   "13": "8 × 19 mod 23 = 14. Multiplying powers adds the exponents, so this gives 5^(6+15) mod 23. The shared secret needs the exponents multiplied, 5^(6×15). No known way gets from A and B to s without, in effect, finding a or b.",
+   "14": "No. It is an assumption, not a proof. No one has proven that the discrete logarithm is hard, or that there is no other route from A and B to s. Confidence rests on decades of failed attempts.",
+   "15": "Mallory replaces both public numbers with his own (5^3 mod 23 = 10). He then shares one secret with Alice (6) and a different one with Bob (5). He decrypts each message, reads it, and re-encrypts it for the other side, and neither party notices. Authentication prevents this."
+  },
+  "audit": {
+   "terms": [
+    "The number 6 is called 'the key' in the first-idea paragraph (line 14: 'Alice picks the key, 6'). Later the same 6 is 'a private number' (line 20: 'Alice picks a = 6'), and the key is something built from s. So 'key' means two different things.",
+    "'shared secret' (line 24) vs 'key' (lines 24 and 82: 'build the key ... from it'; 'use the output as the key'). The difference is only explained in Scope.",
+    "'p' / 'prime modulus' (line 19) vs 'mod 23' (line 11). The link between 'modulus' and the 'mod' notation is never stated outright.",
+    "'undoing number' (line 49) is an unnamed inverse. It is fine, but it is a separate term for the same idea as 'undoes'."
+   ],
+   "unexplained": [
+    "'about 2^112 operations (an estimate)' (line 56): it does not say where the figure comes from or how it changes with the size of p.",
+    "'2048 bits, about 617 decimal digits' (line 56): it does not say why 2048, or what a smaller p would mean for security.",
+    "'about 4,000 steps' (line 58): there is no comparison showing how small this is next to 2^112."
+   ],
+   "missing_why": [
+    "Line 58: 'Each squaring doubles the exponent, so a 2048-bit exponent needs about 2048 squarings plus at most 2048 multiplications'. It does not explain how an arbitrary exponent is built from squarings and multiplications (its binary digits).",
+    "Line 56: 'The best known methods are faster' gives no hint of why they beat trying exponents one by one, or why they still fail.",
+    "Line 19 / line 82: why p must be prime is deferred to Scope and only briefly justified there ('lets a good g reach every non-zero remainder').",
+    "Line 50: 'the results jump around ... A result near 8 says nothing about where 6 is' asserts that the outputs are unpredictable. It gives no reason why mod causes this beyond the single example."
+   ],
+   "excess": [
+    "Line 80: Scope's elliptic-curve paragraph; no question or step of the argument uses it.",
+    "Line 83: the quantum-computer paragraph; it is a detour from the argument.",
+    "Line 75: the 'Answer' section largely repeats the bold summary at line 3."
+   ]
+  },
+  "gaps": [
+   "The explanation never shows that the exchange gives the right answer when you reduce mod p along the way (for example, a check that 5^90 mod 23 = 2). The reader has to trust the general argument.",
+   "How Euclid's algorithm finds the undoing number is not shown. That is acceptable, but the reader has to take it on trust.",
+   "How the shared secret becomes an encryption key (the hash function) is only named in Scope."
+  ]
+ },
+ "grade": {
+  "scores": {
+   "1": 2,
+   "2": 2,
+   "3": 2,
+   "4": 2,
+   "5": 2,
+   "6": 2,
+   "7": 2,
+   "8": 2,
+   "9": 2,
+   "10": 2,
+   "11": 2,
+   "12": 1,
+   "13": 2,
+   "14": 2,
+   "15": 2
+  },
+  "reasons": {
+   "12": "The numbers are correct (A = 8, B = 19, s = 2), but the expected statement is missing: Alice computes B^a mod p, Bob computes A^b mod p, and both equal g^(ab) mod p because (g^a)^b = (g^b)^a and reducing mod p at each step does not change the remainder. The rubric says a case alone is not required for 2, so a case without the principle earns only partial credit. Note for the explainer: the question asks only for numbers while the expect asks for the reason, so the item wording may need fixing (explainer decide).",
+   "13": "Full credit, narrowly. The answer does not name the discrete logarithm problem. It does state that no known way gets from A and B to s without in effect finding a or b, which is the substance of the expect."
+  },
+  "pass": false
+ },
+ "usage": {
+  "cost": 0.1955264,
+  "seconds": 46
+ },
+ "findings": [
+  {
+   "n": 1,
+   "severity": "gap",
+   "kind": "terms",
+   "text": "The number 6 is called 'the key' in the first-idea paragraph (line 14: 'Alice picks the key, 6'). Later the same 6 is 'a private number' (line 20: 'Alice picks a = 6'), and the key is something built from s. So 'key' means two different things."
+  },
+  {
+   "n": 2,
+   "severity": "gap",
+   "kind": "terms",
+   "text": "'shared secret' (line 24) vs 'key' (lines 24 and 82: 'build the key ... from it'; 'use the output as the key'). The difference is only explained in Scope."
+  },
+  {
+   "n": 3,
+   "severity": "gap",
+   "kind": "terms",
+   "text": "'p' / 'prime modulus' (line 19) vs 'mod 23' (line 11). The link between 'modulus' and the 'mod' notation is never stated outright."
+  },
+  {
+   "n": 4,
+   "severity": "gap",
+   "kind": "terms",
+   "text": "'undoing number' (line 49) is an unnamed inverse. It is fine, but it is a separate term for the same idea as 'undoes'."
+  },
+  {
+   "n": 5,
+   "severity": "gap",
+   "kind": "unexplained",
+   "text": "'about 2^112 operations (an estimate)' (line 56): it does not say where the figure comes from or how it changes with the size of p."
+  },
+  {
+   "n": 6,
+   "severity": "gap",
+   "kind": "unexplained",
+   "text": "'2048 bits, about 617 decimal digits' (line 56): it does not say why 2048, or what a smaller p would mean for security."
+  },
+  {
+   "n": 7,
+   "severity": "gap",
+   "kind": "unexplained",
+   "text": "'about 4,000 steps' (line 58): there is no comparison showing how small this is next to 2^112."
+  },
+  {
+   "n": 8,
+   "severity": "gap",
+   "kind": "missing_why",
+   "text": "Line 58: 'Each squaring doubles the exponent, so a 2048-bit exponent needs about 2048 squarings plus at most 2048 multiplications'. It does not explain how an arbitrary exponent is built from squarings and multiplications (its binary digits)."
+  },
+  {
+   "n": 9,
+   "severity": "gap",
+   "kind": "missing_why",
+   "text": "Line 56: 'The best known methods are faster' gives no hint of why they beat trying exponents one by one, or why they still fail."
+  },
+  {
+   "n": 10,
+   "severity": "gap",
+   "kind": "missing_why",
+   "text": "Line 19 / line 82: why p must be prime is deferred to Scope and only briefly justified there ('lets a good g reach every non-zero remainder')."
+  },
+  {
+   "n": 11,
+   "severity": "gap",
+   "kind": "missing_why",
+   "text": "Line 50: 'the results jump around ... A result near 8 says nothing about where 6 is' asserts that the outputs are unpredictable. It gives no reason why mod causes this beyond the single example."
+  },
+  {
+   "n": 12,
+   "severity": "excess",
+   "kind": "excess",
+   "text": "Line 80: Scope's elliptic-curve paragraph; no question or step of the argument uses it."
+  },
+  {
+   "n": 13,
+   "severity": "excess",
+   "kind": "excess",
+   "text": "Line 83: the quantum-computer paragraph; it is a detour from the argument."
+  },
+  {
+   "n": 14,
+   "severity": "excess",
+   "kind": "excess",
+   "text": "Line 75: the 'Answer' section largely repeats the bold summary at line 3."
+  },
+  {
+   "n": 15,
+   "severity": "gap",
+   "kind": "gap",
+   "text": "The explanation never shows that the exchange gives the right answer when you reduce mod p along the way (for example, a check that 5^90 mod 23 = 2). The reader has to trust the general argument."
+  },
+  {
+   "n": 16,
+   "severity": "gap",
+   "kind": "gap",
+   "text": "How Euclid's algorithm finds the undoing number is not shown. That is acceptable, but the reader has to take it on trust."
+  },
+  {
+   "n": 17,
+   "severity": "gap",
+   "kind": "gap",
+   "text": "How the shared secret becomes an encryption key (the hash function) is only named in Scope."
+  }
+ ]
+}

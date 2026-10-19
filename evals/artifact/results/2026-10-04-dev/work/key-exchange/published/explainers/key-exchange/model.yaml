@@ -1,0 +1,112 @@
+# Machine-readable half of model.md. `explainer check key-exchange` holds every rendering to it.
+
+values:
+  p: 23
+  g: 5
+  a: 6
+  b: 15
+  A: 8
+  B: 19
+  s: 2
+  plain_A: 15625
+  product_AB: 14
+  mult_A: 7
+  mult_inverse: 14
+  mult_s: 13
+  brute_tries: 6
+  real_p_bits: 2048
+  real_p_digits: 617
+  mallory_m: 3
+  mallory_M: 10
+  mallory_s_alice: 6
+  mallory_s_bob: 5
+  product_AB_raw: 152
+  squaring_steps: 4000
+  powers_of_5_mod_23: [5, 2, 10, 4, 20, 8, 17, 16, 11, 9, 22, 18, 21, 13, 19, 3, 15, 6, 7, 12, 14, 1]
+
+allow: [1, 2, 3, 4, 16, 18, 25, 100, 112, 125, 10, 12, 30, 36, 70, 75, 22]
+
+require:
+  - path: A
+    in: [prose]
+  - path: B
+    in: [prose]
+  - path: s
+    in: [prose]
+  - path: plain_A
+    in: [prose]
+  - path: product_AB
+    in: [prose]
+  - path: real_p_digits
+    in: [prose]
+
+claims:
+  - id: two-privates
+    kind: why
+    about: [private number]
+    statement: "Each side needs its own private number, because a single secret sent in one-way form is as hard for the receiver to undo as for Eve."
+    alternative: "Alice picks the key k = 6 and sends 5^6 mod 23 = 8."
+    counterexample: "Bob receives 8 and is as stuck as Eve: getting 6 back from 8 is the reverse problem."
+    ask: "Why can't Alice just pick the key and send it through a one-way operation?"
+
+  - id: agreement
+    kind: mechanism
+    statement: "Alice computes B^a mod p and Bob computes A^b mod p; both equal g^(ab) mod p, because (g^a)^b = (g^b)^a and taking remainders at each step does not change the result."
+    example: "p = 23, g = 5, a = 6, b = 15: A = 8, B = 19; 19^6 mod 23 = 2 and 8^15 mod 23 = 2."
+    ask: "With p = 23, g = 5, a = 6, b = 15, what number does each side send, what shared secret do both get, and why must the two results be equal?"
+
+  - id: why-mod
+    kind: why
+    about: [mod]
+    statement: "The powers are taken mod p because plain powers can be reversed with an ordinary logarithm."
+    alternative: "Send plain g^a."
+    counterexample: "A = 5^6 = 15625; log base 5 of 15625 is 6, so Eve has a at once."
+
+  - id: why-power
+    kind: why
+    about: [power]
+    statement: "The operation is a power, not a multiplication, because multiplication mod p has a fast reverse."
+    alternative: "Send A = g·a mod p."
+    counterexample: "A = 30 mod 23 = 7. Eve multiplies by 14 (5 × 14 = 70, which is 1 more than 3 × 23) and gets 7 × 14 mod 23 = 6 = a; the shared secret 13 follows."
+
+  - id: eve-stuck
+    kind: guarantee
+    statement: "Eve sees p, g, A, B but not a, b, or s; to get s Eve must, as far as anyone knows, find a or b, which is the discrete logarithm problem."
+    example: "Combining the public numbers fails: A × B mod 23 = 152 mod 23 = 14 = 5^(6+15) mod 23, not s = 2. With a 617-digit p, the best known methods would take on the order of 10^14 years."
+    counterexample: "With p = 23, Eve tries exponents 1, 2, 3, ...: 5, 2, 10, 4, 20, 8 — a = 6 on the 6th try."
+    ask: "Eve sees A = 8 and B = 19. Why can't Eve multiply them to get the shared secret, what would Eve have to do instead, and why is that hard?"
+
+  - id: assumption
+    kind: definition
+    statement: "That the discrete logarithm is hard for large p is believed, not proven."
+    ask: "Is it proven that Eve cannot find the shared secret?"
+
+  - id: mitm
+    kind: limit
+    statement: "The exchange protects against a reader, not against an attacker who changes messages: such an attacker can run one exchange with each side."
+    example: "Mallory replaces A and B with 5^3 mod 23 = 10. Alice's shared secret becomes 6, Bob's becomes 5, and Mallory knows both."
+    ask: "What can an attacker who can change messages, not just read them, do?"
+
+terms:
+  - term: private number
+    means: "a or b; picked at random and never sent"
+    avoid: [private key, secret number, private value]
+  - term: public number
+    means: "A or B; g to the private number, mod p; sent on the channel"
+    avoid: [public key, public value]
+  - term: shared secret
+    means: "s; the number both sides compute; it becomes the key"
+    avoid: [shared key]
+
+budget: {prose: 1100, reason: "one mechanism with worked numbers, three why-cases with numbers, the hardness assumption, and the man-in-the-middle limit"}
+
+quiz:
+  - q: "Alice and Bob use p = 23 and g = 5. Alice picks a = 3, Bob picks b = 2. What does each send, and what shared secret do they get?"
+    expect: "Alice sends 5^3 mod 23 = 10; Bob sends 5^2 mod 23 = 2; Alice computes 2^3 = 8, Bob computes 10^2 = 100 mod 23 = 8; s = 8."
+    misconception: "They add or multiply the public numbers (10 × 2 = 20, or 12)."
+  - q: "Why does the method use powers mod p rather than plain powers?"
+    expect: "Plain powers can be reversed with a logarithm (log base 5 of 15625 = 6); the remainder scrambles the order, and no fast reverse is known."
+    misconception: "Mod p just keeps the numbers small."
+  - q: "Does the exchange alone guarantee Alice is talking to Bob?"
+    expect: "No. An active attacker can replace the public numbers and run a separate exchange with each side; authentication is needed."
+    misconception: "Yes, because only Bob can compute the shared secret."

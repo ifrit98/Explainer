@@ -1,0 +1,399 @@
+{
+ "tool": "coldread",
+ "rendering": "narrative",
+ "slug": "quorum",
+ "at": "2026-10-04T15:13:28",
+ "model": "default",
+ "prompt_sha": "46d121ad7ad5",
+ "reply": {
+  "beats": [
+   {
+    "at": "Beat 1 (hook)",
+    "text": "Shown: answer in bold. Said: \"Both clusters need 3 servers to agree; 5 − 3 = 2, 4 − 3 = 1.\"",
+    "unresolved": [
+     "\"Both clusters\": no cluster has been introduced, and nothing says one has 5 servers and the other has 4",
+     "\"agree\": agree on what?",
+     "\"5 − 3 = 2, 4 − 3 = 1\": nothing says what the 2 and the 1 count (failures the cluster can survive)"
+    ],
+    "unsaid": [
+     "The question itself (why 5 survives 2 failures but 4 survives only 1) appears only in the author's 'Reader's question' column. The reader hears an answer with no question before it."
+    ],
+    "leap": [
+     "Why 3 for both? No reason is given yet. That is fine for a hook, but it is not marked as something to be explained later."
+    ],
+    "excess": [],
+    "purpose_unclear": true
+   },
+   {
+    "at": "Beat 2 (name)",
+    "text": "Shown: x = 1 accepted by A, B, C. Said: \"A cluster decides a change only when a quorum accepts it. Define accept, decide, quorum size, quorum.\"",
+    "unresolved": [
+     "\"quorum\": the script says \"Define accept, decide, quorum size, quorum\" but never gives the definitions, so the reader still does not know what a quorum is",
+     "\"accept\"",
+     "\"decide\"",
+     "\"quorum size\""
+    ],
+    "unsaid": [
+     "\"x = 1\": what x is and that it stands for a proposed change",
+     "\"A, B, C\": these letters are never said to be servers, and nothing says how many servers the cluster has",
+     "that the quorum size here is 3"
+    ],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Beat 3 (objection)",
+    "text": "Shown: partition {A,B}/{C,D}; 500 ms timeout case. Said: \"A cannot tell crash from cut-off. With quorum size 2, both halves decide: split brain.\"",
+    "unresolved": [
+     "\"split brain\": named but never defined",
+     "\"partition\" (shown only)",
+     "\"cut-off\": cut off from what? The network split is never described in words"
+    ],
+    "unsaid": [
+     "\"500 ms timeout case\"",
+     "the {A,B}/{C,D} split, and that we have moved from 5 servers to a 4-server cluster",
+     "that the two halves decide *different* changes (no x = 2 is said here)"
+    ],
+    "leap": [
+     "Why both halves deciding is harmful. The conflict (x = 1 on one side, x = 2 on the other) is not stated",
+     "Why \"A cannot tell crash from cut-off\" means it must not simply carry on"
+    ],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Beat 4 (mechanism)",
+    "text": "Shown: {A,B,C} and {C,D,E}; C refuses x = 2. Said: \"More than half of all n: two such groups share a server, and that server refuses the conflict. Count all n, not reachable ones.\"",
+    "unresolved": [
+     "\"n\": never said to mean the number of servers",
+     "\"the conflict\": x = 2 has never been said"
+    ],
+    "unsaid": [
+     "\"C refuses x = 2\": the visual introduces x = 2 without the words mentioning it",
+     "E appears, so we are back to 5 servers, but nothing says so"
+    ],
+    "leap": [
+     "Why the shared server refuses. No rule has been stated that a server accepts only one value per change",
+     "\"Count all n, not reachable ones\": no reason is given here, and the link back to beat 3 (survivors cannot tell crash from cut-off) is not made"
+    ],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Beat 5 (test)",
+    "text": "Shown: predict, then answer. Said: \"3 side decides, 2 side stops.\"",
+    "unresolved": [
+     "\"stops\": its meaning (no new changes, no data loss) is only given in beat 7"
+    ],
+    "unsaid": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Beat 6 (generalize)",
+    "text": "Shown: table n = 3..7. Said: \"Tolerance = n − majority size. Even n adds nothing, and costs one more accept per change.\"",
+    "unresolved": [
+     "\"majority size\": beat 4 said \"more than half\" but never named it or gave its value per n",
+     "\"Tolerance\": only defined by the equation"
+    ],
+    "unsaid": [
+     "the table's columns and any formula in it (for example floor(n/2)+1) are not read out"
+    ],
+    "leap": [
+     "\"Even n adds nothing\": the reason (more than half of 2k and of 2k−1 is the same number) is left for the reader to work out from the table"
+    ],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Beat 7 (close)",
+    "text": "Said: \"Answer again; 'stop' means no new changes, not data loss; scope pointers.\"",
+    "unresolved": [
+     "\"scope pointers\": no actual content is given"
+    ],
+    "unsaid": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   }
+  ],
+  "blocking": [
+   "Beat 1: the question is never asked. The reader hears \"Both clusters need 3 servers to agree; 5 − 3 = 2, 4 − 3 = 1\" without knowing what the 2 and 1 count.",
+   "Beat 2: \"Define accept, decide, quorum size, quorum.\" The definitions are not in the script, so the central term \"quorum\" stays undefined.",
+   "Beat 3: \"both halves decide: split brain\". Nothing says the halves decide *different* changes, so the harm is never stated.",
+   "Beat 4: \"More than half of all n\". n is never defined.",
+   "Beat 4: \"that server refuses the conflict\". The rule that makes it refuse is never given, and this is the core of the argument."
+  ],
+  "cuts": [
+   "Beat 3: the shown \"500 ms timeout case\". The words never use it, so it is noise.",
+   "Beat 7: \"scope pointers\" with no content. Either fill it in or cut it.",
+   "Beat 6: \"and costs one more accept per change\". This is minor, and the main line does not need it."
+  ],
+  "question": {
+   "text": "Why does a 5-server cluster survive 2 failures while a 4-server cluster survives only 1?",
+   "known_at": "The script never states it outright. The reader can only infer it from beat 1's \"5 − 3 = 2, 4 − 3 = 1\", and fully only by beat 6, where \"Tolerance\" is introduced.",
+   "result_stated": "Yes, at beat 1: \"Both clusters need 3 servers to agree; 5 − 3 = 2, 4 − 3 = 1.\" It is restated at beat 6: \"Tolerance = n − majority size. Even n adds nothing\"."
+  },
+  "motive": "There is no reason to care in the spoken script. The cost point (a 4th server buys nothing) appears only in the plan. Beat 6's \"Even n adds nothing, and costs one more accept per change\" comes closest, but it arrives late. The reason for the approach is partly there in beat 3: \"A cannot tell crash from cut-off.\"",
+  "close": "Only partly. Beat 7 says \"Answer again\" but the script gives no wording, and the general argument (any two majorities share a server) is not restated in words at the close. It was said only in beat 4: \"two such groups share a server, and that server refuses the conflict\".",
+  "recap": "A cluster only accepts a change if more than half of all its servers agree, so two groups can't decide conflicting things. 5 and 4 both need 3, so 5 can lose 2 but 4 can lose only 1.",
+  "strongest": "Beat 4: \"two such groups share a server, and that server refuses the conflict\". The visual {A,B,C} and {C,D,E} grounds it with a concrete overlap.",
+  "weakest": "Beat 2: \"Define accept, decide, quorum size, quorum.\" This is an instruction to the author rather than an explanation, so the key vocabulary never reaches the reader.",
+  "suggestions": [
+   "Open beat 1 by asking the question out loud before giving the answer.",
+   "In beat 2, write out the definitions, for example: accept means a server stores the change and replies yes; a quorum is a group of that many servers. Say that A to E are servers.",
+   "In beat 3, say that one half sets x = 1 and the other sets x = 2, and explain why that is bad.",
+   "In beat 4, define n as the total number of configured servers. State that each server accepts only one value for a given change, which is why C refuses.",
+   "Read out floor(n/2)+1 and walk through the n = 4 and n = 5 rows of the table in words.",
+   "In beat 7, restate the overlap argument in one sentence and list the actual scope limits."
+  ]
+ },
+ "usage": {
+  "cost": 0.12129479999999998,
+  "seconds": 43
+ },
+ "findings": [
+  {
+   "n": 1,
+   "severity": "blocking",
+   "kind": "blocking",
+   "text": "Beat 1: the question is never asked. The reader hears \"Both clusters need 3 servers to agree; 5 − 3 = 2, 4 − 3 = 1\" without knowing what the 2 and 1 count."
+  },
+  {
+   "n": 2,
+   "severity": "blocking",
+   "kind": "blocking",
+   "text": "Beat 2: \"Define accept, decide, quorum size, quorum.\" The definitions are not in the script, so the central term \"quorum\" stays undefined."
+  },
+  {
+   "n": 3,
+   "severity": "blocking",
+   "kind": "blocking",
+   "text": "Beat 3: \"both halves decide: split brain\". Nothing says the halves decide *different* changes, so the harm is never stated."
+  },
+  {
+   "n": 4,
+   "severity": "blocking",
+   "kind": "blocking",
+   "text": "Beat 4: \"More than half of all n\". n is never defined."
+  },
+  {
+   "n": 5,
+   "severity": "blocking",
+   "kind": "blocking",
+   "text": "Beat 4: \"that server refuses the conflict\". The rule that makes it refuse is never given, and this is the core of the argument."
+  },
+  {
+   "n": 6,
+   "severity": "excess",
+   "kind": "cut",
+   "text": "Beat 3: the shown \"500 ms timeout case\". The words never use it, so it is noise."
+  },
+  {
+   "n": 7,
+   "severity": "excess",
+   "kind": "cut",
+   "text": "Beat 7: \"scope pointers\" with no content. Either fill it in or cut it."
+  },
+  {
+   "n": 8,
+   "severity": "excess",
+   "kind": "cut",
+   "text": "Beat 6: \"and costs one more accept per change\". This is minor, and the main line does not need it."
+  },
+  {
+   "n": 9,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "Beat 1 (hook): \"Both clusters\": no cluster has been introduced, and nothing says one has 5 servers and the other has 4"
+  },
+  {
+   "n": 10,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "Beat 1 (hook): \"agree\": agree on what?"
+  },
+  {
+   "n": 11,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "Beat 1 (hook): \"5 − 3 = 2, 4 − 3 = 1\": nothing says what the 2 and the 1 count (failures the cluster can survive)"
+  },
+  {
+   "n": 12,
+   "severity": "edge",
+   "kind": "unsaid",
+   "text": "Beat 1 (hook): The question itself (why 5 survives 2 failures but 4 survives only 1) appears only in the author's 'Reader's question' column. The reader hears an answer with no question before it."
+  },
+  {
+   "n": 13,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "Beat 1 (hook): Why 3 for both? No reason is given yet. That is fine for a hook, but it is not marked as something to be explained later."
+  },
+  {
+   "n": 14,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "Beat 2 (name): \"quorum\": the script says \"Define accept, decide, quorum size, quorum\" but never gives the definitions, so the reader still does not know what a quorum is"
+  },
+  {
+   "n": 15,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "Beat 2 (name): \"accept\""
+  },
+  {
+   "n": 16,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "Beat 2 (name): \"decide\""
+  },
+  {
+   "n": 17,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "Beat 2 (name): \"quorum size\""
+  },
+  {
+   "n": 18,
+   "severity": "edge",
+   "kind": "unsaid",
+   "text": "Beat 2 (name): \"x = 1\": what x is and that it stands for a proposed change"
+  },
+  {
+   "n": 19,
+   "severity": "edge",
+   "kind": "unsaid",
+   "text": "Beat 2 (name): \"A, B, C\": these letters are never said to be servers, and nothing says how many servers the cluster has"
+  },
+  {
+   "n": 20,
+   "severity": "edge",
+   "kind": "unsaid",
+   "text": "Beat 2 (name): that the quorum size here is 3"
+  },
+  {
+   "n": 21,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "Beat 3 (objection): \"split brain\": named but never defined"
+  },
+  {
+   "n": 22,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "Beat 3 (objection): \"partition\" (shown only)"
+  },
+  {
+   "n": 23,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "Beat 3 (objection): \"cut-off\": cut off from what? The network split is never described in words"
+  },
+  {
+   "n": 24,
+   "severity": "edge",
+   "kind": "unsaid",
+   "text": "Beat 3 (objection): \"500 ms timeout case\""
+  },
+  {
+   "n": 25,
+   "severity": "edge",
+   "kind": "unsaid",
+   "text": "Beat 3 (objection): the {A,B}/{C,D} split, and that we have moved from 5 servers to a 4-server cluster"
+  },
+  {
+   "n": 26,
+   "severity": "edge",
+   "kind": "unsaid",
+   "text": "Beat 3 (objection): that the two halves decide *different* changes (no x = 2 is said here)"
+  },
+  {
+   "n": 27,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "Beat 3 (objection): Why both halves deciding is harmful. The conflict (x = 1 on one side, x = 2 on the other) is not stated"
+  },
+  {
+   "n": 28,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "Beat 3 (objection): Why \"A cannot tell crash from cut-off\" means it must not simply carry on"
+  },
+  {
+   "n": 29,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "Beat 4 (mechanism): \"n\": never said to mean the number of servers"
+  },
+  {
+   "n": 30,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "Beat 4 (mechanism): \"the conflict\": x = 2 has never been said"
+  },
+  {
+   "n": 31,
+   "severity": "edge",
+   "kind": "unsaid",
+   "text": "Beat 4 (mechanism): \"C refuses x = 2\": the visual introduces x = 2 without the words mentioning it"
+  },
+  {
+   "n": 32,
+   "severity": "edge",
+   "kind": "unsaid",
+   "text": "Beat 4 (mechanism): E appears, so we are back to 5 servers, but nothing says so"
+  },
+  {
+   "n": 33,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "Beat 4 (mechanism): Why the shared server refuses. No rule has been stated that a server accepts only one value per change"
+  },
+  {
+   "n": 34,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "Beat 4 (mechanism): \"Count all n, not reachable ones\": no reason is given here, and the link back to beat 3 (survivors cannot tell crash from cut-off) is not made"
+  },
+  {
+   "n": 35,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "Beat 5 (test): \"stops\": its meaning (no new changes, no data loss) is only given in beat 7"
+  },
+  {
+   "n": 36,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "Beat 6 (generalize): \"majority size\": beat 4 said \"more than half\" but never named it or gave its value per n"
+  },
+  {
+   "n": 37,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "Beat 6 (generalize): \"Tolerance\": only defined by the equation"
+  },
+  {
+   "n": 38,
+   "severity": "edge",
+   "kind": "unsaid",
+   "text": "Beat 6 (generalize): the table's columns and any formula in it (for example floor(n/2)+1) are not read out"
+  },
+  {
+   "n": 39,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "Beat 6 (generalize): \"Even n adds nothing\": the reason (more than half of 2k and of 2k−1 is the same number) is left for the reader to work out from the table"
+  },
+  {
+   "n": 40,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "Beat 7 (close): \"scope pointers\": no actual content is given"
+  }
+ ]
+}

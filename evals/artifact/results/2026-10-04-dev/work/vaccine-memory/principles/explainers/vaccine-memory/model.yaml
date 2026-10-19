@@ -1,0 +1,21 @@
+slug: vaccine-memory
+precursor_frequency: "1 in 100,000 to 1 in 1,000,000"   # estimate
+division_time_hours: 8                                   # estimate, activated lymphocyte
+example:
+  naive_matching_cells: 100
+  expansion_days: 5
+  doublings: 15
+  peak_cells: 3276800          # 100 * 2^15
+  surviving_fraction: 0.05     # estimate, 5-10% range
+  memory_cells: 163840
+  fold_increase_over_naive: 1638
+  re_expansion_doublings: 4.32 # log2(20)
+  re_expansion_days: 1.4
+virus_race:                    # illustrative
+  start_particles: 100
+  doubling_hours: 8
+  day3: 51200
+  day7: 209715200
+primary_response_days: "7-14"
+memory_response_days: "2-4"
+failure_case: influenza antigenic drift

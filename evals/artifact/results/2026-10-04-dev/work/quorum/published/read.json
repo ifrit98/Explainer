@@ -1,0 +1,41 @@
+{
+  "answers": {
+    "1": {
+      "answer": "A change is decided (committed/final) only when more than half of all the cluster's configured servers accept it, meaning they store it on disk and reply \"yes\". The explanation says \"decided\" rather than \"committed\".",
+      "quote": "A cluster decides a change only when more than half of all its servers accept the change."
+    },
+    "2": {
+      "answer": "Any two groups that are each more than half must share at least one server. That server has already accepted one change for a given position, so it refuses a conflicting one. Two groups that need not overlap (for example 2 and 2 out of 4) could both decide different values during a partition. That is split brain.",
+      "quote": "Two quorums each hold more than half of the servers, so together they list more than n servers. Some server must therefore be in both."
+    },
+    "3": {
+      "answer": "2. The majority is 4, and 6 − 4 = 2, the same as with 5 servers.",
+      "quote": "| 6 | 4 | 2 |"
+    },
+    "4": {
+      "answer": "The group of 3 can still commit, because 3 meets the majority of 3 out of all 5 configured servers. The group of 2 stops, because 2 < 3, and it must count against all 5 servers, not just the 2 it can reach.",
+      "quote": "A, B, C have 3 accepts, and 3 ≥ 3, so they keep deciding. D and E have 2, and 2 < 3, so they stop. The copies cannot disagree."
+    }
+  },
+  "stops": [
+    "'committed' is never used. The page says 'decided', and a reader has to map the two: \"When enough servers accept, the change is *decided*: it is final.\"",
+    "The positions idea is introduced quickly and its purpose only becomes clear later: \"For each position in that order, a server accepts only one change. The examples below use change 7, an arbitrary position.\"",
+    "floor notation appears without explanation: \"floor(n/2) + 1\"",
+    "It is unclear why a larger quorum lets fewer servers fail. This is stated without a reason: \"a larger quorum is also safe, but it lets fewer servers fail.\"",
+    "The restart assumption feels sudden, and it is unclear how real systems ensure it: \"a server remembers what it accepted, even after a restart.\"",
+    "Raft and Paxos are named without explanation: \"in real protocols (Raft, Paxos), the shared server does more than refuse.\"",
+    "The simplified refusal raises a question that is left open: how does the new group keep x = 1? \"It reports x = 1 to the new group, and the new group keeps x = 1.\"",
+    "\"Servers that lie need larger clusters.\" says how much larger only implicitly."
+  ],
+  "excess": [
+    "The final Answer section repeats the opening summary: \"Both clusters need 3 accepts to decide a change, because 3 is more than half of 4 and of 5.\"",
+    "The upgrade aside is slightly off the question: \"A tolerance of 2 means one server can be off for an upgrade while another one fails.\"",
+    "The line about 4 servers repeats the table: \"With 4 servers and 2 failed, only 2 servers answer, and 2 < 3: the cluster stops.\""
+  ],
+  "grounded": {
+    "1": true,
+    "2": true,
+    "3": true,
+    "4": true
+  }
+}

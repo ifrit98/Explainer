@@ -1,0 +1,40 @@
+{
+  "answers": {
+    "1": {
+      "answer": "A double is a whole number times a power of two, so it can only be a fraction whose denominator is a power of two. 1/10 has a factor 5 in its denominator, and no power of two is divisible by 5. So in binary, 1/10 repeats forever and has to be cut off and rounded.",
+      "quote": "The denominator of 1/10 has a factor 5. No power of two is divisible by 5, so 1/10 never ends in binary:"
+    },
+    "2": {
+      "answer": "Stored 0.1 and stored 0.2 are both slightly too big, and stored 0.3 is slightly too small. The exact sum of the stored inputs lands exactly halfway between two doubles (…595.5 u). The tie rule rounds to the even one, …596 u. Stored 0.3 is …595 u, one gap away, so the two values are different and == is false.",
+      "quote": "The exact sum is exactly halfway between the doubles at …595 u and …596 u. This case is a **tie**."
+    },
+    "3": {
+      "answer": "Compare with a tolerance, such as abs((0.1 + 0.2) - 0.3) < 1e-9. The tolerance should be much bigger than the gap but smaller than any difference that matters to you. For money, count whole cents as integers or use a decimal type.",
+      "quote": "Compare with a tolerance instead: `abs((0.1 + 0.2) - 0.3) < 1e-9` is true"
+    },
+    "4": {
+      "answer": "Yes, it is true. 1/2, 1/4 and 3/4 have power-of-two denominators, so each is stored with no error, and the exact sum is itself a double.",
+      "quote": "All three are fractions with power-of-two denominators (1/2, 1/4, 3/4), so each is stored with error 0, and the exact sum is itself a double."
+    }
+  },
+  "stops": [
+    "Where the sizes come from: the text says the range 0.25–0.5 uses 'whole numbers from 2^52 up to 2^53, times 2^-54' but never says why the multiplier is 2^-54: \"Doubles between 0.25 and 0.5 are whole numbers from 2^52 up to 2^53, times 2^-54.\"",
+    "Why 0.1's stored value is …198.5 and not …198.25 is only clear after checking the table: \"its stored value is a multiple of u/4, such as …198.5.\"",
+    "The tie rule is stated but not justified, so the reader may wonder why 'even' is the choice: \"sends a tie to the neighbor whose count of u is even.\"",
+    "The rule for printing is new and needs a reread: \"Languages print the shortest decimal that rounds back to the same double.\"",
+    "Why 1e-9 is the right size 'for values near 1' is not explained: \"for values near 1, 1e-9 meets both conditions.\"",
+    "The table has no blank line before the next heading, which may break how the page renders: \"| 0.3 | 5404319552844595.2 | u | 5404319552844595 | 0.29999999999999998890 | −1.11e-17 |\""
+  ],
+  "excess": [
+    "The Decimal type is off the main question: \"Python's `Decimal(\"0.1\") + Decimal(\"0.2\") == Decimal(\"0.3\")` is true\"",
+    "The list of topics not covered: \"How errors grow over many operations, such as adding 0.1 ten times: see a numerical analysis text.\"",
+    "Giving the gap for the 0.0625–0.125 range again, which the table already shows: \"Between 0.0625 and 0.125 the gap is u/4.\"",
+    "The idea that the addition is correct repeats the summary at the top: \"The addition did not make a mistake.\""
+  ],
+  "grounded": {
+    "1": true,
+    "2": true,
+    "3": true,
+    "4": true
+  }
+}

@@ -1,0 +1,171 @@
+{
+ "tool": "quiz",
+ "rendering": "prose",
+ "slug": "quorum",
+ "at": "2026-10-04T15:16:29",
+ "model": "default",
+ "prompt_sha": "fda2e8264e06",
+ "reply": {
+  "answers": {
+   "1": "A cluster of n servers holding copies of the same data; the client that proposes a change (e.g. x = 1); the change and its position in the order (change 7); a server's acceptance (\"yes\", stored on disk); a quorum, meaning a group of servers of quorum size; the majority size floor(n/2)+1; a partition, meaning network groups that cannot reach each other; split brain; tolerance.",
+   "2": "A client proposes a change to the cluster's servers. Each server accepts at most one change per position. A change is decided when a quorum of servers accept it. The quorum size is set to the majority of all n configured servers, so any two quorums share at least one server. A server in both quorums refuses a second, conflicting change, so two sides of a partition cannot both decide. Tolerance is n minus the majority size.",
+   "3": "Any two majorities of the same n servers must share a server. That server accepts only one change per position, so only one change can win each position, and split brain cannot happen. This holds even when a partition looks the same as a crash. The price is that the cluster stops once fewer than a majority of servers answer.",
+   "4": "The key variable is n, the cluster size. Going from odd n to n+1 raises the majority size by 1, so tolerance stays the same and each change needs one more accept. Going from even n to n+1 leaves the majority size unchanged, so tolerance rises by 1. Separately, if the quorum size drops to half or less, two disjoint groups can both decide and split brain becomes possible.",
+   "5": "Assumption: a server remembers what it accepted, even after a restart. A second one: servers never send a false \"yes\". Observation or fact: two quorums of 3 among 5 servers list 6 members, so they must share at least one server. Also: a server cannot tell a crashed peer from a cut network link, because both look like the same silence.",
+   "6": "A cluster decides a change only when more than half of all its configured servers accept it, and each server accepts only one change per position. A silent server may have crashed, or the network may be partitioned. Letting a smaller group continue could let two sides decide different values (split brain). Any two majorities overlap, and the shared server refuses the second value, so only one value can win. Tolerance is n minus the majority size: 5 servers need 3 and can lose 2, while 4 servers also need 3 and can lose only 1, which is why odd sizes are preferred.",
+   "7": "The hardest part was the jump from the 5-server overlap example to the general formula floor(n/2)+1. The page never shows that two quorums of that size always add up to more than n, for even n as well as odd. A one-line count for n=4 (3+3=6>4) and n=6 (4+4=8>6) would have closed that gap. A smaller point: the table uses both 'Accepts' and 'Votes'.",
+   "8": "2. The majority size is 4, and 6 − 4 = 2.",
+   "9": "Two groups of 2 among 4 servers need not share a server. In a partition {A,B} | {C,D}, both groups could decide different values for the same position, which is split brain.",
+   "10": "The group of 3 has 3 ≥ 3 votes, so it keeps deciding. The group of 2 has 2 < 3, so it stops: it keeps the changes already decided but decides no new ones until enough servers return.",
+   "11": "They cannot tell whether C and D crashed or whether the network is cut and C and D are still running and deciding together. If it is a partition, both pairs could decide different values (split brain). The majority of 4 is 3, so 2 servers must stop.",
+   "12": "A quorum of 2 among 4 servers lets two disjoint pairs each decide during a partition. The result is split brain, where the copies disagree for good. Surviving 2 failures would cost correctness.",
+   "13": "It tolerates 2 failures. The majority size is floor(6/2)+1 = 4, and 6 − 4 = 2. The 6th server raises the quorum to 4 without adding tolerance compared with 5 servers."
+  },
+  "audit": {
+   "terms": [
+    "'Accepts' and 'Votes' name the same thing in the table header (line 29), and 'votes' is used in lines 42 and 48. Line 13 defines only 'accepts'.",
+    "'quorum size' (line 15) and 'majority size' (line 38) are used as near-synonyms. The answer section says 'need 3 servers' without either term.",
+    "'change 7' (line 29) and 'position in that order' (line 17) refer to the same slot.",
+    "'fail' (lines 5, 54), 'stop answering' (line 23), 'crashed' (line 25) and 'down' (line 68) are used loosely for the same failure."
+   ],
+   "unexplained": [
+    "'500 ms' (line 25) is given with no meaning. Would a longer or shorter wait change anything? The text implies it would not, but never says so.",
+    "'4 to tolerate 1 liar' (line 78) gives a number with no reason behind it."
+   ],
+   "missing_why": [
+    "'floor(n/2) + 1' (line 38): the overlap proof is only shown for n=5 (line 40). It never states that two quorums of this size always total more than n, for even n too.",
+    "'3 is the smallest group that must share a server with every other group' (line 74): 'every other group' presumably means every other group of quorum size, but this is not stated, and why 2 fails for n=5 is not shown.",
+    "'Adding a server to an odd-sized cluster also raises the majority size by 1' (line 70): the page does not say why adding to an even-sized cluster doesn't."
+   ],
+   "excess": [
+    "The HTML comment on line 3 ('Stage 1, rendered from model.md in STE-80') means nothing to this reader.",
+    "The PBFT bullet (line 78) is a detour that no question or step of the argument uses.",
+    "The Raft/Paxos 'Simplified' bullet (line 79) names protocols that are never explained. It is harmless but unused."
+   ]
+  },
+  "gaps": [
+   "There is no general argument that majorities overlap for every n, only the 5-server example.",
+   "It does not say what happens to a change that was accepted by some servers but never decided, for example A and B having accepted x = 1 during a partition.",
+   "It does not say whether the client learns that a change failed or stalled when the cluster stops."
+  ]
+ },
+ "grade": {
+  "scores": {
+   "1": 1,
+   "2": 2,
+   "3": 2,
+   "4": 2,
+   "5": 2,
+   "6": 2,
+   "7": 2,
+   "8": 2,
+   "9": 2,
+   "10": 2,
+   "11": 2,
+   "12": 1,
+   "13": 2
+  },
+  "reasons": {
+   "1": "Covers most entities, but 'failure' and 'decide' are not listed as entities, and 'quorum size' is only implied inside the quorum definition. It also adds 'position in the order (change 7)', which model.md does not have.",
+   "12": "Explains that two disjoint pairs could each decide (split brain), but never states the rule the item expects: the quorum size must be more than half of n, so two groups cannot both decide. It shows why 2 fails, not the general requirement.",
+   "13": "Correct for n = 6 (majority size 4, 6 − 4 = 2, no gain over 5 servers). The rubric's expect line describes n = 5 and n = 4 rather than 6; the answer was scored against the question as asked."
+  },
+  "pass": false
+ },
+ "usage": {
+  "cost": 0.1574386,
+  "seconds": 40
+ },
+ "findings": [
+  {
+   "n": 1,
+   "severity": "gap",
+   "kind": "terms",
+   "text": "'Accepts' and 'Votes' name the same thing in the table header (line 29), and 'votes' is used in lines 42 and 48. Line 13 defines only 'accepts'."
+  },
+  {
+   "n": 2,
+   "severity": "gap",
+   "kind": "terms",
+   "text": "'quorum size' (line 15) and 'majority size' (line 38) are used as near-synonyms. The answer section says 'need 3 servers' without either term."
+  },
+  {
+   "n": 3,
+   "severity": "gap",
+   "kind": "terms",
+   "text": "'change 7' (line 29) and 'position in that order' (line 17) refer to the same slot."
+  },
+  {
+   "n": 4,
+   "severity": "gap",
+   "kind": "terms",
+   "text": "'fail' (lines 5, 54), 'stop answering' (line 23), 'crashed' (line 25) and 'down' (line 68) are used loosely for the same failure."
+  },
+  {
+   "n": 5,
+   "severity": "gap",
+   "kind": "unexplained",
+   "text": "'500 ms' (line 25) is given with no meaning. Would a longer or shorter wait change anything? The text implies it would not, but never says so."
+  },
+  {
+   "n": 6,
+   "severity": "gap",
+   "kind": "unexplained",
+   "text": "'4 to tolerate 1 liar' (line 78) gives a number with no reason behind it."
+  },
+  {
+   "n": 7,
+   "severity": "gap",
+   "kind": "missing_why",
+   "text": "'floor(n/2) + 1' (line 38): the overlap proof is only shown for n=5 (line 40). It never states that two quorums of this size always total more than n, for even n too."
+  },
+  {
+   "n": 8,
+   "severity": "gap",
+   "kind": "missing_why",
+   "text": "'3 is the smallest group that must share a server with every other group' (line 74): 'every other group' presumably means every other group of quorum size, but this is not stated, and why 2 fails for n=5 is not shown."
+  },
+  {
+   "n": 9,
+   "severity": "gap",
+   "kind": "missing_why",
+   "text": "'Adding a server to an odd-sized cluster also raises the majority size by 1' (line 70): the page does not say why adding to an even-sized cluster doesn't."
+  },
+  {
+   "n": 10,
+   "severity": "excess",
+   "kind": "excess",
+   "text": "The HTML comment on line 3 ('Stage 1, rendered from model.md in STE-80') means nothing to this reader."
+  },
+  {
+   "n": 11,
+   "severity": "excess",
+   "kind": "excess",
+   "text": "The PBFT bullet (line 78) is a detour that no question or step of the argument uses."
+  },
+  {
+   "n": 12,
+   "severity": "excess",
+   "kind": "excess",
+   "text": "The Raft/Paxos 'Simplified' bullet (line 79) names protocols that are never explained. It is harmless but unused."
+  },
+  {
+   "n": 13,
+   "severity": "gap",
+   "kind": "gap",
+   "text": "There is no general argument that majorities overlap for every n, only the 5-server example."
+  },
+  {
+   "n": 14,
+   "severity": "gap",
+   "kind": "gap",
+   "text": "It does not say what happens to a change that was accepted by some servers but never decided, for example A and B having accepted x = 1 during a partition."
+  },
+  {
+   "n": 15,
+   "severity": "gap",
+   "kind": "gap",
+   "text": "It does not say whether the client learns that a change failed or stalled when the cluster stops."
+  }
+ ]
+}

@@ -1,0 +1,40 @@
+{
+  "answers": {
+    "1": {
+      "answer": "A decision only counts once a majority of the servers have accepted it.",
+      "quote": "A decision only counts once a majority of the servers have accepted it."
+    },
+    "2": {
+      "answer": "A majority ensures two groups can never both act independently during a partition, because any two majorities of the same group must share at least one server.",
+      "quote": "Two majorities of the same group always share at least one member."
+    },
+    "3": {
+      "answer": "A 6-server cluster survives 2 failures, as shown in the table where a quorum of 4 is needed, and 6 minus 4 equals 2.",
+      "quote": "6 | 4 | **2**"
+    },
+    "4": {
+      "answer": "The group of 3 can still commit writes because 3 is a majority of 5 servers, while the group of 2 cannot because 2 is not more than half.",
+      "quote": "3 of 5: majority, keeps going ║ 2 of 5: not a majority, waits"
+    }
+  },
+  "stops": [
+    "\"counting the ones that are currently down\" - why count failed servers when computing majority?",
+    "\"Two majorities of the same group always share at least one member\" - needs proof of why this is mathematically true",
+    "The floor notation ⌊n/2⌋ + 1 in line 37 may be unfamiliar to some readers",
+    "Why exactly half is not a majority: \"two groups of 2 could both claim to be 'half'\" needs clearer explanation",
+    "The connection between network partition and crash scenarios being \"the same from the inside\" could be explained more"
+  ],
+  "excess": [
+    "The £50/£80 balance example is illustrative but not essential to understanding the core rule",
+    "\"Clusters are usually built with odd sizes: 3, 5, sometimes 7\" is practice context not needed for the questions",
+    "The formula \"To survive f failures you need 2f + 1 servers\" is redundant with the table above it",
+    "The discussion that \"Even sizes aren't useless\" and can spread read load is contextual but off-topic",
+    "The entire Byzantine failures caveat section (3f + 1) is a separate case not relevant to the main explanation"
+  ],
+  "grounded": {
+    "1": true,
+    "2": true,
+    "3": true,
+    "4": false
+  }
+}

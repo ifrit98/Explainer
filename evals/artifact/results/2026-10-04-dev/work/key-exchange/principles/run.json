@@ -1,0 +1,12 @@
+{
+  "result": "I made `explainers/key-exchange/explanation.md`, written as prose with one Alice / public channel / Bob table, because the mechanism is a short series of steps with small numbers that a diagram or interactive page would not make clearer.",
+  "error": null,
+  "cost": 0.16838920000000002,
+  "seconds": 43,
+  "turns": 3,
+  "files": [
+    "explainers/key-exchange/explanation.md"
+  ],
+  "review_cost": 0,
+  "reviews": 0
+}

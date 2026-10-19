@@ -1,0 +1,40 @@
+{
+  "answers": {
+    "1": {
+      "answer": "0.1 in binary form is a repeating fraction like 1/3 in decimal. Computers can only store 53 bits, so they store the nearest binary fraction instead of the infinite repeating form.",
+      "quote": "Its binary form, 0.000110011001100…, repeats forever. A double keeps only 53 bits, so it stores the nearest binary fraction."
+    },
+    "2": {
+      "answer": "The stored 0.1 and 0.2 are slightly too high, and when added together, the result must be rounded again to the nearest double. This rounded sum differs from the stored 0.3, which is slightly too low.",
+      "quote": "The stored 0.1 and 0.2 are slightly too high. The stored 0.3 is slightly too low... so the computer rounds it to the nearest double... The stored 0.3 is the double just below that result."
+    },
+    "3": {
+      "answer": "Compare with a tolerance instead of using ==. For example, test abs(0.1 + 0.2 - 0.3) < 1e-9. Alternatively, for money use integer cents, or use a decimal type like Python Decimal or Java BigDecimal.",
+      "quote": "Compare with a tolerance, not `==`. `abs(0.1 + 0.2 - 0.3) < 1e-9` is true."
+    },
+    "4": {
+      "answer": "Yes, it is true. 0.5 and 0.25 are short binary fractions (1/2 and 1/4), so both can be stored exactly. Their sum 0.75 can also be stored exactly, so no rounding error occurs.",
+      "quote": "0.5 is 1/2 and 0.25 is 1/4, so both are short binary fractions. Their sum, 0.75, is also one. No step rounds, so no error appears."
+    }
+  },
+  "stops": [
+    "Line 15: 'IEEE 754 standard' is unexplained.",
+    "Line 32: 'tie rule' is mentioned but not defined.",
+    "Line 33: 'gap between neighbouring doubles' is a technical concept not fully explained.",
+    "Line 46: 'maps back to the same double' assumes understanding of the relationship between decimal and binary representation.",
+    "Line 18: 'binary fraction' is used before being clearly defined.",
+    "Line 9: 'no finite decimal form' assumes reader knows what that means."
+  ],
+  "excess": [
+    "Line 3: HTML comment tags are not needed.",
+    "Line 55: 'Every language that uses IEEE 754 doubles...' provides context not needed to answer the questions.",
+    "Line 53: 'These are slower than doubles' is off-topic.",
+    "Line 9: 'The calculator adds correctly' is a philosophical point not needed."
+  ],
+  "grounded": {
+    "1": true,
+    "2": true,
+    "3": true,
+    "4": true
+  }
+}

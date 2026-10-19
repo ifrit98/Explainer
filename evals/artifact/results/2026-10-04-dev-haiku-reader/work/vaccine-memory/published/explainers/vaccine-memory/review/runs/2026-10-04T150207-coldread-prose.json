@@ -1,0 +1,294 @@
+{
+ "tool": "coldread",
+ "rendering": "prose",
+ "slug": "vaccine-memory",
+ "at": "2026-10-04T15:02:07",
+ "model": "default",
+ "prompt_sha": "6b72086ee875",
+ "reply": {
+  "paragraphs": [
+   {
+    "at": "Title + bold opening (L1, L5)",
+    "text": "A vaccine does not teach the body a new shape... controls it in about 3 days instead of about 7.",
+    "unresolved": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "L7",
+    "text": "Numbers marked illustrative are round numbers...",
+    "unresolved": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Infection is a race, L11",
+    "text": "A pathogen is a virus or bacterium... symptoms start above 100 million particles.",
+    "unresolved": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "L13",
+    "text": "Immune cells also multiply. Whichever side gets big enough first wins...",
+    "unresolved": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "The matching cells exist before the germ does, L18",
+    "text": "A lymphocyte is a white blood cell... spike protein on the surface of a coronavirus.",
+    "unresolved": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "L20",
+    "text": "Each new lymphocyte builds its receptor by joining pieces of genes...",
+    "unresolved": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "L22",
+    "text": "Because each receptor fits a family of shapes... mostly removed while they develop.",
+    "unresolved": [],
+    "leap": [],
+    "excess": [
+     "Lymphocytes whose receptors bind the body's own molecules are mostly removed while they develop."
+    ],
+    "purpose_unclear": false
+   },
+   {
+    "at": "L25",
+    "text": "This is the central idea... The germ selects from a random library that already exists.",
+    "unresolved": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "The first meeting is slow, L30",
+    "text": "When an antigen arrives, only the lymphocytes whose receptors bind it activate and divide...",
+    "unresolved": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "L32",
+    "text": "For one antigen, about 1 in 100,000 to 1 in 1,000,000 lymphocytes fit... divides about every 8 hours.",
+    "unresolved": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "L35",
+    "text": "The clone's cells become effector cells... 1,000,000 effector cells clear the pathogen faster than it grows.",
+    "unresolved": [
+     "Plasma cells",
+     "B-cell receptor",
+     "Killer T cells"
+    ],
+    "leap": [
+     "Why 1,000,000 effector cells is the number that wins: the text gives only 'thousands of antibodies per second', not how that compares with the pathogen's growth"
+    ],
+    "excess": [
+     "Killer T cells kill infected cells."
+    ],
+    "purpose_unclear": false
+   },
+   {
+    "at": "L38",
+    "text": "How long does the first response take? Let n be the number of divisions...",
+    "unresolved": [
+     "lymph node"
+    ],
+    "leap": [
+     "Why activation takes about 2.5 days is only partly explained ('meet the antigen in a lymph node')"
+    ],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "What stays behind, L43",
+    "text": "After the pathogen is gone, about 99% of the effector cells die. About 1% stay...",
+    "unresolved": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "L45",
+    "text": "At the next meeting with the same antigen, 10,000 × 2^n = 1,000,000... Some antibodies may also still be in the blood.",
+    "unresolved": [],
+    "leap": [],
+    "excess": [
+     "Some antibodies may also still be in the blood."
+    ],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Table L47-53",
+    "text": "First meeting vs same antigen again",
+    "unresolved": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "L55",
+    "text": "The rule behind the table: each doubling of the precursor count saves one division...",
+    "unresolved": [],
+    "leap": [],
+    "excess": [
+     "A 100× larger count saves about 6.6 divisions. (repeats the table's 13.3 vs 6.6)"
+    ],
+    "purpose_unclear": false
+   },
+   {
+    "at": "What the vaccine does, L60",
+    "text": "A vaccine contains the antigen, or instructions... the race starts with the secondary response",
+    "unresolved": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "L63",
+    "text": "Antigen alone is often not enough... an adjuvant: an ingredient that triggers the danger signal.",
+    "unresolved": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "When memory does not help, L67",
+    "text": "Memory cells fit only the antigen that made them. Measles... Influenza...",
+    "unresolved": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "L69",
+    "text": "Also note what a vaccine does not do: it does not stop the pathogen from entering...",
+    "unresolved": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Summary L73",
+    "text": "The body made the matching cells at random, before any infection...",
+    "unresolved": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Not covered L75",
+    "text": "Not covered here: how B-cell receptors improve their fit...",
+    "unresolved": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   }
+  ],
+  "blocking": [],
+  "cuts": [
+   "L35: 'Killer T cells kill infected cells.' and the unexplained 'Plasma cells'/'B-cell' names. Saying 'some clone cells release antibodies, free copies of their receptor' keeps the point.",
+   "L45: 'Some antibodies may also still be in the blood.' This side point is never used.",
+   "L22: the sentence about removing self-binding lymphocytes. The argument does not need it here (L63 covers the safety point).",
+   "L55: 'A 100× larger count saves about 6.6 divisions.' The table already shows this."
+  ],
+  "question": {
+   "text": "How can a vaccine make the body ready for a germ it has never met, when it can't know the germ's shape ahead of time? The title asks this, and the reader knows it from L1. L13 then reframes it as a race: 'what does a vaccine change in this race?'",
+   "known_at": "L1 (title), reframed at L13",
+   "result_stated": "Yes, in words at L5: 'The vaccine makes those few cells multiply once, without the disease, and many of their descendants stay. So when the real germ arrives, the body controls it in about 3 days instead of about 7.'"
+  },
+  "motive": "Reason for the approach: L13 'Immune cells also multiply. Whichever side gets big enough first wins. So ask: what does a vaccine change in this race?' This sets up the counting and doubling argument. Reason to care: mostly implied. The puzzle in the title (preparing for something never met) and L20 'no gene list could anticipate a virus that evolved last year' supply it. No separate stakes are given.",
+  "close": "Yes. L73: 'The body made the matching cells at random, before any infection. The vaccine selects the few that fit, multiplies them safely, and leaves about 100× more behind. So the real infection is controlled in about 3 days instead of about 7.'",
+  "recap": "Your body already has a few cells that fit any germ by chance, and a vaccine safely multiplies them ahead of time, so the real infection starts with 100× more fighters and is beaten in about 3 days instead of 7, before symptoms appear.",
+  "strongest": "L38–L53: the worked doubling arithmetic (100×2^n vs 10,000×2^n) and the table. They make 7 vs 3 days and 1 billion vs 100,000 particles concrete, and every figure checks out.",
+  "weakest": "L35: 'Plasma cells', 'B-cell receptor' and 'Killer T cells' appear without definition. The claim that 1,000,000 effector cells is enough is asserted with little reason.",
+  "suggestions": [
+   "In L35, say that lymphocytes come in two kinds (B cells, whose receptors can be released as antibodies, and T cells), or leave out the names.",
+   "Give a one-line reason why about 1% of effector cells survive as memory cells, or say plainly that this is an observed fact.",
+   "Briefly say what a lymph node is (a small hub where immune cells and antigen meet)."
+  ]
+ },
+ "usage": {
+  "cost": 0.121891,
+  "seconds": 38
+ },
+ "findings": [
+  {
+   "n": 1,
+   "severity": "excess",
+   "kind": "cut",
+   "text": "L35: 'Killer T cells kill infected cells.' and the unexplained 'Plasma cells'/'B-cell' names. Saying 'some clone cells release antibodies, free copies of their receptor' keeps the point."
+  },
+  {
+   "n": 2,
+   "severity": "excess",
+   "kind": "cut",
+   "text": "L45: 'Some antibodies may also still be in the blood.' This side point is never used."
+  },
+  {
+   "n": 3,
+   "severity": "excess",
+   "kind": "cut",
+   "text": "L22: the sentence about removing self-binding lymphocytes. The argument does not need it here (L63 covers the safety point)."
+  },
+  {
+   "n": 4,
+   "severity": "excess",
+   "kind": "cut",
+   "text": "L55: 'A 100× larger count saves about 6.6 divisions.' The table already shows this."
+  },
+  {
+   "n": 5,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "L35: Plasma cells"
+  },
+  {
+   "n": 6,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "L35: B-cell receptor"
+  },
+  {
+   "n": 7,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "L35: Killer T cells"
+  },
+  {
+   "n": 8,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "L35: Why 1,000,000 effector cells is the number that wins: the text gives only 'thousands of antibodies per second', not how that compares with the pathogen's growth"
+  },
+  {
+   "n": 9,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "L38: lymph node"
+  },
+  {
+   "n": 10,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "L38: Why activation takes about 2.5 days is only partly explained ('meet the antigen in a lymph node')"
+  }
+ ]
+}

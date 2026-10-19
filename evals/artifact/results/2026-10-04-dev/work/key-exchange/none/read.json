@@ -1,0 +1,48 @@
+{
+  "answers": {
+    "1": {
+      "answer": "The operation is modular exponentiation: computing g^x mod p. With repeated squaring it is quick to compute, even for numbers hundreds of digits long. It is safe because going backwards, from y = g^x mod p to x, is the discrete logarithm problem. No known method solves it quickly when p is large (about 2048 bits) and chosen well.",
+      "quote": "Going backwards means: given p, g and the result y = g^x mod p, find x. This is the **discrete logarithm problem**."
+    },
+    "2": {
+      "answer": "Alice computes B^a = (g^b)^a = g^(ba). Bob computes A^b = (g^a)^b = g^(ab). Because ab = ba, the two results are equal, and reducing mod p doesn't change that. Only A and B are sent; the secrets a and b, and the key s, never are.",
+      "quote": "Since ab = ba, the two values are equal, and the mod-p reduction doesn't change that. This is the \"order of mixing doesn't matter\" property."
+    },
+    "3": {
+      "answer": "The man-in-the-middle attack: Mallory replaces A and B with her own value M, so Alice and Bob each share a key with Mallory instead of with each other. Authentication stops it. On the web, the server signs its Diffie–Hellman value with a digital signature, and a certificate from a trusted certificate authority vouches for the server's public key.",
+      "quote": "Answering that second question needs **authentication**: some way for Bob to prove that B came from him."
+    },
+    "4": {
+      "answer": "Alice sends A = 5^6 mod 23 = 8. Bob sends B = 5^15 mod 23 = 19. Both compute the shared key 2: Alice from 19^6 mod 23, Bob from 8^15 mod 23.",
+      "quote": "The shared secret is 2. Eve saw 23, 5, 8 and 19."
+    }
+  },
+  "stops": [
+    "Congruence symbol and negative remainder never explained: \"Since 19 ≡ −4, this is (−4)⁶ = 4096\"",
+    "Bob's step is asserted without working: \"Bob computes 8¹⁵ mod 23 = **2**.\"",
+    "Unexplained condition on p: \"when p is large and chosen well\"",
+    "Faster algorithms are mentioned but not named or explained: \"The best known algorithms are much faster than trying every x\"",
+    "No reason given for the range of the secret: \"secrets.randbelow(p - 2) + 1\"",
+    "Claim given without its reason (HTML): \"Any x that gives A works for her, because then B<sup>x</sup> = A<sup>b</sup>.\"",
+    "Binary is assumed without explanation (HTML): \"multiply together the squares that match the 1-bits of a\"",
+    "Term used but not defined: \"It goes through a **key derivation function** (a hash-based procedure).\"",
+    "Unfamiliar terms for a newcomer: \"A large quantum computer running Shor's algorithm could solve discrete logarithms efficiently\"",
+    "How signatures and certificates actually work is left vague: \"The certificate is signed by a certificate authority, and your browser or operating system already trusts that authority.\""
+  ],
+  "excess": [
+    "\"17 mod 12 = 5 (17 o'clock is 5 o'clock)\"",
+    "\"(Whitfield Diffie and Martin Hellman, 1976)\"",
+    "\"**Elliptic-curve Diffie–Hellman (ECDH, e.g. X25519).** Same protocol, but on points of an elliptic curve instead of numbers mod p.\"",
+    "\"**Post-quantum key exchange (e.g. ML-KEM).**\"",
+    "\"Current systems often run a classical exchange and a post-quantum exchange together, and combine the results.\"",
+    "\"This property is called **forward secrecy**.\"",
+    "Summary repeats earlier sections: \"Each side keeps a secret that is never sent, and publishes g^secret mod p.\"",
+    "Python code repeats the protocol table: \"alice_key = pow(B, a, p)\""
+  ],
+  "grounded": {
+    "1": true,
+    "2": true,
+    "3": true,
+    "4": true
+  }
+}

@@ -1,0 +1,43 @@
+{
+  "answers": {
+    "1": {
+      "answer": "When an item is added, its k positions (determined by hash functions) are set to 1. When looking up an item, the same k positions are read: if any bit is 0, the answer is 'definitely not seen'; if all are 1, the answer is 'probably seen'.",
+      "quote": "each item turns on a few of them. If any of an item's bits is still off, the answer is \"definitely not seen\". If all of them are on, the answer is \"probably seen\"."
+    },
+    "2": {
+      "answer": "It can give false positives (saying 'probably seen' for items never added), but cannot give false negatives (saying 'definitely not seen' for added items). False positives occur because different items can set the same bits, but false negatives cannot happen because bits never reset to 0.",
+      "quote": "If all of them are on, the answer is \"probably seen\", because other items can turn on the same bits. So the filter can be wrong in one direction only: it can say \"probably seen\" for an item it never saw."
+    },
+    "3": {
+      "answer": "Because bits are shared between items. Clearing the bits for one item also clears bits that other items use, causing those other items to incorrectly return 'definitely not seen', creating false negatives.",
+      "quote": "Suppose you add owl for real, and then try to delete cat by clearing bits 1, 6 and 11. Owl also uses bits 6 and 11, so they are now 0. Bits are shared between items."
+    },
+    "4": {
+      "answer": "It answers 'probably seen'. When all bits are 1, any query will find all its k positions at 1, so every item (including never-added ones) gets answered as 'probably seen'.",
+      "quote": "If all bits are 1, the answer is probably seen."
+    }
+  },
+  "stops": [
+    "\"Choose k different hash functions\" – what hash functions are and how they work is not explained",
+    "\"Take each hash output mod m to get a position\" – the mod operator is not defined",
+    "\"each hash position is a uniform random choice\" – 'uniform random' is probability terminology not introduced",
+    "\"The number of hash functions k pulls in two directions\" – metaphor unclear",
+    "\"k = (m/n)·ln 2\" – formula appears without explanation of origin or derivation",
+    "\"while n stays near the capacity\" – 'capacity' used without clear definition",
+    "\"real code makes k positions from two hash values ('double hashing')\" – method mentioned but not explained"
+  ],
+  "excess": [
+    "\"A hash set of 1 million URLs, at about 50 bytes per URL, takes about 50 MB\" – motivating example, not needed for mechanism",
+    "The table at lines 22-25 showing bit positions – visualizes what was already described in text",
+    "\"That answer is right.\" (line 32) – obvious conclusion the reader would draw",
+    "\"That is about 1 wrong answer in 120 queries\" – restates the same 0.82% figure already given",
+    "\"Each extra bit per item adds 0.69 to k, so it multiplies p by 0.5^0.69 ≈ 0.62\" – mathematical detail beyond basic understanding",
+    "The full \"Why 7 hash functions?\" table and discussion – interesting but possibly beyond scope of basic explanation"
+  ],
+  "grounded": {
+    "1": true,
+    "2": true,
+    "3": true,
+    "4": true
+  }
+}

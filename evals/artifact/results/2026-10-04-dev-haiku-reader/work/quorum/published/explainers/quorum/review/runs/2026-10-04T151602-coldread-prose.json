@@ -1,0 +1,370 @@
+{
+ "tool": "coldread",
+ "rendering": "prose",
+ "slug": "quorum",
+ "at": "2026-10-04T15:16:02",
+ "model": "default",
+ "prompt_sha": "95ac16e43338",
+ "reply": {
+  "paragraphs": [
+   {
+    "at": "Title (line 1)",
+    "text": "Why does a cluster of 5 servers survive 2 failures, but a cluster of 4 survives only 1?",
+    "unresolved": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Bold summary (line 5)",
+    "text": "A cluster decides a change only when more than half of all its servers accept the change...",
+    "unresolved": [
+     "decides a change",
+     "accept the change"
+    ],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Line 7",
+    "text": "The rest of this page explains why the rule must be \"more than half\".",
+    "unresolved": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "The rule, line 11",
+    "text": "A cluster is a group of n servers that keep copies of the same data...",
+    "unresolved": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "The rule, list (lines 13-15)",
+    "text": "A server accepts the change when... decided... quorum size... quorum",
+    "unresolved": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "The rule, line 17",
+    "text": "The cluster decides changes one at a time, in order... For each position in that order, a server accepts only one change.",
+    "unresolved": [],
+    "leap": [
+     "The rule that a server accepts only one change per position is stated with no reason. Its role only becomes clear at line 42."
+    ],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "The rule, line 19",
+    "text": "If fewer than a quorum of servers answer, the cluster stops...",
+    "unresolved": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Why not let the survivors go on?, line 23",
+    "text": "Take a cluster of 4 servers, A to D. C and D stop answering...",
+    "unresolved": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Line 25",
+    "text": "A sends a message to D and gets no reply in 500 ms... partition...",
+    "unresolved": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Line 27",
+    "text": "Letting A and B go on means quorum size 2...",
+    "unresolved": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Table (lines 29-32)",
+    "text": "Group | Accepts for change 7 | Votes | Quorum size | Result",
+    "unresolved": [],
+    "leap": [
+     "\"change 7\": the number 7 comes with no setup. The reader has to infer that it is just an arbitrary position in the order."
+    ],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Line 34",
+    "text": "Both groups decide, and the copies now disagree for good. This is split brain...",
+    "unresolved": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Why more than half works, line 38",
+    "text": "Set the quorum size to more than half... majority size: floor(n/2) + 1...",
+    "unresolved": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Line 40",
+    "text": "Take any two quorums of 3... Together they list 6 servers, but the cluster has only 5...",
+    "unresolved": [],
+    "leap": [
+     "The overlap argument is shown only for n = 5. The general version (two groups that are each more than n/2 add up to more than n) is never said in words."
+    ],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Line 42",
+    "text": "C already accepted x = 1 for change 7, so C refuses x = 2 for change 7...",
+    "unresolved": [],
+    "leap": [
+     "\"C already accepted x = 1 for change 7\": the example has moved from 4 servers to 5, and no 5-server scenario was set up in which A, B, C accepted x = 1 first. The reader has to rebuild the scenario."
+    ],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Line 44",
+    "text": "This depends on one assumption: a server remembers what it accepted, even after a restart...",
+    "unresolved": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Line 46",
+    "text": "Predict: the network splits 5 servers into {A, B, C} and {D, E}...",
+    "unresolved": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Line 48",
+    "text": "A, B, C have 3 votes, and 3 ≥ 3, so they keep deciding...",
+    "unresolved": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Line 50",
+    "text": "Count more than half of all configured servers, failed or not...",
+    "unresolved": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Counting failures, lines 54-56",
+    "text": "Tolerance is how many servers can fail... tolerance = n − majority size",
+    "unresolved": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Table (lines 58-64)",
+    "text": "Servers n | Majority size | Tolerance",
+    "unresolved": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Line 66",
+    "text": "With 5 servers and 2 failed, 3 servers answer, and 3 ≥ 3... With 4 servers and 2 failed... the cluster stops.",
+    "unresolved": [],
+    "leap": [],
+    "excess": [
+     "This mostly restates the opening bold paragraph and the table rows for 4 and 5, adding only the ≥/< comparison."
+    ],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Line 68",
+    "text": "A tolerance of 1 means a second failure stops the cluster...",
+    "unresolved": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Line 70",
+    "text": "Adding a server to an odd-sized cluster also raises the majority size by 1...",
+    "unresolved": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Answer, line 74",
+    "text": "Both clusters need 3 servers to decide a change, because 3 is the smallest group that must share a server with every other group...",
+    "unresolved": [],
+    "leap": [
+     "\"every other group\" means every other group of that size (every other quorum). The wording could be read as any group at all."
+    ],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Limits, line 78",
+    "text": "Assumed: servers crash or become unreachable, but never send a false \"yes\"...",
+    "unresolved": [
+     "PBFT algorithm"
+    ],
+    "leap": [
+     "\"4 to tolerate 1 liar\" is given without a reason. That is acceptable because it is marked as out of scope."
+    ],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Limits, line 79",
+    "text": "Simplified: in real protocols such as Raft and Paxos...",
+    "unresolved": [
+     "Raft",
+     "Paxos"
+    ],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Limits, line 80",
+    "text": "Not covered: how servers detect a failure...",
+    "unresolved": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   }
+  ],
+  "blocking": [
+   "Line 42, \"C already accepted x = 1 for change 7\": this is the core step showing why overlap prevents split brain, but the 5-server scenario it depends on (A, B, C accepting x = 1 first) is never set up. The only earlier change-7 example used 4 servers."
+  ],
+  "cuts": [
+   "Line 66: shorten or merge it into the table. It repeats the bold opening paragraph.",
+   "Line 25: \"in 500 ms\" is a concrete detail the argument does not need. It is small and harmless."
+  ],
+  "question": {
+   "text": "Why can a 5-server cluster keep working with 2 servers down while a 4-server cluster can only lose 1? Behind that: why must the decision rule be \"more than half of all servers\"?",
+   "known_at": "Title (line 1), sharpened by line 7",
+   "result_stated": "Yes, in words, at line 5: \"For 5 servers, more than half is 3, so 5 − 3 = 2 servers can fail. For 4 servers, more than half is also 3, so only 4 − 3 = 1 server can fail.\""
+  },
+  "motive": "Reason to care about the question: the split-brain table and line 34, \"Both groups decide, and the copies now disagree for good.\" Reason for the approach: line 25, \"A sees the same silence in both cases, so A cannot know which case is true\", which explains why survivors cannot simply go on. Line 70 adds a practical payoff: \"That is why clusters usually have an odd number of servers.\"",
+  "close": "Yes. Line 74: \"Both clusters need 3 servers to decide a change, because 3 is the smallest group that must share a server with every other group. 5 servers have 2 to spare. 4 servers have only 1.\" This states the general overlap argument in words, though only loosely.",
+  "recap": "A cluster needs a majority of all its servers to agree, so that any two deciding groups share a server that blocks conflicting decisions; 4 and 5 servers both need 3, so 5 has one more server to spare.",
+  "strongest": "Lines 25-34: the indistinguishable-silence point leads straight into the partition table, which shows split brain concretely.",
+  "weakest": "Line 42: the switch from 4 to 5 servers leaves out the setup in which C first accepted x = 1.",
+  "suggestions": [
+   "Before line 42, add one sentence such as \"Suppose A, B, C have already accepted x = 1 for change 7, and D, E now receive x = 2.\"",
+   "After the 5-server overlap example at line 40, add the general sentence: two groups that each hold more than half of n servers together count more than n, so they must share a server.",
+   "Mention once at line 17 why a server accepts only one change per position (so that a shared server can block a conflict), or point ahead to line 42."
+  ]
+ },
+ "usage": {
+  "cost": 0.1212488,
+  "seconds": 39
+ },
+ "findings": [
+  {
+   "n": 1,
+   "severity": "blocking",
+   "kind": "blocking",
+   "text": "Line 42, \"C already accepted x = 1 for change 7\": this is the core step showing why overlap prevents split brain, but the 5-server scenario it depends on (A, B, C accepting x = 1 first) is never set up. The only earlier change-7 example used 4 servers."
+  },
+  {
+   "n": 2,
+   "severity": "excess",
+   "kind": "cut",
+   "text": "Line 66: shorten or merge it into the table. It repeats the bold opening paragraph."
+  },
+  {
+   "n": 3,
+   "severity": "excess",
+   "kind": "cut",
+   "text": "Line 25: \"in 500 ms\" is a concrete detail the argument does not need. It is small and harmless."
+  },
+  {
+   "n": 4,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "Bold summary (line 5): decides a change"
+  },
+  {
+   "n": 5,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "Bold summary (line 5): accept the change"
+  },
+  {
+   "n": 6,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "The rule, line 17: The rule that a server accepts only one change per position is stated with no reason. Its role only becomes clear at line 42."
+  },
+  {
+   "n": 7,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "Table (lines 29-32): \"change 7\": the number 7 comes with no setup. The reader has to infer that it is just an arbitrary position in the order."
+  },
+  {
+   "n": 8,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "Line 40: The overlap argument is shown only for n = 5. The general version (two groups that are each more than n/2 add up to more than n) is never said in words."
+  },
+  {
+   "n": 9,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "Line 42: \"C already accepted x = 1 for change 7\": the example has moved from 4 servers to 5, and no 5-server scenario was set up in which A, B, C accepted x = 1 first. The reader has to rebuild the scenario."
+  },
+  {
+   "n": 10,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "Answer, line 74: \"every other group\" means every other group of that size (every other quorum). The wording could be read as any group at all."
+  },
+  {
+   "n": 11,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "Limits, line 78: PBFT algorithm"
+  },
+  {
+   "n": 12,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "Limits, line 78: \"4 to tolerate 1 liar\" is given without a reason. That is acceptable because it is marked as out of scope."
+  },
+  {
+   "n": 13,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "Limits, line 79: Raft"
+  },
+  {
+   "n": 14,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "Limits, line 79: Paxos"
+  }
+ ]
+}

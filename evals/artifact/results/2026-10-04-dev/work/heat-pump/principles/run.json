@@ -1,0 +1,12 @@
+{
+  "result": "I made `explainers/heat-pump/explanation.md` (prose with one text diagram of the refrigerant loop), backed by `model.md` and `model.yaml`; prose fits because the idea is a short causal chain (heat out = heat from outside + electricity, plus how pressure changes the boiling point) that one diagram and two worked cases cover, so an interactive page would add little; I couldn't run `explainer check` because no shell was available here.",
+  "error": null,
+  "cost": 0.2534982,
+  "seconds": 67,
+  "turns": 5,
+  "files": [
+    "explainers/heat-pump/explanation.md"
+  ],
+  "review_cost": 0,
+  "reviews": 0
+}

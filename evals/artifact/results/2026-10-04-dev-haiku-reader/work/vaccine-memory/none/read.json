@@ -1,0 +1,50 @@
+{
+  "answers": {
+    "1": {
+      "answer": "A vaccine must show antigens (the specific shapes that the immune system recognizes) from the pathogen, but without the pathogen itself that causes disease.",
+      "quote": "It shows the body the right antigens, with enough of an alarm signal to trigger a real response, but without a pathogen that can cause the disease."
+    },
+    "2": {
+      "answer": "After vaccination, memory cells and antibodies are already present. When the real pathogen arrives, these expanded memory cells respond quickly within days, rather than taking weeks to generate an initial response.",
+      "quote": "When the real pathogen arrives, it meets a secondary response: antibodies already circulating, plus memory cells that expand within days."
+    },
+    "3": {
+      "answer": "Memory cells and antibodies are specific to the epitopes (patches) they were selected on. An unrelated virus has completely different epitopes, so the old vaccine memory does not recognize it.",
+      "quote": "Memory is specific to the epitopes it was selected on."
+    },
+    "4": {
+      "answer": "Protection weakens or is lost because the memory cells no longer fit the changed epitope well. The shape mismatch prevents the antibodies from binding tightly.",
+      "quote": "Influenza mutates its surface proteins quickly (antigenic drift), so last year's memory cells fit this year's virus less well."
+    }
+  },
+  "stops": [
+    "It picks one segment at random from each of several pools (called V, D and J segments)",
+    "If this filter fails, the result is autoimmune disease.",
+    "The dividing B cells deliberately introduce random point mutations into their receptor genes",
+    "B cells can also class-switch, changing the antibody's \"tail\" while keeping the binding end.",
+    "But binding alone is not enough to start a full response.",
+    "Activation | needs strong signals, slow | responds faster, to less stimulus",
+    "Helper T cells, which have recognised the same pathogen, give B cells permission",
+    "Inside lymph nodes, in structures called germinal centres, B cells run what amounts to an evolutionary algorithm",
+    "The receptor is built from two protein chains, each assembled this way, so the combinations multiply.",
+    "estimates are often quoted above 10^13"
+  ],
+  "excess": [
+    "def make_receptor(): heavy = random.choice(V_heavy) + junk() + random.choice(D)",
+    "population = [mutate(cell) for cell in population for _ in range(2)]",
+    "ASCII chart showing antibody levels over time with primary and secondary responses",
+    "Table of vaccine types: Live attenuated, Inactivated, Subunit, Toxoid, mRNA/viral vector",
+    "Why boosters? Each additional exposure runs another round of selection and affinity maturation.",
+    "Herd immunity. If enough people have memory, a pathogen can't find enough hosts to keep spreading.",
+    "Your body makes billions of B and T cell receptors at random, before meeting any pathogen.",
+    "the vaccine doesn't install new knowledge. It selects, enlarges and sharpens the part of an already-random library",
+    "Nobody designed it. With enough random shapes, some will fit.",
+    "In every case, the immune system ends up seeing the target's shapes in a context that sets off the alarm"
+  ],
+  "grounded": {
+    "1": true,
+    "2": true,
+    "3": true,
+    "4": true
+  }
+}

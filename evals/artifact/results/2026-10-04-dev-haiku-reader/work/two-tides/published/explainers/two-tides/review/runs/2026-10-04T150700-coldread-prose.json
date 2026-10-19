@@ -1,0 +1,270 @@
+{
+ "tool": "coldread",
+ "rendering": "prose",
+ "slug": "two-tides",
+ "at": "2026-10-04T15:07:00",
+ "model": "default",
+ "prompt_sha": "fb797624d4da",
+ "reply": {
+  "paragraphs": [
+   {
+    "at": "Title + line 3 (opening)",
+    "text": "Most coasts get two high tides a day... If the Moon simply pulls water toward itself, the second high tide makes no sense.",
+    "unresolved": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "line 5 (bold summary)",
+    "text": "The Moon does not lift the ocean toward itself. It stretches the ocean along the Earth–Moon line...",
+    "unresolved": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "line 9 (The pull at three points)",
+    "text": "The Moon's pull is the acceleration that the Moon's gravity gives at a point...",
+    "unresolved": [],
+    "leap": [],
+    "excess": [
+     "It points at the Moon and gets weaker with the square of the distance."
+    ],
+    "purpose_unclear": false
+   },
+   {
+    "at": "table, lines 11-15",
+    "text": "| Point | Distance to Moon | Moon's pull | Tidal acceleration |",
+    "unresolved": [
+     "Tidal acceleration (the column header and its values +1.13, 0, −1.07 µm/s² come before the term or its sign convention is defined; both are only given at line 24)"
+    ],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "line 17",
+    "text": "All three pulls point toward the Moon. So why does the far-side water not move toward the Moon?",
+    "unresolved": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "line 22 (Only the part that differs...)",
+    "text": "The Earth and the Moon orbit their shared centre of mass. An orbit is free fall...",
+    "unresolved": [],
+    "leap": [],
+    "excess": [
+     "Astronauts in an orbiting station float for the same reason."
+    ],
+    "purpose_unclear": false
+   },
+   {
+    "at": "line 24",
+    "text": "So subtract the centre's pull. The remainder is the tidal acceleration...",
+    "unresolved": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "line 26 (near side bullet)",
+    "text": "Near side: 34.32 − 33.19 = +1.13...",
+    "unresolved": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "line 27 (far side bullet)",
+    "text": "Far side: 32.12 − 33.19 = −1.07...",
+    "unresolved": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "line 30",
+    "text": "Both results point away from Earth's centre. The Moon does not push the far side away...",
+    "unresolved": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "line 32 (side point)",
+    "text": "Now take a side point, 90° from the near side...",
+    "unresolved": [],
+    "leap": [
+     "\"Subtract the centre's pull, and 0.55 µm/s² is left, pointing down\": it doesn't say why the along-line part cancels (33.18 vs 33.19), leaving only the 0.95° tilt component."
+    ],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "line 36 (How a tiny acceleration moves an ocean)",
+    "text": "1.1 µm/s² is about one ten-millionth of g... The water gathers into two bulges",
+    "unresolved": [],
+    "leap": [
+     "\"It is largest 45° from the near side, at 0.82 µm/s²\": stated without a reason or derivation, since only the 0°, 90° and 180° points were worked out."
+    ],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "diagram, lines 38-47",
+    "text": "far side ←(     ↘  Earth   ↙     )→ near side ... (↘ ↙ : the sideways push, 0.82 at 45°, toward the nearer bulge)",
+    "unresolved": [
+     "\"0.55 down\" and \"0.82 at 45°\" have no units in the diagram"
+    ],
+    "leap": [
+     "The arrows ↘ ↙ both point inward toward the centre. The legend and line 36 say the push points 'toward the nearer bulge', which is outward toward the ends of the line. The reader has to stop and reconcile the picture with the text."
+    ],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "line 52 (Why subtract: two tests)",
+    "text": "The simplest idea is that the Moon's pull itself raises the tide. It fails two tests.",
+    "unresolved": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": true
+   },
+   {
+    "at": "line 55 (first test)",
+    "text": "First, imagine that something held the Earth still... The far bulge exists because the Earth falls.",
+    "unresolved": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "line 57 (Sun test)",
+    "text": "Second, the Sun. Its pull on the Earth is 179 times the Moon's...",
+    "unresolved": [],
+    "leap": [
+     "\"the tidal acceleration is about the pull times 2R/d\": the factor is stated, not derived. The reader can check it against the table (33.19 × 2·6371/384400 ≈ 1.10), but the text doesn't do this."
+    ],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "line 62 (Two high tides per turn)",
+    "text": "The bulges stay on the Earth–Moon line, and the Earth turns under them...",
+    "unresolved": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "line 66 (The answer)",
+    "text": "The Moon pulls the near side more than Earth's centre... An Earth that fell straight at the Moon, with no orbit, would have the same two bulges.",
+    "unresolved": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "line 70 (Scope: Height)",
+    "text": "in an ideal ocean, the bulges rise about 0.36 m above the mean (an estimate)...",
+    "unresolved": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "line 71 (Scope: Real oceans)",
+    "text": "continents block the bulges and basins slosh with their own timing...",
+    "unresolved": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "line 72 (Scope: Spring and neap)",
+    "text": "the Sun's bulges add to the Moon's or partly cancel them.",
+    "unresolved": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   }
+  ],
+  "blocking": [],
+  "cuts": [
+   "Line 22: drop \"Astronauts in an orbiting station float for the same reason.\" The sentence before it already makes the point.",
+   "Line 9: drop \"It points at the Moon and gets weaker with the square of the distance.\" This reader already knows inverse-square gravity."
+  ],
+  "question": {
+   "text": "Why is there a high tide on the side of the Earth away from the Moon, giving two high tides a day instead of one?",
+   "known_at": "Title and line 3: \"If the Moon simply pulls water toward itself, the second high tide makes no sense.\"",
+   "result_stated": "Yes, at line 5: \"It stretches the ocean along the Earth–Moon line, and a stretch has two ends. The Earth turns through both ends, so a place gets two high tides.\""
+  },
+  "motive": "Reason to care about the question (line 3): \"If the Moon simply pulls water toward itself, the second high tide makes no sense.\" Reason for the approach of subtracting the centre's pull (line 22): \"An orbit is free fall... An acceleration that every part shares does not change the shape of a falling body.\" It is backed up at line 52 by \"It fails two tests\" (the held-still Earth and the Sun ratio).",
+  "close": "Yes, at line 66: \"The Moon pulls the near side more than Earth's centre, and the centre more than the far side. The falling Earth feels only these differences, which stretch the ocean into two bulges. The Earth turns through both every 24 h 50 min.\"",
+  "recap": "The whole Earth is falling toward the Moon, so only differences in the Moon's pull count: the near side is pulled more than the centre and the far side less, which stretches the ocean into two bulges, and the Earth turns through both.",
+  "strongest": "Line 55: the held-still-Earth test. \"That Earth has one bulge, not two. The far bulge exists because the Earth falls.\" It isolates the cause of the far bulge cleanly.",
+  "weakest": "The diagram at lines 38-47. The ↘ ↙ arrows point inward, but the legend says the push is 'toward the nearer bulge', and the values have no units. A smaller weak spot is the table at lines 11-15, whose 'Tidal acceleration' column appears before the term is defined at line 24.",
+  "suggestions": [
+   "Redraw the sideways-push arrows so they point outward toward the near and far bulges, and add units (µm/s²) inside the diagram.",
+   "Either leave the 'Tidal acceleration' column out of the first table, or add one line saying it is defined in the next section.",
+   "Give a one-line reason for the 45° maximum, or for the 2R/d factor, e.g. from differentiating GM/d²."
+  ]
+ },
+ "usage": {
+  "cost": 0.12958219999999998,
+  "seconds": 43
+ },
+ "findings": [
+  {
+   "n": 1,
+   "severity": "excess",
+   "kind": "cut",
+   "text": "Line 22: drop \"Astronauts in an orbiting station float for the same reason.\" The sentence before it already makes the point."
+  },
+  {
+   "n": 2,
+   "severity": "excess",
+   "kind": "cut",
+   "text": "Line 9: drop \"It points at the Moon and gets weaker with the square of the distance.\" This reader already knows inverse-square gravity."
+  },
+  {
+   "n": 3,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "table, lines 11-15: Tidal acceleration (the column header and its values +1.13, 0, −1.07 µm/s² come before the term or its sign convention is defined; both are only given at line 24)"
+  },
+  {
+   "n": 4,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "line 32 (side point): \"Subtract the centre's pull, and 0.55 µm/s² is left, pointing down\": it doesn't say why the along-line part cancels (33.18 vs 33.19), leaving only the 0.95° tilt component."
+  },
+  {
+   "n": 5,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "line 36 (How a tiny acceleration moves an ocean): \"It is largest 45° from the near side, at 0.82 µm/s²\": stated without a reason or derivation, since only the 0°, 90° and 180° points were worked out."
+  },
+  {
+   "n": 6,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "diagram, lines 38-47: \"0.55 down\" and \"0.82 at 45°\" have no units in the diagram"
+  },
+  {
+   "n": 7,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "diagram, lines 38-47: The arrows ↘ ↙ both point inward toward the centre. The legend and line 36 say the push points 'toward the nearer bulge', which is outward toward the ends of the line. The reader has to stop and reconcile the picture with the text."
+  },
+  {
+   "n": 8,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "line 57 (Sun test): \"the tidal acceleration is about the pull times 2R/d\": the factor is stated, not derived. The reader can check it against the table (33.19 × 2·6371/384400 ≈ 1.10), but the text doesn't do this."
+  }
+ ]
+}

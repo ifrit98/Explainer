@@ -1,0 +1,308 @@
+{
+ "tool": "coldread",
+ "rendering": "prose",
+ "slug": "float-sum",
+ "at": "2026-10-04T15:23:32",
+ "model": "default",
+ "prompt_sha": "5a19de7d0d5c",
+ "reply": {
+  "paragraphs": [
+   {
+    "at": "L3 (opening)",
+    "text": "In Python, JavaScript, and most other languages, `0.1 + 0.2 == 0.3` is `false`...",
+    "unresolved": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "L5 (bold summary)",
+    "text": "The computer never holds 0.1, 0.2, or 0.3...",
+    "unresolved": [
+     "one step above"
+    ],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "L9 What the computer holds",
+    "text": "A literal such as `0.1` becomes a **double**...",
+    "unresolved": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "L13 Why 0.1 must be rounded",
+    "text": "A whole number times a power of two is a fraction whose denominator is a power of two...",
+    "unresolved": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "L15 code block",
+    "text": "1/10 = 0.000110011001100110011…",
+    "unresolved": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "L17",
+    "text": "This is the same as 1/3 = 0.3333… in decimal...",
+    "unresolved": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "L21 The stored values",
+    "text": "The **stored value** of a literal is the double nearest to it. The **gap**...",
+    "unresolved": [],
+    "leap": [
+     "Between 0.25 and 0.5 the gap is u = 2^-54: no reason is given for this number. The reader has to work out that 53 digits starting at 2^-2 end at 2^-54.",
+     "\"Because a double has a fixed 53 binary digits\" conflicts with \"at most 53 binary digits\" in L9, and it isn't explained why a fixed digit count makes the gap shrink."
+    ],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "L23",
+    "text": "To see the rounding, count each number in units of u...",
+    "unresolved": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "L25 table",
+    "text": "| Number | Exact, in u | Steps allowed here | ...",
+    "unresolved": [
+     "Steps allowed here",
+     "Error"
+    ],
+    "leap": [
+     "The table never says why 0.1 gets u/4 and 0.2 gets u/2. The reader has to match 0.1 to the range 0.0625–0.125 and 0.2 to the range 0.125–0.25 from L21."
+    ],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "L31",
+    "text": "The error is the stored value minus the decimal. 0.1 and 0.2 round up...",
+    "unresolved": [],
+    "leap": [],
+    "excess": [
+     "0.1 and 0.2 round up (positive error). 0.3 rounds down (negative error)."
+    ],
+    "purpose_unclear": false
+   },
+   {
+    "at": "L35 What + does",
+    "text": "The `+` operation first finds the **exact sum**...",
+    "unresolved": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "L37 code block",
+    "text": "exact sum = 1801439850948198.5 + 3602879701896397 = 5404319552844595.5 u",
+    "unresolved": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "L39",
+    "text": "The exact sum is exactly halfway between …595 and …596. This case is a **tie**...",
+    "unresolved": [
+     "The rule"
+    ],
+    "leap": [
+     "It never says that …596 is the even one, so the reader can't see why the tie goes up here.",
+     "\"even whole number\": a whole number of what? The text doesn't say the count of u is what must be even."
+    ],
+    "excess": [
+     "so ties do not always push results upward"
+    ],
+    "purpose_unclear": false
+   },
+   {
+    "at": "L41",
+    "text": "The stored value of 0.3 is 5404319552844595 u...",
+    "unresolved": [],
+    "leap": [],
+    "excess": [
+     "The stored value of 0.3 is 5404319552844595 u."
+    ],
+    "purpose_unclear": false
+   },
+   {
+    "at": "L43",
+    "text": "The addition did not make a mistake...",
+    "unresolved": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "L48 Why print(0.1) shows 0.1",
+    "text": "Languages print the shortest decimal that rounds back to the same double...",
+    "unresolved": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "L53 When it works",
+    "text": "`0.5 + 0.25 == 0.75` is true...",
+    "unresolved": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "L55",
+    "text": "A decimal type also avoids the problem...",
+    "unresolved": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "L60 What to do",
+    "text": "Do not compare doubles with `==`...",
+    "unresolved": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "L64-66 Not covered here",
+    "text": "- The sign and exponent bits of a double...",
+    "unresolved": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   }
+  ],
+  "blocking": [
+   "L39: \"The rule sends a tie to the even whole number\". This is the turning point of the argument, but the text names no rule and never says …596 is the even choice. The reader can't confirm why the sum rounds up.",
+   "L21: \"Between 0.25 and 0.5 the gap is u = 2^-54\". Every later number is counted in u, but the text gives no reason for this value."
+  ],
+  "cuts": [
+   "L39: \"so ties do not always push results upward\". It is an aside that pulls attention away from the case being explained.",
+   "L31: \"0.1 and 0.2 round up (positive error). 0.3 rounds down (negative error).\" The Error column already shows this; keep only the definition of error.",
+   "L41: \"The stored value of 0.3 is 5404319552844595 u.\" This repeats the table."
+  ],
+  "question": {
+   "text": "Why is 0.1 + 0.2 == 0.3 false, and why does it print 0.30000000000000004?",
+   "known_at": "Title and L3",
+   "result_stated": "Yes. L5: \"The computer never holds 0.1, 0.2, or 0.3. It holds the nearest binary numbers to them. The addition is correct, but the result rounds to the number one step above the number that 0.3 rounds to.\""
+  },
+  "motive": "Reason to care: it is implied by L3 (a surprising `false`) and made concrete in L60, \"Do not compare doubles with `==`...\". Reason for the approach: L23, \"To see the rounding, count each number in units of u.\" No sentence says why this method was chosen over others.",
+  "close": "Yes. L43: \"The addition did not make a mistake. The result is the nearest double to the exact sum of its inputs. The inputs were not 0.1 and 0.2.\" L53 then states the general condition: \"The failure needs a decimal whose denominator has a factor 5.\"",
+  "recap": "0.1 and 0.2 get stored slightly too high and 0.3 slightly too low, so their sum lands on the neighboring double just above stored 0.3.",
+  "strongest": "L17: the 4-digit 1/3 example (0.3333 + 0.3333 = 0.6666, but 2/3 becomes 0.6667) shows the same failure in decimal, where the reader can check it.",
+  "weakest": "L39: the tie paragraph leaves the even-rounding rule unexplained at the exact step where the result is decided.",
+  "suggestions": [
+   "In L39, say: \"Ties go to the neighbor whose count of u is even; …596 is even, so the sum rounds up.\"",
+   "In L21, give the reason: numbers from 0.25 to 0.5 are 53-digit whole numbers times 2^-54, so neighbors are 2^-54 apart. Halving the range halves the gap.",
+   "Add \"in the range\" next to the u/4 and u/2 values in the table, or link each row to its range from L21.",
+   "Make L9's \"at most 53\" and L21's \"fixed 53\" agree."
+  ]
+ },
+ "usage": {
+  "cost": 0.10868280000000001,
+  "seconds": 34
+ },
+ "findings": [
+  {
+   "n": 1,
+   "severity": "blocking",
+   "kind": "blocking",
+   "text": "L39: \"The rule sends a tie to the even whole number\". This is the turning point of the argument, but the text names no rule and never says …596 is the even choice. The reader can't confirm why the sum rounds up."
+  },
+  {
+   "n": 2,
+   "severity": "blocking",
+   "kind": "blocking",
+   "text": "L21: \"Between 0.25 and 0.5 the gap is u = 2^-54\". Every later number is counted in u, but the text gives no reason for this value."
+  },
+  {
+   "n": 3,
+   "severity": "excess",
+   "kind": "cut",
+   "text": "L39: \"so ties do not always push results upward\". It is an aside that pulls attention away from the case being explained."
+  },
+  {
+   "n": 4,
+   "severity": "excess",
+   "kind": "cut",
+   "text": "L31: \"0.1 and 0.2 round up (positive error). 0.3 rounds down (negative error).\" The Error column already shows this; keep only the definition of error."
+  },
+  {
+   "n": 5,
+   "severity": "excess",
+   "kind": "cut",
+   "text": "L41: \"The stored value of 0.3 is 5404319552844595 u.\" This repeats the table."
+  },
+  {
+   "n": 6,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "L5 (bold summary): one step above"
+  },
+  {
+   "n": 7,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "L21 The stored values: Between 0.25 and 0.5 the gap is u = 2^-54: no reason is given for this number. The reader has to work out that 53 digits starting at 2^-2 end at 2^-54."
+  },
+  {
+   "n": 8,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "L21 The stored values: \"Because a double has a fixed 53 binary digits\" conflicts with \"at most 53 binary digits\" in L9, and it isn't explained why a fixed digit count makes the gap shrink."
+  },
+  {
+   "n": 9,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "L25 table: Steps allowed here"
+  },
+  {
+   "n": 10,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "L25 table: Error"
+  },
+  {
+   "n": 11,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "L25 table: The table never says why 0.1 gets u/4 and 0.2 gets u/2. The reader has to match 0.1 to the range 0.0625–0.125 and 0.2 to the range 0.125–0.25 from L21."
+  },
+  {
+   "n": 12,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "L39: The rule"
+  },
+  {
+   "n": 13,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "L39: It never says that …596 is the even one, so the reader can't see why the tie goes up here."
+  },
+  {
+   "n": 14,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "L39: \"even whole number\": a whole number of what? The text doesn't say the count of u is what must be even."
+  }
+ ]
+}

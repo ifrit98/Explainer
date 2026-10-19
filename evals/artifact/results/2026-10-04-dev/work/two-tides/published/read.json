@@ -1,0 +1,45 @@
+{
+  "answers": {
+    "1": {
+      "answer": "The whole Earth is in free fall toward the Moon, and its centre accelerates at 33.19 µm/s². The far side is pulled less than that (32.12 µm/s²), so its water falls more slowly than the centre and gets left behind, away from the Moon. The Moon does not push it away. It just pulls the far side less than the centre, and the centre's fall is the reference point.",
+      "quote": "Far side: 32.12 − 33.19 = −1.07. The far-side water falls toward the Moon slower than the centre, so it is left behind, away from the Moon."
+    },
+    "2": {
+      "answer": "The Moon moves about 12° a day along its orbit, in the same direction the Earth turns. So the Earth needs about 50 extra minutes to face the Moon again, which makes a lunar day of 24 h 50 min. A place passes through both bulges each lunar day, so high tides come every half lunar day: 12 h 25 min.",
+      "quote": "The Earth turns about 15° an hour, so it needs about 50 minutes more than 24 hours to face the Moon again: a **lunar day** of 24 h 50 min."
+    },
+    "3": {
+      "answer": "not covered. The explanation only says solar tides are about half the Moon's. It never says when tides are largest or how the Sun's and Moon's tides combine.",
+      "quote": ""
+    },
+    "4": {
+      "answer": "About every 12 hours. The extra 50 minutes comes only from the Moon moving along its orbit. Without that, the lunar day would be 24 h, and two bulges per turn gives a high tide every 12 h.",
+      "quote": "The Moon also moves about 12° a day along its orbit, in the same direction that the Earth turns. The Earth turns about 15° an hour, so it needs about 50 minutes more than 24 hours"
+    }
+  },
+  "stops": [
+    "\"An acceleration that every part shares does not change the shape of a falling body.\": this is the key step, but it is stated without a reason or an everyday example.",
+    "\"The Earth and the Moon orbit their shared centre of mass. An orbit is free fall\": it is not obvious why orbiting means the Earth is falling toward the Moon.",
+    "\"it tilts by R/d = 6371 / 384,400 = 0.0166 rad (0.95°) toward Earth's centre\": R and d are not defined until later, and the tilt geometry is hard to follow.",
+    "\"It is largest 45° from the near side, at 0.82 µm/s²\": the 0.82 figure is given with no derivation.",
+    "\"a pull GM/r² changes by about 2R/d of itself across one Earth radius R\": GM/r² and the 2R/d rule come with no explanation.",
+    "\"The Sun is 389 times farther than the Moon, so its tidal acceleration is about 179 / 389 = 0.46\": dividing by 389 seems to drop part of the 2R/d factor, so it is unclear why this works.",
+    "\"No centrifugal force is needed.\": centrifugal force was never mentioned before, so this comes out of nowhere.",
+    "\"an Earth that fell straight at the Moon, with no orbit, would get the same +1.13 and −1.07\": this is hard to square with the earlier statement that the Earth orbits.",
+    "\"Water flows until the sea surface slopes just enough that gravity along the slope balances this push.\": the step from a sideways push to a sloped surface is quick."
+  ],
+  "excess": [
+    "\"The unit is µm/s², one millionth of a m/s².\": basic unit material this reader already knows.",
+    "\"The near value is about 5% larger because the pull changes faster closer to the Moon.\": an aside that the main question does not need.",
+    "\"For the Moon: 33.19 × 2 × 6371 / 384,400 = 1.10, between 1.13 and 1.07.\": a check on numbers that were already given.",
+    "\"Height: in an ideal ocean, the bulges rise about 0.36 m above the mean (an estimate).\": off the question.",
+    "\"Real oceans: continents and basin shapes make tides lag the Moon\": off the question.",
+    "\"The Moon pulls the near side more than Earth's centre, and the centre more than the far side.\": repeats the earlier sections."
+  ],
+  "grounded": {
+    "1": true,
+    "2": true,
+    "3": false,
+    "4": true
+  }
+}

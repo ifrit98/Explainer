@@ -1,0 +1,50 @@
+{
+  "answers": {
+    "1": {
+      "answer": "Sunlight and infrared radiation are different wavelengths. Gases can be nearly transparent to incoming sunlight while remaining opaque to outgoing infrared, because the air acts on the outgoing radiation but does little to the incoming radiation.",
+      "quote": "The two spectra hardly overlap. This is what makes the greenhouse effect possible. Air can be almost transparent to incoming sunlight and still be largely opaque to outgoing infrared."
+    },
+    "2": {
+      "answer": "Adding CO₂ makes the atmosphere opaque at higher altitudes. Higher altitudes are colder, so they radiate less energy to space. This reduces outgoing radiation below the incoming solar energy, causing the planet to warm until the temperature profile shifts upward enough that the new emission height is back at the temperature needed for energy balance.",
+      "quote": "With more absorber, the air becomes opaque higher up, so the emission height rises. A higher level is colder, and colder air radiates less, so the planet sends out less energy than it absorbs."
+    },
+    "3": {
+      "answer": "N₂ and O₂ molecules are symmetric, made of two identical atoms. Their symmetric structure means they develop no electric dipole when vibrating. Since infrared light acts on electric dipoles to excite molecules, these gases cannot absorb infrared.",
+      "quote": "N₂ and O₂ are two identical atoms. However they stretch, the molecule stays symmetric and has no dipole, so infrared light has almost nothing to act on."
+    },
+    "4": {
+      "answer": "Without greenhouse gases, radiation would escape directly from the surface to space (nothing above absorbs it). The surface would have to be at 255 K to emit enough radiation to balance the 238 W/m² absorbed from the sun, following the Stefan-Boltzmann balance.",
+      "quote": "In equilibrium, absorbed sunlight (~238 W/m²) equals emitted infrared (σT⁴), which gives 255 K for a planet with no greenhouse gases."
+    }
+  },
+  "stops": [
+    "what is an 'electric dipole'? 'because the dipole is what the light's oscillating electric field can push on'",
+    "'Kirchhoff's law' invoked without definition: 'a layer that absorbs a fraction ε also emits ε times the black-body amount (Kirchhoff's law)'",
+    "'Planck response' undefined: 'this is called the Planck response'",
+    "why temperature decreases with height: 'air rising and expanding cools by about 6.5 K per km on average'",
+    "'Convection keeps this profile in place' but convection not explained",
+    "how does 'emission height' work? 'Only photons emitted from fairly high up...get out to space'",
+    "why logarithmic not linear: 'the effect grows roughly with the logarithm of concentration'",
+    "what is 'asymmetric stretching' of CO₂? 'When it bends, or when it stretches asymmetrically, a dipole appears'",
+    "CO₂ saturation paradox: 'the emission level can always move higher...the effect does not stop'",
+    "'Clausius–Clapeyron relation' unnamed: 'hold about 7% more water vapour per kelvin (the Clausius–Clapeyron relation)'"
+  ],
+  "excess": [
+    "Wien's law formula not needed: 'Wien's law: peak ≈ 2898 µm·K / T'",
+    "Section 8 addresses misconceptions not raised: ''It works like a glass greenhouse.' Not really'",
+    "Section 9 observational fingerprint beyond mechanism: 'the troposphere warms while the stratosphere cools'",
+    "other greenhouse gases unnecessary for understanding: 'CH₄ (methane), N₂O (nitrous oxide) and O₃ (ozone)'",
+    "historical context not needed: 'Before industrialisation C₀ was about 280 ppm. By the mid-2020s it was above 420 ppm'",
+    "forcing formula as intermediate calculation: 'ΔF ≈ 5.35 × ln(C / C₀) W/m²'",
+    "feedback percentages not essential: 'Water vapour...around half. Clouds...quarter, and CO₂ about a fifth'",
+    "algebraic intermediate steps: 'absorbs ε·E_s = emits ε·E_a up + ε·E_a down'",
+    "specific model values: '| ε | T_s | 0 (no greenhouse gases) | 255 K |'",
+    "specific water vapor percentage: 'can hold about 7% more water vapour per kelvin'"
+  ],
+  "grounded": {
+    "1": true,
+    "2": true,
+    "3": true,
+    "4": true
+  }
+}

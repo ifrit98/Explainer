@@ -1,0 +1,344 @@
+{
+ "tool": "coldread",
+ "rendering": "prose",
+ "slug": "key-exchange",
+ "at": "2026-10-04T15:07:25",
+ "model": "default",
+ "prompt_sha": "a76b387677f2",
+ "reply": {
+  "paragraphs": [
+   {
+    "at": "Title + bold summary (line 1-3)",
+    "text": "How can two strangers agree... They never send the key. Each person keeps a private number...",
+    "unresolved": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Line 5",
+    "text": "This method is the Diffie–Hellman key exchange. A version of it starts most HTTPS connections.",
+    "unresolved": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "The problem, para 1 (line 9)",
+    "text": "Alice and Bob want to encrypt their messages...",
+    "unresolved": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "The problem, para 2 (line 11)",
+    "text": "\"mod 23\" means \"the remainder after division by 23\"...",
+    "unresolved": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "The problem, para 3 (line 14)",
+    "text": "A first idea fails. Alice picks the key, 6, and sends 5^6 mod 23 = 8...",
+    "unresolved": [],
+    "leap": [
+     "\"Each side then does one half of a calculation, and the other side finishes it without undoing it\": this is abstract, and it only becomes concrete in the next section. The reader has to take it on trust for now.",
+     "Why 5 and 23 are the numbers used is not said here. Step 1 of the next section explains it."
+    ],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Exchange, step 1 (line 19)",
+    "text": "agree in public on two numbers: a prime modulus p = 23 and a base g = 5",
+    "unresolved": [],
+    "leap": [
+     "The text never says why p has to be prime (Scope only touches on choosing g)."
+    ],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Exchange, step 2 (line 20)",
+    "text": "Each picks a private number...",
+    "unresolved": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Exchange, step 3 (line 21)",
+    "text": "Alice sends A = 5^6 mod 23 = 15625 mod 23 = 8. Bob sends B = 5^15 mod 23 = 19.",
+    "unresolved": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Exchange, step 4 (line 22)",
+    "text": "Alice computes 19^6 mod 23 = 2. Bob computes 8^15 mod 23 = 2.",
+    "unresolved": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Line 24",
+    "text": "The result, s = 2, is the shared secret...(see Scope)",
+    "unresolved": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Why both get 2 (line 26)",
+    "text": "Alice computed (5^15)^6, and Bob computed (5^6)^15...",
+    "unresolved": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "What Eve sees, table (lines 31-35)",
+    "text": "Who | p, g | a = 6 | b = 15 | A = 8, B = 19 | s = 2",
+    "unresolved": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Predict prompt (line 37)",
+    "text": "Eve has 8 and 19. Can she combine them into 2?",
+    "unresolved": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Line 39",
+    "text": "Multiplying fails: 8 × 19 mod 23 = 14...",
+    "unresolved": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Why powers, intro (line 43)",
+    "text": "Each choice blocks a simpler way for Eve to find a private number.",
+    "unresolved": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Bullet: Without mod (line 46)",
+    "text": "A = 5^6 = 15625. Eve takes the logarithm base 5...",
+    "unresolved": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Bullet: multiplication instead of a power (line 49)",
+    "text": "A = 5 × 6 mod 23 = 7. Multiplying by 14 undoes multiplying by 5...",
+    "unresolved": [
+     "Euclid's algorithm"
+    ],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Bullet: powers mod p (line 50)",
+    "text": "the results jump around. For exponents 1 to 22...",
+    "unresolved": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Line 52",
+    "text": "So g^x mod p is a one-way operation... discrete logarithm.",
+    "unresolved": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Why real numbers are huge, para 1 (line 56)",
+    "text": "With p = 23, Eve can try exponents in order... about 10^14 years.",
+    "unresolved": [],
+    "leap": [
+     "\"The best known methods are faster, but still need about 2^112 operations\": the methods are not named and the figure is not explained. It is labelled an estimate, which is acceptable."
+    ],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Why real numbers are huge, para 2 (line 58)",
+    "text": "Alice's own work stays small... about 4,000 steps.",
+    "unresolved": [],
+    "leap": [
+     "\"a 2048-bit exponent needs about 2048 squarings plus at most 2048 multiplications\": the example (6 = 3×2, 3 = 2+1) does not show how an arbitrary exponent breaks down into squarings and multiplications. The reader has to infer the link to the exponent's binary digits."
+    ],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Assumption, not proof (line 61)",
+    "text": "No one has proven that the discrete logarithm is hard...",
+    "unresolved": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "The limit, para 1 (line 66)",
+    "text": "The exchange stops a reader. It does not stop Mallory...",
+    "unresolved": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Mallory bullets (lines 68-69)",
+    "text": "Alice computes 10^6 mod 23 = 6. Mallory computes 8^3 mod 23 = 6...",
+    "unresolved": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Line 71",
+    "text": "Alice shares 6 with Mallory... (a digital signature).",
+    "unresolved": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Answer (line 75)",
+    "text": "The two strangers never send the key...",
+    "unresolved": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Scope bullets (lines 79-83)",
+    "text": "Authentication... Elliptic-curve... hash function... AES... Quantum computers",
+    "unresolved": [
+     "hash function",
+     "AES",
+     "Elliptic-curve",
+     "certificates",
+     "Post-quantum key exchange"
+    ],
+    "leap": [],
+    "excess": [
+     "\"it is the version most HTTPS connections use\": this partly repeats line 5's \"A version of it starts most HTTPS connections\", though it adds which version."
+    ],
+    "purpose_unclear": false
+   }
+  ],
+  "blocking": [],
+  "cuts": [
+   "Scope line 80: drop \"it is the version most HTTPS connections use\" or merge it into line 5 (a small repeat). Little else can be cut without loss."
+  ],
+  "question": {
+   "text": "How can two people who have never met agree on a shared secret key when an eavesdropper reads every message they exchange?",
+   "known_at": "Title (line 1), made concrete in The problem (line 9)",
+   "result_stated": "Yes, in words at the very start: \"They never send the key. Each person keeps a private number and sends a public number computed from it... An eavesdropper sees only the public numbers, and no known fast method gets the private numbers back from them.\""
+  },
+  "motive": "Reason to care: \"A version of it starts most HTTPS connections\" (line 5) and \"Encryption needs a key that both of them know. They have never met, so every message goes over a public channel\" (line 9). Reason for the approach: the failed first idea (line 14: \"If Eve cannot get 6 back from 8, Bob cannot either. So each side needs its own private number\") and the section 'Why powers, and why mod' (\"Each choice blocks a simpler way for Eve to find a private number\").",
+  "close": "Yes. Answer (line 75): \"The two strangers never send the key. Each sends g raised to a private number, mod p. Each raises the other's public number to their own private number, and both get g^(ab) mod p. Eve sees only g^a and g^b mod p. To get further, Eve must find a or b, and no fast method is known for a large p.\"",
+  "recap": "Each side mixes a public base with its own secret exponent mod a prime and swaps the results. Raising the other side's result to your own secret gives you both the same number, and an eavesdropper can only get it by solving the discrete logarithm, which nobody knows how to do fast.",
+  "strongest": "'Why powers, and why mod' (lines 43-52): each alternative (no mod, multiplication) is shown failing with concrete numbers, and then the scrambled list of 5^x mod 23 makes 'one-way' visible.",
+  "weakest": "Line 58: the claim 'about 2048 squarings plus at most 2048 multiplications' rests on a single small example (exponent 6) and never says how a general exponent splits into squarings and multiplications.",
+  "suggestions": [
+   "In line 58, add one sentence: write the exponent in binary; square for each digit, and also multiply by g when the digit is 1.",
+   "Briefly say why p is prime (so that every nonzero remainder has an undoing multiplier, and powers of a good g run through all of them).",
+   "Name the faster methods in line 56 (for example, the number field sieve), or say plainly that they are beyond scope."
+  ]
+ },
+ "usage": {
+  "cost": 0.143897,
+  "seconds": 44
+ },
+ "findings": [
+  {
+   "n": 1,
+   "severity": "excess",
+   "kind": "cut",
+   "text": "Scope line 80: drop \"it is the version most HTTPS connections use\" or merge it into line 5 (a small repeat). Little else can be cut without loss."
+  },
+  {
+   "n": 2,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "The problem, para 3 (line 14): \"Each side then does one half of a calculation, and the other side finishes it without undoing it\": this is abstract, and it only becomes concrete in the next section. The reader has to take it on trust for now."
+  },
+  {
+   "n": 3,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "The problem, para 3 (line 14): Why 5 and 23 are the numbers used is not said here. Step 1 of the next section explains it."
+  },
+  {
+   "n": 4,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "Exchange, step 1 (line 19): The text never says why p has to be prime (Scope only touches on choosing g)."
+  },
+  {
+   "n": 5,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "Bullet: multiplication instead of a power (line 49): Euclid's algorithm"
+  },
+  {
+   "n": 6,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "Why real numbers are huge, para 1 (line 56): \"The best known methods are faster, but still need about 2^112 operations\": the methods are not named and the figure is not explained. It is labelled an estimate, which is acceptable."
+  },
+  {
+   "n": 7,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "Why real numbers are huge, para 2 (line 58): \"a 2048-bit exponent needs about 2048 squarings plus at most 2048 multiplications\": the example (6 = 3×2, 3 = 2+1) does not show how an arbitrary exponent breaks down into squarings and multiplications. The reader has to infer the link to the exponent's binary digits."
+  },
+  {
+   "n": 8,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "Scope bullets (lines 79-83): hash function"
+  },
+  {
+   "n": 9,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "Scope bullets (lines 79-83): AES"
+  },
+  {
+   "n": 10,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "Scope bullets (lines 79-83): Elliptic-curve"
+  },
+  {
+   "n": 11,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "Scope bullets (lines 79-83): certificates"
+  },
+  {
+   "n": 12,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "Scope bullets (lines 79-83): Post-quantum key exchange"
+  }
+ ]
+}

@@ -1,0 +1,95 @@
+{
+ "tool": "coldread",
+ "rendering": "diagram",
+ "slug": "heat-pump",
+ "at": "2026-10-04T15:13:29",
+ "model": "default",
+ "prompt_sha": "b7a65e2b208a",
+ "reply": {
+  "diagrams": [
+   {
+    "at": "Diagram 1 (Level 1 — Where the 3 kWh comes from)",
+    "text": "Three boxes feed into or out of a 'Heat pump' box. 'Electricity 1 kWh' (yellow) and 'Outdoor air at 0 °C / outdoor heat: 2 kWh' (blue) go in. 'Home water at 35 °C / heat delivered: 3 kWh' (red) comes out. A caption below explains the colours. It answers the opening puzzle: where do the extra 2 kWh come from?",
+    "unresolved": [],
+    "leap": [],
+    "excess": [
+     "\"Energy is conserved: 1 kWh of electricity + 2 kWh of outdoor heat = 3 kWh of heat delivered.\" The diagram has just shown this sum, and the reader knows energy conservation.",
+     "\"Air at 0 °C is 273 K above absolute zero, so it still holds heat.\" This reader knows kelvin. It is brief and heads off a 'how can cold air give heat?' doubt, so it costs little."
+    ],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Diagram 2 (Level 2 — the refrigerant loop)",
+    "text": "A four-part loop split into a 'Low pressure, 3.5 bar' group (1. Evaporator, outdoor coil, boils at −10 °C; 4. Expansion valve, pressure drops, cools to −10 °C) and a 'High pressure, 14 bar' group (2. Compressor, vapour squeezed, heats to about 60 °C; 3. Condenser, indoor coil, condenses at 40 °C). Arrows: cold vapour → hot vapour → warm liquid → cold liquid and vapour. Outdoor air sends 2 kWh in, electricity sends 1 kWh to the compressor, and the condenser sends 3 kWh to the home water.",
+    "unresolved": [],
+    "leap": [
+     "The compressor label says the vapour heats \"to about 60 °C\", but the next box says it \"condenses at 40 °C\". Neither the diagram nor step 3 says that the hot vapour first cools from 60 °C to 40 °C, giving up heat to the water, before it condenses. A careful reader stops to ask why the temperature drops by 20 K.",
+     "The compressor is drawn inside the \"High pressure, 14 bar\" group, yet it takes in 3.5 bar vapour. It is really the boundary between the two pressures, so the grouping slightly misleads."
+    ],
+    "excess": [
+     "\"Heat flows by itself only from hot to cold.\" This reader already knows it, though it sets up the argument.",
+     "\"(The air around us is at 1 bar.)\" This reader knows pressure. It is a small aside."
+    ],
+    "purpose_unclear": false
+   }
+  ],
+  "blocking": [],
+  "cuts": [
+   "Level 1 prose: \"Energy is conserved: 1 kWh of electricity + 2 kWh of outdoor heat = 3 kWh of heat delivered.\" It repeats the diagram.",
+   "Level 2: \"(The air around us is at 1 bar.)\"",
+   "Level 2 opening: \"Heat flows by itself only from hot to cold.\" The reader knows this; keep only the thought experiment that follows it."
+  ],
+  "question": {
+   "text": "How can a heat pump deliver about 3 kWh of heat for 1 kWh of electricity without breaking energy conservation? A follow-on question: what limits that ratio?",
+   "known_at": "The title and the first paragraph: \"Energy cannot be created, so where do the other 2 kWh come from?\"",
+   "result_stated": "Yes, in words, at once: \"**Answer:** the heat pump does not make that heat. It moves heat from the cold outdoor air into the home. The electricity pays for the move.\""
+  },
+  "motive": "The reason to care is the apparent paradox: \"An electric heater turns 1 kWh of electricity into 1 kWh of heat. A heat pump gives about 3 kWh of heat for the same 1 kWh. Energy cannot be created...\" The reason for the approach is given in Level 2: piping a fluid with no other step would make \"the home gets colder\", so \"the fluid must be colder than the air outside and hotter than the water inside. One fluid can be both, because its boiling temperature depends on its pressure.\" Level 3 is motivated by the \"Predict first\" question about colder days.",
+  "close": "Yes. The Summary says: \"A heat pump does not make 3 kWh of heat from 1 kWh of electricity. It moves 2 kWh of outdoor heat into the home, and the 1 kWh of electricity pays for the move and ends up as heat too. Pressure sets the boiling temperature... Heat flows the normal way at both coils. The colder the day, the more each kWh costs.\" The entropy limit is not restated in the summary.",
+  "recap": "A heat pump doesn't make heat: it uses electricity to change the refrigerant's pressure, so the refrigerant boils colder than the outdoor air and condenses hotter than the home water, carrying 2 kWh in from outside plus the 1 kWh of electricity.",
+  "strongest": "Diagram 2, read together with the numbered walk-through and the earlier thought experiment (\"the home gets colder\"). Each coil's temperature is set against its neighbour (−10 °C vs 0 °C air, 40 °C vs 35 °C water), so \"At both coils, heat flows the normal way\" lands concretely.",
+  "weakest": "Diagram 2's compressor box, \"heats to about 60 °C\", followed by \"condenses at 40 °C\" with no word about the cooling in between. A smaller point: the closing line \"these two pressure changes do all the work\" sits oddly next to \"The valve adds no energy and removes none.\"",
+  "suggestions": [
+   "In step 3, add a clause such as: 'the 60 °C vapour first cools to 40 °C, giving heat to the water, then condenses'.",
+   "Draw the compressor (and the valve) on the boundary between the two pressure groups, or label it '3.5 → 14 bar'.",
+   "Change \"do all the work\" to something like \"make this possible\", so it does not clash with the valve doing no work.",
+   "Consider one sentence in the Summary that restates the entropy limit in words: the bigger the lift, the more entropy must be dumped, so the more work is required."
+  ]
+ },
+ "usage": {
+  "cost": 0.11641279999999998,
+  "seconds": 32
+ },
+ "findings": [
+  {
+   "n": 1,
+   "severity": "excess",
+   "kind": "cut",
+   "text": "Level 1 prose: \"Energy is conserved: 1 kWh of electricity + 2 kWh of outdoor heat = 3 kWh of heat delivered.\" It repeats the diagram."
+  },
+  {
+   "n": 2,
+   "severity": "excess",
+   "kind": "cut",
+   "text": "Level 2: \"(The air around us is at 1 bar.)\""
+  },
+  {
+   "n": 3,
+   "severity": "excess",
+   "kind": "cut",
+   "text": "Level 2 opening: \"Heat flows by itself only from hot to cold.\" The reader knows this; keep only the thought experiment that follows it."
+  },
+  {
+   "n": 4,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "Diagram 2 (Level 2 — the refrigerant loop): The compressor label says the vapour heats \"to about 60 °C\", but the next box says it \"condenses at 40 °C\". Neither the diagram nor step 3 says that the hot vapour first cools from 60 °C to 40 °C, giving up heat to the water, before it condenses. A careful reader stops to ask why the temperature drops by 20 K."
+  },
+  {
+   "n": 5,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "Diagram 2 (Level 2 — the refrigerant loop): The compressor is drawn inside the \"High pressure, 14 bar\" group, yet it takes in 3.5 bar vapour. It is really the boundary between the two pressures, so the grouping slightly misleads."
+  }
+ ]
+}

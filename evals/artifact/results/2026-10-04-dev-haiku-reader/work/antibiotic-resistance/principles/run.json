@@ -1,0 +1,12 @@
+{
+  "result": "I made `explainers/antibiotic-resistance/explanation.md` as prose only, because the answer is a short chain of variation then selection that worked numbers show well, and a diagram or interactive page would not make it easier to follow.",
+  "error": null,
+  "cost": 0.1721862,
+  "seconds": 49,
+  "turns": 2,
+  "files": [
+    "explainers/antibiotic-resistance/explanation.md"
+  ],
+  "review_cost": 0,
+  "reviews": 0
+}

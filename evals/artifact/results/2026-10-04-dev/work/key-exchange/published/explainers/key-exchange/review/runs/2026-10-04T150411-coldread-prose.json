@@ -1,0 +1,389 @@
+{
+ "tool": "coldread",
+ "rendering": "prose",
+ "slug": "key-exchange",
+ "at": "2026-10-04T15:04:11",
+ "model": "default",
+ "prompt_sha": "a76b387677f2",
+ "reply": {
+  "paragraphs": [
+   {
+    "at": "Title",
+    "text": "How can two strangers agree on a secret key when anyone can read their messages?",
+    "unresolved": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Bold summary (line 5)",
+    "text": "They never send the key. Each person keeps a private number and sends a scrambled form of it...",
+    "unresolved": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Line 7",
+    "text": "This method is the Diffie–Hellman key exchange. A version of it starts most HTTPS connections.",
+    "unresolved": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "The problem, para 1",
+    "text": "Alice and Bob want to encrypt their messages...",
+    "unresolved": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "The problem, para 2",
+    "text": "A first idea fails. Alice picks the key, 6, and sends it through an operation that is hard to reverse. The result is 8...",
+    "unresolved": [],
+    "leap": [
+     "\"an operation that lets each side finish the other's half without undoing it\": the reader is not yet told what a 'half' is or how one side could 'finish' it. The reader has to hold this phrase until the numbered steps make it concrete. (Where 6 → 8 comes from is also not given, but 'an operation' makes clear it is only a placeholder.)"
+    ],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "The exchange, mod definition",
+    "text": "\"mod 23\" means \"the remainder after division by 23\"...",
+    "unresolved": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Step 1",
+    "text": "Alice and Bob agree in public on two numbers: a prime modulus p = 23 and a base g = 5...",
+    "unresolved": [],
+    "leap": [
+     "Why p has to be prime is not said here. Scope defers it later, so this is only an edge finding."
+    ],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Step 2",
+    "text": "Each picks a private number at random...",
+    "unresolved": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Step 3",
+    "text": "Each sends a public number: g raised to their private number, mod p...",
+    "unresolved": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Step 4",
+    "text": "Each raises the other's public number to their own private number, mod p. Alice computes 19^6 mod 23 = 2...",
+    "unresolved": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Shared secret",
+    "text": "The result, s = 2, is the shared secret. It becomes the key for ordinary encryption.",
+    "unresolved": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Why both get 2",
+    "text": "Alice computed (5^15)^6, and Bob computed (5^6)^15...",
+    "unresolved": [],
+    "leap": [
+     "\"so it removes a multiple of 23 from the product\": the one-line algebra, (x + 23k)·y = xy + 23ky, is left for the reader to fill in. It is short, but this is where a reader might reread."
+    ],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "What Eve sees, table",
+    "text": "Who | p, g | a = 6 | b = 15 | A = 8, B = 19 | s = 2",
+    "unresolved": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Predict prompt",
+    "text": "Eve has 8 and 19. Can she combine them into 2?",
+    "unresolved": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Multiplying fails",
+    "text": "Multiplying fails: 8 × 19 mod 23 = 152 mod 23 = 14...",
+    "unresolved": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Why powers, and why mod, intro",
+    "text": "Each choice blocks a simpler way for Eve to find a private number.",
+    "unresolved": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Bullet: Without mod",
+    "text": "A = 5^6 = 15625. Eve takes the logarithm base 5...",
+    "unresolved": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Bullet: multiplication instead of a power",
+    "text": "A = 5 × 6 mod 23 = 7. Multiplying by 14 undoes multiplying by 5...",
+    "unresolved": [],
+    "leap": [
+     "It is not said how Eve finds 14. The text checks that 14 works but does not say that finding it is easy, and that ease is the whole point of the bullet. The same number 14 also appeared just before as 8 × 19 mod 23, which could briefly confuse."
+    ],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Bullet: powers mod p",
+    "text": "With powers mod p, the results jump around. For exponents 1 to 22...",
+    "unresolved": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "One-way definition",
+    "text": "So g^x mod p is a one-way operation... the discrete logarithm.",
+    "unresolved": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Why real numbers are huge, para 1",
+    "text": "With p = 23, Eve can try exponents in order... about 10^14 years.",
+    "unresolved": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Why real numbers are huge, para 2",
+    "text": "Alice's own work stays small. Alice squares and takes the remainder at each step...",
+    "unresolved": [],
+    "leap": [
+     "\"A 2048-bit exponent needs about 4,000 such steps\": no reason is given for 4,000 (roughly one squaring plus at most one multiply per bit).",
+     "\"Alice squares... at each step\", yet the example step 5^3 = 2 × 5 is a multiply, not a square, so the rule as stated does not match the example."
+    ],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Assumption, not proof",
+    "text": "No one has proven that the discrete logarithm is hard...",
+    "unresolved": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "The limit, para 1",
+    "text": "The exchange stops a reader. It does not stop Mallory...",
+    "unresolved": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Mallory bullets",
+    "text": "Alice computes 10^6 mod 23 = 6. Mallory computes 8^3 mod 23 = 6...",
+    "unresolved": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "The limit, closing para",
+    "text": "Alice shares 6 with Mallory... Real systems add authentication: Bob signs the public number B, and Alice checks the signature with a certificate.",
+    "unresolved": [
+     "\"signs\"",
+     "\"signature\"",
+     "\"certificate\""
+    ],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Answer",
+    "text": "The two strangers never send the key. Each sends g raised to a private number, mod p...",
+    "unresolved": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Scope list",
+    "text": "Authentication...; Elliptic-curve Diffie–Hellman (for example X25519)...; hash function...AES...; Choosing p and g safely...; Shor's algorithm...ML-KEM",
+    "unresolved": [
+     "\"X25519\"",
+     "\"hash function\"",
+     "\"AES\"",
+     "\"Shor's algorithm\"",
+     "\"ML-KEM\"",
+     "\"different number system\""
+    ],
+    "leap": [],
+    "excess": [
+     "\"Most HTTPS connections use it today\" partly repeats line 7, \"A version of it starts most HTTPS connections\""
+    ],
+    "purpose_unclear": false
+   }
+  ],
+  "blocking": [],
+  "cuts": [
+   "Scope list: drop the example names \"X25519\" and \"ML-KEM\". They are unknown to this reader and add nothing to a pointer list.",
+   "Scope, Elliptic-curve bullet: \"Most HTTPS connections use it today\" largely repeats line 7."
+  ],
+  "question": {
+   "text": "How can two people who share nothing secret, talking only over a channel anyone can read, end up with the same secret key while the eavesdropper does not?",
+   "known_at": "The title, made concrete in 'The problem' para 1 (\"So the key itself can never be sent.\")",
+   "result_stated": "Yes, at the very start: \"They never send the key. Each person keeps a private number and sends a scrambled form of it. Each then combines the other person's scrambled number with their own private number, and both get the same result.\""
+  },
+  "motive": "Reason to care: \"Encryption needs a key that both of them know. They have never met, so every message goes over a public channel\" and \"A version of it starts most HTTPS connections.\" Reason for the approach: the failed first idea (\"If Eve cannot get 6 back from 8, Bob cannot either. So each side needs its own private number...\") and the section 'Why powers, and why mod' (\"Each choice blocks a simpler way for Eve to find a private number.\")",
+  "close": "Yes: \"Each raises the other's public number to their own private number, and both get g^(ab) mod p. Eve sees only g^a and g^b mod p. To get further, Eve must find a or b, and no fast method is known for a large p.\"",
+  "recap": "Each side keeps a secret exponent and publishes g to that power mod p. Raising the other side's number to your own exponent gives both sides g^(ab) mod p, and an eavesdropper can't undo the powering to catch up.",
+  "strongest": "'Why powers, and why mod' (lines 45–54). It rules out the simpler choices with concrete numbers (plain powers fall to a logarithm, multiplication falls to an inverse), and the jumbled table of 5^x mod 23 makes 'one-way' something the reader can see.",
+  "weakest": "'Why real numbers are huge' para 2 (line 60). \"Alice squares... at each step\" does not match the multiply step in its own example, and \"about 4,000 such steps\" comes with no reason.",
+  "suggestions": [
+   "In the multiplication bullet, add a clause saying an inverse like 14 can be found quickly (for example by the extended Euclidean algorithm, or by trying 22 candidates), so the reader sees why this choice fails.",
+   "Line 60: describe the method as square-and-multiply (square at each bit, multiply by g when the bit is 1). That fixes the mismatch with the 5^3 step and explains '≈2 steps per bit → ~4,000'.",
+   "In 'Why both get 2', write the one-line algebra (x + 23k)·y = xy + 23ky.",
+   "In the authentication sentence, gloss 'signs' in a few words (for example 'attaches proof that only Bob could have produced')."
+  ]
+ },
+ "usage": {
+  "cost": 0.1540012,
+  "seconds": 51
+ },
+ "findings": [
+  {
+   "n": 1,
+   "severity": "excess",
+   "kind": "cut",
+   "text": "Scope list: drop the example names \"X25519\" and \"ML-KEM\". They are unknown to this reader and add nothing to a pointer list."
+  },
+  {
+   "n": 2,
+   "severity": "excess",
+   "kind": "cut",
+   "text": "Scope, Elliptic-curve bullet: \"Most HTTPS connections use it today\" largely repeats line 7."
+  },
+  {
+   "n": 3,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "The problem, para 2: \"an operation that lets each side finish the other's half without undoing it\": the reader is not yet told what a 'half' is or how one side could 'finish' it. The reader has to hold this phrase until the numbered steps make it concrete. (Where 6 → 8 comes from is also not given, but 'an operation' makes clear it is only a placeholder.)"
+  },
+  {
+   "n": 4,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "Step 1: Why p has to be prime is not said here. Scope defers it later, so this is only an edge finding."
+  },
+  {
+   "n": 5,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "Why both get 2: \"so it removes a multiple of 23 from the product\": the one-line algebra, (x + 23k)·y = xy + 23ky, is left for the reader to fill in. It is short, but this is where a reader might reread."
+  },
+  {
+   "n": 6,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "Bullet: multiplication instead of a power: It is not said how Eve finds 14. The text checks that 14 works but does not say that finding it is easy, and that ease is the whole point of the bullet. The same number 14 also appeared just before as 8 × 19 mod 23, which could briefly confuse."
+  },
+  {
+   "n": 7,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "Why real numbers are huge, para 2: \"A 2048-bit exponent needs about 4,000 such steps\": no reason is given for 4,000 (roughly one squaring plus at most one multiply per bit)."
+  },
+  {
+   "n": 8,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "Why real numbers are huge, para 2: \"Alice squares... at each step\", yet the example step 5^3 = 2 × 5 is a multiply, not a square, so the rule as stated does not match the example."
+  },
+  {
+   "n": 9,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "The limit, closing para: \"signs\""
+  },
+  {
+   "n": 10,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "The limit, closing para: \"signature\""
+  },
+  {
+   "n": 11,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "The limit, closing para: \"certificate\""
+  },
+  {
+   "n": 12,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "Scope list: \"X25519\""
+  },
+  {
+   "n": 13,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "Scope list: \"hash function\""
+  },
+  {
+   "n": 14,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "Scope list: \"AES\""
+  },
+  {
+   "n": 15,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "Scope list: \"Shor's algorithm\""
+  },
+  {
+   "n": 16,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "Scope list: \"ML-KEM\""
+  },
+  {
+   "n": 17,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "Scope list: \"different number system\""
+  }
+ ]
+}

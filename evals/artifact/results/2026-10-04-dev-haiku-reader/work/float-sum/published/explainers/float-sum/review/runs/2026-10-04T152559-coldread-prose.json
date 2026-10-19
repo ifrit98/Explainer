@@ -1,0 +1,252 @@
+{
+ "tool": "coldread",
+ "rendering": "prose",
+ "slug": "float-sum",
+ "at": "2026-10-04T15:25:59",
+ "model": "default",
+ "prompt_sha": "5a19de7d0d5c",
+ "reply": {
+  "paragraphs": [
+   {
+    "at": "Title + line 3",
+    "text": "In Python, JavaScript, and most other languages, `0.1 + 0.2 == 0.3` is `false`...",
+    "unresolved": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "line 5 (bold summary)",
+    "text": "The computer never holds 0.1, 0.2, or 0.3...",
+    "unresolved": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "What the computer holds, line 9",
+    "text": "A literal such as `0.1` becomes a **double**...",
+    "unresolved": [],
+    "leap": [
+     "\"64-bit binary format\" but \"at most 53 binary digits\": the reader isn't told what the other 11 bits do until the 'Not covered' list at the end. This is an edge issue, not a stopper."
+    ],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Why 0.1 must be rounded, line 13 + expansion",
+    "text": "A whole number times a power of two is a fraction whose denominator is a power of two...",
+    "unresolved": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "line 17",
+    "text": "This is the same as 1/3 = 0.3333… in decimal...",
+    "unresolved": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "The stored values, line 21",
+    "text": "The **stored value** of a literal is the double nearest to it. The **gap** is...",
+    "unresolved": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "line 23",
+    "text": "The gap depends on the size of the number. Doubles between 0.25 and 0.5 are whole numbers from 2^52 up to 2^53, times 2^-54...",
+    "unresolved": [],
+    "leap": [
+     "Why the multiplier must be 2^-54 in this range. The text never links it back to the 53-digit limit from line 9 (a bigger whole number with a smaller power would need more than 53 digits). The reader may reread line 9 to work this out."
+    ],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "line 25",
+    "text": "To see the rounding, count each number in units of u...",
+    "unresolved": [
+     "\"…595\" / \"…198.5\": the ellipsis shorthand for long counts is used without saying what it means. It can be inferred."
+    ],
+    "leap": [
+     "\"its stored value can be a quarter-multiple of u, such as …198.5\": the example is a half, which makes the reader stop to check that .5 counts as a multiple of 1/4. The text also doesn't show why .4 rounds to .5 rather than .25."
+    ],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "table, lines 27-31",
+    "text": "| Number | Exact, in u | Gap here | Stored, in u | ...",
+    "unresolved": [
+     "\"Error\" column: its sign convention is only defined in the next paragraph."
+    ],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "line 33",
+    "text": "The error is the stored value minus the decimal. 0.1 and 0.2 round up; 0.3 rounds down.",
+    "unresolved": [],
+    "leap": [],
+    "excess": [
+     "\"0.3 rounds down\" was already said in line 25, and the table's signs show both directions."
+    ],
+    "purpose_unclear": false
+   },
+   {
+    "at": "What `+` does, line 37 + exact sum",
+    "text": "The `+` operation first finds the **exact sum**...",
+    "unresolved": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "line 41",
+    "text": "The exact sum is exactly halfway... **tie**... IEEE 754...",
+    "unresolved": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "line 43",
+    "text": "Stored 0.3 is at …595 u. The rounded sum and stored 0.3 are neighboring doubles...",
+    "unresolved": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "line 45",
+    "text": "The addition did not make a mistake...",
+    "unresolved": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Why print(0.1) shows 0.1, line 50",
+    "text": "Languages print the shortest decimal that rounds back to the same double...",
+    "unresolved": [],
+    "leap": [
+     "\"One gap is about 1 part in 5 × 10^15 of 0.3, so the two doubles agree in their first 16 digits\": the reader has to do the arithmetic (5.55e-17 / 0.3) to check this."
+    ],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "When it works, line 55",
+    "text": "`0.5 + 0.25 == 0.75` is true...",
+    "unresolved": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "line 57",
+    "text": "A decimal type also avoids the problem...",
+    "unresolved": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "What to do, line 62",
+    "text": "Do not compare doubles with `==`... Compare with a tolerance instead...",
+    "unresolved": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Not covered here, lines 66-68",
+    "text": "- The sign and exponent bits of a double...",
+    "unresolved": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   }
+  ],
+  "blocking": [],
+  "cuts": [
+   "line 33: cut \"0.1 and 0.2 round up; 0.3 rounds down.\" The table's Error column already shows it, and line 25 already said it for 0.3. Moving the error definition above the table would also stop the reader puzzling over the column.",
+   "line 50: cut the last sentence (\"One gap is about 1 part in 5 × 10^15...\"). It asks for arithmetic, and the claim before it (\"with 17 significant digits\") already makes the point."
+  ],
+  "question": {
+   "text": "Why does 0.1 + 0.2 == 0.3 come out false, and why does the sum print as 0.30000000000000004?",
+   "known_at": "Title and line 3",
+   "result_stated": "Yes, in words at line 5: \"The computer never holds 0.1, 0.2, or 0.3. It holds the nearest numbers it can store in binary. The addition is correct, but its result rounds to the next storable number above the one that 0.3 rounds to.\""
+  },
+  "motive": "Reason to care: only implied. Line 3 presents the surprise, and line 62 makes it practical: \"Do not compare doubles with `==`...\". No early sentence says why the reader should care. Reason for the approach: line 25, \"To see the rounding, count each number in units of u\", together with line 23's demonstration that the gap is constant within a range. That is enough.",
+  "close": "Yes. Line 45 gives the general argument in words: \"The addition did not make a mistake. The rounded sum is the nearest double to the exact sum of its inputs. The inputs were not 0.1 and 0.2.\" Line 55 states the general condition: \"The failure needs a decimal whose denominator has a factor 5.\"",
+  "recap": "0.1 and 0.2 are each stored slightly too high and 0.3 slightly too low, and the correctly rounded sum lands one storable step above stored 0.3, so == says false.",
+  "strongest": "Lines 41-43: the exact sum works out to …595.5 u, the tie rule sends it to …596 u, and that is one gap above stored 0.3 at …595 u. The whole result rests on concrete counts the reader can check.",
+  "weakest": "Line 23-25: why the multiplier is 2^-54 is not tied back to the 53-digit limit, and \"quarter-multiple of u, such as …198.5\" uses a half as its example of a quarter. It is the one place the reader rereads.",
+  "suggestions": [
+   "In line 23, add one clause such as \"53 binary digits reach up to 2^53, so to cover 0.25–0.5 the power must be 2^-54\" to close the leap.",
+   "In line 25, show the rounding for 0.1 explicitly: the neighbors are …198.25 and …198.5, and .4 is nearer to .5.",
+   "Define the Error column before the table."
+  ]
+ },
+ "usage": {
+  "cost": 0.1279186,
+  "seconds": 41
+ },
+ "findings": [
+  {
+   "n": 1,
+   "severity": "excess",
+   "kind": "cut",
+   "text": "line 33: cut \"0.1 and 0.2 round up; 0.3 rounds down.\" The table's Error column already shows it, and line 25 already said it for 0.3. Moving the error definition above the table would also stop the reader puzzling over the column."
+  },
+  {
+   "n": 2,
+   "severity": "excess",
+   "kind": "cut",
+   "text": "line 50: cut the last sentence (\"One gap is about 1 part in 5 × 10^15...\"). It asks for arithmetic, and the claim before it (\"with 17 significant digits\") already makes the point."
+  },
+  {
+   "n": 3,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "What the computer holds, line 9: \"64-bit binary format\" but \"at most 53 binary digits\": the reader isn't told what the other 11 bits do until the 'Not covered' list at the end. This is an edge issue, not a stopper."
+  },
+  {
+   "n": 4,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "line 23: Why the multiplier must be 2^-54 in this range. The text never links it back to the 53-digit limit from line 9 (a bigger whole number with a smaller power would need more than 53 digits). The reader may reread line 9 to work this out."
+  },
+  {
+   "n": 5,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "line 25: \"…595\" / \"…198.5\": the ellipsis shorthand for long counts is used without saying what it means. It can be inferred."
+  },
+  {
+   "n": 6,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "line 25: \"its stored value can be a quarter-multiple of u, such as …198.5\": the example is a half, which makes the reader stop to check that .5 counts as a multiple of 1/4. The text also doesn't show why .4 rounds to .5 rather than .25."
+  },
+  {
+   "n": 7,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "table, lines 27-31: \"Error\" column: its sign convention is only defined in the next paragraph."
+  },
+  {
+   "n": 8,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "Why print(0.1) shows 0.1, line 50: \"One gap is about 1 part in 5 × 10^15 of 0.3, so the two doubles agree in their first 16 digits\": the reader has to do the arithmetic (5.55e-17 / 0.3) to check this."
+  }
+ ]
+}

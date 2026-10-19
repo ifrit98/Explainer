@@ -1,0 +1,42 @@
+{
+  "answers": {
+    "1": {
+      "answer": "The operation is raising a base g to a private number mod a prime p (g^x mod p). It is fast to compute, but there is no known fast way to reverse it (the discrete logarithm). On top of that, p is huge, about 2048 bits. Its safety is an assumption that has never been proven.",
+      "quote": "So g^x mod p is a **one-way operation**: fast to compute, with no known fast reverse. The reverse problem (given g, p, and g^x mod p, find x) is the **discrete logarithm** named above."
+    },
+    "2": {
+      "answer": "Alice computes (g^b)^a and Bob computes (g^a)^b. By the exponent rule, both equal g^(ab). Taking remainders along the way does not change the final remainder, so both get the same s.",
+      "quote": "Alice computed (5^15)^6, and Bob computed (5^6)^15. By the exponent rule, both equal 5^(6×15). Both also took remainders along the way, and that does not change the final remainder."
+    },
+    "3": {
+      "answer": "A man-in-the-middle attack: an attacker (Mallory) who can replace the public numbers and so sets up a separate key with each side. Authentication stops it, for example digital signatures and certificates.",
+      "quote": "Nothing in the exchange tells Alice who sent a public number. Real systems add **authentication**: Bob attaches to B a value that only Bob can produce and anyone can check (a digital signature)."
+    },
+    "4": {
+      "answer": "Alice sends A = 8 and Bob sends B = 19. Their shared key is 2.",
+      "quote": "Alice sends A = 5^6 mod 23 = 15625 mod 23 = 8. Bob sends B = 5^15 mod 23 = 19."
+    }
+  },
+  "stops": [
+    "\"This operation is hard to reverse (later sections show why). Bob receives 8, and so does Eve. If Eve cannot get 6 back from 8, Bob cannot either.\" It is not clear at this point why Bob would need to recover 6.",
+    "\"Bob sends B = 5^15 mod 23 = 19.\" No working is shown, unlike Alice's 15625 step.",
+    "\"Alice computes 19^6 mod 23 = 2. Bob computes 8^15 mod 23 = 2.\" These are hard to check by hand.",
+    "\"Multiplying powers adds the exponents, so 14 = 5^(6+15) mod 23.\" This takes a moment to connect back to 8 = 5^6 and 19 = 5^15.",
+    "\"The best known methods are faster, but still need about 2^112 operations\" The faster methods are not named or explained.",
+    "\"Each squaring doubles the exponent, so a 2048-bit exponent needs about 2048 squarings\" The square-and-multiply method is only sketched.",
+    "\"feed s into the same hash function, a fixed scrambling recipe\" It is not explained why s is hashed instead of being used directly."
+  ],
+  "excess": [
+    "\"A version of it starts most HTTPS connections.\"",
+    "\"*Predict before you read on:* Eve has 8 and 19. Can Eve combine them into 2?\"",
+    "\"**Elliptic-curve Diffie–Hellman**: the same idea with points on a curve in place of powers mod p.\"",
+    "\"**Quantum computers**: a large quantum computer could solve the discrete logarithm fast.\"",
+    "\"The two strangers never send the key. Each sends g raised to a private number, mod p.\" This repeats the opening summary."
+  ],
+  "grounded": {
+    "1": true,
+    "2": true,
+    "3": true,
+    "4": true
+  }
+}

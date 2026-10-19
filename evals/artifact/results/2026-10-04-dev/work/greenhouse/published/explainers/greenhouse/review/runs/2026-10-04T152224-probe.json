@@ -1,0 +1,212 @@
+{
+ "tool": "probe",
+ "rendering": null,
+ "slug": "greenhouse",
+ "at": "2026-10-04T15:22:24",
+ "model": "default",
+ "prompt_sha": "5539eb6fbccb",
+ "reply": {
+  "gaps": [
+   {
+    "rule": 2,
+    "severity": "main",
+    "about": "Why the surface warms by exactly 'lapse rate × rise in emission height'. Nothing says why air gets colder with height, or what links the surface temperature to the temperature at the emission height.",
+    "why_it_matters": "The causal chain jumps from 'the emission layer is back at 255 K' to 'the surface is warmer'. That only follows if convection holds the temperature profile at a fixed 6.5 K/km, so the whole profile shifts together. The lapse rate is listed only as an 'observed average', and the reader is never told why higher air is colder. The step the central answer depends on is left unstated.",
+    "suggested_addition": "Add: rising air expands at lower pressure and cools as it does (dry air cools about 9.8 K/km; moist air about 6.5 K/km on average because condensing water releases heat). Convection keeps this profile in place, so surface temperature = emission temperature + 6.5 K/km × emission height. Today that is 255 + 6.5×5.08 ≈ 288 K. After doubling: 255 + 6.5×5.23 ≈ 289 K, so the surface is about 1 K warmer. State that this assumes the lapse rate stays fixed."
+   },
+   {
+    "rule": 2,
+    "severity": "main",
+    "about": "Why more greenhouse gas raises the emission height, and why the rise is only about 150 m",
+    "why_it_matters": "The relationship 'more gas → higher emission height' is the key step of the mechanism, but the model only asserts it. It gives no reason and no worked example. The 150 m figure is worked backwards from the forcing, not from the gas itself.",
+    "suggested_addition": "Add: infrared escapes from roughly the level where the gas above it can absorb it only about once (optical depth ≈ 1). Air thins by a factor e every ~8 km (the scale height). So doubling a well-mixed gas moves that level up by about 8 km × ln 2 ≈ 5.5 km, but only at wavelengths where the gas absorbs and the air at that level is still colder than below. At most wavelengths nothing changes. Averaged over the whole spectrum, the effective rise is ≈ 150 m (3.7 W/m² ÷ 3.76 W/m² per K ÷ 6.5 K/km ≈ 0.15 km)."
+   },
+   {
+    "rule": 4,
+    "severity": "main",
+    "about": "The surface emits 390 W/m² but only 240 W/m² leaves to space. The model never says where the other 150 W/m² goes.",
+    "why_it_matters": "A reader who sees these two numbers will ask where the difference went. Without back-radiation, the numbers look like a violation of the energy balance the model itself sets up.",
+    "suggested_addition": "Add a surface budget with numbers: the surface absorbs ≈160 W/m² of sunlight plus ≈340 W/m² of infrared emitted downward by the greenhouse gases. It loses ≈390 W/m² as infrared plus ≈100 W/m² carried upward by convection and evaporation. Only ≈240 W/m² leaves the top of the atmosphere, from ≈5 km up."
+   },
+   {
+    "rule": 3,
+    "severity": "main",
+    "about": "One quantity, 255 K, has several names: 'no-atmosphere temperature', 'balance temperature', 'emission temperature', and 'the new emission height is back at 255 K'",
+    "why_it_matters": "The reader may take these for different quantities. 'Emission temperature' appears in Relationships, but it is defined only in the last Terms section and is missing from Entities.",
+    "suggested_addition": "Use one name, 'emission temperature (255 K)'. Define it in Entities before Relationships: the temperature that radiates 240 W/m² by σT⁴. Change 'emission height is back at 255 K' to 'the air at the emission height is back at 255 K'."
+   },
+   {
+    "rule": 3,
+    "severity": "edge",
+    "about": "Two pairs of names, and terms used without definition",
+    "why_it_matters": "Two concepts each have two names: 'imbalance' vs 'radiative forcing', and 'emission height' vs 'emitting layer'/'layer'/'that air'. Albedo, Wien's law, feedbacks, 'saturated' and 'band' are used but never defined. The Audience section says the reader does not know Wien's law.",
+    "suggested_addition": "Say that forcing is the imbalance at the moment CO₂ is added (3.7 W/m²), and that the imbalance shrinks toward 0 as the Earth warms. Define albedo as the fraction of sunlight reflected (0.30 → 240 W/m² absorbed; 0.0 would give 340 W/m² and ≈278 K). Define feedback, band and saturation in one line each, or drop Wien's formula."
+   },
+   {
+    "rule": 2,
+    "severity": "edge",
+    "about": "The guarantee 'energy balance sets 255 K' has no example where it breaks",
+    "why_it_matters": "Rule 2 asks for a case where removing the assumption breaks the guarantee. The table leaves that cell as '—'. The two assumptions are steady state and fixed albedo.",
+    "suggested_addition": "Breaks without steady state: today the Earth absorbs ≈1 W/m² more than it emits, so emission is about 239 W/m² and the effective temperature is ≈254.7 K, not 255 K. Breaks without fixed albedo: at albedo 0.25, absorbed is 255 W/m² and T ≈ 259 K."
+   },
+   {
+    "rule": 2,
+    "severity": "edge",
+    "about": "The claim that 'each doubling adds about the same 3.7 W/m²' (logarithmic) has no worked example and no case where it fails",
+    "why_it_matters": "This is an always-type claim, used in the saturation confusion point.",
+    "suggested_addition": "280→560 ppm: 5.35 ln 2 ≈ 3.7 W/m². 560→1120 ppm: also 3.7 W/m². 280→420 ppm: 5.35 ln 1.5 ≈ 2.2 W/m². It breaks at very low concentrations, where absorption grows roughly in proportion to the amount, so from 0→280 ppm the log formula would give an infinite forcing."
+   },
+   {
+    "rule": 1,
+    "severity": "edge",
+    "about": "The 'why T⁴' argument is circular",
+    "why_it_matters": "The 390 W/m² figure is itself computed with σT⁴, so it cannot show that T⁴ is needed rather than linear T.",
+    "suggested_addition": "Say that 390 W/m² is a measured surface emission (≈ 396 W/m² in observed budgets). Show that a linear law fitted to 240 W/m² at 255 K would predict 240 × 288/255 ≈ 271 W/m²."
+   },
+   {
+    "rule": 5,
+    "severity": "edge",
+    "about": "The meaning of 3.76 W/m² per K (the Planck response) and of the 3 K climate sensitivity",
+    "why_it_matters": "These numbers appear in the Quantities section, but the model never says what a low or high value would mean for the reader.",
+    "suggested_addition": "3.76 W/m² per K is the extra emission for each 1 K of warming. A larger value means less warming per W/m² of forcing. Sensitivity of 2.5 K vs 4 K means 2.5 K vs 4 K of eventual warming per doubling of CO₂."
+   },
+   {
+    "rule": 4,
+    "severity": "edge",
+    "about": "The temporal sequence step 'warm over years to decades (the ocean slows it)' has no numbers",
+    "why_it_matters": "It is a mechanism step with no worked example.",
+    "suggested_addition": "With 3.7 W/m² heating a 100 m ocean mixed layer (heat capacity ≈ 4.2×10⁸ J/m²/K), the first 1 K takes about 4.2×10⁸ / 3.7 ≈ 1.1×10⁸ s ≈ 3.6 years if no extra heat were emitted. In reality it takes longer, because emission grows as the Earth warms and heat mixes into the deep ocean."
+   }
+  ],
+  "excess": [
+   "Wien's law constant 2898 µm·K (only the two peak wavelengths are needed)",
+   "CO₂ history 280 ppm (1750) / 420 ppm (2024)",
+   "IPCC 2.5–4 K likely range and feedback-inclusive 3 K (feedbacks are declared out of scope)",
+   "Ozone-hole confusion point",
+   "Stratospheric cooling as a fingerprint (useful but not needed for the central question)"
+  ],
+  "next_questions": [
+   {
+    "q": "Why is the air colder higher up, and why does the surface stay tied to the emission-height temperature?",
+    "answered_by_model": false,
+    "declared_out_of_scope": false
+   },
+   {
+    "q": "Where do the other 150 W/m² that the surface emits go? Does the atmosphere radiate back down?",
+    "answered_by_model": false,
+    "declared_out_of_scope": false
+   },
+   {
+    "q": "Why does adding gas raise the emission height, and why by only about 150 m?",
+    "answered_by_model": false,
+    "declared_out_of_scope": false
+   },
+   {
+    "q": "If no-feedback warming is about 1 K, why is the expected warming 3 K, and how much warming should 280→420 ppm already have caused?",
+    "answered_by_model": false,
+    "declared_out_of_scope": true
+   },
+   {
+    "q": "If CO₂ absorption is saturated, why does each doubling still add about 3.7 W/m²?",
+    "answered_by_model": true,
+    "declared_out_of_scope": true
+   }
+  ]
+ },
+ "usage": {
+  "cost": 0.1644216,
+  "seconds": 59
+ },
+ "findings": [
+  {
+   "n": 1,
+   "severity": "main",
+   "kind": "rule 2",
+   "text": "Why the surface warms by exactly 'lapse rate × rise in emission height'. Nothing says why air gets colder with height, or what links the surface temperature to the temperature at the emission height. → Add: rising air expands at lower pressure and cools as it does (dry air cools about 9.8 K/km; moist air about 6.5 K/km on average because condensing water releases heat). Convection keeps this profile in place, so surface temperature = emission temperature + 6.5 K/km × emission height. Today that is 255 + 6.5×5.08 ≈ 288 K. After doubling: 255 + 6.5×5.23 ≈ 289 K, so the surface is about 1 K warmer. State that this assumes the lapse rate stays fixed."
+  },
+  {
+   "n": 2,
+   "severity": "main",
+   "kind": "rule 2",
+   "text": "Why more greenhouse gas raises the emission height, and why the rise is only about 150 m → Add: infrared escapes from roughly the level where the gas above it can absorb it only about once (optical depth ≈ 1). Air thins by a factor e every ~8 km (the scale height). So doubling a well-mixed gas moves that level up by about 8 km × ln 2 ≈ 5.5 km, but only at wavelengths where the gas absorbs and the air at that level is still colder than below. At most wavelengths nothing changes. Averaged over the whole spectrum, the effective rise is ≈ 150 m (3.7 W/m² ÷ 3.76 W/m² per K ÷ 6.5 K/km ≈ 0.15 km)."
+  },
+  {
+   "n": 3,
+   "severity": "main",
+   "kind": "rule 4",
+   "text": "The surface emits 390 W/m² but only 240 W/m² leaves to space. The model never says where the other 150 W/m² goes. → Add a surface budget with numbers: the surface absorbs ≈160 W/m² of sunlight plus ≈340 W/m² of infrared emitted downward by the greenhouse gases. It loses ≈390 W/m² as infrared plus ≈100 W/m² carried upward by convection and evaporation. Only ≈240 W/m² leaves the top of the atmosphere, from ≈5 km up."
+  },
+  {
+   "n": 4,
+   "severity": "main",
+   "kind": "rule 3",
+   "text": "One quantity, 255 K, has several names: 'no-atmosphere temperature', 'balance temperature', 'emission temperature', and 'the new emission height is back at 255 K' → Use one name, 'emission temperature (255 K)'. Define it in Entities before Relationships: the temperature that radiates 240 W/m² by σT⁴. Change 'emission height is back at 255 K' to 'the air at the emission height is back at 255 K'."
+  },
+  {
+   "n": 5,
+   "severity": "edge",
+   "kind": "rule 3",
+   "text": "Two pairs of names, and terms used without definition → Say that forcing is the imbalance at the moment CO₂ is added (3.7 W/m²), and that the imbalance shrinks toward 0 as the Earth warms. Define albedo as the fraction of sunlight reflected (0.30 → 240 W/m² absorbed; 0.0 would give 340 W/m² and ≈278 K). Define feedback, band and saturation in one line each, or drop Wien's formula."
+  },
+  {
+   "n": 6,
+   "severity": "edge",
+   "kind": "rule 2",
+   "text": "The guarantee 'energy balance sets 255 K' has no example where it breaks → Breaks without steady state: today the Earth absorbs ≈1 W/m² more than it emits, so emission is about 239 W/m² and the effective temperature is ≈254.7 K, not 255 K. Breaks without fixed albedo: at albedo 0.25, absorbed is 255 W/m² and T ≈ 259 K."
+  },
+  {
+   "n": 7,
+   "severity": "edge",
+   "kind": "rule 2",
+   "text": "The claim that 'each doubling adds about the same 3.7 W/m²' (logarithmic) has no worked example and no case where it fails → 280→560 ppm: 5.35 ln 2 ≈ 3.7 W/m². 560→1120 ppm: also 3.7 W/m². 280→420 ppm: 5.35 ln 1.5 ≈ 2.2 W/m². It breaks at very low concentrations, where absorption grows roughly in proportion to the amount, so from 0→280 ppm the log formula would give an infinite forcing."
+  },
+  {
+   "n": 8,
+   "severity": "edge",
+   "kind": "rule 1",
+   "text": "The 'why T⁴' argument is circular → Say that 390 W/m² is a measured surface emission (≈ 396 W/m² in observed budgets). Show that a linear law fitted to 240 W/m² at 255 K would predict 240 × 288/255 ≈ 271 W/m²."
+  },
+  {
+   "n": 9,
+   "severity": "edge",
+   "kind": "rule 5",
+   "text": "The meaning of 3.76 W/m² per K (the Planck response) and of the 3 K climate sensitivity → 3.76 W/m² per K is the extra emission for each 1 K of warming. A larger value means less warming per W/m² of forcing. Sensitivity of 2.5 K vs 4 K means 2.5 K vs 4 K of eventual warming per doubling of CO₂."
+  },
+  {
+   "n": 10,
+   "severity": "edge",
+   "kind": "rule 4",
+   "text": "The temporal sequence step 'warm over years to decades (the ocean slows it)' has no numbers → With 3.7 W/m² heating a 100 m ocean mixed layer (heat capacity ≈ 4.2×10⁸ J/m²/K), the first 1 K takes about 4.2×10⁸ / 3.7 ≈ 1.1×10⁸ s ≈ 3.6 years if no extra heat were emitted. In reality it takes longer, because emission grows as the Earth warms and heat mixes into the deep ocean."
+  },
+  {
+   "n": 11,
+   "severity": "excess",
+   "kind": "model entry",
+   "text": "Wien's law constant 2898 µm·K (only the two peak wavelengths are needed)"
+  },
+  {
+   "n": 12,
+   "severity": "excess",
+   "kind": "model entry",
+   "text": "CO₂ history 280 ppm (1750) / 420 ppm (2024)"
+  },
+  {
+   "n": 13,
+   "severity": "excess",
+   "kind": "model entry",
+   "text": "IPCC 2.5–4 K likely range and feedback-inclusive 3 K (feedbacks are declared out of scope)"
+  },
+  {
+   "n": 14,
+   "severity": "excess",
+   "kind": "model entry",
+   "text": "Ozone-hole confusion point"
+  },
+  {
+   "n": 15,
+   "severity": "excess",
+   "kind": "model entry",
+   "text": "Stratospheric cooling as a fingerprint (useful but not needed for the central question)"
+  }
+ ]
+}

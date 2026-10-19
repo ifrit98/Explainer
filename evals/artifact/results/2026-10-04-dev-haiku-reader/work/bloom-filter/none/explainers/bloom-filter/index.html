@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bloom filters: "have I seen this before?" in a few bits</title>
+<style>
+  :root {
+    --ink: #1d2330;
+    --muted: #5b6475;
+    --line: #d8dce4;
+    --bg: #fbfbfd;
+    --zero: #eef0f4;
+    --one: #3b6fd8;
+    --hit: #f2a93b;
+    --miss: #d9534f;
+    --ok: #2e9e5b;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--bg); color: var(--ink);
+    font: 17px/1.6 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  }
+  main { max-width: 780px; margin: 0 auto; padding: 2rem 1.2rem 4rem; }
+  h1 { font-size: 1.9rem; line-height: 1.25; margin-bottom: .3rem; }
+  h2 { margin-top: 2.6rem; font-size: 1.35rem; border-bottom: 1px solid var(--line); padding-bottom: .2rem; }
+  .lede { color: var(--muted); font-size: 1.08rem; margin-top: 0; }
+  code { background: #eef0f4; padding: 0 .3em; border-radius: 3px; font-size: .92em; }
+  .math { font-family: "Cambria Math", Cambria, Georgia, serif; font-size: 1.08em; white-space: nowrap; }
+  .eq { display: block; text-align: center; margin: .8rem 0; font-family: "Cambria Math", Cambria, Georgia, serif; font-size: 1.15em; }
+  .box { background: #fff; border: 1px solid var(--line); border-radius: 8px; padding: 1rem 1.1rem; margin: 1.2rem 0; }
+  .key { border-left: 4px solid var(--one); background: #f3f6fd; padding: .7rem 1rem; margin: 1.2rem 0; border-radius: 0 6px 6px 0; }
+  table { border-collapse: collapse; margin: 1rem 0; width: 100%; font-size: .95rem; }
+  th, td { border: 1px solid var(--line); padding: .35rem .6rem; text-align: left; }
+  th { background: #f1f3f7; }
+
+  /* widget */
+  .controls { display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; margin-bottom: .8rem; }
+  input[type=text] { font: inherit; padding: .35rem .55rem; border: 1px solid #b9c0cc; border-radius: 5px; width: 11rem; }
+  button { font: inherit; font-size: .93rem; padding: .35rem .8rem; border-radius: 5px; border: 1px solid #b9c0cc; background: #fff; cursor: pointer; }
+  button.primary { background: var(--one); color: #fff; border-color: var(--one); }
+  button:hover { filter: brightness(.95); }
+  select { font: inherit; padding: .25rem; }
+  .bits { display: grid; grid-template-columns: repeat(16, 1fr); gap: 4px; margin: .6rem 0 .3rem; }
+  .bit {
+    aspect-ratio: 1 / 1; border-radius: 4px; background: var(--zero);
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    font-size: .8rem; font-weight: 600; color: #8a93a3; position: relative; transition: background .2s;
+  }
+  .bit .idx { font-size: .58rem; font-weight: 400; position: absolute; top: 1px; left: 3px; color: #9aa2b1; }
+  .bit.one { background: var(--one); color: #fff; }
+  .bit.one .idx { color: #cfdcf7; }
+  .bit.probe { outline: 3px solid var(--hit); outline-offset: 1px; }
+  .bit.probe.zero-probe { outline-color: var(--miss); }
+  .result { min-height: 3.2em; padding: .55rem .8rem; border-radius: 6px; background: #f4f5f8; font-size: .97rem; }
+  .result.yes { background: #fff4e3; }
+  .result.no { background: #e9f6ee; }
+  .result.fp { background: #fde8e7; }
+  .stats { color: var(--muted); font-size: .9rem; margin-top: .5rem; }
+  .chips { display: flex; flex-wrap: wrap; gap: .3rem; margin-top: .4rem; }
+  .chip { background: #e6ecfa; border-radius: 999px; padding: .05rem .6rem; font-size: .85rem; }
+  .legend { font-size: .85rem; color: var(--muted); }
+  .sw { display: inline-block; width: .9em; height: .9em; border-radius: 3px; vertical-align: -0.1em; margin-right: .2em; }
+
+  .sliders label { display: grid; grid-template-columns: 11rem 1fr 4.5rem; align-items: center; gap: .6rem; margin: .3rem 0; font-size: .95rem; }
+  .sliders output { font-variant-numeric: tabular-nums; text-align: right; font-weight: 600; }
+  .readout { margin-top: .8rem; font-size: .97rem; }
+  .readout b { font-variant-numeric: tabular-nums; }
+  canvas { width: 100%; height: 200px; display: block; margin-top: .6rem; }
+</style>
+</head>
+<body>
+<main>
+
+<h1>Bloom filters: answering "have I seen this before?" with very little memory</h1>
+<p class="lede">A Bloom filter is a row of bits plus a few hash functions. It can tell you that something is <em>definitely new</em> or <em>probably seen before</em>. It uses a small, fixed amount of memory no matter how long the items are. The cost is that the "probably" answer is sometimes wrong. This page shows how it works, lets you try one, and explains how to work out how often it will be wrong.</p>
+
+<h2>1. The problem</h2>
+<p>Lots of programs need to ask the same question over and over: <em>is this item in my set?</em> Has this user name been taken? Has the web crawler already visited this URL? Is the row I'm looking for in this file on disk, or should I skip the file?</p>
+<p>The obvious answer is to store every item, say in a hash set, and look it up. That gives exact answers, but you pay for the items themselves. A billion URLs of about 60 bytes each comes to roughly 60&nbsp;GB before any overhead. Often you can't afford that much fast memory, or the full set lives somewhere slow (on disk, across the network), and you just want a cheap check before you go there.</p>
+<p>A Bloom filter gives up a little accuracy in return for a large saving in memory. At a 1% error rate it needs about <strong>10 bits per item</strong>, whether the item is a 6-letter word or a 2&nbsp;KB document. For those billion URLs that's about 1.2&nbsp;GB.</p>
+
+<h2>2. The machinery: bits and hash functions</h2>
+<p>You need two ingredients:</p>
+<ul>
+  <li>An array of <span class="math"><i>m</i></span> bits, all starting at 0.</li>
+  <li><span class="math"><i>k</i></span> different <strong>hash functions</strong>. A hash function turns any input (such as a string) into a number that looks random but is always the same for the same input. We take each number modulo <span class="math"><i>m</i></span>, so it picks a position in the array.</li>
+</ul>
+<p>So each item is linked to <span class="math"><i>k</i></span> positions in the array. You can think of them as the item's "fingerprint" of bit positions.</p>
+<div class="key">
+  <p style="margin:.2rem 0"><strong>Add</strong> an item: compute its <span class="math"><i>k</i></span> positions and set all of those bits to 1. (If a bit is already 1, it stays 1.)</p>
+  <p style="margin:.2rem 0"><strong>Check</strong> an item: compute its <span class="math"><i>k</i></span> positions and look at the bits.</p>
+  <ul style="margin:.2rem 0">
+    <li>If <em>any</em> of them is 0, the item was <strong>definitely never added</strong>. Adding it would have set that bit to 1, and bits never go back to 0.</li>
+    <li>If <em>all</em> of them are 1, the item was <strong>probably added</strong>. Those bits might have been set by other items.</li>
+  </ul>
+</div>
+<p>The filter never stores the item itself. It only stores the bits that items have switched on. That's why it's small, and also why it can be fooled.</p>
+
+<h2>3. Try it</h2>
+<p>This filter has <span class="math"><i>m</i> = 32</span> bits. Add a few words, then check some words you added and some you didn't. The outlined squares are the positions the last word hashed to: orange means the bit was 1, red means it was 0.</p>
+
+<div class="box" id="demo">
+  <div class="controls">
+    <input type="text" id="word" placeholder="type a word" autocomplete="off">
+    <button class="primary" id="addBtn">Add</button>
+    <button id="checkBtn">Check</button>
+    <label style="margin-left:auto;font-size:.9rem">hash functions <i>k</i>
+      <select id="kSel"><option>1</option><option>2</option><option selected>3</option><option>4</option><option>5</option></select>
+    </label>
+  </div>
+  <div class="controls">
+    <button id="seedBtn">Add 6 animal names</button>
+    <button id="fpBtn">Hunt for a false positive</button>
+    <button id="resetBtn">Clear filter</button>
+  </div>
+  <div class="bits" id="bits"></div>
+  <div class="legend"><span class="sw" style="background:var(--zero)"></span>bit is 0 &nbsp; <span class="sw" style="background:var(--one)"></span>bit is 1 &nbsp; <span class="sw" style="outline:3px solid var(--hit)"></span>probed, was 1 &nbsp; <span class="sw" style="outline:3px solid var(--miss)"></span>probed, was 0</div>
+  <div class="result" id="result" style="margin-top:.7rem">Type a word and press <b>Add</b> or <b>Check</b>.</div>
+  <div class="stats" id="stats"></div>
+  <div class="stats">Words actually added (the filter itself does <em>not</em> keep this list; it's shown here only so you can see which answers are wrong):</div>
+  <div class="chips" id="chips"></div>
+</div>
+
+<p>Things to notice:</p>
+<ul>
+  <li>A word you added always comes back "probably yes". There are <strong>no false negatives</strong>.</li>
+  <li>When the filter is nearly empty, most new words land on at least one 0 and are rejected straight away.</li>
+  <li>As you add more words, the array fills up with 1s. Eventually a word you never added lands only on 1s that other words set, and the filter says "probably yes". That's a <strong>false positive</strong>. The <em>Hunt</em> button tries made-up words until it finds one.</li>
+  <li>Different words sometimes share positions. That sharing is what lets the filter use so few bits, and it's also the cause of false positives.</li>
+</ul>
+
+<h2>4. How it can be wrong</h2>
+<p>There are four possible outcomes:</p>
+<table>
+  <tr><th></th><th>Filter says "definitely not"</th><th>Filter says "probably yes"</th></tr>
+  <tr><th>Item was added</th><td><strong>Impossible</strong>: its bits were set to 1 and never cleared</td><td>Correct</td></tr>
+  <tr><th>Item was not added</th><td>Correct</td><td><strong>False positive</strong>: other items happened to cover all its bits</td></tr>
+</table>
+<p>So the error only goes one way. "No" is always trustworthy, and "yes" means "check properly if it matters". That fits the usual way Bloom filters are used, as a cheap guard in front of an expensive exact lookup:</p>
+<ul>
+  <li>A database keeps a Bloom filter for each file on disk. Before reading a file to look for a key, it asks the filter. "Definitely not" saves a disk read. "Probably yes" means it reads the file, and now and then finds nothing there, which costs a wasted read but never gives a wrong answer.</li>
+  <li>A web cache only stores a page the second time it's requested. A Bloom filter of "URLs seen once" answers "have I seen this before?" cheaply, and the occasional false positive just means a page gets cached a little early.</li>
+</ul>
+<p>Two more limits come from the same design:</p>
+<ul>
+  <li><strong>You can't delete.</strong> Setting an item's bits back to 0 might erase bits that other items also depend on, and then those items would get false negatives. (A variant called a <em>counting Bloom filter</em> stores a small counter in each slot instead of a single bit. Adding increments the counters and deleting decrements them, at several times the memory cost.)</li>
+  <li><strong>You can't list the contents.</strong> The items themselves were never stored, only bits.</li>
+</ul>
+
+<h2>5. How often is it wrong? The arithmetic</h2>
+<p>Here's how to estimate the false positive rate. Assume the hash functions behave like independent, fair random choices of position. Real hash functions are close enough to this.</p>
+
+<p><strong>Step 1: chance that a particular bit is still 0.</strong> A single hash picks a particular bit with probability <span class="math">1/<i>m</i></span>, so it misses that bit with probability <span class="math">1 − 1/<i>m</i></span>. Adding <span class="math"><i>n</i></span> items performs <span class="math"><i>kn</i></span> hashes in total, and the bit stays 0 only if every one of them misses it:</p>
+<span class="eq">P(bit still 0) = (1 − 1/<i>m</i>)<sup><i>kn</i></sup> ≈ e<sup>−<i>kn</i>/<i>m</i></sup></span>
+<p>(The approximation uses the standard fact that <span class="math">(1 − 1/<i>m</i>)<sup><i>m</i></sup> ≈ 1/e</span> when <span class="math"><i>m</i></span> is large.)</p>
+
+<p><strong>Step 2: chance of a false positive.</strong> Now check an item that was never added. Its <span class="math"><i>k</i></span> positions are effectively random, and each one is 1 with probability <span class="math">1 − e<sup>−<i>kn</i>/<i>m</i></sup></span>. The filter wrongly says "yes" only if all <span class="math"><i>k</i></span> are 1:</p>
+<span class="eq"><i>p</i> ≈ (1 − e<sup>−<i>kn</i>/<i>m</i></sup>)<sup><i>k</i></sup></span>
+<p>Put another way, if a fraction <span class="math"><i>f</i></span> of the bits are 1, the false positive rate is about <span class="math"><i>f</i><sup><i>k</i></sup></span>. The demo above shows this estimate under the bit array.</p>
+
+<p><strong>Step 3: choosing <span class="math"><i>k</i></span>.</strong> The number of hash functions pulls in two directions:</p>
+<ul>
+  <li>More hashes per check means a stranger has to get lucky more times, which <em>lowers</em> the error.</li>
+  <li>More hashes per insertion fills the array with 1s faster, which <em>raises</em> the error.</li>
+</ul>
+<p>The best balance turns out to be when about half the bits are 1. That happens when</p>
+<span class="eq"><i>k</i> = (<i>m</i>/<i>n</i>) · ln 2 ≈ 0.69 · (<i>m</i>/<i>n</i>)</span>
+<p>With that choice, each extra hash halves the error, so <span class="math"><i>p</i> ≈ (1/2)<sup><i>k</i></sup></span>. Rearranging gives the number of bits needed per item for a target error rate <span class="math"><i>p</i></span>:</p>
+<span class="eq"><i>m</i>/<i>n</i> = −ln <i>p</i> / (ln 2)<sup>2</sup> ≈ 1.44 · log<sub>2</sub>(1/<i>p</i>)</span>
+
+<table>
+  <tr><th>Target false positive rate</th><th>Bits per item</th><th>Best <i>k</i></th></tr>
+  <tr><td>10%</td><td>4.8</td><td>3</td></tr>
+  <tr><td>1%</td><td>9.6</td><td>7</td></tr>
+  <tr><td>0.1%</td><td>14.4</td><td>10</td></tr>
+  <tr><td>0.01%</td><td>19.2</td><td>13</td></tr>
+</table>
+<p>Two things in this table are worth noticing. The item size doesn't appear anywhere. And each tenfold improvement in accuracy costs only about 4.8 more bits per item.</p>
+
+<h2>6. Explore the trade-off</h2>
+<p>Move the sliders to see how memory per item (<span class="math"><i>m</i>/<i>n</i></span>) and the number of hashes (<span class="math"><i>k</i></span>) affect the false positive rate. The curve plots the rate against <span class="math"><i>k</i></span> for the chosen memory budget. Its lowest point is the best <span class="math"><i>k</i></span>.</p>
+<div class="box sliders">
+  <label>Bits per item, <i>m</i>/<i>n</i> <input type="range" id="bpi" min="1" max="24" step="0.5" value="10"><output id="bpiOut">10</output></label>
+  <label>Hash functions, <i>k</i> <input type="range" id="kk" min="1" max="20" step="1" value="4"><output id="kkOut">4</output></label>
+  <div class="readout" id="readout"></div>
+  <canvas id="plot" width="740" height="200"></canvas>
+</div>
+<p>Try overfilling the filter: keep <span class="math"><i>k</i></span> fixed and slide the bits per item down. This is what happens when you build a filter for a million items and then put ten million in it. The error rate doesn't creep up slowly; it rises steeply toward 100% as the array fills with 1s. Bloom filters need to be sized for the largest number of items you expect.</p>
+
+<h2>7. Summary</h2>
+<ul>
+  <li>A Bloom filter is <span class="math"><i>m</i></span> bits plus <span class="math"><i>k</i></span> hash functions. Adding an item sets its <span class="math"><i>k</i></span> bits. Checking an item tests them.</li>
+  <li>Any 0 means <strong>definitely not seen</strong>. All 1s means <strong>probably seen</strong>.</li>
+  <li>It can be wrong in only one direction: false positives, which happen when other items have already set all of a new item's bits. False negatives can't happen.</li>
+  <li>The false positive rate is about <span class="math">(1 − e<sup>−<i>kn</i>/<i>m</i></sup>)<sup><i>k</i></sup></span>. With the best <span class="math"><i>k</i></span>, about 10 bits per item gives 1%, and every extra ~4.8 bits per item cuts the rate tenfold.</li>
+  <li>It saves memory because it stores no items, which is also why it can't delete items or list them.</li>
+</ul>
+
+</main>
+
+<script>
+(function () {
+  // ---------- hashing ----------
+  // FNV-1a with a seed, followed by a final mixing step so nearby seeds give unrelated results.
+  function hash(str, seed) {
+    var h = (0x811c9dc5 ^ seed) >>> 0;
+    for (var i = 0; i < str.length; i++) {
+      h ^= str.charCodeAt(i);
+      h = Math.imul(h, 0x01000193);
+    }
+    h ^= h >>> 16; h = Math.imul(h, 0x85ebca6b);
+    h ^= h >>> 13; h = Math.imul(h, 0xc2b2ae35);
+    h ^= h >>> 16;
+    return h >>> 0;
+  }
+
+  var M = 32;
+  var k = 3;
+  var bits = new Array(M).fill(0);
+  var added = [];
+
+  function positions(word) {
+    var out = [];
+    for (var i = 0; i < k; i++) out.push(hash(word, Math.imul(i + 1, 0x9e3779b9)) % M);
+    return out;
+  }
+
+  // ---------- rendering ----------
+  var bitsEl = document.getElementById('bits');
+  var resultEl = document.getElementById('result');
+  var statsEl = document.getElementById('stats');
+  var chipsEl = document.getElementById('chips');
+  var wordEl = document.getElementById('word');
+
+  function render(probe) {
+    probe = probe || [];
+    bitsEl.innerHTML = '';
+    for (var i = 0; i < M; i++) {
+      var d = document.createElement('div');
+      d.className = 'bit' + (bits[i] ? ' one' : '');
+      if (probe.indexOf(i) >= 0) {
+        d.className += ' probe' + (bits[i] ? '' : ' zero-probe');
+      }
+      d.innerHTML = '<span class="idx">' + i + '</span>' + bits[i];
+      bitsEl.appendChild(d);
+    }
+    var ones = bits.reduce(function (a, b) { return a + b; }, 0);
+    var f = ones / M;
+    statsEl.innerHTML = ones + ' of ' + M + ' bits are 1 (fraction <i>f</i> = ' + f.toFixed(2) +
+      '). Estimated false positive rate ≈ <i>f</i><sup><i>k</i></sup> = ' + f.toFixed(2) + '<sup>' + k + '</sup> ≈ <b>' +
+      (100 * Math.pow(f, k)).toFixed(1) + '%</b>';
+    chipsEl.innerHTML = added.length ? '' : '<span class="legend">(none yet)</span>';
+    added.forEach(function (w) {
+      var c = document.createElement('span');
+      c.className = 'chip';
+      c.textContent = w;
+      chipsEl.appendChild(c);
+    });
+  }
+
+  function esc(s) {
+    return s.replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; });
+  }
+
+  function add(word) {
+    var p = positions(word);
+    var newly = p.filter(function (i, j) { return !bits[i] && p.indexOf(i) === j; });
+    p.forEach(function (i) { bits[i] = 1; });
+    if (added.indexOf(word) < 0) added.push(word);
+    return { p: p, newly: newly };
+  }
+
+  function doAdd() {
+    var w = wordEl.value.trim();
+    if (!w) return;
+    var r = add(w);
+    resultEl.className = 'result';
+    resultEl.innerHTML = 'Added <b>' + esc(w) + '</b>: its hash positions are <b>' + r.p.join(', ') + '</b>. ' +
+      (r.newly.length ? 'Bits newly switched on: ' + r.newly.join(', ') + '.' : 'All of those bits were already 1, so the array did not change at all.');
+    render(r.p);
+  }
+
+  function doCheck() {
+    var w = wordEl.value.trim();
+    if (!w) return;
+    var p = positions(w);
+    var zeros = p.filter(function (i) { return !bits[i]; });
+    var really = added.indexOf(w) >= 0;
+    if (zeros.length) {
+      resultEl.className = 'result no';
+      resultEl.innerHTML = '<b>' + esc(w) + '</b> → positions ' + p.join(', ') + '. Bit' + (zeros.length > 1 ? 's ' : ' ') + zeros.join(', ') +
+        (zeros.length > 1 ? ' are' : ' is') + ' 0, so the answer is <b>definitely not seen</b>. (Correct, always.)';
+    } else if (really) {
+      resultEl.className = 'result yes';
+      resultEl.innerHTML = '<b>' + esc(w) + '</b> → positions ' + p.join(', ') + '. All are 1, so the answer is <b>probably seen</b>. ' +
+        '(Correct: you did add it.)';
+    } else {
+      resultEl.className = 'result fp';
+      resultEl.innerHTML = '<b>' + esc(w) + '</b> → positions ' + p.join(', ') + '. All are 1, so the answer is <b>probably seen</b>. ' +
+        '<b>But you never added it, so this is a false positive.</b> ' + explainCover(w, p);
+    }
+    render(p);
+  }
+
+  // Say which added words switched on each probed bit.
+  function explainCover(w, p) {
+    var parts = [];
+    p.forEach(function (i) {
+      var who = added.filter(function (a) { return positions(a).indexOf(i) >= 0; });
+      parts.push('bit ' + i + ' by ' + who.map(function (x) { return '“' + esc(x) + '”'; }).join(' / '));
+    });
+    return 'The bits were set by other words: ' + parts.join('; ') + '.';
+  }
+
+  document.getElementById('addBtn').onclick = doAdd;
+  document.getElementById('checkBtn').onclick = doCheck;
+  wordEl.addEventListener('keydown', function (e) { if (e.key === 'Enter') doAdd(); });
+
+  document.getElementById('seedBtn').onclick = function () {
+    ['cat', 'dog', 'horse', 'otter', 'zebra', 'llama'].forEach(add);
+    resultEl.className = 'result';
+    resultEl.innerHTML = 'Added six animals. Now try checking <b>cat</b> (added) and words like <b>tiger</b> or <b>owl</b> (not added).';
+    render();
+  };
+
+  document.getElementById('fpBtn').onclick = function () {
+    if (!added.length) {
+      resultEl.className = 'result';
+      resultEl.innerHTML = 'The filter is empty, so every bit is 0 and no false positive is possible yet. Add some words first.';
+      render();
+      return;
+    }
+    var syll = ['ba', 'ko', 'ri', 'mu', 'te', 'lo', 'zi', 'na', 'pe', 'su', 'qua', 'vy'];
+    var tries = 0;
+    for (; tries < 5000; tries++) {
+      var w = '';
+      var len = 2 + (tries % 3);
+      for (var j = 0; j < len; j++) w += syll[Math.floor(Math.random() * syll.length)];
+      if (added.indexOf(w) >= 0) continue;
+      var p = positions(w);
+      if (p.every(function (i) { return bits[i]; })) {
+        wordEl.value = w;
+        resultEl.className = 'result fp';
+        resultEl.innerHTML = 'Tried ' + (tries + 1) + ' made-up word' + (tries ? 's' : '') + ' that were never added. ' +
+          (tries ? 'The first ' + tries + ' were correctly rejected. ' : '') +
+          '<b>' + esc(w) + '</b> was not: positions ' + p.join(', ') + ' are all 1, so the filter says <b>probably seen</b>, which is wrong. ' +
+          explainCover(w, p);
+        render(p);
+        return;
+      }
+    }
+    resultEl.className = 'result no';
+    resultEl.innerHTML = 'Tried 5000 made-up words and every one was correctly rejected. The filter is still sparse; add more words and try again.';
+    render();
+  };
+
+  document.getElementById('resetBtn').onclick = function () {
+    bits.fill(0); added = [];
+    resultEl.className = 'result';
+    resultEl.innerHTML = 'Filter cleared.';
+    render();
+  };
+
+  document.getElementById('kSel').onchange = function (e) {
+    // Changing k changes every item's positions, so the old bits no longer mean anything: rebuild.
+    k = parseInt(e.target.value, 10);
+    var old = added.slice();
+    bits.fill(0); added = [];
+    old.forEach(add);
+    resultEl.className = 'result';
+    resultEl.innerHTML = 'Now using <i>k</i> = ' + k + ' hash functions. The filter was rebuilt from the same words, because every word now maps to a different set of positions.';
+    render();
+  };
+
+  render();
+
+  // ---------- trade-off explorer ----------
+  var bpi = document.getElementById('bpi'), kk = document.getElementById('kk');
+  var bpiOut = document.getElementById('bpiOut'), kkOut = document.getElementById('kkOut');
+  var readout = document.getElementById('readout');
+  var canvas = document.getElementById('plot');
+  var ctx = canvas.getContext('2d');
+
+  function fpRate(r, kv) { return Math.pow(1 - Math.exp(-kv / r), kv); }
+  function fmtPct(p) {
+    if (p >= 0.1) return (100 * p).toFixed(1) + '%';
+    if (p >= 0.001) return (100 * p).toFixed(2) + '%';
+    return (100 * p).toPrecision(2) + '%';
+  }
+
+  function update() {
+    var r = parseFloat(bpi.value), kv = parseInt(kk.value, 10);
+    bpiOut.textContent = r;
+    kkOut.textContent = kv;
+    var p = fpRate(r, kv);
+    var kOptReal = r * Math.LN2;
+    var kOpt = Math.max(1, Math.round(kOptReal));
+    var pOpt = fpRate(r, kOpt);
+    var fill = 1 - Math.exp(-kv / r);
+    readout.innerHTML =
+      'Fraction of bits set to 1 when full: <b>' + (100 * fill).toFixed(0) + '%</b><br>' +
+      'False positive rate with <i>k</i> = ' + kv + ': <b>' + fmtPct(p) + '</b> (about 1 in ' + (p > 0 ? Math.round(1 / p).toLocaleString() : '∞') + ')<br>' +
+      'Best <i>k</i> for this memory: (<i>m</i>/<i>n</i>)·ln 2 = ' + kOptReal.toFixed(2) + ' → <b>' + kOpt + '</b>, giving <b>' + fmtPct(pOpt) + '</b>';
+    draw(r, kv);
+  }
+
+  function draw(r, kv) {
+    var W = canvas.width, H = canvas.height;
+    var L = 52, R = 10, T = 10, B = 28;
+    ctx.clearRect(0, 0, W, H);
+    // log scale y: 1e-6 .. 1
+    var yMin = -6, yMax = 0;
+    function X(kx) { return L + (kx - 1) / 19 * (W - L - R); }
+    function Y(p) {
+      var lg = Math.log10(Math.max(p, 1e-6));
+      return T + (yMax - lg) / (yMax - yMin) * (H - T - B);
+    }
+    ctx.font = '12px sans-serif';
+    ctx.fillStyle = '#5b6475';
+    ctx.strokeStyle = '#e3e6ec';
+    ctx.lineWidth = 1;
+    for (var e = yMin; e <= yMax; e++) {
+      var y = Y(Math.pow(10, e));
+      ctx.beginPath(); ctx.moveTo(L, y); ctx.lineTo(W - R, y); ctx.stroke();
+      var lab = ['0.0001%', '0.001%', '0.01%', '0.1%', '1%', '10%', '100%'][e - yMin];
+      ctx.textAlign = 'right'; ctx.fillText(lab, L - 6, y + 4);
+    }
+    ctx.textAlign = 'center';
+    for (var kx = 1; kx <= 20; kx++) {
+      if (kx === 1 || kx % 2 === 0) ctx.fillText(kx, X(kx), H - B + 16);
+    }
+    ctx.fillText('k (hash functions)', (L + W) / 2, H - 2);
+    // curve
+    ctx.strokeStyle = '#3b6fd8'; ctx.lineWidth = 2;
+    ctx.beginPath();
+    for (var s = 0; s <= 190; s++) {
+      var kxx = 1 + s / 10;
+      var px = X(kxx), py = Y(fpRate(r, kxx));
+      if (s === 0) ctx.moveTo(px, py); else ctx.lineTo(px, py);
+    }
+    ctx.stroke();
+    // integer points
+    for (var ki = 1; ki <= 20; ki++) {
+      ctx.fillStyle = ki === kv ? '#f2a93b' : '#3b6fd8';
+      ctx.beginPath(); ctx.arc(X(ki), Y(fpRate(r, ki)), ki === kv ? 6 : 2.5, 0, 2 * Math.PI); ctx.fill();
+    }
+  }
+
+  bpi.oninput = update;
+  kk.oninput = update;
+  update();
+})();
+</script>
+</body>
+</html>

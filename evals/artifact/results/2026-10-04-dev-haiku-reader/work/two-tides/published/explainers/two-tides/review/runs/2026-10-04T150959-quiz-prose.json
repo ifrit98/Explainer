@@ -1,0 +1,167 @@
+{
+ "tool": "quiz",
+ "rendering": "prose",
+ "slug": "two-tides",
+ "at": "2026-10-04T15:09:53",
+ "model": "default",
+ "prompt_sha": "94be2bc7b92f",
+ "reply": {
+  "answers": {
+   "1": "The Moon, the Earth (its near side, centre, far side and side points), the ocean water, Earth's gravity g, the Sun, and the Earth's rotation, which brings in the lunar day.",
+   "2": "The Moon's gravity pulls every point of the Earth toward the Moon. The pull is weaker farther away: 34.32, 33.19 and 32.12 µm/s² at the near side, centre and far side. The Earth and Moon orbit their shared centre of mass, so the Earth is in free fall toward the Moon at the centre's acceleration. Only the difference from the centre's pull (the tidal acceleration) changes the ocean's shape. It points outward at the near and far sides and inward at the side points. Its sideways part, along the surface, is not resisted by Earth's gravity, so water flows into two bulges on the Earth–Moon line. The Earth turns under the bulges, and the Moon moves along its orbit, so each place passes through both bulges once per lunar day.",
+   "3": "The Moon pulls the near side more than the centre and the centre more than the far side, while the whole Earth falls with its centre. What is left is a stretch along the Earth–Moon line with two ends, and the turning Earth carries each place through both ends.",
+   "4": "The key variable is the distance d to the tide-raising body. The tidal acceleration is about the pull × 2R/d, and the pull falls as 1/d². So the tidal effect falls faster than the pull. A closer Moon would give much bigger bulges and a farther one much smaller bulges. That is why the Sun, which pulls 179 times harder but is 389 times farther, gives only about 0.46 of the Moon's tide. If the Earth stopped falling (held fixed), the subtraction would vanish and only one bulge would remain.",
+   "5": "Assumption or simplification: an ideal ocean in equilibrium with no continents; the 0.36 m bulge height is called an estimate. Observation: solar tides are seen to be about half the height of lunar tides. Most coasts get two high tides a day, about 12 h 25 min apart.",
+   "6": "The Moon's pull weakens with distance, so it is stronger at the Earth's near side than at its centre, and stronger at the centre than at the far side. The Earth is in free fall toward the Moon, so a shared acceleration does nothing. Only the leftover, the tidal acceleration, acts: about +1.13 µm/s² at the near side, −1.07 at the far side (both pointing away from the centre) and inward at the sides. This is far too small to lift water against g, but it is the only sideways push along a level surface, so water flows into two bulges on the Earth–Moon line. The Earth turns through both bulges once per lunar day of 24 h 50 min (longer than 24 h because the Moon moves along its orbit), so high tides come about every 12 h 25 min.",
+   "7": "Two parts were hardest. First, the side-point tilt calculation and the claim that the sideways push peaks at 0.82 µm/s² at 45°: no reason is given for 45° or for that value. A short line on how the stretch along the line and the squeeze across it combine would help. Second, the closing remark that 'no centrifugal force is needed', with an Earth falling straight at the Moon. Centrifugal force was never introduced, so this comes out of nowhere.",
+   "8": "Because the Earth as a whole is falling toward the Moon at the centre's acceleration (33.19 µm/s²). The far side is pulled less (32.12), so it falls more slowly than the centre and is left behind, away from the Moon. Relative to the centre that is an outward tidal acceleration of −1.07 µm/s², and water gathers there into a second bulge.",
+   "9": "One. With no fall, nothing subtracts the centre's pull. The far side's pull points toward the Moon, which on the far side is down into the Earth, so only the near side would bulge.",
+   "10": "At about 20:25. The bulges stay on the Earth–Moon line, and the Moon moves about 12° a day in the same direction the Earth turns. So the Earth needs about 50 minutes more than 24 h to face the Moon again (a lunar day of 24 h 50 min), and half of that is 12 h 25 min.",
+   "11": "Away from the Moon, which on the far side is outward from Earth's centre. The far side's pull (32.12) is smaller than the centre's (33.19), so far side minus centre is −1.07 µm/s²: it lags behind the falling centre. The Moon does not push it; it just pulls it less.",
+   "12": "Tides come from the difference in pull across the Earth, about the pull × 2R/d, not from the pull itself. The Sun is 389 times farther away than the Moon, so its tidal acceleration is about 179/389 ≈ 0.46 of the Moon's. That matches observed solar tides of about half the lunar height.",
+   "13": "The Moon advances about 12° a day along its orbit in the direction of Earth's spin. At 15°/h the Earth needs about 50 extra minutes to face the Moon again, so a lunar day is 24 h 50 min. Two bulges per lunar day gives about 12 h 25 min between high tides."
+  },
+  "audit": {
+   "terms": [
+    "The same horizontal component is called 'the tidal acceleration is the only sideways push' (section 'How a tiny acceleration moves an ocean') and 'sideways push along the surface' (diagram legend). This is fine, but 'push' sits awkwardly next to 'The Moon does not push the far side away' (section 'Only the part that differs').",
+    "Two words for the same direction: 'pointing down' (side point paragraph) and 'toward Earth's centre' (same paragraph), with 'down into the Earth' in the first test. Minor."
+   ],
+   "unexplained": [
+    "'It is largest 45° from the near side, at 0.82 µm/s²' (section 'How a tiny acceleration moves an ocean'): no reason is given for why the peak is at 45° or how 0.82 is obtained.",
+    "'the bulges rise about 0.36 m above the mean (an estimate)' (Scope): there is no hint of how this follows from the 1.1 µm/s² slope balance.",
+    "'the two bulges differ by about 5%' (section 'Only the part that differs'): it says nothing about whether this matters for observed tide heights.",
+    "'The Moon also moves about 12° a day' (section 'Two high tides per turn'): presented as a given. It is fine to take it as data, but no source or reasoning is offered."
+   ],
+   "missing_why": [
+    "'the tidal acceleration is about the pull times 2R/d' (section 'Why subtract: two tests'): nothing explains why it has this form, i.e. where the factor 2 comes from in the inverse-square fall-off. The numeric check shows it works but not why.",
+    "'Water flows until the sea surface slopes just enough that gravity along the slope balances this push': the step from this balance to two bulges of a given height is not shown.",
+    "'No centrifugal force is needed: an Earth that fell straight at the Moon, with no orbit, would have the same two bulges' (The answer): stated with no argument, and it answers a question the text never raised."
+   ],
+   "excess": [
+    "'The answer' section mostly repeats the bold summary at the top and the subtraction section. Its only new content is the centrifugal remark, which is itself unexplained.",
+    "The Scope bullet on real oceans (dynamic theory, once-a-day tides) is not used by the argument. It is short and acceptable as a pointer."
+   ]
+  },
+  "gaps": [
+   "Why the sideways push peaks at 45° and why its value there is 0.82 µm/s².",
+   "Where the 2R/d factor comes from (the derivative of an inverse-square pull).",
+   "The centrifugal-force remark has no setup, so a reader cannot judge it.",
+   "How 0.36 m follows from the acceleration balance is not shown."
+  ]
+ },
+ "grade": {
+  "scores": {
+   "1": 2,
+   "2": 2,
+   "3": 2,
+   "4": 2,
+   "5": 2,
+   "6": 2,
+   "7": 2,
+   "8": 2,
+   "9": 2,
+   "10": 2,
+   "11": 2,
+   "12": 2,
+   "13": 2
+  },
+  "reasons": {},
+  "pass": true
+ },
+ "usage": {
+  "cost": 0.17281239999999998,
+  "seconds": 39
+ },
+ "findings": [
+  {
+   "n": 1,
+   "severity": "gap",
+   "kind": "terms",
+   "text": "The same horizontal component is called 'the tidal acceleration is the only sideways push' (section 'How a tiny acceleration moves an ocean') and 'sideways push along the surface' (diagram legend). This is fine, but 'push' sits awkwardly next to 'The Moon does not push the far side away' (section 'Only the part that differs')."
+  },
+  {
+   "n": 2,
+   "severity": "gap",
+   "kind": "terms",
+   "text": "Two words for the same direction: 'pointing down' (side point paragraph) and 'toward Earth's centre' (same paragraph), with 'down into the Earth' in the first test. Minor."
+  },
+  {
+   "n": 3,
+   "severity": "gap",
+   "kind": "unexplained",
+   "text": "'It is largest 45° from the near side, at 0.82 µm/s²' (section 'How a tiny acceleration moves an ocean'): no reason is given for why the peak is at 45° or how 0.82 is obtained."
+  },
+  {
+   "n": 4,
+   "severity": "gap",
+   "kind": "unexplained",
+   "text": "'the bulges rise about 0.36 m above the mean (an estimate)' (Scope): there is no hint of how this follows from the 1.1 µm/s² slope balance."
+  },
+  {
+   "n": 5,
+   "severity": "gap",
+   "kind": "unexplained",
+   "text": "'the two bulges differ by about 5%' (section 'Only the part that differs'): it says nothing about whether this matters for observed tide heights."
+  },
+  {
+   "n": 6,
+   "severity": "gap",
+   "kind": "unexplained",
+   "text": "'The Moon also moves about 12° a day' (section 'Two high tides per turn'): presented as a given. It is fine to take it as data, but no source or reasoning is offered."
+  },
+  {
+   "n": 7,
+   "severity": "gap",
+   "kind": "missing_why",
+   "text": "'the tidal acceleration is about the pull times 2R/d' (section 'Why subtract: two tests'): nothing explains why it has this form, i.e. where the factor 2 comes from in the inverse-square fall-off. The numeric check shows it works but not why."
+  },
+  {
+   "n": 8,
+   "severity": "gap",
+   "kind": "missing_why",
+   "text": "'Water flows until the sea surface slopes just enough that gravity along the slope balances this push': the step from this balance to two bulges of a given height is not shown."
+  },
+  {
+   "n": 9,
+   "severity": "gap",
+   "kind": "missing_why",
+   "text": "'No centrifugal force is needed: an Earth that fell straight at the Moon, with no orbit, would have the same two bulges' (The answer): stated with no argument, and it answers a question the text never raised."
+  },
+  {
+   "n": 10,
+   "severity": "excess",
+   "kind": "excess",
+   "text": "'The answer' section mostly repeats the bold summary at the top and the subtraction section. Its only new content is the centrifugal remark, which is itself unexplained."
+  },
+  {
+   "n": 11,
+   "severity": "excess",
+   "kind": "excess",
+   "text": "The Scope bullet on real oceans (dynamic theory, once-a-day tides) is not used by the argument. It is short and acceptable as a pointer."
+  },
+  {
+   "n": 12,
+   "severity": "gap",
+   "kind": "gap",
+   "text": "Why the sideways push peaks at 45° and why its value there is 0.82 µm/s²."
+  },
+  {
+   "n": 13,
+   "severity": "gap",
+   "kind": "gap",
+   "text": "Where the 2R/d factor comes from (the derivative of an inverse-square pull)."
+  },
+  {
+   "n": 14,
+   "severity": "gap",
+   "kind": "gap",
+   "text": "The centrifugal-force remark has no setup, so a reader cannot judge it."
+  },
+  {
+   "n": 15,
+   "severity": "gap",
+   "kind": "gap",
+   "text": "How 0.36 m follows from the acceleration balance is not shown."
+  }
+ ]
+}

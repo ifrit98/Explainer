@@ -1,0 +1,194 @@
+{
+ "tool": "quiz",
+ "rendering": "prose",
+ "slug": "key-exchange",
+ "at": "2026-10-04T15:11:47",
+ "model": "default",
+ "prompt_sha": "97e170ce48d4",
+ "reply": {
+  "answers": {
+   "1": "Alice and Bob (the two parties), Eve (an eavesdropper who reads but does not change messages), Mallory (an attacker who replaces messages), the public numbers p (a prime modulus) and g (the base), the private numbers a and b, the public numbers A = g^a mod p and B = g^b mod p, the shared secret s = g^(ab) mod p, the hash function that turns s into the encryption key, the one-way operation g^x mod p and its hard reverse (the discrete logarithm), and authentication (digital signatures).",
+   "2": "p and g are agreed in public. Each party keeps a private number and uses it to compute a public number: A = g^a mod p and B = g^b mod p. These are sent openly, so Eve sees p, g, A and B. Each party raises the other's public number to their own private number mod p. Both get the same s, which is hashed into the key. Eve could only get s by finding a or b from A or B, which is the discrete logarithm. No fast method for it is known. Mallory can swap in her own public number and end up sharing one secret with each side. Authentication prevents this.",
+   "3": "Each side sends g^private mod p. Raising the other side's value to your own private number gives (g^b)^a = (g^a)^b = g^(ab) mod p, so both get the same secret. Eve sees only g^a and g^b, and multiplying them only adds the exponents. To get s she would have to undo the one-way operation, which no known fast method can do.",
+   "4": "The most important variable is the size of p, together with the range a and b are drawn from. With a small p (23), Eve tries exponents one by one and finds a = 6 on the 6th try. With a 2048-bit p and random a and b from that whole range, trying one by one is hopeless. Even the best known methods need about 2^112 operations, around 10^14 years at a trillion operations per second. Alice's own work grows only with the number of bits (about 4,000 steps), because each squaring doubles the exponent. Separately, a bad g (e.g. 22) makes s take only two possible values.",
+   "5": "Assumption: the discrete logarithm is hard, and there is no other way to get s from A and B. The explanation says this is not proven and rests on decades of failed attempts. A simplification is that Eve only reads and never changes messages. Established fact: with p = 23 and g = 5, 19^6 mod 23 = 8^15 mod 23 = 2. Also, (x^a)^b = x^(ab), and taking remainders along the way does not change the final remainder.",
+   "6": "Alice and Bob publicly agree on a prime p and a base g, and each secretly picks a private number. Each sends g raised to their private number, mod p (the remainder after dividing by p). Each raises the number they receive to their own private number mod p, and both get g^(ab) mod p, which they hash into an encryption key. An eavesdropper who sees only g^a and g^b cannot combine them (multiplying adds the exponents instead of multiplying them). Undoing g^x mod p (the discrete logarithm) has no known fast method for huge p, although this is not proven. The exchange does not stop someone who replaces messages, so real systems add digital signatures.",
+   "7": "The 'Why real numbers are huge' section was hardest. The 2^112 figure appears without any link to the 2048-bit size. 'Best known methods are faster' is not explained even briefly. The square-and-multiply example (5^2, then 5^3, then 5^6) does not say why the multiply step is needed or how you pick the order of steps from the exponent's bits. One sentence on writing the exponent in binary would help. The remainder argument in 'Why both get 2' is short but works.",
+   "8": "Alice sends A = 5^3 mod 23 = 125 mod 23 = 10. Bob sends B = 5^2 mod 23 = 25 mod 23 = 2. Alice computes 2^3 mod 23 = 8, and Bob computes 10^2 mod 23 = 100 mod 23 = 8. The shared secret is 8, which equals 5^6 mod 23 = 8 in the explanation's table.",
+   "9": "Plain powers grow in order, so Eve could take the logarithm base 5 of A (e.g. log5 of 15625 = 6) and recover the private number. Taking remainders mod p makes the results jump around (5, 2, 10, 4, 20, 8, ...), so a result near 8 says nothing about where the exponent is. No fast reverse is known: it is a one-way operation.",
+   "10": "No. Nothing in the exchange tells Alice who sent a public number. Mallory can replace both public numbers. Authentication (digital signatures, and in HTTPS certificates) is needed.",
+   "11": "Whatever Alice sends, Bob would have to turn it back into the key. If Eve cannot reverse the one-way operation, Bob cannot either, because he has the same information Eve has. So each side needs its own private number. Each does half the calculation, and the other side finishes it without undoing it.",
+   "12": "Alice sends A = 5^6 mod 23 = 8. Bob sends B = 5^15 mod 23 = 19. Alice computes 19^6 mod 23 = 2 and Bob computes 8^15 mod 23 = 2, so s = 2. They must be equal because Alice computes (5^15)^6 and Bob computes (5^6)^15, and both equal 5^(6×15) by the exponent rule. Taking remainders along the way only removes multiples of 23: (x + 23k)·y = xy + 23ky, and a power is a chain of products. So the final remainder is the same.",
+   "13": "Multiplying powers adds the exponents: 8 × 19 mod 23 = 14 = 5^(6+15) mod 23. The secret needs the exponents multiplied, 5^(6×15) mod 23 = 2. No known way from A and B to s avoids, in effect, finding a or b first.",
+   "14": "No. It is an assumption. No one has proven that the discrete logarithm is hard, or that s cannot be found from A and B some other way. The belief rests on decades of failed attempts. A large quantum computer could solve the discrete logarithm fast.",
+   "15": "Run a man-in-the-middle attack. Mallory picks her own private number (3) and sends 10 = 5^3 mod 23 to both sides in place of their public numbers. She then shares 6 with Alice and 5 with Bob. She decrypts each message, reads it, and re-encrypts it for the other side, and neither side notices. Only authentication stops this."
+  },
+  "audit": {
+   "terms": [
+    "The same number is called 'key' and later 'private number': line 14 'Alice chooses a key, the number 6' versus line 20 'private number ... Alice picks a = 6'. The reader may think the private number is the key, while line 24 says the key is the hashed output of s.",
+    "'shared secret' (line 24) versus 'key' (lines 9, 24, 75 'never send the key'). The answer says they 'never send the key', but what they agree on directly is s. The key is hash(s).",
+    "'hard to reverse' (line 14), 'no known fast method' (line 3), 'no known fast reverse' and 'one-way operation' (line 52) all name the same idea before it is defined at line 52.",
+    "'eavesdropper' (line 9) versus 'a reader' (line 66) for Eve's role."
+   ],
+   "unexplained": [
+    "'about 2^112 operations (an estimate)' (line 56): no link to the 2048-bit size and no explanation of why it is below the 2^2048 tries needed by brute force.",
+    "'a p of 2048 bits, about 617 decimal digits' (line 56): it does not say what security would be lost with fewer bits or gained with more.",
+    "'about 4,000 steps' (line 58): the claim of at most 2048 multiplications is not tied to the binary digits of the exponent."
+   ],
+   "missing_why": [
+    "Fast exponentiation (line 58): '5^3 = 2 × 5 = 10, 5^6 = 10^2' does not explain why you multiply by 5 at some steps and not others, or how the steps follow from the exponent.",
+    "Hashing s (line 24): it does not say why s is fed into a hash function instead of being used directly as the key.",
+    "'The best known methods are faster' (line 56): it gives no hint why they beat trying exponents one by one.",
+    "Why p must be prime (line 19, and only partly in Scope line 81): step 1 requires a prime without saying why.",
+    "'A result near 8 says nothing about where 6 is' (line 50): this shows the scrambling but does not argue why no shortcut exists. The point is only made later as an unproven assumption."
+   ],
+   "excess": [
+    "Scope bullets on Elliptic-curve Diffie–Hellman, AES and quantum computers (lines 80–82) are detours the argument does not use. Line 80 also has two bullets merged into one line.",
+    "'A standard fast method (Euclid's algorithm)' (line 49): the name is not needed. Showing the inverse 14 is enough."
+   ]
+  },
+  "gaps": [
+   "It does not explain how 2048 bits leads to the 2^112 estimate, or why the best methods beat brute force.",
+   "It does not say why the shared secret is hashed before use as the key.",
+   "The square-and-multiply procedure is only sketched, with no rule for choosing between squaring and multiplying.",
+   "Scope line 80 merges the 'Elliptic-curve' and 'Using the key' bullets because a line break is missing."
+  ]
+ },
+ "grade": {
+  "scores": {
+   "1": 2,
+   "2": 2,
+   "3": 2,
+   "4": 2,
+   "5": 2,
+   "6": 2,
+   "7": 2,
+   "8": 2,
+   "9": 2,
+   "10": 2,
+   "11": 2,
+   "12": 2,
+   "13": 1,
+   "14": 2,
+   "15": 2
+  },
+  "reasons": {
+   "13": "Shows correctly that multiplying adds the exponents (14 = 5^(6+15), not s = 2) and that Eve would in effect have to find a or b. But it never says that finding a or b is the discrete logarithm problem, or that this problem has no known fast method. The reason Eve is stuck is left implicit."
+  },
+  "pass": false
+ },
+ "usage": {
+  "cost": 0.20325159999999998,
+  "seconds": 52
+ },
+ "findings": [
+  {
+   "n": 1,
+   "severity": "gap",
+   "kind": "terms",
+   "text": "The same number is called 'key' and later 'private number': line 14 'Alice chooses a key, the number 6' versus line 20 'private number ... Alice picks a = 6'. The reader may think the private number is the key, while line 24 says the key is the hashed output of s."
+  },
+  {
+   "n": 2,
+   "severity": "gap",
+   "kind": "terms",
+   "text": "'shared secret' (line 24) versus 'key' (lines 9, 24, 75 'never send the key'). The answer says they 'never send the key', but what they agree on directly is s. The key is hash(s)."
+  },
+  {
+   "n": 3,
+   "severity": "gap",
+   "kind": "terms",
+   "text": "'hard to reverse' (line 14), 'no known fast method' (line 3), 'no known fast reverse' and 'one-way operation' (line 52) all name the same idea before it is defined at line 52."
+  },
+  {
+   "n": 4,
+   "severity": "gap",
+   "kind": "terms",
+   "text": "'eavesdropper' (line 9) versus 'a reader' (line 66) for Eve's role."
+  },
+  {
+   "n": 5,
+   "severity": "gap",
+   "kind": "unexplained",
+   "text": "'about 2^112 operations (an estimate)' (line 56): no link to the 2048-bit size and no explanation of why it is below the 2^2048 tries needed by brute force."
+  },
+  {
+   "n": 6,
+   "severity": "gap",
+   "kind": "unexplained",
+   "text": "'a p of 2048 bits, about 617 decimal digits' (line 56): it does not say what security would be lost with fewer bits or gained with more."
+  },
+  {
+   "n": 7,
+   "severity": "gap",
+   "kind": "unexplained",
+   "text": "'about 4,000 steps' (line 58): the claim of at most 2048 multiplications is not tied to the binary digits of the exponent."
+  },
+  {
+   "n": 8,
+   "severity": "gap",
+   "kind": "missing_why",
+   "text": "Fast exponentiation (line 58): '5^3 = 2 × 5 = 10, 5^6 = 10^2' does not explain why you multiply by 5 at some steps and not others, or how the steps follow from the exponent."
+  },
+  {
+   "n": 9,
+   "severity": "gap",
+   "kind": "missing_why",
+   "text": "Hashing s (line 24): it does not say why s is fed into a hash function instead of being used directly as the key."
+  },
+  {
+   "n": 10,
+   "severity": "gap",
+   "kind": "missing_why",
+   "text": "'The best known methods are faster' (line 56): it gives no hint why they beat trying exponents one by one."
+  },
+  {
+   "n": 11,
+   "severity": "gap",
+   "kind": "missing_why",
+   "text": "Why p must be prime (line 19, and only partly in Scope line 81): step 1 requires a prime without saying why."
+  },
+  {
+   "n": 12,
+   "severity": "gap",
+   "kind": "missing_why",
+   "text": "'A result near 8 says nothing about where 6 is' (line 50): this shows the scrambling but does not argue why no shortcut exists. The point is only made later as an unproven assumption."
+  },
+  {
+   "n": 13,
+   "severity": "excess",
+   "kind": "excess",
+   "text": "Scope bullets on Elliptic-curve Diffie–Hellman, AES and quantum computers (lines 80–82) are detours the argument does not use. Line 80 also has two bullets merged into one line."
+  },
+  {
+   "n": 14,
+   "severity": "excess",
+   "kind": "excess",
+   "text": "'A standard fast method (Euclid's algorithm)' (line 49): the name is not needed. Showing the inverse 14 is enough."
+  },
+  {
+   "n": 15,
+   "severity": "gap",
+   "kind": "gap",
+   "text": "It does not explain how 2048 bits leads to the 2^112 estimate, or why the best methods beat brute force."
+  },
+  {
+   "n": 16,
+   "severity": "gap",
+   "kind": "gap",
+   "text": "It does not say why the shared secret is hashed before use as the key."
+  },
+  {
+   "n": 17,
+   "severity": "gap",
+   "kind": "gap",
+   "text": "The square-and-multiply procedure is only sketched, with no rule for choosing between squaring and multiplying."
+  },
+  {
+   "n": 18,
+   "severity": "gap",
+   "kind": "gap",
+   "text": "Scope line 80 merges the 'Elliptic-curve' and 'Using the key' bullets because a line break is missing."
+  }
+ ]
+}

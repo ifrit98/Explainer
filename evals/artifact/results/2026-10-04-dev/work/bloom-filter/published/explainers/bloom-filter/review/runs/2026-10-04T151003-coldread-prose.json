@@ -1,0 +1,322 @@
+{
+ "tool": "coldread",
+ "rendering": "prose",
+ "slug": "bloom-filter",
+ "at": "2026-10-04T15:10:03",
+ "model": "default",
+ "prompt_sha": "4717e3c3480f",
+ "reply": {
+  "paragraphs": [
+   {
+    "at": "Title (line 1)",
+    "text": "Bloom filters: \"have I seen this before?\" in a few bits per item",
+    "unresolved": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Bold lede (line 5)",
+    "text": "A Bloom filter does not keep the items. It keeps a row of bits...",
+    "unresolved": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Motive paragraph (line 8)",
+    "text": "The motive is memory. A hash set of 1 million URLs...",
+    "unresolved": [],
+    "leap": [
+     "\"gives a wrong 'probably seen' for 0.82% of new URLs\": the 0.82% figure and the choice of 10 bits per URL are given without a source here. It is a forward claim that is only derived at line 56, and nothing says it will be derived later."
+    ],
+    "excess": [
+     "\"(The 50 bytes per URL is an estimate.)\": this repeats the \"about\" already in the sentence."
+    ],
+    "purpose_unclear": false
+   },
+   {
+    "at": "How it works, para 1 (line 13)",
+    "text": "Start with a bit array of m bits, all 0...",
+    "unresolved": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "How it works, para 2 (line 15)",
+    "text": "Choose k different hash functions; here k = 3...",
+    "unresolved": [],
+    "leap": [],
+    "excess": [
+     "\"A hash function gives a large number, and the same item always gives the same number.\": this reader already knows hash functions."
+    ],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Add + list (lines 17-20)",
+    "text": "To add an item, set its k positions to 1... cat → 1, 6, 11; dog → 3, 9, 14",
+    "unresolved": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Table (lines 22-25)",
+    "text": "Position / Bit / Set by",
+    "unresolved": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Query rule (lines 27-30)",
+    "text": "To query an item... If any bit is 0... If all bits are 1...",
+    "unresolved": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Fox query (line 32)",
+    "text": "Query fox → positions 2, 6, 14...",
+    "unresolved": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "False positives (line 37)",
+    "text": "Query owl → positions 3, 6, 11...",
+    "unresolved": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "No false negatives, para 1 (line 42)",
+    "text": "The other error, a false negative...",
+    "unresolved": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "No false negatives, para 2 (line 44)",
+    "text": "This guarantee depends on bits never going back to 0...",
+    "unresolved": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "How often, intro (line 49)",
+    "text": "Let n be the number of items added. Assume...",
+    "unresolved": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Derivation list (lines 51-54)",
+    "text": "1. ...1 − 1/m. 2. ...e^(−kn/m). 3. fill f... 4. p ≈ f^k",
+    "unresolved": [],
+    "leap": [
+     "Step 4, \"Each one is 1 with probability f\": the step from 'fraction of bits that are 1' to 'probability a random position is 1', and then multiplying k of these, uses the independence assumption only implicitly. The reader can manage this."
+    ],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Worked numbers (line 56)",
+    "text": "Take n = 1 million items and m = 10 million bits...",
+    "unresolved": [],
+    "leap": [],
+    "excess": [
+     "\"That is 10 bits per item (m/n = 10).\": this says the same thing twice."
+    ],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Why 7, intro (line 59)",
+    "text": "Why 7 hash functions? The number of hash functions k pulls in two directions...",
+    "unresolved": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "k table (lines 61-65)",
+    "text": "k=1 / 7 / 20 with fill, p, why",
+    "unresolved": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Best k (line 67)",
+    "text": "More hash functions make each query check more bits... best k is (m/n)·ln 2... Each extra 4.8 bits per item then cuts p by about 10 times.",
+    "unresolved": [],
+    "leap": [
+     "\"The best k is (m/n)·ln 2\": stated with no reason.",
+     "\"At the best k, about half the bits are 1 (a mathematical result of the formula above)\": the reader is not shown why.",
+     "\"Each extra 4.8 bits per item then cuts p by about 10 times\": no reason given, and the reader cannot easily rebuild it."
+    ],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Overfilling (line 72)",
+    "text": "The rate p stays at 0.82% only while n stays near the capacity...",
+    "unresolved": [],
+    "leap": [
+     "\"the number of items used to choose m and k\": the text has not said how m is chosen from n. Only k = (m/n)·ln 2 was given, and the sizing formula appears later, in 'Not covered'."
+    ],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "What it is good for (line 77)",
+    "text": "Put the filter in front of a slow exact lookup...",
+    "unresolved": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Summary (line 81)",
+    "text": "A Bloom filter answers \"have I seen this before?\"...",
+    "unresolved": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Not covered list (lines 85-88)",
+    "text": "Deletion / Growing / Sizing / Cheap hash functions",
+    "unresolved": [
+     "\"counting Bloom filters\" (it gets a one-line gloss)",
+     "\"Cuckoo filters\"",
+     "\"scalable Bloom filter\"",
+     "\"double hashing\" (only glossed briefly)"
+    ],
+    "leap": [
+     "\"m = −n·ln p / (ln 2)²\": given without derivation. That is acceptable for a pointer."
+    ],
+    "excess": [],
+    "purpose_unclear": false
+   }
+  ],
+  "blocking": [],
+  "cuts": [
+   "Line 15: cut \"A hash function gives a large number, and the same item always gives the same number.\" because this reader already knows it.",
+   "Line 8: cut \"(The 50 bytes per URL is an estimate.)\"",
+   "Line 56: shorten \"That is 10 bits per item (m/n = 10).\" to a single statement."
+  ],
+  "question": {
+   "text": "How can you answer 'have I seen this item before?' using much less memory than a hash set, and what does it cost in accuracy?",
+   "known_at": "Title (line 1), made concrete in the lede (line 5) and the memory paragraph (line 8)",
+   "result_stated": "Yes. Line 5: \"So the filter can be wrong in one direction only: it can say 'probably seen' for an item it never saw.\" Line 8: \"takes 1.25 MB (10 bits per URL) and gives a wrong 'probably seen' for 0.82% of new URLs.\""
+  },
+  "motive": "Reason to care: \"The motive is memory. A hash set of 1 million URLs... takes about 50 MB. A Bloom filter... takes 1.25 MB\" (line 8), and the use case \"Put the filter in front of a slow exact lookup\" (line 77). Reason for the approach: \"The memory does not depend on how long the items are, because the filter never keeps them\" (line 8). The reason for using several hash functions is given at lines 59-67.",
+  "close": "Yes. Line 81: \"A Bloom filter answers 'have I seen this before?' by remembering only the bits each item turned on. A 0 bit proves an item is new. All 1s mean 'probably seen', which is wrong at a rate p ≈ f^k that you choose with bits per item, and that rises when you add more items than the capacity.\"",
+  "recap": "A Bloom filter stores only a few bits per item instead of the items themselves, so it can say 'definitely new' with certainty but only 'probably seen' otherwise; at about 10 bits per item that guess is wrong under 1% of the time.",
+  "strongest": "Lines 37-44: the owl example reuses cat's and dog's bits to produce a false positive. It then shows, with the same bits, why deleting cat would create a false negative. Both claims are made concrete with no new machinery.",
+  "weakest": "Line 67: three results arrive in a row with no reason given (best k = (m/n)·ln 2, half the bits are 1 at the best k, and 4.8 bits per item gives 10× lower p). This comes right after a step-by-step derivation that justified every step.",
+  "suggestions": [
+   "At line 67, give a one-line reason: for fixed m/n, p = f^k is smallest when f = 1/2. Then k = (m/n)·ln 2, and p ≈ 0.5^k ≈ 0.6185^(m/n), which gives 4.8 bits per 10× reduction.",
+   "At line 8, add a short '(derived below)' after 0.82%.",
+   "In the Overfilling section, mention that m is chosen from the expected n and a target p, or move the sizing formula there."
+  ]
+ },
+ "usage": {
+  "cost": 0.12415359999999999,
+  "seconds": 38
+ },
+ "findings": [
+  {
+   "n": 1,
+   "severity": "excess",
+   "kind": "cut",
+   "text": "Line 15: cut \"A hash function gives a large number, and the same item always gives the same number.\" because this reader already knows it."
+  },
+  {
+   "n": 2,
+   "severity": "excess",
+   "kind": "cut",
+   "text": "Line 8: cut \"(The 50 bytes per URL is an estimate.)\""
+  },
+  {
+   "n": 3,
+   "severity": "excess",
+   "kind": "cut",
+   "text": "Line 56: shorten \"That is 10 bits per item (m/n = 10).\" to a single statement."
+  },
+  {
+   "n": 4,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "Motive paragraph (line 8): \"gives a wrong 'probably seen' for 0.82% of new URLs\": the 0.82% figure and the choice of 10 bits per URL are given without a source here. It is a forward claim that is only derived at line 56, and nothing says it will be derived later."
+  },
+  {
+   "n": 5,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "Derivation list (lines 51-54): Step 4, \"Each one is 1 with probability f\": the step from 'fraction of bits that are 1' to 'probability a random position is 1', and then multiplying k of these, uses the independence assumption only implicitly. The reader can manage this."
+  },
+  {
+   "n": 6,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "Best k (line 67): \"The best k is (m/n)·ln 2\": stated with no reason."
+  },
+  {
+   "n": 7,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "Best k (line 67): \"At the best k, about half the bits are 1 (a mathematical result of the formula above)\": the reader is not shown why."
+  },
+  {
+   "n": 8,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "Best k (line 67): \"Each extra 4.8 bits per item then cuts p by about 10 times\": no reason given, and the reader cannot easily rebuild it."
+  },
+  {
+   "n": 9,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "Overfilling (line 72): \"the number of items used to choose m and k\": the text has not said how m is chosen from n. Only k = (m/n)·ln 2 was given, and the sizing formula appears later, in 'Not covered'."
+  },
+  {
+   "n": 10,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "Not covered list (lines 85-88): \"counting Bloom filters\" (it gets a one-line gloss)"
+  },
+  {
+   "n": 11,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "Not covered list (lines 85-88): \"Cuckoo filters\""
+  },
+  {
+   "n": 12,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "Not covered list (lines 85-88): \"scalable Bloom filter\""
+  },
+  {
+   "n": 13,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "Not covered list (lines 85-88): \"double hashing\" (only glossed briefly)"
+  },
+  {
+   "n": 14,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "Not covered list (lines 85-88): \"m = −n·ln p / (ln 2)²\": given without derivation. That is acceptable for a pointer."
+  }
+ ]
+}

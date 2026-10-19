@@ -1,0 +1,443 @@
+{
+ "tool": "coldread",
+ "rendering": "narrative",
+ "slug": "bloom-filter",
+ "at": "2026-10-04T15:07:25",
+ "model": "default",
+ "prompt_sha": "84de7cead935",
+ "reply": {
+  "beats": [
+   {
+    "at": "Beat 1 (hook)",
+    "text": "Shown: 50 MB vs 1.25 MB. Said: answer first: bits, one-sided error",
+    "unresolved": [
+     "one-sided error",
+     "bits (bits of what, set by what?)"
+    ],
+    "unsaid": [
+     "50 MB vs 1.25 MB: the words never say what is being stored (how many items, which kinds) or which number belongs to the hash set and which to the filter"
+    ],
+    "leap": [
+     "How can storing 'bits' replace storing the items? Nothing yet links an item to a bit."
+    ],
+    "excess": [
+     "answer first: this is a stage direction, not something the reader can use"
+    ],
+    "purpose_unclear": true
+   },
+   {
+    "at": "Beat 2 (mechanism)",
+    "text": "Shown: 16-bit table after cat, dog. Said: hash mod m → position; add sets k bits",
+    "unresolved": [
+     "m",
+     "k",
+     "add"
+    ],
+    "unsaid": [
+     "16-bit table: the words never say that m = 16 here, or which positions cat and dog set",
+     "how one item gets k different positions (k hash functions?) is never said"
+    ],
+    "leap": [
+     "'hash mod m → position' gives one position, but 'add sets k bits' needs k of them. Where do the other k−1 come from?"
+    ],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Beat 3 (mechanism)",
+    "text": "Shown: fox query. Said: any 0 → definitely not seen",
+    "unresolved": [],
+    "unsaid": [
+     "fox's positions, and which of them is 0, are not said"
+    ],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Beat 4 (notice)",
+    "text": "Shown: owl query. Said: bits from cat and dog cover owl → false positive",
+    "unresolved": [
+     "false positive (used as a label, never defined as 'probably seen' for an item never added)"
+    ],
+    "unsaid": [
+     "the answer 'probably seen' when all bits are 1 is never said as a rule. Only the 0 case was stated in beat 3",
+     "owl's positions and which bits came from cat and which from dog"
+    ],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Beat 5 (guarantee)",
+    "text": "Shown: cat query; delete case. Said: bits never go to 0 → no false negatives; clearing breaks it",
+    "unresolved": [
+     "false negatives",
+     "clearing"
+    ],
+    "unsaid": [
+     "delete case: nothing in the words introduces deletion or says why it comes up here"
+    ],
+    "leap": [
+     "'clearing breaks it': the reason (a cleared bit may be shared with another added item, such as owl's bit from cat) is not given"
+    ],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Beat 6 (mechanism)",
+    "text": "Shown: 4-step derivation, 10 bits/item. Said: f ≈ 1 − e^(−kn/m), p ≈ f^k = 0.82%",
+    "unresolved": [
+     "f",
+     "n",
+     "p",
+     "bits/item (as m/n)"
+    ],
+    "unsaid": [
+     "the 4-step derivation is shown but none of its steps are spoken",
+     "the value of k behind 0.82% (k = 7) is not said",
+     "10 bits/item is not tied to m/n in the words"
+    ],
+    "leap": [
+     "why f ≈ 1 − e^(−kn/m): the chance a given bit is missed by one hash, raised to the power kn, is not given",
+     "why p ≈ f^k: the independence assumption is not stated"
+    ],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Beat 7 (approach)",
+    "text": "Shown: 3-row table. Said: too few checks vs too full; best k at f ≈ 0.5",
+    "unresolved": [
+     "k = 7 (in the reader's question, but no beat has said k = 7)"
+    ],
+    "unsaid": [
+     "the 3-row table's contents: which k values and which p values"
+    ],
+    "leap": [
+     "why the best k lands at f ≈ 0.5 is asserted, not shown"
+    ],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Beat 8 (limit)",
+    "text": "Shown: 2× → 13.8%, 3× → 40%. Said: p depends on n",
+    "unresolved": [
+     "2×, 3× (twice and three times what? The intended n is never said aloud)",
+     "capacity (in 'Reader now knows' but never spoken)"
+    ],
+    "unsaid": [
+     "the shown percentages are not mentioned in the words"
+    ],
+    "leap": [],
+    "excess": [
+     "p depends on n: already plain from the beat 6 formula, so nothing new is said aloud"
+    ],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Beat 9 (payoff)",
+    "text": "Shown: filter before disk. Said: a false positive costs one wasted lookup",
+    "unresolved": [],
+    "unsaid": [
+     "filter before disk: the setup (check the filter, then go to disk only on 'probably seen') is not said"
+    ],
+    "leap": [
+     "why it is safe: no false negatives means a real item is never skipped. This is not linked back to beat 5"
+    ],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Beat 10 (close)",
+    "text": "Shown: —. Said: answer the question in its words",
+    "unresolved": [],
+    "unsaid": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": true
+   }
+  ],
+  "blocking": [
+   "Beat 2: 'add sets k bits'. k is undefined, and one 'hash mod m' gives one position, not k, so the core mechanism can't be rebuilt",
+   "Beat 4: 'false positive'. The rule 'all 1s → probably seen' is never said, so the reader cannot tell why owl gets the wrong answer",
+   "Beat 6: 'f ≈ 1 − e^(−kn/m), p ≈ f^k = 0.82%'. f, n and p are undefined, the derivation is shown but not spoken, and k = 7 is missing",
+   "Beat 10: 'answer the question in its words'. A placeholder: the close says nothing"
+  ],
+  "cuts": [
+   "Beat 1 'answer first:' and beat 10's placeholder: replace with the real sentences, or drop them",
+   "Beat 8 'p depends on n': already follows from beat 6. Say the 2×/3× numbers instead"
+  ],
+  "question": {
+   "text": "How can a program answer 'have I seen this before?' for many items without storing them, and when is the answer wrong?",
+   "known_at": "Only implied at beat 1 (reader's question 'Why not just a hash set?'). The Said column never asks it.",
+   "result_stated": "No, not in full words. Beat 1 gives only 'bits, one-sided error', and beat 10 is a placeholder."
+  },
+  "motive": "Reason to care: only hinted by beat 1 Shown '50 MB vs 1.25 MB', with nothing said about what is stored. Reason for the approach (a hash already maps an item to a number, so keep one bit for it): missing from the beats.",
+  "close": "Not answered. Beat 10 Said is 'answer the question in its words' with nothing shown. The general argument (bits only go 0→1, so added items always pass; others' bits cover a new item with probability f^k) is never said at the end.",
+  "recap": "A Bloom filter turns on a few bits per item; any off bit means definitely new, all on means probably seen, and it gets less reliable as it fills.",
+  "strongest": "Beat 5: 'bits never go to 0 → no false negatives'. A clear one-line reason for the one-sided guarantee.",
+  "weakest": "Beat 6: the formula arrives with f, n and p undefined and the derivation unspoken. Beat 10 is a close close behind, as an empty placeholder.",
+  "suggestions": [
+   "In beat 2, say 'k different hash functions, each mod m, give k positions; here m = 16, k = 3, and cat sets 1, 6, 11'.",
+   "In beat 3 or 4, state the rule 'all k bits 1 → probably seen' before showing owl.",
+   "In beat 6, define n, f and p aloud, speak the steps (chance one bit is missed = (1 − 1/m)^(kn) ≈ e^(−kn/m)), and say that k = 7 gives 0.82%.",
+   "In beat 1, say '1 million URLs: a hash set takes about 50 MB, the filter 1.25 MB, wrong 0.82% of the time, and only toward \"probably seen\"'.",
+   "In beat 5, give the reason clearing fails: a bit may be shared with another added item.",
+   "Write beat 10 using the plan's own answer and general argument from section 7."
+  ]
+ },
+ "usage": {
+  "cost": 0.10809079999999999,
+  "seconds": 36
+ },
+ "findings": [
+  {
+   "n": 1,
+   "severity": "blocking",
+   "kind": "blocking",
+   "text": "Beat 2: 'add sets k bits'. k is undefined, and one 'hash mod m' gives one position, not k, so the core mechanism can't be rebuilt"
+  },
+  {
+   "n": 2,
+   "severity": "blocking",
+   "kind": "blocking",
+   "text": "Beat 4: 'false positive'. The rule 'all 1s → probably seen' is never said, so the reader cannot tell why owl gets the wrong answer"
+  },
+  {
+   "n": 3,
+   "severity": "blocking",
+   "kind": "blocking",
+   "text": "Beat 6: 'f ≈ 1 − e^(−kn/m), p ≈ f^k = 0.82%'. f, n and p are undefined, the derivation is shown but not spoken, and k = 7 is missing"
+  },
+  {
+   "n": 4,
+   "severity": "blocking",
+   "kind": "blocking",
+   "text": "Beat 10: 'answer the question in its words'. A placeholder: the close says nothing"
+  },
+  {
+   "n": 5,
+   "severity": "excess",
+   "kind": "cut",
+   "text": "Beat 1 'answer first:' and beat 10's placeholder: replace with the real sentences, or drop them"
+  },
+  {
+   "n": 6,
+   "severity": "excess",
+   "kind": "cut",
+   "text": "Beat 8 'p depends on n': already follows from beat 6. Say the 2×/3× numbers instead"
+  },
+  {
+   "n": 7,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "Beat 1 (hook): one-sided error"
+  },
+  {
+   "n": 8,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "Beat 1 (hook): bits (bits of what, set by what?)"
+  },
+  {
+   "n": 9,
+   "severity": "edge",
+   "kind": "unsaid",
+   "text": "Beat 1 (hook): 50 MB vs 1.25 MB: the words never say what is being stored (how many items, which kinds) or which number belongs to the hash set and which to the filter"
+  },
+  {
+   "n": 10,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "Beat 1 (hook): How can storing 'bits' replace storing the items? Nothing yet links an item to a bit."
+  },
+  {
+   "n": 11,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "Beat 2 (mechanism): m"
+  },
+  {
+   "n": 12,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "Beat 2 (mechanism): k"
+  },
+  {
+   "n": 13,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "Beat 2 (mechanism): add"
+  },
+  {
+   "n": 14,
+   "severity": "edge",
+   "kind": "unsaid",
+   "text": "Beat 2 (mechanism): 16-bit table: the words never say that m = 16 here, or which positions cat and dog set"
+  },
+  {
+   "n": 15,
+   "severity": "edge",
+   "kind": "unsaid",
+   "text": "Beat 2 (mechanism): how one item gets k different positions (k hash functions?) is never said"
+  },
+  {
+   "n": 16,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "Beat 2 (mechanism): 'hash mod m → position' gives one position, but 'add sets k bits' needs k of them. Where do the other k−1 come from?"
+  },
+  {
+   "n": 17,
+   "severity": "edge",
+   "kind": "unsaid",
+   "text": "Beat 3 (mechanism): fox's positions, and which of them is 0, are not said"
+  },
+  {
+   "n": 18,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "Beat 4 (notice): false positive (used as a label, never defined as 'probably seen' for an item never added)"
+  },
+  {
+   "n": 19,
+   "severity": "edge",
+   "kind": "unsaid",
+   "text": "Beat 4 (notice): the answer 'probably seen' when all bits are 1 is never said as a rule. Only the 0 case was stated in beat 3"
+  },
+  {
+   "n": 20,
+   "severity": "edge",
+   "kind": "unsaid",
+   "text": "Beat 4 (notice): owl's positions and which bits came from cat and which from dog"
+  },
+  {
+   "n": 21,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "Beat 5 (guarantee): false negatives"
+  },
+  {
+   "n": 22,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "Beat 5 (guarantee): clearing"
+  },
+  {
+   "n": 23,
+   "severity": "edge",
+   "kind": "unsaid",
+   "text": "Beat 5 (guarantee): delete case: nothing in the words introduces deletion or says why it comes up here"
+  },
+  {
+   "n": 24,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "Beat 5 (guarantee): 'clearing breaks it': the reason (a cleared bit may be shared with another added item, such as owl's bit from cat) is not given"
+  },
+  {
+   "n": 25,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "Beat 6 (mechanism): f"
+  },
+  {
+   "n": 26,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "Beat 6 (mechanism): n"
+  },
+  {
+   "n": 27,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "Beat 6 (mechanism): p"
+  },
+  {
+   "n": 28,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "Beat 6 (mechanism): bits/item (as m/n)"
+  },
+  {
+   "n": 29,
+   "severity": "edge",
+   "kind": "unsaid",
+   "text": "Beat 6 (mechanism): the 4-step derivation is shown but none of its steps are spoken"
+  },
+  {
+   "n": 30,
+   "severity": "edge",
+   "kind": "unsaid",
+   "text": "Beat 6 (mechanism): the value of k behind 0.82% (k = 7) is not said"
+  },
+  {
+   "n": 31,
+   "severity": "edge",
+   "kind": "unsaid",
+   "text": "Beat 6 (mechanism): 10 bits/item is not tied to m/n in the words"
+  },
+  {
+   "n": 32,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "Beat 6 (mechanism): why f ≈ 1 − e^(−kn/m): the chance a given bit is missed by one hash, raised to the power kn, is not given"
+  },
+  {
+   "n": 33,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "Beat 6 (mechanism): why p ≈ f^k: the independence assumption is not stated"
+  },
+  {
+   "n": 34,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "Beat 7 (approach): k = 7 (in the reader's question, but no beat has said k = 7)"
+  },
+  {
+   "n": 35,
+   "severity": "edge",
+   "kind": "unsaid",
+   "text": "Beat 7 (approach): the 3-row table's contents: which k values and which p values"
+  },
+  {
+   "n": 36,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "Beat 7 (approach): why the best k lands at f ≈ 0.5 is asserted, not shown"
+  },
+  {
+   "n": 37,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "Beat 8 (limit): 2×, 3× (twice and three times what? The intended n is never said aloud)"
+  },
+  {
+   "n": 38,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "Beat 8 (limit): capacity (in 'Reader now knows' but never spoken)"
+  },
+  {
+   "n": 39,
+   "severity": "edge",
+   "kind": "unsaid",
+   "text": "Beat 8 (limit): the shown percentages are not mentioned in the words"
+  },
+  {
+   "n": 40,
+   "severity": "edge",
+   "kind": "unsaid",
+   "text": "Beat 9 (payoff): filter before disk: the setup (check the filter, then go to disk only on 'probably seen') is not said"
+  },
+  {
+   "n": 41,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "Beat 9 (payoff): why it is safe: no false negatives means a real item is never skipped. This is not linked back to beat 5"
+  }
+ ]
+}

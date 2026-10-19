@@ -1,0 +1,41 @@
+{
+  "answers": {
+    "1": {
+      "answer": "In base 2, 0.1 is like 1/3 in base 10: its binary form repeats forever. A double keeps only 53 bits, so the computer stores the nearest binary fraction, which is slightly higher than 0.1.",
+      "quote": "In base 2, 0.1 is like 1/3 in base 10. Its binary form, 0.000110011001100…, repeats forever. A double keeps only 53 bits, so it stores the nearest binary fraction."
+    },
+    "2": {
+      "answer": "The stored 0.1 and 0.2 are both slightly too high. Their exact sum is not a double, so it gets rounded. It is exactly halfway between two doubles, and the tie rule picks the upper one. The stored 0.3 is slightly too low and is the double just below that result. == compares the bits, they differ, so the answer is false.",
+      "quote": "The stored 0.3 is the double just below that result. The two differ by 5.551115123125783e-17, the gap between neighbouring doubles near 0.3."
+    },
+    "3": {
+      "answer": "Compare with a tolerance, for example abs(a - 0.3) < 1e-9. For money, count in integer cents. If exact decimal arithmetic is needed, use a decimal type such as Python Decimal or Java BigDecimal.",
+      "quote": "Compare with a tolerance, not `==`. `abs(0.1 + 0.2 - 0.3) < 1e-9` is true."
+    },
+    "4": {
+      "answer": "Yes, it is true. 0.5 (1/2), 0.25 (1/4) and 0.75 are all short binary fractions, so no step rounds and no error appears.",
+      "quote": "It is true. 0.5 is 1/2 and 0.25 is 1/4, so both are short binary fractions. Their sum, 0.75, is also one. No step rounds, so no error appears."
+    }
+  },
+  "stops": [
+    "\"53 significant bits\": the term 'significant bits' is not defined, and it is unclear how 53 bits relate to the 34 digits shown in the table.",
+    "\"(the IEEE 754 standard)\": the standard is named but never explained.",
+    "\"the tie rule picks the upper one\": the tie rule is not explained, so a reader may wonder whether it always rounds up.",
+    "\"The sum is exactly halfway between two doubles\": no reason is given for why it lands exactly halfway; a reader has to take this on trust.",
+    "\"short binary fractions\": 'short' is never defined, for example how many bits counts as short.",
+    "\"`abs(0.1 + 0.2 - 0.3) < 1e-9`\": there is no reason for choosing 1e-9 or guidance on how to pick a tolerance.",
+    "\"Languages print the shortest decimal that maps back to the same double\": 'maps back' needs a reread to follow."
+  ],
+  "excess": [
+    "\"<!-- Stage 1, rendered from model.md in STE-80. -->\": an internal note that is visible in the source and means nothing to this reader.",
+    "\"Stored value (first 34 digits)\": the full 34-digit expansions are more detail than needed; 'slightly too high/low' carries the point.",
+    "\"These are slower than doubles.\": a side remark that does not help answer the question.",
+    "\"Every language that uses IEEE 754 doubles (JavaScript, Python, Java, C, and most others) gives the same result every time.\": partly repeats the opening 'In most languages' line."
+  ],
+  "grounded": {
+    "1": true,
+    "2": true,
+    "3": true,
+    "4": true
+  }
+}

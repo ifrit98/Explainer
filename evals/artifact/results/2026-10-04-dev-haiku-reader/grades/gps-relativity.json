@@ -1,0 +1,59 @@
+{
+  "key": {
+    "A": "quick",
+    "B": "none",
+    "C": "principles",
+    "D": "published"
+  },
+  "grades": {
+    "quick": {
+      "quiz": [
+        2,
+        2,
+        2,
+        2
+      ],
+      "misconception": "absent",
+      "errors": [
+        "Three spheres meet at a point. So three satellites should be enough."
+      ]
+    },
+    "none": {
+      "quiz": [
+        2,
+        2,
+        2,
+        2
+      ],
+      "misconception": "absent",
+      "errors": []
+    },
+    "principles": {
+      "quiz": [
+        2,
+        2,
+        2,
+        2
+      ],
+      "misconception": "corrected",
+      "errors": []
+    },
+    "published": {
+      "quiz": [
+        2,
+        2,
+        2,
+        2
+      ],
+      "misconception": "corrected",
+      "errors": []
+    }
+  },
+  "rank": [
+    "published",
+    "principles",
+    "none",
+    "quick"
+  ],
+  "why_best": "D states that the receiver only listens and uses a small worked example on a line to make the shared clock error b concrete; it then shows why per-satellite clock errors cannot be absorbed, all in few words and without detours."
+}

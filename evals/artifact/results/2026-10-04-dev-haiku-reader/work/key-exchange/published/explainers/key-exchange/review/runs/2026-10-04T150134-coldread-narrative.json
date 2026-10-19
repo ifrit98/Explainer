@@ -1,0 +1,432 @@
+{
+ "tool": "coldread",
+ "rendering": "narrative",
+ "slug": "key-exchange",
+ "at": "2026-10-04T15:01:34",
+ "model": "default",
+ "prompt_sha": "0dc70ed4e552",
+ "reply": {
+  "beats": [
+   {
+    "at": "Beat 1 (hook)",
+    "text": "Everything sent is read by Eve. So the key can never be sent.",
+    "unresolved": [
+     "Eve"
+    ],
+    "unsaid": [
+     "Shown 'the setting' is never described. The words don't name Alice and Bob as the two parties or say that Eve only listens."
+    ],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Beat 2 (answer first)",
+    "text": "They compute it: each sends half a calculation, finishes the other's half with a kept number; both reach the same number; Eve cannot finish it.",
+    "unresolved": [],
+    "unsaid": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Beat 3 (objection)",
+    "text": "Bob would be as stuck as Eve. Each side needs a private number, and an operation where each can finish the other's half.",
+    "unresolved": [
+     "one-way operation",
+     "k"
+    ],
+    "unsaid": [
+     "Shown 'k = 6 → 8': the words never say what k is or what operation the arrow stands for."
+    ],
+    "leap": [
+     "'Bob would be as stuck as Eve': the words don't say that if only one side holds the secret and sends its one-way result, Bob gets exactly what Eve gets."
+    ],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Beat 4 (name / instance)",
+    "text": "Powers mod p. Alice sends 5^6 mod 23 = 8; Bob sends 19.",
+    "unresolved": [
+     "mod",
+     "p"
+    ],
+    "unsaid": [
+     "Shown 'mod defined': the words never say mod means the remainder after division.",
+     "Shown 'p, g, a, b, A, B': the words don't say g = 5, a = 6, p = 23, b = 15, or that A and B are the sent numbers.",
+     "Bob's private number 15 is never said, so the reader can't see where 19 comes from."
+    ],
+    "leap": [
+     "Bob sends 19: the computation isn't given."
+    ],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Beat 5 (mechanism)",
+    "text": "Yes, both are g^(ab): (g^a)^b = (g^b)^a; remainders can be taken at each step.",
+    "unresolved": [
+     "g",
+     "a",
+     "b"
+    ],
+    "unsaid": [
+     "Shown '8^15 mod 23 = 2' is the first time the reader sees 15 as Bob's number."
+    ],
+    "leap": [
+     "'remainders can be taken at each step': the words don't say why taking remainders partway leaves the final remainder unchanged. The reader knows remainders but not this rule."
+    ],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Beat 6 (notice)",
+    "text": "p, g, A, B. Not a, b, s. A × B = 14, not 2 (exponents add, not multiply).",
+    "unresolved": [
+     "A",
+     "B",
+     "s"
+    ],
+    "unsaid": [
+     "The 'who knows what' table is shown but not walked through in words."
+    ],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Beat 7 (why)",
+    "text": "Without mod, a log reverses it. With multiplication, a single multiplication reverses it. Powers mod p scramble... No fast reverse known: the discrete logarithm.",
+    "unresolved": [
+     "k (in 5^k mod 23, used again with a different meaning from beat 3)"
+    ],
+    "unsaid": [
+     "Shown 'multiplication → 14 undoes it' is not explained, and it's unclear how 14 (from beat 6) relates to this.",
+     "The list of 5^k mod 23 is shown, but the words don't point out what to notice in it."
+    ],
+    "leap": [
+     "'With multiplication, a single multiplication reverses it': this means swapping the power for multiplication. The words don't say so, and the reverse step isn't shown."
+    ],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Beat 8 (quantity)",
+    "text": "Real p: 617 digits; ~10^14 years by best known methods (estimate). Alice uses repeated squaring: ~4000 multiplications. Hardness is believed, not proven.",
+    "unresolved": [
+     "repeated squaring",
+     "6 tries (never said earlier that finding a = 6 means trying exponents one by one)"
+    ],
+    "unsaid": [
+     "Shown 'sizes' is not described."
+    ],
+    "leap": [
+     "The words don't explain why repeated squaring needs only about 4000 multiplications."
+    ],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Beat 9 (limit)",
+    "text": "Mallory swaps public numbers: Alice gets 6, Bob gets 5, Mallory both. Fix: authentication (out of scope).",
+    "unresolved": [
+     "Mallory",
+     "authentication"
+    ],
+    "unsaid": [
+     "Shown 'Mallory numbers': the words never say what number Mallory sends, so 'Alice gets 6, Bob gets 5' can't be checked."
+    ],
+    "leap": [
+     "The words don't say why Mallory ends up knowing both secrets."
+    ],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Beat 10 (close)",
+    "text": "Restate answer; scope pointers.",
+    "unresolved": [],
+    "unsaid": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": true
+   }
+  ],
+  "blocking": [
+   "Beat 4: 'Powers mod p': mod and p are never defined in the words. The definition exists only in Shown ('mod defined').",
+   "Beat 4: g, a, b, A, B are never tied to 5, 6, 15, 8, 19 in the words, so 'g^(ab)' in beat 5 and 'p, g, A, B. Not a, b, s' in beat 6 refer to letters the reader hasn't been given.",
+   "Beat 5: 'remainders can be taken at each step': agreement depends on this rule, and it isn't justified.",
+   "Beat 7: 'With multiplication, a single multiplication reverses it' and Shown 'multiplication → 14 undoes it': it's unclear what is being compared.",
+   "Beat 10: 'Restate answer; scope pointers.' is a placeholder, so no closing words are given."
+  ],
+  "cuts": [
+   "Beat 8: cut the repeated-squaring aside ('~4000 multiplications'), or move it to a footnote. It answers a side question and is never explained.",
+   "Beat 6: cut '(exponents add, not multiply)' or merge it into beat 7, which makes the 'why not simpler' point again."
+  ],
+  "question": {
+   "text": "How can two parties agree on a secret key when everything they send is read?",
+   "known_at": "Beat 1: 'Everything sent is read by Eve. So the key can never be sent.'",
+   "result_stated": "Yes, in beat 2: 'each sends half a calculation, finishes the other's half with a kept number; both reach the same number; Eve cannot finish it.'"
+  },
+  "motive": "Reason for the approach: given in beat 1 ('So the key can never be sent') and beat 3 ('Each side needs a private number, and an operation where each can finish the other's half'). Reason to care: missing from the beats. The HTTPS motive appears only in the plan sections.",
+  "close": "Not delivered. Beat 10 says only 'Restate answer; scope pointers.' It gives no words answering the question, no general argument (exponent rule plus assumed discrete-log hardness), and no payoff.",
+  "recap": "Each side keeps a secret exponent and sends 5 to that power, mod 23. Raising the other's number to your own secret gives both sides the same value, and an eavesdropper would have to undo the power-mod, which nobody knows how to do fast.",
+  "strongest": "Beat 5: the two computations 19^6 mod 23 = 2 and 8^15 mod 23 = 2, tied to (g^a)^b = (g^b)^a, which this reader already knows.",
+  "weakest": "Beat 4 together with beat 10. Beat 4 defines mod and the letters only in Shown, and the whole symbolic argument rests on them. Beat 10 is an unwritten placeholder.",
+  "suggestions": [
+   "In beat 4, say in words: 'mod 23 means the remainder after dividing by 23; here g = 5, p = 23, Alice's private a = 6, Bob's private b = 15, and A = 8, B = 19 are what they send.'",
+   "In beat 5, give one line of support for reducing as you go, e.g. a product's remainder depends only on the remainders of its factors.",
+   "In beat 3, define k and the arrow, or replace the shown example with words.",
+   "In beat 7, state the comparison outright: if Alice sent g × a mod p, Eve could divide (multiply by an inverse) to get a back.",
+   "In beat 9, say that Mallory sends 10 to both sides.",
+   "Write beat 10 as actual sentences, and include the HTTPS reason to care."
+  ]
+ },
+ "usage": {
+  "cost": 0.1230666,
+  "seconds": 42
+ },
+ "findings": [
+  {
+   "n": 1,
+   "severity": "blocking",
+   "kind": "blocking",
+   "text": "Beat 4: 'Powers mod p': mod and p are never defined in the words. The definition exists only in Shown ('mod defined')."
+  },
+  {
+   "n": 2,
+   "severity": "blocking",
+   "kind": "blocking",
+   "text": "Beat 4: g, a, b, A, B are never tied to 5, 6, 15, 8, 19 in the words, so 'g^(ab)' in beat 5 and 'p, g, A, B. Not a, b, s' in beat 6 refer to letters the reader hasn't been given."
+  },
+  {
+   "n": 3,
+   "severity": "blocking",
+   "kind": "blocking",
+   "text": "Beat 5: 'remainders can be taken at each step': agreement depends on this rule, and it isn't justified."
+  },
+  {
+   "n": 4,
+   "severity": "blocking",
+   "kind": "blocking",
+   "text": "Beat 7: 'With multiplication, a single multiplication reverses it' and Shown 'multiplication → 14 undoes it': it's unclear what is being compared."
+  },
+  {
+   "n": 5,
+   "severity": "blocking",
+   "kind": "blocking",
+   "text": "Beat 10: 'Restate answer; scope pointers.' is a placeholder, so no closing words are given."
+  },
+  {
+   "n": 6,
+   "severity": "excess",
+   "kind": "cut",
+   "text": "Beat 8: cut the repeated-squaring aside ('~4000 multiplications'), or move it to a footnote. It answers a side question and is never explained."
+  },
+  {
+   "n": 7,
+   "severity": "excess",
+   "kind": "cut",
+   "text": "Beat 6: cut '(exponents add, not multiply)' or merge it into beat 7, which makes the 'why not simpler' point again."
+  },
+  {
+   "n": 8,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "Beat 1 (hook): Eve"
+  },
+  {
+   "n": 9,
+   "severity": "edge",
+   "kind": "unsaid",
+   "text": "Beat 1 (hook): Shown 'the setting' is never described. The words don't name Alice and Bob as the two parties or say that Eve only listens."
+  },
+  {
+   "n": 10,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "Beat 3 (objection): one-way operation"
+  },
+  {
+   "n": 11,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "Beat 3 (objection): k"
+  },
+  {
+   "n": 12,
+   "severity": "edge",
+   "kind": "unsaid",
+   "text": "Beat 3 (objection): Shown 'k = 6 → 8': the words never say what k is or what operation the arrow stands for."
+  },
+  {
+   "n": 13,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "Beat 3 (objection): 'Bob would be as stuck as Eve': the words don't say that if only one side holds the secret and sends its one-way result, Bob gets exactly what Eve gets."
+  },
+  {
+   "n": 14,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "Beat 4 (name / instance): mod"
+  },
+  {
+   "n": 15,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "Beat 4 (name / instance): p"
+  },
+  {
+   "n": 16,
+   "severity": "edge",
+   "kind": "unsaid",
+   "text": "Beat 4 (name / instance): Shown 'mod defined': the words never say mod means the remainder after division."
+  },
+  {
+   "n": 17,
+   "severity": "edge",
+   "kind": "unsaid",
+   "text": "Beat 4 (name / instance): Shown 'p, g, a, b, A, B': the words don't say g = 5, a = 6, p = 23, b = 15, or that A and B are the sent numbers."
+  },
+  {
+   "n": 18,
+   "severity": "edge",
+   "kind": "unsaid",
+   "text": "Beat 4 (name / instance): Bob's private number 15 is never said, so the reader can't see where 19 comes from."
+  },
+  {
+   "n": 19,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "Beat 4 (name / instance): Bob sends 19: the computation isn't given."
+  },
+  {
+   "n": 20,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "Beat 5 (mechanism): g"
+  },
+  {
+   "n": 21,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "Beat 5 (mechanism): a"
+  },
+  {
+   "n": 22,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "Beat 5 (mechanism): b"
+  },
+  {
+   "n": 23,
+   "severity": "edge",
+   "kind": "unsaid",
+   "text": "Beat 5 (mechanism): Shown '8^15 mod 23 = 2' is the first time the reader sees 15 as Bob's number."
+  },
+  {
+   "n": 24,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "Beat 5 (mechanism): 'remainders can be taken at each step': the words don't say why taking remainders partway leaves the final remainder unchanged. The reader knows remainders but not this rule."
+  },
+  {
+   "n": 25,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "Beat 6 (notice): A"
+  },
+  {
+   "n": 26,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "Beat 6 (notice): B"
+  },
+  {
+   "n": 27,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "Beat 6 (notice): s"
+  },
+  {
+   "n": 28,
+   "severity": "edge",
+   "kind": "unsaid",
+   "text": "Beat 6 (notice): The 'who knows what' table is shown but not walked through in words."
+  },
+  {
+   "n": 29,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "Beat 7 (why): k (in 5^k mod 23, used again with a different meaning from beat 3)"
+  },
+  {
+   "n": 30,
+   "severity": "edge",
+   "kind": "unsaid",
+   "text": "Beat 7 (why): Shown 'multiplication → 14 undoes it' is not explained, and it's unclear how 14 (from beat 6) relates to this."
+  },
+  {
+   "n": 31,
+   "severity": "edge",
+   "kind": "unsaid",
+   "text": "Beat 7 (why): The list of 5^k mod 23 is shown, but the words don't point out what to notice in it."
+  },
+  {
+   "n": 32,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "Beat 7 (why): 'With multiplication, a single multiplication reverses it': this means swapping the power for multiplication. The words don't say so, and the reverse step isn't shown."
+  },
+  {
+   "n": 33,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "Beat 8 (quantity): repeated squaring"
+  },
+  {
+   "n": 34,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "Beat 8 (quantity): 6 tries (never said earlier that finding a = 6 means trying exponents one by one)"
+  },
+  {
+   "n": 35,
+   "severity": "edge",
+   "kind": "unsaid",
+   "text": "Beat 8 (quantity): Shown 'sizes' is not described."
+  },
+  {
+   "n": 36,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "Beat 8 (quantity): The words don't explain why repeated squaring needs only about 4000 multiplications."
+  },
+  {
+   "n": 37,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "Beat 9 (limit): Mallory"
+  },
+  {
+   "n": 38,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "Beat 9 (limit): authentication"
+  },
+  {
+   "n": 39,
+   "severity": "edge",
+   "kind": "unsaid",
+   "text": "Beat 9 (limit): Shown 'Mallory numbers': the words never say what number Mallory sends, so 'Alice gets 6, Bob gets 5' can't be checked."
+  },
+  {
+   "n": 40,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "Beat 9 (limit): The words don't say why Mallory ends up knowing both secrets."
+  }
+ ]
+}

@@ -1,0 +1,44 @@
+{
+  "answers": {
+    "1": {
+      "answer": "Adding an item: work out its k positions using the k hash functions (each taken modulo m) and set all of those bits to 1. A bit that is already 1 stays 1. Looking an item up: work out the same k positions and look at those bits. If any of them is 0, the item was definitely never added. If all of them are 1, the item was probably added.",
+      "quote": "Add an item: compute its k positions and set all of those bits to 1. (If a bit is already 1, it stays 1.)"
+    },
+    "2": {
+      "answer": "It can give false positives: it says \"probably yes\" for an item that was never added, because other items happened to set all of that item's bits. It can never give a false negative. Adding an item sets its bits to 1, and bits never go back to 0, so an item that was added always finds all its bits set.",
+      "quote": "If any of them is 0, the item was definitely never added. Adding it would have set that bit to 1, and bits never go back to 0."
+    },
+    "3": {
+      "answer": "Other items may share those bits. Setting them back to 0 could erase bits that other items depend on, and those items would then get false negatives. A counting Bloom filter, which keeps a counter in each slot, can delete.",
+      "quote": "Setting an item's bits back to 0 might erase bits that other items also depend on, and then those items would get false negatives."
+    },
+    "4": {
+      "answer": "It says \"probably yes\", which is a false positive. Whatever positions the item hashes to, all of them are 1, so the check finds no 0. The page's own estimate agrees: with f = 1, the false positive rate f^k comes to 100%. The page never mentions this case directly; this is reasoned from the check rule.",
+      "quote": "If all of them are 1, the item was probably added. Those bits might have been set by other items."
+    }
+  },
+  "stops": [
+    "\"We take each number modulo m, so it picks a position in the array.\" The word 'modulo' is not explained for a reader new to the subject.",
+    "\"store every item, say in a hash set\". 'Hash set' is used before hashing has been explained.",
+    "\"The best balance turns out to be when about half the bits are 1.\" This is stated without any reason.",
+    "\"With that choice, each extra hash halves the error\". It is not shown why this follows.",
+    "\"m/n = −ln p / (ln 2)^2 ≈ 1.44 · log2(1/p)\". The 'Rearranging' step is skipped.",
+    "\"(1 − 1/m)^m ≈ 1/e when m is large\". This 'standard fact' may not be familiar to the reader.",
+    "\"Assume the hash functions behave like independent, fair random choices of position.\" It is unclear what 'independent' means here and why it matters.",
+    "\"For those billion URLs that's about 1.2 GB.\" The reader has to work out that 10 bits per item gives this figure."
+  ],
+  "excess": [
+    "\"A web cache only stores a page the second time it's requested.\" This second use case is not needed to understand how the filter works.",
+    "\"A variant called a counting Bloom filter stores a small counter in each slot instead of a single bit.\" This is off the main question.",
+    "\"Words actually added (the filter itself does not keep this list; it's shown here only so you can see which answers are wrong)\"",
+    "\"Any 0 means definitely not seen. All 1s means probably seen.\" The summary repeats the earlier rules.",
+    "\"It saves memory because it stores no items, which is also why it can't delete items or list them.\" This also repeats earlier text.",
+    "\"Put another way, if a fraction f of the bits are 1, the false positive rate is about f^k.\" This restates the formula just given."
+  ],
+  "grounded": {
+    "1": true,
+    "2": true,
+    "3": true,
+    "4": true
+  }
+}

@@ -1,0 +1,43 @@
+{
+  "answers": {
+    "1": {
+      "answer": "To add an item, you compute its k positions (each hash output mod m) and set those bits to 1. Nothing else is stored. To look an item up, you compute the same k positions and read those bits. If any of them is 0, the answer is \"definitely not seen\". If all of them are 1, the answer is \"probably seen\".",
+      "quote": "To **add** an item, set its k positions to 1. Nothing else is kept."
+    },
+    "2": {
+      "answer": "It can give a false positive: \"probably seen\" for an item that was never added. This happens because other items may have set all of that item's bits, and the bits don't record which item set them. It can never give a false negative (\"definitely not seen\" for an item that was added). Adding an item sets its bits to 1, and nothing ever sets a bit back to 0, so a later query always finds all of its bits at 1.",
+      "quote": "Adding cat set bits 1, 6 and 11, and nothing ever sets a bit back to 0. So any later query for cat finds all three bits at 1."
+    },
+    "3": {
+      "answer": "Items share bits. Clearing one item's bits can set to 0 a bit that another added item also uses. That item would then read \"definitely not seen\", which is a false negative. So a Bloom filter has no delete operation.",
+      "quote": "Owl also uses bits 6 and 11, so they are now 0, and the filter says owl is definitely not seen. That is a false negative. Bits are shared between items, so a Bloom filter has no delete operation."
+    },
+    "4": {
+      "answer": "It answers \"probably seen\", which is a false positive. If every bit is 1, all k of the item's positions are 1, so any item at all reads \"probably seen\". This matches the formula: when f = 1, p = f^k = 1, so the answer is wrong for every never-added item.",
+      "quote": "If all bits are 1, the answer is **probably seen**."
+    }
+  },
+  "stops": [
+    "Hash functions are never defined, and nothing says how to get k different ones: \"Choose k different hash functions; here k = 3.\"",
+    "\"mod\" is used without a definition: \"Take each hash output mod m to get a **position**.\"",
+    "The reason for this approximation isn't given: \"Because (1 − 1/m)^m ≈ 1/e for large m, this is about e^(−kn/m).\"",
+    "Step 2 isn't explained: why does each add count as setting a bit independently, even when a bit is already 1? \"n adds set kn bits in total.\"",
+    "The value for 2 million items is stated but not worked out: \"At 2 million items, p is 13.8%.\"",
+    "This number has no derivation: \"Thus each extra 4.8 bits per item cuts p by about 10 times.\"",
+    "\"The formula\" is ambiguous, and it isn't shown why f = 0.5 is the best point: \"The best balance is near f = 0.5, which the formula gives at k = (m/n)·ln 2\"",
+    "The reasoning in this step is compressed: \"Each extra bit per item adds 0.69 to k, so it multiplies p by 0.5^0.69 ≈ 0.62.\""
+  ],
+  "excess": [
+    "Leftover build comments: \"<!-- Stage 1, rendered from model.md in STE-80. -->\"",
+    "The summary repeats the opening: \"A 0 bit proves an item is new. All 1s mean \"probably seen\"\"",
+    "The not-covered list wasn't needed: \"**Cheap hash functions:** real code makes k positions from two hash values (\"double hashing\").\"",
+    "Not needed for these questions: \"**Sizing:** for n items and a target p, m = −n·ln p / (ln 2)².\"",
+    "Not needed for these questions: \"**Growing:** changing m changes every position (hash mod m), so you cannot resize a filter in place.\""
+  ],
+  "grounded": {
+    "1": true,
+    "2": true,
+    "3": true,
+    "4": true
+  }
+}

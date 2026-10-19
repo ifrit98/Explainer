@@ -34,7 +34,7 @@ def test_decisions_and_stats(tmp_path, monkeypatch):
 
 def test_reviewer_reads_only_the_explainer_folder(monkeypatch, tmp_path):
     seen = {}
-    monkeypatch.setattr(runs, "ask", lambda system, prompt, model=None, read=None: (seen.update(read=read), '{"gaps": []}')[1])
+    monkeypatch.setattr(runs, "ask", lambda system, prompt, model=None, read=None, usage=None: (seen.update(read=read), '{"gaps": []}')[1])
     folder = tmp_path / "explainers" / "x"
     (folder / "review").mkdir(parents=True)
     (folder / "model.md").write_text("# x\n")

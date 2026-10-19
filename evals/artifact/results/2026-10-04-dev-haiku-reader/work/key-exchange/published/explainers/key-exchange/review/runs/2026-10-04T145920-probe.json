@@ -1,0 +1,225 @@
+{
+ "tool": "probe",
+ "rendering": null,
+ "slug": "key-exchange",
+ "at": "2026-10-04T14:59:20",
+ "model": "default",
+ "prompt_sha": "5df4d87a86a1",
+ "reply": {
+  "gaps": [
+   {
+    "rule": 1,
+    "severity": "main",
+    "about": "No explanation of why a one-way function alone is not enough, and why two private numbers are needed",
+    "why_it_matters": "The obvious first idea is: 'Alice picks the key and sends it hidden by a one-way function.' Nothing in the model says why that fails. Without that, Dependency step 2 (both sides mix, and the mixes match) reads as an arbitrary design rather than the answer to the central question.",
+    "suggested_addition": "Alternative state: Alice picks key k = 6 and sends 5^6 mod 23 = 8. Bob is now as stuck as Eve, because recovering k = 6 from 8 is the same discrete logarithm. DH needs an operation where each side can finish the other's half: Bob turns 8 into 8^15 mod 23 = 2 without ever learning 6. That works because (g^a)^b = (g^b)^a."
+   },
+   {
+    "rule": 2,
+    "severity": "main",
+    "about": "The causal chain jumps from 'Eve needs a or b' without support",
+    "why_it_matters": "The chain says Eve needs a or b, but no step shows that getting s requires a or b. A shortcut from (A, B) straight to g^(ab) is a separate problem (the computational Diffie–Hellman problem). It is also unproven, and the Epistemic status section never names this assumption. The central claim 'Eve is stuck' depends on this hidden step.",
+    "suggested_addition": "State it as an assumption: 'No known way exists to compute g^(ab) mod p from g^a and g^b without, in effect, finding a or b.' Give an instance where the obvious shortcut fails: A·B = 8·19 mod 23 = 14 = 5^21, but s = 5^90 mod 23 = 5^2 = 2. Add this assumption to Epistemic status as 'believed, not proven'."
+   },
+   {
+    "rule": 1,
+    "severity": "edge",
+    "about": "The multiplication row in 'Why this form' ends with a vague sentence",
+    "why_it_matters": "'Would not match in a useful way unless Eve can also compute them' is unclear. In fact the results do match, and Eve gets the same value. The concrete failure is never shown.",
+    "suggested_addition": "With multiplication, s = g·a·b mod 23 = 5·6·15 = 450 mod 23 = 13. Eve computes A·B·14 mod 23 = 7·6·14 mod 23 = 13, where B = 5·15 mod 23 = 6. Eve gets s directly."
+   },
+   {
+    "rule": 1,
+    "severity": "edge",
+    "about": "No reason given for why p must be prime",
+    "why_it_matters": "p is introduced as 'a large prime' with no reason. A learner will ask why not any number.",
+    "suggested_addition": "With modulus 24 and g = 5, the powers are 5, 1, 5, 1, …: only 2 values, so s can only be 1 or 5. With prime 23 and g = 5, all 22 non-zero remainders appear. Note that safe choices of p and g are otherwise out of scope."
+   },
+   {
+    "rule": 2,
+    "severity": "edge",
+    "about": "The check in Quantities uses 5^22 mod 23 = 1 and reduces exponents mod 22 without explanation",
+    "why_it_matters": "The audience does not know Fermat's little theorem, so this verification step is left implicit.",
+    "suggested_addition": "Point to the powers list: 5^22 mod 23 = 1, so the powers repeat every 22 steps. Then 5^90 = 5^(4·22+2), which gives 5^2 = 25 mod 23 = 2. Or drop this check and use direct repeated squaring of 8^15 (see the rule 4 entry)."
+   },
+   {
+    "rule": 2,
+    "severity": "edge",
+    "about": "The claim 'reducing mod p at each step does not change the remainder' has no numeric instance",
+    "why_it_matters": "Every step of Alice's computation depends on this guarantee, and it appears without a concrete check.",
+    "suggested_addition": "5^3 = 125, and 125 mod 23 = 10. Reducing first gives (5^2 mod 23)·5 = 2·5 = 10. Same answer."
+   },
+   {
+    "rule": 2,
+    "severity": "edge",
+    "about": "'Eve cannot get s' has only one way to break it (small p)",
+    "why_it_matters": "A large p does not help if the private number comes from a small range. The model says a is 'random' but never says from what range.",
+    "suggested_addition": "State that a and b are drawn from 1 … p−2. Breaking case: with a 617-digit p but a chosen from 1 … 1,000,000, Eve tries at most 10^6 exponents and finds a in under a second."
+   },
+   {
+    "rule": 3,
+    "severity": "edge",
+    "about": "Several concepts have more than one name",
+    "why_it_matters": "Readers may think each name is a different thing.",
+    "suggested_addition": "Pick one name for each: 'shared secret s' / 'key' / 's (after hashing)'; 'public number' / 'public value' (Dependencies 2); 'private number' / 'private value'; 'active attacker' / 'Mallory' / 'man in the middle'; 'fast exponentiation' / 'repeated squaring'; 'one-way operation' (Entities) / 'one-way function' (Audience). Also define '≡' (used in Quantities) and 'hash' (Temporal step 5) before use, or remove them."
+   },
+   {
+    "rule": 4,
+    "severity": "edge",
+    "about": "Repeated squaring is worked only for 5^6; Bob's 8^15 has no worked steps",
+    "why_it_matters": "The confusion point 'computing is fast' relies on this, and the odd exponent 15 shows how the method combines squares.",
+    "suggested_addition": "8^2 = 64 → 18; 8^4 = 18^2 = 324 → 2; 8^8 = 4. Since 15 = 8+4+2+1, 8^15 = 4·2·18·8 = 1152 mod 23 = 2. That is 3 squarings plus 3 multiplications instead of 14 multiplications."
+   },
+   {
+    "rule": 5,
+    "severity": "edge",
+    "about": "The size of p is not turned into time, and the brute-force count overstates Eve's real cost",
+    "why_it_matters": "'10^616 entries' doesn't tell the reader how long that takes. The model also says faster methods exist, so the security level is far below 10^616. A reader may come away with the wrong order of magnitude.",
+    "suggested_addition": "Brute force at 10^12 tries/s takes about 10^604 s; the universe is about 4×10^17 s old. The best known methods against 2048-bit p cost about 2^112 ≈ 5×10^33 operations, which at 10^12/s is about 10^14 years. Compare Alice: about 4096 multiplications, a few milliseconds."
+   },
+   {
+    "rule": 5,
+    "severity": "edge",
+    "about": "The 'Bad g = 22' row has no stated meaning",
+    "why_it_matters": "'Then s can be only 1 or 22' is the consequence, but its meaning for the reader isn't stated. It reads as a fragment.",
+    "suggested_addition": "With g = 22, Eve guesses s correctly with 1 try in 2. With g = 5, s could be any of 22 values."
+   }
+  ],
+  "excess": [
+   "Known limit: Shor's algorithm and quantum computers (not needed to answer the central question)",
+   "Scope notes on elliptic-curve DH (X25519) and ML-KEM",
+   "'(in practice, a hash of s)' in Temporal step 5 and 'after hashing' in Terms: brings in an undefined term that is out of scope",
+   "The check in Quantities using 5^22 mod 23 = 1 and exponent reduction mod 22 (could be replaced by direct squaring)",
+   "Representation decision section (planning metadata, not content for the reader)"
+  ],
+  "next_questions": [
+   {
+    "q": "Why not just pick a key and send it hidden by a hard-to-reverse function?",
+    "answered_by_model": false,
+    "declared_out_of_scope": false
+   },
+   {
+    "q": "Could Eve compute g^(ab) mod p from A and B without finding a or b?",
+    "answered_by_model": false,
+    "declared_out_of_scope": false
+   },
+   {
+    "q": "How do Alice and Bob stop a man in the middle and know they're talking to each other?",
+    "answered_by_model": false,
+    "declared_out_of_scope": true
+   },
+   {
+    "q": "Why must p be prime, and how are p and g chosen?",
+    "answered_by_model": false,
+    "declared_out_of_scope": true
+   },
+   {
+    "q": "How long would the best known attack actually take against a 2048-bit p?",
+    "answered_by_model": false,
+    "declared_out_of_scope": true
+   }
+  ]
+ },
+ "usage": {
+  "cost": 0.1690814,
+  "seconds": 64
+ },
+ "findings": [
+  {
+   "n": 1,
+   "severity": "main",
+   "kind": "rule 1",
+   "text": "No explanation of why a one-way function alone is not enough, and why two private numbers are needed → Alternative state: Alice picks key k = 6 and sends 5^6 mod 23 = 8. Bob is now as stuck as Eve, because recovering k = 6 from 8 is the same discrete logarithm. DH needs an operation where each side can finish the other's half: Bob turns 8 into 8^15 mod 23 = 2 without ever learning 6. That works because (g^a)^b = (g^b)^a."
+  },
+  {
+   "n": 2,
+   "severity": "main",
+   "kind": "rule 2",
+   "text": "The causal chain jumps from 'Eve needs a or b' without support → State it as an assumption: 'No known way exists to compute g^(ab) mod p from g^a and g^b without, in effect, finding a or b.' Give an instance where the obvious shortcut fails: A·B = 8·19 mod 23 = 14 = 5^21, but s = 5^90 mod 23 = 5^2 = 2. Add this assumption to Epistemic status as 'believed, not proven'."
+  },
+  {
+   "n": 3,
+   "severity": "edge",
+   "kind": "rule 1",
+   "text": "The multiplication row in 'Why this form' ends with a vague sentence → With multiplication, s = g·a·b mod 23 = 5·6·15 = 450 mod 23 = 13. Eve computes A·B·14 mod 23 = 7·6·14 mod 23 = 13, where B = 5·15 mod 23 = 6. Eve gets s directly."
+  },
+  {
+   "n": 4,
+   "severity": "edge",
+   "kind": "rule 1",
+   "text": "No reason given for why p must be prime → With modulus 24 and g = 5, the powers are 5, 1, 5, 1, …: only 2 values, so s can only be 1 or 5. With prime 23 and g = 5, all 22 non-zero remainders appear. Note that safe choices of p and g are otherwise out of scope."
+  },
+  {
+   "n": 5,
+   "severity": "edge",
+   "kind": "rule 2",
+   "text": "The check in Quantities uses 5^22 mod 23 = 1 and reduces exponents mod 22 without explanation → Point to the powers list: 5^22 mod 23 = 1, so the powers repeat every 22 steps. Then 5^90 = 5^(4·22+2), which gives 5^2 = 25 mod 23 = 2. Or drop this check and use direct repeated squaring of 8^15 (see the rule 4 entry)."
+  },
+  {
+   "n": 6,
+   "severity": "edge",
+   "kind": "rule 2",
+   "text": "The claim 'reducing mod p at each step does not change the remainder' has no numeric instance → 5^3 = 125, and 125 mod 23 = 10. Reducing first gives (5^2 mod 23)·5 = 2·5 = 10. Same answer."
+  },
+  {
+   "n": 7,
+   "severity": "edge",
+   "kind": "rule 2",
+   "text": "'Eve cannot get s' has only one way to break it (small p) → State that a and b are drawn from 1 … p−2. Breaking case: with a 617-digit p but a chosen from 1 … 1,000,000, Eve tries at most 10^6 exponents and finds a in under a second."
+  },
+  {
+   "n": 8,
+   "severity": "edge",
+   "kind": "rule 3",
+   "text": "Several concepts have more than one name → Pick one name for each: 'shared secret s' / 'key' / 's (after hashing)'; 'public number' / 'public value' (Dependencies 2); 'private number' / 'private value'; 'active attacker' / 'Mallory' / 'man in the middle'; 'fast exponentiation' / 'repeated squaring'; 'one-way operation' (Entities) / 'one-way function' (Audience). Also define '≡' (used in Quantities) and 'hash' (Temporal step 5) before use, or remove them."
+  },
+  {
+   "n": 9,
+   "severity": "edge",
+   "kind": "rule 4",
+   "text": "Repeated squaring is worked only for 5^6; Bob's 8^15 has no worked steps → 8^2 = 64 → 18; 8^4 = 18^2 = 324 → 2; 8^8 = 4. Since 15 = 8+4+2+1, 8^15 = 4·2·18·8 = 1152 mod 23 = 2. That is 3 squarings plus 3 multiplications instead of 14 multiplications."
+  },
+  {
+   "n": 10,
+   "severity": "edge",
+   "kind": "rule 5",
+   "text": "The size of p is not turned into time, and the brute-force count overstates Eve's real cost → Brute force at 10^12 tries/s takes about 10^604 s; the universe is about 4×10^17 s old. The best known methods against 2048-bit p cost about 2^112 ≈ 5×10^33 operations, which at 10^12/s is about 10^14 years. Compare Alice: about 4096 multiplications, a few milliseconds."
+  },
+  {
+   "n": 11,
+   "severity": "edge",
+   "kind": "rule 5",
+   "text": "The 'Bad g = 22' row has no stated meaning → With g = 22, Eve guesses s correctly with 1 try in 2. With g = 5, s could be any of 22 values."
+  },
+  {
+   "n": 12,
+   "severity": "excess",
+   "kind": "model entry",
+   "text": "Known limit: Shor's algorithm and quantum computers (not needed to answer the central question)"
+  },
+  {
+   "n": 13,
+   "severity": "excess",
+   "kind": "model entry",
+   "text": "Scope notes on elliptic-curve DH (X25519) and ML-KEM"
+  },
+  {
+   "n": 14,
+   "severity": "excess",
+   "kind": "model entry",
+   "text": "'(in practice, a hash of s)' in Temporal step 5 and 'after hashing' in Terms: brings in an undefined term that is out of scope"
+  },
+  {
+   "n": 15,
+   "severity": "excess",
+   "kind": "model entry",
+   "text": "The check in Quantities using 5^22 mod 23 = 1 and exponent reduction mod 22 (could be replaced by direct squaring)"
+  },
+  {
+   "n": 16,
+   "severity": "excess",
+   "kind": "model entry",
+   "text": "Representation decision section (planning metadata, not content for the reader)"
+  }
+ ]
+}

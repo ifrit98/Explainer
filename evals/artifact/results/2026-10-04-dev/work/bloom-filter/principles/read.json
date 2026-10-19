@@ -1,0 +1,39 @@
+{
+  "answers": {
+    "1": {
+      "answer": "Add: the item is hashed to k bit positions, and each of those bits is set to 1. Lookup: the item is hashed to the same k positions. If any of those bits is 0, the answer is \"definitely not seen\". If all of them are 1, the answer is \"probably seen\".",
+      "quote": "To add an item, it hashes the item to a few bit positions and sets those bits to 1. To check an item, it hashes the item the same way and looks at the same positions."
+    },
+    "2": {
+      "answer": "It can give a false positive: a \"yes\" for an item it never saw, because other items may have set all of that item's bits. It can never give a false negative. Adding only turns bits from 0 to 1 and nothing turns them back, so an item that was added always finds all of its bits still set to 1.",
+      "quote": "Add only changes bits from 0 to 1. Nothing changes a bit back to 0. When you add `x`, its `k` bits become 1, and they stay 1."
+    },
+    "3": {
+      "answer": "Other items may share those bits. Clearing them can set to 0 a bit that another item needs, and a later lookup for that other item would then wrongly answer \"definitely not seen\". That is a false negative, which breaks the filter's guarantee.",
+      "quote": "Suppose you try to delete \"cat\" by clearing bits 1, 6, and 11. Bit 6 also belongs to \"dog\". A query for \"dog\" now finds bit 6 = 0 and answers \"definitely not seen\", which is wrong."
+    },
+    "4": {
+      "answer": "\"Probably seen\". Every bit it checks is 1, so the answer is a false positive. A full filter answers yes to every query and so tells you nothing.",
+      "quote": "At 5 million items, almost every bit is 1, so almost every query answers \"probably seen\". The filter then gives almost no information."
+    }
+  },
+  "stops": [
+    "\"in about 10 bits per item\" appears in the title before the reader knows why 10 bits is the figure.",
+    "\"(1 − 1/m)^(k·n)  ≈  e^(−k·n/m)\" gives the approximation step without saying why it holds.",
+    "\"The array then carries as much information as possible: a bit is equally likely to be 0 or 1.\" uses an idea from information theory without explaining it.",
+    "\"−ln(p) / (ln 2)²   ≈  1.44 · log2(1/p)\" gives the sizing formula without deriving it.",
+    "\"The best value is `k = (m/n)·ln 2`\" is stated with no reason given.",
+    "\"It uses about 4 times the memory.\" does not explain why counters cost 4 times as much."
+  ],
+  "excess": [
+    "\"Databases such as LevelDB, RocksDB, and Cassandra use Bloom filters in this way.\" A list of example systems that the reader does not need.",
+    "\"Each 10× drop in the error rate costs about 4.8 more bits per item.\" This repeats what the sizing table already shows.",
+    "\"Its rate depends only on bits per item and `k`, and about 10 bits per item gives about 1%.\" The summary repeats points made earlier."
+  ],
+  "grounded": {
+    "1": true,
+    "2": true,
+    "3": true,
+    "4": true
+  }
+}

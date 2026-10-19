@@ -1,0 +1,12 @@
+{
+  "result": "I made `explainers/float-sum/explanation.md`, plain prose with one table of numbers, because the answer is a single chain of cause and effect with worked values (\"1/10 never ends in binary → 0.1, 0.2 and 0.3 get rounded → their sum lands one step above where 0.3 lands\"), with nothing to click through or watch move; it passes `explainer check`, the probe, two cold reads with no blocking findings, and the blind test (13/13), though code execution wasn't allowed here so I worked out all the numbers by hand.",
+  "error": null,
+  "cost": 1.552655,
+  "seconds": 607,
+  "turns": 60,
+  "files": [
+    "explainers/float-sum/explanation.md"
+  ],
+  "review_cost": 0.8245,
+  "reviews": 6
+}

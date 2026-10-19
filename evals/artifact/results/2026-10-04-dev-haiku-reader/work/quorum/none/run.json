@@ -1,0 +1,12 @@
+{
+  "result": "I made `explainers/quorum/explanation.md`, a prose explanation, because the answer is a short chain of reasoning (why a majority is needed, then counting) that reads best as text, with a table and two small partition sketches doing the job diagrams would.",
+  "error": null,
+  "cost": 0.0993212,
+  "seconds": 32,
+  "turns": 2,
+  "files": [
+    "explainers/quorum/explanation.md"
+  ],
+  "review_cost": 0,
+  "reviews": 0
+}

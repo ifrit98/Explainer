@@ -1,0 +1,44 @@
+{
+  "answers": {
+    "1": {
+      "answer": "Sunlight comes in mostly as visible light near 0.5 µm. Earth gives off infrared near 10 µm. The two bands barely overlap, so greenhouse gases can let the incoming visible light through while absorbing the outgoing infrared.",
+      "quote": "The two bands hardly overlap. So the atmosphere can be nearly transparent to the incoming energy and nearly opaque to the outgoing energy."
+    },
+    "2": {
+      "answer": "More CO2 puts more absorbing gas above each height, so infrared has to start higher before it can escape. The emission level therefore rises into colder air, which gives off less energy. The planet then gains energy until that higher level is back at 255 K. Because the surface now sits further below it on the same temperature slope, the surface ends up warmer.",
+      "quote": "More CO2 means more absorbing gas above each altitude. So a photon must start higher before it can escape, and the emission level rises."
+    },
+    "3": {
+      "answer": "Each is made of two identical atoms. When they stretch, their charge stays symmetric, so no dipole forms and infrared light can't push them into vibrating. They are almost transparent to infrared.",
+      "quote": "When they stretch, the charge stays symmetric, so the dipole stays zero. They are almost transparent to infrared."
+    },
+    "4": {
+      "answer": "Reasoning from the text: with nothing absorbing infrared, heat would escape straight from the surface, so the emission level would be near 0 km. The surface would then sit at about the plain balance temperature, around 255 K, with almost no greenhouse warming.",
+      "quote": "Near 0 km, there would be almost no greenhouse effect (surface near 255 K)."
+    }
+  },
+  "stops": [
+    "Sudden 'emission level' term needs reread: \"at each wavelength, the infrared that reaches space comes mostly from one altitude, the **emission level**\" — why one altitude, and how is 5 km averaged?",
+    "Why the layer emits equally both ways: \"The layer emits equally up and down.\"",
+    "Lapse rate reason is compressed: \"Rising air expands as pressure falls, and expansion cools it.\"",
+    "Puzzling claim: \"the centre of the CO2 band already absorbs almost all 15 µm light within the lowest few hundred metres\" — 'band' not defined.",
+    "Using 255 K rather than the surface temperature here is unexplained: \"dP/dT = 4σT³ = 4 × 5.67 × 10⁻⁸ × 255³\"",
+    "Logarithm reason is hard to follow: \"each doubling widens the band by a similar amount.\"",
+    "Unexplained jump: \"Equivalent rise of the emission level: 1 K / 6.5 K per km ≈ **150 m**.\"",
+    "No reason given for why the stratosphere cools when its emission rises into warmer air: \"more CO2 raises the emission level into warmer air, and the stratosphere cools.\""
+  ],
+  "excess": [
+    "\"Predict before you read on: will the surface be warmer than 255 K, colder, or the same?\"",
+    "\"Including feedbacks, the warming for doubled CO2 is *estimated* at **2.5 to 4 K** (IPCC AR6 likely range).\"",
+    "\"A glass greenhouse also works differently: it warms mostly because the glass stops convection\"",
+    "\"The T⁴ makes emission very sensitive to temperature: 10% warmer means about 46% more emission.\"",
+    "\"Not covered here:** cloud effects in detail, how fast the oceans take up heat\"",
+    "\"Satellites observe this stratospheric cooling at the same time as surface warming.\""
+  ],
+  "grounded": {
+    "1": true,
+    "2": true,
+    "3": true,
+    "4": true
+  }
+}

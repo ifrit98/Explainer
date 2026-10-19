@@ -1,0 +1,81 @@
+# Machine-readable half of model.md. `explainer check greenhouse` holds every rendering to it.
+
+values:
+  solar_constant: 1361
+  albedo: 0.30
+  absorbed: 238
+  absorbed_round: 240
+  sigma: 5.67e-8
+  t_balance: 255
+  t_balance_c: -18
+  t_surface: 288
+  t_surface_c: 15
+  warming_now: 33
+  surface_emission: 390
+  held_back: 150
+  lapse_rate: 6.5
+  emission_height_km: 5
+  doubling_forcing: 3.7
+  height_rise_m: 150
+  colder_emitter_k: 1
+  deficit: 3.8
+  planck_response: 3.2
+  no_feedback_warming: 1.2
+  ecs_low: 2.5
+  ecs_high: 4
+  t_no_divide: 360
+  sun_peak_um: 0.5
+  earth_peak_um: 10
+  co2_band_um: 15
+  co2_percent: 0.04
+  n2o2_percent: 99
+
+allow: [2, 4, 0.4, 1.6, 0.9, 0.7, 0.15]
+
+require:
+  - path: t_balance
+    in: [diagram]
+  - path: t_surface
+    in: [diagram]
+  - path: emission_height_km
+    in: [diagram]
+  - path: lapse_rate
+    in: [diagram]
+
+claims:
+  - id: why-divide-4
+    kind: why
+    about: [divide by 4]
+    statement: "Absorbed sunlight is averaged over the whole sphere, so divide by 4."
+    alternative: "Use 1361 × 0.7 W/m² without dividing."
+    counterexample: "Gives 360 K. The Earth catches sunlight on a disc of area πr² but emits from a sphere of 4πr²."
+  - id: mech-emission-height
+    kind: mechanism
+    statement: "More greenhouse gas raises the emission height; the higher air is colder, so less infrared leaves, and the planet warms until energy balance returns."
+    example: "Doubled CO2 raises the emission height about 150 m; at 6.5 K/km the emitter is 1 K colder and emits 3.8 W/m² less."
+    ask: "Why does adding CO2 warm the surface, if the CO2 only absorbs and re-emits?"
+  - id: guar-lapse-rate
+    kind: guarantee
+    statement: "Extra greenhouse gas warms the surface only because air gets colder with height."
+    example: "Lapse rate 6.5 K/km: a 150 m rise gives a 1 K colder emitter and a 3.8 W/m² deficit."
+    counterexample: "In isothermal air, the higher emitter has the same temperature; no deficit, no warming."
+  - id: def-greenhouse-gas
+    kind: definition
+    statement: "A greenhouse gas absorbs and emits infrared; N2 and O2, 99% of dry air, do not."
+  - id: misc-saturation
+    kind: misconception
+    statement: "CO2 absorption near the surface is saturated, so more CO2 does nothing."
+    correction: "The escape point still moves up into colder air, so forcing grows with the logarithm of CO2: about 3.7 W/m² per doubling."
+    ask: "If CO2 already absorbs all 15 µm infrared near the ground, why does more CO2 still matter?"
+
+accept_unjustified: {ln: "5.35·ln(C/C0) is a fit to detailed radiative calculations; the rendering states the per-doubling result, and the derivation is out of scope."}
+
+terms:
+  - term: emission height
+    means: "the average altitude from which infrared escapes to space"
+    avoid: [radiating level, effective radiating height]
+  - term: infrared
+    means: "radiation the Earth emits"
+    avoid: [longwave radiation, thermal radiation, heat radiation]
+
+quiz: []

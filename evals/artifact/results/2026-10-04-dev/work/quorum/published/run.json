@@ -1,0 +1,12 @@
+{
+  "result": "I made `explainers/quorum/explanation.md` (prose, plus the `model.md`, `model.yaml` and `narrative.md` it is built from), because the answer is a short chain of counting that one table can carry, so a diagram or interactive page would add little. The blind test scored 13/13, the last cold read had no blocking findings, and `explainer check` passes; after the blind test I made three small wording edits and cut one repeated sentence, and did not rerun the blind test.",
+  "error": null,
+  "cost": 1.4309656,
+  "seconds": 589,
+  "turns": 59,
+  "files": [
+    "explainers/quorum/explanation.md"
+  ],
+  "review_cost": 0.9567,
+  "reviews": 7
+}

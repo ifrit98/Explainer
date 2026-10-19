@@ -1,0 +1,211 @@
+{
+ "tool": "probe",
+ "rendering": null,
+ "slug": "quorum",
+ "at": "2026-10-04T15:11:29",
+ "model": "default",
+ "prompt_sha": "7d2607e2a66b",
+ "reply": {
+  "gaps": [
+   {
+    "rule": 2,
+    "severity": "main",
+    "about": "The overlap guarantee is argued as a size count (3+3=6>5). The step showing how the shared server actually stops split brain is missing, and so is the assumption it depends on.",
+    "why_it_matters": "The Relationships table says the shared server 'accepts only one of two conflicting changes', but no example with servers and values shows it. This needs an unstated assumption: a server remembers what it accepted and does not accept a conflicting change. Without that example the reader sees why the groups overlap but not why the overlap is enough.",
+    "suggested_addition": "Holds: n=5, A,B,C accept x=1, so x=1 is decided. D,E,C are then asked to accept x=2. C already holds x=1 and refuses, so x=2 has only 2 votes, which is less than 3, and is not decided. Breaks: C crashes, restarts with its memory wiped, and accepts x=2. Now C,D,E is 3 votes and x=2 is decided too: split brain. Add 'a server keeps what it accepted across a crash' to the Assumed list."
+   },
+   {
+    "rule": 4,
+    "severity": "main",
+    "about": "No worked example of a partition where majority quorum works. The partition example is only the failing one (4 servers, quorum 2).",
+    "why_it_matters": "L3 ('why majority') shows only what goes wrong. The reader never sees the majority side carry on while the minority side safely stops. The confusion point 'majority of running servers' has no numbers either.",
+    "suggested_addition": "n=5, partition {A,B,C} / {D,E}. The left side has 3 ≥ 3 and keeps deciding. The right side has 2 < 3 and stops, so the copies cannot diverge. If quorum were counted from reachable servers, D,E would see 2 reachable, take majority(2)=2, and decide x=2 while A,B,C decide x=1: split brain."
+   },
+   {
+    "rule": 4,
+    "severity": "main",
+    "about": "Dependency 2 ('a server cannot tell a crashed server from a cut-off one') has no worked example.",
+    "why_it_matters": "The causal chain starts from this claim. A reader new to distributed systems needs to see why the two cases look the same from inside, or the requirement for a majority looks arbitrary.",
+    "suggested_addition": "A sends to D and waits 500 ms. Case 1: D has crashed. Case 2: the link to D is cut and D is still accepting changes from C and E. In both cases A gets the same thing: no reply after 500 ms. A has nothing else to go on."
+   },
+   {
+    "rule": 3,
+    "severity": "main",
+    "about": "'Quorum' is used for two things: a number (Entities: 'the number of servers that must accept') and a group of servers (Relationships: 'any two quorums share a server').",
+    "why_it_matters": "The overlap argument is about groups, and the tolerance count is about a number. Using one word for both blurs the central step.",
+    "suggested_addition": "Define 'quorum size' = majority(n), e.g. 3 for n=5, and 'quorum' = any group of at least that many servers, e.g. {A,B,C}. Then two quorums of 5 servers share at least 3+3−5 = 1 server."
+   },
+   {
+    "rule": 3,
+    "severity": "edge",
+    "about": "Deciding new changes goes by several names: 'keeps working', 'survive', 'keeps deciding', 'stops writes', 'decide new changes'. 'Write' is never defined, and reads are never mentioned.",
+    "why_it_matters": "A reader may think 'stops writes' is a different state from 'stops deciding', or may think reads stop too.",
+    "suggested_addition": "Pick 'decide' as the single term and define 'keeps working = can still decide new changes'. Replace 'writes' in the tolerance meaning: with tolerance 1, a 2nd failure means no new change can be decided."
+   },
+   {
+    "rule": 3,
+    "severity": "edge",
+    "about": "Terms used without a definition: 'accept' (what a server does), 'shared server' (a node in Relationships), and 'f' in the Scope line (n ≥ 3f+1).",
+    "why_it_matters": "'Accept' is the action every mechanism step depends on, and 'f' appears nowhere else in the file.",
+    "suggested_addition": "accept: a server stores the proposed change and replies yes, e.g. C stores x=1 and replies to the client. Either define f = number of lying servers tolerated (f=1 → n=4), or drop the formula."
+   },
+   {
+    "rule": 2,
+    "severity": "edge",
+    "about": "The general overlap claim is shown only for n=5, and the general tolerance formula is never derived.",
+    "why_it_matters": "L4 states tolerance = floor((n−1)/2) for every n, but the reader cannot check where it comes from.",
+    "suggested_addition": "Two majorities always overlap because 2·(floor(n/2)+1) ≥ n+1 > n. For n=4 that gives 3+3=6, so they share at least 2 servers. Odd n=2k+1: majority k+1, tolerance k (n=7: 4, 3). Even n=2k: majority k+1, tolerance k−1 (n=6: 4, 2)."
+   },
+   {
+    "rule": 2,
+    "severity": "edge",
+    "about": "The claim 'majority is the smallest size where any two groups overlap' has no breaking instance at n=5. The 'no data is lost' claim when the cluster stops has no instance at all.",
+    "why_it_matters": "Both are guarantees stated without numbers.",
+    "suggested_addition": "At n=5, size 2 breaks it: {A,B} and {C,D} share nothing (2+2=4<5). No data lost: x=1 is decided on A,B,C. Any later quorum of 3 out of 5 contains at least one of A,B,C, so x=1 is always found. This breaks if failed servers lose their disks: if A,B,C all lose storage, x=1 is gone."
+   },
+   {
+    "rule": 4,
+    "severity": "edge",
+    "about": "The Temporal sequence steps have no numbers.",
+    "why_it_matters": "Step 2 (decided once a quorum accepts) and step 3 (the change waits) are mechanism steps described only in words.",
+    "suggested_addition": "n=5: the client sends x=1. A accepts (1 vote), B accepts (2), C accepts (3 = quorum), and x=1 is decided. D and E can reply later. n=4 with C,D down: A,B accept, 2 < 3, so x=1 waits until C or D returns."
+   },
+   {
+    "rule": 4,
+    "severity": "edge",
+    "about": "Missing case: 4 servers split 2/2 under majority quorum.",
+    "why_it_matters": "No server fails, yet the whole cluster stops. This shows the cost of even n directly and connects partition to tolerance.",
+    "suggested_addition": "n=4, partition {A,B} / {C,D}: each side has 2 < 3, so neither decides. n=5 split {A,B,C} / {D,E}: one side has 3 and keeps working."
+   },
+   {
+    "rule": 5,
+    "severity": "edge",
+    "about": "The model never says what a larger majority costs the reader.",
+    "why_it_matters": "The claim that 'the even server adds nothing' leaves out that it adds a cost: every change has to wait for more acceptances.",
+    "suggested_addition": "n=5 waits for 3 acceptances per change, and n=6 waits for 4. That is one more server, one more acceptance per change, and still tolerance 2."
+   }
+  ],
+  "excess": [
+   "Why-this-form row about floor (3.5 servers): the audience already knows floor and integer division.",
+   "Scope detail 'n ≥ 3f + 1, e.g. 4 servers for 1 liar; see PBFT': introduces an undefined f and is not needed for the central question.",
+   "Established practice list naming ZooKeeper and etcd: not needed to answer the central question."
+  ],
+  "next_questions": [
+   {
+    "q": "In a 5-server cluster split 3/2, what does the 2-server side do, and what happens to it when the network heals?",
+    "answered_by_model": false,
+    "declared_out_of_scope": false
+   },
+   {
+    "q": "How does a server decide that another server has failed? Is it a timeout, and how long?",
+    "answered_by_model": false,
+    "declared_out_of_scope": false
+   },
+   {
+    "q": "What if the server in the overlap crashes and restarts? Does it remember what it accepted?",
+    "answered_by_model": false,
+    "declared_out_of_scope": false
+   },
+   {
+    "q": "If 4 servers is no better than 3, why would anyone run an even number?",
+    "answered_by_model": false,
+    "declared_out_of_scope": true
+   },
+   {
+    "q": "Do reads also need a majority, or can any one server answer a read?",
+    "answered_by_model": false,
+    "declared_out_of_scope": true
+   }
+  ]
+ },
+ "usage": {
+  "cost": 0.15055179999999996,
+  "seconds": 63
+ },
+ "findings": [
+  {
+   "n": 1,
+   "severity": "main",
+   "kind": "rule 2",
+   "text": "The overlap guarantee is argued as a size count (3+3=6>5). The step showing how the shared server actually stops split brain is missing, and so is the assumption it depends on. → Holds: n=5, A,B,C accept x=1, so x=1 is decided. D,E,C are then asked to accept x=2. C already holds x=1 and refuses, so x=2 has only 2 votes, which is less than 3, and is not decided. Breaks: C crashes, restarts with its memory wiped, and accepts x=2. Now C,D,E is 3 votes and x=2 is decided too: split brain. Add 'a server keeps what it accepted across a crash' to the Assumed list."
+  },
+  {
+   "n": 2,
+   "severity": "main",
+   "kind": "rule 4",
+   "text": "No worked example of a partition where majority quorum works. The partition example is only the failing one (4 servers, quorum 2). → n=5, partition {A,B,C} / {D,E}. The left side has 3 ≥ 3 and keeps deciding. The right side has 2 < 3 and stops, so the copies cannot diverge. If quorum were counted from reachable servers, D,E would see 2 reachable, take majority(2)=2, and decide x=2 while A,B,C decide x=1: split brain."
+  },
+  {
+   "n": 3,
+   "severity": "main",
+   "kind": "rule 4",
+   "text": "Dependency 2 ('a server cannot tell a crashed server from a cut-off one') has no worked example. → A sends to D and waits 500 ms. Case 1: D has crashed. Case 2: the link to D is cut and D is still accepting changes from C and E. In both cases A gets the same thing: no reply after 500 ms. A has nothing else to go on."
+  },
+  {
+   "n": 4,
+   "severity": "main",
+   "kind": "rule 3",
+   "text": "'Quorum' is used for two things: a number (Entities: 'the number of servers that must accept') and a group of servers (Relationships: 'any two quorums share a server'). → Define 'quorum size' = majority(n), e.g. 3 for n=5, and 'quorum' = any group of at least that many servers, e.g. {A,B,C}. Then two quorums of 5 servers share at least 3+3−5 = 1 server."
+  },
+  {
+   "n": 5,
+   "severity": "edge",
+   "kind": "rule 3",
+   "text": "Deciding new changes goes by several names: 'keeps working', 'survive', 'keeps deciding', 'stops writes', 'decide new changes'. 'Write' is never defined, and reads are never mentioned. → Pick 'decide' as the single term and define 'keeps working = can still decide new changes'. Replace 'writes' in the tolerance meaning: with tolerance 1, a 2nd failure means no new change can be decided."
+  },
+  {
+   "n": 6,
+   "severity": "edge",
+   "kind": "rule 3",
+   "text": "Terms used without a definition: 'accept' (what a server does), 'shared server' (a node in Relationships), and 'f' in the Scope line (n ≥ 3f+1). → accept: a server stores the proposed change and replies yes, e.g. C stores x=1 and replies to the client. Either define f = number of lying servers tolerated (f=1 → n=4), or drop the formula."
+  },
+  {
+   "n": 7,
+   "severity": "edge",
+   "kind": "rule 2",
+   "text": "The general overlap claim is shown only for n=5, and the general tolerance formula is never derived. → Two majorities always overlap because 2·(floor(n/2)+1) ≥ n+1 > n. For n=4 that gives 3+3=6, so they share at least 2 servers. Odd n=2k+1: majority k+1, tolerance k (n=7: 4, 3). Even n=2k: majority k+1, tolerance k−1 (n=6: 4, 2)."
+  },
+  {
+   "n": 8,
+   "severity": "edge",
+   "kind": "rule 2",
+   "text": "The claim 'majority is the smallest size where any two groups overlap' has no breaking instance at n=5. The 'no data is lost' claim when the cluster stops has no instance at all. → At n=5, size 2 breaks it: {A,B} and {C,D} share nothing (2+2=4<5). No data lost: x=1 is decided on A,B,C. Any later quorum of 3 out of 5 contains at least one of A,B,C, so x=1 is always found. This breaks if failed servers lose their disks: if A,B,C all lose storage, x=1 is gone."
+  },
+  {
+   "n": 9,
+   "severity": "edge",
+   "kind": "rule 4",
+   "text": "The Temporal sequence steps have no numbers. → n=5: the client sends x=1. A accepts (1 vote), B accepts (2), C accepts (3 = quorum), and x=1 is decided. D and E can reply later. n=4 with C,D down: A,B accept, 2 < 3, so x=1 waits until C or D returns."
+  },
+  {
+   "n": 10,
+   "severity": "edge",
+   "kind": "rule 4",
+   "text": "Missing case: 4 servers split 2/2 under majority quorum. → n=4, partition {A,B} / {C,D}: each side has 2 < 3, so neither decides. n=5 split {A,B,C} / {D,E}: one side has 3 and keeps working."
+  },
+  {
+   "n": 11,
+   "severity": "edge",
+   "kind": "rule 5",
+   "text": "The model never says what a larger majority costs the reader. → n=5 waits for 3 acceptances per change, and n=6 waits for 4. That is one more server, one more acceptance per change, and still tolerance 2."
+  },
+  {
+   "n": 12,
+   "severity": "excess",
+   "kind": "model entry",
+   "text": "Why-this-form row about floor (3.5 servers): the audience already knows floor and integer division."
+  },
+  {
+   "n": 13,
+   "severity": "excess",
+   "kind": "model entry",
+   "text": "Scope detail 'n ≥ 3f + 1, e.g. 4 servers for 1 liar; see PBFT': introduces an undefined f and is not needed for the central question."
+  },
+  {
+   "n": 14,
+   "severity": "excess",
+   "kind": "model entry",
+   "text": "Established practice list naming ZooKeeper and etcd: not needed to answer the central question."
+  }
+ ]
+}

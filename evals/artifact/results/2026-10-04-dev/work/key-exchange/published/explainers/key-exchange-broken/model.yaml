@@ -1,0 +1,17 @@
+values: {p: 23, g: 5, a: 6, b: 15, A: 8, B: 19, s: 2}
+claims:
+  - id: agreement
+    kind: mechanism
+    statement: "Alice computes B^a mod p and Bob computes A^b mod p; both equal g^(ab) mod p, because (g^a)^b = (g^b)^a and taking remainders at each step does not change the result."
+    example: "p = 23, g = 5, a = 6, b = 15: A = 8, B = 19; 19^6 mod 23 = 2 and 8^15 mod 23 = 2."
+    ask: "With p = 23, g = 5, a = 6, b = 15, what number does each side send, what shared secret do both get, and why must the two results be equal?"
+quiz:
+  - q: "Alice and Bob use p = 23 and g = 5. Alice picks a = 3, Bob picks b = 2. What does each send, and what shared secret do they get?"
+    expect: "Alice sends 5^3 mod 23 = 10; Bob sends 5^2 mod 23 = 2; Alice computes 2^3 = 8, Bob computes 10^2 = 100 mod 23 = 8; s = 8."
+    misconception: "They add or multiply the public numbers (10 × 2 = 20, or 12)."
+  - q: "Why does the method use powers mod p rather than plain powers?"
+    expect: "Plain powers can be reversed with a logarithm (log base 5 of 15625 = 6); the remainder scrambles the order, and no fast reverse is known."
+    misconception: "Mod p just keeps the numbers small."
+  - q: "Does the exchange alone guarantee Alice is talking to Bob?"
+    expect: "No. An active attacker can replace the public numbers and run a separate exchange with each side; authentication is needed."
+    misconception: "Yes, because only Bob can compute the shared secret."

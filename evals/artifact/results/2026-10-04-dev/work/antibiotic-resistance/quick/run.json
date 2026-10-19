@@ -1,0 +1,12 @@
+{
+  "result": "I made `explainers/antibiotic-resistance/explanation.md`, which is prose with worked numbers and one table, plus its `model.md` and `model.yaml`; I chose prose because the answer is a short two-step story (random variation, then the drug kills the rest), so a diagram or interactive page wouldn't add anything, and `explainer check` passes.",
+  "error": null,
+  "cost": 0.430636,
+  "seconds": 104,
+  "turns": 21,
+  "files": [
+    "explainers/antibiotic-resistance/explanation.md"
+  ],
+  "review_cost": 0,
+  "reviews": 0
+}

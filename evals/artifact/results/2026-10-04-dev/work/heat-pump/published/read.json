@@ -1,0 +1,43 @@
+{
+  "answers": {
+    "1": {
+      "answer": "The heat pump doesn't make the extra heat. It takes it from the cold outdoor air (2 kWh) and moves it into the home. The 1 kWh of electricity pays for the move and also ends up as heat, so the home gets 3 kWh.",
+      "quote": "the heat pump does not make that heat. It moves heat from the cold outdoor air into the home. The electricity pays for the move."
+    },
+    "2": {
+      "answer": "It goes around a closed loop. In the outdoor evaporator it boils at −10 °C and 3.5 bar, taking in 2 kWh from the air. The compressor squeezes it to 14 bar using 1 kWh, which heats it to about 60 °C. In the indoor condenser it cools and condenses at 40 °C, giving 3 kWh to the water. The expansion valve then drops the pressure back to 3.5 bar, part of the liquid boils, and all of it cools to −10 °C before going back to step 1.",
+      "quote": "The refrigerant is at 3.5 bar, so it boils at −10 °C. It is colder than the 0 °C air, so 2 kWh of heat flows from the air into it."
+    },
+    "3": {
+      "answer": "On a colder day the temperature lift (water temperature minus outdoor temperature) is bigger. A bigger lift makes the bottom of the ideal-limit fraction bigger, so the limit falls and each kWh of heat needs more electricity. Underneath this is entropy: heat taken from colder air carries more entropy per kWh, and the water must receive at least that much.",
+      "quote": "The bigger the lift, the more electricity each kWh of heat needs."
+    },
+    "4": {
+      "answer": "On a 5 °C day the lift is 30 K, so the ideal limit is 308.15/30 ≈ 10.3. On a −15 °C day the lift is 50 K and the limit is 6.2 (from the table). The ideal limit on the colder day is about 40% lower. The 5 °C value is my calculation using the formula; it isn't in the table.",
+      "quote": "ideal limit = T_hot / (T_hot − T_cold)"
+    }
+  },
+  "stops": [
+    "Lift is given in K, not °C, before kelvin is explained: \"35 − 0 = 35 K in the example\"",
+    "\"bar\" is only explained by one comparison: \"(The air around us is at 1 bar.)\"",
+    "Entropy is used without saying what it is: \"Heat Q that passes at kelvin temperature T carries entropy Q/T, in kWh/K.\"",
+    "This claim is stated without a reason: \"Electricity carries no entropy.\"",
+    "The real COPs in the table have no source or method: \"Typical real COP (estimate)\"",
+    "Why does a third of the liquid boil? \"so about a third of it boils at once\"",
+    "The refrigerant's ideal limit (6.3) is close to the −15 °C row (6.2), which is confusing: \"the ideal limit for the refrigerant is 313.15 / 50 = 6.3\"",
+    "It's unclear why vapour cooling from 60 to 40 °C counts as part of the 3 kWh: \"The 60 °C vapour cools to 40 °C, then condenses\""
+  ],
+  "excess": [
+    "The algebra steps are more than this reader needed: \"Multiply by T_cold: Q_hot × T_cold / T_hot ≥ Q_hot − W\"",
+    "Off the question: \"A fridge uses the same loop, with the cold coil inside the fridge.\"",
+    "Off the question: \"**Not covered here:** ground-source heat pumps (warmer, steadier cold side, so a higher COP)\"",
+    "The colour legend repeats what the diagrams already show: \"Colours in both diagrams: blue is the cold side, red is the hot side, yellow is electricity.\"",
+    "The summary repeats earlier points: \"Heat flows the normal way at both coils.\""
+  ],
+  "grounded": {
+    "1": true,
+    "2": true,
+    "3": true,
+    "4": true
+  }
+}

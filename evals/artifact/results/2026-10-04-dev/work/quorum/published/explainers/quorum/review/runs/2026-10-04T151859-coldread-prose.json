@@ -1,0 +1,317 @@
+{
+ "tool": "coldread",
+ "rendering": "prose",
+ "slug": "quorum",
+ "at": "2026-10-04T15:18:59",
+ "model": "default",
+ "prompt_sha": "95ac16e43338",
+ "reply": {
+  "paragraphs": [
+   {
+    "at": "Title (line 1)",
+    "text": "Why does a cluster of 5 servers survive 2 failures, but a cluster of 4 survives only 1?",
+    "unresolved": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Bold lead (line 3)",
+    "text": "A cluster decides a change only when more than half of all its servers accept the change...",
+    "unresolved": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Line 5",
+    "text": "The rest of this page explains why the rule must be \"more than half\".",
+    "unresolved": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "The rule, line 9",
+    "text": "A *cluster* is a group of n servers that keep copies of the same data...",
+    "unresolved": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "The rule, definition list (lines 11-14)",
+    "text": "A server *accepts*... *decided*... *quorum size*... *quorum*... *fails*...",
+    "unresolved": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "The rule, line 16",
+    "text": "The cluster decides changes one at a time, in order... For each position in that order, a server accepts only one change...",
+    "unresolved": [],
+    "leap": [
+     "\"For each position in that order, a server accepts only one change\": this is given as a rule with no reason. The reason only becomes clear at line 41, where this rule is what makes C refuse. A small stumble, not a block."
+    ],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "The rule, line 18",
+    "text": "If fewer than a quorum of servers answer, the cluster *stops*...",
+    "unresolved": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Why not let the survivors go on?, line 22",
+    "text": "Take a cluster of 4 servers, A to D. C and D fail. Why can A and B not go on alone?",
+    "unresolved": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "line 24",
+    "text": "A sends a message to D and gets no reply... *partition*... A cannot know which case is true.",
+    "unresolved": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "line 26",
+    "text": "Letting A and B go on means quorum size 2. Now suppose the cause is a partition...",
+    "unresolved": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Partition table (lines 28-31)",
+    "text": "Group | Accepts for change 7 | Accepts received | Quorum size | Result",
+    "unresolved": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "line 33",
+    "text": "Both groups decide... *split brain*... So the quorum size must be more than half of n: then two groups cannot both decide.",
+    "unresolved": [],
+    "leap": [
+     "\"So the quorum size must be more than half of n\": the example only shows that 2 out of 4 (exactly half) fails. It does not say here why 'more than half' is the fix, or why that fix is enough. That comes in the next section, so this works as a forward pointer, but the 'So' moves faster than the reasoning."
+    ],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Why more than half works, line 37",
+    "text": "More than half of all n servers is the *majority size*: floor(n/2) + 1... The quorum size is always the majority size.",
+    "unresolved": [
+     "floor(n/2)"
+    ],
+    "leap": [
+     "\"The quorum size is always the majority size\": the text never says why the quorum isn't set larger than a majority. A larger quorum would also overlap. The real reason, that the smallest safe quorum gives the most tolerance, is never stated."
+    ],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "line 39",
+    "text": "Two quorums each hold more than half of the servers, so together they list more than n servers. Some server must therefore be in both...",
+    "unresolved": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "line 41",
+    "text": "The shared server blocks split brain. Suppose A, B, C accepted x = 1 for change 7... C refuses...",
+    "unresolved": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "line 43",
+    "text": "This depends on one assumption: a server remembers what it accepted, even after a restart...",
+    "unresolved": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Predict (line 45)",
+    "text": "**Predict:** the network splits 5 servers into {A, B, C} and {D, E}. What does each side do?",
+    "unresolved": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "line 47",
+    "text": "A, B, C have 3 accepts, and 3 ≥ 3, so they keep deciding. D and E have 2, and 2 < 3, so they stop. The copies cannot disagree.",
+    "unresolved": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "line 49",
+    "text": "Count more than half of *all* configured servers, failed or not...",
+    "unresolved": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Counting failures, line 53-55",
+    "text": "*Tolerance* is how many servers can fail while the cluster still decides changes: tolerance = n − majority size",
+    "unresolved": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Tolerance table (lines 57-62)",
+    "text": "Servers n | Majority size | Tolerance; 3..7",
+    "unresolved": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "line 65",
+    "text": "With 5 servers and 2 failed, 3 servers answer, and 3 ≥ 3: the cluster keeps deciding. With 4 servers and 2 failed... the cluster stops.",
+    "unresolved": [],
+    "leap": [],
+    "excess": [
+     "The whole paragraph restates the bold lead (line 3) and the n = 4 and n = 5 rows of the table just above it, adding only the ≥/< comparison."
+    ],
+    "purpose_unclear": false
+   },
+   {
+    "at": "line 67",
+    "text": "A tolerance of 1 means a second failure stops the cluster. A tolerance of 2 means one server can be off for an upgrade while another one fails.",
+    "unresolved": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "line 69",
+    "text": "Going from an even n to the next odd n keeps the majority size... That is why clusters usually have an odd number of servers.",
+    "unresolved": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Answer (line 73)",
+    "text": "Both clusters need 3 accepts to decide a change, because 3 is more than half of 4 and of 5, and only groups of more than half must share a server with every other quorum...",
+    "unresolved": [],
+    "leap": [
+     "\"only groups of more than half must share a server with every other quorum\": the wording is tangled. The reader has to reread it to see that it means 'only quorums of more than half are guaranteed to overlap'. 'Must' can be read as an obligation rather than a guarantee."
+    ],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Limits, item 1",
+    "text": "**Assumed:** servers crash or become unreachable, but never send a false \"yes\". Servers that lie need larger clusters.",
+    "unresolved": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Limits, item 2",
+    "text": "**Simplified:** in real protocols (Raft, Paxos), the shared server does more than refuse...",
+    "unresolved": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Limits, item 3",
+    "text": "**Not covered:** how servers detect a failure, how the stopped side catches up..., and how reads work.",
+    "unresolved": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   }
+  ],
+  "blocking": [],
+  "cuts": [
+   "Line 65 ('With 5 servers and 2 failed, 3 servers answer...'): it repeats the bold lead and the table. Cut it, or fold the ≥/< check into the table.",
+   "Line 37 'The quorum size is always the majority size.': cut it or replace it with the reason (it is the smallest size that overlaps). As written it only restates the rule from line 3."
+  ],
+  "question": {
+   "text": "Why can 5 servers survive 2 failures while 4 servers survive only 1? Under that sits a second question: why must the decision rule be 'more than half'?",
+   "known_at": "The title (line 1); the second question is stated at line 5.",
+   "result_stated": "Yes, at once and in words in the bold lead: 'For 5 servers, more than half is 3, so 5 − 3 = 2 servers can fail. For 4 servers, more than half is also 3, so only 4 − 3 = 1 server can fail.'"
+  },
+  "motive": "Reason to care about the question: this is weak at the start and only appears late, at line 67 ('one server can be off for an upgrade while another one fails') and line 69 ('That is why clusters usually have an odd number of servers'). Reason for the approach: line 5 ('explains why the rule must be \"more than half\"'), backed by the partition and split-brain example at lines 24-33, which shows that a server cannot tell a crash from a cut network.",
+  "close": "Yes. Line 73 ('Both clusters need 3 accepts to decide a change, because 3 is more than half of 4 and of 5, and only groups of more than half must share a server with every other quorum. 5 servers have 2 to spare. 4 servers have only 1.') answers the title question and states the overlap argument in words, though the overlap clause is awkwardly phrased.",
+  "recap": "A cluster can only safely decide with more than half of all its servers, because only then do any two deciding groups share a server that refuses to agree twice. 4 and 5 servers both need 3, so 5 has two to spare and 4 has one.",
+  "strongest": "Lines 24-33: a server cannot tell a crashed peer from a cut network, and the partition table shows two halves of 4 both deciding. That makes split brain concrete.",
+  "weakest": "Line 37 ('The quorum size is always the majority size') together with the Answer clause at line 73 ('only groups of more than half must share a server'). The text never says why the quorum is the smallest majority rather than any larger size, and the final wording of the overlap argument is tangled.",
+  "suggestions": [
+   "At line 37, add one sentence: a larger quorum would also be safe, but it would lower tolerance, so the smallest majority is chosen.",
+   "Rephrase line 73 as 'groups of more than half always share a server, so two of them can never decide different values'.",
+   "Put a one-line motive near the start, e.g. that choosing the cluster size decides how many simultaneous failures or maintenance outages you can survive.",
+   "At line 16, briefly say why a server accepts only one change per position, or point ahead to line 41."
+  ]
+ },
+ "usage": {
+  "cost": 0.1264728,
+  "seconds": 41
+ },
+ "findings": [
+  {
+   "n": 1,
+   "severity": "excess",
+   "kind": "cut",
+   "text": "Line 65 ('With 5 servers and 2 failed, 3 servers answer...'): it repeats the bold lead and the table. Cut it, or fold the ≥/< check into the table."
+  },
+  {
+   "n": 2,
+   "severity": "excess",
+   "kind": "cut",
+   "text": "Line 37 'The quorum size is always the majority size.': cut it or replace it with the reason (it is the smallest size that overlaps). As written it only restates the rule from line 3."
+  },
+  {
+   "n": 3,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "The rule, line 16: \"For each position in that order, a server accepts only one change\": this is given as a rule with no reason. The reason only becomes clear at line 41, where this rule is what makes C refuse. A small stumble, not a block."
+  },
+  {
+   "n": 4,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "line 33: \"So the quorum size must be more than half of n\": the example only shows that 2 out of 4 (exactly half) fails. It does not say here why 'more than half' is the fix, or why that fix is enough. That comes in the next section, so this works as a forward pointer, but the 'So' moves faster than the reasoning."
+  },
+  {
+   "n": 5,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "Why more than half works, line 37: floor(n/2)"
+  },
+  {
+   "n": 6,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "Why more than half works, line 37: \"The quorum size is always the majority size\": the text never says why the quorum isn't set larger than a majority. A larger quorum would also overlap. The real reason, that the smallest safe quorum gives the most tolerance, is never stated."
+  },
+  {
+   "n": 7,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "Answer (line 73): \"only groups of more than half must share a server with every other quorum\": the wording is tangled. The reader has to reread it to see that it means 'only quorums of more than half are guaranteed to overlap'. 'Must' can be read as an obligation rather than a guarantee."
+  }
+ ]
+}

@@ -1,0 +1,195 @@
+{
+ "tool": "quiz",
+ "rendering": "prose",
+ "slug": "float-sum",
+ "at": "2026-10-04T15:24:05",
+ "model": "default",
+ "prompt_sha": "008e69251529",
+ "reply": {
+  "answers": {
+   "1": "The main objects are: decimal literals (0.1, 0.2, 0.3); the double, a 64-bit binary format that holds a whole number of at most 53 binary digits times a power of two; the stored value, which is the double nearest a literal; the gap, which is the distance between neighboring doubles (u = 2^-54 between 0.25 and 0.5); the error, which is the stored value minus the decimal; the + operation, giving an exact sum and then a rounded sum; the tie and the round-half-to-even rule; `==`; printing as the shortest decimal that rounds back to the double; and the Decimal type.",
+   "2": "Each literal is rounded to its stored value, a double on a grid. The grid's gap depends on the size of the number. `+` adds the stored values exactly, then rounds the result onto the grid. The rule for ties decides which neighbor it lands on. `==` compares the two doubles bit for bit. Printing shows the shortest decimal that rounds back to that double, which hides small errors unless two doubles need to be told apart.",
+   "3": "0.1 and 0.2 cannot end in binary because 10 has a factor of 5, so both are stored slightly too high, while 0.3 is stored slightly too low. Their exact sum falls halfway between two doubles, the tie rounds up to the double just above stored 0.3, and so `==` returns false.",
+   "4": "The key variable is whether the decimal's denominator contains a factor of 5, meaning it is not a power-of-two fraction. If every value is a power-of-two fraction (0.5, 0.25, 0.75), the stored error is zero, the exact sum is already a double, and `==` is true. A second variable is the number of digits kept. With more digits the gap gets smaller, but a repeating binary fraction still has to be cut. The text implies this but does not discuss changing the digit count.",
+   "5": "Assumption or simplification: the text ignores the sign and exponent bits and treats a double as 'a whole number of at most 53 binary digits times a power of two'. Established fact: 0.1 + 0.2 prints 0.30000000000000004, and in units of u the stored 0.3 is 5404319552844595 while the sum rounds to …596.",
+   "6": "A double can only hold a binary fraction with at most 53 significant bits. 1/10 has a factor 5 in its denominator, so its binary expansion never ends and it has to be rounded, much as 1/3 is in decimal. Stored 0.1 and 0.2 are each slightly above their true values, and stored 0.3 is slightly below. Adding the stored 0.1 and 0.2 exactly gives a value halfway between two doubles, and the round-to-even rule picks the one just above stored 0.3, so the two differ by one gap and `==` is false. Printing shows the shortest decimal that identifies a double, which is why 0.1 prints as 0.1 but the sum needs 17 digits.",
+   "7": "The hardest part was the table and the units of u. Fractional values in u, such as 1801439850948198.5, are confusing until you link them to 'steps allowed here = u/4'. The text also never says why the gap is exactly 2^-54 in [0.25, 0.5), which is 2^-2 × 2^-52 from the 53 digits. In the tie step, it never says outright that …596 is the even one. One worked line on the gap, and the sentence '…596 is even, …595 is odd', would have made it easier.",
+   "8": "It is true. 1/2, 1/4 and 3/4 have power-of-two denominators, so each is stored with zero error, and the exact sum is itself a double, so rounding changes nothing.",
+   "9": "No. The `+` returns the nearest double to the exact sum of its inputs, which is correct. The difference comes from the inputs, which were already rounded versions of 0.1 and 0.2, and from the fact that 0.3 was rounded independently (downward). The final rounding of the sum, a tie broken to even, is the only rounding the operation does, and it follows the rule.",
+   "10": "Yes, it would be true. Decimal stores base-10 digits, and 1/10 ends in base 10, so no rounding happens.",
+   "11": "0.75 = 3 × 2^-2 is a whole number times a power of two, so its denominator is a power of two. 1/10 has a factor 5 in its denominator, no power of two is divisible by 5, so its binary expansion repeats forever and has to be cut.",
+   "12": "Both stored values err upward (+5.55e-18 and +1.11e-17), so their exact sum is 5404319552844595.5 u. That is a tie between …595 and …596, and ties go to even, so it rounds to …596. Stored 0.3 was rounded down, to …595. The two results are neighboring doubles one gap (5.55e-17) apart.",
+   "13": "Languages print the shortest decimal that rounds back to the same double. The text '0.1' already rounds back to stored 0.1, so one digit is enough and the error stays hidden."
+  },
+  "audit": {
+   "terms": [
+    "The neighbor spacing is called 'gap' (§The stored values), 'Steps allowed here' (table header), 'one step above' (bold summary line 5) and 'u' (line 21), which in fact is the gap only in [0.25, 0.5).",
+    "The result of `+` is called 'rounded sum' (line 35), 'the result' (line 43) and '0.1 + 0.2' (§What to do).",
+    "The rounded values are called 'nearest binary numbers' (line 5), 'stored value' (line 21) and 'stored 0.1' (line 48).",
+    "The deviation is called 'Error' (table, line 31) and 'difference' (line 48 and line 60, where it means the gap between the sum and stored 0.3)."
+   ],
+   "unexplained": [
+    "'Steps allowed here' column with values u/4, u/2, u (table): the text does not say that this is why stored 0.1 can be …198.5, a value with a fractional part in u.",
+    "'u = 2^-54 ≈ 5.55e-17' (line 21): no derivation from the 53 digits is given, so the reader cannot say what the gap would be in another range.",
+    "'1e-9' tolerance (line 60): the text does not say why this value was chosen or what would go wrong with 1e-15 or 1e-3.",
+    "'1 part in 5 × 10^15 ... 17th digit' (line 48): the step from this ratio to the 17th digit is not shown."
+   ],
+   "missing_why": [
+    "'Because a double has a fixed 53 binary digits, the gap shrinks as the number shrinks. Between 0.25 and 0.5 the gap is u = 2^-54' (line 21): the text does not explain why the exponent is -54.",
+    "'The rule sends a tie to the even whole number' (line 39): the text does not say why this rule exists, and does not state that 596 is even and 595 is odd.",
+    "'Languages print the shortest decimal that rounds back to the same double' (line 48): the text does not say why languages use this rule."
+   ],
+   "excess": [
+    "'Decimal types are slower, because the processor adds binary numbers directly' (line 55): a detour that no question or step of the argument uses.",
+    "'Not covered here' list (lines 62-66): reference pointers that this reader does not need."
+   ]
+  },
+  "gaps": [
+   "The table's fractional 'in u' values (…198.4 rounding to …198.5) depend on the 'u/4 steps' idea, which needs one explicit sentence.",
+   "The text never states that …596 is even, so the reader has to work out the tie direction alone.",
+   "The value u = 2^-54 is given without derivation, which makes the whole 'count in units of u' method feel arbitrary.",
+   "The text gives no guidance on why 1e-9 is a reasonable tolerance."
+  ]
+ },
+ "grade": {
+  "scores": {
+   "1": 2,
+   "2": 2,
+   "3": 2,
+   "4": 2,
+   "5": 2,
+   "6": 2,
+   "7": 2,
+   "8": 2,
+   "9": 2,
+   "10": 2,
+   "11": 2,
+   "12": 2,
+   "13": 2
+  },
+  "reasons": {
+   "1": "Full credit. Covers double, 53 significant bits, stored value, gap with u = 2^-54, error, exact vs rounded sum, tie with half-to-even, printed value, and the Decimal type.",
+   "2": "Full credit. Covers literal to stored value, the gap scaling with magnitude, the exact sum rounded onto the grid, tie-breaking, == comparing doubles, and printing hiding errors.",
+   "3": "Full credit. The chain is correct: factor 5, 0.1 and 0.2 stored high and 0.3 low, a tie, rounding to the double above stored 0.3, == false. 'Rounds up' matches the model's outcome for this case.",
+   "4": "Full credit. Names the power-of-two denominator as the key variable, with 0.5 + 0.25 as the case. Precision (bits kept) is noted as a secondary variable.",
+   "5": "Full credit. Separates the simplification (sign and exponent bits ignored, which the model scopes out) from established facts (IEEE stored values, the observed 0.30000000000000004).",
+   "6": "Full credit. Gives a complete, correct explanation that includes the printing step.",
+   "7": "Full credit. A specific difficulty report naming the units of u, where the gap comes from, and which neighbor is even. This is a subjective item and is not checked against model.md.",
+   "8": "Full credit. True; the power-of-two denominators give zero error and an exact sum.",
+   "9": "Full credit. + is correctly rounded. The difference comes from the inputs, which were already rounded, and from 0.3 being rounded independently.",
+   "10": "Full credit. True; Decimal stores base-10 digits, where 1/10 ends.",
+   "11": "Full credit. States the power-of-two denominator rule and the factor 5, and explains that no power of 2 is divisible by 5.",
+   "12": "Full credit. The exact sum 5404319552844595.5 u is a tie, goes to the even …596, and stored 0.3 is …595, one gap below.",
+   "13": "Full credit. Print shows the shortest decimal that rounds back to the same double, and '0.1' suffices."
+  },
+  "pass": true
+ },
+ "usage": {
+  "cost": 0.17389939999999998,
+  "seconds": 44
+ },
+ "findings": [
+  {
+   "n": 1,
+   "severity": "gap",
+   "kind": "terms",
+   "text": "The neighbor spacing is called 'gap' (§The stored values), 'Steps allowed here' (table header), 'one step above' (bold summary line 5) and 'u' (line 21), which in fact is the gap only in [0.25, 0.5)."
+  },
+  {
+   "n": 2,
+   "severity": "gap",
+   "kind": "terms",
+   "text": "The result of `+` is called 'rounded sum' (line 35), 'the result' (line 43) and '0.1 + 0.2' (§What to do)."
+  },
+  {
+   "n": 3,
+   "severity": "gap",
+   "kind": "terms",
+   "text": "The rounded values are called 'nearest binary numbers' (line 5), 'stored value' (line 21) and 'stored 0.1' (line 48)."
+  },
+  {
+   "n": 4,
+   "severity": "gap",
+   "kind": "terms",
+   "text": "The deviation is called 'Error' (table, line 31) and 'difference' (line 48 and line 60, where it means the gap between the sum and stored 0.3)."
+  },
+  {
+   "n": 5,
+   "severity": "gap",
+   "kind": "unexplained",
+   "text": "'Steps allowed here' column with values u/4, u/2, u (table): the text does not say that this is why stored 0.1 can be …198.5, a value with a fractional part in u."
+  },
+  {
+   "n": 6,
+   "severity": "gap",
+   "kind": "unexplained",
+   "text": "'u = 2^-54 ≈ 5.55e-17' (line 21): no derivation from the 53 digits is given, so the reader cannot say what the gap would be in another range."
+  },
+  {
+   "n": 7,
+   "severity": "gap",
+   "kind": "unexplained",
+   "text": "'1e-9' tolerance (line 60): the text does not say why this value was chosen or what would go wrong with 1e-15 or 1e-3."
+  },
+  {
+   "n": 8,
+   "severity": "gap",
+   "kind": "unexplained",
+   "text": "'1 part in 5 × 10^15 ... 17th digit' (line 48): the step from this ratio to the 17th digit is not shown."
+  },
+  {
+   "n": 9,
+   "severity": "gap",
+   "kind": "missing_why",
+   "text": "'Because a double has a fixed 53 binary digits, the gap shrinks as the number shrinks. Between 0.25 and 0.5 the gap is u = 2^-54' (line 21): the text does not explain why the exponent is -54."
+  },
+  {
+   "n": 10,
+   "severity": "gap",
+   "kind": "missing_why",
+   "text": "'The rule sends a tie to the even whole number' (line 39): the text does not say why this rule exists, and does not state that 596 is even and 595 is odd."
+  },
+  {
+   "n": 11,
+   "severity": "gap",
+   "kind": "missing_why",
+   "text": "'Languages print the shortest decimal that rounds back to the same double' (line 48): the text does not say why languages use this rule."
+  },
+  {
+   "n": 12,
+   "severity": "excess",
+   "kind": "excess",
+   "text": "'Decimal types are slower, because the processor adds binary numbers directly' (line 55): a detour that no question or step of the argument uses."
+  },
+  {
+   "n": 13,
+   "severity": "excess",
+   "kind": "excess",
+   "text": "'Not covered here' list (lines 62-66): reference pointers that this reader does not need."
+  },
+  {
+   "n": 14,
+   "severity": "gap",
+   "kind": "gap",
+   "text": "The table's fractional 'in u' values (…198.4 rounding to …198.5) depend on the 'u/4 steps' idea, which needs one explicit sentence."
+  },
+  {
+   "n": 15,
+   "severity": "gap",
+   "kind": "gap",
+   "text": "The text never states that …596 is even, so the reader has to work out the tie direction alone."
+  },
+  {
+   "n": 16,
+   "severity": "gap",
+   "kind": "gap",
+   "text": "The value u = 2^-54 is given without derivation, which makes the whole 'count in units of u' method feel arbitrary."
+  },
+  {
+   "n": 17,
+   "severity": "gap",
+   "kind": "gap",
+   "text": "The text gives no guidance on why 1e-9 is a reasonable tolerance."
+  }
+ ]
+}

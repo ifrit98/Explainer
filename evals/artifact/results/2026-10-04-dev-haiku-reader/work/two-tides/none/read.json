@@ -1,0 +1,50 @@
+{
+  "answers": {
+    "1": {
+      "answer": "The far side bulge is caused by the difference in the Moon's pull: the Earth's center is pulled toward the Moon more strongly than the water on the far side is, so the water is left behind and rises.",
+      "quote": "The Earth is pulled toward the Moon a bit more than the water on the far side is. The water is left behind, and it rises too."
+    },
+    "2": {
+      "answer": "High tides come every 12 hours 25 minutes because the lunar day (one rotation of Earth relative to the Moon) is about 24 hours 50 minutes, not 24 hours. While Earth rotates, the Moon moves about 13° in its orbit, requiring an extra 50 minutes for Earth to catch up.",
+      "quote": "That is why high tides come about 12 h 25 min apart, and why high tide is about 50 minutes later each day."
+    },
+    "3": {
+      "answer": "Tides are largest at new and full moon, when the Sun, Earth, and Moon are aligned. At these times the Sun's bulges add to the Moon's bulges, creating spring tides.",
+      "quote": "When the Sun, Earth and Moon are in a line (at new and full moon), the two sets of bulges add together and you get larger spring tides."
+    },
+    "4": {
+      "answer": "High tides would come every 12 hours. Since there are two high tides per rotation of Earth relative to the bulges, and a fixed Moon would require just one 24-hour rotation (not the current 24-hour-50-minute lunar day), high tides would occur every 12 hours.",
+      "quote": "That is two highs and two lows for each turn of the Earth relative to the Moon. One turn relative to the Moon takes slightly more than 24 hours. While the Earth spins, the Moon moves about 13° along its orbit in the same direction, so the Earth needs about 50 extra minutes to catch up."
+    }
+  },
+  "stops": [
+    "gradient: \"It is the gradient of gravity, and taking a gradient adds another power of distance.\" (undefined term)",
+    "free fall concept: \"The Earth is in free fall toward the Moon, in the same way an astronaut in orbit is in free fall toward the Earth.\" (needs careful understanding)",
+    "tidal acceleration: \"What is left over is called the tidal acceleration\" (brief definition of complex concept)",
+    "Why being left behind causes rising: \"The water is left behind, and it rises too.\" (mechanism unclear)",
+    "equilibrium tide: \"If the Earth were covered in a deep ocean that could keep up with the Moon instantly, the result is called the equilibrium tide.\" (specialized term, unclear significance)",
+    "sloshing period: \"The size of the tide depends on whether a basin's natural sloshing period is close to 12.4 hours.\" (undefined)",
+    "How sideways force moves water: \"Nothing opposes it directly. Gravity is vertical, so it cannot hold water in place sideways.\" (logic needs work)",
+    "Why water takes time to respond: \"Water takes time to respond, so high tide can lag the Moon by hours.\" (no mechanism given)",
+    "Power law significance: \"The tidal effect goes as 1/d³, not 1/d².\" (why this matters for Sun vs Moon unexplained)",
+    "\"that difference\" referent: \"They are caused by the difference in the Moon's pull between one part of the Earth and another. That difference points toward the Moon\" (needs clearer antecedent)"
+  ],
+  "excess": [
+    "Python script: \"If you'd like to check the vector picture yourself, this short Python script computes the leftover pull\"",
+    "Centrifugal effect: \"The far-side bulge is often explained as a 'centrifugal effect'... but you don't need it.\"",
+    "Specific basin examples: \"That is why the Bay of Fundy has ranges over 15 m while the Mediterranean has only a few tens of centimetres.\"",
+    "Detailed numbers: \"With the real numbers (GM_Moon ≈ 4.9×10¹² m³/s²...)\"",
+    "Magnitude comparison: \"That is about one ten-millionth of the Earth's surface gravity.\"",
+    "Specific equilibrium heights: \"At its high points the water would be about 0.36 m above average.\"",
+    "Sun's bulge obvious consequence: \"The Sun makes its own pair of bulges, which line up with the Sun.\"",
+    "Tide circulation detail: \"In some basins the tide circulates around a point where the height hardly changes at all.\"",
+    "Once-a-day tide specifics: \"In some basins, such as parts of the Gulf of Mexico, the basin's response strengthens that once-a-day part\"",
+    "Calculation intermediate result: \"That gives an inward leftover of about GMR/d³, half as large.\""
+  ],
+  "grounded": {
+    "1": true,
+    "2": true,
+    "3": true,
+    "4": true
+  }
+}

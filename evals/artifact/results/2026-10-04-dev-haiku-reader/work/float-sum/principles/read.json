@@ -1,0 +1,48 @@
+{
+  "answers": {
+    "1": {
+      "answer": "Because 0.1 has a repeating binary expansion. Its denominator (10 = 2 × 5) contains the factor 5, which is not allowed in base 2 where only factors of 2 can produce finite expansions.",
+      "quote": "The denominator of 1/10 is 2 × 5. The factor 5 makes the binary expansion repeat forever"
+    },
+    "2": {
+      "answer": "Because 0.1 and 0.2 are stored slightly too high while 0.3 is stored slightly too low. Their sum lands between two grid points and rounds to a different point than the stored 0.3.",
+      "quote": "0.1 and 0.2 are a little too high. 0.3 is a little too low."
+    },
+    "3": {
+      "answer": "Compare with a tolerance instead of testing for exact equality. Use math.isclose() or check if the absolute difference is smaller than an acceptable threshold.",
+      "quote": "Compare with a tolerance, not with ==: math.isclose(0.1 + 0.2, 0.3) in Python, or abs(a - b) < 1e-9"
+    },
+    "4": {
+      "answer": "Yes, 0.5 + 0.25 == 0.75 is true in these languages. Because 0.5, 0.25, and 0.75 have only power-of-2 denominators (1/2, 1/4, 3/4), they are stored exactly with no rounding errors.",
+      "quote": "Here 1/2, 1/4, and 3/4 are all grid points, so no rounding happens."
+    }
+  },
+  "stops": [
+    "IEEE 754 binary64 technical term not defined: 'the **double** format (IEEE 754 binary64)'",
+    "Why specifically 53 bits unexplained: '(an integer of at most 53 bits) × (a power of 2)'",
+    "Notation 2⁻⁵⁴ and its formula unexplained: 'Between 0.25 and 0.5, the grid step is 2⁻⁵⁴'",
+    "Rounding rule 'round half to even' not explained: 'choose the grid point whose integer is even'",
+    "Mathematical term 'lowest terms' not defined: 'its denominator (in lowest terms) has no prime factors'",
+    "Phrase 'rounds back' unclear: 'shortest decimal string that rounds back to the same double'",
+    "Grid concept used but not initially defined: 'So the values a double can hold form a grid'",
+    "Why power-of-2 denominators are exact not explained: 'Fractions with power-of-2 denominators are stored exactly'",
+    "How money calculations 'drift' mechanism not shown: 'money calculations drift by fractions of a cent'",
+    "How computer decides where to cut binary expansion: 'The computer must cut this off somewhere, so it must round'"
+  ],
+  "excess": [
+    "Language list not needed for understanding: 'In Python, JavaScript, Java, C, and most other languages:'",
+    "Large binary integers are technical noise: '7205759403792794 × 2⁻⁵⁶'",
+    "Supporting detail about doubling: 'Note that the stored 0.2 is exactly twice the stored 0.1. Doubling is exact in binary'",
+    "Decimal analogy illustrative but not essential: 'and the same thing happens with decimals on paper'",
+    "Supporting example about 1/4 and 1/3: 'That is why 1/4 = 0.25 ends, but 1/3 repeats'",
+    "Visual diagram redundant with text: 'stored 0.3 ... exact sum ... result [with spacing diagram]'",
+    "Meta-note about excluded topics: 'Not covered: 32-bit floats, special values (NaN, infinity)'",
+    "Calculator analogy numerical details: '1/3 + 1/3 = 0.3333 + 0.3333 = 0.6666'"
+  ],
+  "grounded": {
+    "1": true,
+    "2": true,
+    "3": true,
+    "4": true
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "result": "I made `explainers/two-tides/explanation.md`, a prose explanation of under 600 words. Prose fits because the answer is one short chain of cause and effect: the Moon's pull weakens with distance, so only the difference from the pull at Earth's centre moves water, which gives two bulges. A table of worked numbers and one small text sketch cover the geometry, and Mermaid draws force arrows poorly. The supporting `model.md`/`model.yaml` are alongside it, and `explainer check two-tides` passes.",
+  "error": null,
+  "cost": 0.5251108,
+  "seconds": 114,
+  "turns": 27,
+  "files": [
+    "explainers/two-tides/explanation.md"
+  ],
+  "review_cost": 0,
+  "reviews": 0
+}

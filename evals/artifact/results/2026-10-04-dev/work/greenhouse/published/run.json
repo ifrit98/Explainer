@@ -1,0 +1,12 @@
+{
+  "result": "I made `explainers/greenhouse/explanation.md` as prose only, because the answer is a short chain of cause and effect with arithmetic at each step (240 W/m² in → 255 K → 5 km emission height × 6.5 K/km → 288 K), and worked numbers in text teach that better than a diagram or interactive page; it passed the check, the cold read and the blind test.",
+  "error": null,
+  "cost": 2.139209,
+  "seconds": 804,
+  "turns": 83,
+  "files": [
+    "explainers/greenhouse/explanation.md"
+  ],
+  "review_cost": 1.0955,
+  "reviews": 6
+}

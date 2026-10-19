@@ -1,0 +1,50 @@
+{
+  "answers": {
+    "1": {
+      "answer": "Heat is moved from the outdoor air into the home. The electricity does not create the heat but instead powers the movement of heat from cold to warm.",
+      "quote": "Answer: the heat pump does not make that heat. It moves heat from the cold outdoor air into the home. The electricity pays for the move."
+    },
+    "2": {
+      "answer": "The refrigerant circulates through a closed loop at two different pressures. It boils at low pressure to absorb outdoor heat, gets compressed to raise its temperature, condenses at high pressure to release heat, then expands to cool before repeating.",
+      "quote": "A fluid circulates in a closed loop of four parts, at a low pressure on the outdoor side and a high pressure on the indoor side."
+    },
+    "3": {
+      "answer": "On colder days, the temperature difference between the home water and the outdoor air increases. This larger temperature lift requires more electricity per unit of heat delivered.",
+      "quote": "The bigger the lift, the more electricity each kWh of heat needs."
+    },
+    "4": {
+      "answer": "By the ideal limit formula, the 5 °C day (35 K lift) delivers much more heat per unit electricity than the −15 °C day (50 K lift), because the larger temperature difference on the colder day reduces the ideal limit.",
+      "quote": "A bigger lift makes the bottom of the fraction bigger, so the limit falls."
+    }
+  },
+  "stops": [
+    "Air at 0 °C is 273 K above absolute zero, so it still holds heat.",
+    "One fluid can be both, because its boiling temperature depends on its pressure.",
+    "Boiling takes this heat without a change in temperature.",
+    "Heat Q that passes at kelvin temperature T carries entropy Q/T, in kWh/K.",
+    "The refrigerant ends each cycle where it started, so it cannot store entropy.",
+    "Propane boils at −10 °C at about 3.5 bar and at 40 °C at about 14 bar.",
+    "The refrigerant boils 10 K below the air and condenses 5 K above the water.",
+    "Losses in the compressor, fans, and pumps take the COP from 6.3 down to about 3.",
+    "Its own lift, the refrigerant lift, is 40 − (−10) = 50 K.",
+    "Multiply by T_cold: Q_hot × T_cold / T_hot ≥ Q_hot − W. Rearrange: W ≥ Q_hot × (T_hot − T_cold) / T_hot."
+  ],
+  "excess": [
+    "Colours in both diagrams: blue is the cold side, red is the hot side, yellow is electricity.",
+    "An electric heater has only one input, the electricity. So it can give only 1 kWh per kWh.",
+    "In Celsius the formula gives 35 / (35 − 0) = 1, which would say that a heat pump can never beat a heater.",
+    "A fridge uses the same loop, with the cold coil inside the fridge.",
+    "Old radiators need 55 °C water: at 0 °C outside, the lift is 55 K and the COP is about 2.2.",
+    "Many units add a backup electric heater (COP 1) for the coldest days.",
+    "The valve adds no energy and removes none.",
+    "Typical real COP (estimate) column in the table showing measured performance.",
+    "Heat flows from the water into the fluid, and the home gets colder.",
+    "Not covered here: ground-source heat pumps; defrosting the outdoor coil below about 5 °C."
+  ],
+  "grounded": {
+    "1": true,
+    "2": true,
+    "3": true,
+    "4": true
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "result": "I made `explainers/two-tides/explanation.md`, a prose explanation (plus its `model.md`, `model.yaml` and `narrative.md`). Prose fits because the argument is a short chain — the Moon's pull at three points, one subtraction, then the Earth's rotation — and a table and a small text figure carry it, so a diagram or interactive page would add nothing; the probe, cold reads, final `explainer check` and blind test all passed, though I made small wording fixes after the blind test and didn't re-run it.",
+  "error": null,
+  "cost": 2.064919,
+  "seconds": 705,
+  "turns": 101,
+  "files": [
+    "explainers/two-tides/explanation.md"
+  ],
+  "review_cost": 0.7731,
+  "reviews": 5
+}

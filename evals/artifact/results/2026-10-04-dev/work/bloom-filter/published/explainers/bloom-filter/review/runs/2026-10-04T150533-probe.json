@@ -1,0 +1,185 @@
+{
+ "tool": "probe",
+ "rendering": null,
+ "slug": "bloom-filter",
+ "at": "2026-10-04T15:05:33",
+ "model": "default",
+ "prompt_sha": "7ab239541a1d",
+ "reply": {
+  "gaps": [
+   {
+    "rule": 2,
+    "severity": "main",
+    "about": "The derivation of p ≈ (1 − e^(−kn/m))^k skips steps and never connects the fill fraction to p",
+    "why_it_matters": "The reader is shown the final formula but not why. Three steps are missing. First, one add misses a given bit with probability 1 − 1/m. Second, there are kn independent tries, so the bit is still 0 with probability (1 − 1/m)^(kn). Third, (1 − 1/m)^(kn) ≈ e^(−kn/m), and the audience knows e but not this limit. The final step, p = (fraction of 1 bits)^k, also assumes a never-added item's k positions are independent of each other and may repeat. None of this is stated, so the formula appears without support.",
+    "suggested_addition": "Work through the main example. With m/n = 10 and k = 7: kn/m = 0.7 and e^(−0.7) ≈ 0.497, so the fraction of 1 bits is ≈ 0.503 and p ≈ 0.503^7 ≈ 0.0082. Check the approximation on the toy: (15/16)^6 ≈ 0.679 versus e^(−0.375) ≈ 0.687. Say that p is the chance that k independent uniform draws all land on 1 bits."
+   },
+   {
+    "rule": 4,
+    "severity": "edge",
+    "about": "The toy 'rough rate' and the formula disagree, and the file doesn't say why",
+    "why_it_matters": "The toy uses the observed fill, 6/16 = 0.375, so p ≈ 5.3%. The formula with m = 16, n = 2, k = 3 predicts a fill of 1 − e^(−0.375) ≈ 0.31, so p ≈ 3.1%. The gap comes from the toy positions being chosen with no collisions. A careful reader will compute both numbers and get confused.",
+    "suggested_addition": "Say that (6/16)^3 ≈ 5.3% uses the bits actually set. The formula predicts the average fill, ≈ 0.31, which gives p ≈ 3.1%. Random hashes would often collide and set fewer than 6 bits."
+   },
+   {
+    "rule": 1,
+    "severity": "edge",
+    "about": "Best k = (m/n)·ln 2 and 'about half the bits are 1' are stated without a reason",
+    "why_it_matters": "Without a reason, ln 2 looks arbitrary, and 'half full' isn't linked to it.",
+    "suggested_addition": "Intuition: when the array is half full, each bit tells you the most. At k = 7, m/n = 10, the fill is 0.503. At k = 1 the fill is 0.095: most bits are 0, so each check carries little information. At k = 20 the fill is 0.865: almost every bit is 1, so checks rarely find a 0. Optionally add that at best k, p ≈ 0.5^k = 0.6185^(m/n). That is where 'each ~4.8 bits per item cuts p by 10×' comes from, since ln 10 / ln(1/0.6185) ≈ 4.79."
+   },
+   {
+    "rule": 2,
+    "severity": "edge",
+    "about": "The no-false-negatives guarantee also assumes the query uses the same m and the same hash functions as the add. Only deletion is shown as breaking it.",
+    "why_it_matters": "A reader may try to 'grow' a full filter by enlarging the array. That silently breaks the guarantee.",
+    "suggested_addition": "Breaking case: resize the toy array from m = 16 to m = 32 without re-adding. If the positions are hash mod m, cat's positions change (for example 1 → 17), the new bit is 0, and cat reads as 'definitely not seen'."
+   },
+   {
+    "rule": 2,
+    "severity": "edge",
+    "about": "The formula's random-hash assumption has no breaking instance",
+    "why_it_matters": "Epistemic status names the assumption, but Concrete cases breaks the formula only by overfilling, never by violating the assumption itself.",
+    "suggested_addition": "Breaking case: all 7 hash functions are identical. Each item then sets 1 bit, the fill is ≈ 9.5% at m/n = 10, and p ≈ 9.5% instead of 0.82%. The formula's prediction is off by 11×."
+   },
+   {
+    "rule": 5,
+    "severity": "main",
+    "about": "The file never says what a 'probably seen' answer costs, or why an error that runs in only one direction is useful",
+    "why_it_matters": "The central question is 'have I seen this before?' The reader needs to know that a false positive usually costs one wasted exact check, never a wrong final answer. Without that, 0.82% means nothing in practice.",
+    "suggested_addition": "Use case: check the filter before a disk or database lookup. With 1,000,000 queries for absent URLs at p = 0.82%, about 8,200 queries hit the disk unnecessarily, and about 991,800 are answered from 1.25 MB of RAM. At p = 40%, about 400,000 hit the disk."
+   },
+   {
+    "rule": 3,
+    "severity": "edge",
+    "about": "Several concepts have more than one name, and some are used before they are defined",
+    "why_it_matters": "The fill fraction is called 'fraction of bits that are 1', 'more 1s', 'fill' and 'fills' (in Relationships, Alternative states and Confusion points), but it is not in Terms. Relationships uses n/m while the rest of the file uses bits per item m/n. Planned capacity is called 'n above plan' and 'sized for 1 million items' but is never defined. 'Rate' means both the toy's observed-fill estimate and p. 'Position' and 'bit' are used interchangeably.",
+    "suggested_addition": "Define fill f = fraction of bits that are 1 (for example 0.503 at m/n = 10, k = 7). Use m/n everywhere. Define capacity n₀ = the n used to choose m and k (1,000,000 in the example). Call the toy figure 'estimate from the observed fill'."
+   },
+   {
+    "rule": 4,
+    "severity": "edge",
+    "about": "The step from hash output to position has no worked example",
+    "why_it_matters": "The audience knows a hash gives a large number but not how it becomes an index from 0 to m − 1. The toy positions are only stipulated.",
+    "suggested_addition": "Example: h1(\"cat\") = 3,141,593 and 3,141,593 mod 16 = 9 (an illustrative value). Repeat with h2 and h3 to get k positions."
+   },
+   {
+    "rule": 1,
+    "severity": "edge",
+    "about": "The file doesn't say why each slot is 1 bit rather than a byte or a boolean",
+    "why_it_matters": "A programmer's natural alternative is a bool array, which typically uses 1 byte per slot.",
+    "suggested_addition": "With 1 byte per slot, 10 M slots cost 10 MB instead of 1.25 MB: 8× the memory for no gain in accuracy, since each slot only ever holds 0 or 1."
+   }
+  ],
+  "excess": [
+   "The 'Why this form (representation)' and 'Representation decision' sections (stage, levels) are rendering metadata, not content for the reader",
+   "The k = 20 example appears in three places (Quantities, Alternative states, Why this form). One is enough.",
+   "The 20 bits/item, p ≈ 0.0067% data point is not needed once the rule '~4.8 bits per item per 10×' is given"
+  ],
+  "next_questions": [
+   {
+    "q": "What do I actually do with 'probably seen'? Where is a Bloom filter used, and what does a false positive cost?",
+    "answered_by_model": false,
+    "declared_out_of_scope": false
+   },
+   {
+    "q": "Given my n and a target p, how do I choose m and k (for example m = −n·ln p / (ln 2)^2)?",
+    "answered_by_model": false,
+    "declared_out_of_scope": false
+   },
+   {
+    "q": "How do real implementations get k independent hash functions cheaply?",
+    "answered_by_model": false,
+    "declared_out_of_scope": true
+   },
+   {
+    "q": "If I can't delete by clearing bits, how do I support deletion?",
+    "answered_by_model": false,
+    "declared_out_of_scope": true
+   },
+   {
+    "q": "What if I don't know n in advance? Can a filter grow without breaking the no-false-negatives guarantee?",
+    "answered_by_model": false,
+    "declared_out_of_scope": false
+   }
+  ]
+ },
+ "usage": {
+  "cost": 0.1518542,
+  "seconds": 55
+ },
+ "findings": [
+  {
+   "n": 1,
+   "severity": "main",
+   "kind": "rule 2",
+   "text": "The derivation of p ≈ (1 − e^(−kn/m))^k skips steps and never connects the fill fraction to p → Work through the main example. With m/n = 10 and k = 7: kn/m = 0.7 and e^(−0.7) ≈ 0.497, so the fraction of 1 bits is ≈ 0.503 and p ≈ 0.503^7 ≈ 0.0082. Check the approximation on the toy: (15/16)^6 ≈ 0.679 versus e^(−0.375) ≈ 0.687. Say that p is the chance that k independent uniform draws all land on 1 bits."
+  },
+  {
+   "n": 2,
+   "severity": "edge",
+   "kind": "rule 4",
+   "text": "The toy 'rough rate' and the formula disagree, and the file doesn't say why → Say that (6/16)^3 ≈ 5.3% uses the bits actually set. The formula predicts the average fill, ≈ 0.31, which gives p ≈ 3.1%. Random hashes would often collide and set fewer than 6 bits."
+  },
+  {
+   "n": 3,
+   "severity": "edge",
+   "kind": "rule 1",
+   "text": "Best k = (m/n)·ln 2 and 'about half the bits are 1' are stated without a reason → Intuition: when the array is half full, each bit tells you the most. At k = 7, m/n = 10, the fill is 0.503. At k = 1 the fill is 0.095: most bits are 0, so each check carries little information. At k = 20 the fill is 0.865: almost every bit is 1, so checks rarely find a 0. Optionally add that at best k, p ≈ 0.5^k = 0.6185^(m/n). That is where 'each ~4.8 bits per item cuts p by 10×' comes from, since ln 10 / ln(1/0.6185) ≈ 4.79."
+  },
+  {
+   "n": 4,
+   "severity": "edge",
+   "kind": "rule 2",
+   "text": "The no-false-negatives guarantee also assumes the query uses the same m and the same hash functions as the add. Only deletion is shown as breaking it. → Breaking case: resize the toy array from m = 16 to m = 32 without re-adding. If the positions are hash mod m, cat's positions change (for example 1 → 17), the new bit is 0, and cat reads as 'definitely not seen'."
+  },
+  {
+   "n": 5,
+   "severity": "edge",
+   "kind": "rule 2",
+   "text": "The formula's random-hash assumption has no breaking instance → Breaking case: all 7 hash functions are identical. Each item then sets 1 bit, the fill is ≈ 9.5% at m/n = 10, and p ≈ 9.5% instead of 0.82%. The formula's prediction is off by 11×."
+  },
+  {
+   "n": 6,
+   "severity": "main",
+   "kind": "rule 5",
+   "text": "The file never says what a 'probably seen' answer costs, or why an error that runs in only one direction is useful → Use case: check the filter before a disk or database lookup. With 1,000,000 queries for absent URLs at p = 0.82%, about 8,200 queries hit the disk unnecessarily, and about 991,800 are answered from 1.25 MB of RAM. At p = 40%, about 400,000 hit the disk."
+  },
+  {
+   "n": 7,
+   "severity": "edge",
+   "kind": "rule 3",
+   "text": "Several concepts have more than one name, and some are used before they are defined → Define fill f = fraction of bits that are 1 (for example 0.503 at m/n = 10, k = 7). Use m/n everywhere. Define capacity n₀ = the n used to choose m and k (1,000,000 in the example). Call the toy figure 'estimate from the observed fill'."
+  },
+  {
+   "n": 8,
+   "severity": "edge",
+   "kind": "rule 4",
+   "text": "The step from hash output to position has no worked example → Example: h1(\"cat\") = 3,141,593 and 3,141,593 mod 16 = 9 (an illustrative value). Repeat with h2 and h3 to get k positions."
+  },
+  {
+   "n": 9,
+   "severity": "edge",
+   "kind": "rule 1",
+   "text": "The file doesn't say why each slot is 1 bit rather than a byte or a boolean → With 1 byte per slot, 10 M slots cost 10 MB instead of 1.25 MB: 8× the memory for no gain in accuracy, since each slot only ever holds 0 or 1."
+  },
+  {
+   "n": 10,
+   "severity": "excess",
+   "kind": "model entry",
+   "text": "The 'Why this form (representation)' and 'Representation decision' sections (stage, levels) are rendering metadata, not content for the reader"
+  },
+  {
+   "n": 11,
+   "severity": "excess",
+   "kind": "model entry",
+   "text": "The k = 20 example appears in three places (Quantities, Alternative states, Why this form). One is enough."
+  },
+  {
+   "n": 12,
+   "severity": "excess",
+   "kind": "model entry",
+   "text": "The 20 bits/item, p ≈ 0.0067% data point is not needed once the rule '~4.8 bits per item per 10×' is given"
+  }
+ ]
+}

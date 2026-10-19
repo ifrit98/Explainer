@@ -1,0 +1,231 @@
+{
+ "tool": "probe",
+ "rendering": null,
+ "slug": "vaccine-memory",
+ "at": "2026-10-04T14:57:46",
+ "model": "default",
+ "prompt_sha": "74ac0a8c8132",
+ "reply": {
+  "gaps": [
+   {
+    "rule": 2,
+    "severity": "main",
+    "about": "The race argument: the clone grows more slowly than the pathogen",
+    "why_it_matters": "In the file's own numbers the clone triples its doublings each day (2^3 = 8× per day) while the pathogen grows 10× per day. With these numbers the clone never catches up. The file never says why the defence wins, so the core 'race' story doesn't hold together as written.",
+    "suggested_addition": "Say that one effector cell or antibody removes many pathogen units, so the relevant comparison is killing capacity, not cell count. Illustrative example: if each of the 10^6 effector cells clears 100 virus particles per day, they clear 10^8 per day. A pathogen load of 10^7 then shrinks. Also give a stopping threshold: 'control' means clearance per day exceeds growth per day."
+   },
+   {
+    "rule": 5,
+    "severity": "main",
+    "about": "Pathogen growth of 10^7× vs 10^3× has no disease threshold or starting dose",
+    "why_it_matters": "The reader can't tell what 10^3× means for symptoms. Without a starting dose and a threshold, 'often no disease' is just asserted.",
+    "suggested_addition": "Illustrative: the infection starts with 100 particles and symptoms begin around 10^8. Primary response: 100 × 10^7 = 10^9, which is above the threshold, so the person gets sick. Secondary response: 100 × 10^3 = 10^5, which is 1,000× below the threshold, so infection happens with no disease."
+   },
+   {
+    "rule": 2,
+    "severity": "main",
+    "about": "The claim that 'the matching receptor already exists by chance' has no coverage argument",
+    "why_it_matters": "A learner will ask how 10^8 random receptors can cover every possible antigen shape. The missing step is that each receptor binds many similar shapes (cross-reactivity) and each pathogen carries many antigen shapes. There is also no case where the claim fails.",
+    "suggested_addition": "Example: if one receptor binds about 1 in 10^5 random shapes, then a library of 10^8 receptors has about 1,000 binders for any shape. A pathogen with 10 separate antigen spots is almost certain to be hit. Breaking case: a small library, such as 10^4 receptors (low diversity in the very old or very young), gives about 0.1 expected binders per shape, so responses can be missing."
+   },
+   {
+    "rule": 2,
+    "severity": "main",
+    "about": "The contraction numbers contradict the memory count",
+    "why_it_matters": "If 90–95% of 10^6 effector cells die, 50,000–100,000 cells are left, not 10,000. The ratio would then be 500–1,000× the naive count, which is outside the stated 10–100× estimate.",
+    "suggested_addition": "Either say that only about 1% become memory (10^6 → 10^4), or rework the example: 5% of 10^6 = 50,000. Also show the low end of the estimate: at 10× the naive count (1,000 cells), 2^n = 1,000 gives n ≈ 10 divisions ≈ 3.3 days, plus 0.75 day, ≈ 4 days."
+   },
+   {
+    "rule": 1,
+    "severity": "edge",
+    "about": "'Keep all effector cells forever' fails on the file's own numbers",
+    "why_it_matters": "10^6 cells × 1,000 infections = 10^9 cells, which is about 0.1% of roughly 10^12 lymphocytes. So the stated 'space runs out' argument doesn't work at these numbers.",
+    "suggested_addition": "Use real expansion sizes: one response can make 10^7–10^9 cells, up to about 10% of all killer T cells. Add that effector cells are short-lived and cause inflammation. Example: 100 infections × 10% each would exceed the whole pool."
+   },
+   {
+    "rule": 1,
+    "severity": "edge",
+    "about": "Why memory cells activate faster (0.5–1 day vs 2.5 days)",
+    "why_it_matters": "The ≈3-day result depends on this unexplained shortcut as well as on the head start.",
+    "suggested_addition": "Say that memory cells already sit in tissues and lymph nodes and need less stimulation to activate. Show the time cost of not having this: 2.2 days of division + 2.5 days of activation = 4.7 days instead of about 3."
+   },
+   {
+    "rule": 5,
+    "severity": "edge",
+    "about": "Measles '97% protection' vs influenza '40–60% effectiveness' are undefined and use two different names",
+    "why_it_matters": "The reader doesn't know what the percentage measures, so they can't compare the two vaccines.",
+    "suggested_addition": "Define it once as the reduction in risk of disease, vaccinated vs unvaccinated. Example: if 90 of 100 unvaccinated exposed people get measles, 97% means about 2.7 of 100 vaccinated people do. For flu at 50%: if 10 of 100 unvaccinated people get flu, 5 of 100 vaccinated people do. Use one term throughout."
+   },
+   {
+    "rule": 5,
+    "severity": "edge",
+    "about": "Pre-existing antibodies in the secondary response are not quantified",
+    "why_it_matters": "The 'Alternative states' table says antibodies are already present, but the model gives no number for their effect and never says how fast they fade.",
+    "suggested_addition": "Example: antibody levels halve about every 3 weeks (illustrative), so after 1 year about 2^-17 of the peak remains. Long-lived plasma cells keep a low baseline that neutralises part of the starting dose, e.g. 100 → 10 particles."
+   },
+   {
+    "rule": 3,
+    "severity": "edge",
+    "about": "Terms used without definition: long-lived plasma cell, heavy/light chain, V/D/J, affinity maturation, precursor",
+    "why_it_matters": "These appear in the causal chain, Quantities and Relationships before they are defined (or are never defined). 'Naive precursors' appears in Relationships, but 'precursor count' is defined only in the Terms section.",
+    "suggested_addition": "Add entity rows: long-lived plasma cell (keeps releasing antibodies for years); heavy and light chain (the two parts of a receptor, each assembled from gene segments); precursor (a lymphocyte able to respond at the start: 100 naive, 10,000 memory)."
+   },
+   {
+    "rule": 3,
+    "severity": "edge",
+    "about": "Concepts with more than one name",
+    "why_it_matters": "Several names for one concept make readers think there are several concepts.",
+    "suggested_addition": "Use one name for each: 'danger signal' (not also 'second signal' or 'signals'); 'precursor count' (not also 'starting cells' or 'head-start'); 'receptor fit' (not also 'affinity'); 'protection' (not also 'effectiveness')."
+   },
+   {
+    "rule": 4,
+    "severity": "edge",
+    "about": "The clonal selection step has no worked example with numbers",
+    "why_it_matters": "The step that answers the central question gets no arithmetic.",
+    "suggested_addition": "Example: a lymph node scans about 10^7 lymphocytes. At a frequency of 1 in 10^5, about 100 bind the vaccine antigen. Only those 100 divide; the other 99.999% stay idle."
+   },
+   {
+    "rule": 2,
+    "severity": "edge",
+    "about": "Self-reactivity of a random library",
+    "why_it_matters": "A random library must also make receptors that bind the body's own proteins. Only the danger signal is offered as protection, and the removal of self-binding cells during development is never mentioned.",
+    "suggested_addition": "Add that most newly made lymphocytes that bind self proteins are removed before release. For T cells, roughly 90%+ of developing cells die in the thymus (estimate)."
+   }
+  ],
+  "excess": [
+   "Detailed gene-segment arithmetic (40 V × 23 D × 6 J, light chains ≈320, pairs ≈1.8 million): the comparison of ~20,000 genes vs >10^8 receptors is enough",
+   "The affinity maturation relationship and the 'B-cell receptors improve fit' step: the Scope section declares this out of scope and it is not needed for the central answer",
+   "Killer T cells as an effector type: the model's arithmetic follows only one generic clone",
+   "The Representation decision section, which is plan metadata, not reader content"
+  ],
+  "next_questions": [
+   {
+    "q": "How can random receptors already match a pathogen nobody has seen, and why don't they attack my own body?",
+    "answered_by_model": false,
+    "declared_out_of_scope": false
+   },
+   {
+    "q": "If the clone grows 8× per day and the pathogen 10× per day, how does the immune system ever win?",
+    "answered_by_model": false,
+    "declared_out_of_scope": false
+   },
+   {
+    "q": "Why does measles immunity last decades while some vaccines (tetanus, pertussis) need boosters?",
+    "answered_by_model": false,
+    "declared_out_of_scope": true
+   },
+   {
+    "q": "Why does the flu antigen change while measles doesn't?",
+    "answered_by_model": false,
+    "declared_out_of_scope": false
+   },
+   {
+    "q": "How does an mRNA vaccine show the antigen without the pathogen?",
+    "answered_by_model": false,
+    "declared_out_of_scope": true
+   }
+  ]
+ },
+ "usage": {
+  "cost": 0.1667154,
+  "seconds": 62
+ },
+ "findings": [
+  {
+   "n": 1,
+   "severity": "main",
+   "kind": "rule 2",
+   "text": "The race argument: the clone grows more slowly than the pathogen → Say that one effector cell or antibody removes many pathogen units, so the relevant comparison is killing capacity, not cell count. Illustrative example: if each of the 10^6 effector cells clears 100 virus particles per day, they clear 10^8 per day. A pathogen load of 10^7 then shrinks. Also give a stopping threshold: 'control' means clearance per day exceeds growth per day."
+  },
+  {
+   "n": 2,
+   "severity": "main",
+   "kind": "rule 5",
+   "text": "Pathogen growth of 10^7× vs 10^3× has no disease threshold or starting dose → Illustrative: the infection starts with 100 particles and symptoms begin around 10^8. Primary response: 100 × 10^7 = 10^9, which is above the threshold, so the person gets sick. Secondary response: 100 × 10^3 = 10^5, which is 1,000× below the threshold, so infection happens with no disease."
+  },
+  {
+   "n": 3,
+   "severity": "main",
+   "kind": "rule 2",
+   "text": "The claim that 'the matching receptor already exists by chance' has no coverage argument → Example: if one receptor binds about 1 in 10^5 random shapes, then a library of 10^8 receptors has about 1,000 binders for any shape. A pathogen with 10 separate antigen spots is almost certain to be hit. Breaking case: a small library, such as 10^4 receptors (low diversity in the very old or very young), gives about 0.1 expected binders per shape, so responses can be missing."
+  },
+  {
+   "n": 4,
+   "severity": "main",
+   "kind": "rule 2",
+   "text": "The contraction numbers contradict the memory count → Either say that only about 1% become memory (10^6 → 10^4), or rework the example: 5% of 10^6 = 50,000. Also show the low end of the estimate: at 10× the naive count (1,000 cells), 2^n = 1,000 gives n ≈ 10 divisions ≈ 3.3 days, plus 0.75 day, ≈ 4 days."
+  },
+  {
+   "n": 5,
+   "severity": "edge",
+   "kind": "rule 1",
+   "text": "'Keep all effector cells forever' fails on the file's own numbers → Use real expansion sizes: one response can make 10^7–10^9 cells, up to about 10% of all killer T cells. Add that effector cells are short-lived and cause inflammation. Example: 100 infections × 10% each would exceed the whole pool."
+  },
+  {
+   "n": 6,
+   "severity": "edge",
+   "kind": "rule 1",
+   "text": "Why memory cells activate faster (0.5–1 day vs 2.5 days) → Say that memory cells already sit in tissues and lymph nodes and need less stimulation to activate. Show the time cost of not having this: 2.2 days of division + 2.5 days of activation = 4.7 days instead of about 3."
+  },
+  {
+   "n": 7,
+   "severity": "edge",
+   "kind": "rule 5",
+   "text": "Measles '97% protection' vs influenza '40–60% effectiveness' are undefined and use two different names → Define it once as the reduction in risk of disease, vaccinated vs unvaccinated. Example: if 90 of 100 unvaccinated exposed people get measles, 97% means about 2.7 of 100 vaccinated people do. For flu at 50%: if 10 of 100 unvaccinated people get flu, 5 of 100 vaccinated people do. Use one term throughout."
+  },
+  {
+   "n": 8,
+   "severity": "edge",
+   "kind": "rule 5",
+   "text": "Pre-existing antibodies in the secondary response are not quantified → Example: antibody levels halve about every 3 weeks (illustrative), so after 1 year about 2^-17 of the peak remains. Long-lived plasma cells keep a low baseline that neutralises part of the starting dose, e.g. 100 → 10 particles."
+  },
+  {
+   "n": 9,
+   "severity": "edge",
+   "kind": "rule 3",
+   "text": "Terms used without definition: long-lived plasma cell, heavy/light chain, V/D/J, affinity maturation, precursor → Add entity rows: long-lived plasma cell (keeps releasing antibodies for years); heavy and light chain (the two parts of a receptor, each assembled from gene segments); precursor (a lymphocyte able to respond at the start: 100 naive, 10,000 memory)."
+  },
+  {
+   "n": 10,
+   "severity": "edge",
+   "kind": "rule 3",
+   "text": "Concepts with more than one name → Use one name for each: 'danger signal' (not also 'second signal' or 'signals'); 'precursor count' (not also 'starting cells' or 'head-start'); 'receptor fit' (not also 'affinity'); 'protection' (not also 'effectiveness')."
+  },
+  {
+   "n": 11,
+   "severity": "edge",
+   "kind": "rule 4",
+   "text": "The clonal selection step has no worked example with numbers → Example: a lymph node scans about 10^7 lymphocytes. At a frequency of 1 in 10^5, about 100 bind the vaccine antigen. Only those 100 divide; the other 99.999% stay idle."
+  },
+  {
+   "n": 12,
+   "severity": "edge",
+   "kind": "rule 2",
+   "text": "Self-reactivity of a random library → Add that most newly made lymphocytes that bind self proteins are removed before release. For T cells, roughly 90%+ of developing cells die in the thymus (estimate)."
+  },
+  {
+   "n": 13,
+   "severity": "excess",
+   "kind": "model entry",
+   "text": "Detailed gene-segment arithmetic (40 V × 23 D × 6 J, light chains ≈320, pairs ≈1.8 million): the comparison of ~20,000 genes vs >10^8 receptors is enough"
+  },
+  {
+   "n": 14,
+   "severity": "excess",
+   "kind": "model entry",
+   "text": "The affinity maturation relationship and the 'B-cell receptors improve fit' step: the Scope section declares this out of scope and it is not needed for the central answer"
+  },
+  {
+   "n": 15,
+   "severity": "excess",
+   "kind": "model entry",
+   "text": "Killer T cells as an effector type: the model's arithmetic follows only one generic clone"
+  },
+  {
+   "n": 16,
+   "severity": "excess",
+   "kind": "model entry",
+   "text": "The Representation decision section, which is plan metadata, not reader content"
+  }
+ ]
+}

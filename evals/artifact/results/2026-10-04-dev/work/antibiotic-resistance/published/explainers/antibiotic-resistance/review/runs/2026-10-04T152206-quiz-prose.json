@@ -1,0 +1,220 @@
+{
+ "tool": "quiz",
+ "rendering": "prose",
+ "slug": "antibiotic-resistance",
+ "at": "2026-10-04T15:21:51",
+ "model": "default",
+ "prompt_sha": "57d2fb9e88c1",
+ "reply": {
+  "answers": {
+   "1": "The main objects are: antibiotics (molecules that kill bacteria or stop their growth); targets (molecules the cell needs, such as the enzymes that build the cell wall); resistance genes and resistance mutations; and bacterial cells, both susceptible and resistant. Also involved are the MIC (minimum inhibitory concentration) and the drug concentration in blood, plasmids, conjugation and horizontal gene transfer, the immune system, fitness cost, compensatory mutations, and combination therapy.",
+   "2": "An antibiotic works by binding a target. A resistance gene blocks this in one of four ways: it destroys the drug (beta-lactamase), changes the target (rifampicin), pumps the drug out (efflux pump), or keeps the drug out (loss of a porin). Each of these raises the strain's MIC. If the MIC is above the drug level reached in blood, the strain is resistant; if below, it is susceptible. Resistance genes come from random copying errors during division or from other bacteria via plasmids passed by conjugation. The drug, with help from the immune system, removes susceptible cells, and the resistant ones multiply. When the drug is absent, a fitness cost works against resistant cells, but compensatory mutations can reduce that cost.",
+   "3": "In a large population, random mutation or gene transfer has already produced a few resistant cells before treatment. The drug removes their susceptible competitors, so the resistant cells grow back exponentially and the infection returns, now resistant.",
+   "4": "The key variable is population size. Expected resistant mutants are roughly N × 10⁻⁸. At 10¹⁰ cells about 100 mutants already exist, so treatment fails. At 10⁶ cells there is only about a 1% chance that even one exists, so treatment usually works. Using two drugs with independent targets multiplies the rates to 10⁻¹⁶, giving an expected 10⁻⁶ double mutants in 10¹⁰ cells, so the infection clears. That protection is lost if one plasmid or pump resists both drugs.",
+   "5": "Assumption or simplification: each division adds one cell, so reaching 10¹⁰ cells took about 10¹⁰ divisions. The mutation rate of 10⁻⁸ is an order of magnitude, and the MIC values are labelled illustrative. Observation: in Luria and Delbrück's 1943 experiment, 11 of 20 cultures had 0 resistant colonies and one had 107, far more spread than random scatter around a mean of 11 would give.",
+   "6": "Antibiotics kill bacteria by binding a target the cell needs. Resistance genes block this by destroying the drug, changing the target, pumping the drug out, or keeping it out, which raises the MIC above the drug level the body reaches. In a large infection, random mutation (about 1 per 10⁸ divisions) or plasmids received from other bacteria have already produced some resistant cells before any drug is given. The drug removes the susceptible cells, and the resistant ones regrow within hours to days. Without the drug, resistance often slows growth, but compensatory mutations let it persist.",
+   "7": "The Luria–Delbrück paragraph was hardest. The text does not show where the range '5 to 18' comes from, and it does not explain why a virus counts as a 'killing agent' or how it relates to a drug. A short note that ordinary random scatter is about ±2×√11, plus a picture of early versus late mutant lineages, would make it easier to follow.",
+   "8": "Growing to 10¹⁰ cells took about 10¹⁰ divisions, so about 100 resistant mutants were already present before treatment. Drug X and the immune system cleared the susceptible majority, so symptoms improved. The roughly 100 resistant cells kept dividing; about 27 doublings bring them back to 10¹⁰, which takes about 13 hours at a lab doubling time and longer in a patient. The returning infection is almost entirely resistant. The drug selected these cells; it did not create them.",
+   "9": "No, not usually. 10⁶ × 10⁻⁸ = 0.01 expected mutants, so there is only about a 1% chance that a resistant cell exists, and the drug would usually clear the infection. The exception is if a resistance gene arrives on a plasmid, which does not depend on the population's own mutations.",
+   "10": "Not necessarily. If resistance costs 5% growth, the resistant-to-susceptible ratio falls to about 0.006 of its starting value after 100 generations, so it shrinks a lot but does not reach zero. If a compensatory mutation cuts the cost to 1%, the ratio is still about 0.37 after 100 generations. The explanation gives no timescale linking 'years' to generations, and it does not say whether plasmid-borne resistance carries a cost.",
+   "11": "Yes. About 100 resistance mutations are expected (10¹⁰ × 10⁻⁸), and because early mutants have divided since, there are at least 100 resistant cells, possibly more.",
+   "12": "If the drug caused resistance, every cell would have the same small chance when it met the drug, so equal cultures would give similar counts with only ordinary scatter (here, mostly 5 to 18 around a mean of 11). Luria and Delbrück instead found 11 cultures with 0 and one with 107. This fits random mutation before exposure: a mutant that arose early leaves many resistant descendants, and a late one leaves few. Separately, the regrowth story shows the drug only removes the competitors.",
+   "13": "Through horizontal gene transfer. In conjugation, one bacterium copies a plasmid carrying a complete working resistance gene (such as beta-lactamase) into another bacterium, which can be of a different species. One plasmid often carries several resistance genes at once.",
+   "14": "Without the drug, the fitness cost makes the resistant fraction shrink: with a 5% cost the ratio is multiplied by 0.95 each generation, giving about 0.006 after 100 generations. It may not disappear because a compensatory mutation can cut the cost to about 1% (0.37 remains after 100 generations). Also, the decline is gradual rather than to zero."
+  },
+  "audit": {
+   "terms": [
+    "The same thing is counted in three units: 'divisions' (lines 24, 26), 'doublings' (line 35) and 'generations' (line 54). The reader must work out that they relate.",
+    "'resistance gene' (line 11), 'resistance mutation' (lines 24, 26) and 'One DNA letter change' / 'One letter change' (lines 15, 47) are used for overlapping ideas. A mutation counts as a gene in one place and is contrasted with whole plasmid genes in another.",
+    "'kills bacteria or stops their growth' (line 9) vs 'stops' (lines 20, 33) vs 'removes' (line 38) vs 'killing agent' (line 40): it is unclear whether stopping growth and killing are treated as the same thing.",
+    "'Genes from other bacteria' (heading, line 42), 'received from another bacterium' (lines 5, 11), 'conjugation' and 'horizontal gene transfer' (line 45): the relationship between conjugation and HGT is given only once.",
+    "'competitors' (lines 5, 61) vs 'susceptible cells' (line 33) vs 'everything else' (line 38) all name the same group."
+   ],
+   "unexplained": [
+    "'most cultures between 5 and 18' (line 40): the text does not say how this range follows from a mean of 11.",
+    "'5% slower' becomes 'multiplies the ratio … by 0.95' each generation (line 54): it does not say whose generation, or what a 5% growth difference means per unit of time.",
+    "'in a patient it takes longer' (line 35): no figure is given, so the reader cannot judge the timescale of relapse.",
+    "'at least 100 resistant cells' (line 28): it does not say how many more could exist when early mutants have divided.",
+    "'cut the cost to 1%' (line 54): no indication of how typical this is or how fast a compensatory mutation appears."
+   ],
+   "missing_why": [
+    "Line 54: why a growth-rate penalty multiplies the ratio by (1 − cost) each generation.",
+    "Line 59: why independent targets let the probabilities multiply, and why a single pump can defeat two different drugs.",
+    "Line 34: why the immune system 'does not keep up' with the resistant cells when it did clear the susceptible ones.",
+    "Line 40: why a virus is equivalent to a drug for the logic of the experiment.",
+    "Line 54: why a compensatory mutation reduces the cost without losing the resistance."
+   ],
+   "excess": [
+    "Line 3: an HTML comment with process metadata ('Stage 1, rendered from model.md in STE-80').",
+    "Lines 63–68: the 'Not covered' list names topics the reader cannot use."
+   ]
+  },
+  "gaps": [
+   "It does not say how fast a plasmid spreads through a population once it arrives, or whether plasmid-borne resistance also carries a fitness cost.",
+   "There is no timescale linking 'generations' to real time, so the reader cannot judge what 'years without the drug' means (Q10).",
+   "It does not say what keeps the immune system from clearing about 100 resistant cells.",
+   "The source of the Luria–Delbrück 'expected scatter' range is not given.",
+   "It does not explain how resistance spreads between patients or within a hospital, though Q10 implies it."
+  ]
+ },
+ "grade": {
+  "scores": {
+   "1": 2,
+   "2": 2,
+   "3": 2,
+   "4": 2,
+   "5": 2,
+   "6": 2,
+   "7": 2,
+   "8": 2,
+   "9": 2,
+   "10": 1,
+   "11": 2,
+   "12": 2,
+   "13": 2,
+   "14": 2
+  },
+  "reasons": {
+   "10": "Correctly says resistance falls through fitness cost (0.95^100 ≈ 0.006), slowly and not to zero, and that compensatory mutations reduce the cost (0.99^100 ≈ 0.37). It omits the expected point that plasmids persist, and instead treats plasmid behaviour as unexplained. That is one of the two listed reasons resistance need not vanish, so the answer is partial."
+  },
+  "pass": false
+ },
+ "usage": {
+  "cost": 0.20742880000000002,
+  "seconds": 53
+ },
+ "findings": [
+  {
+   "n": 1,
+   "severity": "gap",
+   "kind": "terms",
+   "text": "The same thing is counted in three units: 'divisions' (lines 24, 26), 'doublings' (line 35) and 'generations' (line 54). The reader must work out that they relate."
+  },
+  {
+   "n": 2,
+   "severity": "gap",
+   "kind": "terms",
+   "text": "'resistance gene' (line 11), 'resistance mutation' (lines 24, 26) and 'One DNA letter change' / 'One letter change' (lines 15, 47) are used for overlapping ideas. A mutation counts as a gene in one place and is contrasted with whole plasmid genes in another."
+  },
+  {
+   "n": 3,
+   "severity": "gap",
+   "kind": "terms",
+   "text": "'kills bacteria or stops their growth' (line 9) vs 'stops' (lines 20, 33) vs 'removes' (line 38) vs 'killing agent' (line 40): it is unclear whether stopping growth and killing are treated as the same thing."
+  },
+  {
+   "n": 4,
+   "severity": "gap",
+   "kind": "terms",
+   "text": "'Genes from other bacteria' (heading, line 42), 'received from another bacterium' (lines 5, 11), 'conjugation' and 'horizontal gene transfer' (line 45): the relationship between conjugation and HGT is given only once."
+  },
+  {
+   "n": 5,
+   "severity": "gap",
+   "kind": "terms",
+   "text": "'competitors' (lines 5, 61) vs 'susceptible cells' (line 33) vs 'everything else' (line 38) all name the same group."
+  },
+  {
+   "n": 6,
+   "severity": "gap",
+   "kind": "unexplained",
+   "text": "'most cultures between 5 and 18' (line 40): the text does not say how this range follows from a mean of 11."
+  },
+  {
+   "n": 7,
+   "severity": "gap",
+   "kind": "unexplained",
+   "text": "'5% slower' becomes 'multiplies the ratio … by 0.95' each generation (line 54): it does not say whose generation, or what a 5% growth difference means per unit of time."
+  },
+  {
+   "n": 8,
+   "severity": "gap",
+   "kind": "unexplained",
+   "text": "'in a patient it takes longer' (line 35): no figure is given, so the reader cannot judge the timescale of relapse."
+  },
+  {
+   "n": 9,
+   "severity": "gap",
+   "kind": "unexplained",
+   "text": "'at least 100 resistant cells' (line 28): it does not say how many more could exist when early mutants have divided."
+  },
+  {
+   "n": 10,
+   "severity": "gap",
+   "kind": "unexplained",
+   "text": "'cut the cost to 1%' (line 54): no indication of how typical this is or how fast a compensatory mutation appears."
+  },
+  {
+   "n": 11,
+   "severity": "gap",
+   "kind": "missing_why",
+   "text": "Line 54: why a growth-rate penalty multiplies the ratio by (1 − cost) each generation."
+  },
+  {
+   "n": 12,
+   "severity": "gap",
+   "kind": "missing_why",
+   "text": "Line 59: why independent targets let the probabilities multiply, and why a single pump can defeat two different drugs."
+  },
+  {
+   "n": 13,
+   "severity": "gap",
+   "kind": "missing_why",
+   "text": "Line 34: why the immune system 'does not keep up' with the resistant cells when it did clear the susceptible ones."
+  },
+  {
+   "n": 14,
+   "severity": "gap",
+   "kind": "missing_why",
+   "text": "Line 40: why a virus is equivalent to a drug for the logic of the experiment."
+  },
+  {
+   "n": 15,
+   "severity": "gap",
+   "kind": "missing_why",
+   "text": "Line 54: why a compensatory mutation reduces the cost without losing the resistance."
+  },
+  {
+   "n": 16,
+   "severity": "excess",
+   "kind": "excess",
+   "text": "Line 3: an HTML comment with process metadata ('Stage 1, rendered from model.md in STE-80')."
+  },
+  {
+   "n": 17,
+   "severity": "excess",
+   "kind": "excess",
+   "text": "Lines 63–68: the 'Not covered' list names topics the reader cannot use."
+  },
+  {
+   "n": 18,
+   "severity": "gap",
+   "kind": "gap",
+   "text": "It does not say how fast a plasmid spreads through a population once it arrives, or whether plasmid-borne resistance also carries a fitness cost."
+  },
+  {
+   "n": 19,
+   "severity": "gap",
+   "kind": "gap",
+   "text": "There is no timescale linking 'generations' to real time, so the reader cannot judge what 'years without the drug' means (Q10)."
+  },
+  {
+   "n": 20,
+   "severity": "gap",
+   "kind": "gap",
+   "text": "It does not say what keeps the immune system from clearing about 100 resistant cells."
+  },
+  {
+   "n": 21,
+   "severity": "gap",
+   "kind": "gap",
+   "text": "The source of the Luria–Delbrück 'expected scatter' range is not given."
+  },
+  {
+   "n": 22,
+   "severity": "gap",
+   "kind": "gap",
+   "text": "It does not explain how resistance spreads between patients or within a hospital, though Q10 implies it."
+  }
+ ]
+}

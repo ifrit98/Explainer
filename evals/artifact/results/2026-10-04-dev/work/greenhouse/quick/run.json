@@ -1,0 +1,12 @@
+{
+  "result": "I made `explainers/greenhouse/diagram.md`: two Mermaid diagrams (where the energy goes, then why more gas warms the surface) with worked numbers (255 K vs 288 K, 5 km emission height, 6.5 K/km), because the answer is an energy flow plus a cause-and-effect chain the reader needs to see together — its model files are alongside, and `explainer check` passes on the numbers and both diagrams.",
+  "error": null,
+  "cost": 0.507285,
+  "seconds": 120,
+  "turns": 25,
+  "files": [
+    "explainers/greenhouse/diagram.md"
+  ],
+  "review_cost": 0,
+  "reviews": 0
+}

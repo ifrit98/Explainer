@@ -1,0 +1,465 @@
+# Artifact eval: subjects the toolkit has never been tuned on. None is an example in explainers/ or a
+# question in the chat eval. Each subject has a question (given to the agent that builds the explainer) and
+# a quiz (given only to the reader, who answers from the finished explainer). The quiz is fixed here, so
+# it does not depend on what the builder chose to cover. The last item of each quiz is a prediction
+# (kind: predict): a case the explanation need not mention, answered from the mechanism it gives.
+#
+# Split: tune against `dev` only. Run `test` to confirm a change before a release, and do not change the
+# principles or skills in response to a single test subject (docs/evals.md).
+#
+# Run: uv run explainer eval artifact --split dev   (needs the `claude` CLI; see docs/evals.md)
+
+reader: "A technical reader: comfortable with school mathematics and science and with basic programming, and new to this subject."
+
+subjects:
+  # ------------------------------------------------------------------ dev
+  - id: gps-relativity
+    split: dev
+    q: "How does GPS find your position, and why does it need relativity?"
+    misconception: "The receiver sends a signal to the satellites, and they work out where it is."
+    quiz:
+      - q: "What does the receiver measure, and how does it turn that into a distance?"
+        expect: "The time each satellite's signal took to arrive (the signal carries the time it was sent); distance = speed of light × travel time."
+      - q: "Why does a receiver need four satellites for a position, not three?"
+        expect: "Its own clock is cheap and its time error is a fourth unknown, with the three coordinates; four distances give four equations."
+      - q: "Why would GPS fail within a day without relativity corrections, and by about how much?"
+        expect: "Satellite clocks run fast relative to ground clocks by about 38 µs a day (weaker gravity: +45 µs; speed: −7 µs); at the speed of light that is about 10 km of position error per day."
+      - q: "A receiver's clock is 1 µs fast, and it uses three satellites as if its clock were right. About how large is the error in the distances it computes?"
+        expect: "About 300 m per satellite: the speed of light × 1 µs; a fourth satellite would let it solve for the clock error."
+        kind: predict
+
+  - id: vaccine-memory
+    split: dev
+    q: "How does a vaccine prepare the immune system for a disease it has never met?"
+    misconception: "A vaccine works by giving you a mild case of the disease, so you need to get sick for it to work."
+    quiz:
+      - q: "What must a vaccine contain or produce, and why does that not make you ill?"
+        expect: "An antigen (a piece of the pathogen the immune system recognizes, or instructions to make it), without a pathogen that can replicate and cause the disease."
+      - q: "Why is the response to a real infection after vaccination faster than the first response?"
+        expect: "Memory B and T cells specific to that antigen remain after vaccination, so the response starts from many matching cells within days instead of taking one to two weeks to select and multiply them."
+      - q: "Why does a vaccine against one virus not protect against an unrelated virus?"
+        expect: "Recognition is specific: antibodies and receptors match the shape of one antigen; a different virus has different antigens."
+      - q: "A virus changes the shape of the part that antibodies recognize. What happens to the protection from an old vaccine, and why?"
+        expect: "It weakens: the memory cells and antibodies match the old shape and bind the new one poorly; a vaccine with the new antigen restores it."
+        kind: predict
+
+  - id: key-exchange
+    split: dev
+    q: "How can two people who have never met agree on a secret key over a channel that anyone can read?"
+    misconception: "They send the key over the channel in encrypted form."
+    quiz:
+      - q: "What operation makes this possible, and what makes it safe?"
+        expect: "Modular exponentiation (g^a mod p) is easy to compute, but recovering a from g^a mod p (the discrete logarithm) is infeasible for large p."
+      - q: "Why do both people end up with the same key, though the key itself is never sent?"
+        expect: "Each sends g^(own secret) mod p; each raises what it received to its own secret: (g^b)^a = (g^a)^b = g^(ab) mod p."
+      - q: "What attack does the exchange alone not stop, and what stops it?"
+        expect: "A man-in-the-middle who runs a separate exchange with each side; authentication (signatures, certificates) stops it."
+      - q: "With p = 23 and g = 5, Alice's secret is 6 and Bob's is 15. What do they send, and what key do they share?"
+        expect: "Alice sends 5^6 mod 23 = 8, Bob sends 5^15 mod 23 = 19; the key is 19^6 mod 23 = 8^15 mod 23 = 2."
+        kind: predict
+
+  - id: two-tides
+    split: dev
+    q: "Why are there two high tides a day, not one?"
+    misconception: "The far-side bulge comes from the centrifugal force of Earth spinning on its axis."
+    quiz:
+      - q: "Why is there a bulge on the side of Earth away from the Moon?"
+        expect: "The Moon's pull weakens with distance: it pulls the near side more than Earth's center and the center more than the far side, so the oceans are stretched along the Earth–Moon line, with a bulge at each end."
+      - q: "Why do high tides come about every 12 hours 25 minutes, not every 12 hours?"
+        expect: "The Moon moves along its orbit in the same direction Earth turns, so Earth needs about 24 h 50 min to face the Moon again; two bulges give a high tide every half of that."
+      - q: "When are tides largest, and why?"
+        expect: "Spring tides, at new and full Moon, when the Sun and Moon are in line and their tidal effects add (the Sun's is about half the Moon's)."
+      - q: "If the Moon stayed fixed in the sky instead of moving along its orbit, how often would high tides come?"
+        expect: "Every 12 hours exactly: Earth turns once in 24 hours under two fixed bulges."
+        kind: predict
+
+  - id: bloom-filter
+    split: dev
+    q: "How does a Bloom filter answer 'have I seen this before?' with little memory, and how can it be wrong?"
+    misconception: "A Bloom filter stores the items, or their hashes, and compares them."
+    quiz:
+      - q: "What happens when an item is added, and when one is looked up?"
+        expect: "Add: k hash functions give k positions in a bit array; set those bits to 1. Look up: check the same k bits; if any is 0, the item was never added; if all are 1, it probably was."
+      - q: "Which kind of wrong answer can it give, and which can it never give? Why?"
+        expect: "False positives (other items may have set all k bits); never false negatives, because an added item's bits are never cleared."
+      - q: "Why can you not delete an item by clearing its bits?"
+        expect: "Other items may share those bits; clearing them would make those items look absent (false negatives)."
+      - q: "Every bit in a filter is 1. What does it answer for an item that was never added?"
+        expect: "'Probably seen': every lookup finds all its bits set, so every answer is a false positive."
+        kind: predict
+
+  - id: heat-pump
+    split: dev
+    q: "How can a heat pump deliver three times more heat than the electricity it uses?"
+    misconception: "A heat pump creates energy, so it breaks the conservation of energy."
+    quiz:
+      - q: "Where does the extra heat come from?"
+        expect: "From the outside air or ground: the pump moves existing heat from cold to warm; the electricity drives the moving, so heat delivered = heat taken from outside + electrical work."
+      - q: "What does the refrigerant do in one cycle?"
+        expect: "It evaporates at low pressure and takes in heat outside; the compressor raises its pressure and temperature; it condenses inside and gives off heat; an expansion valve lowers its pressure again."
+      - q: "Why does a heat pump deliver less heat per unit of electricity on a colder day?"
+        expect: "It must lift heat across a larger temperature difference; the ideal limit, COP = T_hot / (T_hot − T_cold) in kelvin, falls as T_cold falls."
+      - q: "By the ideal limit, how does a heat pump that heats a house to 35 °C compare between a 5 °C day and a −15 °C day?"
+        expect: "COP limit 308/30 ≈ 10 at 5 °C and 308/50 ≈ 6 at −15 °C: the colder day gives less heat per unit of electricity."
+        kind: predict
+
+  - id: quorum
+    split: dev
+    q: "Why does a cluster of 5 servers survive 2 failures, but a cluster of 4 survives only 1?"
+    misconception: "Adding a server always lets a cluster survive more failures."
+    quiz:
+      - q: "What rule decides whether a write is committed?"
+        expect: "A majority (quorum) of the servers must acknowledge it: 3 of 5, or 3 of 4."
+      - q: "Why a majority, and not any group of servers?"
+        expect: "Any two majorities share at least one server, so two sides of a split network cannot both commit conflicting writes (no split brain), and a committed write is always seen by the next majority."
+      - q: "How many failures does a 6-server cluster survive?"
+        expect: "2: a majority of 6 is 4, so 2 can fail; it is no better than 5."
+      - q: "A 5-server cluster splits into a group of 3 and a group of 2. Which group can still commit writes, and why?"
+        expect: "Only the group of 3: it is a majority; the 2 cannot form one, so the two groups cannot commit conflicting writes."
+        kind: predict
+
+  - id: antibiotic-resistance
+    split: dev
+    q: "How do bacteria become resistant to an antibiotic?"
+    misconception: "Individual bacteria learn to resist, or adapt because they are exposed to the drug."
+    quiz:
+      - q: "Where does resistance come from before the drug is used?"
+        expect: "Variation already exists: random mutations, or resistance genes acquired from other bacteria."
+      - q: "What does the antibiotic itself do to the population?"
+        expect: "It kills the susceptible bacteria; the resistant ones survive and multiply, so the population becomes mostly resistant (selection)."
+      - q: "How can resistance pass between different species of bacteria?"
+        expect: "Horizontal gene transfer: plasmids and other mobile DNA carry resistance genes from one bacterium to another, also across species."
+      - q: "One bacterium in a billion in an infection is resistant. Why can a full course of antibiotics end with a resistant infection?"
+        expect: "The drug kills the susceptible ones; the resistant one survives and, with its competitors gone, multiplies into a resistant population."
+        kind: predict
+
+  - id: float-sum
+    split: dev
+    q: "Why does 0.1 + 0.2 not equal 0.3 in most programming languages?"
+    misconception: "It is a bug in the language or the processor."
+    quiz:
+      - q: "Why can a computer not store 0.1 exactly?"
+        expect: "Floating-point numbers are binary fractions; 0.1 = 1/10 has no finite binary expansion (like 1/3 in decimal), so it is stored as the nearest representable double."
+      - q: "Why does the sum then differ from 0.3?"
+        expect: "The rounding errors of 0.1 and 0.2 do not cancel; their rounded sum is a different double from the one nearest 0.3 (it prints as 0.30000000000000004)."
+      - q: "What should a program do instead of testing a == 0.3?"
+        expect: "Compare with a tolerance (abs(a − 0.3) < epsilon), or use decimal or integer types (cents) where exact decimal values matter, such as money."
+      - q: "Is 0.5 + 0.25 == 0.75 true in the same languages? Why?"
+        expect: "True: 1/2, 1/4, and 3/4 have power-of-2 denominators, so all are stored exactly and no rounding error occurs."
+        kind: predict
+
+  - id: greenhouse
+    split: dev
+    q: "How do greenhouse gases warm the Earth?"
+    misconception: "The hole in the ozone layer is what causes global warming."
+    quiz:
+      - q: "Why do greenhouse gases let sunlight in but hold back the heat the Earth gives off?"
+        expect: "Sunlight is mostly visible light, which they barely absorb; the Earth gives off infrared, which they absorb and emit again, partly back down."
+      - q: "Why does adding CO2 warm the surface, in terms of where the Earth radiates to space?"
+        expect: "Radiation escapes to space from higher in the atmosphere when there is more CO2; higher air is colder and radiates less, so the Earth takes in more than it gives off until the surface and lower air warm."
+      - q: "Why do nitrogen and oxygen, most of the air, not act as greenhouse gases?"
+        expect: "Molecules with two identical atoms have no vibration that changes their charge distribution (dipole), so they barely absorb infrared; CO2 and H2O do."
+      - q: "On a planet with no greenhouse gases, where would its heat radiate to space from, and what follows for its surface temperature?"
+        expect: "From the surface itself, so the surface settles at the temperature that balances sunlight (about 255 K for Earth, instead of the actual 288 K)."
+        kind: predict
+
+  # ------------------------------------------------------------------ test
+  - id: jpeg
+    split: test
+    q: "How does JPEG make a photo about ten times smaller?"
+    misconception: "JPEG makes a photo smaller by lowering its resolution (removing pixels)."
+    quiz:
+      - q: "What does JPEG do to each small block of the image before it discards anything?"
+        expect: "It splits the image into 8×8 blocks and transforms each (discrete cosine transform) into frequency components: smooth average and gradual changes, then finer detail."
+      - q: "Which step loses information, and why do people barely notice?"
+        expect: "Quantization: it rounds the frequency components, coarsely for high frequencies; the eye is less sensitive to fine detail (and to color detail, which is also subsampled)."
+      - q: "Why does a heavily compressed JPEG show blocks and ringing near sharp edges?"
+        expect: "Each 8×8 block is quantized on its own, so neighboring blocks stop matching; sharp edges need high frequencies, which were discarded."
+      - q: "At the same quality setting, which compresses better as JPEG: a photo of a clear sky or a scan of printed text? Why?"
+        expect: "The sky: smooth areas are mostly low frequencies, which quantize to few nonzero values; text has sharp edges that need high frequencies (and shows artifacts)."
+        kind: predict
+
+  - id: transistor-switch
+    split: test
+    q: "How does a transistor act as a switch in a computer chip?"
+    misconception: "Current flows into the gate and through the transistor to turn it on."
+    quiz:
+      - q: "What turns a MOSFET on?"
+        expect: "A voltage on the gate; it is insulated, so almost no current flows into it, but its electric field draws charge carriers into a channel between source and drain, which then conducts."
+      - q: "Why does a CMOS gate use almost no power when its inputs are not changing?"
+        expect: "Each gate pairs transistors so that one of each pair is off; there is no path from supply to ground. Power is spent mainly on charging and discharging capacitance when it switches."
+      - q: "How do transistors make a logic gate such as NOT?"
+        expect: "A p-type transistor to the supply and an n-type to ground share the input: a high input turns on the n-type and pulls the output low; a low input turns on the p-type and pulls the output high."
+      - q: "What happens to a CMOS chip's power use when its clock frequency doubles, the voltage unchanged?"
+        expect: "The switching power about doubles: the gates charge and discharge their capacitance twice as often."
+        kind: predict
+
+  - id: kidney-filter
+    split: test
+    q: "How do the kidneys clean the blood without losing what the body needs?"
+    misconception: "The kidneys pick out waste molecules one by one and leave everything else in the blood."
+    quiz:
+      - q: "What happens in the first step of filtering?"
+        expect: "Blood pressure pushes water and every small molecule through a filter (the glomerulus) into the tubule; blood cells and large proteins stay. About 180 litres a day."
+      - q: "How does the body keep the water, glucose, and salt?"
+        expect: "The tubules take back about 99% of the water and nearly all glucose and much salt; about 1.5 litres a day leaves as urine."
+      - q: "Why does glucose appear in urine in untreated diabetes?"
+        expect: "The transporters that take glucose back can handle only so much; above a blood level of about 10 mmol/L (180 mg/dL) they are full, and the excess stays in the urine."
+      - q: "A drug blocks the transporters that take glucose back in the tubules. What happens to the urine and to blood sugar?"
+        expect: "Glucose stays in the urine, and blood sugar falls (this is how SGLT2-inhibitor drugs work)."
+        kind: predict
+
+  - id: garbage-collection
+    split: test
+    q: "How does a garbage collector know which memory it can free?"
+    misconception: "A garbage collector frees objects the program will not use again."
+    quiz:
+      - q: "Which objects does a tracing collector keep?"
+        expect: "Objects reachable from the roots (stack variables, globals, registers) by following references; everything unreachable is garbage."
+      - q: "Why can reference counting alone fail to free memory?"
+        expect: "Objects in a cycle refer to each other, so their counts never reach zero even when nothing else can reach them."
+      - q: "How can a program with a garbage collector still leak memory?"
+        expect: "By keeping a reference to objects it no longer needs (a growing cache or list): they stay reachable, so the collector cannot free them."
+      - q: "Two objects refer to each other, and nothing else refers to either. Does a tracing collector free them? Does pure reference counting?"
+        expect: "Tracing: yes, they are unreachable from the roots. Reference counting: no, each keeps the other's count at 1."
+        kind: predict
+
+  - id: liquid-core
+    split: test
+    q: "How do earthquakes show that the Earth has a liquid outer core?"
+    misconception: "Scientists have drilled to the core or taken samples of it."
+    quiz:
+      - q: "What is the difference between P waves and S waves that matters here?"
+        expect: "P waves are compression waves and travel through solids and liquids; S waves are shear waves and cannot travel through a liquid."
+      - q: "What do seismometers far from an earthquake record, and what does it show?"
+        expect: "No direct S waves beyond about 104° from the epicenter (the S-wave shadow zone): a layer deep inside stops them, so it must be liquid."
+      - q: "Why is there also a zone where P waves are missing?"
+        expect: "P waves slow down and bend (refract) when they enter the core, so between about 104° and 140° no direct P waves arrive."
+      - q: "If the outer core were solid, what would change in the records of seismometers on the far side of the Earth?"
+        expect: "Direct S waves would arrive there too: no S-wave shadow zone."
+        kind: predict
+
+  - id: backprop
+    split: test
+    q: "How does a neural network learn from its errors?"
+    misconception: "The correct answer is sent backwards through the network and each neuron copies it."
+    quiz:
+      - q: "What does training change, and in which direction?"
+        expect: "The weights; each is moved a small step against the gradient of the loss (the error measure), the direction that lowers the loss fastest."
+      - q: "Why is backpropagation efficient, compared with nudging each weight to see what happens?"
+        expect: "The chain rule, applied from the output back, reuses each layer's derivatives, so all gradients cost about as much as one or two forward passes, not one pass per weight."
+      - q: "What goes wrong when the learning rate is too large, and too small?"
+        expect: "Too large: steps overshoot and the loss jumps around or diverges. Too small: learning is very slow."
+      - q: "A weight's gradient is zero. What happens to it in one training step, and why?"
+        expect: "It does not change: a small change to it does not change the loss (to first order), so the step is zero."
+        kind: predict
+
+  - id: mountain-boiling
+    split: test
+    q: "Why does water boil at a lower temperature high on a mountain?"
+    misconception: "Water up there boils at a lower temperature because it is colder, so food cooks just as fast."
+    quiz:
+      - q: "What condition sets the temperature at which water boils?"
+        expect: "Water boils when its vapor pressure equals the pressure of the air above it."
+      - q: "About how much lower is the boiling point at 3,000 m, and why?"
+        expect: "About 90 °C instead of 100 °C: air pressure there is about 70% of sea level, and water reaches that vapor pressure at a lower temperature."
+      - q: "How does a pressure cooker change this?"
+        expect: "It raises the pressure (about 1 atmosphere extra), so water boils at about 120 °C, and food cooks faster."
+      - q: "At the top of Everest the air pressure is about a third of sea level's. Will an egg in boiling water cook faster or slower than at sea level? Why?"
+        expect: "Slower: water boils there at about 70 °C, so the egg sits in cooler water."
+        kind: predict
+
+  - id: ssd-wear
+    split: test
+    q: "How does an SSD store data, and why does it wear out?"
+    misconception: "SSDs wear out when you read data from them."
+    quiz:
+      - q: "How does a flash memory cell store a bit?"
+        expect: "Charge trapped in an insulated layer (a floating gate or charge trap) shifts the voltage at which the cell's transistor turns on; reading senses that voltage."
+      - q: "What wears a cell out?"
+        expect: "Programming and erasing push electrons through a thin insulating oxide; each cycle damages it a little, so a cell lasts a limited number of program/erase cycles (about 1,000–3,000 for TLC). Reading does not wear it."
+      - q: "Why does an SSD spread writes across the whole drive?"
+        expect: "Data is written in pages but erased only in large blocks, and each block wears; wear leveling spreads erases so no block wears out early."
+      - q: "An SSD holds photos that are written once and read every day for years. Will it wear out from this use? Why?"
+        expect: "No: reading does not wear the cells; wear comes from program/erase cycles, and these photos use very few."
+        kind: predict
+
+  - id: rent-cap
+    split: test
+    q: "Why do economists say that rent caps cause housing shortages, and how sure are they?"
+    misconception: "A rent cap lowers rents across the whole market with no side effects."
+    quiz:
+      - q: "What is the basic mechanism?"
+        expect: "A price held below the market level raises the quantity people want and lowers the quantity offered; the gap is a shortage."
+      - q: "Why does the effect grow over time?"
+        expect: "In the short run the housing stock is fixed; over years, landlords convert, sell, or stop maintaining units, and less is built, so supply falls more."
+      - q: "Who gains and who loses?"
+        expect: "Tenants already in capped units gain; people looking for a place lose (fewer vacancies, longer searches, often higher uncapped rents). The size of the effects is measured differently by different studies."
+      - q: "A city caps rents in existing buildings but exempts new construction. Which part of the mechanism does that weaken, and which part remains?"
+        expect: "It weakens the effect on new building (construction is not discouraged); the shortage in existing capped units, conversions, and lower mobility remain."
+        kind: predict
+
+  - id: pagerank
+    split: test
+    q: "How does PageRank decide which web pages are important?"
+    misconception: "PageRank counts the links to a page; more incoming links always means a higher rank."
+    quiz:
+      - q: "What makes a page important under PageRank?"
+        expect: "Links from important pages: each page shares its rank among the pages it links to, so a link from an important page with few links counts most."
+      - q: "What is the 'random surfer' picture?"
+        expect: "A page's rank is the long-run fraction of time a surfer spends there who follows random links and, with probability about 0.15, jumps to a random page."
+      - q: "Why is the random jump needed?"
+        expect: "Without it, pages with no outgoing links and closed loops trap the surfer (rank sinks), and the ranks do not settle to one well-defined answer."
+      - q: "Page X gets one link from a page with 1,000 outgoing links; page Y gets one link from a page of equal rank with 2 outgoing links. Which gains more rank from its link?"
+        expect: "Y: a page shares its rank among its outgoing links, so Y gets half of that page's share and X a thousandth."
+        kind: predict
+
+  - id: muscle-contraction
+    split: test
+    q: "How does a muscle contract?"
+    misconception: "The protein filaments in the muscle get shorter."
+    quiz:
+      - q: "What moves inside a muscle fiber when it contracts?"
+        expect: "Myosin heads bind actin filaments and pull them past the myosin filaments (sliding filaments); the filaments keep their length, the overlap grows."
+      - q: "What role does ATP play?"
+        expect: "ATP binding releases the myosin head from actin; splitting ATP re-cocks the head for the next stroke."
+      - q: "What starts and stops a contraction?"
+        expect: "A nerve signal releases calcium inside the fiber; calcium moves the blocking proteins (troponin, tropomyosin) off actin's binding sites. When calcium is pumped away, the sites are covered again."
+      - q: "After death, cells stop making ATP. What happens to the muscles, and why?"
+        expect: "They lock stiff (rigor mortis): without ATP the myosin heads cannot release from actin."
+        kind: predict
+
+  - id: noise-cancelling
+    split: test
+    q: "How do noise-cancelling headphones cancel sound?"
+    misconception: "They cancel noise by sealing or absorbing the sound, like earplugs."
+    quiz:
+      - q: "What does the headphone do with the sound from its microphone?"
+        expect: "It plays the same sound with the pressure inverted (opposite phase), so the two waves add to nearly zero at the ear (destructive interference)."
+      - q: "Why does it work better on a steady low hum than on voices or high sounds?"
+        expect: "Any delay shifts the anti-noise wave; a fixed delay is a small fraction of a long low-frequency period but a large fraction of a short high-frequency one. High sounds are left to the ear cups' passive isolation."
+      - q: "What does a 0.1 ms delay do at 100 Hz and at 5 kHz?"
+        expect: "100 Hz: the period is 10 ms, so the shift is 1% of a cycle and the cancellation still works. 5 kHz: the period is 0.2 ms, so the shift is half a cycle and the anti-noise adds to the sound instead."
+      - q: "If the headphone played the microphone's sound without inverting it, what would the listener hear?"
+        expect: "The noise louder, about twice the amplitude: the waves add in step instead of cancelling."
+        kind: predict
+
+  - id: sort-bound
+    split: test
+    q: "Why can no comparison sort sort n items in fewer than about n log n comparisons?"
+    misconception: "No sorting algorithm of any kind can be faster than n log n."
+    quiz:
+      - q: "Why does the number of possible orderings matter?"
+        expect: "The input can be any of n! orderings, and each needs a different sequence of moves, so the algorithm must tell all n! apart."
+      - q: "Why does that give about n log n comparisons?"
+        expect: "Each comparison has two outcomes, so k comparisons separate at most 2^k cases; 2^k ≥ n! needs k ≥ log2(n!) ≈ n log2 n."
+      - q: "How can counting sort be faster?"
+        expect: "It does not compare items; it uses each key as an index into counts, which works when keys are small integers in a known range (time about n + range)."
+      - q: "What is the smallest number of comparisons that always suffices to sort 3 items, and why can 2 not be enough?"
+        expect: "3: there are 3! = 6 orderings; 2 comparisons separate at most 4, and 3 separate up to 8."
+        kind: predict
+
+  - id: lightning
+    split: test
+    q: "What causes lightning, and why do you hear thunder after the flash?"
+    misconception: "Lightning never strikes the same place twice."
+    quiz:
+      - q: "How does a thundercloud become charged?"
+        expect: "In the updrafts, collisions between small ice crystals and soft hail (graupel) move charge between them; the light crystals carry one charge up, the heavier graupel carries the other lower, so the cloud's top and middle get opposite charges."
+      - q: "What makes thunder?"
+        expect: "The stroke heats the air in its channel to about 30,000 K in microseconds; the air expands violently and makes a shock wave that becomes sound."
+      - q: "Why is the thunder late, and how can you use that?"
+        expect: "Light arrives almost at once; sound travels about 340 m/s, so about 3 s per kilometer: count the seconds and divide by 3 for the distance in km."
+      - q: "You see a flash and hear its thunder 9 seconds later. About how far away was the stroke?"
+        expect: "About 3 km (9 s ÷ 3 s per km)."
+        kind: predict
+
+  - id: double-spend
+    split: test
+    q: "How does Bitcoin stop someone from spending the same coin twice without a bank?"
+    misconception: "A central server checks each transaction against the account balances."
+    quiz:
+      - q: "Where are the transactions recorded, and who checks them?"
+        expect: "In a public ledger of blocks, each holding the hash of the one before; every node checks that the coins spent are unspent in that chain."
+      - q: "What makes it hard to rewrite the ledger to undo a payment?"
+        expect: "Proof of work: each block needs a costly hash search, so an attacker must redo the work of that block and every later one, faster than the rest of the network, which needs most of the network's hashing power."
+      - q: "Why does a merchant wait for several confirmations?"
+        expect: "Each later block adds work an attacker must redo; the chance a minority attacker catches up falls exponentially with the number of blocks (six is a common convention)."
+      - q: "An attacker controls 60% of the network's hashing power. Do six confirmations protect a merchant? Why?"
+        expect: "No: with most of the hashing power the attacker's chain grows faster and eventually overtakes the honest one, however many blocks it starts behind."
+        kind: predict
+
+  - id: screen-yellow
+    split: test
+    q: "How can a screen show yellow when it emits only red, green, and blue light?"
+    misconception: "Red and green light mix to brown, as paints do, so the screen must emit yellow light."
+    quiz:
+      - q: "What does the eye actually measure about color?"
+        expect: "Three kinds of cone respond to overlapping ranges of wavelength; the brain sees color from the ratio of their three responses, not from the wavelength itself."
+      - q: "Why does red plus green light look yellow?"
+        expect: "Together they stimulate the long- and medium-wavelength cones in about the same ratio as spectral yellow light (about 580 nm) does, so the two are indistinguishable (metamers)."
+      - q: "Why can a screen not show every color the eye can see?"
+        expect: "The cones' sensitivities overlap, so no light stimulates one cone type alone; mixes of three primaries cover only a triangle (gamut) inside the colors the eye can see, missing the most saturated ones."
+      - q: "A spectrometer measures a screen showing yellow and a sodium lamp (light near 589 nm). Do the spectra match? Why do the two look alike?"
+        expect: "No: the screen shows separate red and green peaks, the lamp one line near 589 nm; both give the cones about the same ratio of responses."
+        kind: predict
+
+  - id: https-identity
+    split: test
+    q: "How does HTTPS prove that a website is the one it claims to be?"
+    misconception: "The padlock means the website is safe and trustworthy."
+    quiz:
+      - q: "What is a certificate?"
+        expect: "A document that binds a domain name to a public key, signed by a certificate authority."
+      - q: "Why does the browser trust the certificate authority's signature?"
+        expect: "It checks a chain of signatures up to a root certificate already installed in the browser or operating system."
+      - q: "Why can an attacker not just copy a site's certificate?"
+        expect: "The certificate is public; during the handshake the server must prove it has the matching private key (by signing), which the attacker does not have."
+      - q: "A phishing site has a valid certificate and a padlock. How is that possible?"
+        expect: "A certificate proves control of a domain name, not honesty; the attacker gets a certificate for their own look-alike domain."
+        kind: predict
+
+  - id: skater-spin
+    split: test
+    q: "Why does a spinning skater speed up when pulling the arms in?"
+    misconception: "The skater speeds up because pulling the arms in reduces air resistance."
+    quiz:
+      - q: "What stays the same as the skater pulls the arms in?"
+        expect: "Angular momentum, L = I × ω (moment of inertia times spin rate), because nothing outside applies a torque (friction aside)."
+      - q: "Why does the spin rate go up, and by how much if the moment of inertia halves?"
+        expect: "Moment of inertia depends on mass × distance² from the axis, so pulling mass in lowers I; with L fixed, ω rises: half the I gives twice the spin rate."
+      - q: "Where does the extra kinetic energy come from?"
+        expect: "The muscles do work pulling the arms inward against their tendency to fly out; kinetic energy (½ I ω²) rises, here doubling."
+      - q: "A skater spinning at 2 turns per second pulls in until the moment of inertia is a third of what it was. What is the new spin rate?"
+        expect: "6 turns per second: L = Iω is constant, so ω triples."
+        kind: predict
+
+  - id: bond-prices
+    split: test
+    q: "Why do bond prices fall when interest rates rise?"
+    misconception: "Bond prices fall because the issuer becomes less likely to pay."
+    quiz:
+      - q: "Why does an existing bond lose value when rates rise?"
+        expect: "Its payments are fixed; new bonds pay the higher rate, so the old bond sells only at a lower price, low enough that its return matches the new rate (its future payments are discounted at the higher rate)."
+      - q: "Why does a long bond fall more than a short one?"
+        expect: "More of its payments lie far in the future, and discounting at a higher rate shrinks distant payments more (higher duration); a 10-year 2% bond falls about 9% when rates go from 2% to 3%."
+      - q: "If you hold the bond to maturity, what do you lose?"
+        expect: "You still get every coupon and the face value; the loss is the market price if you sell early, and the higher return you could have had."
+      - q: "Rates rise by 1 point. Which falls more in price: a 2-year bond or a 30-year bond? Why?"
+        expect: "The 30-year bond: more of its payments are far in the future, where a higher discount rate shrinks them most."
+        kind: predict
+
+  - id: cache-order
+    split: test
+    q: "Why does a loop over a 2D array run much faster row by row than column by column?"
+    misconception: "The two loops do different amounts of work."
+    quiz:
+      - q: "How is a 2D array laid out in memory in C or NumPy by default?"
+        expect: "Row-major: each row is stored contiguously, and the next row follows it."
+      - q: "Why does the order of access matter to the CPU?"
+        expect: "Memory moves into the cache in lines of about 64 bytes; row order uses every value in a line (8 doubles), while column order jumps a full row ahead each step and uses one value per line loaded."
+      - q: "How large is the cost difference between a cache hit and a trip to main memory?"
+        expect: "About 1 ns for L1 cache versus about 100 ns for main memory, so missing the cache on each access can make the loop many times slower."
+      - q: "The array is stored column-major instead (Fortran, or NumPy with order='F'). Which loop order is fast now? Why?"
+        expect: "Column by column: now each column is contiguous, so that order uses every value in each cache line."
+        kind: predict

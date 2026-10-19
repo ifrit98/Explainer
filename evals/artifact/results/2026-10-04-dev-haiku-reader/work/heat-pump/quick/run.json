@@ -1,0 +1,12 @@
+{
+  "result": "I made `explainers/heat-pump/diagram.md` (with `model.md` and `model.yaml` behind it). I chose a diagram because the answer is a closed loop of four parts with energy going in and out, and two Mermaid pictures with short notes show that more clearly than prose alone. The explainer check and the Mermaid render check both pass.",
+  "error": null,
+  "cost": 0.47279319999999997,
+  "seconds": 98,
+  "turns": 19,
+  "files": [
+    "explainers/heat-pump/diagram.md"
+  ],
+  "review_cost": 0,
+  "reviews": 0
+}

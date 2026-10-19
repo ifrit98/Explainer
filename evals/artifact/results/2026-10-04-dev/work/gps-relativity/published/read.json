@@ -1,0 +1,45 @@
+{
+  "answers": {
+    "1": {
+      "answer": "The receiver records when each satellite's signal arrives. Each signal says when it was sent, so travel time = receive time − send time. Multiplying the travel time by the speed of light c gives the range, the distance to that satellite. Because the receiver's own clock is wrong, what it actually computes is a pseudorange: the true range plus b, its clock error expressed in metres.",
+      "quote": "travel time = receive time − send time\n- range = travel time × c, where c is light speed and the range is the true distance to the satellite."
+    },
+    "2": {
+      "answer": "The receiver's quartz clock is off by an unknown amount. That error, b, appears equally in every pseudorange, so it becomes a fourth unknown alongside x, y and z. Four unknowns need four equations, which means four satellites.",
+      "quote": "In three dimensions the unknowns are x, y, z, and b. Four unknowns need four equations, so the receiver needs four satellites."
+    },
+    "3": {
+      "answer": "Relativity makes each satellite clock gain a net 38 µs a day: it gains 45 µs from weaker gravity and loses 7 µs from its speed. That is about 11.4 km of range error per day. A fix needs the satellite clocks within about 17 ns, roughly 5 m. Because each satellite clock is set at a different moment, the clocks carry different errors that the shared b cannot absorb. The explanation does not say how quickly within a day the fix breaks down.",
+      "quote": "38 µs is only 4.5 × 10⁻¹⁰ of a day, but light covers 11.4 km in 38 µs. Each uncorrected satellite clock would move 11.4 km of range further from GPS time every day."
+    },
+    "4": {
+      "answer": "Every computed distance would be about 300 m too long, because 1 µs × c = 300 m. If the receiver treats these as true ranges with only three satellites, it has no fourth equation to detect or remove this shared error. The explanation does not say how large the resulting position error would be.",
+      "quote": "Light covers 300 m in one microsecond (1 µs = 10⁻⁶ s) and 0.3 m in one nanosecond (1 ns = 10⁻⁹ s). So every timing error becomes a range error at that rate."
+    }
+  },
+  "stops": [
+    "Section 5 says the clocks drift at the same rate, then says b absorbs the drift only if the errors are identical. It's unclear at first why a shared rate isn't enough: \"Every satellite clock drifts at the same rate. Why does b not absorb the drift?\"",
+    "It never says why satellites are set to GPS time at different moments, or why they aren't simply reset often: \"But each satellite clock is set to GPS time at a different moment.\"",
+    "Ground stations upload corrections, which makes it unclear why drift would make GPS fail at all: \"Ground stations upload small corrections for what remains\"",
+    "No reason is given for why three spheres meet in exactly two points: \"Three spheres meet in two points.\"",
+    "It doesn't say how a 5 m fix turns into a 17 ns budget (5 m / 0.3 m per ns), or why the full budget goes to each clock: \"For a fix within about 5 m, the satellite clocks must agree with GPS time to about 17 ns.\"",
+    "Why a higher clock ticks faster is stated but never explained: \"general relativity: a clock higher above Earth ticks faster\"",
+    "In the 1D example, the step that the ranges must add to 30 km needs a moment's thought: \"The receiver lies between the beacons, so the two ranges must add up to 30 km.\"",
+    "The clock adjustment is given as a frequency, while the drift is in µs per day; the link between them is implicit: \"set it to 10.22999999543 MHz: slower by 4.5 × 10⁻¹⁰\""
+  ],
+  "excess": [
+    "\"It is measured, not only predicted.\"",
+    "\"Your receiver (the GPS chip in a phone) only listens.\"",
+    "\"About 30 GPS satellites orbit 20,200 km above Earth.\"",
+    "\"Earth's rotation during the 67 ms flight (Sagnac effect)\"",
+    "\"Why a moving clock ticks slow: see the \\\"light clock\\\" argument in special relativity.\"",
+    "\"How the receiver solves the equations: iteration from a guess, with a best fit when it hears more than four satellites.\"",
+    "\"Four pseudoranges give x, y, z, and the receiver's clock error, but only if satellite clocks stay within about 17 ns of GPS time.\""
+  ],
+  "grounded": {
+    "1": true,
+    "2": true,
+    "3": true,
+    "4": true
+  }
+}

@@ -1,0 +1,59 @@
+{
+  "key": {
+    "A": "quick",
+    "B": "none",
+    "C": "published",
+    "D": "principles"
+  },
+  "grades": {
+    "quick": {
+      "quiz": [
+        2,
+        2,
+        2,
+        2
+      ],
+      "misconception": "corrected",
+      "errors": []
+    },
+    "none": {
+      "quiz": [
+        2,
+        2,
+        2,
+        2
+      ],
+      "misconception": "corrected",
+      "errors": [
+        "However you split 5, one side always has at least 3, so exactly one side carries on. (False for a three-way split such as 2–2–1, where no side has a majority.)"
+      ]
+    },
+    "published": {
+      "quiz": [
+        2,
+        2,
+        2,
+        2
+      ],
+      "misconception": "corrected",
+      "errors": []
+    },
+    "principles": {
+      "quiz": [
+        2,
+        2,
+        2,
+        2
+      ],
+      "misconception": "corrected",
+      "errors": []
+    }
+  },
+  "rank": [
+    "quick",
+    "principles",
+    "published",
+    "none"
+  ],
+  "why_best": "A defines every term and reaches the counting rule, the overlap argument (2q > n), the 2–2 split counterexample and the odd/even pattern in the fewest words, with no detours."
+}

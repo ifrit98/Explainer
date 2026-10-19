@@ -1,0 +1,25 @@
+solar_constant_w_m2: 1361
+mean_incoming_w_m2: 340
+albedo: 0.30
+absorbed_solar_w_m2: 238
+sigma: 5.67e-8
+effective_temp_k: 255
+surface_temp_k: 288
+greenhouse_warming_k: 33
+surface_emission_w_m2: 390
+atmosphere_net_stop_w_m2: 150
+sun_temp_k: 5800
+sun_peak_um: 0.5
+earth_peak_um: 10
+wien_constant_um_k: 2898
+one_layer_surface_k: 303
+lapse_rate_k_per_km: 6.5
+emission_height_km: 5
+co2_band_um: 15
+forcing_coefficient: 5.35
+doubling_forcing_w_m2: 3.7
+planck_response_w_m2_k: 3.8
+no_feedback_warming_k: 1.0
+emission_rise_doubling_m: 150
+water_vapour_per_k_percent: 7
+sensitivity_likely_range_k: [2.5, 4]

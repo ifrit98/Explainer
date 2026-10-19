@@ -1,0 +1,50 @@
+{
+  "answers": {
+    "1": {
+      "answer": "From random copying errors (mutations) during cell division and from receiving resistance genes from other bacteria through horizontal gene transfer via plasmids.",
+      "quote": "a few bacteria already carry a resistance gene, made by a random copying error or received from another bacterium"
+    },
+    "2": {
+      "answer": "The antibiotic kills or halts the susceptible bacteria, eliminating them from the population while allowing resistant cells to continue dividing and multiplying.",
+      "quote": "The drug removes the susceptible bacteria around them, and the resistant bacteria multiply"
+    },
+    "3": {
+      "answer": "Through plasmids—small circles of DNA that can be copied from one bacterium to another during conjugation, allowing genes to pass between different species.",
+      "quote": "In conjugation, two bacteria touch and one copies a plasmid into the other"
+    },
+    "4": {
+      "answer": "Even though there are only a few resistant cells initially, they multiply exponentially while susceptible cells are killed. The immune system alone cannot stop this exponential growth, so resistant cells repopulate the infection.",
+      "quote": "The resistant cells keep dividing. The immune system removes some, but alone it cannot keep up with a population that keeps doubling"
+    }
+  },
+  "stops": [
+    "target: a molecule the cell needs",
+    "MIC (minimum inhibitory concentration)",
+    "fitness cost: the extra protein, or the changed target, makes the cell grow more slowly",
+    "A compensatory mutation is a second change, in another gene, that restores growth",
+    "efflux pump, a membrane protein, exports tetracycline faster than it enters",
+    "One letter change could never build",
+    "The cell loses a porin, an entry channel in its surface",
+    "their chances multiply: 10⁻⁸ × 10⁻⁸ = 10⁻¹⁶",
+    "the random scatter is about √11 ≈ 3.3",
+    "expect 10¹⁰ divisions"
+  ],
+  "excess": [
+    "At a lab doubling time of 30 minutes, that is 13 hours",
+    "They grew 20 equal cultures of bacteria, then exposed each one and counted the resistant colonies",
+    "For independent rare events with a mean of 11, the random scatter is about √11 ≈ 3.3",
+    "the test asks only whether resistance arose before contact, so it applies to drugs too",
+    "The same plasmid gene turns up in different species, which shows that the gene moved between them",
+    "If exposure caused resistance, each cell would have the same small chance when it met the drug",
+    "Early mutants have divided since, so there are at least 100 resistant cells",
+    "the immune system removes some, but alone it cannot keep up",
+    "One plasmid often carries resistance genes for several drugs, so any one of those drugs still selects the whole plasmid",
+    "(Illustrative values.)"
+  ],
+  "grounded": {
+    "1": true,
+    "2": true,
+    "3": true,
+    "4": true
+  }
+}

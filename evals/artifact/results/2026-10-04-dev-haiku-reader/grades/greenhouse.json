@@ -1,0 +1,62 @@
+{
+  "key": {
+    "A": "none",
+    "B": "published",
+    "C": "principles",
+    "D": "quick"
+  },
+  "grades": {
+    "none": {
+      "quiz": [
+        1,
+        2,
+        2,
+        2
+      ],
+      "misconception": "corrected",
+      "errors": []
+    },
+    "published": {
+      "quiz": [
+        2,
+        2,
+        1,
+        2
+      ],
+      "misconception": "absent",
+      "errors": []
+    },
+    "principles": {
+      "quiz": [
+        1,
+        2,
+        2,
+        2
+      ],
+      "misconception": "absent",
+      "errors": [
+        "Above about 12 km, ozone absorbs sunlight and temperature *rises* with height."
+      ]
+    },
+    "quick": {
+      "quiz": [
+        1,
+        2,
+        2,
+        2
+      ],
+      "misconception": "absent",
+      "errors": [
+        "The surface, 5 km of lapse rate below, warms by the same amount: about 1.2 K before feedbacks. (contradicts its own chain of a 150 m rise × 6.5 K/km = 1 K)",
+        "\"240 W/m² absorbed\" by the Surface in the flowchart (the atmosphere absorbs part of the sunlight; the surface absorbs much less than 240 W/m²)"
+      ]
+    }
+  },
+  "rank": [
+    "principles",
+    "none",
+    "quick",
+    "published"
+  ],
+  "why_best": "C builds each step of the mechanism in order (energy balance, wavelength split, dipole reason, why the one-layer model fails, emission height and lapse rate, the isothermal test case), with worked numbers and prediction prompts, and adds nothing the reader does not need, while A covers the same ground at much greater length, D contradicts its own numbers, and B skips why N2 and O2 do not absorb."
+}
