@@ -1,0 +1,99 @@
+# Machine-readable half of model.md. `explainer check antibiotic-resistance` holds every rendering to it.
+
+values:
+  expected_mutations_large: 100        # 10^10 cells × 10^-8 per division
+  small_infection_chance_pct: 1        # 1 − e^-0.01 ≈ 1%
+  regrowth_doublings: 27               # log2(10^8) ≈ 26.6
+  two_pow_27: 130000000                # 2^27 ≈ 1.34 × 10^8
+  lab_regrowth_hours: 13               # 27 × 30 min
+  doubling_minutes: 30
+  mic_susceptible: 0.5                 # mg/L
+  mic_resistant: 32                    # mg/L
+  blood_concentration: 8               # mg/L
+  cost_pct: 5
+  cost_generations: 100
+  ratio_after_100_generations: 0.006   # 0.95^100
+  compensated_cost_pct: 1
+  compensated_ratio: 0.37              # 0.99^100
+  ld_cultures: 20
+  ld_mean: 11
+  ld_zero_cultures: 11
+  ld_max: 107
+  ld_poisson_low: 5
+  ld_poisson_high: 18
+  ld_year: 1943
+  ld_scatter: 3.3                      # √11
+
+allow: [1, 2, 4, 6, 8, 10, 16, -6, -8, -16, 0.95, 0.99, 2.0]
+
+require:
+  - path: expected_mutations_large
+    in: [prose]
+  - path: regrowth_doublings
+    in: [prose]
+  - path: ratio_after_100_generations
+    in: [prose]
+  - path: ld_max
+    in: [prose]
+
+claims:
+  - id: preexisting
+    kind: mechanism
+    statement: "Resistant cells exist before the drug arrives, made by random mutation at about 10^-8 per division; a large infection already holds some."
+    example: "10^10 cells × 10^-8 = 100 resistance mutations before treatment; a 10^6-cell infection has about a 1% chance of any."
+    ask: "An infection of 10^10 bacteria has never met drug X. A given resistance mutation happens once per 10^8 divisions. Does the infection contain resistant cells, and roughly how many?"
+  - id: selection-not-induction
+    kind: why
+    statement: "The drug does not cause resistance; it removes the susceptible cells, so resistant cells that were already there take over."
+    alternative: "The drug makes the bacteria change, as an adaptation."
+    counterexample: "Luria and Delbrück 1943: 20 parallel cultures, mean about 11 resistant colonies. Induction predicts about 11 in each (most 5 to 18); observed 11 cultures with 0 and one with 107."
+    ask: "Why do scientists say the antibiotic selects resistance rather than causes it? What evidence separates the two ideas?"
+  - id: mechanisms
+    kind: definition
+    statement: "A resistance gene blocks the drug in one of four ways: destroy it, change its target, pump it out, or keep it out; each raises the MIC."
+  - id: hgt
+    kind: why
+    statement: "Bacteria also get complete resistance genes from other bacteria, often on plasmids, even across species."
+    alternative: "Every resistance is a new mutation in that lineage."
+    counterexample: "A beta-lactamase is a complete enzyme that one letter change cannot build; the same plasmid gene appears in different species."
+    ask: "How can a species become resistant to a drug in one step, without any mutation of its own?"
+  - id: takeover-needs-drug
+    kind: guarantee
+    statement: "Resistant cells take over only while the drug is present; without the drug a fitness cost makes their fraction fall."
+    example: "With drug: 100 survivors regrow to 10^10 in about 27 doublings (about 13 h at 30 min per doubling)."
+    counterexample: "Without drug, 5% slower growth: resistant-to-susceptible ratio × 0.95^100 ≈ 0.006 after 100 doublings; with a compensatory mutation (1% cost), 0.99^100 ≈ 0.37; plasmids with genes for several drugs stay selected by any of them."
+    ask: "If doctors stop using an antibiotic, what happens to the resistant fraction, and why might it not disappear?"
+  - id: mic
+    kind: definition
+    statement: "MIC is the lowest concentration that stops a strain's growth; a strain is resistant when its MIC is above the concentration the drug reaches in the patient."
+    example: "Blood concentration 8 mg/L: MIC 0.5 mg/L strain stopped, MIC 32 mg/L strain grows."
+  - id: combination
+    kind: guarantee
+    statement: "Two drugs given together stop selection when resistance to each needs its own independent change."
+    example: "10^-8 × 10^-8 = 10^-16; 10^10 cells give 10^-6 expected double-resistant cells."
+    counterexample: "If one plasmid or pump resists both drugs, one event at about 10^-8 suffices: 10^10 × 10^-8 = 100 survivors."
+
+accept_unjustified:
+  "√": "the scatter of independent rare-event counts is √mean (Poisson); stated as a fact the reader can use, deriving it is off the main line"
+  ln: "model.md only: the Luria–Delbrück mean μN ln N, a background check that resistant cells exceed 100; no rendering shows it"
+
+terms:
+  - term: resistant
+    means: "a property of the bacteria, not of the patient or the body"
+    avoid: [patient becomes resistant, body becomes resistant, become immune to]
+  - term: selection
+    means: "the drug removes susceptible cells; it does not cause the change"
+    avoid: [bacteria learn, drug causes mutations, adapt to the drug]
+
+budget: {prose: 950, reason: "two sources of resistance genes, four mechanisms in a table, and the selection guarantee with its no-drug case and the Luria–Delbrück evidence"}
+
+quiz:
+  - q: "A patient's infection has 10^10 bacteria. A resistance mutation to drug X happens once in 10^8 divisions. The patient takes drug X; it clears symptoms for a day, then the infection returns and drug X no longer works. Explain what happened."
+    expect: "About 100 resistant cells existed before treatment (10^10 × 10^-8). The drug removed the susceptible cells; the resistant cells survived and regrew (about 27 doublings to 10^10). The bacteria population is now resistant."
+    misconception: "The drug caused the bacteria to mutate or adapt, or the patient's body became resistant."
+  - q: "Would you expect the same outcome if the infection had only 10^6 bacteria? Why?"
+    expect: "Probably not: expected resistant mutations 10^6 × 10^-8 = 0.01, about a 1% chance any resistant cell exists, so the drug most likely clears it."
+    misconception: "Same outcome, because resistance develops during treatment regardless of population size."
+  - q: "A hospital stops using drug X for years. Does resistance to X vanish?"
+    expect: "It usually falls, because resistant cells often grow slower without the drug (fitness cost), but slowly and not always to zero: compensatory mutations reduce the cost and plasmids persist."
+    misconception: "Yes, it disappears quickly, or no, nothing changes because resistance is permanent."

@@ -1,0 +1,180 @@
+{
+ "tool": "quiz",
+ "rendering": "prose",
+ "slug": "key-exchange",
+ "at": "2026-10-04T15:09:31",
+ "model": "default",
+ "prompt_sha": "97e170ce48d4",
+ "reply": {
+  "answers": {
+   "1": "Alice and Bob, who want a shared key. Eve, who reads every message but changes none. Mallory, who can replace messages. The public prime modulus p and the public base g. The private numbers a and b. The public numbers A = g^a mod p and B = g^b mod p. The shared secret s = g^(ab) mod p. A hash function that turns s into the encryption key. The operation g^x mod p, which is one-way, and its reverse problem, the discrete logarithm.",
+   "2": "p and g are public. Each side keeps its own private number and sends the matching public number, A = g^a mod p or B = g^b mod p. Each side then raises the other side's public number to its own private number, mod p, and both get s. s goes through a hash to become the key. Eve sees p, g, A and B, but not a, b or s. To get s she would have to undo g^x mod p, which is the discrete logarithm problem, and no fast method for it is known. Mallory can swap the public numbers. Authentication (digital signatures) is what stops that.",
+   "3": "Each side combines its own private exponent with the other side's public value, and (g^b)^a = (g^a)^b = g^(ab), so both reach the same s. An eavesdropper only has g^a and g^b. Combining those gives g^(a+b), not g^(ab), and getting a or b back needs a discrete logarithm, which has no known fast method.",
+   "4": "The most important variable is the size of p, together with a and b chosen at random across that range. With p = 23, Eve finds a = 6 on her 6th try. With a 2048-bit p, the best known methods need about 2^112 operations, roughly 10^14 years at a trillion operations per second. Alice's own work only grows to about 4,000 steps, because repeated squaring doubles the exponent each time. So making p bigger hurts Eve enormously and costs Alice little. A second variable is the choice of g: with g = 22 the powers mod 23 are only 1 and 22, so s has only two possible values.",
+   "5": "Assumption: the discrete logarithm is hard and Eve has no other way to get s. This is not proven; it rests on decades of failed attempts. Simplification: Eve only reads and never changes messages. Established facts: (x^a)^b = x^(ab), and taking remainders along the way does not change the final remainder, since (x+23k)y = xy + 23ky. Also, Euclid's algorithm quickly finds the number that undoes a multiplication mod p.",
+   "6": "Alice and Bob agree in public on a prime p and a base g. Each picks a secret exponent and sends g raised to it, mod p. Each raises the number they receive to their own secret exponent, and by the exponent rule both get g^(ab) mod p, which they hash into a key. Eve sees only g^a and g^b. Multiplying them gives g^(a+b), and finding a or b is the discrete logarithm, which has no known fast method when p is huge. That hardness is assumed, not proven, and the exchange does not stop an attacker who swaps messages unless signatures are added.",
+   "7": "The hardest part was the 'With multiplication instead of a power' bullet. It uses Euclid's algorithm and the undoing number 14 as a black box. Showing how 14 is found, or at least saying that such a number exists for any g when p is prime, would help. Also, the 'first idea' paragraph calls 5^6 mod 23 'hard to reverse' before one-way operations are explained.",
+   "8": "Alice sends A = 5^3 mod 23 = 125 mod 23 = 10. Bob sends B = 5^2 mod 23 = 25 mod 23 = 2. Alice computes 2^3 mod 23 = 8. Bob computes 10^2 mod 23 = 100 mod 23 = 8. Their shared secret is 8, which matches 5^6 mod 23 = 8 in the table.",
+   "9": "With plain powers, Eve takes the logarithm: log base 5 of 15625 is 6. Plain powers grow in order, so the logarithm reverses them. Mod p scrambles the results (5, 2, 10, 4, 20, 8, …), so a result gives no hint of where the exponent is. Powers rather than multiplication are used because multiplication mod p can be undone quickly by multiplying by an inverse found with Euclid's algorithm.",
+   "10": "No. Nothing in the exchange says who sent a public number. Mallory can replace both public numbers and end up sharing one secret with Alice and another with Bob. Real systems add authentication, such as digital signatures.",
+   "11": "Because whatever Bob can undo, Eve can undo too. They receive the same message. If the operation really is one-way, Bob cannot recover the key either. So each side needs its own private number, and each completes the other's half of the calculation without having to undo it.",
+   "12": "Alice sends A = 5^6 mod 23 = 8. Bob sends B = 5^15 mod 23 = 19. Alice computes 19^6 mod 23 = 2, and Bob computes 8^15 mod 23 = 2, so s = 2. They must be equal because (5^15)^6 = (5^6)^15 = 5^(90), and taking remainders at intermediate steps does not change the final remainder.",
+   "13": "8 × 19 mod 23 = 14, which is 5^(6+15): multiplying powers adds the exponents. The shared secret needs the exponents multiplied, 5^(6×15). No known route gets from A and B to s without, in effect, finding a or b first.",
+   "14": "No. It is an assumption, not a proof. No one has proven that the discrete logarithm is hard, or that there is no other way to get s from A and B. The confidence comes from decades of failed attempts.",
+   "15": "A man-in-the-middle attack. Mallory replaces both public numbers with her own (10, from her private number 3). She then shares 6 with Alice and 5 with Bob, decrypts every message, reads it, and encrypts it again for the other side. Neither Alice nor Bob can detect this without authentication."
+  },
+  "audit": {
+   "terms": [
+    "The 'first idea' paragraph (line 14) says 'Alice picks the key, 6'. The exchange (line 20) then uses 6 as the private number a. Later, 'key' means the hash output of s (line 24). So 'key' names two different things, and the reused value 6 makes them easy to confuse.",
+    "'shared secret' (s, line 24) and 'key' (line 24, the hashed output) are kept apart in the text, but the Answer section and the title use 'secret key' loosely.",
+    "'hard to reverse' (line 14), 'one-way operation' (line 52) and 'no known fast reverse' (line 52) name the same idea. The first phrase is used before the concept is defined."
+   ],
+   "unexplained": [
+    "'about 2^112 operations (an estimate)' (line 56): the text does not say what makes this enough, or what a smaller count such as 2^80 would mean for security.",
+    "'It needs smaller numbers for the same security' (line 80): it does not say how much smaller or why."
+   ],
+   "missing_why": [
+    "Line 49: Euclid's algorithm 'finds this undoing number even for a huge p'. The text gives neither how it does this nor why the undoing number always exists.",
+    "Line 24: it does not say why s is passed through a hash function instead of being used directly as the key.",
+    "Line 50: it does not say why scrambled-looking outputs imply that no fast reverse exists. 'A result near 8 says nothing about where 6 is' is an intuition, not a reason.",
+    "Line 82: it does not say why p must be prime for a good g to reach every non-zero remainder.",
+    "Line 56: there is no hint of why the best known methods are faster than trying exponents one by one."
+   ],
+   "excess": [
+    "Line 5: 'A version of it starts most HTTPS connections' is context that the argument does not use.",
+    "Scope bullets on elliptic curves, AES and quantum computers (lines 80, 81, 83) are detours that no question uses."
+   ]
+  },
+  "gaps": [
+   "Euclid's algorithm and the modular inverse are used as a black box.",
+   "The first-idea paragraph assumes one-way hardness before explaining it.",
+   "No reason is given for hashing s.",
+   "The 2^112 security figure has no reference point."
+  ]
+ },
+ "grade": {
+  "scores": {
+   "1": 2,
+   "2": 2,
+   "3": 2,
+   "4": 2,
+   "5": 2,
+   "6": 2,
+   "7": 2,
+   "8": 2,
+   "9": 2,
+   "10": 2,
+   "11": 2,
+   "12": 2,
+   "13": 1,
+   "14": 2,
+   "15": 2
+  },
+  "reasons": {
+   "13": "The answer correctly shows that A × B mod 23 = 14 = 5^(6+15), which is not s. It also says Eve would in effect have to find a or b. It never says that finding a or b is the discrete logarithm problem, or that no fast method for it is known. That missing step is the core of the expected answer."
+  },
+  "pass": false
+ },
+ "usage": {
+  "cost": 0.18770360000000003,
+  "seconds": 42
+ },
+ "findings": [
+  {
+   "n": 1,
+   "severity": "gap",
+   "kind": "terms",
+   "text": "The 'first idea' paragraph (line 14) says 'Alice picks the key, 6'. The exchange (line 20) then uses 6 as the private number a. Later, 'key' means the hash output of s (line 24). So 'key' names two different things, and the reused value 6 makes them easy to confuse."
+  },
+  {
+   "n": 2,
+   "severity": "gap",
+   "kind": "terms",
+   "text": "'shared secret' (s, line 24) and 'key' (line 24, the hashed output) are kept apart in the text, but the Answer section and the title use 'secret key' loosely."
+  },
+  {
+   "n": 3,
+   "severity": "gap",
+   "kind": "terms",
+   "text": "'hard to reverse' (line 14), 'one-way operation' (line 52) and 'no known fast reverse' (line 52) name the same idea. The first phrase is used before the concept is defined."
+  },
+  {
+   "n": 4,
+   "severity": "gap",
+   "kind": "unexplained",
+   "text": "'about 2^112 operations (an estimate)' (line 56): the text does not say what makes this enough, or what a smaller count such as 2^80 would mean for security."
+  },
+  {
+   "n": 5,
+   "severity": "gap",
+   "kind": "unexplained",
+   "text": "'It needs smaller numbers for the same security' (line 80): it does not say how much smaller or why."
+  },
+  {
+   "n": 6,
+   "severity": "gap",
+   "kind": "missing_why",
+   "text": "Line 49: Euclid's algorithm 'finds this undoing number even for a huge p'. The text gives neither how it does this nor why the undoing number always exists."
+  },
+  {
+   "n": 7,
+   "severity": "gap",
+   "kind": "missing_why",
+   "text": "Line 24: it does not say why s is passed through a hash function instead of being used directly as the key."
+  },
+  {
+   "n": 8,
+   "severity": "gap",
+   "kind": "missing_why",
+   "text": "Line 50: it does not say why scrambled-looking outputs imply that no fast reverse exists. 'A result near 8 says nothing about where 6 is' is an intuition, not a reason."
+  },
+  {
+   "n": 9,
+   "severity": "gap",
+   "kind": "missing_why",
+   "text": "Line 82: it does not say why p must be prime for a good g to reach every non-zero remainder."
+  },
+  {
+   "n": 10,
+   "severity": "gap",
+   "kind": "missing_why",
+   "text": "Line 56: there is no hint of why the best known methods are faster than trying exponents one by one."
+  },
+  {
+   "n": 11,
+   "severity": "excess",
+   "kind": "excess",
+   "text": "Line 5: 'A version of it starts most HTTPS connections' is context that the argument does not use."
+  },
+  {
+   "n": 12,
+   "severity": "excess",
+   "kind": "excess",
+   "text": "Scope bullets on elliptic curves, AES and quantum computers (lines 80, 81, 83) are detours that no question uses."
+  },
+  {
+   "n": 13,
+   "severity": "gap",
+   "kind": "gap",
+   "text": "Euclid's algorithm and the modular inverse are used as a black box."
+  },
+  {
+   "n": 14,
+   "severity": "gap",
+   "kind": "gap",
+   "text": "The first-idea paragraph assumes one-way hardness before explaining it."
+  },
+  {
+   "n": 15,
+   "severity": "gap",
+   "kind": "gap",
+   "text": "No reason is given for hashing s."
+  },
+  {
+   "n": 16,
+   "severity": "gap",
+   "kind": "gap",
+   "text": "The 2^112 security figure has no reference point."
+  }
+ ]
+}

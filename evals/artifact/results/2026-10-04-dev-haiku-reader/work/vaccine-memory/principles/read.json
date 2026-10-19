@@ -1,0 +1,46 @@
+{
+  "answers": {
+    "1": {
+      "answer": "A vaccine must contain or produce antigens—shapes from a pathogen—in harmless form (inactivated, weakened, or as a protein the body briefly makes). It doesn't make you ill because these are copies without the disease.",
+      "quote": "A vaccine delivers the antigen without the disease."
+    },
+    "2": {
+      "answer": "Vaccination creates thousands of matching memory cells. When real infection arrives, the response starts from these pre-existing cells rather than a few rare ones, so it reaches needed numbers much faster (2–4 days instead of 7–14). Antibody is also already present from day 0.",
+      "quote": "When the real pathogen arrives, the response starts from thousands of matching cells instead of a few, and it wins the race."
+    },
+    "3": {
+      "answer": "Memory cells recognize specific shapes. If a new virus has entirely different shapes, the memory cells from vaccination against a different virus won't match those shapes, so no protection exists.",
+      "quote": "Memory is specific to shapes. It protects only while the pathogen keeps those shapes."
+    },
+    "4": {
+      "answer": "Protection weakens or is lost. The old antibodies bind poorly to the changed shape, so the immune response becomes slower again, making the race more difficult to win before illness begins.",
+      "quote": "Last year's antibodies bind this year's virus poorly, so the race starts closer to the slow column."
+    }
+  },
+  "stops": [
+    "\"danger signal\". Fast, non-specific immune cells give this signal when they detect damage or microbial patterns.",
+    "Each new lymphocyte builds its receptor gene by cutting and joining randomly chosen gene segments.",
+    "cells that bind self strongly are mostly removed.",
+    "adjuvant (an added ingredient that triggers the signal)",
+    "Mutants that bind the antigen more tightly receive more survival signals and divide more.",
+    "Memory cells also activate more easily than naive cells, so the real gap is larger than this arithmetic shows.",
+    "log₂(20) ≈ 4.3 doublings, about 1.4 days.",
+    "non-matching cells do nothing. This is clonal selection."
+  ],
+  "excess": [
+    "| Day 0 | 0 | 100 | Day 3 | 9 | ~51,000 | Day 7 | 21 | ~210,000,000 |",
+    "Start: 100 naive cells match the antigen. Expand for 5 days: 15 doublings. 100 × 2¹⁵ ≈ 3.3 million cells.",
+    "Two doses of measles vaccine give long, strong protection.",
+    "Predict before you read on: a pathogen keeps most of its surface but changes one region.",
+    "Each is a separate topic.",
+    "Protection also weakens when antibody levels fall over time.",
+    "Measles keeps the same surface shapes.",
+    "estimates vary by antigen and person"
+  ],
+  "grounded": {
+    "1": true,
+    "2": true,
+    "3": true,
+    "4": true
+  }
+}

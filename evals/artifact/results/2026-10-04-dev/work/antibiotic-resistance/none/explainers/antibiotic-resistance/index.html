@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Antibiotic resistance: a selection simulator</title>
+<style>
+  body { font-family: system-ui, -apple-system, sans-serif; max-width: 980px; margin: 0 auto; padding: 1.5rem; color: #222; line-height: 1.5; }
+  h1 { font-size: 1.6rem; margin-bottom: .2rem; }
+  h2 { font-size: 1.15rem; margin-top: 2rem; }
+  .sub { color: #555; margin-top: 0; }
+  .controls { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: .8rem 1.5rem; background: #f5f6f8; padding: 1rem; border-radius: 8px; }
+  .controls label { display: block; font-size: .9rem; font-weight: 600; }
+  .controls input[type=range] { width: 100%; }
+  .val { font-weight: normal; color: #0a58ca; font-family: ui-monospace, monospace; }
+  .hint { font-size: .8rem; color: #666; }
+  .buttons { margin: .8rem 0; display: flex; flex-wrap: wrap; gap: .5rem; }
+  button { padding: .4rem .8rem; border: 1px solid #bbb; background: white; border-radius: 6px; cursor: pointer; font-size: .9rem; }
+  button.primary { background: #0a58ca; color: white; border-color: #0a58ca; }
+  canvas { width: 100%; border: 1px solid #ddd; border-radius: 6px; background: white; }
+  .legend { font-size: .85rem; display: flex; gap: 1.2rem; flex-wrap: wrap; margin: .3rem 0; }
+  .sw { display: inline-block; width: 14px; height: 4px; vertical-align: middle; margin-right: 4px; }
+  #readout { background: #fffbe6; border: 1px solid #f0e2a0; padding: .7rem 1rem; border-radius: 6px; font-size: .95rem; }
+  code { background: #f0f0f0; padding: 0 .25rem; border-radius: 3px; }
+  details { margin-top: 1rem; }
+</style>
+</head>
+<body>
+
+<h1>Watching resistance get selected</h1>
+<p class="sub">A small simulation of one bacterial population with two kinds of cells: <b style="color:#1f6feb">susceptible (S)</b> and <b style="color:#d1242f">resistant (R)</b>.
+At the start there are no resistant cells at all. They appear only through random mutation as susceptible cells divide. Then the antibiotic decides who survives.</p>
+
+<div class="controls">
+  <div>
+    <label>Drug concentration: <span class="val" id="cVal"></span></label>
+    <input type="range" id="c" min="0" max="100" value="60">
+    <div class="hint">Shown as a multiple of the susceptible strain's MIC. The resistant strain's MIC is <span id="mrHint"></span>× higher.</div>
+  </div>
+  <div>
+    <label>Treatment lasts: <span class="val" id="durVal"></span></label>
+    <input type="range" id="dur" min="0" max="60" value="40">
+    <div class="hint">The drug starts at hour 8 and is held at a constant level.</div>
+  </div>
+  <div>
+    <label>Mutation rate to resistance: <span class="val" id="muVal"></span></label>
+    <input type="range" id="mu" min="-11" max="-6" step="0.25" value="-8">
+    <div class="hint">Chance that a single cell division produces a resistant cell.</div>
+  </div>
+  <div>
+    <label>Fitness cost of resistance: <span class="val" id="costVal"></span></label>
+    <input type="range" id="cost" min="0" max="40" value="10">
+    <div class="hint">How much slower resistant cells grow when no drug is present.</div>
+  </div>
+</div>
+
+<div class="buttons">
+  <button class="primary" id="run">Run again (new random draw)</button>
+  <button data-preset="none">Preset: no drug</button>
+  <button data-preset="low">Preset: below MIC</button>
+  <button data-preset="window">Preset: in the selection window</button>
+  <button data-preset="high">Preset: above both MICs</button>
+</div>
+
+<canvas id="pop" width="940" height="380"></canvas>
+<div class="legend">
+  <span><span class="sw" style="background:#1f6feb"></span>Susceptible cells</span>
+  <span><span class="sw" style="background:#d1242f"></span>Resistant cells</span>
+  <span><span class="sw" style="background:#f2c94c;height:10px;opacity:.5"></span>Drug present</span>
+  <span>Vertical axis is logarithmic: each gridline is 10× more cells.</span>
+</div>
+
+<p id="readout"></p>
+
+<h2>Why concentration matters: net growth rate vs. drug level</h2>
+<p>This chart shows how fast each type grows (above zero) or dies (below zero) at each drug concentration, ignoring crowding.
+The shaded band is the <b>mutant selection window</b>: concentrations high enough to kill susceptible cells but too low to stop resistant ones.
+The dashed line marks the concentration you've chosen above.</p>
+<canvas id="pd" width="940" height="300"></canvas>
+
+<h2>What to try</h2>
+<ul>
+  <li><b>No drug:</b> resistant mutants appear but stay a tiny minority. With a fitness cost, they're outcompeted.</li>
+  <li><b>In the window:</b> the susceptible population collapses and the resistant line, which started from a handful of cells, climbs to take over. Press "Run again" a few times. When the first mutants appear, and whether they survive, changes from run to run.</li>
+  <li><b>Above both MICs:</b> both types die. (Real drugs can't always reach this level safely in every part of the body. Bacteria can also climb out of this regime one mutation step at a time.)</li>
+  <li><b>Short treatment in the window:</b> the drug stops before the susceptible cells are gone, and both types regrow. The resistant fraction is now far higher than before treatment.</li>
+  <li><b>Lower the mutation rate to 10⁻¹⁰:</b> in many runs, no resistant cell exists when the drug arrives, and treatment succeeds. Resistance is a numbers game: (population size) × (mutation rate).</li>
+</ul>
+
+<details>
+<summary>How the model works</summary>
+<p>Time advances in steps of 0.02 hours. Each type <i>i</i> has a birth rate <code>g_i × (1 − N/K)</code>, where <i>N</i> is the total population and <i>K</i> = 10¹⁰ is the carrying capacity. It also has a drug-caused death rate</p>
+<p><code>kill_i(c) = (g_max − g_min) · x^κ / (x^κ − g_min/g_max)</code>, &nbsp; with <code>x = c / MIC_i</code></p>
+<p>This is a standard pharmacodynamic curve, chosen so that net growth is exactly zero at the MIC. The parameters are g_max = 1/hour for S (about one doubling every 42 minutes), g_min = −3/hour, κ = 2. The resistant type's g is reduced by the fitness cost, and its MIC is 64× higher.</p>
+<p>Births and deaths are drawn at random (Poisson) while a type has fewer than 10,000 cells, so small resistant lineages can die out by chance. Above that size the model switches to the deterministic average. In each step, every susceptible birth has probability μ of producing a resistant cell instead. There is no immune system and no horizontal gene transfer, so this is deliberately the simplest case.</p>
+</details>
+
+<script>
+const MIC_R = 64;            // resistant MIC as a multiple of susceptible MIC
+const GMAX = 1.0, GMIN = -3.0, KAPPA = 2;
+const K = 1e10, S0 = 1e6, T_END = 72, DRUG_START = 8, DT = 0.02;
+
+const $ = id => document.getElementById(id);
+$('mrHint').textContent = MIC_R;
+
+function concFromSlider(v) { return v == 0 ? 0 : Math.pow(10, -1 + 3.5 * (v / 100)); } // 0.1x .. ~316x
+function sliderFromConc(c) { return c <= 0 ? 0 : Math.round((Math.log10(c) + 1) / 3.5 * 100); }
+
+function kill(c, mic) {
+  if (c <= 0) return 0;
+  const xk = Math.pow(c / mic, KAPPA);
+  return (GMAX - GMIN) * xk / (xk - GMIN / GMAX);
+}
+
+function gauss() {
+  let u = 0, v = 0;
+  while (u === 0) u = Math.random();
+  while (v === 0) v = Math.random();
+  return Math.sqrt(-2 * Math.log(u)) * Math.cos(2 * Math.PI * v);
+}
+function poisson(l) {
+  if (l <= 0) return 0;
+  if (l < 30) {
+    const L = Math.exp(-l); let k = 0, p = 1;
+    do { k++; p *= Math.random(); } while (p > L);
+    return k - 1;
+  }
+  return Math.max(0, Math.round(l + Math.sqrt(l) * gauss()));
+}
+
+// Advance one population by one step given per-cell birth and death rates.
+function step(X, b, d) {
+  if (X <= 0) return 0;
+  if (X < 1e4) return Math.max(0, X + poisson(b * X * DT) - poisson(d * X * DT));
+  return X * Math.exp((b - d) * DT);
+}
+
+function params() {
+  return {
+    c: concFromSlider(+$('c').value),
+    dur: +$('dur').value,
+    mu: Math.pow(10, +$('mu').value),
+    cost: +$('cost').value / 100,
+  };
+}
+
+function simulate(p) {
+  let S = S0, R = 0, firstR = null, Rat = null;
+  const out = [];
+  const gS = GMAX, gR = GMAX * (1 - p.cost);
+  for (let t = 0; t <= T_END + 1e-9; t += DT) {
+    out.push([t, S, R]);
+    const drugOn = t >= DRUG_START && t < DRUG_START + p.dur;
+    const c = drugOn ? p.c : 0;
+    const crowd = Math.max(0, 1 - (S + R) / K);
+    const bS = gS * crowd, bR = gR * crowd;
+    // mutations: a fraction mu of susceptible births are resistant
+    const mutants = poisson(p.mu * bS * S * DT);
+    S = step(S, bS, kill(c, 1));
+    R = step(R, bR, kill(c, MIC_R)) + mutants;
+    S = Math.max(0, S - mutants);
+    if (S < 1) S = 0;
+    if (R < 1) R = 0;
+    if (R > 0 && firstR === null) firstR = t;
+    if (Rat === null && t >= DRUG_START) Rat = R;
+  }
+  return { out, firstR, Rat };
+}
+
+function fmt(n) {
+  if (n < 1) return '0';
+  if (n < 1e4) return Math.round(n).toLocaleString();
+  const e = Math.floor(Math.log10(n));
+  return (n / Math.pow(10, e)).toFixed(1) + '×10^' + e;
+}
+function fmtSup(n) {
+  if (n < 1) return '0';
+  if (n < 1e4) return Math.round(n).toLocaleString();
+  const e = Math.floor(Math.log10(n));
+  return (n / Math.pow(10, e)).toFixed(1) + '×10<sup>' + e + '</sup>';
+}
+
+function setupCanvas(cv) {
+  const ctx = cv.getContext('2d');
+  const ratio = window.devicePixelRatio || 1;
+  const w = cv.width, h = cv.height;
+  if (!cv.dataset.scaled) {
+    cv.width = w * ratio; cv.height = h * ratio;
+    cv.dataset.w = w; cv.dataset.h = h; cv.dataset.scaled = 1;
+  }
+  ctx.setTransform(ratio, 0, 0, ratio, 0, 0);
+  return [ctx, +cv.dataset.w, +cv.dataset.h];
+}
+
+function drawPop(res, p) {
+  const [ctx, W, H] = setupCanvas($('pop'));
+  const L = 60, Rm = 15, T = 15, B = 40;
+  const pw = W - L - Rm, ph = H - T - B;
+  const YMAX = 11;
+  const X = t => L + t / T_END * pw;
+  const Y = n => T + ph - (n < 1 ? 0 : Math.log10(n)) / YMAX * ph;
+  ctx.clearRect(0, 0, W, H);
+
+  // drug band
+  if (p.dur > 0 && p.c > 0) {
+    ctx.fillStyle = 'rgba(242,201,76,0.25)';
+    ctx.fillRect(X(DRUG_START), T, X(Math.min(T_END, DRUG_START + p.dur)) - X(DRUG_START), ph);
+  }
+  // grid
+  ctx.strokeStyle = '#eee'; ctx.fillStyle = '#555'; ctx.font = '12px system-ui'; ctx.lineWidth = 1;
+  ctx.textAlign = 'right'; ctx.textBaseline = 'middle';
+  for (let e = 0; e <= YMAX; e++) {
+    const y = T + ph - e / YMAX * ph;
+    ctx.beginPath(); ctx.moveTo(L, y); ctx.lineTo(L + pw, y); ctx.stroke();
+    if (e % 2 === 0) ctx.fillText(e === 0 ? '1' : '10' + sup(e), L - 6, y);
+  }
+  ctx.textAlign = 'center'; ctx.textBaseline = 'top';
+  for (let t = 0; t <= T_END; t += 8) {
+    const x = X(t);
+    ctx.beginPath(); ctx.moveTo(x, T); ctx.lineTo(x, T + ph); ctx.stroke();
+    ctx.fillText(t + 'h', x, T + ph + 6);
+  }
+  ctx.fillText('time (hours)', L + pw / 2, T + ph + 22);
+  ctx.save(); ctx.translate(14, T + ph / 2); ctx.rotate(-Math.PI / 2);
+  ctx.textBaseline = 'middle'; ctx.fillText('number of cells', 0, 0); ctx.restore();
+
+  // lines
+  function line(idx, color) {
+    ctx.strokeStyle = color; ctx.lineWidth = 2.5; ctx.beginPath();
+    let pen = false;
+    for (const row of res.out) {
+      const n = row[idx];
+      if (n < 1) { pen = false; continue; }
+      const x = X(row[0]), y = Y(n);
+      if (!pen) { ctx.moveTo(x, y); pen = true; } else ctx.lineTo(x, y);
+    }
+    ctx.stroke();
+  }
+  line(1, '#1f6feb');
+  line(2, '#d1242f');
+}
+
+function sup(e) {
+  const m = { 0: '⁰', 1: '¹', 2: '²', 3: '³', 4: '⁴', 5: '⁵', 6: '⁶', 7: '⁷', 8: '⁸', 9: '⁹' };
+  return String(e).split('').map(d => m[d]).join('');
+}
+
+function drawPD(p) {
+  const [ctx, W, H] = setupCanvas($('pd'));
+  const L = 60, Rm = 15, T = 15, B = 40;
+  const pw = W - L - Rm, ph = H - T - B;
+  const CMIN = -1, CMAX = 2.5, YMIN = -3.2, YMAX = 1.2;
+  const X = lc => L + (lc - CMIN) / (CMAX - CMIN) * pw;
+  const Y = g => T + (YMAX - g) / (YMAX - YMIN) * ph;
+  ctx.clearRect(0, 0, W, H);
+
+  // selection window
+  ctx.fillStyle = 'rgba(209,36,47,0.08)';
+  ctx.fillRect(X(0), T, X(Math.log10(MIC_R)) - X(0), ph);
+  ctx.fillStyle = '#a33'; ctx.font = '12px system-ui'; ctx.textAlign = 'center'; ctx.textBaseline = 'top';
+  ctx.fillText('selection window', (X(0) + X(Math.log10(MIC_R))) / 2, T + 4);
+
+  // grid
+  ctx.strokeStyle = '#eee'; ctx.fillStyle = '#555'; ctx.lineWidth = 1;
+  for (let lc = CMIN; lc <= CMAX; lc += 0.5) {
+    const x = X(lc);
+    ctx.beginPath(); ctx.moveTo(x, T); ctx.lineTo(x, T + ph); ctx.stroke();
+    if (Number.isInteger(lc)) { ctx.textBaseline = 'top'; ctx.fillText(Math.pow(10, lc) + '×', x, T + ph + 6); }
+  }
+  ctx.fillText('drug concentration (× susceptible MIC, log scale)', L + pw / 2, T + ph + 22);
+  ctx.textAlign = 'right'; ctx.textBaseline = 'middle';
+  for (let g = -3; g <= 1; g++) {
+    const y = Y(g);
+    ctx.strokeStyle = g === 0 ? '#999' : '#eee';
+    ctx.beginPath(); ctx.moveTo(L, y); ctx.lineTo(L + pw, y); ctx.stroke();
+    ctx.fillText(g + '/h', L - 6, y);
+  }
+  ctx.save(); ctx.translate(14, T + ph / 2); ctx.rotate(-Math.PI / 2);
+  ctx.textAlign = 'center'; ctx.fillText('net growth rate', 0, 0); ctx.restore();
+
+  // MIC labels
+  ctx.textAlign = 'left'; ctx.textBaseline = 'bottom'; ctx.fillStyle = '#1f6feb';
+  ctx.fillText('MIC of S', X(0) + 4, Y(0) - 4);
+  ctx.fillStyle = '#d1242f';
+  ctx.fillText('MIC of R', X(Math.log10(MIC_R)) + 4, Y(0) - 4);
+
+  function curve(mic, g, color) {
+    ctx.strokeStyle = color; ctx.lineWidth = 2.5; ctx.beginPath();
+    for (let i = 0; i <= 300; i++) {
+      const lc = CMIN + (CMAX - CMIN) * i / 300;
+      const v = g - kill(Math.pow(10, lc), mic);
+      const x = X(lc), y = Y(v);
+      if (i === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
+    }
+    ctx.stroke();
+  }
+  curve(1, GMAX, '#1f6feb');
+  curve(MIC_R, GMAX * (1 - p.cost), '#d1242f');
+
+  if (p.c > 0) {
+    const x = X(Math.log10(p.c));
+    ctx.setLineDash([5, 4]); ctx.strokeStyle = '#333'; ctx.lineWidth = 1.5;
+    ctx.beginPath(); ctx.moveTo(x, T); ctx.lineTo(x, T + ph); ctx.stroke(); ctx.setLineDash([]);
+  }
+}
+
+function zone(c) {
+  if (c <= 0) return 'none';
+  if (c < 1) return 'below';
+  if (c < MIC_R) return 'window';
+  return 'above';
+}
+
+function describe(res, p) {
+  const last = res.out[res.out.length - 1];
+  const S = last[1], R = last[2], N = S + R;
+  const frac = N > 0 ? R / N : 0;
+  const end = DRUG_START + p.dur;
+  let s = '';
+  s += res.firstR === null
+    ? 'No resistant mutant arose in this run. '
+    : `The first resistant mutant appeared at hour ${res.firstR.toFixed(1)}. `;
+  s += `When the drug arrived (hour ${DRUG_START}), about ${fmtSup(res.Rat || 0)} resistant cells were already present. None of them were caused by the drug. `;
+  s += `At hour ${T_END}: ${fmtSup(S)} susceptible, ${fmtSup(R)} resistant`;
+  s += N > 0 ? ` (${(frac * 100).toPrecision(frac > 0.001 ? 3 : 2)}% resistant). ` : ' (the infection is cleared). ';
+  const z = zone(p.dur > 0 ? p.c : 0);
+  if (z === 'none') s += 'With no drug, nothing favours the resistant cells. Any fitness cost keeps them rare.';
+  else if (z === 'below') s += 'The drug slows the susceptible cells but doesn\'t kill them, so they still dominate. Even so, it gives resistant cells a small relative advantage.';
+  else if (z === 'window') s += (frac > 0.5)
+    ? 'This concentration is inside the selection window. It removed the competition, and the resistant lineage took over.'
+    : (R === 0 && S === 0 ? 'Every cell died, including the resistant ones, because no mutant existed or the few that did were lost by chance. Lucky. Press "Run again".' : 'Inside the selection window, but the treatment ended before resistant cells took over. Look at how much their share has grown, though.');
+  else s += (N === 0) ? 'The drug is above both MICs, so both types die. Resistance would need a further mutation step to escape.' : 'The drug is above both MICs, but treatment ended before every cell was gone, and the survivors regrew.';
+  return s;
+}
+
+let lastRes = null;
+function updateLabels() {
+  const p = params();
+  $('cVal').textContent = p.c === 0 ? 'none' : (p.c < 10 ? p.c.toFixed(2) : p.c.toFixed(0)) + '× MIC(S)  [' + { below: 'below MIC', window: 'selection window', above: 'above both MICs' }[zone(p.c)] + ']';
+  $('durVal').textContent = p.dur + ' hours';
+  $('muVal').textContent = '10' + supNeg(+$('mu').value);
+  $('costVal').textContent = Math.round(p.cost * 100) + '% slower growth';
+  return p;
+}
+function supNeg(v) {
+  const m = { '-': '⁻', '.': '·', 0: '⁰', 1: '¹', 2: '²', 3: '³', 4: '⁴', 5: '⁵', 6: '⁶', 7: '⁷', 8: '⁸', 9: '⁹' };
+  return String(v).split('').map(ch => m[ch] || ch).join('');
+}
+
+function run() {
+  const p = updateLabels();
+  lastRes = simulate(p);
+  drawPop(lastRes, p);
+  drawPD(p);
+  $('readout').innerHTML = describe(lastRes, p);
+}
+
+['c', 'dur', 'mu', 'cost'].forEach(id => $(id).addEventListener('input', run));
+$('run').addEventListener('click', run);
+const presets = {
+  none:   { c: 0,   dur: 40 },
+  low:    { c: 0.5, dur: 40 },
+  window: { c: 8,   dur: 40 },
+  high:   { c: 200, dur: 40 },
+};
+document.querySelectorAll('[data-preset]').forEach(b => b.addEventListener('click', () => {
+  const pr = presets[b.dataset.preset];
+  $('c').value = sliderFromConc(pr.c);
+  $('dur').value = pr.dur;
+  run();
+}));
+run();
+</script>
+</body>
+</html>

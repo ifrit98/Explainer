@@ -1,0 +1,230 @@
+{
+ "tool": "quiz",
+ "rendering": "prose",
+ "slug": "vaccine-memory",
+ "at": "2026-10-04T15:03:12",
+ "model": "default",
+ "prompt_sha": "a0a72909c349",
+ "reply": {
+  "answers": {
+   "1": "The main objects are the pathogen (a virus or bacterium that multiplies) and its antigens (the shapes a receptor binds). On the immune side there are lymphocytes, each carrying many copies of one kind of receptor, and clones (one lymphocyte plus its descendants). Clones produce effector cells, the antibodies some effector cells release, and memory cells. Finally there are the vaccine, the adjuvant and the danger signal.",
+   "2": "Each lymphocyte's receptor is built at random from gene pieces, so the body has a large library of different receptors. When a pathogen's antigen appears, only the lymphocytes whose receptors bind it activate and divide into a clone. To activate they also need a danger signal. The clone's cells become effector cells, which kill infected cells or release antibodies (free copies of the receptor) that block the pathogen. After the pathogen is cleared, about 99% of effector cells die and about 1% remain as memory cells for that same antigen. A vaccine supplies the antigen without a pathogen that can multiply, plus often an adjuvant to trigger the danger signal, so the first expansion happens safely and memory cells are left behind.",
+   "3": "A vaccine's antigen selects the few lymphocytes that already fit it and makes them multiply, leaving about 100× more memory cells than the original number. With that larger starting count, a real infection needs fewer doublings to reach an effective force, so it is controlled in about 3 days instead of 7, before the pathogen reaches the symptom level.",
+   "4": "The key variable is the precursor count (cells able to respond at the start). Raising it cuts the divisions needed to reach about 1,000,000 effector cells: each doubling saves one division, about 8 hours. Going from 100 to 10,000 cuts 13.3 divisions to 6.6, and the pathogen peak falls from 1 billion to 100,000, below the symptom level. Lowering it, or having an antigen that has changed so memory fits poorly, pushes the response back toward 7 days and illness, because the pathogen grows 10× per day while the response grows only by doubling.",
+   "5": "Assumption: the illustrative numbers. Infection starts with 100 particles growing 10× per day, symptoms start above 100 million particles, 1,000,000 effector cells is enough to win, and a fixed 8-hour division time holds. Established fact: two doses of measles vaccine prevent about 97% of cases for decades. Also: humans have about 20,000 genes.",
+   "6": "Each lymphocyte builds a random receptor by joining gene pieces, so the body already holds over 100 million receptor types, and a few of them fit almost any pathogen. An antigen selects those few cells, which divide every ~8 hours. Starting from about 100 cells, the first response needs ~7 days, by which time the pathogen has caused symptoms. Afterward about 1% of the expanded clone survives as memory cells (~100× the original count), so a second meeting needs half the divisions and takes ~3 days, keeping the pathogen below symptom level. A vaccine runs that first expansion with antigen but no growing pathogen (plus often an adjuvant for the needed danger signal). This works only while the antigen stays the same: measles yes, flu no.",
+   "7": "Hardest: the time totals. The 2.5 days for a first activation and 'under a day' for memory cells are stated without a reason, and the 3-day total only works if you add 2.2 + under a day yourself. It is also unclear how '1 in 100,000 to 1,000,000' turns into 100 cells, because the total number of lymphocytes is never given. Also, 'secondary/primary response' appears only in the vaccine section and never in the table. Stating the total lymphocyte count, giving a short reason for each activation delay, and using one name for the first and second responses would help.",
+   "8": "According to the explanation, about 3 days to control instead of about 7, so roughly 2.3× faster (about 4 days sooner). Memory cells last 'years or decades', so after two years about 10,000 matching cells remain instead of 100. That means 6.6 divisions instead of 13.3, and memory cells activate in under a day instead of ~2.5 days. The pathogen peaks around 100,000 particles instead of 1 billion, so there are no symptoms.",
+   "9": "Memory cells fit only the antigen that made them. Measles keeps the same antigens, so old memory still fits and gives the fast response for decades. Influenza changes its surface antigens each year, so old memory receptors fit poorly and the response falls back toward the slow first one. The vaccine is therefore updated yearly. The explanation says the cause is the changed antigen, not memory wearing off.",
+   "10": "Receptors are not stored one per gene, and they are not designed after the virus appears. Each new lymphocyte joins gene pieces at random and adds random edits, giving more than 100 million receptor types. Each receptor binds a family of similar shapes, and a virus shows many antigens. So by chance a few existing lymphocytes fit even a brand-new virus; the virus selects them.",
+   "11": "Yes, a few: about 1 in 100,000 to 1,000,000 lymphocytes per antigen (illustrative: 100 cells). The reason is that the receptor library is made at random beforehand, is very large, and each receptor fits a family of shapes.",
+   "12": "There are more starting cells: about 10,000 memory cells versus 100, so fewer doublings (6.6 vs 13.3) are needed to reach ~1,000,000 effector cells. Also, memory cells already wait in the tissues and need less stimulation, so they activate in under a day instead of ~2.5 days.",
+   "13": "Memory cells: the roughly 1% of the expanded clone's effector cells that survive for years or decades. For the same antigen they form a starting pool about 100× larger than the original precursor count (illustrative: 10,000 vs 100). Antibodies are not the lasting protection here; their decline is listed as not covered."
+  },
+  "audit": {
+   "terms": [
+    "'germ' (lines 5, 13, 24) and 'pathogen' (line 11 onward) name the same thing; 'germ' is never defined as equal to 'pathogen'.",
+    "'secondary response' / 'primary one' (line 58) mean the same as 'first meeting' / 'next meeting' / 'Same antigen again' (lines 26, 44, table), but 'primary/secondary' are used without being introduced.",
+    "'controls it' (lines 5, 49), 'clear the pathogen' (line 34) and 'wins' (line 13) all describe the same end point of the race, but it is never said they are one threshold (reaching 1,000,000 effector cells).",
+    "'fit' (lines 5, 22, 31), 'bind' (lines 18, 29) and 'match' (heading, line 15) are used interchangeably for receptor-antigen binding.",
+    "'shape' (lines 5, 18) and 'antigen' (line 18) overlap: line 5 says the vaccine does not teach 'a new shape', and only later is it said that the shape on a pathogen is the antigen."
+   ],
+   "unexplained": [
+    "'about 1 in 100,000 to 1 in 1,000,000 lymphocytes fit' becomes 'Illustrative: 100 cells' (line 31) without the total lymphocyte count, so the reader cannot check the 100 or see what a higher or lower fraction would mean.",
+    "'about 2.5 days to meet the antigen and activate' (line 37) and 'under a day' for memory cells (line 44): no basis is given, yet these delays make up a large share of both totals.",
+    "'about 99% of the effector cells die. About 1% stay' (line 42): it is not stated that 10,000 = 1% of 1,000,000, or what a higher or lower survival share would change (it sets the 100× gain).",
+    "'about 97% of cases' vs 'about 40–60%' (line 65): it is not said whether these are per person or per population, or how they relate to the 3-day vs 7-day model.",
+    "'1,000,000 effector cells clear the pathogen faster than it grows' (line 34): the threshold is asserted; it is unclear how it depends on pathogen size, given the pathogen is at 1 billion by then in the first response."
+   ],
+   "missing_why": [
+    "Why only about 1% of effector cells become long-lived memory cells while the rest die (line 42).",
+    "Why memory cells 'need less stimulation' and activate faster (line 44).",
+    "Why the first activation takes about 2.5 days: 'rare matching cells also need ... to meet the antigen' (line 37) hints at search time but does not explain it.",
+    "Why one fixed threshold of 1,000,000 effector cells applies even though the pathogen count at that time differs by 10,000× between the two scenarios (lines 34, 50)."
+   ],
+   "excess": [
+    "Line 3 HTML comment 'Stage 1, rendered from model.md in STE-80' is production metadata, not content.",
+    "Line 71 Summary repeats the bolded opening (line 5) almost word for word, adding only '100× more'."
+   ]
+  },
+  "gaps": [
+   "The total number of lymphocytes is never given, so the step from '1 in 100,000–1,000,000' to 100 precursor cells cannot be checked.",
+   "There is no reason for the activation delays (2.5 days vs under a day), even though they are a large part of the 7-vs-3-day result.",
+   "Antibody levels and how long they last are excluded, so the reader cannot tell whether protection years later involves anything besides memory cells.",
+   "No mechanism is given for why ~1% of effector cells survive as memory.",
+   "'Primary/secondary response' appear once without definition.",
+   "It is unclear whether a partly changed antigen (flu) gives a partial speed-up or none; 'falls back toward' is not quantified."
+  ]
+ },
+ "grade": {
+  "scores": {
+   "1": 2,
+   "2": 2,
+   "3": 2,
+   "4": 2,
+   "5": 2,
+   "6": 2,
+   "7": 2,
+   "8": 2,
+   "9": 2,
+   "10": 2,
+   "11": 2,
+   "12": 2,
+   "13": 2
+  },
+  "reasons": {
+   "1": "Full marks. Correct and specific, though it leaves out naive lymphocyte, clonal selection and primary/secondary response as named entities.",
+   "2": "Full marks. The full mechanism is present: random library, clonal selection, danger signal, effector/antibody, 99% contraction, vaccine with adjuvant.",
+   "3": "Full marks. Selection plus 100× memory, fewer doublings, about 3 vs 7 days, below symptom level.",
+   "4": "Full marks. Precursor count is correctly identified as the key variable, with numbers (13.3 vs 6.6 divisions, 8 h per doubling) and the antigen-change limit.",
+   "5": "Full marks. Illustrative assumptions are separated correctly from established facts (measles 97%, about 20,000 genes).",
+   "6": "Full marks. The summary covers the whole causal chain and its limit.",
+   "7": "Full marks. Gives specific, plausible points of difficulty with concrete suggested fixes.",
+   "8": "Full marks. Gives about 3 vs 7 days, 100× more starting cells (6.6 vs 13.3 divisions), faster activation, and the pathogen staying below symptom level. Does not fall into either 'wrong if' trap.",
+   "9": "Full marks. The changed surface antigen is named as the cause, and the answer explicitly rejects memory wearing off.",
+   "10": "Full marks. Random generation of more than 100 million receptors before infection, binding to shape families, and selection by the virus; it explicitly denies that receptors are designed after infection.",
+   "11": "Full marks. Yes, because a random library exists beforehand; precursor frequency is given.",
+   "12": "Full marks. 100× more starting memory cells with fewer divisions and faster activation. The 3-day total is not stated outright but follows from the components given.",
+   "13": "Full marks. Memory cells, about 100× the precursor count, are correctly named as the lasting protection. It does not mention the danger-signal and no-disease framing, but it answers what is left behind correctly."
+  },
+  "pass": true
+ },
+ "usage": {
+  "cost": 0.20738799999999996,
+  "seconds": 56
+ },
+ "findings": [
+  {
+   "n": 1,
+   "severity": "gap",
+   "kind": "terms",
+   "text": "'germ' (lines 5, 13, 24) and 'pathogen' (line 11 onward) name the same thing; 'germ' is never defined as equal to 'pathogen'."
+  },
+  {
+   "n": 2,
+   "severity": "gap",
+   "kind": "terms",
+   "text": "'secondary response' / 'primary one' (line 58) mean the same as 'first meeting' / 'next meeting' / 'Same antigen again' (lines 26, 44, table), but 'primary/secondary' are used without being introduced."
+  },
+  {
+   "n": 3,
+   "severity": "gap",
+   "kind": "terms",
+   "text": "'controls it' (lines 5, 49), 'clear the pathogen' (line 34) and 'wins' (line 13) all describe the same end point of the race, but it is never said they are one threshold (reaching 1,000,000 effector cells)."
+  },
+  {
+   "n": 4,
+   "severity": "gap",
+   "kind": "terms",
+   "text": "'fit' (lines 5, 22, 31), 'bind' (lines 18, 29) and 'match' (heading, line 15) are used interchangeably for receptor-antigen binding."
+  },
+  {
+   "n": 5,
+   "severity": "gap",
+   "kind": "terms",
+   "text": "'shape' (lines 5, 18) and 'antigen' (line 18) overlap: line 5 says the vaccine does not teach 'a new shape', and only later is it said that the shape on a pathogen is the antigen."
+  },
+  {
+   "n": 6,
+   "severity": "gap",
+   "kind": "unexplained",
+   "text": "'about 1 in 100,000 to 1 in 1,000,000 lymphocytes fit' becomes 'Illustrative: 100 cells' (line 31) without the total lymphocyte count, so the reader cannot check the 100 or see what a higher or lower fraction would mean."
+  },
+  {
+   "n": 7,
+   "severity": "gap",
+   "kind": "unexplained",
+   "text": "'about 2.5 days to meet the antigen and activate' (line 37) and 'under a day' for memory cells (line 44): no basis is given, yet these delays make up a large share of both totals."
+  },
+  {
+   "n": 8,
+   "severity": "gap",
+   "kind": "unexplained",
+   "text": "'about 99% of the effector cells die. About 1% stay' (line 42): it is not stated that 10,000 = 1% of 1,000,000, or what a higher or lower survival share would change (it sets the 100× gain)."
+  },
+  {
+   "n": 9,
+   "severity": "gap",
+   "kind": "unexplained",
+   "text": "'about 97% of cases' vs 'about 40–60%' (line 65): it is not said whether these are per person or per population, or how they relate to the 3-day vs 7-day model."
+  },
+  {
+   "n": 10,
+   "severity": "gap",
+   "kind": "unexplained",
+   "text": "'1,000,000 effector cells clear the pathogen faster than it grows' (line 34): the threshold is asserted; it is unclear how it depends on pathogen size, given the pathogen is at 1 billion by then in the first response."
+  },
+  {
+   "n": 11,
+   "severity": "gap",
+   "kind": "missing_why",
+   "text": "Why only about 1% of effector cells become long-lived memory cells while the rest die (line 42)."
+  },
+  {
+   "n": 12,
+   "severity": "gap",
+   "kind": "missing_why",
+   "text": "Why memory cells 'need less stimulation' and activate faster (line 44)."
+  },
+  {
+   "n": 13,
+   "severity": "gap",
+   "kind": "missing_why",
+   "text": "Why the first activation takes about 2.5 days: 'rare matching cells also need ... to meet the antigen' (line 37) hints at search time but does not explain it."
+  },
+  {
+   "n": 14,
+   "severity": "gap",
+   "kind": "missing_why",
+   "text": "Why one fixed threshold of 1,000,000 effector cells applies even though the pathogen count at that time differs by 10,000× between the two scenarios (lines 34, 50)."
+  },
+  {
+   "n": 15,
+   "severity": "excess",
+   "kind": "excess",
+   "text": "Line 3 HTML comment 'Stage 1, rendered from model.md in STE-80' is production metadata, not content."
+  },
+  {
+   "n": 16,
+   "severity": "excess",
+   "kind": "excess",
+   "text": "Line 71 Summary repeats the bolded opening (line 5) almost word for word, adding only '100× more'."
+  },
+  {
+   "n": 17,
+   "severity": "gap",
+   "kind": "gap",
+   "text": "The total number of lymphocytes is never given, so the step from '1 in 100,000–1,000,000' to 100 precursor cells cannot be checked."
+  },
+  {
+   "n": 18,
+   "severity": "gap",
+   "kind": "gap",
+   "text": "There is no reason for the activation delays (2.5 days vs under a day), even though they are a large part of the 7-vs-3-day result."
+  },
+  {
+   "n": 19,
+   "severity": "gap",
+   "kind": "gap",
+   "text": "Antibody levels and how long they last are excluded, so the reader cannot tell whether protection years later involves anything besides memory cells."
+  },
+  {
+   "n": 20,
+   "severity": "gap",
+   "kind": "gap",
+   "text": "No mechanism is given for why ~1% of effector cells survive as memory."
+  },
+  {
+   "n": 21,
+   "severity": "gap",
+   "kind": "gap",
+   "text": "'Primary/secondary response' appear once without definition."
+  },
+  {
+   "n": 22,
+   "severity": "gap",
+   "kind": "gap",
+   "text": "It is unclear whether a partly changed antigen (flu) gives a partial speed-up or none; 'falls back toward' is not quantified."
+  }
+ ]
+}

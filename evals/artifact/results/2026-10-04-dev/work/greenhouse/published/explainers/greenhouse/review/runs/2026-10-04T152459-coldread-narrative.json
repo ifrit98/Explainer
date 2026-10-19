@@ -1,0 +1,526 @@
+{
+ "tool": "coldread",
+ "rendering": "narrative",
+ "slug": "greenhouse",
+ "at": "2026-10-04T15:24:59",
+ "model": "default",
+ "prompt_sha": "46e8105a72c2",
+ "reply": {
+  "beats": [
+   {
+    "at": "Beat 1 (hook)",
+    "text": "Shown: answer in two sentences. Said: gases move the emission of infrared up into cold air; the surface must be warmer so that cold air emits enough",
+    "unresolved": [
+     "emits enough"
+    ],
+    "unsaid": [],
+    "leap": [
+     "\"the surface must be warmer so that cold air emits enough\": nothing yet says why the surface has to warm when the air higher up emits. The link between them (temperature falling with height) only comes in beat 4. That's fine for a hook, but the reader holds it as a puzzle."
+    ],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Beat 2 (instance)",
+    "text": "Shown: 1361/4 = 340; ×0.70 = 240; σT⁴ = 240 → 255 K; why ÷4 (360 K otherwise). Said: energy balance fixes 255 K",
+    "unresolved": [
+     "1361",
+     "×0.70",
+     "σT⁴",
+     "σ",
+     "energy balance",
+     "360 K otherwise"
+    ],
+    "unsaid": [
+     "1361 is never said to be the sunlight arriving per m², and its units are not given",
+     "0.70 (the 30% reflected, i.e. albedo) is shown but never named or explained",
+     "the reason for ÷4 is announced ('why ÷4') but the words don't give it",
+     "σT⁴ appears as a formula, but the words never say it is the power a body emits per m² at temperature T",
+     "288 K observed and the 33 K gap: these are listed as what the reader now knows, but they appear in neither Shown nor Said"
+    ],
+    "leap": [
+     "Why is 255 K a puzzle? Without the measured 288 K, the reader has no gap to explain."
+    ],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Beat 3 (name)",
+    "text": "Shown: sunlight 0.5 µm vs infrared 10 µm; which gases absorb. Said: the gases pass sunlight, absorb and re-emit infrared; N₂, O₂ do not",
+    "unresolved": [],
+    "unsaid": [
+     "the 0.5 µm vs 10 µm contrast is shown, but the words never say that the Earth emits at 10 µm because it is cold, or why the difference matters",
+     "'which gases absorb': the gases that do absorb (CO₂, water vapour) are never named in the words. Only the ones that don't (N₂, O₂) are."
+    ],
+    "leap": [
+     "Why does the Earth's own emission sit in the infrared? This reader knows hotter things radiate more, but not that a cooler body emits at longer wavelengths."
+    ],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Beat 4 (mechanism)",
+    "text": "Shown: table: height vs temperature; emission height ≈ 5 km at 255 K. Said: infrared escapes where little gas remains above; that air must be 255 K; air cools 6.5 K/km (convection: rising air expands and cools); 255 + 6.5 × 5 ≈ 288",
+    "unresolved": [],
+    "unsaid": [
+     "'emission height ≈ 5 km' is shown, but the words never say where 5 km comes from"
+    ],
+    "leap": [
+     "\"that air must be 255 K\": beat 2 presented 255 K as the Earth's temperature without the gases. Reusing it as the temperature of the air that emits to space needs a sentence like 'whatever emits the 240 W/m² must be at 255 K'.",
+     "Why does re-emission move the escape point upward? Re-emitted infrared goes in every direction, and the step from that to 'escape happens where little gas remains above' is compressed.",
+     "288 is treated as the target here, but the reader was never given it as the measured value"
+    ],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Beat 5 (objection)",
+    "text": "Shown: surface budget. Said: the air sends 330 W/m² back down; 160 + 330 = 390 + 100",
+    "unresolved": [
+     "160",
+     "100",
+     "390"
+    ],
+    "unsaid": [
+     "the objection itself ('the surface emits 390 W/m² but only 240 leaves') appears in neither Said nor Shown",
+     "160 (sunlight absorbed at the surface) and 100 (heat carried up by convection and evaporation) are never identified",
+     "390 W/m² for the surface is never derived in the beats (σ·288⁴)"
+    ],
+    "leap": [
+     "The equation balances, but the reader can't tell what each term is, so it can't be checked"
+    ],
+    "excess": [],
+    "purpose_unclear": true
+   },
+   {
+    "at": "Beat 6 (test, predict)",
+    "text": "Shown: prediction prompt, then: rise ≈ 150 m, 1 K colder, −3.7 W/m², warm until balance, ≈ 1 K (≈ 3 K with feedbacks). Said: more gas → higher → colder → less out → warm",
+    "unresolved": [
+     "feedbacks",
+     "−3.7 W/m²"
+    ],
+    "unsaid": [
+     "how much CO₂ is added (a doubling) is never said",
+     "the 150 m rise is shown without saying where it comes from",
+     "−3.7 W/m² is shown but never named as the imbalance before warming"
+    ],
+    "leap": [
+     "≈ 1 K becoming ≈ 3 K 'with feedbacks' is given without explanation"
+    ],
+    "excess": [
+     "\"(≈ 3 K with feedbacks)\": the argument doesn't need it, and it brings in an idea it never explains"
+    ],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Beat 7 (test)",
+    "text": "Shown: isothermal case; stratosphere cools. Said: no lapse rate, no warming",
+    "unresolved": [
+     "lapse rate",
+     "stratosphere",
+     "isothermal"
+    ],
+    "unsaid": [
+     "'stratosphere cools' is shown and never mentioned in the words"
+    ],
+    "leap": [
+     "Why would the stratosphere cool? Nothing says that temperature rises with height there."
+    ],
+    "excess": [
+     "\"stratosphere cools\": not needed for the main line, and unexplained"
+    ],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Beat 8 (objection)",
+    "text": "Shown: 280→560: 3.7; 560→1120: 3.7. Said: saturation near the ground does not stop the rise of the emission height",
+    "unresolved": [
+     "saturation",
+     "280→560",
+     "3.7"
+    ],
+    "unsaid": [
+     "the units (ppm of CO₂, W/m²) are not given",
+     "that the figures show the same forcing for each doubling is not said in words"
+    ],
+    "leap": [
+     "Why does each doubling give the same 3.7? Not explained."
+    ],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Beat 9 (close)",
+    "text": "Shown: recap sentence. Said: answer in the opening's words; scope pointers",
+    "unresolved": [
+     "scope pointers"
+    ],
+    "unsaid": [
+     "neither the recap sentence nor the general argument is actually written in the beat. It only describes them."
+    ],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   }
+  ],
+  "blocking": [
+   "Beat 2: 288 K observed / 33 K gap is in neither Shown nor Said. Without it there is no puzzle, and beat 4's '≈ 288' has nothing to match.",
+   "Beat 2: 'σT⁴' and '×0.70' are never explained, so the 255 K that everything after depends on rests on symbols the reader hasn't been given.",
+   "Beat 4: 'that air must be 255 K' goes unexplained (it reuses beat 2's result for the emitting layer). This is the key step of the argument.",
+   "Beat 4: 'emission height ≈ 5 km' is shown with no source, so 255 + 6.5 × 5 ≈ 288 looks tuned to fit."
+  ],
+  "cuts": [
+   "Beat 7: 'stratosphere cools' (unexplained and off the main line)",
+   "Beat 6: '(≈ 3 K with feedbacks)'",
+   "Beat 5: cut the whole surface budget, or state the objection and name the terms; as written it costs a reread and gives nothing back"
+  ],
+  "question": {
+   "text": "How do greenhouse gases warm the Earth's surface? The reader knows this at beat 1.",
+   "known_at": "Beat 1",
+   "result_stated": "Yes, at beat 1: \"gases move the emission of infrared up into cold air; the surface must be warmer so that cold air emits enough\""
+  },
+  "motive": "Missing in the beats. The reason to care (the 'trapping heat' picture can't give amounts and suggests saturation) appears only in the author's plan. The reason for the approach (start from energy conservation and show the 33 K gap) is only partly there: beat 2's bridge says 'start from energy', but the gap is never shown.",
+  "close": "Can't be confirmed. Beat 9 says only 'answer in the opening's words; scope pointers' and 'recap sentence', with no actual wording. The general argument (any rise in emission height warms the surface, as long as temperature falls with height) is not said in the beats. Beat 7's 'no lapse rate, no warming' comes closest.",
+  "recap": "Greenhouse gases make the Earth radiate to space from high, cold air that has to sit at 255 K, and because air warms by about 6.5 K per km going down, the surface 5 km below ends up about 33 K warmer.",
+  "strongest": "Beat 6: the said causal chain 'more gas → higher → colder → less out → warm', with a prediction prompt and numbers.",
+  "weakest": "Beat 5: an objection that is never stated, with unnamed numbers '160 + 330 = 390 + 100'. Runner-up: beat 2 leaves out 288 K.",
+  "suggestions": [
+   "In beat 2, say '1361 W/m² of sunlight arrives; 30% is reflected; σT⁴ is the power per m² emitted at temperature T', and state 'measured: 288 K, so 33 K is missing'.",
+   "In beat 4, add 'whatever emits the 240 W/m² to space must be at 255 K, and now that is air at about 5 km, not the surface'.",
+   "In beat 1, voice the motive: 'trapping heat' can't say how much, and suggests the effect stops once CO₂ absorbs everything.",
+   "In beat 5, state the objection and name the 160 (absorbed sunlight) and 100 (convection and evaporation) terms.",
+   "In beat 8, give units (ppm, W/m²) and say 'each doubling adds the same 3.7 W/m²'.",
+   "Write the closing sentence and the general argument into beat 9 itself."
+  ]
+ },
+ "usage": {
+  "cost": 0.15388179999999999,
+  "seconds": 57
+ },
+ "findings": [
+  {
+   "n": 1,
+   "severity": "blocking",
+   "kind": "blocking",
+   "text": "Beat 2: 288 K observed / 33 K gap is in neither Shown nor Said. Without it there is no puzzle, and beat 4's '≈ 288' has nothing to match."
+  },
+  {
+   "n": 2,
+   "severity": "blocking",
+   "kind": "blocking",
+   "text": "Beat 2: 'σT⁴' and '×0.70' are never explained, so the 255 K that everything after depends on rests on symbols the reader hasn't been given."
+  },
+  {
+   "n": 3,
+   "severity": "blocking",
+   "kind": "blocking",
+   "text": "Beat 4: 'that air must be 255 K' goes unexplained (it reuses beat 2's result for the emitting layer). This is the key step of the argument."
+  },
+  {
+   "n": 4,
+   "severity": "blocking",
+   "kind": "blocking",
+   "text": "Beat 4: 'emission height ≈ 5 km' is shown with no source, so 255 + 6.5 × 5 ≈ 288 looks tuned to fit."
+  },
+  {
+   "n": 5,
+   "severity": "excess",
+   "kind": "cut",
+   "text": "Beat 7: 'stratosphere cools' (unexplained and off the main line)"
+  },
+  {
+   "n": 6,
+   "severity": "excess",
+   "kind": "cut",
+   "text": "Beat 6: '(≈ 3 K with feedbacks)'"
+  },
+  {
+   "n": 7,
+   "severity": "excess",
+   "kind": "cut",
+   "text": "Beat 5: cut the whole surface budget, or state the objection and name the terms; as written it costs a reread and gives nothing back"
+  },
+  {
+   "n": 8,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "Beat 1 (hook): emits enough"
+  },
+  {
+   "n": 9,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "Beat 1 (hook): \"the surface must be warmer so that cold air emits enough\": nothing yet says why the surface has to warm when the air higher up emits. The link between them (temperature falling with height) only comes in beat 4. That's fine for a hook, but the reader holds it as a puzzle."
+  },
+  {
+   "n": 10,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "Beat 2 (instance): 1361"
+  },
+  {
+   "n": 11,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "Beat 2 (instance): ×0.70"
+  },
+  {
+   "n": 12,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "Beat 2 (instance): σT⁴"
+  },
+  {
+   "n": 13,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "Beat 2 (instance): σ"
+  },
+  {
+   "n": 14,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "Beat 2 (instance): energy balance"
+  },
+  {
+   "n": 15,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "Beat 2 (instance): 360 K otherwise"
+  },
+  {
+   "n": 16,
+   "severity": "edge",
+   "kind": "unsaid",
+   "text": "Beat 2 (instance): 1361 is never said to be the sunlight arriving per m², and its units are not given"
+  },
+  {
+   "n": 17,
+   "severity": "edge",
+   "kind": "unsaid",
+   "text": "Beat 2 (instance): 0.70 (the 30% reflected, i.e. albedo) is shown but never named or explained"
+  },
+  {
+   "n": 18,
+   "severity": "edge",
+   "kind": "unsaid",
+   "text": "Beat 2 (instance): the reason for ÷4 is announced ('why ÷4') but the words don't give it"
+  },
+  {
+   "n": 19,
+   "severity": "edge",
+   "kind": "unsaid",
+   "text": "Beat 2 (instance): σT⁴ appears as a formula, but the words never say it is the power a body emits per m² at temperature T"
+  },
+  {
+   "n": 20,
+   "severity": "edge",
+   "kind": "unsaid",
+   "text": "Beat 2 (instance): 288 K observed and the 33 K gap: these are listed as what the reader now knows, but they appear in neither Shown nor Said"
+  },
+  {
+   "n": 21,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "Beat 2 (instance): Why is 255 K a puzzle? Without the measured 288 K, the reader has no gap to explain."
+  },
+  {
+   "n": 22,
+   "severity": "edge",
+   "kind": "unsaid",
+   "text": "Beat 3 (name): the 0.5 µm vs 10 µm contrast is shown, but the words never say that the Earth emits at 10 µm because it is cold, or why the difference matters"
+  },
+  {
+   "n": 23,
+   "severity": "edge",
+   "kind": "unsaid",
+   "text": "Beat 3 (name): 'which gases absorb': the gases that do absorb (CO₂, water vapour) are never named in the words. Only the ones that don't (N₂, O₂) are."
+  },
+  {
+   "n": 24,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "Beat 3 (name): Why does the Earth's own emission sit in the infrared? This reader knows hotter things radiate more, but not that a cooler body emits at longer wavelengths."
+  },
+  {
+   "n": 25,
+   "severity": "edge",
+   "kind": "unsaid",
+   "text": "Beat 4 (mechanism): 'emission height ≈ 5 km' is shown, but the words never say where 5 km comes from"
+  },
+  {
+   "n": 26,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "Beat 4 (mechanism): \"that air must be 255 K\": beat 2 presented 255 K as the Earth's temperature without the gases. Reusing it as the temperature of the air that emits to space needs a sentence like 'whatever emits the 240 W/m² must be at 255 K'."
+  },
+  {
+   "n": 27,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "Beat 4 (mechanism): Why does re-emission move the escape point upward? Re-emitted infrared goes in every direction, and the step from that to 'escape happens where little gas remains above' is compressed."
+  },
+  {
+   "n": 28,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "Beat 4 (mechanism): 288 is treated as the target here, but the reader was never given it as the measured value"
+  },
+  {
+   "n": 29,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "Beat 5 (objection): 160"
+  },
+  {
+   "n": 30,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "Beat 5 (objection): 100"
+  },
+  {
+   "n": 31,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "Beat 5 (objection): 390"
+  },
+  {
+   "n": 32,
+   "severity": "edge",
+   "kind": "unsaid",
+   "text": "Beat 5 (objection): the objection itself ('the surface emits 390 W/m² but only 240 leaves') appears in neither Said nor Shown"
+  },
+  {
+   "n": 33,
+   "severity": "edge",
+   "kind": "unsaid",
+   "text": "Beat 5 (objection): 160 (sunlight absorbed at the surface) and 100 (heat carried up by convection and evaporation) are never identified"
+  },
+  {
+   "n": 34,
+   "severity": "edge",
+   "kind": "unsaid",
+   "text": "Beat 5 (objection): 390 W/m² for the surface is never derived in the beats (σ·288⁴)"
+  },
+  {
+   "n": 35,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "Beat 5 (objection): The equation balances, but the reader can't tell what each term is, so it can't be checked"
+  },
+  {
+   "n": 36,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "Beat 6 (test, predict): feedbacks"
+  },
+  {
+   "n": 37,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "Beat 6 (test, predict): −3.7 W/m²"
+  },
+  {
+   "n": 38,
+   "severity": "edge",
+   "kind": "unsaid",
+   "text": "Beat 6 (test, predict): how much CO₂ is added (a doubling) is never said"
+  },
+  {
+   "n": 39,
+   "severity": "edge",
+   "kind": "unsaid",
+   "text": "Beat 6 (test, predict): the 150 m rise is shown without saying where it comes from"
+  },
+  {
+   "n": 40,
+   "severity": "edge",
+   "kind": "unsaid",
+   "text": "Beat 6 (test, predict): −3.7 W/m² is shown but never named as the imbalance before warming"
+  },
+  {
+   "n": 41,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "Beat 6 (test, predict): ≈ 1 K becoming ≈ 3 K 'with feedbacks' is given without explanation"
+  },
+  {
+   "n": 42,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "Beat 7 (test): lapse rate"
+  },
+  {
+   "n": 43,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "Beat 7 (test): stratosphere"
+  },
+  {
+   "n": 44,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "Beat 7 (test): isothermal"
+  },
+  {
+   "n": 45,
+   "severity": "edge",
+   "kind": "unsaid",
+   "text": "Beat 7 (test): 'stratosphere cools' is shown and never mentioned in the words"
+  },
+  {
+   "n": 46,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "Beat 7 (test): Why would the stratosphere cool? Nothing says that temperature rises with height there."
+  },
+  {
+   "n": 47,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "Beat 8 (objection): saturation"
+  },
+  {
+   "n": 48,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "Beat 8 (objection): 280→560"
+  },
+  {
+   "n": 49,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "Beat 8 (objection): 3.7"
+  },
+  {
+   "n": 50,
+   "severity": "edge",
+   "kind": "unsaid",
+   "text": "Beat 8 (objection): the units (ppm of CO₂, W/m²) are not given"
+  },
+  {
+   "n": 51,
+   "severity": "edge",
+   "kind": "unsaid",
+   "text": "Beat 8 (objection): that the figures show the same forcing for each doubling is not said in words"
+  },
+  {
+   "n": 52,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "Beat 8 (objection): Why does each doubling give the same 3.7? Not explained."
+  },
+  {
+   "n": 53,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "Beat 9 (close): scope pointers"
+  },
+  {
+   "n": 54,
+   "severity": "edge",
+   "kind": "unsaid",
+   "text": "Beat 9 (close): neither the recap sentence nor the general argument is actually written in the beat. It only describes them."
+  }
+ ]
+}

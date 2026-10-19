@@ -1,0 +1,178 @@
+{
+ "tool": "quiz",
+ "rendering": "prose",
+ "slug": "key-exchange",
+ "at": "2026-10-04T15:04:46",
+ "model": "default",
+ "prompt_sha": "bedad2b89e75",
+ "reply": {
+  "answers": {
+   "1": "The people are Alice and Bob (the two strangers), Eve (an eavesdropper who only reads) and Mallory (an attacker who can replace messages). The public values are the prime modulus p and the base g. Each side has a private number (a, b) and a public number (A = g^a mod p, B = g^b mod p). The result is the shared secret s = g^(ab) mod p, which is then used as the key for ordinary encryption. Supporting ideas: 'mod' (remainder), one-way operation, discrete logarithm, authentication.",
+   "2": "p and g are agreed in public. Each side keeps a private exponent and publishes g raised to it, mod p. Each side raises the other's public number to its own private exponent. Because of the exponent rule, both get g^(ab) mod p. Eve sees p, g, A and B but not a, b or s. Getting a from A is the discrete logarithm problem. Mallory can swap A and B for her own public number, and authentication (signatures, certificates) is what stops that.",
+   "3": "Each side sends g^private mod p and raises what it receives to its own private number. By (g^a)^b = (g^b)^a, both reach g^(ab) mod p. Eve can't follow because undoing g^x mod p (the discrete logarithm) has no known fast method.",
+   "4": "The most important variable is the size of p (and of the range a and b are picked from). With p = 23, Eve can try exponents one by one and finds a = 6 on the 6th try. With a 2048-bit p (about 617 digits), even the best known methods need about 2^112 operations, roughly 10^14 years at a trillion per second. Alice's own work only grows to about 4,000 steps. So making p bigger hurts Eve enormously and the honest users only a little.",
+   "5": "Assumption: that the discrete logarithm is hard, and that there is no other way from A and B to s. This has not been proven; it rests on decades of failed attempts. The setup also assumes Eve only reads and does not change messages. Established fact: (5^15)^6 and (5^6)^15 both equal 5^(90), and taking remainders along the way doesn't change the final remainder. In the example, both sides compute 2.",
+   "6": "Alice and Bob publicly agree on a prime p and a base g. Each secretly picks an exponent and sends g to that power, mod p. Each raises the number they receive to their own secret exponent, mod p, and the exponent rule makes both results equal g^(ab) mod p, which becomes the key. Eve, who sees only g^a and g^b mod p, would have to solve the discrete logarithm, which has no known fast method when p is huge, though this is assumed rather than proven. The method doesn't stop someone who replaces messages, so real systems add signatures and certificates.",
+   "7": "The 'first idea fails' paragraph was hardest. It says 6 is sent 'through an operation that is hard to reverse' and the result is 8, but it doesn't name the operation (it is in fact 5^6 mod 23, which only appears later). Naming it, or pointing ahead to it, would help. The '~4,000 steps' figure was also hard to follow without a sentence on where it comes from.",
+   "8": "Alice sends A = 5^3 mod 23 = 125 mod 23 = 10. Bob sends B = 5^2 mod 23 = 25 mod 23 = 2. Alice computes 2^3 mod 23 = 8. Bob computes 10^2 mod 23 = 100 mod 23 = 8. The shared secret is 8 (= 5^6 mod 23, matching the explanation's table).",
+   "9": "Without mod, A = 5^6 = 15625, and Eve just takes the logarithm base 5 to get 6, because plain powers grow in order. With mod p, the results jump around (5, 2, 10, 4, 20, 8, …), so a result says nothing about where the exponent is. That makes the operation one-way, as far as anyone knows.",
+   "10": "No. Nothing in the exchange tells Alice who sent a public number, so Mallory can sit in the middle. Authentication has to be added: Bob signs B, and Alice checks the signature with a certificate.",
+   "11": "Because Bob would then have to reverse the operation to get the key, and if Bob can reverse it, so can Eve: both receive the same 8. So each side needs its own private number, and an operation that lets each side finish the other's half without undoing it.",
+   "12": "Alice sends A = 5^6 mod 23 = 8. Bob sends B = 5^15 mod 23 = 19. Alice computes 19^6 mod 23 = 2, and Bob computes 8^15 mod 23 = 2. The shared secret is 2.",
+   "13": "Multiplying powers adds the exponents: 8 × 19 mod 23 = 14 = 5^(6+15) mod 23. The secret needs the exponents multiplied, 5^(6×15) mod 23 = 2. No known way gets from A and B to s without, in effect, finding a or b.",
+   "14": "No. The explanation says plainly that no one has proven the discrete logarithm is hard, or that s can't be found from A and B some other way. The security rests on decades of failed attempts.",
+   "15": "Mallory can replace both public numbers with her own (for example 5^3 mod 23 = 10). She then shares one secret with Alice (6) and another with Bob (5). She decrypts each message, reads it, and re-encrypts it for the other side, and neither of them notices."
+  },
+  "audit": {
+   "terms": [
+    "The key and the shared secret are treated as the same thing, then not. Line 26: s 'becomes the key for ordinary encryption'. Scope (line 84): 'a hash function scrambles s first; a cipher such as AES then encrypts'. It is unclear whether s is the key or only the input to it.",
+    "Three names for the hard-to-undo step: 'scrambled form' / 'unscramble' (line 5), 'operation that is hard to reverse' (line 14) and 'one-way operation' (line 54). The term 'one-way' is only defined at the end.",
+    "Two names for A and B: 'scrambled numbers' (line 5) and 'public number' (line 23)."
+   ],
+   "unexplained": [
+    "'about 4,000 such steps' for a 2048-bit exponent (line 60): it doesn't say why roughly twice the bit count, or how the step count would change with a bigger or smaller p.",
+    "'about 2^112 operations (an estimate)' (line 58): it doesn't say where this comes from or how it changes with the size of p, so the reader can't tell how much safety a bigger or smaller p would give.",
+    "'2048 bits' (line 58): bits aren't tied to the size of p beyond '617 digits', and it isn't said what a smaller size such as 1024 would mean."
+   ],
+   "missing_why": [
+    "The first-idea example (line 14) gives 'The result is 8' without naming the operation (5^6 mod 23), so the reader can't check it.",
+    "Line 60: the square-and-multiply steps are shown, but not why doubling the exponent each step lets a huge exponent take only a few thousand steps.",
+    "Why p must be prime and g must 'produce many different values' is left to Scope (lines 21 and 84), even though line 21 already requires a prime.",
+    "Line 28: the argument that taking remainders along the way doesn't change the result is shown for one product; the extension to repeated powers is left implicit."
+   ],
+   "excess": [
+    "The HTML comments ('<!-- Stage 1, rendered from model.md in STE-80. -->' and the '<!-- claim: ... -->' markers) mean nothing to this reader.",
+    "Scope bullets on elliptic curves and quantum/ML-KEM (lines 82, 85) aren't used by the argument or the questions."
+   ]
+  },
+  "gaps": [
+   "The operation in the first-idea example (line 14) is never named.",
+   "It's unclear whether s itself is the encryption key or is hashed first (line 26 vs line 84).",
+   "No derivation for the ~4,000 steps or the 2^112 estimate.",
+   "Why p must be prime is deferred and never explained."
+  ]
+ },
+ "grade": {
+  "scores": {
+   "1": 2,
+   "2": 2,
+   "3": 2,
+   "4": 2,
+   "5": 2,
+   "6": 2,
+   "7": 2,
+   "8": 2,
+   "9": 2,
+   "10": 2,
+   "11": 2,
+   "12": 2,
+   "13": 2,
+   "14": 2,
+   "15": 2
+  },
+  "reasons": {},
+  "pass": true
+ },
+ "usage": {
+  "cost": 0.1816422,
+  "seconds": 39
+ },
+ "findings": [
+  {
+   "n": 1,
+   "severity": "gap",
+   "kind": "terms",
+   "text": "The key and the shared secret are treated as the same thing, then not. Line 26: s 'becomes the key for ordinary encryption'. Scope (line 84): 'a hash function scrambles s first; a cipher such as AES then encrypts'. It is unclear whether s is the key or only the input to it."
+  },
+  {
+   "n": 2,
+   "severity": "gap",
+   "kind": "terms",
+   "text": "Three names for the hard-to-undo step: 'scrambled form' / 'unscramble' (line 5), 'operation that is hard to reverse' (line 14) and 'one-way operation' (line 54). The term 'one-way' is only defined at the end."
+  },
+  {
+   "n": 3,
+   "severity": "gap",
+   "kind": "terms",
+   "text": "Two names for A and B: 'scrambled numbers' (line 5) and 'public number' (line 23)."
+  },
+  {
+   "n": 4,
+   "severity": "gap",
+   "kind": "unexplained",
+   "text": "'about 4,000 such steps' for a 2048-bit exponent (line 60): it doesn't say why roughly twice the bit count, or how the step count would change with a bigger or smaller p."
+  },
+  {
+   "n": 5,
+   "severity": "gap",
+   "kind": "unexplained",
+   "text": "'about 2^112 operations (an estimate)' (line 58): it doesn't say where this comes from or how it changes with the size of p, so the reader can't tell how much safety a bigger or smaller p would give."
+  },
+  {
+   "n": 6,
+   "severity": "gap",
+   "kind": "unexplained",
+   "text": "'2048 bits' (line 58): bits aren't tied to the size of p beyond '617 digits', and it isn't said what a smaller size such as 1024 would mean."
+  },
+  {
+   "n": 7,
+   "severity": "gap",
+   "kind": "missing_why",
+   "text": "The first-idea example (line 14) gives 'The result is 8' without naming the operation (5^6 mod 23), so the reader can't check it."
+  },
+  {
+   "n": 8,
+   "severity": "gap",
+   "kind": "missing_why",
+   "text": "Line 60: the square-and-multiply steps are shown, but not why doubling the exponent each step lets a huge exponent take only a few thousand steps."
+  },
+  {
+   "n": 9,
+   "severity": "gap",
+   "kind": "missing_why",
+   "text": "Why p must be prime and g must 'produce many different values' is left to Scope (lines 21 and 84), even though line 21 already requires a prime."
+  },
+  {
+   "n": 10,
+   "severity": "gap",
+   "kind": "missing_why",
+   "text": "Line 28: the argument that taking remainders along the way doesn't change the result is shown for one product; the extension to repeated powers is left implicit."
+  },
+  {
+   "n": 11,
+   "severity": "excess",
+   "kind": "excess",
+   "text": "The HTML comments ('<!-- Stage 1, rendered from model.md in STE-80. -->' and the '<!-- claim: ... -->' markers) mean nothing to this reader."
+  },
+  {
+   "n": 12,
+   "severity": "excess",
+   "kind": "excess",
+   "text": "Scope bullets on elliptic curves and quantum/ML-KEM (lines 82, 85) aren't used by the argument or the questions."
+  },
+  {
+   "n": 13,
+   "severity": "gap",
+   "kind": "gap",
+   "text": "The operation in the first-idea example (line 14) is never named."
+  },
+  {
+   "n": 14,
+   "severity": "gap",
+   "kind": "gap",
+   "text": "It's unclear whether s itself is the encryption key or is hashed first (line 26 vs line 84)."
+  },
+  {
+   "n": 15,
+   "severity": "gap",
+   "kind": "gap",
+   "text": "No derivation for the ~4,000 steps or the 2^112 estimate."
+  },
+  {
+   "n": 16,
+   "severity": "gap",
+   "kind": "gap",
+   "text": "Why p must be prime is deferred and never explained."
+  }
+ ]
+}

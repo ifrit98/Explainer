@@ -1,0 +1,43 @@
+{
+  "answers": {
+    "1": {
+      "answer": "From the outdoor air. The heat pump moves heat that is already in the air into the house. About 2 of the 3 kWh come from the air, and the other 1 kWh is the electricity. No energy is created.",
+      "quote": "It uses electricity to *move* heat that already exists in the outdoor air into the house. For each 1 kWh of electricity, it takes about 2 kWh of heat from the air and delivers 3 kWh to the house."
+    },
+    "2": {
+      "answer": "In one cycle the refrigerant does four things. (1) In the evaporator outdoors it boils at −10 °C and 3.5 bar, taking 2 kWh of heat from the 0 °C air. (2) The compressor, powered by the 1 kWh of electricity, squeezes it to 14 bar, which makes it hot. (3) In the condenser indoors it condenses at 40 °C and gives 3 kWh to the 35 °C water. (4) The expansion valve drops it back to 3.5 bar and −10 °C, and the loop starts again.",
+      "quote": "EVAP[\"① evaporator<br/>boils at −10 °C, 3.5 bar\"] -->|\"cold gas\"| COMP[\"② compressor<br/>3.5 → 14 bar\"]"
+    },
+    "3": {
+      "answer": "On a colder day the heat has to be lifted from a lower temperature, so the temperature lift is bigger. A bigger lift needs more work for each kWh of heat moved, and the Carnot ceiling is lower. For example, the real COP is about 3 at 0 °C but about 2 at −15 °C.",
+      "quote": "**Colder outdoor air → lower COP.** The heat pump must lift the heat farther."
+    },
+    "4": {
+      "answer": "The 5 °C day isn't in the table, so this is my own working from it. I assumed the condenser stays at 40 °C (313 K) and the evaporator sits 10 K below the outdoor air. At 5 °C the evaporator is −5 °C (268 K), the lift is 45 K, and the limit is 313 ÷ 45 ≈ 7.0. At −15 °C the lift is 65 K and the limit is 313 ÷ 65 ≈ 4.8. So the ideal limit on the 5 °C day is about 1.45 times higher. Using the half-of-Carnot rule, real COPs would be roughly 3.5 against 2.",
+      "quote": "COP_max = T_hot ÷ (T_hot − T_cold)"
+    }
+  },
+  "stops": [
+    "Unit 'bar' is never defined: \"it boils at about −10 °C at 3.5 bar\"",
+    "Carnot limit is used without saying what it is: \"No machine can beat the Carnot limit (temperatures in kelvin)\"",
+    "No reason given for the evaporator being 10 K colder than the air: \"| Typical | 0 °C | −10 °C (263 K) |\"",
+    "Why lowering the pressure lowers the temperature isn't explained: \"The valve drops the pressure to 3.5 bar, which drops the temperature to −10 °C.\"",
+    "Why squeezing a gas heats it isn't explained: \"Squeezing the gas to 14 bar raises its temperature\"",
+    "The half-of-Carnot rule doesn't quite match the table (4.8 ÷ 2 = 2.4, yet the table says about 2): \"real machines reach about half of the Carnot limit\"",
+    "It's unclear whether T_hot is the water temperature or the condenser temperature, since the water is 35 °C but the formula uses 40 °C: \"Condenser | Lift | Carnot limit\"",
+    "The distinction between efficiency and COP may confuse this reader: \"COP is not an efficiency.\""
+  ],
+  "excess": [
+    "\"A refrigerator uses the same loop. Its evaporator is inside the box and its condenser is the warm grille at the back.\"",
+    "\"One example is propane (R290).\"",
+    "\"**Out of scope:** defrost cycles, ground-source heat pumps, refrigerant choice and safety\"",
+    "The summary repeats the short answer: \"1 kWh of electricity delivers about 3 kWh of heat\"",
+    "\"COP 4 or more is possible on a mild day.\""
+  ],
+  "grounded": {
+    "1": true,
+    "2": true,
+    "3": true,
+    "4": true
+  }
+}

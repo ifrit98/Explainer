@@ -1,0 +1,162 @@
+{
+ "tool": "quiz",
+ "rendering": "prose",
+ "slug": "bloom-filter",
+ "at": "2026-10-04T15:12:02",
+ "model": "default",
+ "prompt_sha": "87e51d7b50fa",
+ "reply": {
+  "answers": {
+   "1": "The main objects are: a bit array of m bits; k hash functions, whose outputs are taken mod m to give positions; the items being added and queried; the two operations, add and query; the two answers, \"definitely not seen\" and \"probably seen\"; false positives and false negatives; and the quantities n (items added), f (fill, the fraction of bits that are 1), p (false-positive rate) and capacity.",
+   "2": "Each item is hashed by the k hash functions into k positions in the bit array. Adding an item sets those bits to 1. Querying an item reads the same k bits: any 0 means \"definitely not seen\", all 1s mean \"probably seen\". Because different items can share bits, an item that was never added can find all its bits set, which is a false positive. Bits never go back to 0, so an added item always finds its bits set, which means no false negatives. Fill f grows with kn/m, and p ≈ f^k. The filter is sized for a capacity n, and adding more items raises f and so raises p.",
+   "3": "Each added item turns on k shared bits and nothing is ever turned off. So a query that finds a 0 proves the item is new, and a query that finds all 1s may only be matching bits set by other items. That chance, p ≈ (1 − e^(−kn/m))^k, grows as the array fills.",
+   "4": "The key variable is items per bit, n/m (or its inverse, bits per item). If more items go into the same m, the fill f = 1 − e^(−kn/m) rises, so a never-added item is more likely to find all k bits at 1, and p rises sharply: 0.82% at 1M, 13.8% at 2M, 40% at 3M. More bits per item lowers p: at the best k, each extra 4.8 bits per item cuts p about tenfold. Changing k pulls two ways. More hashes mean more bits checked per query, but also faster filling. The best is near f = 0.5, at k ≈ 0.69·m/n.",
+   "5": "Assumption: each hash position is a uniform random choice, independent of the others. There is also the approximation (1 − 1/m)^m ≈ 1/e. Fact: nothing ever sets a bit back to 0, so a false negative is impossible. A worked figure: 1M items in 10M bits with k = 7 gives p ≈ 0.82%.",
+   "6": "A Bloom filter replaces a set of items with an array of m bits. Adding an item sets the k bits picked by k hash functions. A query answers \"definitely not seen\" if any of its k bits is 0, and \"probably seen\" if all are 1. Since bits are shared and never cleared, it can give false positives but never false negatives, and for the same reason it can't delete. With independent uniform hashes, the fill is f ≈ 1 − e^(−kn/m) and the false-positive rate is p ≈ f^k: about 0.82% at 10 bits per item with k = 7. The best k makes the array about half full, and p rises sharply once you add more items than the filter was sized for. That makes it a cheap pre-check before a slow exact lookup.",
+   "7": "The hardest part was the paragraph on choosing k. It says the optimum k = (m/n)·ln 2 \"which the formula gives\" without showing why f = 0.5 is the best point. It also jumps through 0.5^0.69 ≈ 0.62 to \"each 4.8 bits cuts p by 10\". Two things would help: a line showing that f = 0.5 means e^(−kn/m) = 1/2, so k = (m/n)·ln 2, and a line showing 0.62^4.8 ≈ 0.1.",
+   "8": "Not necessarily. All of its k bits are 1, which happens if it was added, but other items may have set those bits (a false positive, as with owl). It was probably added, but the filter can't confirm it.",
+   "9": "The fill f rises towards 1, so more never-added items find all their bits set, and the false-positive rate climbs: 0.82% at 1M, 13.8% at 2M, 40% at 3M for the 10M-bit, k = 7 filter. Added items are still always reported as \"probably seen\" (no false negatives), but \"probably seen\" stops meaning much.",
+   "10": "It doesn't store the items. It stores only a fixed number of bits per item (for example 10), whatever the item's length. A hash set stores the items themselves (for example about 50 bytes per URL). For 1M URLs that is 1.25 MB against about 50 MB, paid for with a small false-positive rate.",
+   "11": "Bit 2 is not set, so the answer is \"definitely not seen\". That answer can't be wrong: an added item would have set bit 2, and bits never go back to 0. (This is the fox example.)",
+   "12": "Bits are shared between items. Clearing one item's bits can clear bits another added item depends on. For example, deleting cat clears 6 and 11, which owl also uses, so owl would then read \"definitely not seen\". That is a false negative, and it breaks the guarantee.",
+   "13": "It gets worse: about 5.5% instead of 0.82%. Each add sets 20 bits, so the fill rises to about 0.865, and checking 20 bits that are almost all 1 doesn't filter well (0.865^20 ≈ 5.5%).",
+   "14": "kn/m = 2.1, so f = 1 − e^(−2.1) ≈ 0.88 and p ≈ 0.88^7 ≈ 40%. Added items are still never missed, but about 40% of queries for new items wrongly say \"probably seen\". In front of a database, that means about 400,000 wasted lookups per million queries for new items, against 8,200."
+  },
+  "audit": {
+   "terms": [
+    "The same concept appears under several names: \"never-added item\" (step 4, 'How often it is wrong'), \"new items\" / \"new URLs\" (intro, line 8; 'How often', line 56; 'What it is good for'), and \"an item that was never added\" ('false positives'). These are all the same population that p is measured over.",
+    "Capacity has two names: \"capacity\" ('Overfilling') and \"sized for\" ('Overfilling'; Q14). The summary also says p is chosen \"with bits per item\" rather than with capacity."
+   ],
+   "unexplained": [
+    "'Overfilling': \"At 2 million items, p is 13.8%\" is given without the working that the 3-million case gets (kn/m = 1.4, f ≈ 0.75).",
+    "'How often it is wrong', final paragraph: \"Thus each extra 4.8 bits per item cuts p by about 10 times\". It doesn't show where 4.8 comes from (0.62^4.8 ≈ 0.1).",
+    "'Not covered here': \"m = −n·ln p / (ln 2)²\" is given with no meaning or example. The reader can't tell what m it gives for, say, p = 1%."
+   ],
+   "missing_why": [
+    "'How often it is wrong': \"The best balance is near f = 0.5, which the formula gives at k = (m/n)·ln 2\". The reader isn't shown why the optimum is f = 0.5, or how setting e^(−kn/m) = 1/2 yields ln 2.",
+    "Step 4: \"p ≈ f^k\" relies on the k checked bits being independent, each 1 with probability f. That is only implied by the earlier assumption and isn't tied to this step.",
+    "'Not covered here': the sizing formula \"m = −n·ln p / (ln 2)²\" is stated with no reason for its form. It follows from p ≈ 0.5^k with k = (m/n)·ln 2, but the text doesn't say so."
+   ],
+   "excess": [
+    "'How it works': \"a hash output of 3,141,593 gives position 3,141,593 mod 16 = 9\". This reader already knows hash functions and mod; the worked mod example adds nothing for them.",
+    "'Summary' restates the bold intro paragraph and the rate formula with nothing new."
+   ]
+  },
+  "gaps": [
+   "The 13.8% figure at 2M items has no derivation.",
+   "There is no derivation of why the optimal k gives f = 0.5, or of k = (m/n)·ln 2.",
+   "The 4.8-bits-per-tenfold claim is not shown.",
+   "The sizing formula in 'Not covered' is unexplained, though it is explicitly marked out of scope."
+  ]
+ },
+ "grade": {
+  "scores": {
+   "1": 2,
+   "2": 2,
+   "3": 2,
+   "4": 2,
+   "5": 2,
+   "6": 2,
+   "7": 2,
+   "8": 2,
+   "9": 2,
+   "10": 2,
+   "11": 2,
+   "12": 2,
+   "13": 2,
+   "14": 2
+  },
+  "reasons": {},
+  "pass": true
+ },
+ "usage": {
+  "cost": 0.172995,
+  "seconds": 38
+ },
+ "findings": [
+  {
+   "n": 1,
+   "severity": "gap",
+   "kind": "terms",
+   "text": "The same concept appears under several names: \"never-added item\" (step 4, 'How often it is wrong'), \"new items\" / \"new URLs\" (intro, line 8; 'How often', line 56; 'What it is good for'), and \"an item that was never added\" ('false positives'). These are all the same population that p is measured over."
+  },
+  {
+   "n": 2,
+   "severity": "gap",
+   "kind": "terms",
+   "text": "Capacity has two names: \"capacity\" ('Overfilling') and \"sized for\" ('Overfilling'; Q14). The summary also says p is chosen \"with bits per item\" rather than with capacity."
+  },
+  {
+   "n": 3,
+   "severity": "gap",
+   "kind": "unexplained",
+   "text": "'Overfilling': \"At 2 million items, p is 13.8%\" is given without the working that the 3-million case gets (kn/m = 1.4, f ≈ 0.75)."
+  },
+  {
+   "n": 4,
+   "severity": "gap",
+   "kind": "unexplained",
+   "text": "'How often it is wrong', final paragraph: \"Thus each extra 4.8 bits per item cuts p by about 10 times\". It doesn't show where 4.8 comes from (0.62^4.8 ≈ 0.1)."
+  },
+  {
+   "n": 5,
+   "severity": "gap",
+   "kind": "unexplained",
+   "text": "'Not covered here': \"m = −n·ln p / (ln 2)²\" is given with no meaning or example. The reader can't tell what m it gives for, say, p = 1%."
+  },
+  {
+   "n": 6,
+   "severity": "gap",
+   "kind": "missing_why",
+   "text": "'How often it is wrong': \"The best balance is near f = 0.5, which the formula gives at k = (m/n)·ln 2\". The reader isn't shown why the optimum is f = 0.5, or how setting e^(−kn/m) = 1/2 yields ln 2."
+  },
+  {
+   "n": 7,
+   "severity": "gap",
+   "kind": "missing_why",
+   "text": "Step 4: \"p ≈ f^k\" relies on the k checked bits being independent, each 1 with probability f. That is only implied by the earlier assumption and isn't tied to this step."
+  },
+  {
+   "n": 8,
+   "severity": "gap",
+   "kind": "missing_why",
+   "text": "'Not covered here': the sizing formula \"m = −n·ln p / (ln 2)²\" is stated with no reason for its form. It follows from p ≈ 0.5^k with k = (m/n)·ln 2, but the text doesn't say so."
+  },
+  {
+   "n": 9,
+   "severity": "excess",
+   "kind": "excess",
+   "text": "'How it works': \"a hash output of 3,141,593 gives position 3,141,593 mod 16 = 9\". This reader already knows hash functions and mod; the worked mod example adds nothing for them."
+  },
+  {
+   "n": 10,
+   "severity": "excess",
+   "kind": "excess",
+   "text": "'Summary' restates the bold intro paragraph and the rate formula with nothing new."
+  },
+  {
+   "n": 11,
+   "severity": "gap",
+   "kind": "gap",
+   "text": "The 13.8% figure at 2M items has no derivation."
+  },
+  {
+   "n": 12,
+   "severity": "gap",
+   "kind": "gap",
+   "text": "There is no derivation of why the optimal k gives f = 0.5, or of k = (m/n)·ln 2."
+  },
+  {
+   "n": 13,
+   "severity": "gap",
+   "kind": "gap",
+   "text": "The 4.8-bits-per-tenfold claim is not shown."
+  },
+  {
+   "n": 14,
+   "severity": "gap",
+   "kind": "gap",
+   "text": "The sizing formula in 'Not covered' is unexplained, though it is explicitly marked out of scope."
+  }
+ ]
+}

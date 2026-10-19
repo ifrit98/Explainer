@@ -1,0 +1,60 @@
+{
+  "key": {
+    "A": "none",
+    "B": "published",
+    "C": "principles",
+    "D": "quick"
+  },
+  "grades": {
+    "none": {
+      "quiz": [
+        2,
+        2,
+        2,
+        2
+      ],
+      "misconception": "corrected",
+      "errors": []
+    },
+    "published": {
+      "quiz": [
+        2,
+        2,
+        0,
+        2
+      ],
+      "misconception": "absent",
+      "errors": []
+    },
+    "principles": {
+      "quiz": [
+        2,
+        2,
+        2,
+        2
+      ],
+      "misconception": "absent",
+      "errors": []
+    },
+    "quick": {
+      "quiz": [
+        2,
+        2,
+        2,
+        2
+      ],
+      "misconception": "absent",
+      "errors": [
+        "\"the infrared escapes to space only from high, cold air, about 5 km up\" (overstated: through the 8–13 µm window much surface infrared escapes directly, and the text never mentions this)",
+        "\"The new emitting air is 1 K colder... The surface... warms by the same amount: about 1.2 K before feedbacks\" (inconsistent: the 1 K drop it just derived implies about 1 K of warming, and the 1.2 K figure is given without its source)"
+      ]
+    }
+  },
+  "rank": [
+    "principles",
+    "none",
+    "quick",
+    "published"
+  ],
+  "why_best": "C builds every link the reader needs (energy balance, the wavelength split, the dipole reason, a one-layer model and why it fails, then emission height with the lapse rate, its limits, and worked numbers) in a tight order with prediction prompts, without A's extra detours and length or the gaps in D and B."
+}

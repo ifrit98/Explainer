@@ -1,0 +1,57 @@
+{
+  "key": {
+    "A": "quick",
+    "B": "none",
+    "C": "published",
+    "D": "principles"
+  },
+  "grades": {
+    "quick": {
+      "quiz": [
+        2,
+        2,
+        2,
+        2
+      ],
+      "misconception": "corrected",
+      "errors": []
+    },
+    "none": {
+      "quiz": [
+        2,
+        2,
+        2,
+        2
+      ],
+      "misconception": "corrected",
+      "errors": []
+    },
+    "published": {
+      "quiz": [
+        2,
+        2,
+        2,
+        2
+      ],
+      "misconception": "corrected",
+      "errors": []
+    },
+    "principles": {
+      "quiz": [
+        2,
+        2,
+        2,
+        2
+      ],
+      "misconception": "corrected",
+      "errors": []
+    }
+  },
+  "rank": [
+    "quick",
+    "published",
+    "principles",
+    "none"
+  ],
+  "why_best": "A gives every needed step in the fewest words: add and query on a tiny worked array, why a 'no' is certain, why deletion breaks that guarantee, and a concrete false positive, with correct numbers and no detours."
+}

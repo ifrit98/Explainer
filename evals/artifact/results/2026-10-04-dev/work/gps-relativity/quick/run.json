@@ -1,0 +1,12 @@
+{
+  "result": "I made `explainers/gps-relativity/explanation.md` (prose, with `model.md` and `model.yaml` behind it; `explainer check` passes) because the subject is one chain of reasoning with worked numbers: timing gives distance, four satellites solve the clock error, and relativity makes the satellite clocks gain 38 µs/day (about 11 km/day) — there is nothing to explore or animate.",
+  "error": null,
+  "cost": 0.44009420000000005,
+  "seconds": 91,
+  "turns": 18,
+  "files": [
+    "explainers/gps-relativity/explanation.md"
+  ],
+  "review_cost": 0,
+  "reviews": 0
+}

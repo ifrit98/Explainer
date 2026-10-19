@@ -1,0 +1,12 @@
+{
+  "result": "I made `explainers/vaccine-memory/explanation.md`, plus `model.md` and `model.yaml` as the source facts behind it. I chose prose because the subject is one causal chain: random receptor library → selection → expansion → memory → a faster race against the virus. A short text diagram inside the file covers the overview, so an interactive page or separate diagram would not have added anything. I could not run `explainer check` because I have no shell here, so the numbers have not been automatically checked against `model.yaml`.",
+  "error": null,
+  "cost": 0.2302082,
+  "seconds": 68,
+  "turns": 4,
+  "files": [
+    "explainers/vaccine-memory/explanation.md"
+  ],
+  "review_cost": 0,
+  "reviews": 0
+}

@@ -1,0 +1,60 @@
+# Machine-readable half of model.md. `explainer check float-sum` holds every rendering to it.
+
+values:
+  bits: 53
+  stored_01: "0.1000000000000000055511151231257827"
+  stored_02: "0.2000000000000000111022302462515654"
+  stored_03: "0.2999999999999999888977697537484345"
+  exact_sum: "0.3000000000000000166533453693773481"
+  result: "0.3000000000000000444089209850062616"
+  result_printed: "0.30000000000000004"
+  gap: "5.551115123125783e-17"
+
+# Written inputs, the binary expansion, the standard's name, and small illustrative integers.
+allow: [0.1, 0.2, 0.3, 0.5, 0.25, 0.75, 0.333, 0.666, 0.667, 1e-9, 2, 3, 4, 8, 10, 20, 30, 34, 754,
+        "0.000110011001100",
+        "0.1000000000000000055511151231257827", "0.2000000000000000111022302462515654",
+        "0.2999999999999999888977697537484345", "0.3000000000000000166533453693773481",
+        "0.3000000000000000444089209850062616", "0.30000000000000004", "5.551115123125783e-17"]
+
+require:
+  - path: result_printed
+    in: [prose]
+  - path: stored_01
+    in: [prose]
+  - path: stored_03
+    in: [prose]
+
+claims:
+  - id: why-binary-inexact
+    kind: why
+    statement: "0.1 has an infinite binary expansion, so a double with 53 bits stores only the nearest binary fraction."
+    alternative: "Store 0.1 exactly."
+    counterexample: "0.1 = 0.000110011001100… in binary and never ends; stored 0.1 = 0.1000000000000000055511…"
+    ask: "Why can a double not hold 0.1 exactly when it can hold 0.75 exactly?"
+  - id: mech-sum
+    kind: mechanism
+    statement: "The rounding errors of the stored 0.1 and 0.2 add, and the sum is rounded to the double one spacing above the stored 0.3."
+    example: "stored 0.1 + stored 0.2 = 0.30000000000000001665…; rounded to 0.30000000000000004441…; stored 0.3 = 0.29999999999999998889…"
+  - id: guarantee-exact
+    kind: guarantee
+    statement: "Addition gives the exact answer when the inputs and the answer are sums of powers of 2 that fit in 53 bits."
+    example: "0.5 + 0.25 == 0.75 is true."
+    counterexample: "0.1 + 0.2 == 0.3 is false, because 0.1, 0.2, 0.3 are not sums of powers of 2."
+  - id: misc-print
+    kind: misconception
+    correction: "The stored value of 0.1 is 0.1000000000000000055511…; printing chooses a short decimal for display only."
+    statement: "print(0.1) shows 0.1 because the language prints the shortest decimal that maps back to the same double, not because the double equals 0.1."
+    ask: "If print(0.1) shows 0.1, why is the stored value not 0.1?"
+  - id: why-tolerance
+    kind: why
+    statement: "Compare doubles with a tolerance, or use integers or a decimal type, not ==."
+    alternative: "Compare with =="
+    counterexample: "0.1 + 0.2 == 0.3 is false; abs(0.1 + 0.2 - 0.3) < 1e-9 is true."
+
+accept_unjustified: {}
+
+terms:
+  - term: stored value
+    means: "the double the computer holds for a written number"
+    avoid: [imprecise number, fuzzy]

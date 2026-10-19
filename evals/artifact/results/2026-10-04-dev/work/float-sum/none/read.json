@@ -1,0 +1,43 @@
+{
+  "answers": {
+    "1": {
+      "answer": "A computer stores numbers in binary. In binary, a fraction has a finite form only if its denominator is a power of 2. 0.1 is 1/10, and 10 = 2 × 5, so in binary it repeats forever, the way 1/3 does in decimal. A double keeps only 53 significant binary digits, so 0.1 is rounded to the nearest number it can store, which is slightly larger than 0.1.",
+      "quote": "So in binary, a fraction has a finite form **only if its denominator is a power of 2**: 1/2, 1/4, 3/8, 5/16, and so on."
+    },
+    "2": {
+      "answer": "The stored 0.1 and 0.2 are both slightly too big, and the stored 0.3 is slightly too small. Their exact sum falls exactly halfway between two doubles. The tie rule, round half to even, picks the upper one. So the result is the double one step above the stored 0.3. They are different numbers, so == returns false.",
+      "quote": "Adding the rounded 0.1 and 0.2, then rounding the sum, lands one step above the stored 0.3. The two are different numbers, so `==` is false."
+    },
+    "3": {
+      "answer": "It should check whether the two values are close enough, for example with math.isclose or abs(a - 0.3) < tolerance. A relative tolerance usually works better than a fixed one. For money or other exact decimal amounts, it should use integers in the smallest unit (such as cents) or a decimal type.",
+      "quote": "**Don't compare floats with `==`** when they come out of a calculation. Check whether they are *close enough*:"
+    },
+    "4": {
+      "answer": "Yes, it should be true. The explanation doesn't test this sum, but its rule settles it. 0.5 = 1/2, 0.25 = 1/4 and 0.75 = 3/4 all have power-of-2 denominators, so all three are stored exactly. Addition gives the exact result correctly rounded. The exact sum 0.75 can be stored, so no rounding happens and the comparison is true.",
+      "quote": "IEEE 754 guarantees that each basic operation (+, −, ×, ÷, √) gives the exact result *correctly rounded* to the nearest double."
+    }
+  },
+  "stops": [
+    "The digits after the point (the *significand*) get a fixed budget: **53 significant binary digits**.",
+    "Near 0.3, the doubles are spaced about 5.55 × 10⁻¹⁷ apart.",
+    "pick the neighbour whose last binary digit is 0. That's the upper one.",
+    "Near 0.3 the stored values are whole multiples of\n> 2⁻⁵⁴",
+    "Every double has a finite decimal expansion, because its denominator is a power of 2.",
+    "Modern languages print the **shortest decimal string that maps back to the same double**.",
+    "A relative tolerance (a fraction of the numbers' size) usually works better than a fixed absolute one."
+  ],
+  "excess": [
+    "For readers who like exact arithmetic: the double for 0.1 is exactly\n> 3602879701896397 × 2⁻⁵⁵",
+    "**Speed and hardware:** binary arithmetic is what the circuits do natively.",
+    "**Range:** the exponent lets one 64-bit format hold numbers from about 10⁻³⁰⁸ to 10³⁰⁸.",
+    "For example, `0.1 + 0.7` happens to print `0.7999999999999999`, but `0.1 + 0.4` prints `0.5`",
+    "Python's `decimal.Decimal`, Java's `BigDecimal`, C#'s `decimal`, SQL's `NUMERIC`.",
+    "**For exact rational arithmetic**, some languages provide fractions, such as Python's `fractions.Fraction(1, 10)`."
+  ],
+  "grounded": {
+    "1": true,
+    "2": true,
+    "3": true,
+    "4": true
+  }
+}

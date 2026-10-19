@@ -1,0 +1,49 @@
+{
+  "answers": {
+    "1": {
+      "answer": "Each person raises the other's public number to their own private number, mod p. This operation is safe because it's a one-way function: no known fast method can reverse it to find the private numbers from the public ones.",
+      "quote": "Each raises the other's public number to their own private number, mod p. To get further, Eve must find a or b, and no fast method is known for a large p."
+    },
+    "2": {
+      "answer": "Both compute the same value because when Alice raises g^b to power a and Bob raises g^a to power b, the exponent rule makes both equal g^(ab). The key is never sent because each person computes it locally from the public numbers and their private number.",
+      "quote": "Alice computed (5^15)^6, and Bob computed (5^6)^15. By the exponent rule, both equal 5^(6×15)."
+    },
+    "3": {
+      "answer": "The exchange alone doesn't stop a man-in-the-middle attacker who intercepts and replaces the public numbers with their own. Authentication using digital signatures stops this attack.",
+      "quote": "It does not stop Mallory, an attacker who can replace messages. Real systems add **authentication**: Bob attaches to B a value that only Bob can produce and anyone can check (a digital signature)."
+    },
+    "4": {
+      "answer": "Alice sends 8 and Bob sends 19. They share the shared secret s = 2.",
+      "quote": "Alice sends A = 5^6 mod 23 = 15625 mod 23 = 8. Bob sends B = 5^15 mod 23 = 19. The result, s = 2, is the **shared secret**."
+    }
+  },
+  "stops": [
+    "Each side then does one half of a calculation, and the other side finishes it without undoing it",
+    "(x + 23k) × y = x × y + 23ky, for any whole number k",
+    "Can Eve combine them into 2?",
+    "Multiplying powers adds the exponents",
+    "Plain powers grow in order, so a logarithm reverses them",
+    "Multiplying by 14 undoes multiplying by 5, because 5 × 14 = 70 = 3 × 23 + 1",
+    "For exponents 1 to 22, 5^x mod 23 gives: 5, 2, 10, 4, 20, 8, 17, 16, 11, 9, 22, 18, 21, 13, 19, 3, 15, 6, 7, 12, 14, 1",
+    "No one has proven that the discrete logarithm is hard",
+    "Nothing in the exchange tells Alice who sent a public number",
+    "hash function, a fixed scrambling recipe"
+  ],
+  "excess": [
+    "A version of it starts most HTTPS connections",
+    "A first idea fails",
+    "*Predict before you read on:*",
+    "A standard fast method (Euclid's algorithm) finds this undoing number",
+    "At a trillion operations per second, that is about 10^14 years",
+    "Each squaring doubles the exponent, so a 2048-bit exponent needs about 2048 squarings",
+    "Example: 5^3 = 125, and 125 mod 23 = 10. Reducing first gives (25 mod 23) × 5 = 2 × 5 = 10",
+    "A bad g fails: for example, with g = 22 the powers mod 23 are only 1 and 22",
+    "The calculations below use one piece of notation"
+  ],
+  "grounded": {
+    "1": true,
+    "2": true,
+    "3": true,
+    "4": true
+  }
+}

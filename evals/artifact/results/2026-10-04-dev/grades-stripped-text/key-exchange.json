@@ -1,0 +1,57 @@
+{
+  "key": {
+    "A": "none",
+    "B": "quick",
+    "C": "principles",
+    "D": "published"
+  },
+  "grades": {
+    "none": {
+      "quiz": [
+        2,
+        2,
+        2,
+        2
+      ],
+      "misconception": "corrected",
+      "errors": []
+    },
+    "quick": {
+      "quiz": [
+        2,
+        2,
+        2,
+        2
+      ],
+      "misconception": "absent",
+      "errors": []
+    },
+    "principles": {
+      "quiz": [
+        2,
+        2,
+        2,
+        2
+      ],
+      "misconception": "corrected",
+      "errors": []
+    },
+    "published": {
+      "quiz": [
+        2,
+        2,
+        2,
+        2
+      ],
+      "misconception": "corrected",
+      "errors": []
+    }
+  },
+  "rank": [
+    "quick",
+    "principles",
+    "published",
+    "none"
+  ],
+  "why_best": "B covers every needed step (the operation, why the two results agree, why it is hard, the worked numbers and the man-in-the-middle fix) in the fewest words, and its short contrasts with multiplication and with plain powers explain why the method takes this form without detours."
+}

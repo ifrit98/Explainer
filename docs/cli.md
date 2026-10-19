@@ -22,6 +22,7 @@ With the plugin installed, run `explainer <command>` from any project. In the Ex
 | `explainer say "<text>" [--voice V] [--speed S]` | Synthesize one line and play it. Use it to choose a voice or test a lexicon spelling. |
 | `explainer frames <slug> [--draft] [--every N]` | Rebuild the contact sheet from an existing render. |
 | `explainer eval chat [--conditions name=source ...]` | Answer the questions in `evals/chat/questions.yaml` under several system prompts with fresh `claude -p` calls, grade them blind, and write a report. See [Evals](evals.md). |
+| `explainer eval artifact [--split dev\|test\|all] [--only id ...] [--conditions name=source ...]` | Build an explainer for each held-out subject in `evals/artifact/questions.yaml` under each condition (`none`, `principles`, `git:<rev>`, a file, `quick`, `published`), have a fresh reader answer its quiz from the renderings alone, grade blind, and write a report. A rerun into the same `--out` resumes. See [Evals](evals.md#the-artifact-eval). |
 
 ## `check`
 

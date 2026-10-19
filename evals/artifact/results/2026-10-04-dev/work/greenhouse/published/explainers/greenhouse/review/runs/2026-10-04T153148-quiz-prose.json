@@ -1,0 +1,227 @@
+{
+ "tool": "quiz",
+ "rendering": "prose",
+ "slug": "greenhouse",
+ "at": "2026-10-04T15:31:33",
+ "model": "default",
+ "prompt_sha": "a3fd476ca87a",
+ "reply": {
+  "answers": {
+   "1": "The Sun's input (1361 W/m²), the Earth's surface, the atmosphere and its layers at different heights, greenhouse gases (water vapour, CO₂, methane) versus non-absorbing N₂ and O₂, infrared radiation, the emission height and the emission temperature (255 K), the lapse rate (6.5 K/km), the albedo (0.30) and radiative forcing.",
+   "2": "The Earth absorbs 240 W/m² of sunlight (1361/4 × 0.70) and must emit the same amount to space. Greenhouse gases let sunlight through but absorb infrared and emit it again at the local air temperature. Infrared escapes to space only from air with little greenhouse gas above it, at the emission height. That air must be at 255 K to emit 240 W/m². The lapse rate links that height's temperature to the surface: the surface is warmer by 6.5 K for each km of height.",
+   "3": "Greenhouse gases raise the height from which infrared escapes to space. Because air gets colder with height, the emitting air would radiate less than 240 W/m², so the atmosphere and surface warm until the emitting air is back at 255 K. This leaves the surface warmer by the lapse rate times the emission height.",
+   "4": "If CO₂ doubles, the emission height rises by about 150 m. Air there is about 1 K colder (6.5 × 0.15), so it emits about 3.7 W/m² less than the Earth absorbs (the radiative forcing). The Earth gains energy until every height has warmed about 1 K, which brings the new emission height back to 255 K. The surface ends about 1 K warmer, or about 3 K (2.5–4 K) once feedbacks such as water vapour are included. With a lapse rate of 0, nothing changes.",
+   "5": "Assumption: the lapse rate stays fixed at 6.5 K/km while the Earth warms, so every height warms by the same amount (the text says this changes a little in reality). The text also replaces a spread of emission heights with one average height. Observed facts: the average surface temperature is 288 K, the measured lapse rate is about 6.5 K/km, the albedo is 0.30, and the solar input is 1361 W/m².",
+   "6": "In balance, the Earth must emit the 240 W/m² of sunlight it absorbs, which needs an emitting temperature of 255 K. Greenhouse gases absorb and re-emit infrared, so the radiation escapes only from high air with little gas above it, on average about 5 km up. Air cools by about 6.5 K per km, so the surface sits about 33 K warmer than that layer, at 288 K. Adding CO₂ lifts the escape height into colder air that emits less, creating an imbalance (3.7 W/m² per doubling). The Earth then warms until the new emitting layer is back at 255 K: about 1 K at the surface from this mechanism alone, about 3 K with feedbacks.",
+   "7": "The surface-budget paragraph was hardest. The surface emits 390 W/m² and receives about 330 W/m² back from the air, but the text never accounts for the net 60 W/m² against the 240 W/m² absorbed: how much sunlight the surface absorbs, and how convection carries heat upward. A small balance sheet for the surface would help. The number 3.7 W/m² was also confusing: 240 − 236 gives 4, not 3.7, and the text does not reconcile the two.",
+   "8": "About 255 K (−18 °C). The energy balance sets it: absorbed sunlight is 1361/4 × (1 − 0.30) ≈ 240 W/m², and σT⁴ = 240 gives T = 255 K. The factor 4 is the ratio of the sphere's emitting area to the disc that catches sunlight.",
+   "9": "More CO₂ means infrared must start higher before little gas is left above it, so the emission height rises by about 150 m. Because of the lapse rate, the air there is about 1 K colder, and colder air emits less (σ·254⁴ ≈ 236 W/m² instead of 240). The surface has not warmed yet, so outgoing radiation falls below the absorbed input.",
+   "10": "No. The emission height would still rise, but the air there would still be at 255 K and would emit the same 240 W/m². There would be no imbalance and no warming. The effect needs both a rising emission height and air that gets colder with height.",
+   "11": "It comes from high air with little greenhouse gas above it, on average about 5 km up, where the air is at about 255 K. The temperature is fixed because that layer must emit the 240 W/m² absorbed from the Sun, and σT⁴ = 240 gives 255 K. The height follows from the lapse rate: going from 288 K at the surface down to 255 K at 6.5 K/km takes about 5 km. The text derives the height from the temperatures, not from gas amounts. It notes that the real emission comes from a spread of heights that differ by wavelength.",
+   "12": "Step 1: CO₂ goes from 280 to 560 ppm, and the emission height rises about 150 m (a result taken from radiation calculations). Step 2: air at that height is about 1 K colder. Step 3: it emits about 3.7 W/m² less than the Earth absorbs (the radiative forcing). Step 4: the Earth gains energy and warms; convection keeps the lapse rate, so all heights warm equally. Step 5: warming stops when the air at the new emission height is back at 255 K and emits 240 W/m² again. The surface is then about 1 K warmer, or about 3 K (2.5–4 K) with feedbacks. The text does not say how long this takes; it explicitly leaves out ocean timing.",
+   "13": "Yes. What reaches space is decided high up, where the air is thin and infrared can still escape. More CO₂ makes that thin air absorb more, so the escape level moves up into colder air. Each doubling adds about 3.7 W/m². The text states this but does not explain why each doubling adds the same amount; it defers that to a textbook."
+  },
+  "audit": {
+   "terms": [
+    "The forcing concept has three names: 'imbalance' and 'radiative forcing' (§4 step 3), 'forcing' (§6), and 'no imbalance' (§5).",
+    "The escape level is called 'emission height' (§3, §4), 'emitting air' (lead and §3 'emitting air', Summary), and 'the escape moves up' (§6).",
+    "The outgoing radiation is called 'energy' (lead), 'power' (§1), 'infrared' (§2 onward), and 'heat' (§5 'trap heat like a blanket').",
+    "For the 255 K figure, §1 uses 'emission temperature' while the lead uses 'high, cold air'. §3 then says 'must be at the emission temperature, 255 K'. It is the same idea, but the reader has to connect it to 'whatever emits the Earth's energy' in §1."
+   ],
+   "unexplained": [
+    "§4 step 3: '≈ 236 W/m², against 240 … about 3.7 W/m² less'. The arithmetic gives 4, and the text does not explain why it says 3.7.",
+    "§6: 'Today's 420 ppm gives about 2.2 W/m²'. It never says what this means for temperature, or how 2.2 follows from the rule that each doubling adds the same forcing.",
+    "§3: '330 W/m² of infrared back down (a measured value)'. It does not say what this number does for the surface balance, or what would change if it were larger or smaller.",
+    "§4 step 1: 'about 150 m (a result of radiation calculations)'. The 150 m is given with no sense of why it is this size.",
+    "§4: 'about 3 K, likely 2.5–4 K'. It does not say what 'likely' means, or what drives the range."
+   ],
+   "missing_why": [
+    "§6: 'Each doubling adds about the same forcing'. The reason is deferred to Pierrehumbert, but the saturation argument (Q13) depends on it.",
+    "§3: 'The measured fall is about 6.5 K per km'. The text says rising air cools, but not why the rate is 6.5 and not some other value (for example, the role of water vapour).",
+    "§4 step 4: 'Convection still sets the lapse rate, so the temperature at every height rises by the same amount'. It does not explain why convection fixes the profile's shape rather than its level.",
+    "§3: 'emitted again, in all directions, at the temperature of that air'. It does not say why the emission is set by the local air temperature.",
+    "§3 surface budget: 'The surface does not lose that much'. The full surface balance (absorbed sunlight, convection) is not given, so the step stays unjustified."
+   ],
+   "excess": [
+    "The Summary mostly repeats §1 and §3 with nothing new.",
+    "§1: 'with 1361 × 0.70 instead, T = 360 K (87 °C)'. This counterfactual is a minor detour, although it does justify the division by 4.",
+    "§1: the explanation of what σT⁴ means and that 'Emission grows fast with temperature'. This reader already knows hotter things radiate more; only the law's form is needed.",
+    "Line 3 comment: '<!-- Stage 1, rendered from model.md in STE-80. -->'. This is internal metadata."
+   ]
+  },
+  "gaps": [
+   "The surface energy budget is incomplete: 390 emitted − 330 received does not reconcile with the 240 W/m² absorbed, and convective transport is not mentioned.",
+   "3.7 W/m² is inconsistent with the 240 − 236 calculation shown.",
+   "Why each doubling gives equal forcing is not explained, and the saturation answer depends on it.",
+   "How long warming takes (ocean heat uptake) is not covered, so 'when the warming stops' can only be answered as a condition, not as a time.",
+   "The 150 m rise in emission height is asserted from calculations; the reader cannot derive or check it."
+  ]
+ },
+ "grade": {
+  "scores": {
+   "1": 2,
+   "2": 2,
+   "3": 2,
+   "4": 2,
+   "5": 2,
+   "6": 2,
+   "7": 2,
+   "8": 2,
+   "9": 2,
+   "10": 2,
+   "11": 2,
+   "12": 2,
+   "13": 2
+  },
+  "reasons": {
+   "7": "No points lost. The reviewer found two real gaps in the rendering. First, the surface budget is incomplete: the 160 W/m² of sunlight and 100 W/m² of convection and evaporation are not reconciled. Second, 240 − 236 = 4 is not matched to the 3.7 W/m² forcing. These are audit candidates for the explainer to decide on.",
+   "11": "No points lost. The answer states that infrared escapes from air with little greenhouse gas above it, about 5 km up, at 255 K set by energy balance. It also says the height is derived from the lapse rate rather than from gas amounts. That is a reading of the rendering, not an error, but the explainer may want the gas-above criterion stated as the cause of the height.",
+   "12": "No points lost, but borderline. Step 2 says the higher air is colder without saying why. The fall of temperature with height appears only indirectly, in step 4 ('convection keeps the lapse rate'). The answer also attributes the 150 m rise to radiation calculations, whereas model.md derives it from 1 K at 6.5 K/km. The mechanism and the stopping condition (back to 255 K) are correct and specific."
+  },
+  "pass": true
+ },
+ "usage": {
+  "cost": 0.2071348,
+  "seconds": 53
+ },
+ "findings": [
+  {
+   "n": 1,
+   "severity": "gap",
+   "kind": "terms",
+   "text": "The forcing concept has three names: 'imbalance' and 'radiative forcing' (§4 step 3), 'forcing' (§6), and 'no imbalance' (§5)."
+  },
+  {
+   "n": 2,
+   "severity": "gap",
+   "kind": "terms",
+   "text": "The escape level is called 'emission height' (§3, §4), 'emitting air' (lead and §3 'emitting air', Summary), and 'the escape moves up' (§6)."
+  },
+  {
+   "n": 3,
+   "severity": "gap",
+   "kind": "terms",
+   "text": "The outgoing radiation is called 'energy' (lead), 'power' (§1), 'infrared' (§2 onward), and 'heat' (§5 'trap heat like a blanket')."
+  },
+  {
+   "n": 4,
+   "severity": "gap",
+   "kind": "terms",
+   "text": "For the 255 K figure, §1 uses 'emission temperature' while the lead uses 'high, cold air'. §3 then says 'must be at the emission temperature, 255 K'. It is the same idea, but the reader has to connect it to 'whatever emits the Earth's energy' in §1."
+  },
+  {
+   "n": 5,
+   "severity": "gap",
+   "kind": "unexplained",
+   "text": "§4 step 3: '≈ 236 W/m², against 240 … about 3.7 W/m² less'. The arithmetic gives 4, and the text does not explain why it says 3.7."
+  },
+  {
+   "n": 6,
+   "severity": "gap",
+   "kind": "unexplained",
+   "text": "§6: 'Today's 420 ppm gives about 2.2 W/m²'. It never says what this means for temperature, or how 2.2 follows from the rule that each doubling adds the same forcing."
+  },
+  {
+   "n": 7,
+   "severity": "gap",
+   "kind": "unexplained",
+   "text": "§3: '330 W/m² of infrared back down (a measured value)'. It does not say what this number does for the surface balance, or what would change if it were larger or smaller."
+  },
+  {
+   "n": 8,
+   "severity": "gap",
+   "kind": "unexplained",
+   "text": "§4 step 1: 'about 150 m (a result of radiation calculations)'. The 150 m is given with no sense of why it is this size."
+  },
+  {
+   "n": 9,
+   "severity": "gap",
+   "kind": "unexplained",
+   "text": "§4: 'about 3 K, likely 2.5–4 K'. It does not say what 'likely' means, or what drives the range."
+  },
+  {
+   "n": 10,
+   "severity": "gap",
+   "kind": "missing_why",
+   "text": "§6: 'Each doubling adds about the same forcing'. The reason is deferred to Pierrehumbert, but the saturation argument (Q13) depends on it."
+  },
+  {
+   "n": 11,
+   "severity": "gap",
+   "kind": "missing_why",
+   "text": "§3: 'The measured fall is about 6.5 K per km'. The text says rising air cools, but not why the rate is 6.5 and not some other value (for example, the role of water vapour)."
+  },
+  {
+   "n": 12,
+   "severity": "gap",
+   "kind": "missing_why",
+   "text": "§4 step 4: 'Convection still sets the lapse rate, so the temperature at every height rises by the same amount'. It does not explain why convection fixes the profile's shape rather than its level."
+  },
+  {
+   "n": 13,
+   "severity": "gap",
+   "kind": "missing_why",
+   "text": "§3: 'emitted again, in all directions, at the temperature of that air'. It does not say why the emission is set by the local air temperature."
+  },
+  {
+   "n": 14,
+   "severity": "gap",
+   "kind": "missing_why",
+   "text": "§3 surface budget: 'The surface does not lose that much'. The full surface balance (absorbed sunlight, convection) is not given, so the step stays unjustified."
+  },
+  {
+   "n": 15,
+   "severity": "excess",
+   "kind": "excess",
+   "text": "The Summary mostly repeats §1 and §3 with nothing new."
+  },
+  {
+   "n": 16,
+   "severity": "excess",
+   "kind": "excess",
+   "text": "§1: 'with 1361 × 0.70 instead, T = 360 K (87 °C)'. This counterfactual is a minor detour, although it does justify the division by 4."
+  },
+  {
+   "n": 17,
+   "severity": "excess",
+   "kind": "excess",
+   "text": "§1: the explanation of what σT⁴ means and that 'Emission grows fast with temperature'. This reader already knows hotter things radiate more; only the law's form is needed."
+  },
+  {
+   "n": 18,
+   "severity": "excess",
+   "kind": "excess",
+   "text": "Line 3 comment: '<!-- Stage 1, rendered from model.md in STE-80. -->'. This is internal metadata."
+  },
+  {
+   "n": 19,
+   "severity": "gap",
+   "kind": "gap",
+   "text": "The surface energy budget is incomplete: 390 emitted − 330 received does not reconcile with the 240 W/m² absorbed, and convective transport is not mentioned."
+  },
+  {
+   "n": 20,
+   "severity": "gap",
+   "kind": "gap",
+   "text": "3.7 W/m² is inconsistent with the 240 − 236 calculation shown."
+  },
+  {
+   "n": 21,
+   "severity": "gap",
+   "kind": "gap",
+   "text": "Why each doubling gives equal forcing is not explained, and the saturation answer depends on it."
+  },
+  {
+   "n": 22,
+   "severity": "gap",
+   "kind": "gap",
+   "text": "How long warming takes (ocean heat uptake) is not covered, so 'when the warming stops' can only be answered as a condition, not as a time."
+  },
+  {
+   "n": 23,
+   "severity": "gap",
+   "kind": "gap",
+   "text": "The 150 m rise in emission height is asserted from calculations; the reader cannot derive or check it."
+  }
+ ]
+}

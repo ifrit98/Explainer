@@ -1,0 +1,44 @@
+{
+  "answers": {
+    "1": {
+      "answer": "The receiver measures the travel time of the radio signal (time received minus time sent), then multiplies by the speed of light to calculate distance.",
+      "quote": "Each satellite sends the time it transmitted. Your receiver measures how long each signal took to arrive, and multiplies by the speed of light to get a distance."
+    },
+    "2": {
+      "answer": "Because the receiver's clock may be inaccurate. Any clock error affects all measured distances equally. Treating the clock error as an unknown quantity requires four equations to solve four unknowns: x, y, z position and clock bias.",
+      "quote": "There are four unknowns (x, y, z, b), so the receiver needs four equations: four satellites."
+    },
+    "3": {
+      "answer": "Relativity causes satellite clocks to run 38 microseconds per day faster than ground clocks. At light speed, this error accumulates to about 11 km of distance error per day, which overwhelms meter-level accuracy requirements.",
+      "quote": "Relativity matters because the satellite clocks tick faster than ground clocks by 38 microseconds per day. At the speed of light, that error is about 11 km of distance per day."
+    },
+    "4": {
+      "answer": "Since 1 ms of clock error causes 300 km distance error, a 1 µs error (1000 times smaller) causes 300 m error, proportionally distributed across all distance measurements.",
+      "quote": "Suppose the phone clock is 1 ms wrong. Then every distance is wrong by 1 ms × c = 300 km."
+    }
+  },
+  "stops": [
+    "pseudorange ρ: the true distance plus the same error c·b",
+    "A moving clock ticks slower by a fraction of about v²/(2c²)",
+    "solves them by iteration: guess a position, compute the predicted pseudoranges, and correct",
+    "The fraction is about (GM/c²)(1/R_Earth − 1/r) = 5.3 × 10⁻¹⁰",
+    "Three spheres meet at a point. So three satellites should be enough.",
+    "The Sagnac effect",
+    "The receiver clock bias b is the offset of your clock from GPS time",
+    "The bias b absorbs part of an error that all satellites share"
+  ],
+  "excess": [
+    "About 30 GPS satellites orbit at 20,200 km altitude",
+    "For a satellite straight overhead, the travel time is about 67 ms",
+    "A side effect: your phone gets the time accurate to nanoseconds",
+    "Light travels about 30 cm per nanosecond",
+    "Each satellite continuously broadcasts a signal: a radio message",
+    "A ground clock sits at 6,371 km from Earth's center. A satellite sits at 26,560 km"
+  ],
+  "grounded": {
+    "1": true,
+    "2": true,
+    "3": true,
+    "4": true
+  }
+}

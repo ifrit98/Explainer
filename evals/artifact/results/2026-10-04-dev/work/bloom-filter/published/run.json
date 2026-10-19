@@ -1,0 +1,12 @@
+{
+  "result": "I made `explainers/bloom-filter/explanation.md`, prose only: the subject is a short add-then-query procedure and one failure case, and a 16-bit table plus a 3-row trade-off table show both without a diagram or interactive page; the blind test passed with all 14 items at 2 after one fix, and the cold read found nothing blocking.",
+  "error": null,
+  "cost": 1.4500966000000002,
+  "seconds": 553,
+  "turns": 54,
+  "files": [
+    "explainers/bloom-filter/explanation.md"
+  ],
+  "review_cost": 0.8529,
+  "reviews": 6
+}

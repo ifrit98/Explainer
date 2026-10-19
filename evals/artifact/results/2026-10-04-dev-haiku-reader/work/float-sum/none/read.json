@@ -1,0 +1,48 @@
+{
+  "answers": {
+    "1": {
+      "answer": "Because 0.1 equals 1/10, and the denominator 10 contains the factor 5. In binary, only fractions whose denominator is a power of 2 can be stored exactly. Since 5 is not a power of 2, 0.1 repeats forever in binary.",
+      "quote": "Base 2 has only one prime factor: 2. So in binary, a fraction has a finite form only if its denominator is a power of 2"
+    },
+    "2": {
+      "answer": "The stored 0.1 and 0.2 are both slightly too large; the stored 0.3 is slightly too small. When the rounded 0.1 and 0.2 are added and the sum is rounded again, it lands on a different double (one step above) than the stored 0.3.",
+      "quote": "Adding the rounded 0.1 and 0.2, then rounding the sum, lands one step above the stored 0.3."
+    },
+    "3": {
+      "answer": "Use a tolerance-based comparison instead, checking if the values are close enough rather than exactly equal. Functions like math.isclose() or checking the absolute difference against a small tolerance value should be used.",
+      "quote": "Don't compare floats with `==` when they come out of a calculation. Check whether they are *close enough*"
+    },
+    "4": {
+      "answer": "Yes, 0.5 + 0.25 == 0.75 is true. Since 0.5 = 1/2, 0.25 = 1/4, and 0.75 = 3/4 all have power-of-2 denominators, they can be stored exactly in binary with no rounding error.",
+      "quote": "Binary can only write fractions with power-of-2 denominators exactly."
+    }
+  },
+  "stops": [
+    "IEEE 754 double-precision format—introduced as technical term without explanation",
+    "53 significant binary digits—why this specific number? What does significant mean?",
+    "round half to even: pick the neighbour whose last binary digit is 0—rule stated without explanation",
+    "value = ± (1.xxxxxxxx...) × 2^exponent—the notation and meaning unclear",
+    "relative tolerance (a fraction of the numbers' size)—term defined but concept may confuse",
+    "power of 2 denominators—why this property is special not immediately clear",
+    "2⁻⁵⁴ notation—mathematical notation possibly unclear to reader new to subject",
+    "exactly halfway between them—why this condition triggers special rounding behavior unexplained"
+  ],
+  "excess": [
+    "For readers who like exact arithmetic: the double for 0.1 is exactly 3602879701896397 × 2⁻⁵⁵—marked as extra",
+    "Conversion algorithm: 0.1 × 2 = 0.2 → 0 through 0.2 × 2 = 0.4 → 0—thorough but excessive detail",
+    "Why computers use binary floating point: Speed, Range, Bounded error—interesting but not needed",
+    "For example, 0.1 + 0.7 prints as 0.7999999999999999—illustrates already-explained concept",
+    "Modern languages print the shortest decimal string that maps back—explains print behavior but tangential",
+    "Seeing the error at all is the exception. Most of the time rounding stays hidden—context but not essential",
+    "Python's fractions.Fraction(1, 10). They're slower, but never round—alternatives, not needed",
+    "Every integer up to 2⁵³ is stored exactly in a double—additional note about integers, not central",
+    "0.1 (decimal) = 0.0001100110011001100110011...(binary)—precise but possibly excessive",
+    "Create the Decimal from the string 0.1. Decimal(0.1) would faithfully copy—implementation detail"
+  ],
+  "grounded": {
+    "1": true,
+    "2": true,
+    "3": true,
+    "4": true
+  }
+}

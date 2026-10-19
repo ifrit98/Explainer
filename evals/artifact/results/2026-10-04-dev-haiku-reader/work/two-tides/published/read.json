@@ -1,0 +1,40 @@
+{
+  "answers": {
+    "1": {
+      "answer": "The Moon pulls the far side less strongly than Earth's center. As the Earth falls toward the Moon, the far-side water is left behind and bulges away from the Moon.",
+      "quote": "The Moon does not push the far side away. It pulls the far side less than it pulls the centre, and the centre's fall sets the reference."
+    },
+    "2": {
+      "answer": "The Moon moves about 12° per day along its orbit in the same direction as Earth's rotation. Earth therefore needs about 50 minutes more than 24 hours to face the Moon again (a lunar day of 24 h 50 min). Since a place passes through both bulges each lunar day, high tides come every half lunar day: 12 h 25 min.",
+      "quote": "The Moon also moves about 12° a day along its orbit, in the same direction that the Earth turns. The Earth turns about 15° an hour, so it needs about 50 minutes more than 24 hours to face the Moon again: a lunar day of 24 h 50 min."
+    },
+    "3": {
+      "answer": "not covered",
+      "quote": ""
+    },
+    "4": {
+      "answer": "Every 12 hours. If the Moon stayed fixed, Earth would need only 24 hours (not 24 h 50 min) to rotate and face it again. Since there are two bulges on the Earth-Moon line, a place passes through both bulges once per 24-hour rotation, giving high tides every 12 hours.",
+      "quote": "A place passes through both bulges in each lunar day, so high tides come every half lunar day: 12 h 25 min."
+    }
+  },
+  "stops": [
+    "An orbit is free fall: the whole Earth falls toward the Moon, and Earth's centre accelerates at 33.19 µm/s².",
+    "An acceleration that every part shares does not change the shape of a falling body.",
+    "so it tilts by R/d = 6371 / 384,400 = 0.0166 rad (0.95°) toward Earth's centre.",
+    "Water flows until the sea surface slopes just enough that gravity along the slope balances this push.",
+    "The bulges stay on the Earth–Moon line, and the Earth turns under them."
+  ],
+  "excess": [
+    "A high tide at 8 in the morning gives the next at about 8:25 in the evening.",
+    "The near value is about 5% larger because the pull changes faster closer to the Moon.",
+    "Observed solar tides are about half the Moon's.",
+    "in an ideal ocean, the bulges rise about 0.36 m above the mean (an estimate).",
+    "Look up 'equilibrium tide'."
+  ],
+  "grounded": {
+    "1": true,
+    "2": true,
+    "3": false,
+    "4": true
+  }
+}

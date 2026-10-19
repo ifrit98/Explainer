@@ -1,0 +1,87 @@
+# Machine-readable half of model.md. `explainer check two-tides` holds every rendering to it.
+
+values:
+  earth_radius_km: 6371
+  moon_distance_km: 384400
+  near_distance_km: 378029
+  far_distance_km: 390771
+  pull_near: 34.32        # µm/s²
+  pull_centre: 33.19
+  pull_far: 32.12
+  pull_side: 33.18
+  tidal_near: 1.13
+  tidal_far: 1.07
+  tidal_far_signed: -1.07
+  tidal_side: 0.55
+  near_far_diff_pct: 5
+  earth_turn_deg_per_h: 15
+  side_tilt_deg: 0.95
+  bulge_height_m: 0.36
+  example_high_tide_h: 8
+  example_next_high_tide_min: 25
+  tidal_sideways_max: 0.82
+  sun_pull_ratio: 179
+  sun_tide_ratio: 0.46
+  sun_distance_ratio: 389
+  lunar_day: "24 h 50 min"
+  tide_interval: "12 h 25 min"
+
+allow: [2, 3, 45, 90, 24, 50, 12, 9.81, 10, 7, 0.0166, 1.1, 6]
+
+require:
+  - path: pull_centre
+    in: [prose]
+  - path: tidal_near
+    in: [prose]
+  - path: tidal_far
+    in: [prose]
+  - path: tide_interval
+    in: [prose]
+
+claims:
+  - id: mech-subtract
+    kind: mechanism
+    statement: "The tidal acceleration at a point is the Moon's pull there minus the Moon's pull at Earth's centre, because the whole Earth falls toward the Moon with the centre's acceleration."
+    example: "Near side 34.32 − 33.19 = +1.13 µm/s² (toward the Moon); far side 32.12 − 33.19 = −1.07 µm/s² (away from the Moon); side point 0.55 µm/s² toward Earth's centre."
+    ask: "On the far side of the Earth, which way does the tidal acceleration point, and why?"
+  - id: why-subtract
+    kind: why
+    statement: "Subtract the centre's pull; the Moon's pull itself does not predict the tides."
+    alternative: "Take the Moon's pull itself as the cause of the tide."
+    counterexample: "All points are pulled toward the Moon (34.32, 33.19, 32.12 µm/s²), so this predicts one bulge. It also predicts a solar tide 179 times the Moon's; the observed solar tide is 0.46 times the Moon's."
+    ask: "The Sun pulls on the Earth about 179 times harder than the Moon does. Why are its tides smaller?"
+  - id: guar-far-bulge
+    kind: guarantee
+    statement: "The far side has a bulge because the Earth falls freely toward the Moon."
+    example: "Centre pulled 33.19, far side 32.12 µm/s²: the far side is left behind by 1.07 µm/s²."
+    counterexample: "If the Earth were held fixed, the far side's 32.12 µm/s² would point toward the Moon, down into the Earth: no far bulge, one bulge only."
+  - id: mech-rotation
+    kind: mechanism
+    statement: "The Earth turns under the two bulges, so a place passes through a bulge twice per lunar day."
+    example: "Lunar day 24 h 50 min, so a high tide every 12 h 25 min."
+    ask: "Why are high tides about 12 h 25 min apart, not 12 h?"
+  - id: misc-push
+    kind: misconception
+    statement: "The Moon pushes the far-side water away."
+    correction: "The Moon pulls the far side less than it pulls the centre, so the far-side water is left behind as the Earth falls toward the Moon."
+
+terms:
+  - term: tidal acceleration
+    means: "the Moon's pull at a point minus the Moon's pull at Earth's centre"
+    avoid: [tide-raising force, differential acceleration, tidal force]
+  - term: Moon's pull
+    means: "the acceleration the Moon's gravity gives at a point"
+    avoid: [average pull]
+
+budget: {prose: 950, reason: "the subtraction at four points, why the sideways part acts, the why with the Sun counterexample, the held-Earth break case, the rotation timing, and a text figure"}
+
+quiz:
+  - q: "Why is there a high tide on the side of the Earth facing away from the Moon?"
+    expect: "The Moon pulls the far side less than it pulls Earth's centre. The whole Earth falls toward the Moon with the centre's acceleration, so the far-side water is left behind: its tidal acceleration points away from the Moon."
+    misconception: "The Moon pushes the far side away, or centrifugal force throws water out."
+  - q: "If the Earth were held fixed in space and did not fall toward the Moon, how many bulges would there be?"
+    expect: "One, under the Moon, because every point would be pulled toward the Moon and nothing subtracts the centre's pull."
+    misconception: "Still two."
+  - q: "A place has a high tide at 08:00. When is the next high tide, roughly, and why not exactly 12 hours later?"
+    expect: "About 20:25, because the Moon moves along its orbit, so the Earth needs 24 h 50 min to face it again, and there are two bulges in that time."
+    misconception: "20:00 exactly."

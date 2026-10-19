@@ -1,0 +1,44 @@
+{
+  "answers": {
+    "1": {
+      "answer": "It must contain or produce the antigen, meaning the pathogen's molecular shape. Examples are a killed pathogen, a weakened pathogen, a purified protein, or mRNA or a carrier virus that makes one protein. It also needs a danger signal, from an adjuvant or the vaccine's own microbial parts. It does not make you ill because it delivers only the shape, not the working disease: the pathogen is killed, copies itself poorly, or is reduced to a single protein. The explanation states this but does not spell out why a weakened pathogen that still copies itself causes no illness.",
+      "quote": "A vaccine delivers the antigen without the disease."
+    },
+    "2": {
+      "answer": "Vaccination leaves a memory pool much larger than the few original matching cells (about 164,000 instead of 100). This pool needs only about 4.3 doublings, roughly 1.4 days, to reach full size, compared with 5 days the first time. Memory cells also activate more easily, their antibodies bind more tightly after affinity maturation, and some antibody is already in the blood on day 0.",
+      "quote": "To reach 3.3 million cells again from 164,000 takes log₂(20) ≈ 4.3 doublings, about **1.4 days**. The first time it took 5 days. Memory cells also activate more easily than naive cells"
+    },
+    "3": {
+      "answer": "This is reasoned from the text, which does not discuss unrelated viruses directly. The vaccine selects and expands only the cells whose receptors match its antigen's shapes. An unrelated virus has different shapes, so the expanded memory cells and antibodies do not bind it. Its matching cells are still rare naive cells, so the response stays slow.",
+      "quote": "Memory is specific to shapes. It protects only while the pathogen keeps those shapes."
+    },
+    "4": {
+      "answer": "Protection drops. Old antibodies and memory cells were selected to fit the old shape, so they bind the new shape poorly. The response falls back toward the slow first-time timeline. Antibodies that bind unchanged regions still help, which is why the flu vaccine is updated every year.",
+      "quote": "Last year's antibodies bind this year's virus poorly, so the race starts closer to the slow column. That is why the flu vaccine is updated every year."
+    }
+  },
+  "stops": [
+    "'naive cells' is used but never defined: \"Start: 100 naive cells match the antigen.\"",
+    "The summary contradicts the worked example: \"most cells die, 5–10% remain        (memory pool ~1000× naive pool)\" versus \"Keep 5%\" and \"about 1,600 times larger\"",
+    "Unclear meaning: \"The joins also add random letters.\"",
+    "No reason given why a pathogen that still copies itself causes no illness: \"a weakened (attenuated) pathogen that copies itself poorly;\"",
+    "The danger signal is introduced without saying what it physically is: \"Fast, non-specific immune cells give this signal when they detect damage or microbial patterns.\"",
+    "Metaphor that refers back to the table: \"the race starts closer to the slow column\"",
+    "The role of T cells in the memory story is never explained: \"T cells kill infected cells and help B cells activate.\"",
+    "Plasma cells appear abruptly: \"Some B cells also become **long-lived plasma cells** in the bone marrow.\"",
+    "Unclear how millions of shapes can fit almost any antigen: \"some shapes in the library fit almost any antigen.\""
+  ],
+  "excess": [
+    "\"The rest of this file explains each part of that sentence: the library, the selection, the multiplication, the memory, and the race.\"",
+    "The summary chain repeats Steps 1–4: \"random receptor library (before any exposure)\"",
+    "\"How cells display antigen to T cells (MHC molecules), herd immunity, vaccine side effects, and specific schedules.\"",
+    "Self-tolerance is off the question: \"During development, cells that bind self strongly are mostly removed.\"",
+    "\"Two doses of measles vaccine give long, strong protection.\""
+  ],
+  "grounded": {
+    "1": true,
+    "2": true,
+    "3": true,
+    "4": true
+  }
+}

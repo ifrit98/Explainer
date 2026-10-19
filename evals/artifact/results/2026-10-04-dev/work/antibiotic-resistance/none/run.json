@@ -1,0 +1,13 @@
+{
+  "result": "I made `explainers/antibiotic-resistance/explanation.md` and `explainers/antibiotic-resistance/index.html`. The prose covers how resistance works and where it comes from, with rough numbers. The page is a small simulation where you change the drug dose and watch resistant cells take over from almost nothing, which this reader can explore and check against the stated model better than text alone. I haven't opened the page in a browser.",
+  "error": null,
+  "cost": 0.502619,
+  "seconds": 162,
+  "turns": 3,
+  "files": [
+    "explainers/antibiotic-resistance/explanation.md",
+    "explainers/antibiotic-resistance/index.html"
+  ],
+  "review_cost": 0,
+  "reviews": 0
+}

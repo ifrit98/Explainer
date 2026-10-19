@@ -1,0 +1,40 @@
+{
+  "answers": {
+    "1": {
+      "answer": "A quorum (minimum number of agreeing servers, which must be a majority) must reach consensus before a write is committed as a decision.",
+      "quote": "A quorum is the minimum number of servers that must agree before the cluster makes a decision."
+    },
+    "2": {
+      "answer": "A majority ensures only one quorum can exist after a partition, preventing split brain where two separate groups each commit conflicting decisions.",
+      "quote": "Without that rule, two halves of a cluster can decide different things at the same time."
+    },
+    "3": {
+      "answer": "A 6-server cluster survives 2 failures, since it requires quorum of 4, leaving 6 − 4 = 2 servers that can fail.",
+      "quote": "| 6 | 4 | 2 |"
+    },
+    "4": {
+      "answer": "The group of 3 can commit writes because it has the majority (quorum) for 5 servers. The group of 2 lacks majority and cannot.",
+      "quote": "A split of 3 + 2 lets only the side with 3 decide."
+    }
+  },
+  "stops": [
+    "⌊*n*/2⌋ + 1",
+    "Any two majorities then share at least one server, and that server refuses to agree to two conflicting decisions.",
+    "Byzantine faults",
+    "Two groups of size *q* fit into *n* servers without a shared server only if 2*q* ≤ *n*.",
+    "Raft and Paxos",
+    "A server cannot tell a crashed server from a server that it cannot reach."
+  ],
+  "excess": [
+    "The fourth server is not useless: it holds another copy and can serve reads.",
+    "To tolerate *f* failures, use 2*f* + 1 servers.",
+    "This is why clusters (etcd, ZooKeeper, Consul) normally run 3, 5, or 7 servers.",
+    "This text does not cover how protocols such as Raft and Paxos use quorums to elect a leader and copy the log."
+  ],
+  "grounded": {
+    "1": true,
+    "2": true,
+    "3": true,
+    "4": true
+  }
+}

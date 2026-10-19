@@ -1,0 +1,205 @@
+{
+ "tool": "quiz",
+ "rendering": "prose",
+ "slug": "two-tides",
+ "at": "2026-10-04T15:08:08",
+ "model": "default",
+ "prompt_sha": "94be2bc7b92f",
+ "reply": {
+  "answers": {
+   "1": "The Moon, the Earth (its centre plus three surface points: the near side, the far side and a side point 90° away), the ocean water, the Moon's pull (the acceleration its gravity gives at a point), the tidal acceleration, the two bulges, the Earth's rotation and the lunar day. The Sun is also used as a comparison.",
+   "2": "The Moon's pull gets weaker with distance: 34.32 µm/s² at the near side, 33.19 at the centre and 32.12 at the far side. Earth and Moon orbit their shared centre of mass, so the whole Earth is in free fall toward the Moon. Only the difference from the centre's pull (the tidal acceleration) changes the Earth's shape. That difference points outward at the near and far sides and inward at the side points. Along the surface it pushes water toward the two ends of the Earth–Moon line, which forms two bulges. The Earth turns under these bulges.",
+   "3": "Because the Earth falls freely toward the Moon, only the difference between the Moon's pull at a point and its pull at the centre acts on the water. That difference stretches the ocean into two bulges along the Earth–Moon line, and the turning Earth carries each place through both bulges.",
+   "4": "The key variable is distance d to the tide-raising body. The tidal acceleration is roughly the pull times 2R/d. The pull itself falls as 1/d², so the tide falls faster than the pull, roughly as 1/d³ (the explanation only implies this). A farther body gives smaller tides. That is why the Sun's pull is 179 times the Moon's but its tide is only about 0.46 times the Moon's. A larger Earth radius R would give larger tides.",
+   "5": "Assumption: an ideal ocean in equilibrium with no continents (the 0.36 m bulge height is called an estimate), and the Earth treated as falling freely. Observation: solar tides are about half the size of the Moon's. Also, high tides come about every 12 h 25 min.",
+   "6": "The Moon's pull is a little stronger on the near side of the Earth than at the centre, and a little weaker on the far side. The whole Earth is in free fall toward the Moon, so only the differences from the centre's pull matter. Those differences point outward along the Earth–Moon line and inward across it. Along the surface they push water toward the two ends of the line, which makes two bulges. The Earth turns under both bulges once per lunar day of 24 h 50 min, so high tides come every 12 h 25 min.",
+   "7": "The hardest parts were the side-point tilt (0.95°, 0.0166 rad) and the 2R/d formula. Both are stated, not derived. It would help to say that the tilt angle is R/d, and to show where the factor 2 comes from. It was also unclear how a sideways push of 0.82 µm/s² at 45° turns into a sea slope.",
+   "8": "The Moon pulls the far side less than it pulls the Earth's centre (32.12 vs 33.19 µm/s²). The Earth as a whole falls toward the Moon, so the far-side water is left behind, away from the Moon. Its tidal acceleration is −1.07 µm/s², which points outward from the Earth's centre.",
+   "9": "One. Nothing would subtract the centre's pull, so on the far side the Moon's pull would point down into the Earth. Only the near-side bulge would remain.",
+   "10": "At about 20:25. The Moon moves about 12° a day along its orbit in the same direction the Earth turns. The Earth therefore needs 24 h 50 min to face the Moon again, and half of that is 12 h 25 min.",
+   "11": "It points away from the Moon, which on the far side is outward from the Earth's centre. The far side is pulled less (32.12) than the centre (33.19), so the difference is −1.07 µm/s².",
+   "12": "Tides depend on the difference in pull across the Earth, roughly the pull times 2R/d, not on the pull itself. The Sun is 389 times farther away than the Moon, so its tide is about 179/389 ≈ 0.46 times the Moon's.",
+   "13": "There are two bulges, and a place passes through both in each lunar day. The lunar day is 24 h 50 min, not 24 h, because the Moon moves about 12° a day in the direction the Earth turns. Half of 24 h 50 min is 12 h 25 min."
+  },
+  "audit": {
+   "terms": [
+    "'tide' means two things in the Sun paragraph (line 60). In 'its tide is about 0.46 times the Moon's' it means tidal acceleration. In 'Observed solar tides are about half' it means water height. The explanation treats the two as the same without saying so.",
+    "'bulge' (line 36 onward) and 'high tide' (lines 3, 65) both name the same feature: one is the water shape, the other is what a coastal place sees. The link is implied rather than stated.",
+    "'stretches the ocean' (line 5), 'tidal acceleration' (line 24) and 'these differences' (line 69) all name the same quantity."
+   ],
+   "unexplained": [
+    "Line 13 vs line 15: near side +1.13 vs far side −1.07. Why the two ends are unequal is never said. The reader may wonder whether the near bulge is larger.",
+    "Line 32, '0.95° (0.0166 rad)': where the angle comes from is not stated (it is R/d).",
+    "Line 36, '0.82 µm/s² at 45°': given with no derivation and no comparison to the 1.1 values along the line.",
+    "Line 65, '12° a day' leading to '50 minutes': the conversion is not shown.",
+    "Line 73, '0.36 m above the mean': not linked to the accelerations, and no hint of how it relates to observed metre-scale tides beyond the Scope note."
+   ],
+   "missing_why": [
+    "Line 60: 'tidal acceleration is about the pull times 2R/d'. Neither the factor 2 nor the R/d form is justified.",
+    "Line 36: why the sideways push is largest at 45°.",
+    "Line 36: 'Water flows until the sea slopes just enough to balance this push'. How a slope balances a sideways force is not explained.",
+    "Line 32: why the side-point tilt equals the inward component (pull × angle)."
+   ],
+   "excess": [
+    "Line 9: defining µm/s² as one millionth of a m/s² is something this reader already knows.",
+    "Line 22: 'An orbit is free fall' restates something the reader already knows (free fall), though it does link that idea to the orbit.",
+    "Line 69: the centrifugal-force aside adds a claim ('An Earth that fell straight... same two bulges') that the questions do not use.",
+    "Lines 74–75: the 'Real oceans' and spring/neap bullets are detours the argument and questions do not use. They are short and clearly labelled."
+   ]
+  },
+  "gaps": [
+   "No derivation of the 2R/d tidal formula, so the Sun comparison has to be taken on trust.",
+   "The near/far asymmetry (1.13 vs 1.07) is not explained.",
+   "The 45° maximum and the slope-balance mechanism are asserted, not shown.",
+   "How 12° a day becomes about 50 minutes is not shown."
+  ]
+ },
+ "grade": {
+  "scores": {
+   "1": 2,
+   "2": 2,
+   "3": 2,
+   "4": 2,
+   "5": 2,
+   "6": 2,
+   "7": 2,
+   "8": 2,
+   "9": 2,
+   "10": 2,
+   "11": 1,
+   "12": 2,
+   "13": 2
+  },
+  "reasons": {
+   "10": "Kept at 2, borderline. It explains why the gap is not exactly 12 h (the Moon moves about 12° a day, so the lunar day is 24 h 50 min) and gives 20:25. It halves the lunar day without saying this is because there are two bulges.",
+   "11": "It gives the direction (away from the Moon, outward) and the subtraction 32.12 − 33.19 = −1.07. It does not say why the centre's pull is subtracted: the whole Earth falls toward the Moon with the centre's acceleration. The expected answer requires this reason."
+  },
+  "pass": false
+ },
+ "usage": {
+  "cost": 0.1745564,
+  "seconds": 42
+ },
+ "findings": [
+  {
+   "n": 1,
+   "severity": "gap",
+   "kind": "terms",
+   "text": "'tide' means two things in the Sun paragraph (line 60). In 'its tide is about 0.46 times the Moon's' it means tidal acceleration. In 'Observed solar tides are about half' it means water height. The explanation treats the two as the same without saying so."
+  },
+  {
+   "n": 2,
+   "severity": "gap",
+   "kind": "terms",
+   "text": "'bulge' (line 36 onward) and 'high tide' (lines 3, 65) both name the same feature: one is the water shape, the other is what a coastal place sees. The link is implied rather than stated."
+  },
+  {
+   "n": 3,
+   "severity": "gap",
+   "kind": "terms",
+   "text": "'stretches the ocean' (line 5), 'tidal acceleration' (line 24) and 'these differences' (line 69) all name the same quantity."
+  },
+  {
+   "n": 4,
+   "severity": "gap",
+   "kind": "unexplained",
+   "text": "Line 13 vs line 15: near side +1.13 vs far side −1.07. Why the two ends are unequal is never said. The reader may wonder whether the near bulge is larger."
+  },
+  {
+   "n": 5,
+   "severity": "gap",
+   "kind": "unexplained",
+   "text": "Line 32, '0.95° (0.0166 rad)': where the angle comes from is not stated (it is R/d)."
+  },
+  {
+   "n": 6,
+   "severity": "gap",
+   "kind": "unexplained",
+   "text": "Line 36, '0.82 µm/s² at 45°': given with no derivation and no comparison to the 1.1 values along the line."
+  },
+  {
+   "n": 7,
+   "severity": "gap",
+   "kind": "unexplained",
+   "text": "Line 65, '12° a day' leading to '50 minutes': the conversion is not shown."
+  },
+  {
+   "n": 8,
+   "severity": "gap",
+   "kind": "unexplained",
+   "text": "Line 73, '0.36 m above the mean': not linked to the accelerations, and no hint of how it relates to observed metre-scale tides beyond the Scope note."
+  },
+  {
+   "n": 9,
+   "severity": "gap",
+   "kind": "missing_why",
+   "text": "Line 60: 'tidal acceleration is about the pull times 2R/d'. Neither the factor 2 nor the R/d form is justified."
+  },
+  {
+   "n": 10,
+   "severity": "gap",
+   "kind": "missing_why",
+   "text": "Line 36: why the sideways push is largest at 45°."
+  },
+  {
+   "n": 11,
+   "severity": "gap",
+   "kind": "missing_why",
+   "text": "Line 36: 'Water flows until the sea slopes just enough to balance this push'. How a slope balances a sideways force is not explained."
+  },
+  {
+   "n": 12,
+   "severity": "gap",
+   "kind": "missing_why",
+   "text": "Line 32: why the side-point tilt equals the inward component (pull × angle)."
+  },
+  {
+   "n": 13,
+   "severity": "excess",
+   "kind": "excess",
+   "text": "Line 9: defining µm/s² as one millionth of a m/s² is something this reader already knows."
+  },
+  {
+   "n": 14,
+   "severity": "excess",
+   "kind": "excess",
+   "text": "Line 22: 'An orbit is free fall' restates something the reader already knows (free fall), though it does link that idea to the orbit."
+  },
+  {
+   "n": 15,
+   "severity": "excess",
+   "kind": "excess",
+   "text": "Line 69: the centrifugal-force aside adds a claim ('An Earth that fell straight... same two bulges') that the questions do not use."
+  },
+  {
+   "n": 16,
+   "severity": "excess",
+   "kind": "excess",
+   "text": "Lines 74–75: the 'Real oceans' and spring/neap bullets are detours the argument and questions do not use. They are short and clearly labelled."
+  },
+  {
+   "n": 17,
+   "severity": "gap",
+   "kind": "gap",
+   "text": "No derivation of the 2R/d tidal formula, so the Sun comparison has to be taken on trust."
+  },
+  {
+   "n": 18,
+   "severity": "gap",
+   "kind": "gap",
+   "text": "The near/far asymmetry (1.13 vs 1.07) is not explained."
+  },
+  {
+   "n": 19,
+   "severity": "gap",
+   "kind": "gap",
+   "text": "The 45° maximum and the slope-balance mechanism are asserted, not shown."
+  },
+  {
+   "n": 20,
+   "severity": "gap",
+   "kind": "gap",
+   "text": "How 12° a day becomes about 50 minutes is not shown."
+  }
+ ]
+}

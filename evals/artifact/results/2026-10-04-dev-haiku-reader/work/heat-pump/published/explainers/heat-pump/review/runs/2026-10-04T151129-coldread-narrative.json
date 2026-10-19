@@ -1,0 +1,493 @@
+{
+ "tool": "coldread",
+ "rendering": "narrative",
+ "slug": "heat-pump",
+ "at": "2026-10-04T15:11:29",
+ "model": "default",
+ "prompt_sha": "c1be6734e6da",
+ "reply": {
+  "beats": [
+   {
+    "at": "Beat 1 (hook)",
+    "text": "Shown: heater vs heat pump numbers. Said: define COP; heater 1, heat pump 3",
+    "unresolved": [],
+    "unsaid": [],
+    "leap": [
+     "The words never say why a COP of 3 is puzzling. Nothing links 'heat pump 3' to conservation of energy, so the puzzle exists only in the 'Reader's question' column, which the reader does not get."
+    ],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Beat 2 (notice)",
+    "text": "Shown: L1 energy diagram: 1 + 2 = 3. Said: the 2 kWh is outdoor heat; 0 °C air is 273 K and still holds heat",
+    "unresolved": [
+     "L1"
+    ],
+    "unsaid": [
+     "The L1 diagram's colour coding. The plan says the text explains blue/red/yellow under the first diagram, but this beat's 'Said' does not.",
+     "The question 'is energy created?' is never asked aloud. The answer arrives before the question."
+    ],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Beat 3 (objection)",
+    "text": "Shown: —. Said: a plain fluid loop with no compressor reaches at most 0 °C and would cool a 20 °C home",
+    "unresolved": [
+     "compressor",
+     "fluid loop"
+    ],
+    "unsaid": [],
+    "leap": [
+     "The text brings in a 'fluid loop' with no reason given for why heat would be moved by a loop of fluid at all.",
+     "The objection itself, that heat flows hot to cold, so how can it go from 0 °C air indoors, is not in 'Said'. Only the failed design is.",
+     "There is a jump from '20 °C home' here to '35 °C water' later. The heating water is never introduced."
+    ],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Beat 4 (approach)",
+    "text": "Shown: —. Said: boiling temperature rises with pressure; propane boils at −10 °C at 3.5 bar, at 40 °C at 14 bar",
+    "unresolved": [
+     "propane (its role as the fluid in the loop is not said; the word 'refrigerant' never appears in 'Said')"
+    ],
+    "unsaid": [],
+    "leap": [
+     "It is not said how these two boiling points help. The tie to 'colder than 0 °C air, hotter than the water' waits until beat 5."
+    ],
+    "excess": [
+     "'boiling temperature rises with pressure': the reader already knows boiling and pressure. This is useful as a reminder but borderline."
+    ],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Beat 5 (mechanism)",
+    "text": "Shown: L2 loop diagram. Said: four steps, each with temperatures and kWh; why −10 °C is colder than the air and 40 °C hotter than the water",
+    "unresolved": [
+     "the names of the four parts (evaporator, compressor, condenser, expansion valve) if they are labels in the diagram; 'Said' does not name or define them",
+     "refrigerant",
+     "the water"
+    ],
+    "unsaid": [
+     "The blue/red/yellow colour coding of the diagram nodes is never explained in 'Said'.",
+     "The diagram's kWh numbers are the same as in L1 (the plan's link), but this is not said."
+    ],
+    "leap": [
+     "How the pressure is raised and lowered (by the compressor and the expansion valve) is not stated."
+    ],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Beat 6 (notice)",
+    "text": "Shown: same diagram, compressor. Said: the compressor's 1 kWh ends up in the water too",
+    "unresolved": [],
+    "unsaid": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Beat 7 (test/predict)",
+    "text": "Shown: predict prompt, then table. Said: define temperature lift; COP about 4 / 3 / 2 at 10 / 0 / −15 °C; radiators at 55 °C",
+    "unresolved": [],
+    "unsaid": [
+     "The contents of the predict prompt are not stated."
+    ],
+    "leap": [
+     "'radiators at 55 °C' is dropped in with no stated COP and no reason why hotter radiators matter.",
+     "Why a larger lift lowers COP is not given here. The reason comes in beats 8–9."
+    ],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Beat 8 (approach)",
+    "text": "Shown: formula. Said: ideal limit T_hot / (T_hot − T_cold) in kelvin; 8.8; Celsius gives 1",
+    "unresolved": [
+     "T_hot",
+     "T_cold"
+    ],
+    "unsaid": [
+     "The concrete 308.15 / 35 is not in 'Said'. Only '8.8' is, so the reader cannot check where 8.8 comes from."
+    ],
+    "leap": [
+     "The formula is asserted with no reason. The reason is deferred to beat 9.",
+     "'Celsius gives 1' is too terse to follow: the reader is not shown 35/35, and the beat does not say why Celsius is wrong."
+    ],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Beat 9 (mechanism)",
+    "text": "Shown: L3 inequality, two cases. Said: entropy Q/T is never destroyed; COP 3 passes, COP 12 fails; algebra",
+    "unresolved": [
+     "entropy",
+     "Q",
+     "Q/T",
+     "L3",
+     "Q_hot, Q_cold, W (presumably in the inequality, never defined in 'Said')",
+     "COP 12 (where 12 comes from)"
+    ],
+    "unsaid": [
+     "The L3 inequality itself is not spoken. 'algebra' is all the reader gets."
+    ],
+    "leap": [
+     "'never destroyed' is stated as a rule. It is not tied to what the reader already knows, that heat flows hot to cold by itself.",
+     "How the inequality turns into T_hot / (T_hot − T_cold) is compressed into 'algebra'."
+    ],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Beat 10 (notice)",
+    "text": "Shown: —. Said: refrigerant lift 50 K (ideal 6.3) plus compressor losses",
+    "unresolved": [
+     "refrigerant lift",
+     "refrigerant"
+    ],
+    "unsaid": [],
+    "leap": [
+     "'ideal 6.3' is not derived in 'Said' (313.15/50). The reader has to work out that it uses 40 °C and −10 °C instead of 35 °C and 0 °C."
+    ],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Beat 11 (close)",
+    "text": "Shown: —. Said: answer in the opening words; connection to the fridge; scope",
+    "unresolved": [
+     "scope"
+    ],
+    "unsaid": [],
+    "leap": [
+     "The fridge connection is named but not explained."
+    ],
+    "excess": [],
+    "purpose_unclear": false
+   }
+  ],
+  "blocking": [
+   "Beat 9: 'entropy Q/T is never destroyed' is given as an unexplained rule to a reader new to entropy, and the step to the formula is only 'algebra'. The ideal limit therefore rests on nothing the reader can follow.",
+   "Beat 9: the symbols Q_hot, Q_cold, W and the 'L3 inequality' are never defined or spoken.",
+   "Beat 11: 'answer in the opening words' is a placeholder. The answer and the general argument are never actually said.",
+   "Beat 5: the four parts and the word 'refrigerant' are never named or defined in 'Said', yet beats 6 and 10 depend on 'compressor' and 'refrigerant lift'.",
+   "Beat 1/2: the puzzle (3 out for 1 in seems to break conservation of energy) is never said, so the reader is not told what question is being answered."
+  ],
+  "cuts": [
+   "The terse 'Celsius gives 1' in beat 8: either spell it out (35/35) or cut it. As it stands it costs a reread and gains nothing.",
+   "'radiators at 55 °C' in beat 7: it is not used later in the beats, so either give its COP or drop it.",
+   "Beat 4's restatement that boiling temperature rises with pressure: the reader knows this, so lead with the propane numbers."
+  ],
+  "question": {
+   "text": "How can a heat pump deliver 3 kWh of heat for 1 kWh of electricity without creating energy?",
+   "known_at": "Only implicitly, at beat 1 (heater 1 vs heat pump 3) and beat 2. The question is never put in words in 'Said'.",
+   "result_stated": "Partly, at beat 2: 'the 2 kWh is outdoor heat'. The full answer is promised at beat 11 ('answer in the opening words') but never written."
+  },
+  "motive": "Reason to care: missing in 'Said'. The heater-vs-heat-pump comparison in beat 1 hints at it, but conservation of energy is never mentioned. Reason for the approach: missing. The sequence (energy balance, then the uphill problem, then the cost limit) is never announced.",
+  "close": "Not achieved in the beats. Beat 11 'Said' reads 'answer in the opening words; connection to the fridge; scope', which is a placeholder, and the general argument about pressure and boiling temperature is not restated.",
+  "recap": "A heat pump doesn't make heat, it moves it: squeezing and releasing a refrigerant makes it boil colder than the outdoor air and condense hotter than the indoor water, so 1 kWh of electricity carries 2 kWh in, and the bigger the temperature gap the more each kWh costs.",
+  "strongest": "Beats 3–4: the failed no-compressor loop ('reaches at most 0 °C and would cool a 20 °C home') followed by propane's two boiling points at 3.5 and 14 bar. Together they make the trick feel necessary and concrete.",
+  "weakest": "Beat 9: entropy, Q/T, an unspoken inequality, undefined symbols and 'algebra', all in one beat for a reader new to entropy.",
+  "suggestions": [
+   "In beat 1, say explicitly that energy cannot be created, so a COP of 3 looks impossible.",
+   "In beat 2 or 5, say the colour coding aloud (blue = cold side, red = hot side, yellow = electricity).",
+   "In beat 5, name the four parts and the word 'refrigerant' as each appears, and say the compressor raises the pressure and the valve lowers it.",
+   "Introduce the heating water (at 35 °C) before beat 3 relies on it.",
+   "In beat 9, give 2 / 273.15 = 0.00732 kWh/K before the symbol Q/T, define Q_hot, Q_cold and W, and link 'never destroyed' to heat flowing hot to cold by itself.",
+   "In beat 8, show 308.15 / 35 = 8.8 before the formula.",
+   "In beat 11, write out the answer sentence and the general argument."
+  ]
+ },
+ "usage": {
+  "cost": 0.1379862,
+  "seconds": 51
+ },
+ "findings": [
+  {
+   "n": 1,
+   "severity": "blocking",
+   "kind": "blocking",
+   "text": "Beat 9: 'entropy Q/T is never destroyed' is given as an unexplained rule to a reader new to entropy, and the step to the formula is only 'algebra'. The ideal limit therefore rests on nothing the reader can follow."
+  },
+  {
+   "n": 2,
+   "severity": "blocking",
+   "kind": "blocking",
+   "text": "Beat 9: the symbols Q_hot, Q_cold, W and the 'L3 inequality' are never defined or spoken."
+  },
+  {
+   "n": 3,
+   "severity": "blocking",
+   "kind": "blocking",
+   "text": "Beat 11: 'answer in the opening words' is a placeholder. The answer and the general argument are never actually said."
+  },
+  {
+   "n": 4,
+   "severity": "blocking",
+   "kind": "blocking",
+   "text": "Beat 5: the four parts and the word 'refrigerant' are never named or defined in 'Said', yet beats 6 and 10 depend on 'compressor' and 'refrigerant lift'."
+  },
+  {
+   "n": 5,
+   "severity": "blocking",
+   "kind": "blocking",
+   "text": "Beat 1/2: the puzzle (3 out for 1 in seems to break conservation of energy) is never said, so the reader is not told what question is being answered."
+  },
+  {
+   "n": 6,
+   "severity": "excess",
+   "kind": "cut",
+   "text": "The terse 'Celsius gives 1' in beat 8: either spell it out (35/35) or cut it. As it stands it costs a reread and gains nothing."
+  },
+  {
+   "n": 7,
+   "severity": "excess",
+   "kind": "cut",
+   "text": "'radiators at 55 °C' in beat 7: it is not used later in the beats, so either give its COP or drop it."
+  },
+  {
+   "n": 8,
+   "severity": "excess",
+   "kind": "cut",
+   "text": "Beat 4's restatement that boiling temperature rises with pressure: the reader knows this, so lead with the propane numbers."
+  },
+  {
+   "n": 9,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "Beat 1 (hook): The words never say why a COP of 3 is puzzling. Nothing links 'heat pump 3' to conservation of energy, so the puzzle exists only in the 'Reader's question' column, which the reader does not get."
+  },
+  {
+   "n": 10,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "Beat 2 (notice): L1"
+  },
+  {
+   "n": 11,
+   "severity": "edge",
+   "kind": "unsaid",
+   "text": "Beat 2 (notice): The L1 diagram's colour coding. The plan says the text explains blue/red/yellow under the first diagram, but this beat's 'Said' does not."
+  },
+  {
+   "n": 12,
+   "severity": "edge",
+   "kind": "unsaid",
+   "text": "Beat 2 (notice): The question 'is energy created?' is never asked aloud. The answer arrives before the question."
+  },
+  {
+   "n": 13,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "Beat 3 (objection): compressor"
+  },
+  {
+   "n": 14,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "Beat 3 (objection): fluid loop"
+  },
+  {
+   "n": 15,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "Beat 3 (objection): The text brings in a 'fluid loop' with no reason given for why heat would be moved by a loop of fluid at all."
+  },
+  {
+   "n": 16,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "Beat 3 (objection): The objection itself, that heat flows hot to cold, so how can it go from 0 °C air indoors, is not in 'Said'. Only the failed design is."
+  },
+  {
+   "n": 17,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "Beat 3 (objection): There is a jump from '20 °C home' here to '35 °C water' later. The heating water is never introduced."
+  },
+  {
+   "n": 18,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "Beat 4 (approach): propane (its role as the fluid in the loop is not said; the word 'refrigerant' never appears in 'Said')"
+  },
+  {
+   "n": 19,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "Beat 4 (approach): It is not said how these two boiling points help. The tie to 'colder than 0 °C air, hotter than the water' waits until beat 5."
+  },
+  {
+   "n": 20,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "Beat 5 (mechanism): the names of the four parts (evaporator, compressor, condenser, expansion valve) if they are labels in the diagram; 'Said' does not name or define them"
+  },
+  {
+   "n": 21,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "Beat 5 (mechanism): refrigerant"
+  },
+  {
+   "n": 22,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "Beat 5 (mechanism): the water"
+  },
+  {
+   "n": 23,
+   "severity": "edge",
+   "kind": "unsaid",
+   "text": "Beat 5 (mechanism): The blue/red/yellow colour coding of the diagram nodes is never explained in 'Said'."
+  },
+  {
+   "n": 24,
+   "severity": "edge",
+   "kind": "unsaid",
+   "text": "Beat 5 (mechanism): The diagram's kWh numbers are the same as in L1 (the plan's link), but this is not said."
+  },
+  {
+   "n": 25,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "Beat 5 (mechanism): How the pressure is raised and lowered (by the compressor and the expansion valve) is not stated."
+  },
+  {
+   "n": 26,
+   "severity": "edge",
+   "kind": "unsaid",
+   "text": "Beat 7 (test/predict): The contents of the predict prompt are not stated."
+  },
+  {
+   "n": 27,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "Beat 7 (test/predict): 'radiators at 55 °C' is dropped in with no stated COP and no reason why hotter radiators matter."
+  },
+  {
+   "n": 28,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "Beat 7 (test/predict): Why a larger lift lowers COP is not given here. The reason comes in beats 8–9."
+  },
+  {
+   "n": 29,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "Beat 8 (approach): T_hot"
+  },
+  {
+   "n": 30,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "Beat 8 (approach): T_cold"
+  },
+  {
+   "n": 31,
+   "severity": "edge",
+   "kind": "unsaid",
+   "text": "Beat 8 (approach): The concrete 308.15 / 35 is not in 'Said'. Only '8.8' is, so the reader cannot check where 8.8 comes from."
+  },
+  {
+   "n": 32,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "Beat 8 (approach): The formula is asserted with no reason. The reason is deferred to beat 9."
+  },
+  {
+   "n": 33,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "Beat 8 (approach): 'Celsius gives 1' is too terse to follow: the reader is not shown 35/35, and the beat does not say why Celsius is wrong."
+  },
+  {
+   "n": 34,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "Beat 9 (mechanism): entropy"
+  },
+  {
+   "n": 35,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "Beat 9 (mechanism): Q"
+  },
+  {
+   "n": 36,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "Beat 9 (mechanism): Q/T"
+  },
+  {
+   "n": 37,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "Beat 9 (mechanism): L3"
+  },
+  {
+   "n": 38,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "Beat 9 (mechanism): Q_hot, Q_cold, W (presumably in the inequality, never defined in 'Said')"
+  },
+  {
+   "n": 39,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "Beat 9 (mechanism): COP 12 (where 12 comes from)"
+  },
+  {
+   "n": 40,
+   "severity": "edge",
+   "kind": "unsaid",
+   "text": "Beat 9 (mechanism): The L3 inequality itself is not spoken. 'algebra' is all the reader gets."
+  },
+  {
+   "n": 41,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "Beat 9 (mechanism): 'never destroyed' is stated as a rule. It is not tied to what the reader already knows, that heat flows hot to cold by itself."
+  },
+  {
+   "n": 42,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "Beat 9 (mechanism): How the inequality turns into T_hot / (T_hot − T_cold) is compressed into 'algebra'."
+  },
+  {
+   "n": 43,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "Beat 10 (notice): refrigerant lift"
+  },
+  {
+   "n": 44,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "Beat 10 (notice): refrigerant"
+  },
+  {
+   "n": 45,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "Beat 10 (notice): 'ideal 6.3' is not derived in 'Said' (313.15/50). The reader has to work out that it uses 40 °C and −10 °C instead of 35 °C and 0 °C."
+  },
+  {
+   "n": 46,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "Beat 11 (close): scope"
+  },
+  {
+   "n": 47,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "Beat 11 (close): The fridge connection is named but not explained."
+  }
+ ]
+}

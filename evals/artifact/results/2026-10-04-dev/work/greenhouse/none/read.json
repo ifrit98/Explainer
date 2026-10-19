@@ -1,0 +1,46 @@
+{
+  "answers": {
+    "1": {
+      "answer": "Sunlight and the Earth's own radiation have different wavelengths. The Sun, at about 5800 K, peaks in visible light near 0.5 µm. The Earth, at about 288 K, peaks in thermal infrared near 10 µm. The two spectra hardly overlap, so the air can let visible sunlight through and still absorb much of the outgoing infrared.",
+      "quote": "The two spectra hardly overlap. This is what makes the greenhouse effect possible. Air can be almost transparent to incoming sunlight and still be largely opaque to outgoing infrared."
+    },
+    "2": {
+      "answer": "Radiation reaches space from an effective emission height, on average about 5 km up, where the air is 255 K. More CO2 makes the air opaque higher up, so this height rises into colder air. Colder air radiates less, so the planet sends out less than it absorbs. It keeps warming until the new, higher level is back at 255 K. Because temperature falls with height at a fixed rate (the lapse rate), the surface ends up warmer by about the lapse rate times the rise in height.",
+      "quote": "With more absorber, the air becomes opaque higher up, so the emission height rises. A higher level is colder, and colder air radiates less (T⁴ again). For a while the planet sends out **less** than the 238 W/m² it absorbs."
+    },
+    "3": {
+      "answer": "A molecule can only absorb or emit infrared if its vibration changes its electric dipole. N2 and O2 are each made of two identical atoms, so they stay symmetric however they stretch and never have a dipole. Infrared light has almost nothing to act on.",
+      "quote": "N₂ and O₂ are two identical atoms. However they stretch, the molecule stays symmetric and has no dipole, so infrared light has almost nothing to act on."
+    },
+    "4": {
+      "answer": "Reasoning from the text: with nothing to absorb the infrared, it would radiate to space straight from the surface, not from a high, cold layer. The surface temperature would then just be the energy-balance temperature, about 255 K (−18 °C), with no extra warming from altitude and the lapse rate.",
+      "quote": "In equilibrium, absorbed sunlight (~238 W/m²) equals emitted infrared (σT⁴), which gives 255 K for a planet with no greenhouse gases."
+    }
+  },
+  "stops": [
+    "The symbol Γ appears in a formula, but the text only names the 'lapse rate' and never says Γ stands for it: \"T_surface ≈ T_emission + Γ × H\"",
+    "The rule behind 'absorbs ε, so also emits ε' is just named, with no reason given: \"A layer that absorbs a fraction ε also emits ε times the black-body amount (Kirchhoff's law).\"",
+    "'Electric dipole' is used as the key idea but never explained: \"It can only do this if the motion **changes the molecule's electric dipole**\"",
+    "Two different numbers are given without saying why they differ: \"Detailed models give about 3.2 W/m² per K for the real Earth (this is called the *Planck response*)\" versus 3.8",
+    "No reason is given for why the effect follows a logarithm: \"the effect grows roughly with the **logarithm** of concentration, not linearly\"",
+    "The lapse-rate feedback is hard to follow: \"In the tropics, warming is greater aloft than at the surface. That lets the planet radiate a little more easily\"",
+    "No reason is given for why the stratosphere cools: \"Above about 15 km, extra CO₂ mainly helps the air radiate its energy to space, so that layer cools.\"",
+    "The λ value appears without being derived: \"replacing the 3.2 with a smaller net \"restoring\" value λ\"",
+    "Convection is mentioned as the cause without explanation: \"Convection keeps this profile in place.\""
+  ],
+  "excess": [
+    "\"**\"It's to do with the ozone hole.\"** The ozone hole is a separate problem.\"",
+    "\"A real greenhouse stays warm mainly because the glass stops warm air from rising away by convection.\"",
+    "\"If the Sun were causing the warming, the whole atmosphere would warm.\"",
+    "\"Before industrialisation C₀ was about 280 ppm. By the mid-2020s it was above 420 ppm.\"",
+    "\"Current assessments put the long-term warming from doubled CO₂ (the *equilibrium climate sensitivity*) **likely between about 2.5 and 4 K\"",
+    "\"**Clouds (uncertain, probably amplifying overall).**\"",
+    "\"**CH₄** (methane), **N₂O** (nitrous oxide) and **O₃** (ozone) each have their own absorption bands.\""
+  ],
+  "grounded": {
+    "1": true,
+    "2": true,
+    "3": true,
+    "4": true
+  }
+}

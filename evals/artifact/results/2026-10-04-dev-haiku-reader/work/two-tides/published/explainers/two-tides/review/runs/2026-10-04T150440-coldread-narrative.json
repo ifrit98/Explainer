@@ -1,0 +1,339 @@
+{
+ "tool": "coldread",
+ "rendering": "narrative",
+ "slug": "two-tides",
+ "at": "2026-10-04T15:04:40",
+ "model": "default",
+ "prompt_sha": "6fd08b11fa54",
+ "reply": {
+  "beats": [
+   {
+    "at": "Beat 1 (hook)",
+    "text": "Shown: the answer in bold. Said: \"The Moon stretches the ocean; a stretch has two ends; the Earth turns through both.\"",
+    "unresolved": [],
+    "unsaid": [],
+    "leap": [
+     "The question is never asked in words. The beat gives the answer (\"a stretch has two ends\") before the reader hears that there are two high tides a day, or that the far side has one. The reader has to rebuild the puzzle from the answer."
+    ],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Beat 2 (instance)",
+    "text": "Shown: table of three points. Said: \"Pull falls with distance squared: 34.32, 33.19, 32.12 µm/s².\"",
+    "unresolved": [],
+    "unsaid": [
+     "The table's point names (near side, centre, far side) and their distances from the Moon are not said. The words list three numbers without saying which point each belongs to, or that all three point toward the Moon."
+    ],
+    "leap": [],
+    "excess": [
+     "\"Pull falls with distance squared\": this reader knows the inverse-square law."
+    ],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Beat 3 (objection)",
+    "text": "Said: \"The whole Earth falls toward the Moon at 33.19. A shared acceleration changes nothing inside a falling body (as in an orbiting space station).\"",
+    "unresolved": [],
+    "unsaid": [],
+    "leap": [
+     "\"The whole Earth falls toward the Moon\": the reader thinks of the Moon orbiting the Earth, not the Earth falling toward the Moon. The beat does not say why the Earth is in free fall toward the Moon. The space-station comparison helps once the reader accepts that."
+    ],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Beat 4 (name)",
+    "text": "Shown: difference column. Said: \"tidal acceleration: +1.13 near, −1.07 far\"",
+    "unresolved": [
+     "the + and − signs in \"+1.13\" and \"−1.07\": nothing says which direction is positive"
+    ],
+    "unsaid": [
+     "The column is centre-subtracted (34.32−33.19 and 32.12−33.19), but the words do not define tidal acceleration as 'pull minus pull at the centre'.",
+     "The key conclusion, that both ends are pulled outward relative to the centre, is not said. It is only in the plan's 'Reader now knows' column."
+    ],
+    "leap": [
+     "The step from −1.07 to 'the far side is pushed away from the Moon' is left for the reader to work out."
+    ],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Beat 5 (mechanism)",
+    "text": "Shown: side row. Said: \"pull tilted toward centre, 0.55 inward\"",
+    "unresolved": [
+     "which point \"side\" means (90° from the near side) is not said"
+    ],
+    "unsaid": [
+     "The conclusion 'stretch along the line, squeeze across' is not said."
+    ],
+    "leap": [
+     "Why the pull at a side point tilts toward the centre (the lines to the Moon converge) is not given."
+    ],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Beat 6 (mechanism)",
+    "text": "Shown: ASCII figure. Said: \"The sideways part, up to 0.82 at 45°, is unopposed; water flows to two bulges.\"",
+    "unresolved": [
+     "\"sideways part\": sideways relative to what (along the surface?)",
+     "\"45°\": measured from what"
+    ],
+    "unsaid": [
+     "The beat's own problem, that these accelerations are tiny (about 10⁻⁷ g), is never said, so the reader does not know what this beat is answering."
+    ],
+    "leap": [
+     "\"is unopposed\": no reason is given for why the horizontal component is unopposed when the vertical one is swamped by g. This is the step that explains how a tiny force moves the ocean."
+    ],
+    "excess": [],
+    "purpose_unclear": true
+   },
+   {
+    "at": "Beat 7 (test)",
+    "text": "Said: \"Held Earth: one bulge. Sun: 179× pull but 0.46× tide, because 1/d³.\"",
+    "unresolved": [
+     "\"Held Earth\": a hypothetical Earth held fixed so it does not fall toward the Moon; never explained",
+     "\"1/d³\": where a cube law comes from is never said (2GMR/d³ is in the plan only)"
+    ],
+    "unsaid": [],
+    "leap": [
+     "Why a held Earth would have one bulge is not argued.",
+     "How a difference of pulls turns into 1/d³ is not shown."
+    ],
+    "excess": [
+     "The Sun comparison is useful but is a side test, off the main question of two bulges."
+    ],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Beat 8 (mechanism)",
+    "text": "Shown: timeline. Said: \"Earth turns under bulges; 24 h 50 min lunar day; 12 h 25 min.\"",
+    "unresolved": [
+     "\"lunar day\""
+    ],
+    "unsaid": [],
+    "leap": [
+     "The reader knows the Earth turns in 24 h. Nothing says why the period here is 24 h 50 min (the Moon moves about 12° a day)."
+    ],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Beat 9 (close)",
+    "text": "Said: \"Restate; misconception about centrifugal force; scope.\"",
+    "unresolved": [
+     "\"misconception about centrifugal force\": centrifugal force never came up before, so the reader does not know what misconception is meant"
+    ],
+    "unsaid": [],
+    "leap": [
+     "The 'Said' is only a stage direction. No actual restatement, general argument or scope is given to the reader."
+    ],
+    "excess": [],
+    "purpose_unclear": true
+   }
+  ],
+  "blocking": [
+   "Beat 4, \"+1.13 near, −1.07 far\": the sign convention and the meaning 'both ends pulled outward from the centre' are not said, and this is the core of the two-bulge answer.",
+   "Beat 6, \"The sideways part, up to 0.82 at 45°, is unopposed\": no reason is given for why the horizontal part acts while the vertical part does not. Without it the reader cannot see how a force of about 10⁻⁷ g moves water.",
+   "Beat 9, \"Restate; misconception about centrifugal force; scope.\": there is no closing content, so the answer and the general argument are never actually said."
+  ],
+  "cuts": [
+   "Beat 9: either drop \"misconception about centrifugal force\" or set it up earlier. As it stands it brings in a topic the reader has never seen.",
+   "Beat 2: drop \"Pull falls with distance squared\" (already known) and use the space to name which number belongs to which point.",
+   "Beat 7: the Sun comparison (\"179× pull but 0.46× tide, because 1/d³\") could be shortened or moved after the close, because its 1/d³ step is never explained."
+  ],
+  "question": {
+   "text": "The Moon is on one side of the Earth, so why is there a high tide on the far side too, giving two high tides a day?",
+   "known_at": "Never asked outright in 'Said'. It can be inferred from Beat 1's answer (\"a stretch has two ends\").",
+   "result_stated": "Yes, in Beat 1: \"The Moon stretches the ocean; a stretch has two ends; the Earth turns through both.\""
+  },
+  "motive": "Missing from the script. The reason to care (the naive picture predicts one tide but coasts have two) and the reason for the approach (compare the pull at three points, then ask which differences change the Earth's shape) appear only in the plan's 'Question and motive' section. Neither is in Said or Shown.",
+  "close": "Not delivered. Beat 9 says only \"Restate; misconception about centrifugal force; scope.\" The general argument ('any body falling in a non-uniform field stretches along the line to the source') appears only in plan section 7.",
+  "recap": "The whole Earth falls toward the Moon, so only the differences in pull matter: the near side is pulled a bit more and the far side a bit less, which stretches the ocean into two bulges.",
+  "strongest": "Beats 2–3: real numbers at three points, then the free-fall argument (\"A shared acceleration changes nothing inside a falling body (as in an orbiting space station)\"). This takes away the naive picture.",
+  "weakest": "Beat 9: the close is a placeholder with no content, and it brings in an unexplained centrifugal misconception. A close second is Beat 6's unexplained \"unopposed\".",
+  "suggestions": [
+   "Open with the puzzle in words: 'The Moon pulls water toward it, so why is there also a high tide on the side facing away?'",
+   "In Beat 4, say it plainly: 'positive means toward the Moon; so the near water is pulled ahead of the Earth and the far water is left behind, and both move away from the centre.'",
+   "In Beat 6, explain 'unopposed': straight up or down, 1 µm/s² is nothing against g = 9.81 m/s², but along the surface nothing resists it, so the water slides.",
+   "Define 'held Earth' as 'if the Earth were held still instead of falling', and give a one-line reason for 1/d³ (a difference of 1/d² terms across the Earth's width).",
+   "Say why the lunar day is 24 h 50 min: the Moon moves about 12° along its orbit each day.",
+   "Write the close out in full: the answer, then the general rule that anything falling in a non-uniform field is stretched along the line to the source."
+  ]
+ },
+ "usage": {
+  "cost": 0.1251516,
+  "seconds": 46
+ },
+ "findings": [
+  {
+   "n": 1,
+   "severity": "blocking",
+   "kind": "blocking",
+   "text": "Beat 4, \"+1.13 near, −1.07 far\": the sign convention and the meaning 'both ends pulled outward from the centre' are not said, and this is the core of the two-bulge answer."
+  },
+  {
+   "n": 2,
+   "severity": "blocking",
+   "kind": "blocking",
+   "text": "Beat 6, \"The sideways part, up to 0.82 at 45°, is unopposed\": no reason is given for why the horizontal part acts while the vertical part does not. Without it the reader cannot see how a force of about 10⁻⁷ g moves water."
+  },
+  {
+   "n": 3,
+   "severity": "blocking",
+   "kind": "blocking",
+   "text": "Beat 9, \"Restate; misconception about centrifugal force; scope.\": there is no closing content, so the answer and the general argument are never actually said."
+  },
+  {
+   "n": 4,
+   "severity": "excess",
+   "kind": "cut",
+   "text": "Beat 9: either drop \"misconception about centrifugal force\" or set it up earlier. As it stands it brings in a topic the reader has never seen."
+  },
+  {
+   "n": 5,
+   "severity": "excess",
+   "kind": "cut",
+   "text": "Beat 2: drop \"Pull falls with distance squared\" (already known) and use the space to name which number belongs to which point."
+  },
+  {
+   "n": 6,
+   "severity": "excess",
+   "kind": "cut",
+   "text": "Beat 7: the Sun comparison (\"179× pull but 0.46× tide, because 1/d³\") could be shortened or moved after the close, because its 1/d³ step is never explained."
+  },
+  {
+   "n": 7,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "Beat 1 (hook): The question is never asked in words. The beat gives the answer (\"a stretch has two ends\") before the reader hears that there are two high tides a day, or that the far side has one. The reader has to rebuild the puzzle from the answer."
+  },
+  {
+   "n": 8,
+   "severity": "edge",
+   "kind": "unsaid",
+   "text": "Beat 2 (instance): The table's point names (near side, centre, far side) and their distances from the Moon are not said. The words list three numbers without saying which point each belongs to, or that all three point toward the Moon."
+  },
+  {
+   "n": 9,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "Beat 3 (objection): \"The whole Earth falls toward the Moon\": the reader thinks of the Moon orbiting the Earth, not the Earth falling toward the Moon. The beat does not say why the Earth is in free fall toward the Moon. The space-station comparison helps once the reader accepts that."
+  },
+  {
+   "n": 10,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "Beat 4 (name): the + and − signs in \"+1.13\" and \"−1.07\": nothing says which direction is positive"
+  },
+  {
+   "n": 11,
+   "severity": "edge",
+   "kind": "unsaid",
+   "text": "Beat 4 (name): The column is centre-subtracted (34.32−33.19 and 32.12−33.19), but the words do not define tidal acceleration as 'pull minus pull at the centre'."
+  },
+  {
+   "n": 12,
+   "severity": "edge",
+   "kind": "unsaid",
+   "text": "Beat 4 (name): The key conclusion, that both ends are pulled outward relative to the centre, is not said. It is only in the plan's 'Reader now knows' column."
+  },
+  {
+   "n": 13,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "Beat 4 (name): The step from −1.07 to 'the far side is pushed away from the Moon' is left for the reader to work out."
+  },
+  {
+   "n": 14,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "Beat 5 (mechanism): which point \"side\" means (90° from the near side) is not said"
+  },
+  {
+   "n": 15,
+   "severity": "edge",
+   "kind": "unsaid",
+   "text": "Beat 5 (mechanism): The conclusion 'stretch along the line, squeeze across' is not said."
+  },
+  {
+   "n": 16,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "Beat 5 (mechanism): Why the pull at a side point tilts toward the centre (the lines to the Moon converge) is not given."
+  },
+  {
+   "n": 17,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "Beat 6 (mechanism): \"sideways part\": sideways relative to what (along the surface?)"
+  },
+  {
+   "n": 18,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "Beat 6 (mechanism): \"45°\": measured from what"
+  },
+  {
+   "n": 19,
+   "severity": "edge",
+   "kind": "unsaid",
+   "text": "Beat 6 (mechanism): The beat's own problem, that these accelerations are tiny (about 10⁻⁷ g), is never said, so the reader does not know what this beat is answering."
+  },
+  {
+   "n": 20,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "Beat 6 (mechanism): \"is unopposed\": no reason is given for why the horizontal component is unopposed when the vertical one is swamped by g. This is the step that explains how a tiny force moves the ocean."
+  },
+  {
+   "n": 21,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "Beat 7 (test): \"Held Earth\": a hypothetical Earth held fixed so it does not fall toward the Moon; never explained"
+  },
+  {
+   "n": 22,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "Beat 7 (test): \"1/d³\": where a cube law comes from is never said (2GMR/d³ is in the plan only)"
+  },
+  {
+   "n": 23,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "Beat 7 (test): Why a held Earth would have one bulge is not argued."
+  },
+  {
+   "n": 24,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "Beat 7 (test): How a difference of pulls turns into 1/d³ is not shown."
+  },
+  {
+   "n": 25,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "Beat 8 (mechanism): \"lunar day\""
+  },
+  {
+   "n": 26,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "Beat 8 (mechanism): The reader knows the Earth turns in 24 h. Nothing says why the period here is 24 h 50 min (the Moon moves about 12° a day)."
+  },
+  {
+   "n": 27,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "Beat 9 (close): \"misconception about centrifugal force\": centrifugal force never came up before, so the reader does not know what misconception is meant"
+  },
+  {
+   "n": 28,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "Beat 9 (close): The 'Said' is only a stage direction. No actual restatement, general argument or scope is given to the reader."
+  }
+ ]
+}

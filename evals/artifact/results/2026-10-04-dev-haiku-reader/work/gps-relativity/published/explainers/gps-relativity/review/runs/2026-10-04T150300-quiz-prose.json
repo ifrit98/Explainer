@@ -1,0 +1,237 @@
+{
+ "tool": "quiz",
+ "rendering": "prose",
+ "slug": "gps-relativity",
+ "at": "2026-10-04T15:02:47",
+ "model": "default",
+ "prompt_sha": "8989a402f1c2",
+ "reply": {
+  "answers": {
+   "1": "The GPS satellites (about 30, 20,200 km up) and their atomic clocks; the receiver (for example a phone chip) and its quartz clock; the broadcast signal (satellite ID, position P, send time t); range and pseudorange; b, the receiver's clock error in metres; GPS time, kept by atomic clocks at ground stations; the two relativity effects (special relativity from speed, general relativity from gravity/height); and the 10.23 MHz clock frequency offset set before launch.",
+   "2": "Each satellite broadcasts its position and send time. The receiver times when each signal arrives. Travel time × c gives a range. Because the receiver clock is wrong, each measurement is a pseudorange = range + b, and b is the same in every pseudorange. Four pseudoranges let it solve for x, y, z and b. Satellite clocks must match GPS time because an error in one satellite clock sits in only one pseudorange, so nothing absorbs it. Relativity makes satellite clocks run fast compared with GPS time, so engineers set their frequency slightly low before launch. Ground stations upload small corrections for what is left.",
+   "3": "Position comes from signal travel times × light speed, so every nanosecond of satellite clock error is 0.3 m of range error. Relativity makes satellite clocks gain 38 µs/day (11.4 km of range per day), so the clocks are built to tick slow by 4.5×10⁻¹⁰ to cancel this.",
+   "4": "Satellite clock error is the key variable. Each extra ns adds 0.3 m of range error to that satellite's pseudorange only, so the fix gets worse, and past about 17 ns it is worse than about 5 m. If the relativistic drift were left uncorrected, each clock would move away from GPS time by 11.4 km of range per day, and the fix would fail. A change in the receiver clock error instead does not hurt accuracy, because b absorbs it.",
+   "5": "Assumption/simplification: the 1D worked example with two beacons on a line (and leaving out atmosphere, Sagnac and orbit shape). Established fact: time dilation 'is measured, not only predicted'. Net, satellite clocks gain 38 µs/day (lose 7 from speed, gain 45 from gravity).",
+   "6": "A GPS receiver turns signal travel times into distances by multiplying by light speed. Its cheap clock adds the same unknown offset to every distance, so it uses four satellites to solve for x, y, z and that offset. A satellite clock error affects only one distance, so satellite clocks must stay within about 17 ns of GPS time. Relativity makes them gain a net 38 µs per day (gravity +45, speed −7), which is 11.4 km of range per day. Engineers therefore set the clocks slightly slow before launch so that they run at the right rate in orbit.",
+   "7": "Section 5 was hardest. It does not say why satellites are set to GPS time at different moments. It also says the difference 'grows every day', but in its own example both clocks gain 38 µs/day, so the A−B gap stays at 114 µs (34.2 km). An explicit day-by-day table, and a reason why per-satellite drift becomes uneven (different set times, different clocks), would help. Also the text says 34 km, but 57 − 22.8 = 34.2.",
+   "8": "2 µs × 300 m/µs ≈ 600 m added to every pseudorange. It does not make the position wrong by 600 m. The error is the same in all pseudoranges, so the receiver solves for it as b (about 600 m) and subtracts it.",
+   "9": "They would run fast by about 45 µs per day, the gravity gain with nothing to cancel it. That is about 13.5 km of range per day.",
+   "10": "Range = time × c, and light covers 11.4 km in 38 µs. A 5 m fix needs satellite clocks within about 17 ns, so 38 µs/day is thousands of times over that budget after one day. Each satellite's error is its own and is not absorbed.",
+   "11": "The receiver's quartz clock error b is a fourth unknown alongside x, y, z. Four unknowns need four equations (pseudoranges). With perfect clocks, three would do: three spheres meet in two points and one is rejected as being in space.",
+   "12": "Fast, by a net 38 µs/day. Weaker gravity at 20,200 km makes them gain 45 µs/day (general relativity). Their 3.9 km/s speed makes them lose 7 µs/day (special relativity). Gravity wins. (Once built slow, they match GPS time in orbit.)",
+   "13": "b can only absorb an error that is the same in every pseudorange at the same moment. Satellites are set to GPS time at different moments, so their accumulated errors differ (for example 57 km vs 22.8 km on day 5). The difference is not shared, so no single b removes it. The explanation does not say why setting times differ."
+  },
+  "audit": {
+   "terms": [
+    "The ground reference has three names: 'ground clocks' (lead), 'GPS time' (§3, 'atomic clocks at ground stations'), and 'a clock on the ground' (§4). It is unclear whether these are the same thing.",
+    "Satellite clock error is called 'drift' (§5 title, §5), 'gain' (§4 table, lead), and 'error' (§3). For example: 'Relativity makes those clocks gain 38 µs a day' (lead) vs 'relativity drift' / 'cancel the drift' (§5).",
+    "'fix' means two things: 'For a fix within about 5 m' (§3) and 'position fix fails' (§5) mean a computed position, but '## 6. The fix: make the clocks tick slow' means the engineering correction.",
+    "b is given in two units without the link being stated: 'the receiver clock error expressed in metres' (§2) vs 'b = 1.5 km (5 µs)' (§2 example).",
+    "'range' / 'true distance' / 'distance' (§1) all mean the same thing, and pseudorange is introduced right after. This is minor but should stay consistent."
+   ],
+   "unexplained": [
+    "'This difference grows every day' (§5): in the example both clocks gain 38 µs/day, so the 114 µs gap between A and B stays constant. The text does not say what makes the difference grow.",
+    "'10.23 MHz' and '10.22999999543 MHz' (§6): no reason is given for this base frequency, or for what the many decimal places mean for the reader.",
+    "'For a fix within about 5 m' (§3): the 5 m target is given without saying why 5 m, or what a looser or tighter target would do to the 17 ns budget.",
+    "'swings by up to about 23 ns' (Not covered): there is no comparison with the 17 ns budget, although 23 ns exceeds it. That is the key implication.",
+    "'3.9 km/s', 'loses 7 µs', 'gains 45 µs' (§4 table) are given with no way to see how they scale (for example, how the loss would change at higher speed or lower orbit)."
+   ],
+   "missing_why": [
+    "The §4 table gives −7 and +45 µs/day with no formula or reasoning for their size. The text does not say why higher altitude makes a clock tick faster, only that it does.",
+    "§5: 'each satellite clock is set to GPS time at a different moment' is given without saying why the satellites are not all set together, or why a common rate still leaves unequal errors.",
+    "§6: why a rate (frequency) change is the right fix rather than periodic resets. Ground corrections exist, so why not just reset? This is only partly answered by 'keeps those corrections small'.",
+    "§1: 'Three spheres meet in two points': no reason is given why it is exactly two points.",
+    "§2: why the receiver clock error adds (pseudorange = range + b) rather than scaling the range. The 1D example shows it but does not state why."
+   ],
+   "excess": [
+    "The Summary (lines 66–68) repeats the lead paragraph almost word for word.",
+    "'Light covers 300 m in one microsecond … 0.3 m in one nanosecond' with unit definitions (§1): this reader knows c ≈ 300,000 km/s, though the conversion rates are mildly useful.",
+    "The 'Not covered here' bullets on atmosphere and solving by iteration are detours the questions do not use."
+   ]
+  },
+  "gaps": [
+   "Section 5 says the satellite-to-satellite difference 'grows every day', but its own example (same drift rate, different set days) gives a constant 114 µs gap. The explanation never says what makes satellite errors diverge over time.",
+   "No derivation or scaling of the 7 µs and 45 µs figures, and no explanation of why higher gravitational potential means faster ticking.",
+   "There is no explanation of why satellites are synchronised at different moments.",
+   "The orbit-shape swing of 23 ns exceeds the stated 17 ns budget, but the effect is only noted under 'Not covered'.",
+   "Small arithmetic rounding: 57 − 22.8 = 34.2 km, stated as 34 km."
+  ]
+ },
+ "grade": {
+  "scores": {
+   "1": 2,
+   "2": 2,
+   "3": 2,
+   "4": 2,
+   "5": 2,
+   "6": 2,
+   "7": 2,
+   "8": 2,
+   "9": 2,
+   "10": 2,
+   "11": 2,
+   "12": 2,
+   "13": 2
+  },
+  "reasons": {
+   "1": "Full marks: lists every entity in model.md with correct details (30 satellites at 20,200 km, atomic vs quartz clocks, signal contents, range/pseudorange, b in metres, GPS time, both relativity effects, 10.23 MHz offset).",
+   "2": "Full marks: the causal chain is complete and in order. It explains why a satellite clock error is not absorbed by b and mentions the ground corrections.",
+   "3": "Full marks: gives the central answer with 0.3 m/ns, +38 µs/day, 11.4 km/day and the 4.5×10⁻¹⁰ slow-tick fix.",
+   "4": "Full marks: identifies satellite clock error as the key variable, with the 17 ns to 5 m budget, and contrasts it with receiver clock error, which b absorbs.",
+   "5": "Full marks: correctly separates simplifications (1D example; atmosphere, Sagnac and eccentricity out of scope) from measured fact (time dilation).",
+   "6": "Full marks: accurate summary with correct numbers (+45, −7, net 38 µs/day, 11.4 km/day, 17 ns).",
+   "7": "Full marks: specific and valid critique. If both clocks drift at the same rate, the A−B gap stays constant at 114 µs (34.2 km), which conflicts with 'grows every day'. It also notes the rounding (34 vs 34.2) and that the rendering never says why setting times differ. This is a candidate audit finding for the explainer to decide.",
+   "8": "Full marks: 600 m per pseudorange, absorbed as b, so the position is not off by 600 m.",
+   "9": "Full marks: fast by 45 µs/day, about 13.5 km/day, because the gravity gain remains.",
+   "10": "Full marks: 38 µs × c ≈ 11.4 km per day, set against the 17 ns budget.",
+   "11": "Full marks: b is a fourth unknown, so four equations are needed. Also covers the perfect-clock three-satellite case.",
+   "12": "Full marks: net fast by 38 µs/day; gravity +45 (GR) and speed −7 (SR).",
+   "13": "Full marks: b absorbs only a shared error. Gives the day-5 example (57 vs 22.8 km) showing the difference cannot go into one b."
+  },
+  "pass": true
+ },
+ "usage": {
+  "cost": 0.1966034,
+  "seconds": 51
+ },
+ "findings": [
+  {
+   "n": 1,
+   "severity": "gap",
+   "kind": "terms",
+   "text": "The ground reference has three names: 'ground clocks' (lead), 'GPS time' (§3, 'atomic clocks at ground stations'), and 'a clock on the ground' (§4). It is unclear whether these are the same thing."
+  },
+  {
+   "n": 2,
+   "severity": "gap",
+   "kind": "terms",
+   "text": "Satellite clock error is called 'drift' (§5 title, §5), 'gain' (§4 table, lead), and 'error' (§3). For example: 'Relativity makes those clocks gain 38 µs a day' (lead) vs 'relativity drift' / 'cancel the drift' (§5)."
+  },
+  {
+   "n": 3,
+   "severity": "gap",
+   "kind": "terms",
+   "text": "'fix' means two things: 'For a fix within about 5 m' (§3) and 'position fix fails' (§5) mean a computed position, but '## 6. The fix: make the clocks tick slow' means the engineering correction."
+  },
+  {
+   "n": 4,
+   "severity": "gap",
+   "kind": "terms",
+   "text": "b is given in two units without the link being stated: 'the receiver clock error expressed in metres' (§2) vs 'b = 1.5 km (5 µs)' (§2 example)."
+  },
+  {
+   "n": 5,
+   "severity": "gap",
+   "kind": "terms",
+   "text": "'range' / 'true distance' / 'distance' (§1) all mean the same thing, and pseudorange is introduced right after. This is minor but should stay consistent."
+  },
+  {
+   "n": 6,
+   "severity": "gap",
+   "kind": "unexplained",
+   "text": "'This difference grows every day' (§5): in the example both clocks gain 38 µs/day, so the 114 µs gap between A and B stays constant. The text does not say what makes the difference grow."
+  },
+  {
+   "n": 7,
+   "severity": "gap",
+   "kind": "unexplained",
+   "text": "'10.23 MHz' and '10.22999999543 MHz' (§6): no reason is given for this base frequency, or for what the many decimal places mean for the reader."
+  },
+  {
+   "n": 8,
+   "severity": "gap",
+   "kind": "unexplained",
+   "text": "'For a fix within about 5 m' (§3): the 5 m target is given without saying why 5 m, or what a looser or tighter target would do to the 17 ns budget."
+  },
+  {
+   "n": 9,
+   "severity": "gap",
+   "kind": "unexplained",
+   "text": "'swings by up to about 23 ns' (Not covered): there is no comparison with the 17 ns budget, although 23 ns exceeds it. That is the key implication."
+  },
+  {
+   "n": 10,
+   "severity": "gap",
+   "kind": "unexplained",
+   "text": "'3.9 km/s', 'loses 7 µs', 'gains 45 µs' (§4 table) are given with no way to see how they scale (for example, how the loss would change at higher speed or lower orbit)."
+  },
+  {
+   "n": 11,
+   "severity": "gap",
+   "kind": "missing_why",
+   "text": "The §4 table gives −7 and +45 µs/day with no formula or reasoning for their size. The text does not say why higher altitude makes a clock tick faster, only that it does."
+  },
+  {
+   "n": 12,
+   "severity": "gap",
+   "kind": "missing_why",
+   "text": "§5: 'each satellite clock is set to GPS time at a different moment' is given without saying why the satellites are not all set together, or why a common rate still leaves unequal errors."
+  },
+  {
+   "n": 13,
+   "severity": "gap",
+   "kind": "missing_why",
+   "text": "§6: why a rate (frequency) change is the right fix rather than periodic resets. Ground corrections exist, so why not just reset? This is only partly answered by 'keeps those corrections small'."
+  },
+  {
+   "n": 14,
+   "severity": "gap",
+   "kind": "missing_why",
+   "text": "§1: 'Three spheres meet in two points': no reason is given why it is exactly two points."
+  },
+  {
+   "n": 15,
+   "severity": "gap",
+   "kind": "missing_why",
+   "text": "§2: why the receiver clock error adds (pseudorange = range + b) rather than scaling the range. The 1D example shows it but does not state why."
+  },
+  {
+   "n": 16,
+   "severity": "excess",
+   "kind": "excess",
+   "text": "The Summary (lines 66–68) repeats the lead paragraph almost word for word."
+  },
+  {
+   "n": 17,
+   "severity": "excess",
+   "kind": "excess",
+   "text": "'Light covers 300 m in one microsecond … 0.3 m in one nanosecond' with unit definitions (§1): this reader knows c ≈ 300,000 km/s, though the conversion rates are mildly useful."
+  },
+  {
+   "n": 18,
+   "severity": "excess",
+   "kind": "excess",
+   "text": "The 'Not covered here' bullets on atmosphere and solving by iteration are detours the questions do not use."
+  },
+  {
+   "n": 19,
+   "severity": "gap",
+   "kind": "gap",
+   "text": "Section 5 says the satellite-to-satellite difference 'grows every day', but its own example (same drift rate, different set days) gives a constant 114 µs gap. The explanation never says what makes satellite errors diverge over time."
+  },
+  {
+   "n": 20,
+   "severity": "gap",
+   "kind": "gap",
+   "text": "No derivation or scaling of the 7 µs and 45 µs figures, and no explanation of why higher gravitational potential means faster ticking."
+  },
+  {
+   "n": 21,
+   "severity": "gap",
+   "kind": "gap",
+   "text": "There is no explanation of why satellites are synchronised at different moments."
+  },
+  {
+   "n": 22,
+   "severity": "gap",
+   "kind": "gap",
+   "text": "The orbit-shape swing of 23 ns exceeds the stated 17 ns budget, but the effect is only noted under 'Not covered'."
+  },
+  {
+   "n": 23,
+   "severity": "gap",
+   "kind": "gap",
+   "text": "Small arithmetic rounding: 57 − 22.8 = 34.2 km, stated as 34 km."
+  }
+ ]
+}

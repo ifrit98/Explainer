@@ -1,0 +1,61 @@
+{
+  "key": {
+    "A": "principles",
+    "B": "none",
+    "C": "quick",
+    "D": "published"
+  },
+  "grades": {
+    "principles": {
+      "quiz": [
+        2,
+        2,
+        2,
+        2
+      ],
+      "misconception": "corrected",
+      "errors": []
+    },
+    "none": {
+      "quiz": [
+        2,
+        2,
+        2,
+        2
+      ],
+      "misconception": "corrected",
+      "errors": [
+        "The digits after the point (the *significand*) get a fixed budget: **53 significant binary digits**."
+      ]
+    },
+    "quick": {
+      "quiz": [
+        2,
+        2,
+        2,
+        2
+      ],
+      "misconception": "corrected",
+      "errors": []
+    },
+    "published": {
+      "quiz": [
+        2,
+        2,
+        2,
+        2
+      ],
+      "misconception": "corrected",
+      "errors": [
+        "The other 11 bits hold the sign and the power."
+      ]
+    }
+  },
+  "rank": [
+    "principles",
+    "none",
+    "quick",
+    "published"
+  ],
+  "why_best": "A gives the full causal chain (the prime-factor rule, stored values as integer × power of 2, the tie rounding and the printing behaviour) in a short, exact form with no detours, so the reader gets a correct model with little effort."
+}

@@ -1,0 +1,218 @@
+{
+ "tool": "probe",
+ "rendering": null,
+ "slug": "heat-pump",
+ "at": "2026-10-04T15:08:33",
+ "model": "default",
+ "prompt_sha": "7350959dd026",
+ "reply": {
+  "gaps": [
+   {
+    "rule": 3,
+    "severity": "main",
+    "about": "'Entropy' is used in L3 (Q/T, 'cannot store entropy', 'cannot be destroyed') but is not in the Terms section, and the Audience section does not list it as prior knowledge.",
+    "why_it_matters": "L3 is the level that explains why moving heat uphill costs work. Its whole argument depends on a word this reader has never been given a meaning for, so they can't check any step of it.",
+    "suggested_addition": "Add to Terms: 'Entropy (here only): heat Q passing at absolute temperature T carries Q/T of entropy. Taking 2 kWh from 273.15 K air removes 2/273.15 = 0.00732 kWh/K. Giving 3 kWh to 308.15 K water adds 3/308.15 = 0.00974 kWh/K. Heat flowing by itself from hot to cold always increases the total.' Give one example of that last fact: 1 kWh moving from 308 K to 273 K gives −0.00325 + 0.00366 = +0.00042 kWh/K."
+   },
+   {
+    "rule": 2,
+    "severity": "main",
+    "about": "L3 says entropy given to the hot side ≥ entropy taken from the cold side, with no numbers showing it holding or failing. The algebra from that inequality to W ≥ Q_hot(T_hot−T_cold)/T_hot is also left out, and so is the step from that bound to COP_max = T_hot/(T_hot−T_cold).",
+    "why_it_matters": "The ideal limit (8.8) is the only bound in the explanation. Without a case that violates it, the reader can't see what the inequality forbids, and the formula in Quantities seems to come from nowhere.",
+    "suggested_addition": "Holds: COP 3 at 0 °C → 35 °C gives 2/273.15 = 0.00732 taken and 3/308.15 = 0.00974 given; 0.00974 ≥ 0.00732. Breaks: a claimed COP 12 (11 kWh from air, 1 kWh electricity, 12 kWh out) gives 11/273.15 = 0.0403 taken but only 12/308.15 = 0.0389 given, so entropy would be destroyed, which is forbidden. Show the algebra: substitute Q_cold = Q_hot − W, so Q_hot/T_hot ≥ (Q_hot − W)/T_cold, so W ≥ Q_hot(1 − T_cold/T_hot). Then Q_hot/W ≤ T_hot/(T_hot−T_cold) = 308.15/35 = 8.8."
+   },
+   {
+    "rule": 4,
+    "severity": "main",
+    "about": "The expansion-valve step says the pressure drop 'makes it cold' but never says how. The model also calls the output 'cold low-pressure liquid', when it is really a mixture of liquid and vapour.",
+    "why_it_matters": "The reader is told that boiling temperature depends on pressure but is never shown it being used here. 40 °C liquid at 3.5 bar is far above its −10 °C boiling point, so part of it boils at once and that boiling cools the rest. Without this, getting from 40 °C to −10 °C with no energy removed looks like magic.",
+    "suggested_addition": "'At 3.5 bar propane boils at −10 °C, so the 40 °C liquid boils instantly. Roughly a third of it turns to vapour (estimate; recompute from propane tables), and the heat that boiling uses comes from the liquid itself, cooling everything to −10 °C. The valve adds or removes 0 kWh; it only drops the pressure.'"
+   },
+   {
+    "rule": 1,
+    "severity": "main",
+    "about": "Why squeezing vapour makes it hot. The model states this but never explains it, and offers no comparison.",
+    "why_it_matters": "The compressor is the one place where electricity enters. Without a reason, 'pressure rises → temperature rises' is just a rule to memorise, and the reader can't tell why the work 'ends up as heat in the vapour'.",
+    "suggested_addition": "'Pushing the piston or scroll does work on the gas molecules and speeds them up, which is a higher temperature (as when a bicycle pump gets warm). Vapour enters at about −10 °C and 3.5 bar and leaves at about 14 bar and roughly 60 °C (estimate). It first cools to 40 °C in the condenser, then condenses.' Also say that this means the condenser receives vapour above 40 °C."
+   },
+   {
+    "rule": 3,
+    "severity": "main",
+    "about": "'Temperature lift' names two different things: water minus air (35 K, used in the table and the ideal COP) and refrigerant minus refrigerant (50 K, used in the 'why real is a third' line). T_hot is likewise 308.15 K in one place and 313.15 K in another.",
+    "why_it_matters": "The reader will see that the lift is 35 K and also 50 K for the same situation. The two ideal COPs (8.8 and 6.3) will look like a contradiction.",
+    "suggested_addition": "Name them separately. 'Lift' = water − air = 35 K, ideal 8.8. 'Refrigerant lift' = condensing − boiling = 40 − (−10) = 50 K, ideal 313.15/50 = 6.3. State that the extra 15 K (10 K at the evaporator + 5 K at the condenser) is what heat exchangers need to make heat flow."
+   },
+   {
+    "rule": 1,
+    "severity": "edge",
+    "about": "Why run the refrigerant at −10 °C and 40 °C instead of right at 0 °C and 35 °C. The cost is stated (refrigerant lift 50 K instead of 35 K) but not the reason.",
+    "why_it_matters": "It explains part of why real is below ideal, and it explains a trade-off: a bigger heat exchanger means a smaller temperature gap, which means a higher COP.",
+    "suggested_addition": "'Heat flow through an exchanger is roughly proportional to the temperature difference. At 0 K difference nothing flows. Halving the evaporator gap from 10 K to 5 K needs about twice the coil area but raises the ideal from 313.15/50 = 6.3 to 313.15/45 = 7.0.'"
+   },
+   {
+    "rule": 1,
+    "severity": "edge",
+    "about": "Why use a fluid that boils and condenses rather than just heating and cooling a gas.",
+    "why_it_matters": "Boiling takes a lot of heat at one fixed temperature. That is why the temperatures at each exchanger are fixed at single values. A gas-only cycle would change temperature along the coil.",
+    "suggested_addition": "'Propane takes about 390 kJ/kg to boil at −10 °C (estimate), so 2 kWh = 7200 kJ needs about 18 kg to circulate, all at −10 °C. Warming propane gas by 10 K takes only about 17 kJ/kg (cp ≈ 1.7 kJ/kg·K), so it would need about 20 times the flow.'"
+   },
+   {
+    "rule": 3,
+    "severity": "edge",
+    "about": "Several concepts have more than one name: 'ideal limit' / 'Carnot' / 'COP_max' / 'Ideal COP'; 'outdoor heat' / 'heat taken from outside' / 'heat from the air' / Q_cold; 'electricity' / 'work' / W; 'heat delivered' / Q_hot / 'heat out'; 'typical real COP' / 'COP'.",
+    "why_it_matters": "In L3 the reader has to work out that W is the electricity and Q_cold is the outdoor heat, and that 'Carnot' is the same thing as 'ideal limit'.",
+    "suggested_addition": "Choose one name for each and map the symbols once: 'Q_hot = heat delivered (3 kWh), Q_cold = outdoor heat (2 kWh), W = electricity (1 kWh), COP_max = ideal limit (Carnot).'"
+   },
+   {
+    "rule": 5,
+    "severity": "edge",
+    "about": "Pressures in bar (3.5 and 14) are given with no reference point.",
+    "why_it_matters": "The reader can't tell whether 14 bar is mild or extreme, which matters for why the parts are sealed and strong.",
+    "suggested_addition": "'Air around you is about 1 bar; a car tyre is about 3.2 bar absolute; the condenser side at 14 bar is about 4 times tyre pressure.'"
+   },
+   {
+    "rule": 5,
+    "severity": "edge",
+    "about": "The ratio of real to ideal (3/8.8 ≈ 0.34) is mentioned but never shown as a measure with low and high values.",
+    "why_it_matters": "It tells the reader how close a machine gets to physics' limit, and it separates poor engineering from a hard lift.",
+    "suggested_addition": "'Fraction of ideal: 3/8.8 = 0.34 at 0 °C. At 10 °C: 4/12.3 = 0.33. At −15 °C: 2/6.2 = 0.32. Roughly constant, so the lift, not the machine, causes most of the drop.'"
+   },
+   {
+    "rule": 4,
+    "severity": "edge",
+    "about": "Real COP at outdoor temperatures where it gets close to 1 is missing. The table stops at −15 °C.",
+    "why_it_matters": "A learner will ask whether it ever becomes worse than a heater. This is the natural place where the claim 'COP above 1' would break.",
+    "suggested_addition": "Add a row: −25 °C outside, lift 60 K, ideal 308.15/60 = 5.1, typical real about 1.5 (estimate; recompute). State that the real COP stays above 1 well beyond typical winter temperatures, but backup resistive heaters (COP 1) sometimes take over."
+   }
+  ],
+  "excess": [
+   "Why-this-form row about Celsius: the second example, '−15 °C outside and 0 °C water gives 0/15 = 0, kelvin 18.2', uses an unrealistic 0 °C water temperature and adds nothing beyond the first example (35/35 = 1).",
+   "Refrigerant product names (R290, R32, R744) in Entities and Scope; 'propane' alone is enough.",
+   "Alternative state 'Reverse the loop (fridge, air conditioner)'; it isn't needed to answer the central question.",
+   "Representation decision section (stage, levels); this is planning metadata, not content for the reader."
+  ],
+  "next_questions": [
+   {
+    "q": "Why does squeezing the vapour make it hot, and why does going through the valve make the liquid cold without removing energy?",
+    "answered_by_model": false,
+    "declared_out_of_scope": false
+   },
+   {
+    "q": "What is entropy, and why does heat carry Q/T of it?",
+    "answered_by_model": false,
+    "declared_out_of_scope": false
+   },
+   {
+    "q": "How cold can it get outside before the heat pump is no better than an electric heater (COP 1)?",
+    "answered_by_model": false,
+    "declared_out_of_scope": false
+   },
+   {
+    "q": "Is it actually cheaper or lower in CO₂ than a gas boiler?",
+    "answered_by_model": false,
+    "declared_out_of_scope": true
+   },
+   {
+    "q": "Why is the real COP (3) so far below the ideal limit (8.8), and could better engineering close the gap?",
+    "answered_by_model": true,
+    "declared_out_of_scope": false
+   }
+  ]
+ },
+ "usage": {
+  "cost": 0.1754818,
+  "seconds": 61
+ },
+ "findings": [
+  {
+   "n": 1,
+   "severity": "main",
+   "kind": "rule 3",
+   "text": "'Entropy' is used in L3 (Q/T, 'cannot store entropy', 'cannot be destroyed') but is not in the Terms section, and the Audience section does not list it as prior knowledge. → Add to Terms: 'Entropy (here only): heat Q passing at absolute temperature T carries Q/T of entropy. Taking 2 kWh from 273.15 K air removes 2/273.15 = 0.00732 kWh/K. Giving 3 kWh to 308.15 K water adds 3/308.15 = 0.00974 kWh/K. Heat flowing by itself from hot to cold always increases the total.' Give one example of that last fact: 1 kWh moving from 308 K to 273 K gives −0.00325 + 0.00366 = +0.00042 kWh/K."
+  },
+  {
+   "n": 2,
+   "severity": "main",
+   "kind": "rule 2",
+   "text": "L3 says entropy given to the hot side ≥ entropy taken from the cold side, with no numbers showing it holding or failing. The algebra from that inequality to W ≥ Q_hot(T_hot−T_cold)/T_hot is also left out, and so is the step from that bound to COP_max = T_hot/(T_hot−T_cold). → Holds: COP 3 at 0 °C → 35 °C gives 2/273.15 = 0.00732 taken and 3/308.15 = 0.00974 given; 0.00974 ≥ 0.00732. Breaks: a claimed COP 12 (11 kWh from air, 1 kWh electricity, 12 kWh out) gives 11/273.15 = 0.0403 taken but only 12/308.15 = 0.0389 given, so entropy would be destroyed, which is forbidden. Show the algebra: substitute Q_cold = Q_hot − W, so Q_hot/T_hot ≥ (Q_hot − W)/T_cold, so W ≥ Q_hot(1 − T_cold/T_hot). Then Q_hot/W ≤ T_hot/(T_hot−T_cold) = 308.15/35 = 8.8."
+  },
+  {
+   "n": 3,
+   "severity": "main",
+   "kind": "rule 4",
+   "text": "The expansion-valve step says the pressure drop 'makes it cold' but never says how. The model also calls the output 'cold low-pressure liquid', when it is really a mixture of liquid and vapour. → 'At 3.5 bar propane boils at −10 °C, so the 40 °C liquid boils instantly. Roughly a third of it turns to vapour (estimate; recompute from propane tables), and the heat that boiling uses comes from the liquid itself, cooling everything to −10 °C. The valve adds or removes 0 kWh; it only drops the pressure.'"
+  },
+  {
+   "n": 4,
+   "severity": "main",
+   "kind": "rule 1",
+   "text": "Why squeezing vapour makes it hot. The model states this but never explains it, and offers no comparison. → 'Pushing the piston or scroll does work on the gas molecules and speeds them up, which is a higher temperature (as when a bicycle pump gets warm). Vapour enters at about −10 °C and 3.5 bar and leaves at about 14 bar and roughly 60 °C (estimate). It first cools to 40 °C in the condenser, then condenses.' Also say that this means the condenser receives vapour above 40 °C."
+  },
+  {
+   "n": 5,
+   "severity": "main",
+   "kind": "rule 3",
+   "text": "'Temperature lift' names two different things: water minus air (35 K, used in the table and the ideal COP) and refrigerant minus refrigerant (50 K, used in the 'why real is a third' line). T_hot is likewise 308.15 K in one place and 313.15 K in another. → Name them separately. 'Lift' = water − air = 35 K, ideal 8.8. 'Refrigerant lift' = condensing − boiling = 40 − (−10) = 50 K, ideal 313.15/50 = 6.3. State that the extra 15 K (10 K at the evaporator + 5 K at the condenser) is what heat exchangers need to make heat flow."
+  },
+  {
+   "n": 6,
+   "severity": "edge",
+   "kind": "rule 1",
+   "text": "Why run the refrigerant at −10 °C and 40 °C instead of right at 0 °C and 35 °C. The cost is stated (refrigerant lift 50 K instead of 35 K) but not the reason. → 'Heat flow through an exchanger is roughly proportional to the temperature difference. At 0 K difference nothing flows. Halving the evaporator gap from 10 K to 5 K needs about twice the coil area but raises the ideal from 313.15/50 = 6.3 to 313.15/45 = 7.0.'"
+  },
+  {
+   "n": 7,
+   "severity": "edge",
+   "kind": "rule 1",
+   "text": "Why use a fluid that boils and condenses rather than just heating and cooling a gas. → 'Propane takes about 390 kJ/kg to boil at −10 °C (estimate), so 2 kWh = 7200 kJ needs about 18 kg to circulate, all at −10 °C. Warming propane gas by 10 K takes only about 17 kJ/kg (cp ≈ 1.7 kJ/kg·K), so it would need about 20 times the flow.'"
+  },
+  {
+   "n": 8,
+   "severity": "edge",
+   "kind": "rule 3",
+   "text": "Several concepts have more than one name: 'ideal limit' / 'Carnot' / 'COP_max' / 'Ideal COP'; 'outdoor heat' / 'heat taken from outside' / 'heat from the air' / Q_cold; 'electricity' / 'work' / W; 'heat delivered' / Q_hot / 'heat out'; 'typical real COP' / 'COP'. → Choose one name for each and map the symbols once: 'Q_hot = heat delivered (3 kWh), Q_cold = outdoor heat (2 kWh), W = electricity (1 kWh), COP_max = ideal limit (Carnot).'"
+  },
+  {
+   "n": 9,
+   "severity": "edge",
+   "kind": "rule 5",
+   "text": "Pressures in bar (3.5 and 14) are given with no reference point. → 'Air around you is about 1 bar; a car tyre is about 3.2 bar absolute; the condenser side at 14 bar is about 4 times tyre pressure.'"
+  },
+  {
+   "n": 10,
+   "severity": "edge",
+   "kind": "rule 5",
+   "text": "The ratio of real to ideal (3/8.8 ≈ 0.34) is mentioned but never shown as a measure with low and high values. → 'Fraction of ideal: 3/8.8 = 0.34 at 0 °C. At 10 °C: 4/12.3 = 0.33. At −15 °C: 2/6.2 = 0.32. Roughly constant, so the lift, not the machine, causes most of the drop.'"
+  },
+  {
+   "n": 11,
+   "severity": "edge",
+   "kind": "rule 4",
+   "text": "Real COP at outdoor temperatures where it gets close to 1 is missing. The table stops at −15 °C. → Add a row: −25 °C outside, lift 60 K, ideal 308.15/60 = 5.1, typical real about 1.5 (estimate; recompute). State that the real COP stays above 1 well beyond typical winter temperatures, but backup resistive heaters (COP 1) sometimes take over."
+  },
+  {
+   "n": 12,
+   "severity": "excess",
+   "kind": "model entry",
+   "text": "Why-this-form row about Celsius: the second example, '−15 °C outside and 0 °C water gives 0/15 = 0, kelvin 18.2', uses an unrealistic 0 °C water temperature and adds nothing beyond the first example (35/35 = 1)."
+  },
+  {
+   "n": 13,
+   "severity": "excess",
+   "kind": "model entry",
+   "text": "Refrigerant product names (R290, R32, R744) in Entities and Scope; 'propane' alone is enough."
+  },
+  {
+   "n": 14,
+   "severity": "excess",
+   "kind": "model entry",
+   "text": "Alternative state 'Reverse the loop (fridge, air conditioner)'; it isn't needed to answer the central question."
+  },
+  {
+   "n": 15,
+   "severity": "excess",
+   "kind": "model entry",
+   "text": "Representation decision section (stage, levels); this is planning metadata, not content for the reader."
+  }
+ ]
+}

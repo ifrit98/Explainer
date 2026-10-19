@@ -1,0 +1,232 @@
+{
+ "tool": "quiz",
+ "rendering": "diagram",
+ "slug": "heat-pump",
+ "at": "2026-10-04T15:16:46",
+ "model": "default",
+ "prompt_sha": "a1f778fe9ff6",
+ "reply": {
+  "answers": {
+   "1": "The main objects are electricity (1 kWh), outdoor air (the cold source, 0 °C in the example), home water (the hot sink, 35 °C) and the heat pump itself. The heat pump contains a refrigerant (propane) that circulates through a closed loop of four parts: the evaporator (outdoor coil), the compressor, the condenser (indoor coil) and the expansion valve. The measures used are COP, temperature lift, the ideal (Carnot) limit and entropy.",
+   "2": "Electricity drives the compressor. Outdoor air gives heat to the refrigerant in the evaporator, because the refrigerant boils there at -10 °C, below the air temperature. The compressor raises the refrigerant from 3.5 to 14 bar, which heats the vapour to about 60 °C. In the condenser the refrigerant condenses at 40 °C, above the water temperature, so heat flows into the home water. The expansion valve drops the pressure back to 3.5 bar, and part of the liquid boils, cooling the rest to -10 °C. Pressure sets the boiling temperature, so the low-pressure side is cold and the high-pressure side is hot. COP is heat delivered divided by electricity used. COP falls as the temperature lift (water temperature minus air temperature) grows, and entropy sets an upper limit on it.",
+   "3": "Electricity runs a compressor that raises the refrigerant's pressure, and with it the boiling/condensing temperature. That lets the refrigerant soak up heat from cold outdoor air at low pressure and release it into warmer home water at high pressure, with heat flowing hot-to-cold at each coil. So the water gets the moved outdoor heat plus the electricity: 2 + 1 = 3 kWh.",
+   "4": "The key variable is the temperature lift. If the outdoor air gets colder, or the water must be hotter, the lift grows and COP falls. In the table, COP is about 4 at 10 °C, about 3 at 0 °C, about 2 at -15 °C and about 1.5 at -25 °C. The reason is entropy. Heat taken at a lower temperature carries more entropy per kWh, and the water must receive at least that much entropy, so more of the delivered heat must come from electricity. The ideal limit T_hot/(T_hot - T_cold) falls as the bottom of the fraction grows.",
+   "5": "Assumptions/simplifications: the 'typical real COP' values are labelled estimates; the refrigerant is assumed to boil exactly 10 K below the air and condense 5 K above the water; the expansion valve is said to add and remove no energy. Established facts: propane boils at -10 °C at about 3.5 bar and at 40 °C at about 14 bar; energy is conserved; entropy cannot be destroyed.",
+   "6": "A heat pump does not create heat: it moves heat from cold outdoor air into warmer home water, and the electricity it uses ends up as heat too, so 1 kWh in can give 3 kWh out. It does this with a refrigerant whose boiling temperature depends on pressure. At low pressure the refrigerant boils below the outdoor air temperature and absorbs heat. At high pressure, after the compressor, it condenses above the water temperature and releases heat. The expansion valve drops the pressure again to close the loop. Entropy cannot be destroyed, which sets an upper limit on COP of T_hot/(T_hot - T_cold) in kelvin, so a bigger temperature lift (a colder day or hotter water) means a lower COP. Real units reach about a third of that limit because of the coil temperature gaps and machine losses.",
+   "7": "The entropy section was hardest. It says heat Q at temperature T 'carries entropy Q/T' and that entropy cannot be destroyed, but it never says what entropy is or why it has the form Q/T. A sentence or two of intuition would have made the derivation feel earned, not just checkable. A second point: the expansion valve 'boils a third of the liquid' with no energy added, and it isn't obvious how that conserves energy until you see that the heat comes from the liquid itself.",
+   "8": "No, it does not break energy conservation. Of the 3 kWh, 1 kWh is the electricity, which ends up as heat in the vapour, and 2 kWh is heat taken from the outdoor air. Air at 0 °C is 273 K above absolute zero, so it still holds heat. It flows into the refrigerant because the refrigerant boils colder (-10 °C) in the evaporator.",
+   "9": "COP is higher on the 10 °C day. The lift there is 25 K (ideal limit 12.3, typical real COP about 4), against 50 K at -15 °C (ideal limit 6.2, typical about 2). A bigger lift needs more electricity per kWh of heat, because heat taken at a lower temperature carries more entropy, and the water must receive at least that much.",
+   "10": "The compressor uses electricity to squeeze the vapour from 3.5 to 14 bar, which heats it to about 60 °C and raises its condensing temperature to 40 °C, so it can give heat to the 35 °C water. The expansion valve is a narrow opening that drops the pressure from 14 back to 3.5 bar. About a third of the liquid boils at once, cooling the whole flow to -10 °C, so it can take heat from the 0 °C air. The loop needs both because the refrigerant must be at high pressure (hot) at the indoor coil and low pressure (cold) at the outdoor coil. One raises the pressure and the other lowers it. Only the compressor uses energy.",
+   "11": "They are heat taken from the outdoor air in the evaporator. The refrigerant boils at -10 °C there, colder than the 0 °C air, so heat flows into it by itself. That heat is carried around the loop and released in the condenser, along with the compressor's 1 kWh.",
+   "12": "Heat flows by itself only from hot to cold. If the refrigerant were not colder than the outdoor air, no heat would flow into it. If it were not hotter than the water, heat would flow from the water into the refrigerant and the home would get colder. A temperature gap also moves heat faster through a smaller coil, which is why the explanation uses 10 K and 5 K gaps.",
+   "13": "COP falls, for example from about 3 at 0 °C to about 2 at -15 °C and about 1.5 at -25 °C. The temperature lift grows, so the entropy limit T_hot/(T_hot - T_cold) falls and each kWh of heat needs more electricity. Many units add a backup electric heater (COP 1) for the coldest days."
+  },
+  "audit": {
+   "terms": [
+    "The same limit has two names: 'ideal limit' (Level 3 table, 'The ideal limit') and 'Carnot limit' ('physicists call it the Carnot limit').",
+    "Two words for the refrigerant: 'fluid' (Level 1: 'makes its fluid colder'; Level 2: 'pipe a fluid') and 'refrigerant' (named only partway through Level 2).",
+    "Two words for the refrigerant vapour: 'vapour' (diagram, steps 2-3) and 'gas' (step 2: 'push on the gas', 'heats the gas'). A reader may wonder if the change of word means a change of state.",
+    "Two words for the electricity input: 'electricity' and 'W' in the formulas. Its relation to 'push' or work in step 2 is not made explicit.",
+    "Two names for the heat taken from the air: 'outdoor heat' (Levels 1 and 2) and 'Q_cold' (Level 3). The mapping is given, but 'heat delivered' becomes 'Q_hot', and the air side of the entropy argument talks about 'the air loses'."
+   ],
+   "unexplained": [
+    "'Losses in the compressor, fans, and pumps take the COP from 6.3 down to about 3': the size of these losses is not explained, and they halve the COP.",
+    "Table column 'Typical real COP (estimate)': no source or method, so the reader can't tell how firm 'about 4/3/2/1.5' are.",
+    "'Old radiators need 55 °C water ... the COP is about 2.2': no ideal-limit figure is given for this case, and it's not shown how 2.2 was obtained.",
+    "'about a third of it boils at once' at the expansion valve: there is no basis for 'a third', and nothing says what a larger or smaller fraction would mean.",
+    "The coil gaps 'boils 10 K below the air ... condenses 5 K above the water': the reader isn't told why these values or what changes with bigger or smaller gaps beyond 'faster through a smaller coil'. The text also doesn't say whether the -10 °C boiling point moves on a -15 °C day."
+   ],
+   "missing_why": [
+    "'Heat Q that passes at kelvin temperature T carries entropy Q/T': stated without any reason why entropy has this form or what entropy is. The whole limit rests on it.",
+    "'its boiling temperature depends on its pressure': it isn't explained why higher pressure raises the boiling point. Only propane data is given.",
+    "'that push heats the gas': only the bicycle-pump analogy is offered, with no reason why compressing a gas raises its temperature.",
+    "'Nothing can destroy entropy': stated as a law, with the link to hot-to-cold flow asserted rather than motivated.",
+    "'The refrigerant ends each cycle where it started, so it cannot store entropy': it isn't explained why the entropy bookkeeping uses the water and air temperatures rather than the refrigerant's own. This only comes up later as 'refrigerant lift'."
+   ],
+   "excess": [
+    "'Air at 0 °C is 273 K above absolute zero, so it still holds heat': this reader already knows kelvin.",
+    "'(The air around us is at 1 bar.)': this reader already knows pressure.",
+    "'An electric heater has only one input, the electricity. So it can give only 1 kWh per kWh.': repeats the opening and the COP-1 statement.",
+    "'A fridge uses the same loop...' and the 'Not covered here' list: detours that neither the questions nor the argument use."
+   ]
+  },
+  "gaps": [
+   "Entropy is used as the basis of the limit but never explained beyond 'Q/T' and 'cannot be destroyed'.",
+   "The text doesn't say how the refrigerant's boiling temperature or pressure adjusts when the outdoor temperature changes. The loop is described only for 0 °C air (-10 °C boiling), so it's unclear how it works on a -15 °C day.",
+   "There is no explanation of why real COP is only about a third of the ideal limit, beyond naming the losses.",
+   "Energy accounting at the expansion valve, where liquid boils with no energy added, is only lightly explained.",
+   "The real COP figures are estimates with no stated basis."
+  ]
+ },
+ "grade": {
+  "scores": {
+   "1": 2,
+   "2": 2,
+   "3": 2,
+   "4": 2,
+   "5": 1,
+   "6": 2,
+   "7": 2,
+   "8": 2,
+   "9": 2,
+   "10": 2,
+   "11": 2,
+   "12": 2,
+   "13": 2
+  },
+  "reasons": {
+   "5": "Misclassifies the propane boiling pressures (about 3.5 and 14 bar) as established facts. model.md labels them estimates. It also lists 'the valve adds and removes no energy' as an assumption, when it is a stated fact of the cycle. It omits other estimates the model labels, such as vapour at about 60 °C and about a third of the liquid boiling. It also omits the core assumed conditions of 0 °C outside and 35 °C water."
+  },
+  "pass": true
+ },
+ "usage": {
+  "cost": 0.23809480000000002,
+  "seconds": 60
+ },
+ "findings": [
+  {
+   "n": 1,
+   "severity": "gap",
+   "kind": "terms",
+   "text": "The same limit has two names: 'ideal limit' (Level 3 table, 'The ideal limit') and 'Carnot limit' ('physicists call it the Carnot limit')."
+  },
+  {
+   "n": 2,
+   "severity": "gap",
+   "kind": "terms",
+   "text": "Two words for the refrigerant: 'fluid' (Level 1: 'makes its fluid colder'; Level 2: 'pipe a fluid') and 'refrigerant' (named only partway through Level 2)."
+  },
+  {
+   "n": 3,
+   "severity": "gap",
+   "kind": "terms",
+   "text": "Two words for the refrigerant vapour: 'vapour' (diagram, steps 2-3) and 'gas' (step 2: 'push on the gas', 'heats the gas'). A reader may wonder if the change of word means a change of state."
+  },
+  {
+   "n": 4,
+   "severity": "gap",
+   "kind": "terms",
+   "text": "Two words for the electricity input: 'electricity' and 'W' in the formulas. Its relation to 'push' or work in step 2 is not made explicit."
+  },
+  {
+   "n": 5,
+   "severity": "gap",
+   "kind": "terms",
+   "text": "Two names for the heat taken from the air: 'outdoor heat' (Levels 1 and 2) and 'Q_cold' (Level 3). The mapping is given, but 'heat delivered' becomes 'Q_hot', and the air side of the entropy argument talks about 'the air loses'."
+  },
+  {
+   "n": 6,
+   "severity": "gap",
+   "kind": "unexplained",
+   "text": "'Losses in the compressor, fans, and pumps take the COP from 6.3 down to about 3': the size of these losses is not explained, and they halve the COP."
+  },
+  {
+   "n": 7,
+   "severity": "gap",
+   "kind": "unexplained",
+   "text": "Table column 'Typical real COP (estimate)': no source or method, so the reader can't tell how firm 'about 4/3/2/1.5' are."
+  },
+  {
+   "n": 8,
+   "severity": "gap",
+   "kind": "unexplained",
+   "text": "'Old radiators need 55 °C water ... the COP is about 2.2': no ideal-limit figure is given for this case, and it's not shown how 2.2 was obtained."
+  },
+  {
+   "n": 9,
+   "severity": "gap",
+   "kind": "unexplained",
+   "text": "'about a third of it boils at once' at the expansion valve: there is no basis for 'a third', and nothing says what a larger or smaller fraction would mean."
+  },
+  {
+   "n": 10,
+   "severity": "gap",
+   "kind": "unexplained",
+   "text": "The coil gaps 'boils 10 K below the air ... condenses 5 K above the water': the reader isn't told why these values or what changes with bigger or smaller gaps beyond 'faster through a smaller coil'. The text also doesn't say whether the -10 °C boiling point moves on a -15 °C day."
+  },
+  {
+   "n": 11,
+   "severity": "gap",
+   "kind": "missing_why",
+   "text": "'Heat Q that passes at kelvin temperature T carries entropy Q/T': stated without any reason why entropy has this form or what entropy is. The whole limit rests on it."
+  },
+  {
+   "n": 12,
+   "severity": "gap",
+   "kind": "missing_why",
+   "text": "'its boiling temperature depends on its pressure': it isn't explained why higher pressure raises the boiling point. Only propane data is given."
+  },
+  {
+   "n": 13,
+   "severity": "gap",
+   "kind": "missing_why",
+   "text": "'that push heats the gas': only the bicycle-pump analogy is offered, with no reason why compressing a gas raises its temperature."
+  },
+  {
+   "n": 14,
+   "severity": "gap",
+   "kind": "missing_why",
+   "text": "'Nothing can destroy entropy': stated as a law, with the link to hot-to-cold flow asserted rather than motivated."
+  },
+  {
+   "n": 15,
+   "severity": "gap",
+   "kind": "missing_why",
+   "text": "'The refrigerant ends each cycle where it started, so it cannot store entropy': it isn't explained why the entropy bookkeeping uses the water and air temperatures rather than the refrigerant's own. This only comes up later as 'refrigerant lift'."
+  },
+  {
+   "n": 16,
+   "severity": "excess",
+   "kind": "excess",
+   "text": "'Air at 0 °C is 273 K above absolute zero, so it still holds heat': this reader already knows kelvin."
+  },
+  {
+   "n": 17,
+   "severity": "excess",
+   "kind": "excess",
+   "text": "'(The air around us is at 1 bar.)': this reader already knows pressure."
+  },
+  {
+   "n": 18,
+   "severity": "excess",
+   "kind": "excess",
+   "text": "'An electric heater has only one input, the electricity. So it can give only 1 kWh per kWh.': repeats the opening and the COP-1 statement."
+  },
+  {
+   "n": 19,
+   "severity": "excess",
+   "kind": "excess",
+   "text": "'A fridge uses the same loop...' and the 'Not covered here' list: detours that neither the questions nor the argument use."
+  },
+  {
+   "n": 20,
+   "severity": "gap",
+   "kind": "gap",
+   "text": "Entropy is used as the basis of the limit but never explained beyond 'Q/T' and 'cannot be destroyed'."
+  },
+  {
+   "n": 21,
+   "severity": "gap",
+   "kind": "gap",
+   "text": "The text doesn't say how the refrigerant's boiling temperature or pressure adjusts when the outdoor temperature changes. The loop is described only for 0 °C air (-10 °C boiling), so it's unclear how it works on a -15 °C day."
+  },
+  {
+   "n": 22,
+   "severity": "gap",
+   "kind": "gap",
+   "text": "There is no explanation of why real COP is only about a third of the ideal limit, beyond naming the losses."
+  },
+  {
+   "n": 23,
+   "severity": "gap",
+   "kind": "gap",
+   "text": "Energy accounting at the expansion valve, where liquid boils with no energy added, is only lightly explained."
+  },
+  {
+   "n": 24,
+   "severity": "gap",
+   "kind": "gap",
+   "text": "The real COP figures are estimates with no stated basis."
+  }
+ ]
+}

@@ -1,0 +1,381 @@
+{
+ "tool": "coldread",
+ "rendering": "prose",
+ "slug": "greenhouse",
+ "at": "2026-10-04T15:27:23",
+ "model": "default",
+ "prompt_sha": "363f5ff7238d",
+ "reply": {
+  "paragraphs": [
+   {
+    "at": "Line 5 (bold lead)",
+    "text": "Greenhouse gases make the Earth send its heat to space from high, cold air instead of from the warm surface...",
+    "unresolved": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Line 7",
+    "text": "The rest of this page puts numbers on each step.",
+    "unresolved": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "§1 line 12",
+    "text": "Start from conservation of energy... energy balance.",
+    "unresolved": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "§1 list, line 14",
+    "text": "Sunlight delivers 1361 W/m² to a panel that faces the Sun.",
+    "unresolved": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "§1 list, line 15",
+    "text": "The Earth catches sunlight on a disc of area πR², but it emits from its whole sphere...",
+    "unresolved": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "§1 list, line 16",
+    "text": "The albedo is the fraction of sunlight... 240 W/m².",
+    "unresolved": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "§1 line 19",
+    "text": "The division by 4 matters. Without it, the calculation below gives 360 K...",
+    "unresolved": [],
+    "leap": [
+     "\"the calculation below gives 360 K\": this points ahead to a calculation the reader has not seen yet, so they cannot check the number at this point"
+    ],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "§1 line 21",
+    "text": "A body at temperature T emits σT⁴ watts per square metre...",
+    "unresolved": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "§1 line 23",
+    "text": "Set σT⁴ = 240 W/m² and solve: T = 255 K... emission temperature",
+    "unresolved": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "§1 line 25",
+    "text": "The measured average surface temperature is 288 K... The greenhouse gases cause that 33 K.",
+    "unresolved": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "§2 line 30",
+    "text": "The Sun is hot (about 5800 K)... This is infrared",
+    "unresolved": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "§2 line 32",
+    "text": "A greenhouse gas lets most sunlight pass but absorbs and emits infrared...",
+    "unresolved": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "§2 line 34",
+    "text": "So sunlight reaches the ground. But infrared from the ground is absorbed by the air...",
+    "unresolved": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "§3 line 39",
+    "text": "Infrared reaches space only from air that has little greenhouse gas above it... emission height.",
+    "unresolved": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "§3 line 41",
+    "text": "The air at the emission height must emit 240 W/m², so it must be at the emission temperature, 255 K.",
+    "unresolved": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "§3 line 43",
+    "text": "The air gets colder with height... the lapse rate.",
+    "unresolved": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "§3 table, lines 45-49",
+    "text": "Height / Temperature: 0 km 288 K, 2 km 275 K, 5 km 255 K",
+    "unresolved": [],
+    "leap": [],
+    "excess": [
+     "\"| 2 km | 275 K |\": this row is never used in the argument"
+    ],
+    "purpose_unclear": false
+   },
+   {
+    "at": "§3 line 51",
+    "text": "Now the 33 K has a cause: 255 K + 6.5 K/km × 5 km ≈ 288 K.",
+    "unresolved": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "§3 line 54",
+    "text": "Where does the surface's extra emission go? ... The air emits 330 W/m² of infrared down to the surface.",
+    "unresolved": [],
+    "leap": [
+     "\"The air emits 330 W/m² of infrared down to the surface\": the figure is given with no reason why it is so large, or why it is larger than the 240 W/m² that leaves the top"
+    ],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "§3 surface budget table, lines 56-60",
+    "text": "sunlight 160 | infrared 390; infrared from the air 330 | rising warm air and evaporation 100",
+    "unresolved": [],
+    "leap": [
+     "\"sunlight | 160\": §1 said the Earth absorbs 240 W/m², and the text never says where the other 80 W/m² goes (into the air?). The reader stops to reconcile the two figures",
+     "The table explains the surface's warmth by downward infrared, but it is not tied back to the emission-height account. The reader may wonder which of the two is the real explanation"
+    ],
+    "excess": [
+     "The whole surface-budget aside: the main argument (emission height + lapse rate) does not need it"
+    ],
+    "purpose_unclear": false
+   },
+   {
+    "at": "§4 line 64",
+    "text": "Predict first: CO₂ doubles, from its pre-industrial 280 ppm to 560 ppm...",
+    "unresolved": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "§4 list item 1, line 67",
+    "text": "More gas means the infrared must start higher... about 150 m.",
+    "unresolved": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "§4 list item 2, line 68",
+    "text": "The air 150 m higher is about 1 K colder",
+    "unresolved": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "§4 list item 3, line 69",
+    "text": "Colder air emits less... radiative forcing.",
+    "unresolved": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "§4 list item 4, line 70",
+    "text": "The Earth gains energy and warms. The lapse rate holds, so the whole profile warms together.",
+    "unresolved": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "§4 list item 5, line 71",
+    "text": "Warming stops when the air at the new emission height is back at 255 K...",
+    "unresolved": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "§4 line 73",
+    "text": "This 1 K counts only this mechanism... about 3 K (IPCC best estimate). Today's 420 ppm already gives a forcing of about 2.2 W/m².",
+    "unresolved": [
+     "IPCC"
+    ],
+    "leap": [
+     "\"Today's 420 ppm already gives a forcing of about 2.2 W/m²\": the reader cannot get 2.2 from 3.7 per doubling, because the rule that each doubling adds the same forcing does not come until §6"
+    ],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "§5 line 78",
+    "text": "The usual picture, \"greenhouse gases trap heat like a blanket\", says more gas always warms...",
+    "unresolved": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "§5 line 80",
+    "text": "Suppose the atmosphere had the same temperature at every height (a lapse rate of 0)...",
+    "unresolved": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "§5 line 82",
+    "text": "So the warming depends on two things together...",
+    "unresolved": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "§6 line 87",
+    "text": "Near the ground, CO₂ already absorbs almost all infrared at its main wavelength (15 µm)...",
+    "unresolved": [],
+    "leap": [
+     "\"the escape happens high up, where the air is thin\": the text does not say why thin air makes the near-ground saturation irrelevant (thin air absorbs less, so it is not saturated there)"
+    ],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Summary line 91",
+    "text": "Energy balance requires the Earth to emit 240 W/m² to space...",
+    "unresolved": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Not covered, lines 95-98",
+    "text": "Feedbacks in detail...; Why only some molecules absorb infrared...; Why each doubling gives the same forcing...; Where added CO₂ goes...",
+    "unresolved": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   }
+  ],
+  "blocking": [],
+  "cuts": [
+   "The surface-budget aside in §3 (line 54 and the table at lines 56-60) is the biggest cut. It is off the main line, and its 160 W/m² sunlight figure clashes with the 240 W/m² from §1 without explanation. Cut it, or account for the missing 80 W/m² in one clause.",
+   "§4 line 73: \"Today's 420 ppm already gives a forcing of about 2.2 W/m².\" Cut it, or move it to §6 after the per-doubling rule.",
+   "§3 table: the 2 km row, which is never used."
+  ],
+  "question": {
+   "text": "Why does adding gases that absorb infrared make the surface warmer, and by how much?",
+   "known_at": "The title (line 1), and the bold lead (line 5) right after it",
+   "result_stated": "Yes, in words, at line 5: \"Greenhouse gases make the Earth send its heat to space from high, cold air instead of from the warm surface. Cold air emits less, so the whole lower atmosphere, and the surface with it, must be warmer before enough energy leaves.\""
+  },
+  "motive": "There is a reason for the approach: line 78, \"The usual picture, 'greenhouse gases trap heat like a blanket', says more gas always warms. A test case shows that it does not.\" It comes late, in §5. There is no reason to care about the question near the start. The stakes (CO₂ doubling, \"Today's 420 ppm\") only appear in §4.",
+  "close": "Yes. Line 91: \"Greenhouse gases move that emitting air up to about 5 km. The lapse rate of 6.5 K/km makes the surface 33 K warmer, at 288 K. More greenhouse gas lifts the emission height and warms the surface.\" Line 82 also states the general condition: \"the gas lifts the emission height, and the air is colder higher up.\"",
+  "recap": "Greenhouse gases push the level where Earth's heat escapes to space higher up, into colder air, and because air gets colder with height, the surface has to sit warmer below that level; more CO₂ pushes the level higher and warms the surface more.",
+  "strongest": "§5 (lines 78-82): the test with a lapse rate of 0 shows that warming needs both a rising emission height and colder air above, which also explains why the blanket picture falls short. §4's numbered chain (lines 67-71) is a close second.",
+  "weakest": "The §3 surface budget (lines 54-60). Its 160 W/m² sunlight figure contradicts the 240 W/m² from §1 with no explanation, and the section brings in a back-radiation picture that is never tied to the emission-height argument.",
+  "suggestions": [
+   "In the surface budget, say that the air and clouds absorb about 80 W/m² of sunlight directly, so the 160 and 240 figures fit together.",
+   "Add one sentence near the top on why this matters, for example: it is how scientists predict the warming from CO₂ that people add.",
+   "In §6, say that thin air high up absorbs too little to be saturated, which is why adding gas there still matters.",
+   "Spell out IPCC (Intergovernmental Panel on Climate Change) at first use."
+  ]
+ },
+ "usage": {
+  "cost": 0.1570202,
+  "seconds": 51
+ },
+ "findings": [
+  {
+   "n": 1,
+   "severity": "excess",
+   "kind": "cut",
+   "text": "The surface-budget aside in §3 (line 54 and the table at lines 56-60) is the biggest cut. It is off the main line, and its 160 W/m² sunlight figure clashes with the 240 W/m² from §1 without explanation. Cut it, or account for the missing 80 W/m² in one clause."
+  },
+  {
+   "n": 2,
+   "severity": "excess",
+   "kind": "cut",
+   "text": "§4 line 73: \"Today's 420 ppm already gives a forcing of about 2.2 W/m².\" Cut it, or move it to §6 after the per-doubling rule."
+  },
+  {
+   "n": 3,
+   "severity": "excess",
+   "kind": "cut",
+   "text": "§3 table: the 2 km row, which is never used."
+  },
+  {
+   "n": 4,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "§1 line 19: \"the calculation below gives 360 K\": this points ahead to a calculation the reader has not seen yet, so they cannot check the number at this point"
+  },
+  {
+   "n": 5,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "§3 line 54: \"The air emits 330 W/m² of infrared down to the surface\": the figure is given with no reason why it is so large, or why it is larger than the 240 W/m² that leaves the top"
+  },
+  {
+   "n": 6,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "§3 surface budget table, lines 56-60: \"sunlight | 160\": §1 said the Earth absorbs 240 W/m², and the text never says where the other 80 W/m² goes (into the air?). The reader stops to reconcile the two figures"
+  },
+  {
+   "n": 7,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "§3 surface budget table, lines 56-60: The table explains the surface's warmth by downward infrared, but it is not tied back to the emission-height account. The reader may wonder which of the two is the real explanation"
+  },
+  {
+   "n": 8,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "§4 line 73: IPCC"
+  },
+  {
+   "n": 9,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "§4 line 73: \"Today's 420 ppm already gives a forcing of about 2.2 W/m²\": the reader cannot get 2.2 from 3.7 per doubling, because the rule that each doubling adds the same forcing does not come until §6"
+  },
+  {
+   "n": 10,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "§6 line 87: \"the escape happens high up, where the air is thin\": the text does not say why thin air makes the near-ground saturation irrelevant (thin air absorbs less, so it is not saturated there)"
+  }
+ ]
+}

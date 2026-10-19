@@ -1,0 +1,50 @@
+{
+  "answers": {
+    "1": {
+      "answer": "When adding an item, the filter hashes it to k bit positions and sets those bits to 1. When looking up an item, it hashes it the same way and checks those positions—if any bit is 0, the item was definitely not added; if all are 1, it was probably added.",
+      "quote": "To add an item, it hashes the item to a few bit positions and sets those bits to 1. To check an item, it hashes the item the same way and looks at the same positions. If any of those bits is 0, the item was never added. If all of them are 1, the item was *probably* added."
+    },
+    "2": {
+      "answer": "It can give false positives (answering yes to items never added) but never false negatives (answering no to items that were added). This is because adding only changes bits from 0 to 1, never back to 0, so bits once set stay set.",
+      "quote": "It can say \"yes\" to an item that it never saw. It never says \"no\" to an item that it did see. Add only changes bits from 0 to 1. Nothing changes a bit back to 0."
+    },
+    "3": {
+      "answer": "Because multiple items can share the same bits. Clearing an item's bits would also clear bits set by other items, causing their queries to incorrectly return 'not seen'.",
+      "quote": "Bit 6 also belongs to \"dog\". A query for \"dog\" now finds bit 6 = 0 and answers \"definitely not seen\", which is wrong."
+    },
+    "4": {
+      "answer": "It answers 'probably seen' because when all bits in the filter are 1, any query will find all its k positions set to 1.",
+      "quote": "If all bits are 1, answer \"probably seen\"."
+    }
+  },
+  "stops": [
+    "a function that turns an item into a number that looks random",
+    "Assumption: each hash position is uniform and independent of the others",
+    "(1 − 1/m)^(k·n)  ≈  e^(−k·n/m) — mathematical approximation not justified",
+    "A *counting Bloom filter* stores a small counter in place of each bit",
+    "The chance that a given bit is still 0 is (1 − 1/m)^(k·n) — derivation not shown",
+    "Each hash gives a position from 0 to `m − 1` — why this range?",
+    "false-positive rate  p  ≈  (1 − e^(−k·n/m))^k — how does this follow?",
+    "The array then carries as much information as possible: a bit is equally likely to be 0 or 1",
+    "bits per item  m/n  =  −ln(p) / (ln 2)² — origin of formula not explained",
+    "The query for an item that was never added checks `k` bits"
+  ],
+  "excess": [
+    "Databases such as LevelDB, RocksDB, and Cassandra use Bloom filters in this way",
+    "A normal set stores each item. One million URLs of about 50 bytes each need about 50 MB",
+    "The price is that the filter can only answer the membership question. It cannot list its items",
+    "Why use several hash functions, not one — optimization discussion section",
+    "More hashes make each item's fingerprint harder to fake by accident",
+    "The best value is `k = (m/n)·ln 2`, which is about 7 here",
+    "At that value, about half of the bits are 1. The array then carries as much information as possible",
+    "If you add more items than planned, the error rate climbs fast",
+    "The bits cannot be resized, because the filter does not keep the items it would need to hash again",
+    "Each 10× drop in the error rate costs about 4.8 more bits per item"
+  ],
+  "grounded": {
+    "1": true,
+    "2": true,
+    "3": true,
+    "4": true
+  }
+}

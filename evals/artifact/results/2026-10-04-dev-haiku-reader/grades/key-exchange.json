@@ -1,0 +1,57 @@
+{
+  "key": {
+    "A": "none",
+    "B": "quick",
+    "C": "principles",
+    "D": "published"
+  },
+  "grades": {
+    "none": {
+      "quiz": [
+        2,
+        2,
+        2,
+        2
+      ],
+      "misconception": "corrected",
+      "errors": []
+    },
+    "quick": {
+      "quiz": [
+        2,
+        2,
+        2,
+        2
+      ],
+      "misconception": "absent",
+      "errors": []
+    },
+    "principles": {
+      "quiz": [
+        2,
+        2,
+        2,
+        2
+      ],
+      "misconception": "absent",
+      "errors": []
+    },
+    "published": {
+      "quiz": [
+        2,
+        2,
+        2,
+        2
+      ],
+      "misconception": "absent",
+      "errors": []
+    }
+  },
+  "rank": [
+    "quick",
+    "principles",
+    "published",
+    "none"
+  ],
+  "why_best": "B covers every quiz point, including the operation, why both keys match, the worked p=23 example, the man-in-the-middle attack with its fix, and why powers mod p are needed, in the fewest words with no detours."
+}

@@ -1,0 +1,28 @@
+energy_balance:
+  W_kWh: 1
+  Q_C_kWh: 2
+  Q_H_kWh: 3
+  COP: 3
+resistance_heater_COP: 1
+mild_case:
+  outdoor_air_C: 5
+  heating_water_C: 35
+  evaporate_C: -5
+  evaporate_K: 268
+  evaporate_pressure_bar: 4     # approx, propane
+  condense_C: 45
+  condense_K: 318
+  condense_pressure_bar: 15     # approx, propane
+  lift_K: 50
+  ideal_COP: 6.4
+  real_COP: 3.0
+cold_case:
+  outdoor_air_C: -15
+  evaporate_C: -25
+  evaporate_K: 248
+  condense_C: 45
+  condense_K: 318
+  lift_K: 70
+  ideal_COP: 4.5
+  real_COP: 2.1
+real_fraction_of_ideal: 0.47    # estimate, typical

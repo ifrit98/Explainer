@@ -1,0 +1,57 @@
+# Machine-readable half of model.md. `explainer check antibiotic-resistance` holds every rendering to it.
+
+values:
+  mutation_rate: "10^-9"
+  population: "10^10"
+  resistant_before: 10
+  doublings: 30
+  doubling_minutes: 30
+  regrowth_hours: 15
+  small_population: "10^7"
+  small_expected: 0.01
+  combo_rate: "10^-18"
+  combo_expected: "10^-8"
+  luria_year: 1943
+
+# exponents of the power-of-ten values above (the checker reads 10^-9 as 10 and -9)
+allow: [2, 4, -9, 7, -18, -8]
+
+require:
+  - path: resistant_before
+    in: [prose]
+  - path: combo_rate
+    in: [prose]
+
+claims:
+  - id: selection-not-adaptation
+    kind: why
+    about: [selection]
+    statement: "Resistance comes from rare random variants that exist before the drug; the drug selects them, it does not create them."
+    alternative: "Each cell adapts when it meets the drug."
+    counterexample: "If cells adapted on contact, every cell would have the same chance; observed: about 10 of 10^10 survive, and they were resistant before exposure (Luria–Delbrück, 1943)."
+    ask: "Does the antibiotic cause the resistance mutation?"
+  - id: selection-worked
+    kind: mechanism
+    statement: "The drug kills susceptible cells; the resistant cells regrow the population."
+    example: "10^10 cells × 10^-9 = 10 resistant cells; 10 × 2^30 ≈ 10^10 after 30 doublings, about 15 hours."
+  - id: sources
+    kind: mechanism
+    statement: "Resistance genes arrive by mutation or by gene transfer on plasmids."
+    example: "A plasmid can carry several resistance genes and move between species."
+  - id: mechanisms
+    kind: mechanism
+    statement: "A resistance gene works in one of four ways: destroy the drug, change the target, pump the drug out, or keep it out."
+    example: "Beta-lactamase cuts penicillin before it reaches its target."
+  - id: combination
+    kind: guarantee
+    statement: "Two independent drugs make resistance far less likely."
+    example: "10^-9 × 10^-9 = 10^-18 per cell; 10^-8 expected cells in 10^10."
+    counterexample: "A plasmid with both resistance genes gives both at once."
+    ask: "Why does giving two drugs at once help?"
+
+terms:
+  - term: resistant
+    means: "the bacterial cell survives the drug; the patient is not resistant"
+    avoid: [patient becomes resistant, immune to the antibiotic]
+
+quiz: []

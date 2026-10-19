@@ -1,0 +1,230 @@
+{
+ "tool": "probe",
+ "rendering": null,
+ "slug": "antibiotic-resistance",
+ "at": "2026-10-04T15:16:10",
+ "model": "default",
+ "prompt_sha": "e5129749a45f",
+ "reply": {
+  "gaps": [
+   {
+    "rule": 2,
+    "severity": "main",
+    "about": "'About 100 carry a resistance mutation' (N × rate) counts mutation events but calls them resistant cells. Descendants are left out.",
+    "why_it_matters": "The file's own Luria–Delbrück row says an early mutation leaves many resistant descendants. So the number of resistant cells is larger than N × rate, and it varies a lot from culture to culture. The causal chain and the temporal sequence both rely on this number, and the step from mutation events to resistant cells is left implicit.",
+    "suggested_addition": "Keep two separate names: 'mutation events ≈ N × μ = 10^10 × 10^-8 = 100' and 'resistant cells'. Then add: mutants that arose in earlier generations have divided since, so the expected number of resistant cells is about μN·ln(N) ≈ 10^-8 × 10^10 × 23 ≈ 2,300, and the median is about μN·ln(μN) ≈ 100 × 4.6 ≈ 460. State that 100 is a lower bound."
+   },
+   {
+    "rule": 2,
+    "severity": "main",
+    "about": "The model never says why the roughly 100 surviving cells are not cleared by the host. It assumes nothing kills resistant cells after treatment.",
+    "why_it_matters": "A learner will expect the immune system to mop up 100 cells. Without this, step 3 (regrowth to 10^10) looks unjustified, and the 'small population is cleared' case seems to rest only on the drug.",
+    "suggested_addition": "State the assumption: host defences remove some cells but cannot keep up with a population that doubles. Give an example: if immune killing removes 50% of cells per doubling time, net growth is zero; if it removes 20%, 100 cells still reach 10^10 in about 27/log2(1.6) ≈ 40 doublings. Say that weakened patients (ICU, chemotherapy) clear fewer cells."
+   },
+   {
+    "rule": 4,
+    "severity": "main",
+    "about": "The four resistance mechanisms (destroy, change target, pump out, keep out) are only listed. None has a concrete example, and the learning order puts this as step 2.",
+    "why_it_matters": "The audience explicitly does not know how antibiotics act on a cell. 'A change in DNA can stop that binding' stays abstract with no instance.",
+    "suggested_addition": "Give one line each. Destroy: a beta-lactamase enzyme cuts penicillin's beta-lactam ring before it reaches the wall-building enzymes. Change target: one base change in the rpoB gene stops rifampicin binding. Pump out: an efflux pump exports tetracycline. Keep out: loss of a porin channel cuts drug entry. Link one example to MIC numbers, e.g. beta-lactamase raises MIC from 0.5 to 32 mg/L (64-fold)."
+   },
+   {
+    "rule": 2,
+    "severity": "main",
+    "about": "The 'breaks' column for combination therapy compares with one drug instead of removing the stated assumption, which is that the two resistances are independent.",
+    "why_it_matters": "The file itself says plasmids carry several resistance genes at once, and a single efflux pump can export both drugs. Either way the 10^-16 product fails. The claim also silently assumes both drugs are given together and that each drug alone kills cells resistant to the other.",
+    "suggested_addition": "Breaks case: if one plasmid or pump gives resistance to both drugs at about 10^-8, then expected double-resistant cells = 10^10 × 10^-8 = 100. Second breaks case: drug A alone leaves about 100 A-resistant cells. They regrow to 10^10 and then drug B is added: 10^10 × 10^-8 = 100 cells resistant to both."
+   },
+   {
+    "rule": 3,
+    "severity": "main",
+    "about": "Several concepts have two names or two definitions. 'Resistance gene / resistance mutation' is one entity. 'Resistant' is defined both as 'survives the dose used' and as 'higher MIC'. Antibiotic 'kills or stops growth' (Entities) vs 'kills' (Terms). MIC 'stops growth' but the example says 8 mg/L 'kills'. Division / doubling / generation are used for the same thing.",
+    "why_it_matters": "A reader cannot tell whether resistance is relative to a dose or to a strain. They also cannot tell whether exceeding the MIC kills cells or only stops their growth.",
+    "suggested_addition": "Use one term, 'resistance determinant (mutation or acquired gene)'. Define resistant as 'MIC above the concentration reachable in the patient (e.g. MIC 32 > 8 mg/L)'. Say MIC measures growth inhibition, not killing. Pick one word, 'doubling', for one division of every cell."
+   },
+   {
+    "rule": 5,
+    "severity": "edge",
+    "about": "'Low MIC ratio means the drug still works' uses an undefined ratio and gives no threshold value.",
+    "why_it_matters": "The reader cannot judge what number counts as resistant.",
+    "suggested_addition": "Define the ratio as reachable concentration ÷ MIC. 8/0.5 = 16 means the drug works; 8/32 = 0.25 means it fails. Give the cutoff (a clinical breakpoint), e.g. ratio ≥ about 1 to 4 counts as susceptible (illustrative)."
+   },
+   {
+    "rule": 1,
+    "severity": "edge",
+    "about": "The fitness cost compounds multiplicatively (0.95^100). There is no justification against the linear alternative.",
+    "why_it_matters": "A learner may compute 1 − 0.05 × 100 = −4 (or 0) and get confused.",
+    "suggested_addition": "Each generation the resistant/susceptible ratio is multiplied by 0.95, because both lineages compound. So after 100 generations the ratio is 0.95^100 ≈ 0.006, not 1 − 5 = negative. After 10 generations it is ≈ 0.60."
+   },
+   {
+    "rule": 1,
+    "severity": "edge",
+    "about": "The 'many 0, a few hundreds' result of Luria–Delbrück has no concrete numbers or comparison statistic.",
+    "why_it_matters": "The argument against 'the drug induces resistance' depends on variance versus mean, and that is never shown.",
+    "suggested_addition": "Example: 20 parallel cultures, mean about 10 resistant colonies. Induction (Poisson) predicts most counts between about 4 and 16, with variance ≈ mean ≈ 10. Observed counts were 11 zeros, several 1–5, and one of 107, so variance ≫ mean (illustrative; recompute)."
+   },
+   {
+    "rule": 4,
+    "severity": "edge",
+    "about": "Plasmid transfer and spread to other hosts and species have no mechanism (conjugation) and no numbers.",
+    "why_it_matters": "'No waiting for a rare error' implies transfer is fast, but no rate is given to compare with 10^-8.",
+    "suggested_addition": "Name conjugation: cell-to-cell contact through a pilus copies the plasmid. Give an illustrative rate of 10^-4 to 10^-2 transfers per donor per hour in dense gut populations, versus 10^-8 per division for mutation."
+   },
+   {
+    "rule": 3,
+    "severity": "edge",
+    "about": "'Compensatory mutations' appears in the confusion points without definition or numbers.",
+    "why_it_matters": "It explains why resistance persists after the drug is stopped, which is a likely follow-up question.",
+    "suggested_addition": "Definition: a second mutation that restores growth rate without losing resistance. Example: cost goes from 5% to 1%, so after 100 generations the fraction factor is 0.99^100 ≈ 0.37 instead of 0.006."
+   },
+   {
+    "rule": 2,
+    "severity": "edge",
+    "about": "'A cell has the resistance gene or not' conflicts with stepwise resistance, where MIC can rise in steps.",
+    "why_it_matters": "The binary claim breaks for low-level mutations that accumulate.",
+    "suggested_addition": "Add the case: a first mutation raises MIC from 0.5 to 2 mg/L (still killed at 8), and a second raises it to 16 mg/L (survives). Each step is selected by sub-MIC or low exposure."
+   },
+   {
+    "rule": 5,
+    "severity": "edge",
+    "about": "In-patient regrowth time is described only as 'slower' with no value.",
+    "why_it_matters": "The reader cannot tell when the relapse occurs.",
+    "suggested_addition": "Illustrative: a 2–4 h doubling in tissue gives 27 doublings in about 2–4.5 days, versus 13 h in the lab."
+   },
+   {
+    "rule": 5,
+    "severity": "edge",
+    "about": "The 0.01 expected count is not turned into a probability.",
+    "why_it_matters": "'Usually none' is vague.",
+    "suggested_addition": "P(at least one resistant cell) = 1 − e^-0.01 ≈ 1% for 10^6 cells. For 10^10 cells (expected 100), P ≈ 1."
+   }
+  ],
+  "excess": [
+   "Representation decision section (Stage, Levels): this is production metadata, not content the reader needs",
+   "Epistemic 'Disputed: shortened course' line: it is out of scope and not needed for the central question"
+  ],
+  "next_questions": [
+   {
+    "q": "Why doesn't my immune system kill the 100 resistant cells that survive?",
+    "answered_by_model": false,
+    "declared_out_of_scope": false
+   },
+   {
+    "q": "What physically happens inside the cell to block the drug, e.g. what does a beta-lactamase do?",
+    "answered_by_model": false,
+    "declared_out_of_scope": false
+   },
+   {
+    "q": "Does stopping the antibiotic course early cause resistance?",
+    "answered_by_model": false,
+    "declared_out_of_scope": true
+   },
+   {
+    "q": "How does a plasmid get from one bacterium to another, and how fast?",
+    "answered_by_model": false,
+    "declared_out_of_scope": false
+   },
+   {
+    "q": "If resistance has a fitness cost, why doesn't it disappear when we stop using the drug?",
+    "answered_by_model": true,
+    "declared_out_of_scope": false
+   }
+  ]
+ },
+ "usage": {
+  "cost": 0.1673884,
+  "seconds": 62
+ },
+ "findings": [
+  {
+   "n": 1,
+   "severity": "main",
+   "kind": "rule 2",
+   "text": "'About 100 carry a resistance mutation' (N × rate) counts mutation events but calls them resistant cells. Descendants are left out. → Keep two separate names: 'mutation events ≈ N × μ = 10^10 × 10^-8 = 100' and 'resistant cells'. Then add: mutants that arose in earlier generations have divided since, so the expected number of resistant cells is about μN·ln(N) ≈ 10^-8 × 10^10 × 23 ≈ 2,300, and the median is about μN·ln(μN) ≈ 100 × 4.6 ≈ 460. State that 100 is a lower bound."
+  },
+  {
+   "n": 2,
+   "severity": "main",
+   "kind": "rule 2",
+   "text": "The model never says why the roughly 100 surviving cells are not cleared by the host. It assumes nothing kills resistant cells after treatment. → State the assumption: host defences remove some cells but cannot keep up with a population that doubles. Give an example: if immune killing removes 50% of cells per doubling time, net growth is zero; if it removes 20%, 100 cells still reach 10^10 in about 27/log2(1.6) ≈ 40 doublings. Say that weakened patients (ICU, chemotherapy) clear fewer cells."
+  },
+  {
+   "n": 3,
+   "severity": "main",
+   "kind": "rule 4",
+   "text": "The four resistance mechanisms (destroy, change target, pump out, keep out) are only listed. None has a concrete example, and the learning order puts this as step 2. → Give one line each. Destroy: a beta-lactamase enzyme cuts penicillin's beta-lactam ring before it reaches the wall-building enzymes. Change target: one base change in the rpoB gene stops rifampicin binding. Pump out: an efflux pump exports tetracycline. Keep out: loss of a porin channel cuts drug entry. Link one example to MIC numbers, e.g. beta-lactamase raises MIC from 0.5 to 32 mg/L (64-fold)."
+  },
+  {
+   "n": 4,
+   "severity": "main",
+   "kind": "rule 2",
+   "text": "The 'breaks' column for combination therapy compares with one drug instead of removing the stated assumption, which is that the two resistances are independent. → Breaks case: if one plasmid or pump gives resistance to both drugs at about 10^-8, then expected double-resistant cells = 10^10 × 10^-8 = 100. Second breaks case: drug A alone leaves about 100 A-resistant cells. They regrow to 10^10 and then drug B is added: 10^10 × 10^-8 = 100 cells resistant to both."
+  },
+  {
+   "n": 5,
+   "severity": "main",
+   "kind": "rule 3",
+   "text": "Several concepts have two names or two definitions. 'Resistance gene / resistance mutation' is one entity. 'Resistant' is defined both as 'survives the dose used' and as 'higher MIC'. Antibiotic 'kills or stops growth' (Entities) vs 'kills' (Terms). MIC 'stops growth' but the example says 8 mg/L 'kills'. Division / doubling / generation are used for the same thing. → Use one term, 'resistance determinant (mutation or acquired gene)'. Define resistant as 'MIC above the concentration reachable in the patient (e.g. MIC 32 > 8 mg/L)'. Say MIC measures growth inhibition, not killing. Pick one word, 'doubling', for one division of every cell."
+  },
+  {
+   "n": 6,
+   "severity": "edge",
+   "kind": "rule 5",
+   "text": "'Low MIC ratio means the drug still works' uses an undefined ratio and gives no threshold value. → Define the ratio as reachable concentration ÷ MIC. 8/0.5 = 16 means the drug works; 8/32 = 0.25 means it fails. Give the cutoff (a clinical breakpoint), e.g. ratio ≥ about 1 to 4 counts as susceptible (illustrative)."
+  },
+  {
+   "n": 7,
+   "severity": "edge",
+   "kind": "rule 1",
+   "text": "The fitness cost compounds multiplicatively (0.95^100). There is no justification against the linear alternative. → Each generation the resistant/susceptible ratio is multiplied by 0.95, because both lineages compound. So after 100 generations the ratio is 0.95^100 ≈ 0.006, not 1 − 5 = negative. After 10 generations it is ≈ 0.60."
+  },
+  {
+   "n": 8,
+   "severity": "edge",
+   "kind": "rule 1",
+   "text": "The 'many 0, a few hundreds' result of Luria–Delbrück has no concrete numbers or comparison statistic. → Example: 20 parallel cultures, mean about 10 resistant colonies. Induction (Poisson) predicts most counts between about 4 and 16, with variance ≈ mean ≈ 10. Observed counts were 11 zeros, several 1–5, and one of 107, so variance ≫ mean (illustrative; recompute)."
+  },
+  {
+   "n": 9,
+   "severity": "edge",
+   "kind": "rule 4",
+   "text": "Plasmid transfer and spread to other hosts and species have no mechanism (conjugation) and no numbers. → Name conjugation: cell-to-cell contact through a pilus copies the plasmid. Give an illustrative rate of 10^-4 to 10^-2 transfers per donor per hour in dense gut populations, versus 10^-8 per division for mutation."
+  },
+  {
+   "n": 10,
+   "severity": "edge",
+   "kind": "rule 3",
+   "text": "'Compensatory mutations' appears in the confusion points without definition or numbers. → Definition: a second mutation that restores growth rate without losing resistance. Example: cost goes from 5% to 1%, so after 100 generations the fraction factor is 0.99^100 ≈ 0.37 instead of 0.006."
+  },
+  {
+   "n": 11,
+   "severity": "edge",
+   "kind": "rule 2",
+   "text": "'A cell has the resistance gene or not' conflicts with stepwise resistance, where MIC can rise in steps. → Add the case: a first mutation raises MIC from 0.5 to 2 mg/L (still killed at 8), and a second raises it to 16 mg/L (survives). Each step is selected by sub-MIC or low exposure."
+  },
+  {
+   "n": 12,
+   "severity": "edge",
+   "kind": "rule 5",
+   "text": "In-patient regrowth time is described only as 'slower' with no value. → Illustrative: a 2–4 h doubling in tissue gives 27 doublings in about 2–4.5 days, versus 13 h in the lab."
+  },
+  {
+   "n": 13,
+   "severity": "edge",
+   "kind": "rule 5",
+   "text": "The 0.01 expected count is not turned into a probability. → P(at least one resistant cell) = 1 − e^-0.01 ≈ 1% for 10^6 cells. For 10^10 cells (expected 100), P ≈ 1."
+  },
+  {
+   "n": 14,
+   "severity": "excess",
+   "kind": "model entry",
+   "text": "Representation decision section (Stage, Levels): this is production metadata, not content the reader needs"
+  },
+  {
+   "n": 15,
+   "severity": "excess",
+   "kind": "model entry",
+   "text": "Epistemic 'Disputed: shortened course' line: it is out of scope and not needed for the central question"
+  }
+ ]
+}

@@ -1,0 +1,61 @@
+{
+  "key": {
+    "A": "principles",
+    "B": "none",
+    "C": "quick",
+    "D": "published"
+  },
+  "grades": {
+    "principles": {
+      "quiz": [
+        2,
+        2,
+        2,
+        2
+      ],
+      "misconception": "corrected",
+      "errors": []
+    },
+    "none": {
+      "quiz": [
+        2,
+        2,
+        2,
+        2
+      ],
+      "misconception": "corrected",
+      "errors": [
+        "The digits after the point (the *significand*) get a fixed budget: **53 significant binary digits**."
+      ]
+    },
+    "quick": {
+      "quiz": [
+        2,
+        2,
+        2,
+        2
+      ],
+      "misconception": "corrected",
+      "errors": []
+    },
+    "published": {
+      "quiz": [
+        2,
+        2,
+        2,
+        2
+      ],
+      "misconception": "absent",
+      "errors": [
+        "The other 11 bits hold the sign and the power."
+      ]
+    }
+  },
+  "rank": [
+    "principles",
+    "quick",
+    "none",
+    "published"
+  ],
+  "why_best": "A gives the reason 0.1 cannot be stored (the prime-factor rule, anchored by the 1/3 analogy), then the exact stored values, the tie-rounded sum, why it prints as it does and the fixes, all in a compact text without detours, while C asserts that 0.1 repeats in binary without saying why, B adds side topics and D asks the reader to work through heavy unit arithmetic."
+}

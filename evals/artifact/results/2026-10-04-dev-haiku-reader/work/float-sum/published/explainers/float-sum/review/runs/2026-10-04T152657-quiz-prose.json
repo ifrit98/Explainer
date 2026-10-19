@@ -1,0 +1,162 @@
+{
+ "tool": "quiz",
+ "rendering": "prose",
+ "slug": "float-sum",
+ "at": "2026-10-04T15:26:49",
+ "model": "default",
+ "prompt_sha": "008e69251529",
+ "reply": {
+  "answers": {
+   "1": "The main objects are decimal literals (0.1, 0.2, 0.3) and the double, a 64-bit binary format. A double is a whole number of at most 53 binary digits times a power of two. The other objects are: the stored value (the nearest double to a literal); the gap, meaning the distance between neighbouring doubles, with u = 2^-54 for doubles between 0.25 and 0.5; the error (stored value minus the decimal); the exact sum; the rounded sum; the tie-to-even rule from IEEE 754; the shortest-decimal printing rule; the == comparison; Python's Decimal type; and a tolerance.",
+   "2": "Each literal is rounded to its stored value, a nearby double. The gap between doubles depends on the size of the number: u/4 near 0.1, u/2 near 0.2 and u near 0.3. So each stored value has its own small error. The + operation adds the stored values exactly, then rounds the result to a double, breaking ties toward an even count of u. == compares the rounded sum with stored 0.3. Printing shows the shortest decimal that rounds back to the same double.",
+   "3": "0.1 and 0.2 cannot end in binary, so both are stored slightly too high, while 0.3 is stored slightly too low. Their exact sum lands halfway between two doubles, and the tie rounds up to the double just above stored 0.3, so == is false.",
+   "4": "The most important variable is whether the decimal's denominator has a factor of 5. If every value is a fraction with a power-of-two denominator, such as 0.5, 0.25 or 0.75, each one is stored with error 0. The exact sum is then itself a double, so == is true. With a factor of 5, the value has to be rounded, and the errors can push the sum onto a different double. The explanation also implies that a larger number has a larger gap, so its rounding error is bigger in absolute terms.",
+   "5": "Simplification: the sign and exponent bits are left out, and growth of errors over many operations is not covered. Established fact: IEEE 754 rounds a tie to the neighbour with an even count, and stored 0.1 = 0.10000000000000000555.",
+   "6": "Languages store numbers as doubles: a whole number of up to 53 binary digits times a power of two. 1/10 has a factor of 5 in its denominator, so it repeats forever in binary and must be rounded to the nearest double. As a result, stored 0.1 and 0.2 are slightly high, and stored 0.3 is slightly low. Adding the stored values exactly gives a result halfway between two doubles, and tie-to-even rounds it to the double one gap above stored 0.3, so == is false even though + did its job correctly. Printing shows the shortest decimal that maps back to each double, so 0.1 prints as 0.1 but the sum prints as 0.30000000000000004.",
+   "7": "The hardest part was counting in units of u (line 23). It does not say why doubles between 0.25 and 0.5 must use whole numbers from 2^52 to 2^53 times 2^-54, rather than a smaller whole number with a larger multiplier. One sentence would help: the whole number always uses all 53 digits. Mixing u/4 steps with values written in u (for example ...198.5) also takes effort.",
+   "8": "True. 1/2, 1/4 and 3/4 have power-of-two denominators, so each is stored exactly. The exact sum, 0.75, is itself a double, so no rounding happens.",
+   "9": "No. + computes the exact sum of its inputs and rounds it to the nearest double, which is correct. The difference comes from the inputs: they were the stored values, not 0.1 and 0.2. The tie-breaking rounding of the sum then moves the result to a different double from the one 0.3 rounds to.",
+   "10": "Yes, it is true. Decimal stores base-10 digits, and 1/10 ends in base 10, so all three values are exact.",
+   "11": "0.75 = 3 × 2^-2 is a whole number times a power of two. 1/10 has a factor of 5 in its denominator, and no power of two is divisible by 5. So in binary 0.1 repeats forever (0011…) and has to be cut off and rounded.",
+   "12": "Their errors do not cancel the way 0.3's error needs. Both are rounded up (+5.55e-18 and +1.11e-17), while 0.3 is rounded down (−1.11e-17). The exact sum, ...595.5 u, sits exactly halfway between ...595 and ...596. Tie-to-even sends it to ...596, one gap (5.55e-17) above stored 0.3 at ...595.",
+   "13": "Printing shows the shortest decimal that rounds back to the same double. The text \"0.1\" rounds to stored 0.1, so one digit is enough. The sum's double, ...596, needs 0.30000000000000004 instead."
+  },
+  "audit": {
+   "terms": [
+    "The same idea has two names: 'the power' (line 9: 'hold the sign and the power') and 'exponent' (line 65: 'sign and exponent bits').",
+    "Three words name the same integer part of a double: 'whole number' (line 9), 'multiplier' is used for the power-of-two factor (line 23: 'the multiplier is 2^-55'), and 'count of u' (line 40). This risks confusing which part is meant.",
+    "'gap' and 'u' are used together and overlap: 'gap ... u = 2^-54' (line 23), but elsewhere the gap is 'u/4' or 'u/2'. Later, 'one gap (5.55e-17)' (lines 42 and 61) assumes the gap means u."
+   ],
+   "unexplained": [
+    "The 'Error' column (line 29 table: +5.55e-18, +1.11e-17, −1.11e-17) is given in decimal while every other column is in u. The text never says that these errors are what decide which double the sum lands on.",
+    "Line 49, 'with 17 significant digits': nothing says why 17 matters or what it implies.",
+    "Line 9, '53 binary digits ... other 11 bits': nothing says what more or fewer digits would change, for example a smaller gap."
+   ],
+   "missing_why": [
+    "Line 23, 'Doubles between 0.25 and 0.5 are whole numbers from 2^52 up to 2^53, times 2^-54': it does not explain why the whole number must fill all 53 digits, which is what fixes the multiplier.",
+    "Line 40, tie-to-even: it does not explain why ties go to an even count instead of always rounding up or down.",
+    "Line 25, '0.1 ... its stored value is a multiple of u/4, such as …198.5': it does not show that 198.5 is the nearest multiple of 0.25 to 198.4."
+   ],
+   "excess": [
+    "Lines 63–67, the 'Not covered here' list of references, is not needed by this reader.",
+    "Line 61, the money advice ('count whole cents as integers'), is a detour from the argument."
+   ]
+  },
+  "gaps": [
+   "The explanation never says why the integer part always has exactly 53 bits within a range. That is the step that makes the gap depend on the size of the number.",
+   "The tie-to-even rule is stated with no reason behind it.",
+   "It does not show that the decimal-errors table and the counts in u say the same thing."
+  ]
+ },
+ "grade": {
+  "scores": {
+   "1": 2,
+   "2": 2,
+   "3": 2,
+   "4": 2,
+   "5": 2,
+   "6": 2,
+   "7": 2,
+   "8": 2,
+   "9": 2,
+   "10": 2,
+   "11": 2,
+   "12": 2,
+   "13": 2
+  },
+  "reasons": {
+   "9": "Full marks, narrowly. The answer gives the right reason, that the inputs were stored values and not 0.1 and 0.2, but does not say why (1/10 does not end in binary)."
+  },
+  "pass": true
+ },
+ "usage": {
+  "cost": 0.16206720000000002,
+  "seconds": 38
+ },
+ "findings": [
+  {
+   "n": 1,
+   "severity": "gap",
+   "kind": "terms",
+   "text": "The same idea has two names: 'the power' (line 9: 'hold the sign and the power') and 'exponent' (line 65: 'sign and exponent bits')."
+  },
+  {
+   "n": 2,
+   "severity": "gap",
+   "kind": "terms",
+   "text": "Three words name the same integer part of a double: 'whole number' (line 9), 'multiplier' is used for the power-of-two factor (line 23: 'the multiplier is 2^-55'), and 'count of u' (line 40). This risks confusing which part is meant."
+  },
+  {
+   "n": 3,
+   "severity": "gap",
+   "kind": "terms",
+   "text": "'gap' and 'u' are used together and overlap: 'gap ... u = 2^-54' (line 23), but elsewhere the gap is 'u/4' or 'u/2'. Later, 'one gap (5.55e-17)' (lines 42 and 61) assumes the gap means u."
+  },
+  {
+   "n": 4,
+   "severity": "gap",
+   "kind": "unexplained",
+   "text": "The 'Error' column (line 29 table: +5.55e-18, +1.11e-17, −1.11e-17) is given in decimal while every other column is in u. The text never says that these errors are what decide which double the sum lands on."
+  },
+  {
+   "n": 5,
+   "severity": "gap",
+   "kind": "unexplained",
+   "text": "Line 49, 'with 17 significant digits': nothing says why 17 matters or what it implies."
+  },
+  {
+   "n": 6,
+   "severity": "gap",
+   "kind": "unexplained",
+   "text": "Line 9, '53 binary digits ... other 11 bits': nothing says what more or fewer digits would change, for example a smaller gap."
+  },
+  {
+   "n": 7,
+   "severity": "gap",
+   "kind": "missing_why",
+   "text": "Line 23, 'Doubles between 0.25 and 0.5 are whole numbers from 2^52 up to 2^53, times 2^-54': it does not explain why the whole number must fill all 53 digits, which is what fixes the multiplier."
+  },
+  {
+   "n": 8,
+   "severity": "gap",
+   "kind": "missing_why",
+   "text": "Line 40, tie-to-even: it does not explain why ties go to an even count instead of always rounding up or down."
+  },
+  {
+   "n": 9,
+   "severity": "gap",
+   "kind": "missing_why",
+   "text": "Line 25, '0.1 ... its stored value is a multiple of u/4, such as …198.5': it does not show that 198.5 is the nearest multiple of 0.25 to 198.4."
+  },
+  {
+   "n": 10,
+   "severity": "excess",
+   "kind": "excess",
+   "text": "Lines 63–67, the 'Not covered here' list of references, is not needed by this reader."
+  },
+  {
+   "n": 11,
+   "severity": "excess",
+   "kind": "excess",
+   "text": "Line 61, the money advice ('count whole cents as integers'), is a detour from the argument."
+  },
+  {
+   "n": 12,
+   "severity": "gap",
+   "kind": "gap",
+   "text": "The explanation never says why the integer part always has exactly 53 bits within a range. That is the step that makes the gap depend on the size of the number."
+  },
+  {
+   "n": 13,
+   "severity": "gap",
+   "kind": "gap",
+   "text": "The tie-to-even rule is stated with no reason behind it."
+  },
+  {
+   "n": 14,
+   "severity": "gap",
+   "kind": "gap",
+   "text": "It does not show that the decimal-errors table and the counts in u say the same thing."
+  }
+ ]
+}

@@ -1,0 +1,77 @@
+# Machine-readable half of model.md. `explainer check gps-relativity` holds every rendering to it.
+
+values:
+  satellites_in_orbit: 30
+  altitude_km: 20200
+  c_m_per_s: 299792458
+  travel_time_ms: 67
+  light_cm_per_ns: 30
+  light_m_per_us: 300
+  receiver_clock_error_ms: 1
+  receiver_range_error_km: 300
+  unknowns: 4
+  orbit_speed_km_s: 3.87
+  sr_fraction: 8.3e-11
+  seconds_per_day: 86400
+  sr_us_per_day: 7
+  earth_radius_km: 6371
+  orbit_radius_km: 26560
+  gr_fraction: 5.3e-10
+  gr_us_per_day: 45
+  net_us_per_day: 38
+  drift_km_per_day: 11
+  drift_ns_per_s: 0.44
+  drift_ns_per_min: 26
+  drift_m_per_min: 8
+  nominal_mhz: 10.23
+  set_mhz: 10.22999999543
+
+allow: [1, 2, 3, 4, 10]
+
+require:
+  - path: net_us_per_day
+    in: [prose]
+  - path: drift_km_per_day
+    in: [prose]
+  - path: set_mhz
+    in: [prose]
+
+claims:
+  - id: time-to-distance
+    kind: mechanism
+    statement: "The receiver turns travel time into distance by multiplying by c."
+    example: "Satellite overhead at 20,200 km: travel time about 67 ms. 1 ns of clock error is 30 cm."
+  - id: why-four
+    kind: why
+    statement: "Four satellites are needed because the receiver clock bias is a fourth unknown."
+    alternative: "Use three satellites; three spheres meet at a point."
+    counterexample: "A phone clock 1 ms wrong makes every distance wrong by 300 km."
+    ask: "Why does a receiver need four satellites, not three?"
+  - id: two-effects
+    kind: mechanism
+    statement: "Speed slows the satellite clock; weaker gravity speeds it up more."
+    example: "-7 µs/day from speed, +45 µs/day from gravity, net +38 µs/day."
+    ask: "Does a GPS satellite clock run fast or slow compared with a ground clock, and why?"
+  - id: drift-size
+    kind: why
+    statement: "A tiny clock drift matters because c converts it into a large distance."
+    alternative: "Ignore relativity; the rate shift is only a few parts in 10^10."
+    counterexample: "38 µs/day × 300 m/µs ≈ 11 km/day; 8 m after one minute."
+  - id: the-fix
+    kind: mechanism
+    statement: "Satellite clocks are set slow before launch so they tick at the nominal rate in orbit."
+    example: "10.23 MHz nominal, set to 10.22999999543 MHz."
+
+accept_unjustified: {}
+
+budget: {prose: 750, reason: "two mechanisms (positioning, then two opposing clock effects), each with worked numbers"}
+
+terms:
+  - term: pseudorange
+    means: "travel time × c, which still contains the receiver clock bias"
+    avoid: [true range]
+
+quiz:
+  - q: "Does a GPS satellite clock run fast or slow compared with a ground clock?"
+    expect: "Fast, by about 38 µs/day: gravity's +45 beats speed's -7."
+    misconception: "Slow, because moving clocks run slow."

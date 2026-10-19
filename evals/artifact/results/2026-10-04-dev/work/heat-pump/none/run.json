@@ -1,0 +1,12 @@
+{
+  "result": "I made `explainers/heat-pump/explanation.md`, a single prose explainer, because this reader can follow a short algebra derivation (the Carnot limit) and a worked table, and a diagram and Python snippet inside the prose cover what separate diagram or interactive files would add.",
+  "error": null,
+  "cost": 0.1563,
+  "seconds": 49,
+  "turns": 2,
+  "files": [
+    "explainers/heat-pump/explanation.md"
+  ],
+  "review_cost": 0,
+  "reviews": 0
+}

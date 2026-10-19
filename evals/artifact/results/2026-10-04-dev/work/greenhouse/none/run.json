@@ -1,0 +1,13 @@
+{
+  "result": "I made `explainers/greenhouse/explanation.md` and `explainers/greenhouse/index.html`. The prose builds the explanation step by step, using equations a technical reader can check with a calculator: energy balance, infrared absorption, one-layer and emission-height models, forcing and feedbacks. The page adds two models whose sliders change the inputs, so the reader can see how surface temperature responds to absorptivity, CO₂ and feedback strength; I haven't opened it in a browser yet.",
+  "error": null,
+  "cost": 0.3816954,
+  "seconds": 124,
+  "turns": 3,
+  "files": [
+    "explainers/greenhouse/explanation.md",
+    "explainers/greenhouse/index.html"
+  ],
+  "review_cost": 0,
+  "reviews": 0
+}

@@ -1,0 +1,12 @@
+{
+  "result": "I made `explainers/quorum/explanation.md`, a short prose explanation with one table. I chose prose because the answer is a short chain of reasoning: a silent server can't be told apart from a cut-off one, so the group that decides must be a majority, and the number of failures a cluster survives is servers minus that majority. Worked numbers and the table cover it without needing a diagram or an interactive page. The supporting model files, `explainers/quorum/model.md` and `model.yaml`, are in the same folder, and `explainer check quorum` passes.",
+  "error": null,
+  "cost": 0.41601699999999997,
+  "seconds": 71,
+  "turns": 21,
+  "files": [
+    "explainers/quorum/explanation.md"
+  ],
+  "review_cost": 0,
+  "reviews": 0
+}

@@ -1,0 +1,46 @@
+{
+  "answers": {
+    "1": {
+      "answer": "Earth is pulled toward the Moon more strongly than the far-side water. Earth's center falls toward the Moon faster than the far water, so the water lags behind relative to Earth's center, creating a bulge away from the Moon.",
+      "quote": "On the far side, the water is pulled less than Earth's centre. Earth falls toward the Moon a little faster than this water. The water falls behind: a bulge away from the Moon."
+    },
+    "2": {
+      "answer": "The Moon orbits and moves roughly 12° per day in the same direction Earth rotates. A point on Earth must rotate slightly extra to realign with the Moon, extending the cycle from 24 hours to 24 hours 50 minutes, making high tides about 12 hours 25 minutes apart.",
+      "quote": "The Moon also moves along its orbit, about 12° per day, in the same direction as Earth turns. Earth must turn a little extra to bring the point back under the Moon. So the cycle is a lunar day of 24 h 50 min, and high tides come about every 12 h 25 min."
+    },
+    "3": {
+      "answer": "not covered",
+      "quote": "Not covered: spring and neap tides, where the Sun's smaller pair of bulges adds to or partly cancels the Moon's."
+    },
+    "4": {
+      "answer": "Every 12 hours. The explanation indicates that two bulges exist and a point passes each bulge in half a turn. If no extra rotation were needed (Moon fixed), a full rotation takes 24 hours, so high tides would come every 12 hours, not the current 12 hours 25 minutes.",
+      "quote": "The two bulges stay lined up with the Moon. Earth turns under them. A point on the coast passes the near bulge, then the far bulge half a turn later."
+    }
+  },
+  "stops": [
+    "\"Only the difference in pull moves water\" — why subtract center's pull rather than use absolute pulls?",
+    "\"The water falls behind\" — confusing why falling slower creates a bulge away (needs reference frame clarity)",
+    "\"A difference across a fixed width falls off as 1/d³, not 1/d²\" — unexplained mathematical step",
+    "Diagram arrows pointing in opposite directions — hard to parse which direction is 'relative'",
+    "\"Earth is not held in place\" — what frame of reference makes the center's pull irrelevant?",
+    "\"The Moon also moves along its orbit, about 12° per day\" — why is this specific angle important?",
+    "Table with scientific notation (3.433e-5) — magnitude hard to grasp",
+    "\"A point on the coast passes the near bulge, then the far bulge half a turn later\" — needs mental visualization"
+  ],
+  "excess": [
+    "\"Predict first\" — pedagogical instruction, not explanation",
+    "\"The tidal acceleration is about 1.1e-6 m/s² ... raises the water by about 0.5 m\" — specific numbers not needed for mechanism",
+    "\"Earth and Moon orbit each other, so this fall never ends in a collision\" — orbital mechanics context",
+    "\"High tide comes about 50 minutes later each day\" — repeats 12h 25min information",
+    "\"Some coasts, such as parts of the Gulf of Mexico, get only one high tide a day\" — off-topic example",
+    "\"Real oceans have continents and basins that resonate\" — additional complexity beyond basic mechanism",
+    "\"with the Moon at 384,400 km and Earth's radius 6,371 km\" — specific distances before table",
+    "\"The Moon's gravity gives an acceleration, here called the pull, of GM/r²\" — formula not essential to understand mechanism"
+  ],
+  "grounded": {
+    "1": true,
+    "2": true,
+    "3": true,
+    "4": true
+  }
+}

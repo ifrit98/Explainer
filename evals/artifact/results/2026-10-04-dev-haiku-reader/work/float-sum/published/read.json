@@ -1,0 +1,50 @@
+{
+  "answers": {
+    "1": {
+      "answer": "Because 0.1 expressed as a fraction is 1/10, whose denominator has a factor of 5. Since no power of two is divisible by 5, the fraction 1/10 cannot terminate in binary and must be rounded.",
+      "quote": "The denominator of 1/10 has a factor 5. No power of two is divisible by 5, so 1/10 never ends in binary: 1/10 = 0.000110011001100110011… (0011 repeats forever)"
+    },
+    "2": {
+      "answer": "The exact sum of the stored values (5404319552844595.5 u) falls exactly halfway between two representable numbers. The IEEE 754 standard rounds such ties to the neighboring value with an even count, which is 5404319552844596 u, representing a different value from stored 0.3.",
+      "quote": "The exact sum is exactly halfway between the doubles at …595 u and …596 u. The IEEE 754 standard sends a tie to the neighbor whose count of u is even."
+    },
+    "3": {
+      "answer": "A program should compare floating-point numbers using a tolerance instead of testing exact equality. It should use code like abs((0.1 + 0.2) - 0.3) < 1e-9 to check if values are close enough.",
+      "quote": "Compare with a tolerance instead: `abs((0.1 + 0.2) - 0.3) < 1e-9` is true, because the rounded sum and stored 0.3 are one gap (5.55e-17) apart."
+    },
+    "4": {
+      "answer": "Yes, 0.5 + 0.25 == 0.75 is true. Because 0.5 (1/2), 0.25 (1/4), and 0.75 (3/4) are all fractions with power-of-two denominators, each is stored with zero error and their sum is exact.",
+      "quote": "All three are fractions with power-of-two denominators (1/2, 1/4, 3/4), so each is stored with error 0, and the exact sum is itself a double."
+    }
+  },
+  "stops": [
+    "Unexplained technical term: 'A double is a whole number of at most 53 binary digits, times a power of two'",
+    "Ambiguous antecedent: 'A fraction like that ends in binary'",
+    "Unsupported mathematical claim: 'No power of two is divisible by 5'",
+    "Unexplained formula with specific ranges: 'Doubles between 0.25 and 0.5 are whole numbers from 2^52 up to 2^53, times 2^-54'",
+    "Undefined concept: 'To see the rounding, count each number in units of u'",
+    "Unclear which range is meant: '0.1 is in the range where the gap is u/4, so its stored value is a multiple of u/4'",
+    "Ambiguous phrasing: 'sends a tie to the neighbor whose count of u is even'",
+    "Unexplained how determined: 'The shortest decimal that rounds back to …596 u is 0.30000000000000004'",
+    "Unjustified claim: 'each is stored with error 0, and the exact sum is itself a double'",
+    "Unclear conversion step: '0.3 × 2^54 = 5404319552844595.2, so 0.3 is 5404319552844595.2 u'"
+  ],
+  "excess": [
+    "Shows the problem but doesn't explain it: 'and `0.1 + 0.2` prints `0.30000000000000004`'",
+    "Example of exact storage unrelated to the core problem: 'For example, 0.75 = 3 × 2^-2, so a double holds 0.75 exactly'",
+    "Helpful but not necessary analogy: 'This is the same as 1/3 = 0.3333… in decimal. A machine that keeps only a fixed number of digits must cut the expansion'",
+    "Explains printing behavior, not the core problem: 'Why `print(0.1)` shows `0.1`'",
+    "Supporting printing detail not needed: 'Languages print the shortest decimal that rounds back to the same double'",
+    "Solution to the problem rather than explanation: 'A decimal type also avoids the problem. Python's `Decimal(\"0.1\") + Decimal(\"0.2\") == Decimal(\"0.3\")` is true'",
+    "Listed as not covered, not part of explanation: 'How errors grow over many operations, such as adding 0.1 ten times'",
+    "Listed as not covered, not part of explanation: 'How to choose between an absolute and a relative tolerance'",
+    "Listed as not covered, not part of explanation: 'The sign and exponent bits of a double'",
+    "Specific decimal values may be excessive detail: '| Number | Exact, in u | Gap here | Stored, in u | Stored, in decimal | Error |' (the table in lines 29-33)"
+  ],
+  "grounded": {
+    "1": true,
+    "2": true,
+    "3": true,
+    "4": true
+  }
+}

@@ -1,0 +1,136 @@
+# Machine-readable half of model.md. `explainer check heat-pump` holds every rendering to it.
+
+values:
+  energy:            # kWh, at 0 °C outside and 35 °C home water
+    electricity: 1
+    outdoor_heat: 2
+    heat_delivered: 3
+  cop:
+    heat_pump: 3
+    heater: 1
+  temps:             # °C
+    outdoor: 0
+    water: 35
+    room: 20
+    boil: -10
+    condense: 40
+    discharge: 60
+    warm_refrigerant_case: 5
+  kelvin:
+    outdoor: 273.15
+    water: 308.15
+    condense: 313.15
+    radiator_water: 328.15
+  pressure_bar:
+    low: 3.5
+    high: 14
+    air: 1
+  lift_k:
+    example: 35
+    refrigerant: 50
+    evaporator_gap: 10
+    condenser_gap: 5
+  ideal:
+    example: 8.8
+    refrigerant: 6.3
+  sweep:             # outdoor °C, lift K, ideal COP, typical real COP; water at 35 °C
+    mild: {outdoor: 10, lift: 25, ideal: 12.3, real: 4}
+    freezing: {outdoor: 0, lift: 35, ideal: 8.8, real: 3}
+    cold: {outdoor: -15, lift: 50, ideal: 6.2, real: 2}
+    very_cold: {outdoor: -25, lift: 60, ideal: 5.1, real: 1.5}
+  radiators: {water: 55, lift: 55, ideal: 6.0, real: 2.2}
+  entropy:           # kWh/K
+    taken: 0.00732
+    given: 0.00974
+    bad_cop: 12
+    bad_outdoor_heat: 11
+    bad_taken: 0.0403
+    bad_given: 0.0389
+    hot_to_cold_net: 0.00042
+  kelvin_rounded: 273
+  min_electricity: 0.34
+  celsius_wrong: 1
+
+allow: [2, 3, 4]
+
+require:
+  - path: energy/outdoor_heat
+    in: [diagram]
+  - path: energy/heat_delivered
+    in: [diagram]
+  - path: temps/boil
+    in: [diagram]
+  - path: temps/condense
+    in: [diagram]
+  - path: ideal/example
+    in: [diagram]
+
+claims:
+  - id: energy-balance
+    kind: guarantee
+    statement: "A heat pump does not create energy: heat delivered = electricity + outdoor heat, 3 kWh = 1 kWh + 2 kWh."
+    example: "0 °C outside, 35 °C water: 1 kWh electricity, 2 kWh outdoor heat, 3 kWh into the water, COP 3."
+    counterexample: "An electric heater has only electricity as input: 1 kWh in, 1 kWh heat out, COP 1."
+    ask: "Where do the other 2 kWh come from, if the heat pump uses only 1 kWh of electricity?"
+
+  - id: why-compress
+    kind: why
+    statement: "The heat pump must spend work, because heat flows by itself only from hot to cold."
+    alternative: "Circulate a fluid between the outdoor air and the home, with no compressor."
+    counterexample: "Fluid warmed by 0 °C air is at most 0 °C; in a 20 °C home heat flows from the home into the fluid."
+
+  - id: pressure-sets-boiling
+    kind: mechanism
+    statement: "Boiling temperature rises with pressure, so the loop runs at two pressures: low where it must be cold, high where it must be hot."
+    example: "Propane boils at −10 °C at about 3.5 bar and at 40 °C at about 14 bar."
+    alternative: "One fixed pressure gives one boiling temperature, which cannot be below 0 °C outdoors and above 35 °C indoors."
+
+  - id: loop
+    kind: mechanism
+    statement: "Evaporator, compressor, condenser, expansion valve: the refrigerant takes heat in where it is colder than the air and gives heat out where it is hotter than the water."
+    example: "Boils at −10 °C, taking 2 kWh from 0 °C air; compressor adds 1 kWh; condenses at 40 °C, giving 3 kWh to 35 °C water; valve drops the pressure, a third of the liquid boils, the rest cools to −10 °C."
+    ask: "Why must the refrigerant be colder than the outdoor air in the evaporator, and hotter than the home water in the condenser?"
+
+  - id: lift-sets-cop
+    kind: guarantee
+    statement: "The larger the temperature lift, the more electricity each kWh of heat costs, so COP falls."
+    example: "10 °C outside: lift 25 K, COP about 4."
+    counterexample: "−15 °C outside: lift 50 K, COP about 2."
+    ask: "What happens to the COP on a colder day, and why?"
+
+  - id: ideal-limit
+    kind: limit
+    statement: "No heat pump can beat ideal COP = T_hot / (T_hot − T_cold), in kelvin, because entropy cannot be destroyed."
+    example: "COP 3 at 273.15 K → 308.15 K: entropy taken 0.00732 kWh/K, given 0.00974 kWh/K; allowed. Ideal 8.8."
+    counterexample: "Claimed COP 12: taken 0.0403 kWh/K, given 0.0389 kWh/K; entropy would be destroyed."
+
+  - id: why-kelvin
+    kind: why
+    about: [ideal COP]
+    statement: "The ideal limit uses kelvin, because entropy is Q/T with T measured from absolute zero."
+    alternative: "Use Celsius."
+    counterexample: "35 / (35 − 0) = 1, which says a heat pump cannot beat a heater; kelvin gives 8.8."
+
+terms:
+  - term: outdoor heat
+    means: "the heat taken from the outdoor air, 2 kWh in the example"
+    avoid: [free energy, free heat]
+  - term: ideal limit
+    means: "the highest COP allowed for two temperatures; COP is not an efficiency"
+    avoid: [efficiency of 300, 300% efficient, 300 % efficient]
+  - term: temperature lift
+    means: "home water minus outdoor air; the refrigerant lift is a separate term"
+    avoid: [temperature difference of the refrigerant]
+
+budget: {diagram: 1100, reason: "three levels: energy balance, the loop with two pressures, and the ideal limit with a case that holds and one that breaks"}
+
+quiz:
+  - q: "A heat pump uses 1 kWh of electricity and delivers 3 kWh of heat. Does it break energy conservation? Where does the energy come from?"
+    expect: "No. 2 kWh comes from the outdoor air, which is colder than the home but still holds heat; the refrigerant is made colder than the air so heat flows into it. 1 + 2 = 3."
+    misconception: "It creates energy, or it is '300% efficient' in the sense of making more energy than it uses."
+  - q: "The same heat pump runs on a 10 °C day and on a −15 °C day, heating water to 35 °C. On which day is its COP higher, and why?"
+    expect: "On the 10 °C day (about 4 vs about 2): the temperature lift is smaller (25 K vs 50 K), so less work is needed per kWh moved."
+    misconception: "COP is a fixed number for the machine, or it is higher in the cold."
+  - q: "What do the compressor and the expansion valve each do to the refrigerant, and why does the loop need both?"
+    expect: "Compressor raises pressure, so the refrigerant condenses at a high temperature (40 °C) above the water; valve drops pressure, so it boils at a low temperature (−10 °C) below the air. Boiling temperature depends on pressure."
+    misconception: "The compressor makes the heat; or the refrigerant is cooled by the outdoor air."

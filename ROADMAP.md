@@ -20,6 +20,7 @@ Status: `proposed` · `next` · `in progress` · `done`
 | 12 | [The narrative pass](#12-the-narrative-pass) | done (v0.5.0), with open items |
 | 13 | [Rebalance: omission and excess both cost](#13-rebalance-omission-and-excess-both-cost) | done (v0.6.0), with open items |
 | 14 | [Reviews that run themselves](#14-reviews-that-run-themselves) | done (v0.7.0), with open items |
+| 15 | [Measure the toolkit, not the examples](#15-measure-the-toolkit-not-the-examples) | in progress (eval shipped in v0.8.0) |
 
 ---
 
@@ -210,3 +211,34 @@ Rounds 2 and 3 also produced general rules: names match pictures (call it an L o
 - Measure adoption again under the tuned prompts; if edge findings stay under 10%, drop the per-unit edge lists and keep only blocking findings and cuts.
 - The cold read on a video re-reads its review sheet from scratch each round; a round could read only the changed captions.
 - Run review rounds on more than one model, as with the chat eval.
+
+## 15. Measure the toolkit, not the examples
+
+**Problem.** From v0.4 to v0.7, each round reviewed the same ten examples, fixed what the reviewers found, and often changed a principle or a review prompt in response. That fits the toolkit to those examples. The review prompts were tuned on adoption figures from the same examples they were then judged on; ste-80 took six cold-read rounds, which shows that a reviewer always finds something, not that the pipeline improved. Several rules in §10 and §11 trace back to one example's failure, and nothing showed that they help on a new subject. The only measure on new material was the chat eval: six questions, which the chat rule was also tuned against.
+
+**Built.**
+
+- The examples are frozen as reference implementations and regression fixtures: `explainer check` must pass; no more review rounds.
+- `evals/artifact/questions.yaml`: 30 held-out subjects (10 dev, 20 test), none an example or a chat-eval question, each with a fixed quiz of four questions; the last is a prediction about a case the explanation need not mention.
+- `explainer eval artifact`: per subject and condition, a fresh agent builds the explainer (none, the principles, or the explain skill at the quick or published tier), a second reads only the renderings and answers the quiz with a quote for each answer (an answer whose quote is not in the renderings scores 0), and a third grades blind. [docs/evals.md](docs/evals.md#the-artifact-eval).
+
+**Rules.**
+
+- Change the principles or a skill only for a failure seen in at least three dev subjects; confirm the change on test before a release; never change anything for one test subject.
+- Remove a rule when removing it costs nothing on dev.
+- Calibrate the grader against a person: the author rates a sample, and the grader's ranking must agree before its numbers steer a change.
+
+**Evidence** (dev baseline, [docs/evals.md](docs/evals.md#what-the-artifact-eval-found)).
+
+- The quiz is at its ceiling (94–100% in every condition, with a strong reader and with Haiku): a model reader cannot measure the difference. The same holds for the published tier's blind test.
+- The principles alone cut length 40% and rank first on effort in every grading pass, at the lowest cost. The quick tier is shortest but ranks below them and makes the most errors; the published tier costs 13× as much for no measured gain.
+- The first run was invalid: builders inside the repo loaded its CLAUDE.md in every condition. Builds now run outside every project.
+
+**Next.**
+
+- A person ranks a sample (principles, quick, published on three subjects); the grader's ranking is used only if it agrees.
+- If it agrees: decide what the skill keeps. Candidates: the model file and the reviews only for the published tier, or the reviews dropped where they do not change the result.
+- A quiz that discriminates: harder subjects, or a reader limited in another way (time, words read), since a weaker model was not enough.
+- `plugin/skills/explain/references/html.md` says "the seven understanding questions from principles.md §7", but §7 has eight. Fix it with the principles rewrite, because skill text is measured.
+- The blind test (`explainer_kit/review.py`) does not ask "Could anything be cut with no loss?" Decide whether it should when the objective becomes least *wasted* effort.
+

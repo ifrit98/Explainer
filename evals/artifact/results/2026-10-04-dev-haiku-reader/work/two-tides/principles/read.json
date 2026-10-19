@@ -1,0 +1,50 @@
+{
+  "answers": {
+    "1": {
+      "answer": "The far-side water is pulled toward the Moon less strongly than Earth's center, so the Earth falls away from it, causing it to bulge away from the Moon.",
+      "quote": "The far-side water moves toward the Moon *slower* than the Earth does. The Earth falls away from it, so it bulges away from the Moon."
+    },
+    "2": {
+      "answer": "The Moon moves along its orbit by about 13 degrees per day, requiring the Earth to rotate an extra 50 minutes to face the Moon again.",
+      "quote": "In one day the Moon moves about 13° along its orbit, in the same direction as the Earth turns. The Earth needs about 50 more minutes to face the Moon again."
+    },
+    "3": {
+      "answer": "Tides are largest at new and full moons when the Sun and Moon line up, because their tidal bulges add together to create large spring tides.",
+      "quote": "When the Sun and Moon line up (new and full moon), their bulges add: large **spring tides**."
+    },
+    "4": {
+      "answer": "Every 12 hours, because Earth rotates once in 24 hours passing through 2 bulges, and without the Moon's orbital motion, no extra 50 minutes would be needed.",
+      "quote": "The cycle is 24 h 50 min, not 24 h. In one day the Moon moves about 13° along its orbit, in the same direction as the Earth turns. The Earth needs about 50 more minutes to face the Moon again."
+    }
+  },
+  "stops": [
+    "how the pull at each point **differs from** the pull at the centre",
+    "Gravity weakens with distance: acceleration = GM / d²",
+    "Both are close to 2GMR/d³ = 1.10 × 10⁻⁶ m/s²",
+    "At the two sides (90° from the Moon), the Moon's pull points slightly inward",
+    "nothing opposes horizontal flow except the slope of the water itself",
+    "difference of about half a metre between bulge and squeeze (model output, \"equilibrium tide\")",
+    "The cycle is 24 h 50 min, not 24 h",
+    "Before you read on: the far side is pulled toward the Moon less than the centre. Relative to the centre, which way does far-side water move?",
+    "Subtract the pull at the centre (the whole Earth already has this motion)",
+    "the spin is symmetric about the Earth's axis. It does not know where the Moon is"
+  ],
+  "excess": [
+    "The Earth and the Moon orbit their common centre of mass",
+    "Why the far side is not pushed by \"centrifugal force from the Earth's spin\"",
+    "Because the effect goes as 1/d³, a Moon at half the distance would give 8 times the tidal acceleration",
+    "This is the idealized model: an ocean that covers the Earth and responds at once",
+    "more than 15 m in the Bay of Fundy",
+    "The two values are almost equal. Both are close to 2GMR/d³",
+    "basin shape and the Moon's tilt relative to the equator make one of the two daily tides dominate",
+    "Real tides are also shaped by continents, ocean depth, and resonance of ocean basins",
+    "The result is two bulges: one facing the Moon and one facing away",
+    "When they are at 90° (quarter moons), they partly cancel: small **neap tides**"
+  ],
+  "grounded": {
+    "1": true,
+    "2": true,
+    "3": true,
+    "4": true
+  }
+}

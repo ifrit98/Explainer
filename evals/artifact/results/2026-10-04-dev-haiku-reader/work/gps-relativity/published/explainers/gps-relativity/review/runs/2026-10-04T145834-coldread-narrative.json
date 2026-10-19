@@ -1,0 +1,401 @@
+{
+ "tool": "coldread",
+ "rendering": "narrative",
+ "slug": "gps-relativity",
+ "at": "2026-10-04T14:58:34",
+ "model": "default",
+ "prompt_sha": "c53fdd66ab92",
+ "reply": {
+  "beats": [
+   {
+    "at": "Beat 1 (hook)",
+    "text": "Shown: answer paragraph. Said: the result in two sentences.",
+    "unresolved": [],
+    "unsaid": [
+     "The table never gives the 'answer paragraph' or the 'two sentences', so the reader can't check what the result actually is."
+    ],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Beat 2 (mechanism)",
+    "text": "Shown: signal content; 67 ms; 1 µs ↔ 300 m. Said: time stamp × c = range.",
+    "unresolved": [
+     "time stamp",
+     "c"
+    ],
+    "unsaid": [
+     "'signal content': the words never say what the signal carries.",
+     "'67 ms': no one says this is the travel time, or that it comes to about 20,200 km.",
+     "'1 µs ↔ 300 m': the words never say what this conversion is for."
+    ],
+    "leap": [
+     "'time stamp × c = range': a time stamp is a clock reading, not a travel time. The step 'travel time = arrival time − time stamp' is never said, so the formula as written doesn't follow."
+    ],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Beat 3 (mechanism)",
+    "text": "Shown: spheres. Said: 3 spheres meet in 2 points; one is far from Earth.",
+    "unresolved": [],
+    "unsaid": [],
+    "leap": [
+     "Nobody says why a single range is a sphere (every point at that distance from the satellite)."
+    ],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Beat 4 (objection + instance)",
+    "text": "Shown: 1D worked example. Said: bias b is the same for all; extra measurement reveals it.",
+    "unresolved": [
+     "bias b",
+     "pseudorange (listed as something the reader now knows, but it is never said or shown)"
+    ],
+    "unsaid": [
+     "The numbers in the 1D example (13.5 = 12 + 1.5) and the step 5 µs → 1.5 km never appear in Shown or Said.",
+     "'four satellites' is never said; the reader has to work out 3 + 1 alone."
+    ],
+    "leap": [
+     "'the same for all': the reason (one receiver clock is used for every measurement) is not given.",
+     "'extra measurement reveals it': it isn't said that this works by adding a fourth unknown and a fourth equation (simultaneous equations)."
+    ],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Beat 5 (mechanism)",
+    "text": "Shown: 17 ns ↔ 5 m. Said: satellite clock errors are not solved; they must match GPS time.",
+    "unresolved": [
+     "GPS time",
+     "ns"
+    ],
+    "unsaid": [
+     "Nothing says why 5 m is the target, or where the ~10 ns requirement comes from."
+    ],
+    "leap": [
+     "'satellite clock errors are not solved': the reader has just learned that a clock error can be solved for, and the reason the satellites' errors can't be (each satellite has its own error, not a shared one) only comes in beat 7."
+    ],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Beat 6 (mechanism)",
+    "text": "Shown: −7, +45, +38 µs/day. Said: two effects, opposite signs.",
+    "unresolved": [
+     "which 'two effects' (speed and gravity are never named)",
+     "time dilation (never said)"
+    ],
+    "unsaid": [
+     "Nothing says which number belongs to which cause, or what the signs mean (slow or fast compared with ground clocks).",
+     "The 11.4 km/day figure (listed as something the reader now knows) is neither shown nor said."
+    ],
+    "leap": [
+     "There is no reason at all for why a moving clock runs slow or a higher clock runs fast. Relativity, the topic named in the title, arrives as bare numbers."
+    ],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Beat 7 (objection)",
+    "text": "Shown: day 0/3/5 example. Said: only shared error is absorbed.",
+    "unresolved": [],
+    "unsaid": [
+     "The day 0/3/5 example isn't described, so the reader can't tell what it shows."
+    ],
+    "leap": [
+     "If every satellite gains the same 38 µs/day, that looks like a shared error that b should absorb. The beat doesn't say why the drift is not shared."
+    ],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Beat 8 (close)",
+    "text": "Shown: 10.22999999543 MHz. Said: rate offset; ground corrections.",
+    "unresolved": [
+     "MHz",
+     "rate offset",
+     "ground corrections",
+     "what 10.23 MHz is (the clock's nominal frequency is never given)"
+    ],
+    "unsaid": [
+     "The shown frequency is never linked to 38 µs/day. The fractional offset (about 4.5 × 10⁻¹⁰) is not explained."
+    ],
+    "leap": [
+     "The table doesn't say how a slower tick rate cancels the relativistic gain."
+    ],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Beat 9 (recap)",
+    "text": "Said: answer in the opening words; scope.",
+    "unresolved": [
+     "'scope': the items left out are not listed in the beat"
+    ],
+    "unsaid": [],
+    "leap": [],
+    "excess": [
+     "'answer in the opening words': this repeats beat 1 and gives no sign of saying anything new."
+    ],
+    "purpose_unclear": false
+   }
+  ],
+  "blocking": [
+   "Beat 2: 'time stamp × c = range'. Travel time is never defined as arrival time minus the stamp, and 'c' is not introduced.",
+   "Beat 4: 'bias b is the same for all; extra measurement reveals it'. The bias b and 'pseudorange' are never defined, and the move to four satellites and four unknowns is not said.",
+   "Beat 6: 'two effects, opposite signs'. The effects are not named or explained. The relativity step, which is the core of the explanation, is only numbers.",
+   "Beat 7: 'only shared error is absorbed'. It doesn't say why the satellites' relativistic drift counts as unshared."
+  ],
+  "cuts": [
+   "Beat 9: 'answer in the opening words' repeats beat 1. Merge it into beat 8's close or cut it to one sentence."
+  ],
+  "question": {
+   "text": "How does a GPS receiver find its position from satellite signals, and why does relativity have to be corrected for?",
+   "known_at": "Beat 1 (reader's question: 'How does GPS work, and where does relativity come in?')",
+   "result_stated": "Only as a reference. Beat 1 says 'the result in two sentences', but the beats never show the sentences themselves (they appear only in the author's plan, section 2)."
+  },
+  "motive": "Missing from the beats. The plan's reasons to care ('a phone with a cheap clock finds itself to a few metres', and that an everyday device depends on Einstein's theory) never appear in Said or Shown. The reason for the approach is only implied in beat 2 ('time stamp × c = range'); the line 'signal speed is known exactly, so measure time' appears only in the plan.",
+  "close": "Partial. Beat 8 says 'rate offset; ground corrections' and beat 9 says 'answer in the opening words'. Neither states the general argument in words: four timings give position plus clock error, a 38 µs/day drift means about 11 km/day, so the clocks are set slow.",
+  "recap": "GPS finds you by timing signals from four satellites (the fourth one cancels your phone's clock error), and because relativity makes satellite clocks gain about 38 µs a day, they are built to tick slightly slow.",
+  "strongest": "Beat 4: answering 'my phone clock is not atomic' with a worked 1D example that shows the extra unknown being solved for.",
+  "weakest": "Beat 6: relativity, the topic named in the title, arrives as '−7, +45, +38 µs/day' and 'two effects, opposite signs', with no names and no reasons.",
+  "suggestions": [
+   "In beat 2, say 'travel time = arrival time − time stamp' before multiplying by c, and define c as light speed.",
+   "In beat 6, name the effects: speed (special relativity, −7 µs/day) and weaker gravity at altitude (general relativity, +45 µs/day). Say the 11.4 km/day figure aloud.",
+   "In beat 7, explain why b can't absorb the drift. The satellite clocks drift away from GPS time, so the time stamps and the satellite positions computed from them become inconsistent, and the satellites' clock states differ.",
+   "In beat 8, link 10.23 → 10.22999999543 MHz to a fractional change of about 4.5 × 10⁻¹⁰, which is 38 µs per 86,400 s.",
+   "Put the 'why care' line (cheap phone clock, metre-level accuracy) into beat 1."
+  ]
+ },
+ "usage": {
+  "cost": 0.11163419999999998,
+  "seconds": 42
+ },
+ "findings": [
+  {
+   "n": 1,
+   "severity": "blocking",
+   "kind": "blocking",
+   "text": "Beat 2: 'time stamp × c = range'. Travel time is never defined as arrival time minus the stamp, and 'c' is not introduced."
+  },
+  {
+   "n": 2,
+   "severity": "blocking",
+   "kind": "blocking",
+   "text": "Beat 4: 'bias b is the same for all; extra measurement reveals it'. The bias b and 'pseudorange' are never defined, and the move to four satellites and four unknowns is not said."
+  },
+  {
+   "n": 3,
+   "severity": "blocking",
+   "kind": "blocking",
+   "text": "Beat 6: 'two effects, opposite signs'. The effects are not named or explained. The relativity step, which is the core of the explanation, is only numbers."
+  },
+  {
+   "n": 4,
+   "severity": "blocking",
+   "kind": "blocking",
+   "text": "Beat 7: 'only shared error is absorbed'. It doesn't say why the satellites' relativistic drift counts as unshared."
+  },
+  {
+   "n": 5,
+   "severity": "excess",
+   "kind": "cut",
+   "text": "Beat 9: 'answer in the opening words' repeats beat 1. Merge it into beat 8's close or cut it to one sentence."
+  },
+  {
+   "n": 6,
+   "severity": "edge",
+   "kind": "unsaid",
+   "text": "Beat 1 (hook): The table never gives the 'answer paragraph' or the 'two sentences', so the reader can't check what the result actually is."
+  },
+  {
+   "n": 7,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "Beat 2 (mechanism): time stamp"
+  },
+  {
+   "n": 8,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "Beat 2 (mechanism): c"
+  },
+  {
+   "n": 9,
+   "severity": "edge",
+   "kind": "unsaid",
+   "text": "Beat 2 (mechanism): 'signal content': the words never say what the signal carries."
+  },
+  {
+   "n": 10,
+   "severity": "edge",
+   "kind": "unsaid",
+   "text": "Beat 2 (mechanism): '67 ms': no one says this is the travel time, or that it comes to about 20,200 km."
+  },
+  {
+   "n": 11,
+   "severity": "edge",
+   "kind": "unsaid",
+   "text": "Beat 2 (mechanism): '1 µs ↔ 300 m': the words never say what this conversion is for."
+  },
+  {
+   "n": 12,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "Beat 2 (mechanism): 'time stamp × c = range': a time stamp is a clock reading, not a travel time. The step 'travel time = arrival time − time stamp' is never said, so the formula as written doesn't follow."
+  },
+  {
+   "n": 13,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "Beat 3 (mechanism): Nobody says why a single range is a sphere (every point at that distance from the satellite)."
+  },
+  {
+   "n": 14,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "Beat 4 (objection + instance): bias b"
+  },
+  {
+   "n": 15,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "Beat 4 (objection + instance): pseudorange (listed as something the reader now knows, but it is never said or shown)"
+  },
+  {
+   "n": 16,
+   "severity": "edge",
+   "kind": "unsaid",
+   "text": "Beat 4 (objection + instance): The numbers in the 1D example (13.5 = 12 + 1.5) and the step 5 µs → 1.5 km never appear in Shown or Said."
+  },
+  {
+   "n": 17,
+   "severity": "edge",
+   "kind": "unsaid",
+   "text": "Beat 4 (objection + instance): 'four satellites' is never said; the reader has to work out 3 + 1 alone."
+  },
+  {
+   "n": 18,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "Beat 4 (objection + instance): 'the same for all': the reason (one receiver clock is used for every measurement) is not given."
+  },
+  {
+   "n": 19,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "Beat 4 (objection + instance): 'extra measurement reveals it': it isn't said that this works by adding a fourth unknown and a fourth equation (simultaneous equations)."
+  },
+  {
+   "n": 20,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "Beat 5 (mechanism): GPS time"
+  },
+  {
+   "n": 21,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "Beat 5 (mechanism): ns"
+  },
+  {
+   "n": 22,
+   "severity": "edge",
+   "kind": "unsaid",
+   "text": "Beat 5 (mechanism): Nothing says why 5 m is the target, or where the ~10 ns requirement comes from."
+  },
+  {
+   "n": 23,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "Beat 5 (mechanism): 'satellite clock errors are not solved': the reader has just learned that a clock error can be solved for, and the reason the satellites' errors can't be (each satellite has its own error, not a shared one) only comes in beat 7."
+  },
+  {
+   "n": 24,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "Beat 6 (mechanism): which 'two effects' (speed and gravity are never named)"
+  },
+  {
+   "n": 25,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "Beat 6 (mechanism): time dilation (never said)"
+  },
+  {
+   "n": 26,
+   "severity": "edge",
+   "kind": "unsaid",
+   "text": "Beat 6 (mechanism): Nothing says which number belongs to which cause, or what the signs mean (slow or fast compared with ground clocks)."
+  },
+  {
+   "n": 27,
+   "severity": "edge",
+   "kind": "unsaid",
+   "text": "Beat 6 (mechanism): The 11.4 km/day figure (listed as something the reader now knows) is neither shown nor said."
+  },
+  {
+   "n": 28,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "Beat 6 (mechanism): There is no reason at all for why a moving clock runs slow or a higher clock runs fast. Relativity, the topic named in the title, arrives as bare numbers."
+  },
+  {
+   "n": 29,
+   "severity": "edge",
+   "kind": "unsaid",
+   "text": "Beat 7 (objection): The day 0/3/5 example isn't described, so the reader can't tell what it shows."
+  },
+  {
+   "n": 30,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "Beat 7 (objection): If every satellite gains the same 38 µs/day, that looks like a shared error that b should absorb. The beat doesn't say why the drift is not shared."
+  },
+  {
+   "n": 31,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "Beat 8 (close): MHz"
+  },
+  {
+   "n": 32,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "Beat 8 (close): rate offset"
+  },
+  {
+   "n": 33,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "Beat 8 (close): ground corrections"
+  },
+  {
+   "n": 34,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "Beat 8 (close): what 10.23 MHz is (the clock's nominal frequency is never given)"
+  },
+  {
+   "n": 35,
+   "severity": "edge",
+   "kind": "unsaid",
+   "text": "Beat 8 (close): The shown frequency is never linked to 38 µs/day. The fractional offset (about 4.5 × 10⁻¹⁰) is not explained."
+  },
+  {
+   "n": 36,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "Beat 8 (close): The table doesn't say how a slower tick rate cancels the relativistic gain."
+  },
+  {
+   "n": 37,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "Beat 9 (recap): 'scope': the items left out are not listed in the beat"
+  }
+ ]
+}

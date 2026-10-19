@@ -1,0 +1,12 @@
+{
+  "result": "I wrote `explainers/gps-relativity/explanation.md` as prose with worked numbers, because the subject is one causal chain (time → distance → position → clock agreement → relativity) and needs no diagram or interactive page; I also wrote `model.md` and `model.yaml` with the values, but I had no shell, so `explainer check` was not run and the numbers are hand-checked only.",
+  "error": null,
+  "cost": 0.28801780000000005,
+  "seconds": 89,
+  "turns": 6,
+  "files": [
+    "explainers/gps-relativity/explanation.md"
+  ],
+  "review_cost": 0,
+  "reviews": 0
+}

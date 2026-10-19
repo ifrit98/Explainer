@@ -1,0 +1,39 @@
+{
+  "answers": {
+    "1": {
+      "answer": "Modular exponentiation: each person computes g to the power of their private number, mod p. Doing this is fast. It is safe because undoing it (the discrete logarithm, finding a from g^a mod p) is very hard when p is large, as far as anyone knows. The explanation says this hardness is assumed, not proven.",
+      "quote": "To get the key she needs a or b. That means solving 5^a mod 23 = 8 for a. This problem is the **discrete logarithm**."
+    },
+    "2": {
+      "answer": "Each person raises the other's public value to their own private number. Both end up computing g^(ab) mod p, because the order of the exponents does not matter. Only g^a and g^b are sent, never g^(ab).",
+      "quote": "Order does not matter: (g^b)^a = (g^a)^b = g^(ab)."
+    },
+    "3": {
+      "answer": "A man-in-the-middle attack: an active attacker (Mallory) swaps the public values for her own and ends up sharing a separate key with each side. Authenticating the public values, for example with signatures and certificates as HTTPS does, stops it.",
+      "quote": "The fix is to authenticate the public values, for example with signatures and certificates, as HTTPS does."
+    },
+    "4": {
+      "answer": "Alice sends A = 5^6 mod 23 = 8. Bob sends B = 5^15 mod 23 = 19. Both compute the shared key 2 (19^6 mod 23 = 8^15 mod 23 = 2).",
+      "quote": "Alice: 19^6 mod 23 = **2**.\n   - Bob: 8^15 mod 23 = **2**."
+    }
+  },
+  "stops": [
+    "\"repeated squaring\" is used without being explained: \"because repeated squaring needs only about 2 × 2048 multiplications\"",
+    "The idea of a modular inverse is not explained: \"Eve multiplies 7 by 14, because 5·14 mod 23 = 1\"",
+    "\"signatures and certificates\" are not defined, and it is unclear how they stop the attack: \"for example with signatures and certificates, as HTTPS does\"",
+    "The arithmetic is hard to check: \"Bob: B = 5^15 mod 23 = 19\" and \"8^15 mod 23\" cannot be verified by hand without the repeated-squaring method",
+    "The reason for 2^112 operations is not given: \"The best known methods then need about 2^112 operations\"",
+    "\"Mallory does the same with Bob\" is left implicit: it does not say which key Mallory and Bob end up sharing"
+  ],
+  "excess": [
+    "\"Most systems today use the same idea on elliptic curves (X25519), which gives equal security with much smaller numbers.\"",
+    "\"A large quantum computer would break it (Shor's algorithm), so newer systems add post-quantum key exchange.\"",
+    "\"(NIST estimate)\""
+  ],
+  "grounded": {
+    "1": true,
+    "2": true,
+    "3": true,
+    "4": true
+  }
+}

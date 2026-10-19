@@ -1,0 +1,532 @@
+# What the author did with each review finding (explainer decide). Read by findings --stats.
+2026-10-04T152224-probe#1:
+  decision: adopted
+  note: '8: T^4 is a stated physical law the reader accepts; row removed. 6,10: scope.
+    12,13,15 kept: motive, scope pointer, breaking case of the guarantee.'
+2026-10-04T152224-probe#10:
+  decision: declined
+  note: '8: T^4 is a stated physical law the reader accepts; row removed. 6,10: scope.
+    12,13,15 kept: motive, scope pointer, breaking case of the guarantee.'
+2026-10-04T152224-probe#11:
+  decision: adopted
+  note: '8: T^4 is a stated physical law the reader accepts; row removed. 6,10: scope.
+    12,13,15 kept: motive, scope pointer, breaking case of the guarantee.'
+2026-10-04T152224-probe#12:
+  decision: declined
+  note: '8: T^4 is a stated physical law the reader accepts; row removed. 6,10: scope.
+    12,13,15 kept: motive, scope pointer, breaking case of the guarantee.'
+2026-10-04T152224-probe#13:
+  decision: declined
+  note: '8: T^4 is a stated physical law the reader accepts; row removed. 6,10: scope.
+    12,13,15 kept: motive, scope pointer, breaking case of the guarantee.'
+2026-10-04T152224-probe#14:
+  decision: adopted
+  note: '8: T^4 is a stated physical law the reader accepts; row removed. 6,10: scope.
+    12,13,15 kept: motive, scope pointer, breaking case of the guarantee.'
+2026-10-04T152224-probe#15:
+  decision: declined
+  note: '8: T^4 is a stated physical law the reader accepts; row removed. 6,10: scope.
+    12,13,15 kept: motive, scope pointer, breaking case of the guarantee.'
+2026-10-04T152224-probe#2:
+  decision: adopted
+  note: '8: T^4 is a stated physical law the reader accepts; row removed. 6,10: scope.
+    12,13,15 kept: motive, scope pointer, breaking case of the guarantee.'
+2026-10-04T152224-probe#3:
+  decision: adopted
+  note: '8: T^4 is a stated physical law the reader accepts; row removed. 6,10: scope.
+    12,13,15 kept: motive, scope pointer, breaking case of the guarantee.'
+2026-10-04T152224-probe#4:
+  decision: adopted
+  note: '8: T^4 is a stated physical law the reader accepts; row removed. 6,10: scope.
+    12,13,15 kept: motive, scope pointer, breaking case of the guarantee.'
+2026-10-04T152224-probe#5:
+  decision: adopted
+  note: '8: T^4 is a stated physical law the reader accepts; row removed. 6,10: scope.
+    12,13,15 kept: motive, scope pointer, breaking case of the guarantee.'
+2026-10-04T152224-probe#6:
+  decision: declined
+  note: '8: T^4 is a stated physical law the reader accepts; row removed. 6,10: scope.
+    12,13,15 kept: motive, scope pointer, breaking case of the guarantee.'
+2026-10-04T152224-probe#7:
+  decision: adopted
+  note: '8: T^4 is a stated physical law the reader accepts; row removed. 6,10: scope.
+    12,13,15 kept: motive, scope pointer, breaking case of the guarantee.'
+2026-10-04T152224-probe#8:
+  decision: declined
+  note: '8: T^4 is a stated physical law the reader accepts; row removed. 6,10: scope.
+    12,13,15 kept: motive, scope pointer, breaking case of the guarantee.'
+2026-10-04T152224-probe#9:
+  decision: adopted
+  note: '8: T^4 is a stated physical law the reader accepts; row removed. 6,10: scope.
+    12,13,15 kept: motive, scope pointer, breaking case of the guarantee.'
+2026-10-04T152459-coldread-narrative#1:
+  decision: adopted
+  note: '6 declined: one-line feedback pointer answers the reader''s obvious ''how
+    much really'' question. Remaining: tabular shorthand; rendering defines each term.'
+2026-10-04T152459-coldread-narrative#10:
+  decision: declined
+  note: '6 declined: one-line feedback pointer answers the reader''s obvious ''how
+    much really'' question. Remaining: tabular shorthand; rendering defines each term.'
+2026-10-04T152459-coldread-narrative#11:
+  decision: declined
+  note: '6 declined: one-line feedback pointer answers the reader''s obvious ''how
+    much really'' question. Remaining: tabular shorthand; rendering defines each term.'
+2026-10-04T152459-coldread-narrative#12:
+  decision: declined
+  note: '6 declined: one-line feedback pointer answers the reader''s obvious ''how
+    much really'' question. Remaining: tabular shorthand; rendering defines each term.'
+2026-10-04T152459-coldread-narrative#13:
+  decision: declined
+  note: '6 declined: one-line feedback pointer answers the reader''s obvious ''how
+    much really'' question. Remaining: tabular shorthand; rendering defines each term.'
+2026-10-04T152459-coldread-narrative#14:
+  decision: declined
+  note: '6 declined: one-line feedback pointer answers the reader''s obvious ''how
+    much really'' question. Remaining: tabular shorthand; rendering defines each term.'
+2026-10-04T152459-coldread-narrative#15:
+  decision: declined
+  note: '6 declined: one-line feedback pointer answers the reader''s obvious ''how
+    much really'' question. Remaining: tabular shorthand; rendering defines each term.'
+2026-10-04T152459-coldread-narrative#16:
+  decision: adopted
+  note: '6 declined: one-line feedback pointer answers the reader''s obvious ''how
+    much really'' question. Remaining: tabular shorthand; rendering defines each term.'
+2026-10-04T152459-coldread-narrative#17:
+  decision: adopted
+  note: '6 declined: one-line feedback pointer answers the reader''s obvious ''how
+    much really'' question. Remaining: tabular shorthand; rendering defines each term.'
+2026-10-04T152459-coldread-narrative#18:
+  decision: adopted
+  note: '6 declined: one-line feedback pointer answers the reader''s obvious ''how
+    much really'' question. Remaining: tabular shorthand; rendering defines each term.'
+2026-10-04T152459-coldread-narrative#19:
+  decision: adopted
+  note: '6 declined: one-line feedback pointer answers the reader''s obvious ''how
+    much really'' question. Remaining: tabular shorthand; rendering defines each term.'
+2026-10-04T152459-coldread-narrative#2:
+  decision: adopted
+  note: '6 declined: one-line feedback pointer answers the reader''s obvious ''how
+    much really'' question. Remaining: tabular shorthand; rendering defines each term.'
+2026-10-04T152459-coldread-narrative#20:
+  decision: adopted
+  note: '6 declined: one-line feedback pointer answers the reader''s obvious ''how
+    much really'' question. Remaining: tabular shorthand; rendering defines each term.'
+2026-10-04T152459-coldread-narrative#21:
+  decision: adopted
+  note: '6 declined: one-line feedback pointer answers the reader''s obvious ''how
+    much really'' question. Remaining: tabular shorthand; rendering defines each term.'
+2026-10-04T152459-coldread-narrative#22:
+  decision: adopted
+  note: '6 declined: one-line feedback pointer answers the reader''s obvious ''how
+    much really'' question. Remaining: tabular shorthand; rendering defines each term.'
+2026-10-04T152459-coldread-narrative#23:
+  decision: adopted
+  note: '6 declined: one-line feedback pointer answers the reader''s obvious ''how
+    much really'' question. Remaining: tabular shorthand; rendering defines each term.'
+2026-10-04T152459-coldread-narrative#24:
+  decision: declined
+  note: '6 declined: one-line feedback pointer answers the reader''s obvious ''how
+    much really'' question. Remaining: tabular shorthand; rendering defines each term.'
+2026-10-04T152459-coldread-narrative#25:
+  decision: adopted
+  note: '6 declined: one-line feedback pointer answers the reader''s obvious ''how
+    much really'' question. Remaining: tabular shorthand; rendering defines each term.'
+2026-10-04T152459-coldread-narrative#26:
+  decision: adopted
+  note: '6 declined: one-line feedback pointer answers the reader''s obvious ''how
+    much really'' question. Remaining: tabular shorthand; rendering defines each term.'
+2026-10-04T152459-coldread-narrative#27:
+  decision: adopted
+  note: '6 declined: one-line feedback pointer answers the reader''s obvious ''how
+    much really'' question. Remaining: tabular shorthand; rendering defines each term.'
+2026-10-04T152459-coldread-narrative#28:
+  decision: adopted
+  note: '6 declined: one-line feedback pointer answers the reader''s obvious ''how
+    much really'' question. Remaining: tabular shorthand; rendering defines each term.'
+2026-10-04T152459-coldread-narrative#29:
+  decision: declined
+  note: '6 declined: one-line feedback pointer answers the reader''s obvious ''how
+    much really'' question. Remaining: tabular shorthand; rendering defines each term.'
+2026-10-04T152459-coldread-narrative#3:
+  decision: adopted
+  note: '6 declined: one-line feedback pointer answers the reader''s obvious ''how
+    much really'' question. Remaining: tabular shorthand; rendering defines each term.'
+2026-10-04T152459-coldread-narrative#30:
+  decision: declined
+  note: '6 declined: one-line feedback pointer answers the reader''s obvious ''how
+    much really'' question. Remaining: tabular shorthand; rendering defines each term.'
+2026-10-04T152459-coldread-narrative#31:
+  decision: declined
+  note: '6 declined: one-line feedback pointer answers the reader''s obvious ''how
+    much really'' question. Remaining: tabular shorthand; rendering defines each term.'
+2026-10-04T152459-coldread-narrative#32:
+  decision: adopted
+  note: '6 declined: one-line feedback pointer answers the reader''s obvious ''how
+    much really'' question. Remaining: tabular shorthand; rendering defines each term.'
+2026-10-04T152459-coldread-narrative#33:
+  decision: adopted
+  note: '6 declined: one-line feedback pointer answers the reader''s obvious ''how
+    much really'' question. Remaining: tabular shorthand; rendering defines each term.'
+2026-10-04T152459-coldread-narrative#34:
+  decision: adopted
+  note: '6 declined: one-line feedback pointer answers the reader''s obvious ''how
+    much really'' question. Remaining: tabular shorthand; rendering defines each term.'
+2026-10-04T152459-coldread-narrative#35:
+  decision: declined
+  note: '6 declined: one-line feedback pointer answers the reader''s obvious ''how
+    much really'' question. Remaining: tabular shorthand; rendering defines each term.'
+2026-10-04T152459-coldread-narrative#36:
+  decision: declined
+  note: '6 declined: one-line feedback pointer answers the reader''s obvious ''how
+    much really'' question. Remaining: tabular shorthand; rendering defines each term.'
+2026-10-04T152459-coldread-narrative#37:
+  decision: declined
+  note: '6 declined: one-line feedback pointer answers the reader''s obvious ''how
+    much really'' question. Remaining: tabular shorthand; rendering defines each term.'
+2026-10-04T152459-coldread-narrative#38:
+  decision: adopted
+  note: '6 declined: one-line feedback pointer answers the reader''s obvious ''how
+    much really'' question. Remaining: tabular shorthand; rendering defines each term.'
+2026-10-04T152459-coldread-narrative#39:
+  decision: declined
+  note: '6 declined: one-line feedback pointer answers the reader''s obvious ''how
+    much really'' question. Remaining: tabular shorthand; rendering defines each term.'
+2026-10-04T152459-coldread-narrative#4:
+  decision: adopted
+  note: '6 declined: one-line feedback pointer answers the reader''s obvious ''how
+    much really'' question. Remaining: tabular shorthand; rendering defines each term.'
+2026-10-04T152459-coldread-narrative#40:
+  decision: adopted
+  note: '6 declined: one-line feedback pointer answers the reader''s obvious ''how
+    much really'' question. Remaining: tabular shorthand; rendering defines each term.'
+2026-10-04T152459-coldread-narrative#41:
+  decision: declined
+  note: '6 declined: one-line feedback pointer answers the reader''s obvious ''how
+    much really'' question. Remaining: tabular shorthand; rendering defines each term.'
+2026-10-04T152459-coldread-narrative#42:
+  decision: declined
+  note: '6 declined: one-line feedback pointer answers the reader''s obvious ''how
+    much really'' question. Remaining: tabular shorthand; rendering defines each term.'
+2026-10-04T152459-coldread-narrative#43:
+  decision: declined
+  note: '6 declined: one-line feedback pointer answers the reader''s obvious ''how
+    much really'' question. Remaining: tabular shorthand; rendering defines each term.'
+2026-10-04T152459-coldread-narrative#44:
+  decision: declined
+  note: '6 declined: one-line feedback pointer answers the reader''s obvious ''how
+    much really'' question. Remaining: tabular shorthand; rendering defines each term.'
+2026-10-04T152459-coldread-narrative#45:
+  decision: adopted
+  note: '6 declined: one-line feedback pointer answers the reader''s obvious ''how
+    much really'' question. Remaining: tabular shorthand; rendering defines each term.'
+2026-10-04T152459-coldread-narrative#46:
+  decision: adopted
+  note: '6 declined: one-line feedback pointer answers the reader''s obvious ''how
+    much really'' question. Remaining: tabular shorthand; rendering defines each term.'
+2026-10-04T152459-coldread-narrative#47:
+  decision: declined
+  note: '6 declined: one-line feedback pointer answers the reader''s obvious ''how
+    much really'' question. Remaining: tabular shorthand; rendering defines each term.'
+2026-10-04T152459-coldread-narrative#48:
+  decision: declined
+  note: '6 declined: one-line feedback pointer answers the reader''s obvious ''how
+    much really'' question. Remaining: tabular shorthand; rendering defines each term.'
+2026-10-04T152459-coldread-narrative#49:
+  decision: declined
+  note: '6 declined: one-line feedback pointer answers the reader''s obvious ''how
+    much really'' question. Remaining: tabular shorthand; rendering defines each term.'
+2026-10-04T152459-coldread-narrative#5:
+  decision: adopted
+  note: '6 declined: one-line feedback pointer answers the reader''s obvious ''how
+    much really'' question. Remaining: tabular shorthand; rendering defines each term.'
+2026-10-04T152459-coldread-narrative#50:
+  decision: adopted
+  note: '6 declined: one-line feedback pointer answers the reader''s obvious ''how
+    much really'' question. Remaining: tabular shorthand; rendering defines each term.'
+2026-10-04T152459-coldread-narrative#51:
+  decision: adopted
+  note: '6 declined: one-line feedback pointer answers the reader''s obvious ''how
+    much really'' question. Remaining: tabular shorthand; rendering defines each term.'
+2026-10-04T152459-coldread-narrative#52:
+  decision: adopted
+  note: '6 declined: one-line feedback pointer answers the reader''s obvious ''how
+    much really'' question. Remaining: tabular shorthand; rendering defines each term.'
+2026-10-04T152459-coldread-narrative#53:
+  decision: declined
+  note: '6 declined: one-line feedback pointer answers the reader''s obvious ''how
+    much really'' question. Remaining: tabular shorthand; rendering defines each term.'
+2026-10-04T152459-coldread-narrative#54:
+  decision: adopted
+  note: '6 declined: one-line feedback pointer answers the reader''s obvious ''how
+    much really'' question. Remaining: tabular shorthand; rendering defines each term.'
+2026-10-04T152459-coldread-narrative#6:
+  decision: declined
+  note: '6 declined: one-line feedback pointer answers the reader''s obvious ''how
+    much really'' question. Remaining: tabular shorthand; rendering defines each term.'
+2026-10-04T152459-coldread-narrative#7:
+  decision: adopted
+  note: '6 declined: one-line feedback pointer answers the reader''s obvious ''how
+    much really'' question. Remaining: tabular shorthand; rendering defines each term.'
+2026-10-04T152459-coldread-narrative#8:
+  decision: adopted
+  note: '6 declined: one-line feedback pointer answers the reader''s obvious ''how
+    much really'' question. Remaining: tabular shorthand; rendering defines each term.'
+2026-10-04T152459-coldread-narrative#9:
+  decision: adopted
+  note: '6 declined: one-line feedback pointer answers the reader''s obvious ''how
+    much really'' question. Remaining: tabular shorthand; rendering defines each term.'
+2026-10-04T152723-coldread-prose#1:
+  decision: adopted
+  note: '1: budget table replaced by one sentence. 7,9 resolved by the same edits.'
+2026-10-04T152723-coldread-prose#10:
+  decision: adopted
+  note: '1: budget table replaced by one sentence. 7,9 resolved by the same edits.'
+2026-10-04T152723-coldread-prose#2:
+  decision: adopted
+  note: '1: budget table replaced by one sentence. 7,9 resolved by the same edits.'
+2026-10-04T152723-coldread-prose#3:
+  decision: adopted
+  note: '1: budget table replaced by one sentence. 7,9 resolved by the same edits.'
+2026-10-04T152723-coldread-prose#4:
+  decision: adopted
+  note: '1: budget table replaced by one sentence. 7,9 resolved by the same edits.'
+2026-10-04T152723-coldread-prose#5:
+  decision: adopted
+  note: '1: budget table replaced by one sentence. 7,9 resolved by the same edits.'
+2026-10-04T152723-coldread-prose#6:
+  decision: adopted
+  note: '1: budget table replaced by one sentence. 7,9 resolved by the same edits.'
+2026-10-04T152723-coldread-prose#7:
+  decision: declined
+  note: '1: budget table replaced by one sentence. 7,9 resolved by the same edits.'
+2026-10-04T152723-coldread-prose#8:
+  decision: adopted
+  note: '1: budget table replaced by one sentence. 7,9 resolved by the same edits.'
+2026-10-04T152723-coldread-prose#9:
+  decision: declined
+  note: '1: budget table replaced by one sentence. 7,9 resolved by the same edits.'
+2026-10-04T152840-quiz-prose#1:
+  decision: declined
+  note: '12 scored 1 because the ask did not request a reason: asks rewritten, duplicates
+    removed. 6,9,11,13,18,21,22: out of scope (logarithm, feedbacks). 14,15: carry
+    the why-divide-4 claim and the probe''s main surface-budget finding.'
+2026-10-04T152840-quiz-prose#10:
+  decision: adopted
+  note: '12 scored 1 because the ask did not request a reason: asks rewritten, duplicates
+    removed. 6,9,11,13,18,21,22: out of scope (logarithm, feedbacks). 14,15: carry
+    the why-divide-4 claim and the probe''s main surface-budget finding.'
+2026-10-04T152840-quiz-prose#11:
+  decision: declined
+  note: '12 scored 1 because the ask did not request a reason: asks rewritten, duplicates
+    removed. 6,9,11,13,18,21,22: out of scope (logarithm, feedbacks). 14,15: carry
+    the why-divide-4 claim and the probe''s main surface-budget finding.'
+2026-10-04T152840-quiz-prose#12:
+  decision: declined
+  note: '12 scored 1 because the ask did not request a reason: asks rewritten, duplicates
+    removed. 6,9,11,13,18,21,22: out of scope (logarithm, feedbacks). 14,15: carry
+    the why-divide-4 claim and the probe''s main surface-budget finding.'
+2026-10-04T152840-quiz-prose#13:
+  decision: declined
+  note: '12 scored 1 because the ask did not request a reason: asks rewritten, duplicates
+    removed. 6,9,11,13,18,21,22: out of scope (logarithm, feedbacks). 14,15: carry
+    the why-divide-4 claim and the probe''s main surface-budget finding.'
+2026-10-04T152840-quiz-prose#14:
+  decision: declined
+  note: '12 scored 1 because the ask did not request a reason: asks rewritten, duplicates
+    removed. 6,9,11,13,18,21,22: out of scope (logarithm, feedbacks). 14,15: carry
+    the why-divide-4 claim and the probe''s main surface-budget finding.'
+2026-10-04T152840-quiz-prose#15:
+  decision: declined
+  note: '12 scored 1 because the ask did not request a reason: asks rewritten, duplicates
+    removed. 6,9,11,13,18,21,22: out of scope (logarithm, feedbacks). 14,15: carry
+    the why-divide-4 claim and the probe''s main surface-budget finding.'
+2026-10-04T152840-quiz-prose#16:
+  decision: adopted
+  note: '12 scored 1 because the ask did not request a reason: asks rewritten, duplicates
+    removed. 6,9,11,13,18,21,22: out of scope (logarithm, feedbacks). 14,15: carry
+    the why-divide-4 claim and the probe''s main surface-budget finding.'
+2026-10-04T152840-quiz-prose#17:
+  decision: adopted
+  note: '12 scored 1 because the ask did not request a reason: asks rewritten, duplicates
+    removed. 6,9,11,13,18,21,22: out of scope (logarithm, feedbacks). 14,15: carry
+    the why-divide-4 claim and the probe''s main surface-budget finding.'
+2026-10-04T152840-quiz-prose#18:
+  decision: declined
+  note: '12 scored 1 because the ask did not request a reason: asks rewritten, duplicates
+    removed. 6,9,11,13,18,21,22: out of scope (logarithm, feedbacks). 14,15: carry
+    the why-divide-4 claim and the probe''s main surface-budget finding.'
+2026-10-04T152840-quiz-prose#19:
+  decision: adopted
+  note: '12 scored 1 because the ask did not request a reason: asks rewritten, duplicates
+    removed. 6,9,11,13,18,21,22: out of scope (logarithm, feedbacks). 14,15: carry
+    the why-divide-4 claim and the probe''s main surface-budget finding.'
+2026-10-04T152840-quiz-prose#2:
+  decision: declined
+  note: '12 scored 1 because the ask did not request a reason: asks rewritten, duplicates
+    removed. 6,9,11,13,18,21,22: out of scope (logarithm, feedbacks). 14,15: carry
+    the why-divide-4 claim and the probe''s main surface-budget finding.'
+2026-10-04T152840-quiz-prose#20:
+  decision: adopted
+  note: '12 scored 1 because the ask did not request a reason: asks rewritten, duplicates
+    removed. 6,9,11,13,18,21,22: out of scope (logarithm, feedbacks). 14,15: carry
+    the why-divide-4 claim and the probe''s main surface-budget finding.'
+2026-10-04T152840-quiz-prose#21:
+  decision: declined
+  note: '12 scored 1 because the ask did not request a reason: asks rewritten, duplicates
+    removed. 6,9,11,13,18,21,22: out of scope (logarithm, feedbacks). 14,15: carry
+    the why-divide-4 claim and the probe''s main surface-budget finding.'
+2026-10-04T152840-quiz-prose#22:
+  decision: declined
+  note: '12 scored 1 because the ask did not request a reason: asks rewritten, duplicates
+    removed. 6,9,11,13,18,21,22: out of scope (logarithm, feedbacks). 14,15: carry
+    the why-divide-4 claim and the probe''s main surface-budget finding.'
+2026-10-04T152840-quiz-prose#23:
+  decision: adopted
+  note: '12 scored 1 because the ask did not request a reason: asks rewritten, duplicates
+    removed. 6,9,11,13,18,21,22: out of scope (logarithm, feedbacks). 14,15: carry
+    the why-divide-4 claim and the probe''s main surface-budget finding.'
+2026-10-04T152840-quiz-prose#3:
+  decision: declined
+  note: '12 scored 1 because the ask did not request a reason: asks rewritten, duplicates
+    removed. 6,9,11,13,18,21,22: out of scope (logarithm, feedbacks). 14,15: carry
+    the why-divide-4 claim and the probe''s main surface-budget finding.'
+2026-10-04T152840-quiz-prose#4:
+  decision: adopted
+  note: '12 scored 1 because the ask did not request a reason: asks rewritten, duplicates
+    removed. 6,9,11,13,18,21,22: out of scope (logarithm, feedbacks). 14,15: carry
+    the why-divide-4 claim and the probe''s main surface-budget finding.'
+2026-10-04T152840-quiz-prose#5:
+  decision: adopted
+  note: '12 scored 1 because the ask did not request a reason: asks rewritten, duplicates
+    removed. 6,9,11,13,18,21,22: out of scope (logarithm, feedbacks). 14,15: carry
+    the why-divide-4 claim and the probe''s main surface-budget finding.'
+2026-10-04T152840-quiz-prose#6:
+  decision: declined
+  note: '12 scored 1 because the ask did not request a reason: asks rewritten, duplicates
+    removed. 6,9,11,13,18,21,22: out of scope (logarithm, feedbacks). 14,15: carry
+    the why-divide-4 claim and the probe''s main surface-budget finding.'
+2026-10-04T152840-quiz-prose#7:
+  decision: adopted
+  note: '12 scored 1 because the ask did not request a reason: asks rewritten, duplicates
+    removed. 6,9,11,13,18,21,22: out of scope (logarithm, feedbacks). 14,15: carry
+    the why-divide-4 claim and the probe''s main surface-budget finding.'
+2026-10-04T152840-quiz-prose#8:
+  decision: declined
+  note: '12 scored 1 because the ask did not request a reason: asks rewritten, duplicates
+    removed. 6,9,11,13,18,21,22: out of scope (logarithm, feedbacks). 14,15: carry
+    the why-divide-4 claim and the probe''s main surface-budget finding.'
+2026-10-04T152840-quiz-prose#9:
+  decision: declined
+  note: '12 scored 1 because the ask did not request a reason: asks rewritten, duplicates
+    removed. 6,9,11,13,18,21,22: out of scope (logarithm, feedbacks). 14,15: carry
+    the why-divide-4 claim and the probe''s main surface-budget finding.'
+2026-10-04T153030-quiz-prose#1:
+  decision: declined
+  note: 'Item 5 partial: labeled emission height as an average of a spread, 150 m
+    and 3 K as calculation/assessment, removed unmodeled satellite clause. Rest: scope
+    (logarithm, feedbacks, timing) or already declined.'
+2026-10-04T153030-quiz-prose#10:
+  decision: declined
+  note: 'Item 5 partial: labeled emission height as an average of a spread, 150 m
+    and 3 K as calculation/assessment, removed unmodeled satellite clause. Rest: scope
+    (logarithm, feedbacks, timing) or already declined.'
+2026-10-04T153030-quiz-prose#11:
+  decision: declined
+  note: 'Item 5 partial: labeled emission height as an average of a spread, 150 m
+    and 3 K as calculation/assessment, removed unmodeled satellite clause. Rest: scope
+    (logarithm, feedbacks, timing) or already declined.'
+2026-10-04T153030-quiz-prose#12:
+  decision: declined
+  note: 'Item 5 partial: labeled emission height as an average of a spread, 150 m
+    and 3 K as calculation/assessment, removed unmodeled satellite clause. Rest: scope
+    (logarithm, feedbacks, timing) or already declined.'
+2026-10-04T153030-quiz-prose#13:
+  decision: declined
+  note: 'Item 5 partial: labeled emission height as an average of a spread, 150 m
+    and 3 K as calculation/assessment, removed unmodeled satellite clause. Rest: scope
+    (logarithm, feedbacks, timing) or already declined.'
+2026-10-04T153030-quiz-prose#14:
+  decision: declined
+  note: 'Item 5 partial: labeled emission height as an average of a spread, 150 m
+    and 3 K as calculation/assessment, removed unmodeled satellite clause. Rest: scope
+    (logarithm, feedbacks, timing) or already declined.'
+2026-10-04T153030-quiz-prose#15:
+  decision: declined
+  note: 'Item 5 partial: labeled emission height as an average of a spread, 150 m
+    and 3 K as calculation/assessment, removed unmodeled satellite clause. Rest: scope
+    (logarithm, feedbacks, timing) or already declined.'
+2026-10-04T153030-quiz-prose#16:
+  decision: declined
+  note: 'Item 5 partial: labeled emission height as an average of a spread, 150 m
+    and 3 K as calculation/assessment, removed unmodeled satellite clause. Rest: scope
+    (logarithm, feedbacks, timing) or already declined.'
+2026-10-04T153030-quiz-prose#17:
+  decision: adopted
+  note: 'Item 5 partial: labeled emission height as an average of a spread, 150 m
+    and 3 K as calculation/assessment, removed unmodeled satellite clause. Rest: scope
+    (logarithm, feedbacks, timing) or already declined.'
+2026-10-04T153030-quiz-prose#18:
+  decision: adopted
+  note: 'Item 5 partial: labeled emission height as an average of a spread, 150 m
+    and 3 K as calculation/assessment, removed unmodeled satellite clause. Rest: scope
+    (logarithm, feedbacks, timing) or already declined.'
+2026-10-04T153030-quiz-prose#19:
+  decision: declined
+  note: 'Item 5 partial: labeled emission height as an average of a spread, 150 m
+    and 3 K as calculation/assessment, removed unmodeled satellite clause. Rest: scope
+    (logarithm, feedbacks, timing) or already declined.'
+2026-10-04T153030-quiz-prose#2:
+  decision: declined
+  note: 'Item 5 partial: labeled emission height as an average of a spread, 150 m
+    and 3 K as calculation/assessment, removed unmodeled satellite clause. Rest: scope
+    (logarithm, feedbacks, timing) or already declined.'
+2026-10-04T153030-quiz-prose#20:
+  decision: declined
+  note: 'Item 5 partial: labeled emission height as an average of a spread, 150 m
+    and 3 K as calculation/assessment, removed unmodeled satellite clause. Rest: scope
+    (logarithm, feedbacks, timing) or already declined.'
+2026-10-04T153030-quiz-prose#21:
+  decision: declined
+  note: 'Item 5 partial: labeled emission height as an average of a spread, 150 m
+    and 3 K as calculation/assessment, removed unmodeled satellite clause. Rest: scope
+    (logarithm, feedbacks, timing) or already declined.'
+2026-10-04T153030-quiz-prose#22:
+  decision: declined
+  note: 'Item 5 partial: labeled emission height as an average of a spread, 150 m
+    and 3 K as calculation/assessment, removed unmodeled satellite clause. Rest: scope
+    (logarithm, feedbacks, timing) or already declined.'
+2026-10-04T153030-quiz-prose#3:
+  decision: adopted
+  note: 'Item 5 partial: labeled emission height as an average of a spread, 150 m
+    and 3 K as calculation/assessment, removed unmodeled satellite clause. Rest: scope
+    (logarithm, feedbacks, timing) or already declined.'
+2026-10-04T153030-quiz-prose#4:
+  decision: declined
+  note: 'Item 5 partial: labeled emission height as an average of a spread, 150 m
+    and 3 K as calculation/assessment, removed unmodeled satellite clause. Rest: scope
+    (logarithm, feedbacks, timing) or already declined.'
+2026-10-04T153030-quiz-prose#5:
+  decision: adopted
+  note: 'Item 5 partial: labeled emission height as an average of a spread, 150 m
+    and 3 K as calculation/assessment, removed unmodeled satellite clause. Rest: scope
+    (logarithm, feedbacks, timing) or already declined.'
+2026-10-04T153030-quiz-prose#6:
+  decision: declined
+  note: 'Item 5 partial: labeled emission height as an average of a spread, 150 m
+    and 3 K as calculation/assessment, removed unmodeled satellite clause. Rest: scope
+    (logarithm, feedbacks, timing) or already declined.'
+2026-10-04T153030-quiz-prose#7:
+  decision: declined
+  note: 'Item 5 partial: labeled emission height as an average of a spread, 150 m
+    and 3 K as calculation/assessment, removed unmodeled satellite clause. Rest: scope
+    (logarithm, feedbacks, timing) or already declined.'
+2026-10-04T153030-quiz-prose#8:
+  decision: declined
+  note: 'Item 5 partial: labeled emission height as an average of a spread, 150 m
+    and 3 K as calculation/assessment, removed unmodeled satellite clause. Rest: scope
+    (logarithm, feedbacks, timing) or already declined.'
+2026-10-04T153030-quiz-prose#9:
+  decision: declined
+  note: 'Item 5 partial: labeled emission height as an average of a spread, 150 m
+    and 3 K as calculation/assessment, removed unmodeled satellite clause. Rest: scope
+    (logarithm, feedbacks, timing) or already declined.'

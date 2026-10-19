@@ -1,0 +1,42 @@
+{
+  "answers": {
+    "1": {
+      "answer": "The Moon pulls the far side less than it pulls Earth's centre. The whole Earth falls toward the Moon faster than the far-side water does, so relative to the Earth that water is left behind and bulges away from the Moon.",
+      "quote": "The far-side water moves toward the Moon *slower* than the Earth does. The Earth falls away from it, so it bulges away from the Moon."
+    },
+    "2": {
+      "answer": "The Moon moves about 13° along its orbit each day, in the same direction the Earth turns. So the Earth needs about 50 extra minutes to face the Moon again. A full cycle takes 24 h 50 min, and two bulges per cycle gives about 12 h 25 min between high tides.",
+      "quote": "In one day the Moon moves about 13° along its orbit, in the same direction as the Earth turns. The Earth needs about 50 more minutes to face the Moon again."
+    },
+    "3": {
+      "answer": "At new and full moon (spring tides). The Sun and Moon line up, so their bulges add together. At quarter moons they are at 90° and partly cancel, giving small neap tides.",
+      "quote": "When the Sun and Moon line up (new and full moon), their bulges add: large **spring tides**."
+    },
+    "4": {
+      "answer": "Reasoning from the text: the extra 50 minutes comes only from the Moon's orbital motion. Without it, the cycle would be 24 h, so high tides would come every 12 h. This is not stated directly.",
+      "quote": "The Earth needs about 50 more minutes to face the Moon again. So high tides come every 12 h 25 min"
+    }
+  },
+  "stops": [
+    "\"In practice, the Earth is in free fall toward the Moon.\" It isn't explained how orbiting a common centre of mass counts as free fall, or why that means we only feel differences.",
+    "\"acceleration = GM / d²\": G and M are never defined; GM is just given as a number.",
+    "\"Both are close to 2GMR/d³\": the formula appears without saying where the 2 and the R/d³ come from.",
+    "\"the Moon's pull points slightly inward, toward the Earth–Moon line\": no reason is given for why it points inward at the sides.",
+    "\"It works because part of it points *along* the surface\": it's unclear which part points along the surface, and where.",
+    "\"model output, \"equilibrium tide\"\": the term is named but not explained, and it's unclear what model produced the half metre.",
+    "\"the spin is symmetric about the Earth's axis. It does not know where the Moon is\": this rebuts a misconception the reader may never have held, and it uses phrasing that is a bit abstract.",
+    "\"resonance of ocean basins\": not defined.",
+    "\"the Moon's tilt relative to the equator\": appears without any explanation of how it leads to one tide a day."
+  ],
+  "excess": [
+    "\"| Near side | d − R = 378,029 km | 3.429 × 10⁻⁵ |\": the full numeric table is more detail than the 'why' needs.",
+    "\"Because the effect goes as 1/d³, a Moon at half the distance would give 8 times the tidal acceleration.\": off the main question.",
+    "\"for example, more than 15 m in the Bay of Fundy\": a side example."
+  ],
+  "grounded": {
+    "1": true,
+    "2": true,
+    "3": true,
+    "4": true
+  }
+}

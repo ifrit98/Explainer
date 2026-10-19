@@ -1,0 +1,59 @@
+{
+  "key": {
+    "A": "published",
+    "B": "principles",
+    "C": "quick",
+    "D": "none"
+  },
+  "grades": {
+    "published": {
+      "quiz": [
+        2,
+        2,
+        2,
+        2
+      ],
+      "misconception": "corrected",
+      "errors": []
+    },
+    "principles": {
+      "quiz": [
+        2,
+        2,
+        2,
+        2
+      ],
+      "misconception": "corrected",
+      "errors": []
+    },
+    "quick": {
+      "quiz": [
+        2,
+        2,
+        2,
+        2
+      ],
+      "misconception": "corrected",
+      "errors": [
+        "Change the target | The target protein changes shape, so the drug cannot bind | MRSA makes a cell-wall enzyme that penicillin-type drugs do not bind (MRSA acquires an extra, different enzyme, PBP2a; its existing target does not change shape)"
+      ]
+    },
+    "none": {
+      "quiz": [
+        2,
+        2,
+        2,
+        2
+      ],
+      "misconception": "corrected",
+      "errors": []
+    }
+  },
+  "rank": [
+    "published",
+    "principles",
+    "quick",
+    "none"
+  ],
+  "why_best": "A builds the full chain (pre-existing variation, mechanisms, selection, Luria–Delbrück evidence and horizontal transfer) in compact, checkable steps, with worked numbers a technical reader can verify and no detours."
+}

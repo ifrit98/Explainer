@@ -1,0 +1,50 @@
+{
+  "answers": {
+    "1": {
+      "answer": "A vaccine must contain the antigen or genetic instructions for making it. It doesn't make you ill because it contains no pathogen capable of multiplying to cause disease.",
+      "quote": "A **vaccine** contains the antigen, or instructions for the body's cells to make it. It contains no pathogen that can multiply to disease."
+    },
+    "2": {
+      "answer": "Vaccination creates memory cells that are 100 times more numerous than the original matching lymphocytes. These memory cells activate faster because they already wait in body tissues and require less stimulation.",
+      "quote": "Illustrative: 1% of 1,000,000 is 10,000 memory cells, which is 100× the original precursor count of 100...Memory cells already wait in the tissues and need less stimulation, so they activate in under a day. Total: about 3 days."
+    },
+    "3": {
+      "answer": "A vaccine against one virus doesn't protect against an unrelated virus because memory cells only recognize the specific antigen that trained them.",
+      "quote": "Memory cells bind only the antigen that made them."
+    },
+    "4": {
+      "answer": "When the virus changes the shape of its antigen, the old memory cell receptors bind poorly, so the immune response falls back to the slower primary response, reducing protection.",
+      "quote": "The old memory receptors bind poorly, so the response falls back toward the slow first one. That is why flu vaccines prevent only about 40–60% of cases in a typical season and are updated every year."
+    }
+  },
+  "stops": [
+    "joining pieces of genes in a random combination and adding random edits",
+    "Memory cells already wait in the tissues and need less stimulation",
+    "need about 2.5 days to meet the antigen and activate",
+    "binds one family of similar molecular shapes",
+    "does not need as many cells as the pathogen has particles",
+    "does not design a receptor...selects from a random library",
+    "release thousands of antibodies per second",
+    "1 in 100,000 to 1 in 1,000,000...Illustrative: 100 cells",
+    "100 × 2^n = 1,000,000, so 2^n = 10,000",
+    "immune cells that sense a threat"
+  ],
+  "excess": [
+    "Numbers marked *illustrative* are round numbers",
+    "One gene per receptor is impossible",
+    "Some release **antibodies**...Others kill infected cells",
+    "each doubling saves one division",
+    "For simplicity, use this one target",
+    "more than 100 million different receptors",
+    "Call this number the **precursor count**",
+    "improve their fit over weeks",
+    "need about 2.5 days to meet",
+    "thousands of antibodies per second"
+  ],
+  "grounded": {
+    "1": true,
+    "2": true,
+    "3": true,
+    "4": true
+  }
+}

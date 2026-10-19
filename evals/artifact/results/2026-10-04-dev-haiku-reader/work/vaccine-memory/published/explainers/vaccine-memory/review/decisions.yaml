@@ -1,0 +1,193 @@
+# What the author did with each review finding (explainer decide). Read by findings --stats.
+2026-10-04T145746-probe#1:
+  decision: adopted
+2026-10-04T145746-probe#10:
+  decision: adopted
+2026-10-04T145746-probe#11:
+  decision: adopted
+2026-10-04T145746-probe#12:
+  decision: adopted
+2026-10-04T145746-probe#13:
+  decision: adopted
+2026-10-04T145746-probe#14:
+  decision: adopted
+2026-10-04T145746-probe#15:
+  decision: declined
+2026-10-04T145746-probe#16:
+  decision: declined
+2026-10-04T145746-probe#2:
+  decision: adopted
+2026-10-04T145746-probe#3:
+  decision: adopted
+2026-10-04T145746-probe#4:
+  decision: adopted
+2026-10-04T145746-probe#5:
+  decision: declined
+2026-10-04T145746-probe#6:
+  decision: adopted
+2026-10-04T145746-probe#7:
+  decision: adopted
+2026-10-04T145746-probe#8:
+  decision: declined
+2026-10-04T145746-probe#9:
+  decision: adopted
+2026-10-04T150002-coldread-narrative#1:
+  decision: adopted
+2026-10-04T150002-coldread-narrative#10:
+  decision: declined
+2026-10-04T150002-coldread-narrative#11:
+  decision: declined
+2026-10-04T150002-coldread-narrative#12:
+  decision: declined
+2026-10-04T150002-coldread-narrative#13:
+  decision: adopted
+2026-10-04T150002-coldread-narrative#14:
+  decision: adopted
+2026-10-04T150002-coldread-narrative#15:
+  decision: declined
+2026-10-04T150002-coldread-narrative#16:
+  decision: declined
+2026-10-04T150002-coldread-narrative#17:
+  decision: adopted
+2026-10-04T150002-coldread-narrative#18:
+  decision: adopted
+2026-10-04T150002-coldread-narrative#19:
+  decision: declined
+2026-10-04T150002-coldread-narrative#2:
+  decision: adopted
+2026-10-04T150002-coldread-narrative#20:
+  decision: declined
+2026-10-04T150002-coldread-narrative#21:
+  decision: declined
+2026-10-04T150002-coldread-narrative#22:
+  decision: declined
+2026-10-04T150002-coldread-narrative#23:
+  decision: declined
+2026-10-04T150002-coldread-narrative#24:
+  decision: adopted
+2026-10-04T150002-coldread-narrative#25:
+  decision: adopted
+2026-10-04T150002-coldread-narrative#26:
+  decision: adopted
+2026-10-04T150002-coldread-narrative#27:
+  decision: declined
+2026-10-04T150002-coldread-narrative#28:
+  decision: declined
+2026-10-04T150002-coldread-narrative#29:
+  decision: declined
+2026-10-04T150002-coldread-narrative#3:
+  decision: adopted
+2026-10-04T150002-coldread-narrative#30:
+  decision: adopted
+2026-10-04T150002-coldread-narrative#31:
+  decision: adopted
+2026-10-04T150002-coldread-narrative#32:
+  decision: adopted
+2026-10-04T150002-coldread-narrative#33:
+  decision: adopted
+2026-10-04T150002-coldread-narrative#34:
+  decision: adopted
+2026-10-04T150002-coldread-narrative#35:
+  decision: adopted
+2026-10-04T150002-coldread-narrative#36:
+  decision: adopted
+2026-10-04T150002-coldread-narrative#37:
+  decision: adopted
+2026-10-04T150002-coldread-narrative#38:
+  decision: declined
+2026-10-04T150002-coldread-narrative#39:
+  decision: adopted
+2026-10-04T150002-coldread-narrative#4:
+  decision: adopted
+2026-10-04T150002-coldread-narrative#40:
+  decision: declined
+2026-10-04T150002-coldread-narrative#41:
+  decision: declined
+2026-10-04T150002-coldread-narrative#42:
+  decision: adopted
+2026-10-04T150002-coldread-narrative#43:
+  decision: adopted
+2026-10-04T150002-coldread-narrative#44:
+  decision: declined
+2026-10-04T150002-coldread-narrative#45:
+  decision: declined
+2026-10-04T150002-coldread-narrative#46:
+  decision: adopted
+2026-10-04T150002-coldread-narrative#47:
+  decision: adopted
+2026-10-04T150002-coldread-narrative#48:
+  decision: adopted
+2026-10-04T150002-coldread-narrative#5:
+  decision: adopted
+2026-10-04T150002-coldread-narrative#6:
+  decision: adopted
+2026-10-04T150002-coldread-narrative#7:
+  decision: adopted
+2026-10-04T150002-coldread-narrative#8:
+  decision: adopted
+2026-10-04T150002-coldread-narrative#9:
+  decision: declined
+2026-10-04T150207-coldread-prose#1:
+  decision: adopted
+2026-10-04T150207-coldread-prose#10:
+  decision: declined
+2026-10-04T150207-coldread-prose#2:
+  decision: adopted
+2026-10-04T150207-coldread-prose#3:
+  decision: adopted
+2026-10-04T150207-coldread-prose#4:
+  decision: adopted
+2026-10-04T150207-coldread-prose#5:
+  decision: adopted
+2026-10-04T150207-coldread-prose#6:
+  decision: adopted
+2026-10-04T150207-coldread-prose#7:
+  decision: adopted
+2026-10-04T150207-coldread-prose#8:
+  decision: declined
+2026-10-04T150207-coldread-prose#9:
+  decision: adopted
+2026-10-04T150328-quiz-prose#1:
+  decision: adopted
+2026-10-04T150328-quiz-prose#10:
+  decision: declined
+2026-10-04T150328-quiz-prose#11:
+  decision: declined
+2026-10-04T150328-quiz-prose#12:
+  decision: declined
+2026-10-04T150328-quiz-prose#13:
+  decision: declined
+2026-10-04T150328-quiz-prose#14:
+  decision: adopted
+2026-10-04T150328-quiz-prose#15:
+  decision: declined
+2026-10-04T150328-quiz-prose#16:
+  decision: adopted
+2026-10-04T150328-quiz-prose#17:
+  decision: declined
+2026-10-04T150328-quiz-prose#18:
+  decision: declined
+2026-10-04T150328-quiz-prose#19:
+  decision: declined
+2026-10-04T150328-quiz-prose#2:
+  decision: adopted
+2026-10-04T150328-quiz-prose#20:
+  decision: declined
+2026-10-04T150328-quiz-prose#21:
+  decision: adopted
+2026-10-04T150328-quiz-prose#22:
+  decision: declined
+2026-10-04T150328-quiz-prose#3:
+  decision: adopted
+2026-10-04T150328-quiz-prose#4:
+  decision: adopted
+2026-10-04T150328-quiz-prose#5:
+  decision: declined
+2026-10-04T150328-quiz-prose#6:
+  decision: declined
+2026-10-04T150328-quiz-prose#7:
+  decision: declined
+2026-10-04T150328-quiz-prose#8:
+  decision: adopted
+2026-10-04T150328-quiz-prose#9:
+  decision: declined

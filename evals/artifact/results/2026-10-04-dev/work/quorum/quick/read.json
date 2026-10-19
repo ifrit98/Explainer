@@ -1,0 +1,40 @@
+{
+  "answers": {
+    "1": {
+      "answer": "The text speaks of a 'decision' rather than a 'write'. A change is made only when at least a quorum of servers agree. The quorum is a majority, ⌊n/2⌋ + 1.",
+      "quote": "A **quorum** is the minimum number of servers that must agree before the cluster makes a decision."
+    },
+    "2": {
+      "answer": "Any two majorities share at least one server, so two quorums cannot exist at the same time. The shared server refuses to agree to conflicting decisions. This prevents split brain during a partition. A smaller quorum, such as 2 of 4, would let both halves decide different values.",
+      "quote": "Any two majorities then share at least one server, and that server refuses to agree to two conflicting decisions."
+    },
+    "3": {
+      "answer": "2 failures. The quorum is 4, and 6 − 4 = 2.",
+      "quote": "| 6 | 4 | 2 |"
+    },
+    "4": {
+      "answer": "Only the group of 3 can commit. The quorum for 5 servers is 3. The group of 3 meets it and the group of 2 does not.",
+      "quote": "5 servers: 3 + 3 = 6 > 5. A split of 3 + 2 lets only the side with 3 decide."
+    }
+  },
+  "stops": [
+    "'write' and 'committed' (the words in the questions) are never used. The text says 'decision' and 'decide', so the reader has to map one set of words onto the other.",
+    "'Two groups of size *q* fit into *n* servers without a shared server only if 2*q* ≤ *n*': a compressed pigeonhole step that a new reader would need to reread.",
+    "'that server refuses to agree to two conflicting decisions': it is not explained how the server knows the decisions conflict, or why it refuses.",
+    "'⌊*n*/2⌋ + 1': the floor notation is not explained.",
+    "'Adding a server to an odd cluster raises the quorum by one, so the tolerance stays the same': the wording is easy to misread on a first pass.",
+    "'Byzantine faults' / '3*f* + 1': the term and the formula appear without a reason.",
+    "'it is the \"2 failures stop the cluster\" case from above': the reader has to link a partition back to the earlier crash example."
+  ],
+  "excess": [
+    "'This is why clusters (etcd, ZooKeeper, Consul) normally run 3, 5, or 7 servers.': product names the reader does not need.",
+    "'This text does not cover how protocols such as Raft and Paxos use quorums': off the question.",
+    "'The fourth server is not useless: it holds another copy and can serve reads.': a side point."
+  ],
+  "grounded": {
+    "1": true,
+    "2": true,
+    "3": true,
+    "4": true
+  }
+}

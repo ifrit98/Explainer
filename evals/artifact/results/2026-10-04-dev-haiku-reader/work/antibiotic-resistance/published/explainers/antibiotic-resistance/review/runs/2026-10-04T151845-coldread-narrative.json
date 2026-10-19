@@ -1,0 +1,417 @@
+{
+ "tool": "coldread",
+ "rendering": "narrative",
+ "slug": "antibiotic-resistance",
+ "at": "2026-10-04T15:18:45",
+ "model": "default",
+ "prompt_sha": "3c4725ae6cae",
+ "reply": {
+  "beats": [
+   {
+    "at": "Beat 1 (hook)",
+    "text": "Said: 'Selection of variants that existed before the drug; not the drug changing them, not the patient.' Shown: bold answer.",
+    "unresolved": [
+     "'not the patient': the reader hasn't been told the common belief this rejects (that the patient's body becomes resistant), so the denial means little"
+    ],
+    "unsaid": [],
+    "leap": [
+     "The answer comes before any question is said. The reader can only guess that the topic is how resistance happens."
+    ],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Beat 2 (mechanism)",
+    "text": "Said: 'binds a target the cell needs'. Shown: nothing.",
+    "unresolved": [],
+    "unsaid": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Beat 3 (mechanism)",
+    "text": "Said: 'four ways; each raises MIC; resistant = MIC above concentration reached'. Shown: table of four ways, MIC example.",
+    "unresolved": [
+     "'MIC': the abbreviation is never expanded or defined in the Said column",
+     "'concentration reached': it doesn't say where (in the blood? at the infection site?)"
+    ],
+    "unsaid": [
+     "The names of the four ways appear only in the table, and none is explained in words",
+     "The numbers in the MIC example (two strains against the concentration reached) are shown but not walked through"
+    ],
+    "leap": [
+     "It doesn't say how each of the four ways blocks the 'binds a target' step from beat 2, or why that 'raises MIC'"
+    ],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Beat 4 (instance)",
+    "text": "Said: '10^10 × 10^-8 = 100; at least 100 resistant cells; 10^6 gives about 1%'. Shown: arithmetic.",
+    "unresolved": [
+     "'10^10': not said to be the number of cells in an infection",
+     "'10^-8': not said to be a mutation rate per cell division"
+    ],
+    "unsaid": [],
+    "leap": [
+     "'at least 100': 10^10 × 10^-8 is an expected count of new mutations. 'At least' needs a reason, such as earlier mutants having divided, and none is given",
+     "'10^6 gives about 1%': 10^6 × 10^-8 = 0.01 is an expected count. Calling it '1%' leaves unclear whether this is a 1% chance of one resistant cell or 1% of the cells"
+    ],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Beat 5 (mechanism)",
+    "text": "Said: 'removes susceptible; 100 regrow in 27 doublings, about 13 h in the lab; immune system does not keep up'. Shown: steps.",
+    "unresolved": [],
+    "unsaid": [],
+    "leap": [
+     "'immune system does not keep up' is asserted with no reason",
+     "'about 13 h' assumes a doubling time (about 29 min) that is never stated"
+    ],
+    "excess": [
+     "'about 13 h in the lab': a lab figure that the argument doesn't need"
+    ],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Beat 6 (objection)",
+    "text": "Said: '20 cultures, mean 11, induction predicts 5–18 each; observed 11 zeros and a 107'. Shown: LD numbers.",
+    "unresolved": [
+     "'induction': never defined as the drug causing the change",
+     "'LD': a label that is never expanded (Luria–Delbrück)",
+     "'cultures': it doesn't say what was grown, what was counted, or that it was counted after exposure to the drug"
+    ],
+    "unsaid": [
+     "The 'LD numbers' display isn't tied to a named experiment in the Said column"
+    ],
+    "leap": [
+     "It doesn't say why induction predicts 5–18 for each culture (similar counts everywhere)",
+     "It doesn't say why 11 zeros and a 107 point to mutations that existed before the drug. Mutants arising early and multiplying into jackpots is never given as the reasoning"
+    ],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Beat 7 (generalize)",
+    "text": "Said: 'plasmids, conjugation, across species; whole enzymes'. Shown: nothing.",
+    "unresolved": [
+     "'plasmids'",
+     "'conjugation'",
+     "'whole enzymes': unclear what this refers to"
+    ],
+    "unsaid": [],
+    "leap": [
+     "It doesn't say how a gene moves from one bacterium to another, or why that removes the wait for each lineage's own mutation"
+    ],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Beat 8 (test)",
+    "text": "Bridge: 'the guarantee needs the drug'. Said: 'cost 5%: 0.006; compensatory 1%: 0.37'. Shown: numbers.",
+    "unresolved": [
+     "'cost': fitness cost is never defined",
+     "'compensatory': never defined",
+     "'the guarantee': no earlier beat named a guarantee"
+    ],
+    "unsaid": [
+     "The exponent 100 (generations) that produces 0.006 and 0.37 is never said",
+     "It doesn't say what 0.006 and 0.37 are fractions of"
+    ],
+    "leap": [
+     "It doesn't say why resistance costs growth when the drug is absent"
+    ],
+    "excess": [],
+    "purpose_unclear": true
+   },
+   {
+    "at": "Beat 9 (payoff)",
+    "text": "Said: 'small infections rarely; two independent drugs 10^-16; breaks if one plasmid covers both'. Shown: two lines.",
+    "unresolved": [],
+    "unsaid": [],
+    "leap": [
+     "10^-16 is presumably 10^-8 squared, but the multiplication isn't said"
+    ],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Beat 10 (close)",
+    "text": "Said: 'answer in the opening words; scope list'.",
+    "unresolved": [
+     "'scope list': its contents aren't in the script"
+    ],
+    "unsaid": [],
+    "leap": [],
+    "excess": [
+     "Restating the opening answer word for word adds nothing new unless the general argument is added"
+    ],
+    "purpose_unclear": false
+   }
+  ],
+  "blocking": [
+   "Beat 4: '10^10 × 10^-8 = 100'. The two numbers aren't identified as cells and mutation rate, so the count that the whole argument rests on can't be followed",
+   "Beat 6: 'induction predicts 5–18 each; observed 11 zeros and a 107'. 'Induction' is undefined and the reasoning from the spread of counts to 'existed before the drug' is missing, so the key evidence doesn't land",
+   "Beat 7: 'plasmids, conjugation'. Both are undefined for a reader who knows nothing of gene exchange",
+   "Beat 8: 'cost 5%: 0.006; compensatory 1%: 0.37'. Cost, compensatory, the 100 generations and 'the guarantee' are all undefined"
+  ],
+  "cuts": [
+   "Beat 5: 'about 13 h in the lab'. Cutting it removes an unexplained conversion",
+   "Beat 3: name and explain one mechanism (for example, an enzyme that destroys the drug) instead of a table of four unexplained names",
+   "Beat 10: replace the scope list with the one-sentence general argument"
+  ],
+  "question": {
+   "text": "How does an infection that a drug once cleared become one it can't clear? The question is never said in the Said column; the reader infers it from the hook's answer in Beat 1.",
+   "known_at": "Beat 1, only by inference",
+   "result_stated": "Yes, Beat 1: 'Selection of variants that existed before the drug; not the drug changing them, not the patient.'"
+  },
+  "motive": "Missing from the script. The plan's reasons to care (the 'bacteria get used to the drug' picture predicts the wrong things) and the reason for the approach (start from what the drug does, then count) never appear in the Said column.",
+  "close": "Partly. Beat 10 repeats 'the answer in the opening words', but the general argument ('any heritable variant that grows under the drug while others are stopped takes over') is never said in the beats.",
+  "recap": "Resistant bacteria are already there by chance, or they get the gene from other bacteria; the drug just kills their competitors so they take over.",
+  "strongest": "Beat 4: one multiplication turns 'resistance must be caused by the drug' into 'about 100 resistant cells are already present', which is the surprise the explanation is built around.",
+  "weakest": "Beat 6: the Luria–Delbrück evidence is given as bare numbers, with 'induction' undefined and no reasoning from the jackpot pattern to the conclusion.",
+  "suggestions": [
+   "Say in Beat 4: 'an infection holds about 10^10 bacteria; each division makes this mutation about once in 10^8 times'",
+   "Define induction in Beat 6, then say: if the drug caused it, every culture would have similar counts; if mutations came first, a mutant that arose early multiplies into a jackpot, so most cultures have none and a few have many",
+   "Define a plasmid as a small, separate ring of DNA that bacteria copy and pass to each other through contact (conjugation)",
+   "In Beat 8, say that the resistant cells grow 5% slower per generation, so after 100 generations they are 0.95^100 ≈ 0.6% of what they would otherwise be",
+   "State the motive in Beat 1: the 'bacteria get used to it' picture predicts the wrong things"
+  ]
+ },
+ "usage": {
+  "cost": 0.12325699999999998,
+  "seconds": 42
+ },
+ "findings": [
+  {
+   "n": 1,
+   "severity": "blocking",
+   "kind": "blocking",
+   "text": "Beat 4: '10^10 × 10^-8 = 100'. The two numbers aren't identified as cells and mutation rate, so the count that the whole argument rests on can't be followed"
+  },
+  {
+   "n": 2,
+   "severity": "blocking",
+   "kind": "blocking",
+   "text": "Beat 6: 'induction predicts 5–18 each; observed 11 zeros and a 107'. 'Induction' is undefined and the reasoning from the spread of counts to 'existed before the drug' is missing, so the key evidence doesn't land"
+  },
+  {
+   "n": 3,
+   "severity": "blocking",
+   "kind": "blocking",
+   "text": "Beat 7: 'plasmids, conjugation'. Both are undefined for a reader who knows nothing of gene exchange"
+  },
+  {
+   "n": 4,
+   "severity": "blocking",
+   "kind": "blocking",
+   "text": "Beat 8: 'cost 5%: 0.006; compensatory 1%: 0.37'. Cost, compensatory, the 100 generations and 'the guarantee' are all undefined"
+  },
+  {
+   "n": 5,
+   "severity": "excess",
+   "kind": "cut",
+   "text": "Beat 5: 'about 13 h in the lab'. Cutting it removes an unexplained conversion"
+  },
+  {
+   "n": 6,
+   "severity": "excess",
+   "kind": "cut",
+   "text": "Beat 3: name and explain one mechanism (for example, an enzyme that destroys the drug) instead of a table of four unexplained names"
+  },
+  {
+   "n": 7,
+   "severity": "excess",
+   "kind": "cut",
+   "text": "Beat 10: replace the scope list with the one-sentence general argument"
+  },
+  {
+   "n": 8,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "Beat 1 (hook): 'not the patient': the reader hasn't been told the common belief this rejects (that the patient's body becomes resistant), so the denial means little"
+  },
+  {
+   "n": 9,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "Beat 1 (hook): The answer comes before any question is said. The reader can only guess that the topic is how resistance happens."
+  },
+  {
+   "n": 10,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "Beat 3 (mechanism): 'MIC': the abbreviation is never expanded or defined in the Said column"
+  },
+  {
+   "n": 11,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "Beat 3 (mechanism): 'concentration reached': it doesn't say where (in the blood? at the infection site?)"
+  },
+  {
+   "n": 12,
+   "severity": "edge",
+   "kind": "unsaid",
+   "text": "Beat 3 (mechanism): The names of the four ways appear only in the table, and none is explained in words"
+  },
+  {
+   "n": 13,
+   "severity": "edge",
+   "kind": "unsaid",
+   "text": "Beat 3 (mechanism): The numbers in the MIC example (two strains against the concentration reached) are shown but not walked through"
+  },
+  {
+   "n": 14,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "Beat 3 (mechanism): It doesn't say how each of the four ways blocks the 'binds a target' step from beat 2, or why that 'raises MIC'"
+  },
+  {
+   "n": 15,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "Beat 4 (instance): '10^10': not said to be the number of cells in an infection"
+  },
+  {
+   "n": 16,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "Beat 4 (instance): '10^-8': not said to be a mutation rate per cell division"
+  },
+  {
+   "n": 17,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "Beat 4 (instance): 'at least 100': 10^10 × 10^-8 is an expected count of new mutations. 'At least' needs a reason, such as earlier mutants having divided, and none is given"
+  },
+  {
+   "n": 18,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "Beat 4 (instance): '10^6 gives about 1%': 10^6 × 10^-8 = 0.01 is an expected count. Calling it '1%' leaves unclear whether this is a 1% chance of one resistant cell or 1% of the cells"
+  },
+  {
+   "n": 19,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "Beat 5 (mechanism): 'immune system does not keep up' is asserted with no reason"
+  },
+  {
+   "n": 20,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "Beat 5 (mechanism): 'about 13 h' assumes a doubling time (about 29 min) that is never stated"
+  },
+  {
+   "n": 21,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "Beat 6 (objection): 'induction': never defined as the drug causing the change"
+  },
+  {
+   "n": 22,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "Beat 6 (objection): 'LD': a label that is never expanded (Luria–Delbrück)"
+  },
+  {
+   "n": 23,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "Beat 6 (objection): 'cultures': it doesn't say what was grown, what was counted, or that it was counted after exposure to the drug"
+  },
+  {
+   "n": 24,
+   "severity": "edge",
+   "kind": "unsaid",
+   "text": "Beat 6 (objection): The 'LD numbers' display isn't tied to a named experiment in the Said column"
+  },
+  {
+   "n": 25,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "Beat 6 (objection): It doesn't say why induction predicts 5–18 for each culture (similar counts everywhere)"
+  },
+  {
+   "n": 26,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "Beat 6 (objection): It doesn't say why 11 zeros and a 107 point to mutations that existed before the drug. Mutants arising early and multiplying into jackpots is never given as the reasoning"
+  },
+  {
+   "n": 27,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "Beat 7 (generalize): 'plasmids'"
+  },
+  {
+   "n": 28,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "Beat 7 (generalize): 'conjugation'"
+  },
+  {
+   "n": 29,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "Beat 7 (generalize): 'whole enzymes': unclear what this refers to"
+  },
+  {
+   "n": 30,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "Beat 7 (generalize): It doesn't say how a gene moves from one bacterium to another, or why that removes the wait for each lineage's own mutation"
+  },
+  {
+   "n": 31,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "Beat 8 (test): 'cost': fitness cost is never defined"
+  },
+  {
+   "n": 32,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "Beat 8 (test): 'compensatory': never defined"
+  },
+  {
+   "n": 33,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "Beat 8 (test): 'the guarantee': no earlier beat named a guarantee"
+  },
+  {
+   "n": 34,
+   "severity": "edge",
+   "kind": "unsaid",
+   "text": "Beat 8 (test): The exponent 100 (generations) that produces 0.006 and 0.37 is never said"
+  },
+  {
+   "n": 35,
+   "severity": "edge",
+   "kind": "unsaid",
+   "text": "Beat 8 (test): It doesn't say what 0.006 and 0.37 are fractions of"
+  },
+  {
+   "n": 36,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "Beat 8 (test): It doesn't say why resistance costs growth when the drug is absent"
+  },
+  {
+   "n": 37,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "Beat 9 (payoff): 10^-16 is presumably 10^-8 squared, but the multiplication isn't said"
+  },
+  {
+   "n": 38,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "Beat 10 (close): 'scope list': its contents aren't in the script"
+  }
+ ]
+}

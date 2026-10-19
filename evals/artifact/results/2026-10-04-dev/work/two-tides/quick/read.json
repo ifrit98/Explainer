@@ -1,0 +1,41 @@
+{
+  "answers": {
+    "1": {
+      "answer": "Nothing pushes the far-side water away. It is pulled toward the Moon, just less strongly than Earth's centre is. Earth falls toward the Moon a little faster than that water does, so the water falls behind and makes a bulge on the far side.",
+      "quote": "On the far side, the water is pulled less than Earth's centre. Earth falls toward the Moon a little faster than this water. The water falls behind: a bulge away from the Moon."
+    },
+    "2": {
+      "answer": "The Moon moves along its orbit about 12° per day, in the same direction Earth turns. Earth has to turn a little extra to bring a point back under the Moon. That makes a lunar day of 24 h 50 min, so high tides come about every 12 h 25 min.",
+      "quote": "Earth must turn a little extra to bring the point back under the Moon. So the cycle is a **lunar day** of 24 h 50 min, and high tides come about every 12 h 25 min."
+    },
+    "3": {
+      "answer": "not covered. The explanation says spring and neap tides, where the Sun's bulges add to or partly cancel the Moon's, are left out. It never says when tides are largest.",
+      "quote": ""
+    },
+    "4": {
+      "answer": "About every 12 hours. The extra 25 minutes comes only from the Moon moving along its orbit. Without that motion, Earth would need no extra turn, so one turn would take 24 h and contain two highs.",
+      "quote": "The Moon also moves along its orbit, about 12° per day, in the same direction as Earth turns. Earth must turn a little extra to bring the point back under the Moon."
+    }
+  },
+  "stops": [
+    "\"GM/r²\": G and M are never defined.",
+    "\"A difference across a fixed width falls off as 1/d³, not 1/d²\": it says the difference falls off as 1/d³ but never shows why.",
+    "\"(Earth and Moon orbit each other, so this fall never ends in a collision.)\": it doesn't say why a fall that never ends still counts as falling.",
+    "\"it raises the water by about 0.5 m from low to high\": it doesn't show how a tiny acceleration becomes 0.5 m.",
+    "\"solar tides are 0.46 of lunar tides\": no source or working is given for this ratio.",
+    "\"The two bulges stay lined up with the Moon\": it doesn't say why the bulges don't turn with Earth.",
+    "\"Real oceans have continents and basins that resonate\": 'resonate' is never explained, and neither is how it gives some coasts only one tide."
+  ],
+  "excess": [
+    "\"<!-- Stage 1, rendered from model.md in STE-80. -->\"",
+    "\"Earth is 12,742 km wide\": this repeats the radius given in the next sentence.",
+    "\"Nothing pushes the far water. It is pulled toward the Moon, but less than the rest of Earth.\": this restates the far-side bullet just above it.",
+    "\"High tide comes about 50 minutes later each day.\": this repeats the 24 h 50 min already given."
+  ],
+  "grounded": {
+    "1": true,
+    "2": true,
+    "3": false,
+    "4": true
+  }
+}

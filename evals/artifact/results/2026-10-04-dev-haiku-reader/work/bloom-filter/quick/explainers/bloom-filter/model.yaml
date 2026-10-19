@@ -1,0 +1,70 @@
+values:
+  p_percent: 1
+  bits_per_item: 9.6
+  toy:
+    m: 10
+    k: 2
+    cat: [1, 6]
+    dog: [3, 6]
+    fox: [1, 3]
+    owl: [3, 5]
+  real:
+    n: 1000000
+    m_bits: 9600000
+    megabytes: 1.2
+    k: 7
+    p_percent: 1
+    bits_per_item: 9.6
+    set_megabytes: 50
+    string_bytes: 50
+  k1_p_percent: 9.9
+  k20_p_percent: 7
+  k_many: 20
+  overfull_n: 3000000
+  overfull_p_percent: 43
+  ln2: 0.69
+
+allow: [0, 1, 2, 3, 4, 8, 9, 100]
+
+require:
+  - path: p_percent
+    in: [prose]
+  - path: bits_per_item
+    in: [prose]
+  - path: overfull_p_percent
+    in: [prose]
+
+claims:
+  - id: mech-add-query
+    kind: mechanism
+    statement: "Add sets the item's k bits to 1; query answers no if any of them is 0."
+    example: "m=10, k=2: cat sets 1 and 6, dog sets 3 and 6; owl checks 3 and 5, bit 5 is 0, so no."
+  - id: no-false-negatives
+    kind: guarantee
+    statement: "An added item always gets 'probably yes', because bits only change from 0 to 1."
+    example: "dog's bits 3 and 6 stay 1, so dog always gets probably yes."
+    counterexample: "Delete cat by clearing 1 and 6: bit 6 becomes 0 and dog now gets no."
+    ask: "Why can you not remove an item by setting its bits back to 0?"
+  - id: false-positive
+    kind: limit
+    statement: "An item never added can find all its bits already set by other items."
+    example: "fox checks 1 and 3, set by cat and dog, so fox gets probably yes."
+    ask: "How can a Bloom filter say 'probably yes' for an item it never saw?"
+  - id: why-k
+    kind: why
+    statement: "Several hash functions lower the false-positive rate, up to a best k of about (m/n) ln 2."
+    alternative: "one hash function, or very many"
+    counterexample: "At 9.6 bits per item: k=1 gives 9.9%, k=7 gives 1%, k=20 gives 7%."
+  - id: why-bits
+    kind: why
+    statement: "The filter stores bits, not items, so its size does not depend on item length."
+    alternative: "store the items in a set"
+    counterexample: "1,000,000 items of 50 bytes: about 50 MB as a set, 1.2 MB as a filter with 1% false positives."
+
+accept_unjustified:
+  ln: "ln 2 in the best-k rule comes from minimizing the formula; the k table shows the minimum with numbers."
+
+terms:
+  - term: probably yes
+    means: "the answer when all k bits are 1; it can be a false positive"
+    avoid: [definitely yes]

@@ -1,0 +1,328 @@
+{
+ "tool": "coldread",
+ "rendering": "prose",
+ "slug": "antibiotic-resistance",
+ "at": "2026-10-04T15:20:38",
+ "model": "default",
+ "prompt_sha": "fbc694b7c598",
+ "reply": {
+  "paragraphs": [
+   {
+    "at": "Lead (bold paragraph under the title)",
+    "text": "The drug does not change the bacteria. In a large infection, a few bacteria already carry a resistance gene... The bacteria become resistant, not the patient's body.",
+    "unresolved": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "What a cell must block, para 1",
+    "text": "An antibiotic is a molecule that kills bacteria or stops their growth... penicillin binds the enzymes that build the cell wall.",
+    "unresolved": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "What a cell must block, para 2",
+    "text": "A resistance gene is a gene, changed by mutation or received from another bacterium, that blocks this. It works in one of four ways:",
+    "unresolved": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Table of four ways",
+    "text": "Destroy the drug / Change the target / Pump the drug out / Keep the drug out",
+    "unresolved": [
+     "rpoB gene",
+     "outer membrane"
+    ],
+    "leap": [],
+    "excess": [
+     "One DNA letter change in the rpoB gene"
+    ],
+    "purpose_unclear": false
+   },
+   {
+    "at": "What a cell must block, MIC paragraph",
+    "text": "Each way means the cell needs more drug to stop it. The lowest concentration ... is its MIC ... (Illustrative values.)",
+    "unresolved": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Resistant cells are there before the drug, para 1",
+    "text": "A given resistance mutation happens about once per 10⁸ cell divisions ... Growing to that size took about 10¹⁰ divisions, so expect",
+    "unresolved": [],
+    "leap": [
+     "Growing to that size took about 10¹⁰ divisions: the reason (going from 1 cell to N cells takes about N−1 divisions) is not given"
+    ],
+    "excess": [
+     "(order of magnitude; real values range from about 10⁻⁶ to 10⁻¹⁰)"
+    ],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Resistant cells..., equation line",
+    "text": "10¹⁰ × 10⁻⁸ = 100 resistance mutations, before anyone gives a drug.",
+    "unresolved": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Resistant cells..., para 3",
+    "text": "Early mutants have divided since, so there are at least 100 resistant cells. Compare a small infection of 10⁶ cells...",
+    "unresolved": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "The drug selects them, item 1",
+    "text": "The drug stops the susceptible cells, and the immune system clears them.",
+    "unresolved": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "The drug selects them, item 2",
+    "text": "The resistant cells keep dividing... (A weakened patient clears fewer.)",
+    "unresolved": [],
+    "leap": [],
+    "excess": [
+     "(A weakened patient clears fewer.)"
+    ],
+    "purpose_unclear": false
+   },
+   {
+    "at": "The drug selects them, item 3",
+    "text": "A doubling is one round in which every cell divides once. 100 cells need 27 doublings to reach 10¹⁰ again (2²⁷ ≈ 1.3 × 10⁸)...",
+    "unresolved": [],
+    "leap": [
+     "(2²⁷ ≈ 1.3 × 10⁸): the reader has to multiply by the starting 100 cells to get 10¹⁰, and the text never says so"
+    ],
+    "excess": [
+     "A doubling is one round in which every cell divides once."
+    ],
+    "purpose_unclear": false
+   },
+   {
+    "at": "The drug selects them, item 4",
+    "text": "The infection returns, and now almost every cell is resistant.",
+    "unresolved": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "The drug selects them, para after list",
+    "text": "This is selection: the drug did not make resistant cells, it removed everything else.",
+    "unresolved": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "The drug selects them, Luria–Delbrück paragraph",
+    "text": "How do we know the drug did not cause the change? ... They found 11 cultures with 0 and one with 107...",
+    "unresolved": [
+     "with a virus as the killing agent"
+    ],
+    "leap": [
+     "so the \"drug causes it\" idea predicts most cultures between 5 and 18: the text never says where the 5–18 range comes from"
+    ],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Genes from other bacteria, para 1",
+    "text": "A cell does not have to wait for its own rare mutation. A plasmid is a small circle of DNA... horizontal gene transfer...",
+    "unresolved": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Genes from other bacteria, para 2",
+    "text": "Plasmids carry complete working genes... The same plasmid gene turns up in different species, and one plasmid often carries several resistance genes at once.",
+    "unresolved": [],
+    "leap": [
+     "The same plasmid gene turns up in different species: the text doesn't say this is evidence of transfer, or what it is meant to show"
+    ],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Without the drug, para 1",
+    "text": "Resistant cells take over only while the drug is present. Without the drug, resistance often has a fitness cost...",
+    "unresolved": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Without the drug, para 2",
+    "text": "Suppose resistant cells grow 5% slower... Plasmids also persist.",
+    "unresolved": [],
+    "leap": [
+     "Plasmids also persist.: no reason is given"
+    ],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "What this predicts, bullet 1",
+    "text": "Large infections are the risk, because they hold resistant cells before treatment.",
+    "unresolved": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "What this predicts, bullet 2",
+    "text": "Two drugs with independent targets need two mutations in one cell... This fails if one plasmid or one pump resists both drugs: then about 100 cells survive again.",
+    "unresolved": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "In short",
+    "text": "resistance genes come first, by chance or from other bacteria. The drug removes the competitors, and the resistant cells multiply.",
+    "unresolved": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Not covered",
+    "text": "Persister cells... transformation and transduction... SOS response... biofilms.",
+    "unresolved": [
+     "transformation and transduction",
+     "biofilms"
+    ],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   }
+  ],
+  "blocking": [],
+  "cuts": [
+   "Resistant cells..., para 1: drop the parenthetical \"(order of magnitude; real values range from about 10⁻⁶ to 10⁻¹⁰)\" or shorten it",
+   "Selects them, item 3: drop the definition \"A doubling is one round in which every cell divides once.\" because this reader knows exponential growth",
+   "Selects them, item 2: drop \"(A weakened patient clears fewer.)\"",
+   "Table: shorten \"One DNA letter change in the rpoB gene\" to \"One DNA letter change\""
+  ],
+  "question": {
+   "text": "How do bacteria come to resist an antibiotic: does the drug cause the change, or does it select bacteria that were already resistant?",
+   "known_at": "Title and the bold lead paragraph",
+   "result_stated": "Yes, in the lead: \"The drug does not change the bacteria... The drug removes their competitors, and the resistant bacteria multiply.\""
+  },
+  "motive": "Neither motive is stated outright. A reason to care is only implied, by \"The infection returns, and now almost every cell is resistant.\" There is no stated reason for the counting approach, though the arithmetic in \"10¹⁰ × 10⁻⁸ = 100 resistance mutations, before anyone gives a drug\" makes the case by example.",
+  "close": "Yes: \"In short: resistance genes come first, by chance or from other bacteria. The drug removes the competitors, and the resistant cells multiply.\"",
+  "recap": "A big infection already holds about a hundred resistant bacteria before treatment, from random mutation or genes passed between bacteria, and the drug just clears away everything else so they take over.",
+  "strongest": "'Resistant cells are there before the drug': the 10¹⁰ × 10⁻⁸ = 100 calculation, together with the Luria–Delbrück paragraph that tests the idea.",
+  "weakest": "'Genes from other bacteria', para 2: the facts in it (the same gene in different species, several genes on one plasmid) are stated without saying what they show.",
+  "suggestions": [
+   "Say where 5–18 comes from (Poisson spread: about mean ± 2√mean).",
+   "Explain that a virus can infect and kill bacteria (a bacteriophage).",
+   "Add one sentence on why resistance matters: treatment fails and the patient relapses.",
+   "Say why plasmids persist without the drug, or cut that sentence.",
+   "Write the doubling arithmetic as 100 × 2²⁷ ≈ 1.3 × 10¹⁰."
+  ]
+ },
+ "usage": {
+  "cost": 0.13425979999999998,
+  "seconds": 44
+ },
+ "findings": [
+  {
+   "n": 1,
+   "severity": "excess",
+   "kind": "cut",
+   "text": "Resistant cells..., para 1: drop the parenthetical \"(order of magnitude; real values range from about 10⁻⁶ to 10⁻¹⁰)\" or shorten it"
+  },
+  {
+   "n": 2,
+   "severity": "excess",
+   "kind": "cut",
+   "text": "Selects them, item 3: drop the definition \"A doubling is one round in which every cell divides once.\" because this reader knows exponential growth"
+  },
+  {
+   "n": 3,
+   "severity": "excess",
+   "kind": "cut",
+   "text": "Selects them, item 2: drop \"(A weakened patient clears fewer.)\""
+  },
+  {
+   "n": 4,
+   "severity": "excess",
+   "kind": "cut",
+   "text": "Table: shorten \"One DNA letter change in the rpoB gene\" to \"One DNA letter change\""
+  },
+  {
+   "n": 5,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "Table of four ways: rpoB gene"
+  },
+  {
+   "n": 6,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "Table of four ways: outer membrane"
+  },
+  {
+   "n": 7,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "Resistant cells are there before the drug, para 1: Growing to that size took about 10¹⁰ divisions: the reason (going from 1 cell to N cells takes about N−1 divisions) is not given"
+  },
+  {
+   "n": 8,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "The drug selects them, item 3: (2²⁷ ≈ 1.3 × 10⁸): the reader has to multiply by the starting 100 cells to get 10¹⁰, and the text never says so"
+  },
+  {
+   "n": 9,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "The drug selects them, Luria–Delbrück paragraph: with a virus as the killing agent"
+  },
+  {
+   "n": 10,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "The drug selects them, Luria–Delbrück paragraph: so the \"drug causes it\" idea predicts most cultures between 5 and 18: the text never says where the 5–18 range comes from"
+  },
+  {
+   "n": 11,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "Genes from other bacteria, para 2: The same plasmid gene turns up in different species: the text doesn't say this is evidence of transfer, or what it is meant to show"
+  },
+  {
+   "n": 12,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "Without the drug, para 2: Plasmids also persist.: no reason is given"
+  },
+  {
+   "n": 13,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "Not covered: transformation and transduction"
+  },
+  {
+   "n": 14,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "Not covered: biofilms"
+  }
+ ]
+}

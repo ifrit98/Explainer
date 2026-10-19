@@ -1,0 +1,12 @@
+{
+  "result": "I made one file, `explainers/two-tides/explanation.md`: prose with two small inline text diagrams, because the explanation is a short chain of steps (pull at three points, minus the pull at the centre, Earth turning under two bulges) that a worked numeric table and an arrow sketch cover without needing an interactive page.",
+  "error": null,
+  "cost": 0.1563002,
+  "seconds": 42,
+  "turns": 2,
+  "files": [
+    "explainers/two-tides/explanation.md"
+  ],
+  "review_cost": 0,
+  "reviews": 0
+}

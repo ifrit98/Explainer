@@ -1,0 +1,59 @@
+{
+  "key": {
+    "A": "quick",
+    "B": "none",
+    "C": "principles",
+    "D": "published"
+  },
+  "grades": {
+    "quick": {
+      "quiz": [
+        2,
+        2,
+        2,
+        2
+      ],
+      "misconception": "absent",
+      "errors": [
+        "Three spheres meet at a point."
+      ]
+    },
+    "none": {
+      "quiz": [
+        2,
+        2,
+        2,
+        2
+      ],
+      "misconception": "absent",
+      "errors": []
+    },
+    "principles": {
+      "quiz": [
+        2,
+        2,
+        2,
+        2
+      ],
+      "misconception": "corrected",
+      "errors": []
+    },
+    "published": {
+      "quiz": [
+        2,
+        2,
+        2,
+        2
+      ],
+      "misconception": "corrected",
+      "errors": []
+    }
+  },
+  "rank": [
+    "principles",
+    "published",
+    "none",
+    "quick"
+  ],
+  "why_best": "C states outright that the receiver only listens, then builds each step from the one before (time to distance, distance to position, clock bias, why a shared bias cannot cover per-satellite clock errors, relativity, the fix) with checked numbers and an honest account of what the 11 km figure means, and it does so without B's length and detours."
+}

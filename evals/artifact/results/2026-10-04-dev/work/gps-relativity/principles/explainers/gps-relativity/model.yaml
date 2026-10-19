@@ -1,0 +1,22 @@
+c_m_per_s: 299792458
+light_per_ns_cm: 30
+earth_radius_km: 6371
+orbit_radius_km: 26560
+orbit_altitude_km: 20200
+orbit_speed_km_s: 3.87
+orbit_period_h: 11.97
+signal_travel_ms: [67, 86]
+receiver_clock_error_example_ms: 1
+receiver_clock_error_example_km: 300
+special_relativity_fraction: 8.3e-11
+special_relativity_us_per_day: -7.2
+general_relativity_fraction: 5.29e-10
+general_relativity_us_per_day: 45.7
+net_fraction: 4.46e-10
+net_us_per_day: 38.5
+net_range_km_per_day: 11.5
+nominal_clock_mhz: 10.23
+factory_clock_mhz: 10.22999999543
+eccentricity_example: 0.02
+eccentricity_term_ns: 46
+eccentricity_term_m: 14

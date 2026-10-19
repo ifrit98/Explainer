@@ -1,0 +1,41 @@
+{
+  "answers": {
+    "1": {
+      "answer": "In binary, a fraction ends only if its denominator has no prime factor other than 2. 1/10 has a factor of 5, so its binary expansion repeats forever. The computer has to cut it off, which means rounding it to the nearest value it can hold.",
+      "quote": "In base 2, the only allowed prime factor is 2. The denominator of 1/10 is 2 × 5. The factor 5 makes the binary expansion repeat forever:"
+    },
+    "2": {
+      "answer": "The stored 0.1 and 0.2 are both a little too high, and the stored 0.3 is a little too low. Their exact sum falls exactly halfway between two grid points. The round-half-to-even rule rounds it up, so the result is one grid step above the stored 0.3, and == returns False.",
+      "quote": "Their exact sum falls halfway between two doubles, and the tie rule rounds it up, one step above the stored 0.3. The values differ, so the comparison is false."
+    },
+    "3": {
+      "answer": "Compare with a tolerance, for example math.isclose(a, 0.3) or abs(a - b) < 1e-9 with a tolerance that suits the data. For money, use integers (cents). Where decimal digits must be exact, use a decimal type.",
+      "quote": "**Compare with a tolerance**, not with `==`: `math.isclose(0.1 + 0.2, 0.3)` in Python, or `abs(a - b) < 1e-9` with a tolerance that suits your data."
+    },
+    "4": {
+      "answer": "Yes, it is True. 1/2, 1/4 and 3/4 have power-of-2 denominators, so all three are exact grid points and no rounding happens. The explanation shows this in Python only. It extends to the other languages through its claim that most languages use the same double format.",
+      "quote": "Here 1/2, 1/4, and 3/4 are all grid points, so no rounding happens."
+    }
+  },
+  "stops": [
+    "Term never explained: \"IEEE 754 binary64\"",
+    "No reason given for this grid step: \"Between 0.25 and 0.5, the grid step is 2⁻⁵⁴\"",
+    "Unclear why the integer is limited to 53 bits or what happens past that: \"(an integer of at most 53 bits) × (a power of 2)\"",
+    "A count of grid units that is not a whole number, measured on 0.1's scale using 0.3's grid step: \"stored 0.1 = 1801439850948198.5 units\"",
+    "No reason given for this tie rule or why even is preferred: \"the IEEE 754 rule is **round half to even**\"",
+    "The limit is never explained: \"their sums are exact while they fit in 53 bits\"",
+    "The table values have to be taken on trust: \"7205759403792794 × 2⁻⁵⁶\""
+  ],
+  "excess": [
+    "Explains printing, which is beside the main question: \"Languages print the **shortest decimal string that rounds back to the same double**.\"",
+    "Lists topics left out: \"Not covered: 32-bit floats, special values (NaN, infinity), and how errors grow across long chains of operations.\"",
+    "Repeats the short answer and sections 3–4: \"0.1, 0.2, and 0.3 each have a repeating binary expansion, so each is rounded to the nearest double.\"",
+    "Restates the error directions just shown in the table: \"The errors already point in different directions. 0.1 and 0.2 are a little too high. 0.3 is a little too low.\""
+  ],
+  "grounded": {
+    "1": true,
+    "2": true,
+    "3": true,
+    "4": true
+  }
+}

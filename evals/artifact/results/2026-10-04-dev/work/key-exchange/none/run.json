@@ -1,0 +1,13 @@
+{
+  "result": "I made `explainers/key-exchange/explanation.md` and `explainers/key-exchange/index.html`. The prose builds the idea step by step: paint mixing, clock arithmetic, the protocol with a hand-checked p = 23 example, the man-in-the-middle weakness and how real systems handle it. The interactive page lets you change the secrets, watch both sides reach the same key, run Eve's brute-force search to see how its cost grows with the size of p, and switch on Mallory to swap messages. I haven't opened the page in a browser.",
+  "error": null,
+  "cost": 0.3186072,
+  "seconds": 96,
+  "turns": 4,
+  "files": [
+    "explainers/key-exchange/explanation.md",
+    "explainers/key-exchange/index.html"
+  ],
+  "review_cost": 0,
+  "reviews": 0
+}

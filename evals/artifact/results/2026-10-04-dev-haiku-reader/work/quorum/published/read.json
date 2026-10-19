@@ -1,0 +1,44 @@
+{
+  "answers": {
+    "1": {
+      "answer": "A cluster commits a write when more than half of all its servers accept it.",
+      "quote": "A cluster decides a change only when more than half of all its servers accept the change."
+    },
+    "2": {
+      "answer": "Because with a smaller quorum, two groups in a network partition could both achieve quorum and decide different changes (split brain). A majority quorum ensures any two groups must overlap at some server.",
+      "quote": "It happens because two groups of 2 among 4 servers need not share a server. So the quorum size must be more than half of n: then two groups cannot both decide."
+    },
+    "3": {
+      "answer": "A 6-server cluster survives 2 failures.",
+      "quote": "tolerance = n − majority size"
+    },
+    "4": {
+      "answer": "The group of 3 can still commit writes because 3 equals the majority requirement. The group of 2 cannot because 2 is less than the required 3.",
+      "quote": "A, B, C have 3 accepts, and 3 ≥ 3, so they keep deciding. D and E have 2, and 2 < 3, so they stop."
+    }
+  },
+  "stops": [
+    "More than half of all n servers is the *majority size*: floor(n/2) + 1.",
+    "Two quorums each hold more than half of the servers, so together they list more than n servers. Some server must therefore be in both.",
+    "This depends on one assumption: a server remembers what it accepted, even after a restart.",
+    "Count more than half of *all* configured servers, failed or not.",
+    "This split of the network into groups that cannot reach each other is a *partition*.",
+    "For each position in that order, a server accepts only one change."
+  ],
+  "excess": [
+    "Going from an even n to the next odd n keeps the majority size (4 → 5: both 3), so tolerance grows by 1.",
+    "That is why clusters usually have an odd number of servers.",
+    "Servers that lie need larger clusters.",
+    "A tolerance of 1 means a second failure stops the cluster.",
+    "A tolerance of 2 means one server can be off for an upgrade while another one fails.",
+    "The rest of this page explains why the rule must be \"more than half\".",
+    "The examples below use change 7, an arbitrary position.",
+    "The extra server only makes each change wait for one more accept."
+  ],
+  "grounded": {
+    "1": true,
+    "2": true,
+    "3": true,
+    "4": true
+  }
+}

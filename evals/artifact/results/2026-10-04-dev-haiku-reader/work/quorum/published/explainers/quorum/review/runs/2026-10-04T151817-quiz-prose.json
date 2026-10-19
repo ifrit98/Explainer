@@ -1,0 +1,141 @@
+{
+ "tool": "quiz",
+ "rendering": "prose",
+ "slug": "quorum",
+ "at": "2026-10-04T15:18:10",
+ "model": "default",
+ "prompt_sha": "45bb3c67ca87",
+ "reply": {
+  "answers": {
+   "1": "Servers (n of them) that form a cluster, each holding a copy of the same data. Clients, which propose changes (e.g. x = 1). Changes, which are decided one at a time at numbered positions (change 1, 2, … 7). Accepts: a server stores the change on disk and replies 'yes'. The quorum size and a quorum, which is a group of that many servers. The majority size, floor(n/2)+1. Failures: a crash or an unreachable server. A partition: the network splits into groups that cannot reach each other. Split brain: copies that disagree for good. Tolerance: how many servers can fail while the cluster still decides changes.",
+   "2": "A client proposes a change to the cluster. Each server accepts at most one change per position. A change is decided when a quorum of servers has accepted it. The quorum size is set to the majority size of all n configured servers. Any two quorums then share at least one server, and that server refuses a second, different value for the same position, so two conflicting decisions cannot happen. Failures and partitions reduce how many servers answer. If fewer than a quorum answer, the cluster stops deciding but keeps what it has already decided. Tolerance = n − majority size.",
+   "3": "Because a quorum is more than half of all n servers, any two quorums overlap. The shared server has already accepted one value for a position and refuses another, so only one value can be decided and split brain cannot happen. The cost is that the cluster stops when fewer than a majority of servers answer, so it can lose only n − (floor(n/2)+1) servers.",
+   "4": "The key variable is n, the number of servers. Going from an even n to the next odd n keeps the majority size the same (4→5: both 3), so tolerance rises by 1. Going from an odd n to the next even n raises the majority size by 1 (5→6: 3→4), so tolerance stays the same, and each change just has to wait for one more accept. A second variable is the quorum size. If it drops to half or less, two disjoint groups can both decide, which gives split brain. If it is raised, tolerance drops.",
+   "5": "Assumption: a server remembers what it accepted even after a restart (its disk is not wiped), and servers never send a false 'yes'. Simplification: in real protocols the shared server reports x = 1 to the new group instead of just refusing. Fact: a server that hears silence cannot tell a crashed peer from a network cut, however long it waits. Also, two groups of more than half of n must share a server, because together they list more than n servers.",
+   "6": "A cluster decides a change only when a quorum of servers has accepted it, and each server accepts only one change per position. A server cannot tell whether a silent peer crashed or was cut off by the network. So if a quorum could be half or less, both sides of a partition could decide different values (split brain). Requiring more than half of all configured servers, floor(n/2)+1, means any two quorums share a server, and that server refuses the conflicting value. The cluster therefore survives n − majority failures: 2 for n=5, but only 1 for n=4, because 4 and 5 both need 3 accepts.",
+   "7": "The overlap argument is the hardest part, especially the step 'C refuses'. It depends on the rule from much earlier that a server accepts only one change per position, and the example does not point back to that rule. It also leaves open what happens if a quorum never finished deciding x = 1; the Limits note on Raft/Paxos hints at this but does not resolve it. A one-line reminder of the one-change-per-position rule at the refusal step would help. So would a short note that floor(n/2)+1 is just 'the smallest whole number above n/2'.",
+   "8": "Majority size for 6 is floor(6/2)+1 = 4, so tolerance is 6 − 4 = 2 failed servers.",
+   "9": "Two groups of 2 among 4 servers need not share a server. In a partition {A,B} | {C,D}, both sides could decide different values for change 7 (x=1 and x=2), and the copies would disagree for good. That is split brain.",
+   "10": "The group of 3 has 3 ≥ 3 (the majority size), so it keeps deciding changes. The group of 2 has 2 < 3, so it stops: it keeps the changes already decided but decides nothing new until it can reach enough servers again. The copies cannot disagree.",
+   "11": "A and B cannot tell whether C and D crashed or are just cut off by a network partition and still running. If C and D are alive on the other side, letting A and B decide with 2 servers would also let C and D decide with 2, and the two sides could decide different values: split brain. 2 is not more than half of 4, so the two groups need not overlap.",
+   "12": "A quorum of 2 is not more than half of 4. Two disjoint pairs could each decide a different value for the same position during a partition, which produces split brain. Surviving 2 failures this way would cost correctness. The cluster must use quorum 3, which gives tolerance 1.",
+   "13": "Both need a majority of 3 accepts, because floor(4/2)+1 = floor(5/2)+1 = 3. With 5 servers, 3 still answer after 2 failures, so the cluster keeps deciding. With 4 servers, only 2 answer after 2 failures, and 2 < 3, so it stops. Tolerance is 5−3=2 versus 4−3=1."
+  },
+  "audit": {
+   "terms": [
+    "The required number of accepts is called both 'quorum size' (line 13: 'The number of accepts needed is the *quorum size*') and 'majority size' (line 37: 'the *majority size*: floor(n/2) + 1 ... The quorum size is always the majority size'), and the tolerance formula then uses only 'majority size' (line 55). The reader has to keep two names for one number.",
+    "Failure is described as 'fails' (line 14), 'stops answering' (line 14), 'become unreachable' (line 77), and 'crash' (line 77). Line 14 does tie these together, so the cost to the reader is small.",
+    "'Accepts' is used both as a value accepted and as a count in the same table (line 28: column 'Accepts for change 7' holds x = 1, while column 'Accepts received' holds 2)."
+   ],
+   "unexplained": [
+    "'floor(n/2) + 1' (line 37) is given without saying what floor does, i.e. round down, so for odd n it is the next whole number above n/2. A school-maths reader may not know the notation."
+   ],
+   "missing_why": [
+    "Line 41, 'C already accepted x = 1 for that position, so C refuses': the refusal depends on the rule in line 16 ('a server accepts only one change' per position), but the text does not refer back to it, and line 16 does not say why servers follow that rule.",
+    "Line 78, 'the new group keeps x = 1': no reason is given for why the new group should adopt the old value. This is the step that makes the protocol make progress rather than just block.",
+    "Line 77, 'Servers that lie need larger clusters': stated with no reason and no indication of how much larger."
+   ],
+   "excess": [
+    "The bold opening (line 3) and the 'Answer' section (line 73) say almost the same thing. The repeat adds only the overlap reason."
+   ]
+  },
+  "gaps": [
+   "The explanation does not say what happens when a change has been accepted by fewer than a quorum before a partition or crash (a partial accept), or how a value stuck at position 7 gets resolved. It is only gestured at in Limits.",
+   "The single-server example (C refuses) assumes the first decision finished before the second attempt. It does not cover two clients proposing different values at the same moment.",
+   "It does not say how many more servers are needed when servers can lie (line 77)."
+  ]
+ },
+ "grade": {
+  "scores": {
+   "1": 2,
+   "2": 2,
+   "3": 2,
+   "4": 2,
+   "5": 2,
+   "6": 2,
+   "7": 2,
+   "8": 2,
+   "9": 2,
+   "10": 2,
+   "11": 2,
+   "12": 2,
+   "13": 2
+  },
+  "reasons": {
+   "8": "Full marks: correct count (2) from majority size 4. It omits the expected remark that the sixth server adds nothing over 5. The question does not require that remark."
+  },
+  "pass": true
+ },
+ "usage": {
+  "cost": 0.1621684,
+  "seconds": 39
+ },
+ "findings": [
+  {
+   "n": 1,
+   "severity": "gap",
+   "kind": "terms",
+   "text": "The required number of accepts is called both 'quorum size' (line 13: 'The number of accepts needed is the *quorum size*') and 'majority size' (line 37: 'the *majority size*: floor(n/2) + 1 ... The quorum size is always the majority size'), and the tolerance formula then uses only 'majority size' (line 55). The reader has to keep two names for one number."
+  },
+  {
+   "n": 2,
+   "severity": "gap",
+   "kind": "terms",
+   "text": "Failure is described as 'fails' (line 14), 'stops answering' (line 14), 'become unreachable' (line 77), and 'crash' (line 77). Line 14 does tie these together, so the cost to the reader is small."
+  },
+  {
+   "n": 3,
+   "severity": "gap",
+   "kind": "terms",
+   "text": "'Accepts' is used both as a value accepted and as a count in the same table (line 28: column 'Accepts for change 7' holds x = 1, while column 'Accepts received' holds 2)."
+  },
+  {
+   "n": 4,
+   "severity": "gap",
+   "kind": "unexplained",
+   "text": "'floor(n/2) + 1' (line 37) is given without saying what floor does, i.e. round down, so for odd n it is the next whole number above n/2. A school-maths reader may not know the notation."
+  },
+  {
+   "n": 5,
+   "severity": "gap",
+   "kind": "missing_why",
+   "text": "Line 41, 'C already accepted x = 1 for that position, so C refuses': the refusal depends on the rule in line 16 ('a server accepts only one change' per position), but the text does not refer back to it, and line 16 does not say why servers follow that rule."
+  },
+  {
+   "n": 6,
+   "severity": "gap",
+   "kind": "missing_why",
+   "text": "Line 78, 'the new group keeps x = 1': no reason is given for why the new group should adopt the old value. This is the step that makes the protocol make progress rather than just block."
+  },
+  {
+   "n": 7,
+   "severity": "gap",
+   "kind": "missing_why",
+   "text": "Line 77, 'Servers that lie need larger clusters': stated with no reason and no indication of how much larger."
+  },
+  {
+   "n": 8,
+   "severity": "excess",
+   "kind": "excess",
+   "text": "The bold opening (line 3) and the 'Answer' section (line 73) say almost the same thing. The repeat adds only the overlap reason."
+  },
+  {
+   "n": 9,
+   "severity": "gap",
+   "kind": "gap",
+   "text": "The explanation does not say what happens when a change has been accepted by fewer than a quorum before a partition or crash (a partial accept), or how a value stuck at position 7 gets resolved. It is only gestured at in Limits."
+  },
+  {
+   "n": 10,
+   "severity": "gap",
+   "kind": "gap",
+   "text": "The single-server example (C refuses) assumes the first decision finished before the second attempt. It does not cover two clients proposing different values at the same moment."
+  },
+  {
+   "n": 11,
+   "severity": "gap",
+   "kind": "gap",
+   "text": "It does not say how many more servers are needed when servers can lie (line 77)."
+  }
+ ]
+}

@@ -1,0 +1,41 @@
+{
+  "answers": {
+    "1": {
+      "answer": "The receiver records when each signal arrives. Each signal carries its send time, so the travel time is the receive time minus the send time. Multiplying the travel time by the speed of light c gives the distance to that satellite.",
+      "quote": "Your receiver notes when the signal arrives. The **travel time** is receive time minus send time."
+    },
+    "2": {
+      "answer": "A cheap receiver clock is wrong by some unknown amount, and that error adds the same amount (c·b) to every distance. The clock bias b becomes a fourth unknown alongside x, y and z. Four unknowns need four equations, so the receiver needs four satellites.",
+      "quote": "There are four unknowns (x, y, z, b), so the receiver needs four equations: four satellites."
+    },
+    "3": {
+      "answer": "Two effects change the satellite clock rate. Speed slows it by about 7 µs per day, and weaker gravity speeds it up by about 45 µs per day. The net result is that satellite clocks gain about 38 µs per day. Multiplied by c, that is about 11 km of distance per day. The system needs its clocks to agree within a few nanoseconds, and the drift reaches 26 ns (8 m) after just one minute.",
+      "quote": "38 µs looks small. Multiply by c: 38 µs × 300 m per µs ≈ 11 km."
+    },
+    "4": {
+      "answer": "Each distance would be off by about 300 m (1 µs × c). Since the clock is fast, the distances would come out too long. With only three satellites, nothing absorbs this error, so the spheres would not meet at the true position.",
+      "quote": "Then every distance is wrong by 1 ms × c = 300 km. The three spheres no longer meet at your true position."
+    }
+  },
+  "stops": [
+    "\"the bias b absorbs part of an error that all satellites share. The drift would still break the system within hours.\": If b can absorb a shared error, why does the shared drift still break the system? The reason is not given.",
+    "\"(GM/c²)(1/R_Earth − 1/r)\": GM is never defined.",
+    "\"The drift would still break the system within hours.\": this seems to conflict with the earlier framing of an error of 11 km per day.",
+    "\"the clock is set to 10.22999999543 MHz\": the explanation does not show how this number follows from the 38 µs per day drift.",
+    "\"A clock deeper in a gravity well ticks slower.\": this is stated without any reason.",
+    "\"It solves them by iteration: guess a position...\": it is unclear why the equations are not solved directly."
+  ],
+  "excess": [
+    "\"<!-- Stage 1, rendered from model.md in STE-80. -->\": internal build note.",
+    "\"<!-- claim: time-to-distance -->\": internal markup that does not help the reader.",
+    "\"A side effect: your phone gets the time accurate to nanoseconds.\": not needed for the question.",
+    "\"Out of scope: Earth's rotation during signal travel (the Sagnac effect)...\": lists topics that are never covered.",
+    "\"About 30 GPS satellites orbit at 20,200 km altitude.\": the count of satellites is not used anywhere."
+  ],
+  "grounded": {
+    "1": true,
+    "2": true,
+    "3": true,
+    "4": true
+  }
+}

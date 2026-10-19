@@ -1,0 +1,13 @@
+{
+  "result": "I made `explainers/two-tides/explanation.md` and `explainers/two-tides/index.html`: the prose walks through the argument, with a little algebra and a runnable Python check, and the interactive page lets the reader flip from \"the pull\" to \"the pull minus the pull on the centre\" and watch the two bulges form, which a still image shows poorly (not tested in a browser).",
+  "error": null,
+  "cost": 0.4116578,
+  "seconds": 131,
+  "turns": 3,
+  "files": [
+    "explainers/two-tides/explanation.md",
+    "explainers/two-tides/index.html"
+  ],
+  "review_cost": 0,
+  "reviews": 0
+}

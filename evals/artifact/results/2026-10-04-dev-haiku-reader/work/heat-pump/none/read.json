@@ -1,0 +1,50 @@
+{
+  "answers": {
+    "1": {
+      "answer": "From the outside air or ground. A heat pump uses electricity to move heat that already exists at cold temperatures and releases it into the warm house.",
+      "quote": "taking it from somewhere cold (the outside air, the ground) and releasing it somewhere warm (your house)."
+    },
+    "2": {
+      "answer": "The refrigerant circulates through a closed loop where its temperature is manipulated: it is made colder than the outside air to absorb heat from it, then made hotter than the house to release that heat indoors, completing the cycle through boiling, compression, condensation, and expansion stages.",
+      "quote": "It makes the refrigerant colder than the outside air when it needs to absorb heat, then hotter than the house when it needs to release it."
+    },
+    "3": {
+      "answer": "On a colder day, the temperature difference (lift) between outside and inside is larger. As the temperature gap grows, the coefficient of performance (heat per unit electricity) decreases.",
+      "quote": "Colder weather means a lower COP. The lift is bigger."
+    },
+    "4": {
+      "answer": "On the 5 °C day, the ideal COP is higher than on the −15 °C day. The 5 °C day has a smaller temperature gap (30 K vs 50 K), and the Carnot limit depends only on these temperatures and shrinks as the gap grows.",
+      "quote": "The maximum COP depends only on the two absolute temperatures, and it shrinks as the gap between them grows."
+    }
+  },
+  "stops": [
+    "Boiling soaks up a lot of energy (latent heat)",
+    "The second law of thermodynamics says that the total entropy can't decrease.",
+    "depends only on the two absolute temperatures",
+    "most heat pumps do this with a reversing valve",
+    "the boiling point depends on pressure",
+    "defrosting the outdoor coil",
+    "(the Carnot limit)",
+    "carry a lot of thermal energy",
+    "part of it flashes to vapour",
+    "boiling point at sensible pressures"
+  ],
+  "excess": [
+    "It's not perpetual motion.",
+    "A resistive heater converts 1 kWh of electricity into exactly 1 kWh of heat (COP = 1).",
+    "Calling it \"300 % efficient\" is a loose way of saying COP = 3.",
+    "A fridge is exactly this machine.",
+    "Run backwards, it's an air conditioner.",
+    "A useful analogy is a water pump.",
+    "Real machines lose energy in several ways.",
+    "Ground-source heat pumps draw from soil that stays around 10 °C all winter",
+    "def carnot_cop(t_out_c, t_water_c):",
+    "That's why heat pumps pair well with large radiators or underfloor heating"
+  ],
+  "grounded": {
+    "1": true,
+    "2": true,
+    "3": true,
+    "4": true
+  }
+}

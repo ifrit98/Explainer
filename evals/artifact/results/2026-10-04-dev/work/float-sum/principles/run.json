@@ -1,0 +1,12 @@
+{
+  "result": "I made `explainers/float-sum/explanation.md`, along with `model.md` and `model.yaml` to hold the facts and numbers it relies on. I chose prose because the cause is one short chain: round each number to binary, add, round once more. A worked table and one small number-line sketch carry the numbers, so a diagram or interactive page would add little. I checked the binary arithmetic by hand, but I couldn't run `explainer check` because I have no shell here.",
+  "error": null,
+  "cost": 0.2104636,
+  "seconds": 55,
+  "turns": 4,
+  "files": [
+    "explainers/float-sum/explanation.md"
+  ],
+  "review_cost": 0,
+  "reviews": 0
+}

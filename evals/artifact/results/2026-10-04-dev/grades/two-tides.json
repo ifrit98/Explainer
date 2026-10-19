@@ -1,0 +1,57 @@
+{
+  "key": {
+    "A": "principles",
+    "B": "none",
+    "C": "published",
+    "D": "quick"
+  },
+  "grades": {
+    "principles": {
+      "quiz": [
+        2,
+        2,
+        2,
+        2
+      ],
+      "misconception": "corrected",
+      "errors": []
+    },
+    "none": {
+      "quiz": [
+        2,
+        2,
+        2,
+        2
+      ],
+      "misconception": "absent",
+      "errors": []
+    },
+    "published": {
+      "quiz": [
+        2,
+        2,
+        0,
+        2
+      ],
+      "misconception": "corrected",
+      "errors": []
+    },
+    "quick": {
+      "quiz": [
+        2,
+        2,
+        0,
+        2
+      ],
+      "misconception": "absent",
+      "errors": []
+    }
+  },
+  "rank": [
+    "principles",
+    "none",
+    "published",
+    "quick"
+  ],
+  "why_best": "A covers every quiz point and names and refutes the spin-centrifugal misconception, using compact worked numbers, without B's long detours (code, a broken companion-page dump) and without the spring-tide gap in C and D."
+}

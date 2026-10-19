@@ -1,0 +1,209 @@
+{
+ "tool": "coldread",
+ "rendering": "narrative",
+ "slug": "bloom-filter",
+ "at": "2026-10-04T15:08:31",
+ "model": "default",
+ "prompt_sha": "84de7cead935",
+ "reply": {
+  "beats": [
+   {
+    "at": "Beat 1 (hook)",
+    "text": "Hash set of 1M URLs ≈ 50 MB; Bloom filter keeps 10 bits per URL, 1.25 MB; answers 'definitely not seen' / 'probably seen', only the second can be wrong.",
+    "unresolved": [],
+    "unsaid": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Beat 2 (mechanism)",
+    "text": "m = 16 bits, k = 3 hash functions, hash mod 16 gives a position; add sets 3 positions; cat → 1, 6, 11; dog → 3, 9, 14.",
+    "unresolved": [],
+    "unsaid": [
+     "The shown '16-bit table after cat, dog' may mark which item set each bit, but the words never say so."
+    ],
+    "leap": [
+     "'(3,141,593 mod 16 = 9)' is not linked to any item. Position 9 later turns up under dog, so the reader may stop to check whether this was dog's hash."
+    ],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Beat 3 (mechanism)",
+    "text": "Query reads the same 3 positions; any 0 → definitely not seen; all 1 → probably seen; fox → 2, 6, 14, bit 2 is 0.",
+    "unresolved": [],
+    "unsaid": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Beat 4 (notice)",
+    "text": "owl → 3, 6, 11, never added, all bits set by dog and cat → false positive.",
+    "unresolved": [],
+    "unsaid": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Beat 5 (guarantee)",
+    "text": "No false negatives because bits only go to 1; deleting cat after adding owl would cause one; so no delete.",
+    "unresolved": [],
+    "unsaid": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Beat 6 (mechanism)",
+    "text": "Derivation: miss prob 1 − 1/m, (1 − 1/m)^(kn) ≈ e^(−kn/m), f ≈ 1 − e^(−kn/m), p ≈ f^k; with m/n = 10, k = 7 → p = 0.82%.",
+    "unresolved": [
+     "'p' is never named as the false-positive rate. The beat says 'p ≈ f^k' straight after 'is a false positive when…', so the reader has to infer what p means."
+    ],
+    "unsaid": [],
+    "leap": [
+     "'(1 − 1/m)^(kn) ≈ e^(−kn/m)': the step (1 − 1/m)^m ≈ 1/e is not stated.",
+     "'p ≈ f^k': it is not said that the fill fraction f is used as the probability that one random position is 1, or that the k positions are treated as independent for this."
+    ],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Beat 7 (approach)",
+    "text": "k = 1 → p = 9.5%, k = 20 → p = 5.5%, k = 7 → f ≈ 0.5, p = 0.82%; best k = (m/n)·ln 2.",
+    "unresolved": [],
+    "unsaid": [],
+    "leap": [
+     "'The best k is (m/n)·ln 2' is stated with no reason, and the beat never says that 10·ln 2 ≈ 6.9 rounds to 7.",
+     "'f ≈ 0.5, the balance': it is not said why half-full is the optimum."
+    ],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Beat 8 (limit)",
+    "text": "Sized for 1M; 2M → 13.8%, 3M → 40%; added items still read 'probably seen'.",
+    "unresolved": [],
+    "unsaid": [],
+    "leap": [
+     "The beat does not say that m and k stay fixed (10M bits, k = 7) while n grows."
+    ],
+    "excess": [
+     "'Added items still always read \"probably seen\"' repeats beat 5 with nothing new."
+    ],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Beat 9 (payoff)",
+    "text": "Filter before a disk lookup; 'definitely not seen' skips it; ≈ 8,200 wasted lookups per 1M absent queries.",
+    "unresolved": [],
+    "unsaid": [],
+    "leap": [],
+    "excess": [
+     "'safely, because there are no false negatives' restates beat 5."
+    ],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Beat 10 (close)",
+    "text": "Remembers only bits; a 0 proves new; all 1s → probably seen, wrong at rate p, rising as the array fills.",
+    "unresolved": [],
+    "unsaid": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   }
+  ],
+  "blocking": [],
+  "cuts": [
+   "Beat 8: drop 'Added items still always read \"probably seen\"' (repeats beat 5).",
+   "Beat 9: shorten 'safely, because there are no false negatives' to 'safely' (repeats beat 5)."
+  ],
+  "question": {
+   "text": "How can a program check 'have I seen this?' for millions of items without storing the items, and when is that answer wrong?",
+   "known_at": "Beat 1. It is implied by the 50 MB vs 1.25 MB contrast, but the words never ask it as a question.",
+   "result_stated": "Yes. Beat 1: 'It answers \"definitely not seen\" or \"probably seen\", and only the second answer can be wrong.' Beat 10: 'A 0 bit proves an item is new. All 1s mean \"probably seen\", wrong at rate p, which rises as the array fills.'"
+  },
+  "motive": "Reason to care: beat 1, 'A hash set of 1 million URLs ... takes about 50 MB ... 10 bits per URL, 1.25 MB', and beat 9, 'Check the filter before a slow lookup on disk.' Reason for the approach: partly given in beat 1, 'keeps no URLs: it keeps a row of bits that each URL turned on'. The words never say why hashing to bit positions is the natural way to do this.",
+  "close": "Mostly. Beat 10: 'A Bloom filter remembers only the bits each item turned on. A 0 bit proves an item is new. All 1s mean \"probably seen\", wrong at rate p, which rises as the array fills.' It answers the question. It does not repeat the reason a 0 is proof (bits only ever go from 0 to 1), and it does not mention that the rate is set by memory per item.",
+  "recap": "A Bloom filter hashes each item to k bits and sets them; a 0 among an item's bits proves it is new, all 1s only means 'probably seen', and with about 10 bits per item it is wrong under 1% of the time, getting worse as it fills.",
+  "strongest": "Beats 4–5: the owl example produces a false positive from cat's and dog's bits, then reuses owl to show why deleting creates false negatives.",
+  "weakest": "Beat 7: 'The best k is (m/n)·ln 2' and 'f ≈ 0.5, the balance' are given with no reason. Beat 6's undefined 'p' is a close second.",
+  "suggestions": [
+   "In beat 6, name p aloud: 'call the false-positive rate p'.",
+   "In beat 6, add one clause: (1 − 1/m)^m ≈ 1/e for large m.",
+   "In beat 7, say that 10·ln 2 ≈ 6.9, hence k = 7. Either give the one-line reason for the optimum or mark it as stated without proof.",
+   "In beat 2, tie the mod example to an item, e.g. 'dog's second hash is 3,141,593; mod 16 = 9'.",
+   "In beat 8, say that m and k stay fixed while n grows.",
+   "In beat 10, add 'because bits only ever go from 0 to 1' so the close carries the general argument."
+  ]
+ },
+ "usage": {
+  "cost": 0.1236152,
+  "seconds": 39
+ },
+ "findings": [
+  {
+   "n": 1,
+   "severity": "excess",
+   "kind": "cut",
+   "text": "Beat 8: drop 'Added items still always read \"probably seen\"' (repeats beat 5)."
+  },
+  {
+   "n": 2,
+   "severity": "excess",
+   "kind": "cut",
+   "text": "Beat 9: shorten 'safely, because there are no false negatives' to 'safely' (repeats beat 5)."
+  },
+  {
+   "n": 3,
+   "severity": "edge",
+   "kind": "unsaid",
+   "text": "Beat 2 (mechanism): The shown '16-bit table after cat, dog' may mark which item set each bit, but the words never say so."
+  },
+  {
+   "n": 4,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "Beat 2 (mechanism): '(3,141,593 mod 16 = 9)' is not linked to any item. Position 9 later turns up under dog, so the reader may stop to check whether this was dog's hash."
+  },
+  {
+   "n": 5,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "Beat 6 (mechanism): 'p' is never named as the false-positive rate. The beat says 'p ≈ f^k' straight after 'is a false positive when…', so the reader has to infer what p means."
+  },
+  {
+   "n": 6,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "Beat 6 (mechanism): '(1 − 1/m)^(kn) ≈ e^(−kn/m)': the step (1 − 1/m)^m ≈ 1/e is not stated."
+  },
+  {
+   "n": 7,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "Beat 6 (mechanism): 'p ≈ f^k': it is not said that the fill fraction f is used as the probability that one random position is 1, or that the k positions are treated as independent for this."
+  },
+  {
+   "n": 8,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "Beat 7 (approach): 'The best k is (m/n)·ln 2' is stated with no reason, and the beat never says that 10·ln 2 ≈ 6.9 rounds to 7."
+  },
+  {
+   "n": 9,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "Beat 7 (approach): 'f ≈ 0.5, the balance': it is not said why half-full is the optimum."
+  },
+  {
+   "n": 10,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "Beat 8 (limit): The beat does not say that m and k stay fixed (10M bits, k = 7) while n grows."
+  }
+ ]
+}

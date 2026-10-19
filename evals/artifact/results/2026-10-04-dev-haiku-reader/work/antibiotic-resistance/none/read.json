@@ -1,0 +1,49 @@
+{
+  "answers": {
+    "1": {
+      "answer": "Resistance originates from random mutations in bacterial DNA and from horizontal gene transfer (acquiring genes from other bacteria). These create genetic variation so that a large population almost always contains a few cells that happen to be resistant before any drug is used.",
+      "quote": "A large bacterial population almost always contains a few cells that differ genetically from the rest. They differ because of random mutations, or because they picked up genes from other bacteria."
+    },
+    "2": {
+      "answer": "The antibiotic kills or stops the susceptible cells, while resistant cells survive and multiply. By removing the competition, the drug allows resistant cells to reproduce exponentially with abundant food and space.",
+      "quote": "The drug kills or stops the susceptible cells. The resistant few survive, and they now have food and space to themselves."
+    },
+    "3": {
+      "answer": "Bacteria can acquire ready-made resistance genes from other bacteria through three mechanisms: conjugation (direct DNA transfer via a bridge), transformation (taking up loose DNA), and transduction (viruses accidentally transfer bacterial DNA between cells).",
+      "quote": "Bacteria can also acquire ready-made resistance genes from other bacteria, even from different species."
+    },
+    "4": {
+      "answer": "Exponential growth. Resistant cells double roughly every 30 minutes while susceptible cells die within hours. Starting from just 100 resistant cells among 10 billion susceptible ones, exponential growth produces 10 million resistant cells within 10 hours, overwhelming the population.",
+      "quote": "The population has gone from 1 resistant cell in 10⁸ to almost entirely resistant in less than half a day. Exponential growth makes up the difference quickly."
+    }
+  },
+  "stops": [
+    "β-lactamases, which cut open the ring structure that penicillin-type drugs need",
+    "Some bacteria (the \"Gram-negative\" group, such as E. coli) have an outer membrane with channels called porins",
+    "Efflux pumps are membrane proteins that push molecules out of the cell",
+    "In a clinic, a strain is labelled \"resistant\" when its MIC is above what can be safely reached in a patient's body",
+    "transposons (\"jumping genes\") and integrons (gene-capture systems) let resistance genes move between chromosome and plasmid",
+    "Later mutations can restore the lost growth rate without removing the resistance, so the cost shrinks to nearly zero",
+    "Between MIC_S and MIC_R: susceptible cells die and resistant cells grow. This range is the mutant selection window",
+    "A small fraction of genetically identical cells happen to be dormant when the drug arrives",
+    "Carrying capacity K = 10¹⁰ is the carrying capacity; this is deliberately the simplest case"
+  ],
+  "excess": [
+    "Cell wall construction | penicillins, cephalosporins (β-lactams); vancomycin | The wall is built badly",
+    "Some bacteria make enzymes that chemically inactivate the antibiotic. The best-known are the β-lactamases",
+    "This was shown directly in classic experiments in the 1940s and 50s (Luria–Delbrück, and the Lederbergs' replica plating)",
+    "If you program, here is a loose analogy. Mutation is like random bit-flips in your own source code",
+    "Use antibiotics only when they're needed. Every use selects for resistance somewhere, including among harmless bacteria in your gut",
+    "This is natural selection, and it runs fast because bacteria have huge populations and short generation times",
+    "This is why tuberculosis and HIV are treated with combinations",
+    "the old blanket rule \"always finish the course\" is now debated",
+    "Tolerance. The bacteria die more slowly under the drug, but the MIC doesn't change",
+    "Biofilms. Communities of bacteria stuck to a surface inside a slimy matrix"
+  ],
+  "grounded": {
+    "1": true,
+    "2": true,
+    "3": true,
+    "4": true
+  }
+}

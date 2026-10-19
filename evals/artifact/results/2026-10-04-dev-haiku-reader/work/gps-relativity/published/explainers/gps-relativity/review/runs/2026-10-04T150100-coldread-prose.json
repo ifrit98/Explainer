@@ -1,0 +1,375 @@
+{
+ "tool": "coldread",
+ "rendering": "prose",
+ "slug": "gps-relativity",
+ "at": "2026-10-04T15:01:00",
+ "model": "default",
+ "prompt_sha": "05a1f51134c7",
+ "reply": {
+  "paragraphs": [
+   {
+    "at": "Title",
+    "text": "How does GPS find your position, and why does it need relativity?",
+    "unresolved": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Lead (bold paragraph)",
+    "text": "A GPS receiver times radio signals from four satellites and solves for its position and its own clock error. ... engineers build them to tick slow.",
+    "unresolved": [],
+    "leap": [
+     "\"Relativity makes those clocks gain 38 µs a day\": the reader is told this here and has to wait until §4 for the reason. That is fine in a summary.",
+     "\"which would add 11.4 km of range error per day\": this reads as if the error is the clock drift itself. §5 later says a drift shared by all clocks would be absorbed, so this framing needs revising once the reader gets there."
+    ],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "§1 para 1",
+    "text": "About 30 GPS satellites orbit 20,200 km above Earth. Each one carries atomic clocks and broadcasts ...",
+    "unresolved": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "§1 para 2 + list",
+    "text": "The receiver notes when each signal arrives. Then: travel time = receive time − send time; range = travel time × c ...",
+    "unresolved": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "§1 para 3",
+    "text": "From a satellite directly overhead, the travel time is about 67 ms. Light covers 300 m in one microsecond ...",
+    "unresolved": [],
+    "leap": [],
+    "excess": [
+     "\"(1 µs = 10⁻⁶ s)\": this definition comes after µs was already used in the lead, and this reader probably knows the unit anyway. It costs very little."
+    ],
+    "purpose_unclear": false
+   },
+   {
+    "at": "§1 para 4",
+    "text": "One range puts you somewhere on a sphere around the satellite ... Three satellites would be enough, if every clock were perfect.",
+    "unresolved": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "§2 para 1",
+    "text": "Your phone's clock is quartz, not atomic. It can easily be off by 1 ms, and 1 ms × c = 300 km.",
+    "unresolved": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "§2 para 2",
+    "text": "So the receiver does not compute a range. It computes a pseudorange ... That makes b one more unknown to solve for, next to the position.",
+    "unresolved": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "§2 worked example",
+    "text": "Worked example, on a line. Put beacon A at 0 km and beacon B at 30 km ... Those give pseudoranges of 13.5 km and 19.5 km.",
+    "unresolved": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "§2 para 4",
+    "text": "The two pseudoranges add up to 33 km, but the beacons are only 30 km apart. The excess, 3 km, is b counted twice ...",
+    "unresolved": [],
+    "leap": [
+     "\"The two pseudoranges add up to 33 km, but the beacons are only 30 km apart\": the shortcut of adding the ranges only works because the receiver lies between the beacons. The text does not say so, but it is a small point."
+    ],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "§2 para 5",
+    "text": "In three dimensions the unknowns are x, y, z, and b. Four unknowns need four equations ...",
+    "unresolved": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "§3 para 1",
+    "text": "The receiver can solve for its own clock error because that error is shared by all the pseudoranges. A satellite clock error is different ...",
+    "unresolved": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "§3 para 2",
+    "text": "How close? Each nanosecond of satellite clock error is 0.3 m of range error. For a fix within about 5 m ... about 17 ns.",
+    "unresolved": [],
+    "leap": [
+     "\"For a fix within about 5 m\": the 5 m target is given without a reason. It works as an example."
+    ],
+    "excess": [
+     "\"Each nanosecond of satellite clock error is 0.3 m of range error\": this repeats the conversion from §1. The repeat is short and useful here."
+    ],
+    "purpose_unclear": false
+   },
+   {
+    "at": "§4 para 1",
+    "text": "Time dilation means that clocks in different motion, or at different heights in gravity, tick at different rates ...",
+    "unresolved": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "§4 table",
+    "text": "Speed: 3.9 km/s ... loses 7 µs per day | Height ... gains 45 µs per day | Net gains 38 µs per day",
+    "unresolved": [],
+    "leap": [
+     "\"a clock higher above Earth ticks faster\": the text gives no reason, only a pointer to experiment. The 'Not covered' section later admits this, and the main line does not need the reason."
+    ],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "§4 para 2",
+    "text": "The gravity effect is larger, so the clock runs fast. A correction for speed alone would leave the full 45 µs a day, about 13.5 km of range per day.",
+    "unresolved": [],
+    "leap": [],
+    "excess": [
+     "\"A correction for speed alone would leave the full 45 µs a day, about 13.5 km of range per day.\": nobody has suggested correcting for speed alone, so the reader stops to work out why this hypothetical is here. Nothing later uses it."
+    ],
+    "purpose_unclear": false
+   },
+   {
+    "at": "§4 para 3",
+    "text": "38 µs is only 4.5 × 10⁻¹⁰ of a day, but light covers 11.4 km in 38 µs.",
+    "unresolved": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "§5 para 1",
+    "text": "Every satellite clock drifts at the same rate. So does b not absorb the drift, as it absorbs the receiver clock error?",
+    "unresolved": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "§5 para 2",
+    "text": "Only if every clock had the same error at the same moment. If every satellite clock were exactly 38 µs fast, b would absorb 11.4 km, and the position would come out right.",
+    "unresolved": [],
+    "leap": [
+     "\"b would absorb 11.4 km, and the position would come out right\": this contradicts the lead's \"would add 11.4 km of range error per day\". The reader has to go back and work out that the real damage comes from differences between clocks, not from the 11.4 km itself."
+    ],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "§5 para 3",
+    "text": "But each satellite clock is set to GPS time at a different moment. Suppose satellite A is set on day 0 and satellite B on day 3 ...",
+    "unresolved": [],
+    "leap": [
+     "\"each satellite clock is set to GPS time at a different moment\": the obvious question is why not reset them often, or all at once. The text never answers it."
+    ],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "§6",
+    "text": "Each satellite clock counts the ticks of a signal at a nominal 10.23 MHz ... Ground stations upload small corrections for what remains.",
+    "unresolved": [
+     "\"nominal\""
+    ],
+    "leap": [
+     "\"Ground stations upload small corrections for what remains\": if uploads can correct the clocks at all, why not upload corrections for the whole 38 µs a day? The text does not say why a rate offset built in before launch is better."
+    ],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Summary",
+    "text": "Four pseudoranges give x, y, z, and the receiver's clock error, but only if satellite clocks stay within about 17 ns of GPS time; relativity's net 38 µs a day would break that by 11.4 km a day, so each clock is built to tick slow.",
+    "unresolved": [],
+    "leap": [
+     "\"would break that by 11.4 km a day\": this repeats the framing that §5 qualified. The damage is the unshared part of the drift, not 11.4 km as such."
+    ],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Not covered: Atmosphere",
+    "text": "the ionosphere and troposphere delay the signal ...",
+    "unresolved": [
+     "\"ionosphere\"",
+     "\"troposphere\""
+    ],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Not covered: Sagnac / orbit-shape",
+    "text": "Earth's rotation during the 67 ms flight (Sagnac effect) and the orbit-shape correction ...",
+    "unresolved": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Not covered: moving clock",
+    "text": "any introduction to special relativity (the \"light clock\" argument).",
+    "unresolved": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Not covered: solving",
+    "text": "iteration from a guess, with least squares when it hears more than four satellites.",
+    "unresolved": [
+     "\"least squares\""
+    ],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   }
+  ],
+  "blocking": [
+   "Lead (\"would add 11.4 km of range error per day\") and Summary (\"would break that by 11.4 km a day\") vs §5 para 2 (\"If every satellite clock were exactly 38 µs fast, b would absorb 11.4 km, and the position would come out right\"): the headline cost of relativity is stated in a way that the argument itself then says is not how the failure happens. A careful reader stops at §5 and has to rebuild the claim as 'the clocks drift apart by up to 11.4 km a day'."
+  ],
+  "cuts": [
+   "§4 para 2: cut \"A correction for speed alone would leave the full 45 µs a day, about 13.5 km of range per day.\" It answers a question nobody asked.",
+   "§1 para 3: the \"(1 µs = 10⁻⁶ s)\" and \"(1 ns = 10⁻⁹ s)\" definitions are probably unneeded for this reader. They are very short, so cutting them saves little."
+  ],
+  "question": {
+   "text": "How does a GPS receiver work out its position from satellite signals, and why does that depend on correcting for relativity?",
+   "known_at": "Title, with the answer sketched in the bold lead.",
+   "result_stated": "Yes. The lead says: \"Relativity makes those clocks gain 38 µs a day, which would add 11.4 km of range error per day, so engineers build them to tick slow.\" The Summary restates it."
+  },
+  "motive": "Reason to care: this is weak and only implied, through \"Your receiver (the GPS chip in a phone or car)\". It is an everyday device with a surprising dependence on relativity. Reason for the approach: present. §3 says \"A satellite clock error is different: it sits in only one pseudorange, so no unknown can absorb it\", and §5 explains why b cannot cancel the drift. Together these justify building in the rate offset. Missing: why a fixed slow rate is better than ground uploads alone.",
+  "close": "Yes. The Summary says: \"Four pseudoranges give x, y, z, and the receiver's clock error, but only if satellite clocks stay within about 17 ns of GPS time; relativity's net 38 µs a day would break that by 11.4 km a day, so each clock is built to tick slow.\" It answers the opening question in words, though the 11.4 km framing ignores the shared-versus-unshared point from §5.",
+  "recap": "GPS solves for your position plus your phone's clock error from four satellites, which only works if the satellite clocks agree almost perfectly, and since relativity makes orbiting clocks run 38 µs a day fast, they are built to tick slightly slow.",
+  "strongest": "§2 worked example on a line (the 12 km receiver with a clock 5 µs fast): it makes the clock-bias unknown b concrete and easy to check.",
+  "weakest": "§5 para 2 together with the Lead and Summary: they disagree about whether 11.4 km a day is the actual error. Second weakest is the unexplained \"Ground stations upload small corrections\" in §6.",
+  "suggestions": [
+   "Rephrase the lead and summary as something like 'clocks set at different times would drift apart, reaching tens of km of disagreement within days', so they agree with §5.",
+   "Add one sentence to §6 on why a built-in rate offset is preferred over large, frequent uploaded corrections.",
+   "Drop the speed-only hypothetical in §4, or say why it matters.",
+   "Optionally note that adding the two pseudoranges in the 1-D example works because the receiver is between the beacons."
+  ]
+ },
+ "usage": {
+  "cost": 0.15960499999999997,
+  "seconds": 58
+ },
+ "findings": [
+  {
+   "n": 1,
+   "severity": "blocking",
+   "kind": "blocking",
+   "text": "Lead (\"would add 11.4 km of range error per day\") and Summary (\"would break that by 11.4 km a day\") vs §5 para 2 (\"If every satellite clock were exactly 38 µs fast, b would absorb 11.4 km, and the position would come out right\"): the headline cost of relativity is stated in a way that the argument itself then says is not how the failure happens. A careful reader stops at §5 and has to rebuild the claim as 'the clocks drift apart by up to 11.4 km a day'."
+  },
+  {
+   "n": 2,
+   "severity": "excess",
+   "kind": "cut",
+   "text": "§4 para 2: cut \"A correction for speed alone would leave the full 45 µs a day, about 13.5 km of range per day.\" It answers a question nobody asked."
+  },
+  {
+   "n": 3,
+   "severity": "excess",
+   "kind": "cut",
+   "text": "§1 para 3: the \"(1 µs = 10⁻⁶ s)\" and \"(1 ns = 10⁻⁹ s)\" definitions are probably unneeded for this reader. They are very short, so cutting them saves little."
+  },
+  {
+   "n": 4,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "Lead (bold paragraph): \"Relativity makes those clocks gain 38 µs a day\": the reader is told this here and has to wait until §4 for the reason. That is fine in a summary."
+  },
+  {
+   "n": 5,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "Lead (bold paragraph): \"which would add 11.4 km of range error per day\": this reads as if the error is the clock drift itself. §5 later says a drift shared by all clocks would be absorbed, so this framing needs revising once the reader gets there."
+  },
+  {
+   "n": 6,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "§2 para 4: \"The two pseudoranges add up to 33 km, but the beacons are only 30 km apart\": the shortcut of adding the ranges only works because the receiver lies between the beacons. The text does not say so, but it is a small point."
+  },
+  {
+   "n": 7,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "§3 para 2: \"For a fix within about 5 m\": the 5 m target is given without a reason. It works as an example."
+  },
+  {
+   "n": 8,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "§4 table: \"a clock higher above Earth ticks faster\": the text gives no reason, only a pointer to experiment. The 'Not covered' section later admits this, and the main line does not need the reason."
+  },
+  {
+   "n": 9,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "§5 para 2: \"b would absorb 11.4 km, and the position would come out right\": this contradicts the lead's \"would add 11.4 km of range error per day\". The reader has to go back and work out that the real damage comes from differences between clocks, not from the 11.4 km itself."
+  },
+  {
+   "n": 10,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "§5 para 3: \"each satellite clock is set to GPS time at a different moment\": the obvious question is why not reset them often, or all at once. The text never answers it."
+  },
+  {
+   "n": 11,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "§6: \"nominal\""
+  },
+  {
+   "n": 12,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "§6: \"Ground stations upload small corrections for what remains\": if uploads can correct the clocks at all, why not upload corrections for the whole 38 µs a day? The text does not say why a rate offset built in before launch is better."
+  },
+  {
+   "n": 13,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "Summary: \"would break that by 11.4 km a day\": this repeats the framing that §5 qualified. The damage is the unshared part of the drift, not 11.4 km as such."
+  },
+  {
+   "n": 14,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "Not covered: Atmosphere: \"ionosphere\""
+  },
+  {
+   "n": 15,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "Not covered: Atmosphere: \"troposphere\""
+  },
+  {
+   "n": 16,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "Not covered: solving: \"least squares\""
+  }
+ ]
+}

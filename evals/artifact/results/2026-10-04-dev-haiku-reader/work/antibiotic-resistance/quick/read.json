@@ -1,0 +1,48 @@
+{
+  "answers": {
+    "1": {
+      "answer": "From random mutations or gene transfer between bacteria before the drug is used.",
+      "quote": "A few bacteria in a large population already carry a gene that protects them, by random chance."
+    },
+    "2": {
+      "answer": "It kills the susceptible bacteria and leaves the resistant ones to survive and repopulate.",
+      "quote": "This process is selection: the drug removes one kind of cell, and the remaining kind fills the space."
+    },
+    "3": {
+      "answer": "Through plasmids—small circles of DNA that can move between different bacterial species.",
+      "quote": "One plasmid can carry several resistance genes and move between species, so one transfer can give resistance to several drugs."
+    },
+    "4": {
+      "answer": "Even though only 1 in a billion bacteria are resistant, a large infection of 10^10 bacteria contains about 10 resistant bacteria (10^10 × 10^-9 = 10). When the antibiotic kills all susceptible bacteria, these 10 resistant survivors repopulate the cleared space.",
+      "quote": "Expected resistant cells before any drug: 10^10 × 10^-9 = 10. The antibiotic kills the susceptible cells. The 10 resistant cells survive."
+    }
+  },
+  "stops": [
+    "Efflux pumps against tetracycline",
+    "Fewer porins against several drugs",
+    "A specific error that changes the target has a chance of about 10^-9 per division: once per billion divisions.",
+    "the number of resistant bacteria varied between cultures in a way that only fits mutations that occurred before exposure",
+    "A cell needs two independent rare events: 10^-9 × 10^-9 = 10^-18 per cell",
+    "Without the drug, resistant cells often grow slower, so they stay rare.",
+    "10 × 2^30 ≈ 10^10, so 30 doublings rebuild the population.",
+    "This fails if one plasmid carries both resistance genes."
+  ],
+  "excess": [
+    "The bacteria become resistant, not the patient.",
+    "Predict before you read on: what happens with a small population of 10^7 cells?",
+    "Luria and Delbrück showed this in 1943: the number of resistant bacteria varied between cultures in a way that only fits mutations that occurred before exposure.",
+    "At 30 minutes per doubling (a lab rate; slower in a body), that takes about 15 hours.",
+    "Not covered here: persister cells, which survive a drug without a resistance gene; and stress responses that raise mutation rates.",
+    "Beta-lactamase cuts penicillin",
+    "Resistance is often a cost.",
+    "Every use of the drug gives them the advantage.",
+    "The cell makes fewer entry channels in its outer membrane",
+    "MRSA makes a cell-wall enzyme that penicillin-type drugs do not bind"
+  ],
+  "grounded": {
+    "1": true,
+    "2": true,
+    "3": true,
+    "4": true
+  }
+}

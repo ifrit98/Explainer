@@ -1,0 +1,29 @@
+values: {}
+claims:
+  - id: energy-balance
+    kind: guarantee
+    statement: "A heat pump does not create energy: heat delivered = electricity + outdoor heat, 3 kWh = 1 kWh + 2 kWh."
+    example: "0 °C outside, 35 °C water: 1 kWh electricity, 2 kWh outdoor heat, 3 kWh into the water, COP 3."
+    counterexample: "An electric heater has only electricity as input: 1 kWh in, 1 kWh heat out, COP 1."
+    ask: "Where do the other 2 kWh come from, if the heat pump uses only 1 kWh of electricity?"
+  - id: loop
+    kind: mechanism
+    statement: "Evaporator, compressor, condenser, expansion valve: the refrigerant takes heat in where it is colder than the air and gives heat out where it is hotter than the water."
+    example: "Boils at −10 °C, taking 2 kWh from 0 °C air; compressor adds 1 kWh; condenses at 40 °C, giving 3 kWh to 35 °C water."
+    ask: "Why must the refrigerant be colder than the outdoor air in the evaporator, and hotter than the home water in the condenser?"
+  - id: lift-sets-cop
+    kind: guarantee
+    statement: "The larger the temperature lift, the more electricity each kWh of heat costs, so COP falls."
+    example: "10 °C outside: lift 25 K, COP about 4."
+    counterexample: "−15 °C outside: lift 50 K, COP about 2."
+    ask: "What happens to the COP on a colder day, and why?"
+quiz:
+  - q: "A heat pump uses 1 kWh of electricity and delivers 3 kWh of heat. Does it break energy conservation? Where does the energy come from?"
+    expect: "No. 2 kWh comes from the outdoor air, which is colder than the home but still holds heat; the refrigerant is made colder than the air so heat flows into it. 1 + 2 = 3."
+    misconception: "It creates energy, or it is '300% efficient' in the sense of making more energy than it uses."
+  - q: "The same heat pump runs on a 10 °C day and on a −15 °C day, heating water to 35 °C. On which day is its COP higher, and why?"
+    expect: "On the 10 °C day (about 4 vs about 2): the temperature lift is smaller (25 K vs 50 K), so less work is needed per kWh moved."
+    misconception: "COP is a fixed number for the machine, or it is higher in the cold."
+  - q: "What do the compressor and the expansion valve each do to the refrigerant, and why does the loop need both?"
+    expect: "Compressor raises pressure, so the refrigerant condenses at a high temperature (40 °C) above the water; valve drops pressure, so it boils at a low temperature (−10 °C) below the air. Boiling temperature depends on pressure."
+    misconception: "The compressor makes the heat; or the refrigerant is cooled by the outdoor air."

@@ -1,0 +1,36 @@
+{
+  "answers": {
+    "1": {
+      "answer": "Adding an item: you compute its k positions with the hash functions and set those bits to 1. Looking an item up: you compute the same k positions and check those bits. If any of them is 0 the answer is \"no\"; if all are 1 the answer is \"probably yes\".",
+      "quote": "Query** an item: compute its k positions and look at those bits. If any bit is 0, answer \"no\". If all are 1, answer \"probably yes\"."
+    },
+    "2": {
+      "answer": "It can give a false positive: a \"probably yes\" for an item that was never added, because other items may have already turned on all of that item's bits. It can never give a false negative: adding only ever changes bits from 0 to 1 and nothing resets them, so every item that was added still has all its bits set.",
+      "quote": "Adding an item only changes bits from 0 to 1. Nothing changes a bit back to 0. So every item you added still has all its bits set, and it always gets \"probably yes\"."
+    },
+    "3": {
+      "answer": "Other items may share those bits. Clearing them can turn off a bit that another added item needs, so that item then gets a wrong \"no\". In the example, clearing cat's bit 6 breaks dog.",
+      "quote": "Suppose you remove cat by clearing bits 1 and 6. Dog also uses bit 6. Now a query for dog finds bit 6 at 0 and answers \"no\", which is wrong."
+    },
+    "4": {
+      "answer": "\"Probably yes\". All of the item's bits are 1, so the filter gives a false positive for every unseen item. This is the extreme end of the over-full case the explanation describes. The explanation does not discuss this case directly; I reasoned it from the query rule.",
+      "quote": "If all are 1, answer \"probably yes\"."
+    }
+  },
+  "stops": [
+    "Hash function positions: the reader may wonder how k different hash functions are obtained in practice. Quote: \"k **hash functions**. A hash function turns an item into a position from 0 to m − 1.\"",
+    "The formula appears with no derivation or explanation of e and its terms. Quote: \"p ≈ (1 − e^(−kn/m))^k\"",
+    "\"one more lucky bit\" is vague wording. Quote: \"Each extra hash makes a false positive need one more lucky bit.\"",
+    "The optimal k formula is stated without a reason. Quote: \"The best k is about (m/n) × ln 2\"",
+    "\"independent and uniform\" is not explained. Quote: \"This formula assumes the hash positions are independent and uniform.\""
+  ],
+  "excess": [
+    "The closing note names topics it then leaves out. Quote: \"*Not covered: counting Bloom filters (they allow deletion by storing small counters instead of bits) and cuckoo filters.*\""
+  ],
+  "grounded": {
+    "1": true,
+    "2": true,
+    "3": true,
+    "4": true
+  }
+}

@@ -1,0 +1,46 @@
+{
+  "answers": {
+    "1": {
+      "answer": "From the outdoor air. The electricity moves heat from outside into the house rather than creating it.",
+      "quote": "the electricity does not *make* the heat. It *moves* heat from the cold outdoor air into the house."
+    },
+    "2": {
+      "answer": "The refrigerant boils in the evaporator to absorb heat from outside, is compressed to raise its temperature, condenses in the condenser to release heat inside, then pressure drops through the expansion valve to repeat the cycle.",
+      "quote": "It moves heat \"uphill\" by changing the refrigerant's pressure, so the same fluid boils below outdoor temperature and condenses above indoor temperature."
+    },
+    "3": {
+      "answer": "On a colder day, the outdoor air is colder, so the refrigerant must boil at a lower temperature. This increases the temperature lift, which requires more work and reduces COP (heat delivered per unit of electricity).",
+      "quote": "Moving heat from cold to hot costs work, and the cost grows with the **temperature lift**: the gap between the temperature where the fluid condenses and where it boils."
+    },
+    "4": {
+      "answer": "The 5°C day has higher ideal COP (better efficiency) because the temperature lift is smaller. Smaller lift means lower work requirement and higher COP, so the 5°C day outperforms the −15°C day.",
+      "quote": "The bound has lift in the denominator. A small lift gives a high possible COP; a large lift gives a low one."
+    }
+  },
+  "stops": [
+    "\"heat flows by itself only from a hotter body to a colder one (the second law of thermodynamics)\" — stated without explaining why this matters here",
+    "\"COP = Q_H / W ≤ T_H / (T_H − T_C)\" — derivation from entropy constraint shown but not explained",
+    "\"Part of the liquid flashes to vapour, which cools the rest to −5 °C\" — flash evaporation mechanism unexplained",
+    "\"the fluid must be about 10 K colder than the air and about 10 K hotter than the water\" — why this offset is necessary not justified",
+    "Table row \"Cold day, air −15 °C\" maps to \"Fluid boils −25 °C\" without prior explanation",
+    "\"It is 278 K, far above absolute zero\" — Celsius to Kelvin conversion not explained",
+    "\"A liquid boils at a lower temperature when the pressure is lower\" — physical mechanism not explained",
+    "Entropy formula derivation skipped between \"Q_H / T_H ≥ Q_C / T_C\" and the COP formula result"
+  ],
+  "excess": [
+    "\"A refrigerator is the same machine\" — analogy not needed to understand heat pumps",
+    "\"An electric resistance heater turns 1 kWh of electricity into exactly 1 kWh of heat\" — baseline comparison",
+    "\"Real machines also lose energy to friction, motor heat, and imperfect compression\" — explanation of real vs ideal gap",
+    "\"Water boils below 100 °C on a mountain for this reason\" — mountain analogy unnecessary",
+    "\"A heat pump moves heat; it does not create it\" — repeats the opening",
+    "\"A COP of 1 is no better than a resistance heater\" — reference point for comparison",
+    "\"This is why heat pumps work best with large, low-temperature radiators\" — design recommendation",
+    "\"*Not covered:* defrost cycles, ground-source heat pumps\" — scope statement"
+  ],
+  "grounded": {
+    "1": true,
+    "2": true,
+    "3": true,
+    "4": true
+  }
+}

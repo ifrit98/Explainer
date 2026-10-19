@@ -1,0 +1,64 @@
+{
+  "key": {
+    "A": "none",
+    "B": "principles",
+    "C": "published",
+    "D": "quick"
+  },
+  "grades": {
+    "none": {
+      "quiz": [
+        2,
+        2,
+        2,
+        2
+      ],
+      "misconception": "absent",
+      "errors": []
+    },
+    "principles": {
+      "quiz": [
+        2,
+        2,
+        2,
+        2
+      ],
+      "misconception": "absent",
+      "errors": [
+        "\"the library contains millions of different shapes\": this understates the repertoire, which is commonly estimated at 10^8 to 10^10 distinct receptors per person.",
+        "\"Across the body's hundreds of billions of lymphocytes\": the usual estimate is about 10^12 lymphocytes, so this is low."
+      ]
+    },
+    "published": {
+      "quiz": [
+        2,
+        2,
+        2,
+        2
+      ],
+      "misconception": "absent",
+      "errors": [
+        "\"The cause is a changed antigen, not memory cells that wear off.\": this overstates the case for influenza, where waning antibody also lowers protection within and across seasons."
+      ]
+    },
+    "quick": {
+      "quiz": [
+        2,
+        2,
+        2,
+        2
+      ],
+      "misconception": "absent",
+      "errors": [
+        "\"Many have a better fit, because the clone mutates its receptors during expansion\": this is applied to all lymphocytes, but only B cells undergo somatic hypermutation and affinity maturation; T cell receptors do not mutate."
+      ]
+    }
+  },
+  "rank": [
+    "quick",
+    "published",
+    "principles",
+    "none"
+  ],
+  "why_best": "D gives every link in the chain (random repertoire, selection, expansion, memory, race, and limits from antigen change) in the fewest words, with defined terms and a single comparison table, so this reader gets the full model with no detours."
+}

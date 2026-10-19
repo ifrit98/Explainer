@@ -1,0 +1,48 @@
+{
+  "answers": {
+    "1": {
+      "answer": "Resistance comes from two sources: random mutations during bacterial DNA copying, and genes transferred from other bacteria. Resistant cells already exist before treatment begins.",
+      "quote": "The protective genes come from two sources: random copying errors (mutation) and genes passed from other bacteria (gene transfer)."
+    },
+    "2": {
+      "answer": "The antibiotic kills the susceptible cells in the population while resistant cells remain unaffected, allowing them to multiply and dominate as competition is removed.",
+      "quote": "The antibiotic kills the other cells, and the protected cells multiply to replace them."
+    },
+    "3": {
+      "answer": "Resistance passes between different species through horizontal gene transfer via three mechanisms: conjugation (direct contact with a plasmid), transformation (uptake of free DNA), and transduction (transfer by virus).",
+      "quote": "Transfer also crosses species: a harmless gut bacterium can give a gene to a dangerous one."
+    },
+    "4": {
+      "answer": "Even one resistant bacterium per billion can dominate because the drug eliminates all susceptible competitors. The rare resistant cells then multiply rapidly, going from negligible to nearly 100% of the population.",
+      "quote": "The resistant fraction has gone from 1 in 100 million to nearly 100%. No cell changed. The drug removed the competition. This is natural selection, and it runs fast because bacteria divide in hours, not years."
+    }
+  },
+  "stops": [
+    "Line 22: 'resistance mechanism' introduced as term but what distinguishes one from another unclear until table shown",
+    "Line 31: MIC definition complex—'above the level that treatment can achieve' requires understanding of pharmacokinetics",
+    "Line 37: How does mutation 'switch on' a pump? Mechanism not explained—'A few change a target or switch on a pump'",
+    "Lines 39-44: Heavy scientific notation (10¹⁰, 10⁸) and rapid calculation steps unfamiliar to reader new to subject",
+    "Line 48: Luria-Delbrück logic condensed—why does pattern 'most had none and a few had hundreds' prove pre-exposure mutation?",
+    "Line 52: Three gene transfer types (conjugation, transformation, transduction) listed with minimal explanation each",
+    "Line 58: How bacteria transfer genes 'across species' needs more context—'Transfer also crosses species: a harmless gut bacterium can give a gene to a dangerous one'",
+    "Line 62: 'Return to the infection with 10¹⁰ bacteria'—unclear if same example from line 40 or new scenario",
+    "Line 75: 'mutant selection window' introduced without explanation of why called 'window' or what defines boundaries",
+    "Line 78: Probability multiplication (1 in 10⁸ × 1 in 10⁸) not explained—'about 1 in 10⁸ × 1 in 10⁸ = 1 in 10¹⁶ divisions'"
+  ],
+  "excess": [
+    "Line 16: 'Human cells do not have these exact targets'—explains drug safety, not resistance mechanism",
+    "Line 39: '(illustrative numbers; real rates vary by drug and species from about 1 in a million to 1 in 10 billion)'—complicates simplified example",
+    "Lines 48-49: Luria-Delbrück experiment details redundant—'They grew many separate cultures and then exposed them to a killer'",
+    "Line 59: 'Gene transfer is the main reason resistance spreads fast in hospitals'—real-world context, off the core mechanism",
+    "Lines 72-76: Dose optimization and selection windows—tangential to how resistance arises and dominates",
+    "Line 82: 'Suppose a resistant strain grows 5% slower per generation'—specific illustration adds complexity",
+    "Lines 82-84: 'What happens when the drug is removed'—about reversal, not about dominance during treatment",
+    "Line 90: 'Not covered here: tolerance and persistence'—merely notes scope, not essential to explanation"
+  ],
+  "grounded": {
+    "1": true,
+    "2": true,
+    "3": true,
+    "4": true
+  }
+}

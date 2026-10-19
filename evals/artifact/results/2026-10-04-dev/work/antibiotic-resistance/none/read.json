@@ -1,0 +1,46 @@
+{
+  "answers": {
+    "1": {
+      "answer": "It comes from random mutations made when DNA is copied, or from genes picked up from other bacteria. In a large population a few resistant cells are already there before any drug is given. The drug doesn't create them.",
+      "quote": "They differ because of random mutations, or because they picked up genes from other bacteria. A few of those differences happen to make a cell harder to kill with a particular drug."
+    },
+    "2": {
+      "answer": "It selects rather than causes. It kills or stops the susceptible cells, which leaves the resistant few with food and space to themselves, so they multiply and take over.",
+      "quote": "The drug kills or stops the susceptible cells. The resistant few survive, and they now have food and space to themselves."
+    },
+    "3": {
+      "answer": "By horizontal gene transfer, which can happen even between species. There are three routes: conjugation (one cell passes a plasmid to another through a bridge), transformation (a cell takes up loose DNA from its surroundings) and transduction (a bacteriophage delivers bacterial DNA to the next cell it infects).",
+      "quote": "Bacteria can also acquire **ready-made resistance genes** from other bacteria, even from different species. This is a major reason resistance spreads so fast in hospitals. There are three main routes:"
+    },
+    "4": {
+      "answer": "An infection holds 10^9–10^11 cells, so 1 in a billion still means several resistant cells at the start. The full course kills the susceptible cells, and the resistant ones keep dividing about every 30 minutes, so they grow exponentially into most of the population. The full course doesn't help, because the drug level may be inside the selection window (between the two MICs), where the resistant cells grow anyway. If the immune system doesn't clear the few survivors, the infection ends up resistant.",
+      "quote": "It doesn't matter much how rare the resistant cells were to start with. Exponential growth makes up the difference quickly."
+    }
+  },
+  "stops": [
+    "\"bind its target tightly enough\": the reader may not know what binding means at the molecular level.",
+    "\"cut open the ring structure that penicillin-type drugs need\": 'ring structure' is never explained.",
+    "\"PBP2a, that β-lactams barely bind\": an unexplained acronym.",
+    "\"the \"Gram-negative\" group\": the term is used without saying what it means.",
+    "\"1 error per 10⁹–10¹⁰ base pairs copied\": 'base pairs' is never defined.",
+    "\"Luria–Delbrück, and the Lederbergs' replica plating\": the experiment names are dropped in without describing how they worked.",
+    "\"**integrons** (gene-capture systems)\": the gloss is too short to say what they do.",
+    "\"Resistance gains a foothold only if a cell gets a *second*, bigger resistance step.\": it's unclear why one step can't reach above MIC_R.",
+    "\"kill_i(c) = (g_max − g_min) · x^κ / (x^κ − g_min/g_max)\": the formula is given with no intuition behind it.",
+    "\"Shown as a multiple of the susceptible strain's MIC\": the slider unit takes a moment to work out."
+  ],
+  "excess": [
+    "\"If you program, here is a loose analogy. Mutation is like random bit-flips in your own source code.\"",
+    "\"Biofilms. Communities of bacteria stuck to a surface inside a slimy matrix.\"",
+    "\"Tolerance. The bacteria die more *slowly* under the drug, but the MIC doesn't change.\"",
+    "\"Stop transmission. Hand hygiene, infection control and sanitation stop resistant strains spreading\"",
+    "\"Time advances in steps of 0.02 hours.\"",
+    "\"The antibiotic doesn't cause resistance. It **selects** for it, by removing the competition.\": this repeats the short answer."
+  ],
+  "grounded": {
+    "1": true,
+    "2": true,
+    "3": true,
+    "4": true
+  }
+}

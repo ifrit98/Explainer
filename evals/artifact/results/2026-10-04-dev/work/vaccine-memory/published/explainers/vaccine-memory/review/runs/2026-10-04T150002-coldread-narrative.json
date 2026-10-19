@@ -1,0 +1,486 @@
+{
+ "tool": "coldread",
+ "rendering": "narrative",
+ "slug": "vaccine-memory",
+ "at": "2026-10-04T15:00:02",
+ "model": "default",
+ "prompt_sha": "7327675ff3e8",
+ "reply": {
+  "beats": [
+   {
+    "at": "Beat 1 (hook)",
+    "text": "Shown: answer in 3 sentences. Said: selection, not instruction; memory cells; 7 → 3 days",
+    "unresolved": [
+     "selection, not instruction",
+     "memory cells",
+     "7 → 3 days"
+    ],
+    "unsaid": [
+     "'answer in 3 sentences' is shown, but the Said column gives only three fragments. The reader never hears the answer as sentences."
+    ],
+    "leap": [
+     "It is not said what '7 → 3 days' measures (days until what?), or what is being selected."
+    ],
+    "excess": [],
+    "purpose_unclear": true
+   },
+   {
+    "at": "Beat 2 (approach)",
+    "text": "Shown: pathogen numbers. Said: infection is a race; 100 particles ×10/day; symptoms above 100 million",
+    "unresolved": [
+     "pathogen",
+     "particles"
+    ],
+    "unsaid": [
+     "The 'pathogen numbers' are shown, but the words never say what the pathogen is (a virus or bacterium)."
+    ],
+    "leap": [
+     "'infection is a race': only one runner is named. The reader is not told what the germ is racing against.",
+     "No reason is given for treating infection as a race."
+    ],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Beat 3 (mechanism)",
+    "text": "Shown: library numbers. Said: random receptors, >100 million kinds; 20,000 genes can't list them; loose fit + many antigens; self-binders removed",
+    "unresolved": [
+     "receptors",
+     "antigens",
+     "self-binders",
+     "library"
+    ],
+    "unsaid": [
+     "The 'library numbers' are shown, but the words never call it a library or say what it holds. The cell that carries the receptor (lymphocyte) is never named or described."
+    ],
+    "leap": [
+     "'20,000 genes can't list them': it is not said how random receptors are made from a limited number of genes.",
+     "'loose fit + many antigens': it is not said why this means some cell will fit."
+    ],
+    "excess": [
+     "'self-binders removed' is not needed for the main argument at this point."
+    ],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Beat 4 (mechanism)",
+    "text": "Shown: clone arithmetic. Said: only matching ~100 cells divide every 8 h; effector cells; why fewer can beat more",
+    "unresolved": [
+     "clone",
+     "effector cells",
+     "the antigen"
+    ],
+    "unsaid": [
+     "The 'clone arithmetic' is shown, but the words do not say what a clone is or give the 1,000,000 target."
+    ],
+    "leap": [
+     "Where '~100 cells' comes from, after '>100 million kinds'.",
+     "'why fewer can beat more': the reason is named but not given."
+    ],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Beat 5 (mechanism)",
+    "text": "Shown: 13.3 divisions; 7 days; 1 billion particles. Said: the clone starts tiny",
+    "unresolved": [],
+    "unsaid": [
+     "'13.3 divisions' appears with no equation and no target count in the words.",
+     "'1 billion particles' is shown, but the words do not compare it with the 100 million symptom threshold (so: sick)."
+    ],
+    "leap": [
+     "13.3 divisions × 8 h is about 4.4 days, not '7 days'. The difference is not explained."
+    ],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Beat 6 (mechanism)",
+    "text": "Shown: 99% die, 1% stay: 10,000. Said: memory cells; 6.6 divisions; 3 days; 100,000 particles",
+    "unresolved": [],
+    "unsaid": [
+     "'99% die, 1% stay' is shown, but the words do not say it.",
+     "The words never say that 100,000 particles is below the symptom threshold (so: not sick)."
+    ],
+    "leap": [
+     "Why 1% stay.",
+     "6.6 × 8 h is about 2.2 days, not '3 days'."
+    ],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Beat 7 (name)",
+    "text": "Shown: vaccine = antigen + adjuvant, no disease. Said: runs beat 4–6 safely; why adjuvant",
+    "unresolved": [
+     "adjuvant",
+     "beat 4–6"
+    ],
+    "unsaid": [
+     "The 'adjuvant' is shown, but the words say only 'why adjuvant' and never explain it (no danger signal is given)."
+    ],
+    "leap": [
+     "It is not said why antigen alone causes no disease."
+    ],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Beat 8 (objection)",
+    "text": "Shown: flu vs measles. Said: antigen change; effectiveness defined",
+    "unresolved": [
+     "effectiveness"
+    ],
+    "unsaid": [
+     "The flu vs measles comparison is shown, but no numbers or definition of effectiveness are given in the words."
+    ],
+    "leap": [
+     "It is not said why a change in antigen breaks memory (no new matching cells)."
+    ],
+    "excess": [
+     "The 'effectiveness defined' detail is not needed for the main argument."
+    ],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Beat 9 (close)",
+    "text": "Shown: recap. Said: answer in the opening words; cache analogy and where it breaks",
+    "unresolved": [
+     "cache analogy"
+    ],
+    "unsaid": [],
+    "leap": [
+     "A new analogy appears at the very end, and its content and where it breaks are not given."
+    ],
+    "excess": [
+     "'answer in the opening words' repeats Beat 1."
+    ],
+    "purpose_unclear": false
+   }
+  ],
+  "blocking": [
+   "Beat 2: 'infection is a race': the opposing runner (the immune cells) is never named.",
+   "Beat 3: 'receptors' and 'antigens' are used undefined, and the lymphocyte is never introduced.",
+   "Beat 4: 'clone' and '~100 cells' are unexplained.",
+   "Beat 5: '13.3 divisions' has no stated target or equation, and it does not match '7 days'.",
+   "Beat 7: 'adjuvant' is never explained."
+  ],
+  "cuts": [
+   "Beat 3: 'self-binders removed'",
+   "Beat 9: 'cache analogy and where it breaks'",
+   "Beat 8: 'effectiveness defined'",
+   "Beat 3: '20,000 genes can't list them' (or explain it)"
+  ],
+  "question": {
+   "text": "How can a vaccine prepare the body for a germ it has never met?",
+   "known_at": "Never stated in Said/Shown. Beat 1 only implies it through the answer.",
+   "result_stated": "Only in compressed form, Beat 1: 'selection, not instruction; memory cells; 7 → 3 days'"
+  },
+  "motive": "Missing from the beats. 'sounds impossible' appears only in the plan. A reason for the approach is also missing: Beat 2 asserts 'infection is a race' with no reason.",
+  "close": "Beat 9: 'answer in the opening words'. The answer is not quoted, and the general argument (each doubling of starting cells saves one 8 h division) is not stated in the beats.",
+  "recap": "Your body already has a few cells that fit a germ by chance; a vaccine multiplies them safely once, so next time there are many more and the race is won in about 3 days instead of about 7.",
+  "strongest": "Beats 5–6: the same arithmetic, 100 vs 10,000 starting cells, gives 13.3 vs 6.6 divisions and 1 billion vs 100,000 particles.",
+  "weakest": "Beat 3: four undefined terms ('receptors', 'antigens', 'self-binders', 'library') arrive at once, and the cell carrying the receptor is never named.",
+  "suggestions": [
+   "Name the second runner in Beat 2: immune cells that must multiply to fight back.",
+   "Define lymphocyte, receptor and antigen in plain words in Beat 3.",
+   "Say the 1,000,000 target and the 100×2^n equation aloud, and explain why 4.4 days becomes 7 (start-up delay).",
+   "Explain the adjuvant as the 'this is a threat' signal.",
+   "State the question and why it seems impossible at the start of Beat 1."
+  ]
+ },
+ "usage": {
+  "cost": 0.11253679999999999,
+  "seconds": 36
+ },
+ "findings": [
+  {
+   "n": 1,
+   "severity": "blocking",
+   "kind": "blocking",
+   "text": "Beat 2: 'infection is a race': the opposing runner (the immune cells) is never named."
+  },
+  {
+   "n": 2,
+   "severity": "blocking",
+   "kind": "blocking",
+   "text": "Beat 3: 'receptors' and 'antigens' are used undefined, and the lymphocyte is never introduced."
+  },
+  {
+   "n": 3,
+   "severity": "blocking",
+   "kind": "blocking",
+   "text": "Beat 4: 'clone' and '~100 cells' are unexplained."
+  },
+  {
+   "n": 4,
+   "severity": "blocking",
+   "kind": "blocking",
+   "text": "Beat 5: '13.3 divisions' has no stated target or equation, and it does not match '7 days'."
+  },
+  {
+   "n": 5,
+   "severity": "blocking",
+   "kind": "blocking",
+   "text": "Beat 7: 'adjuvant' is never explained."
+  },
+  {
+   "n": 6,
+   "severity": "excess",
+   "kind": "cut",
+   "text": "Beat 3: 'self-binders removed'"
+  },
+  {
+   "n": 7,
+   "severity": "excess",
+   "kind": "cut",
+   "text": "Beat 9: 'cache analogy and where it breaks'"
+  },
+  {
+   "n": 8,
+   "severity": "excess",
+   "kind": "cut",
+   "text": "Beat 8: 'effectiveness defined'"
+  },
+  {
+   "n": 9,
+   "severity": "excess",
+   "kind": "cut",
+   "text": "Beat 3: '20,000 genes can't list them' (or explain it)"
+  },
+  {
+   "n": 10,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "Beat 1 (hook): selection, not instruction"
+  },
+  {
+   "n": 11,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "Beat 1 (hook): memory cells"
+  },
+  {
+   "n": 12,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "Beat 1 (hook): 7 → 3 days"
+  },
+  {
+   "n": 13,
+   "severity": "edge",
+   "kind": "unsaid",
+   "text": "Beat 1 (hook): 'answer in 3 sentences' is shown, but the Said column gives only three fragments. The reader never hears the answer as sentences."
+  },
+  {
+   "n": 14,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "Beat 1 (hook): It is not said what '7 → 3 days' measures (days until what?), or what is being selected."
+  },
+  {
+   "n": 15,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "Beat 2 (approach): pathogen"
+  },
+  {
+   "n": 16,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "Beat 2 (approach): particles"
+  },
+  {
+   "n": 17,
+   "severity": "edge",
+   "kind": "unsaid",
+   "text": "Beat 2 (approach): The 'pathogen numbers' are shown, but the words never say what the pathogen is (a virus or bacterium)."
+  },
+  {
+   "n": 18,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "Beat 2 (approach): 'infection is a race': only one runner is named. The reader is not told what the germ is racing against."
+  },
+  {
+   "n": 19,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "Beat 2 (approach): No reason is given for treating infection as a race."
+  },
+  {
+   "n": 20,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "Beat 3 (mechanism): receptors"
+  },
+  {
+   "n": 21,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "Beat 3 (mechanism): antigens"
+  },
+  {
+   "n": 22,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "Beat 3 (mechanism): self-binders"
+  },
+  {
+   "n": 23,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "Beat 3 (mechanism): library"
+  },
+  {
+   "n": 24,
+   "severity": "edge",
+   "kind": "unsaid",
+   "text": "Beat 3 (mechanism): The 'library numbers' are shown, but the words never call it a library or say what it holds. The cell that carries the receptor (lymphocyte) is never named or described."
+  },
+  {
+   "n": 25,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "Beat 3 (mechanism): '20,000 genes can't list them': it is not said how random receptors are made from a limited number of genes."
+  },
+  {
+   "n": 26,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "Beat 3 (mechanism): 'loose fit + many antigens': it is not said why this means some cell will fit."
+  },
+  {
+   "n": 27,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "Beat 4 (mechanism): clone"
+  },
+  {
+   "n": 28,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "Beat 4 (mechanism): effector cells"
+  },
+  {
+   "n": 29,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "Beat 4 (mechanism): the antigen"
+  },
+  {
+   "n": 30,
+   "severity": "edge",
+   "kind": "unsaid",
+   "text": "Beat 4 (mechanism): The 'clone arithmetic' is shown, but the words do not say what a clone is or give the 1,000,000 target."
+  },
+  {
+   "n": 31,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "Beat 4 (mechanism): Where '~100 cells' comes from, after '>100 million kinds'."
+  },
+  {
+   "n": 32,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "Beat 4 (mechanism): 'why fewer can beat more': the reason is named but not given."
+  },
+  {
+   "n": 33,
+   "severity": "edge",
+   "kind": "unsaid",
+   "text": "Beat 5 (mechanism): '13.3 divisions' appears with no equation and no target count in the words."
+  },
+  {
+   "n": 34,
+   "severity": "edge",
+   "kind": "unsaid",
+   "text": "Beat 5 (mechanism): '1 billion particles' is shown, but the words do not compare it with the 100 million symptom threshold (so: sick)."
+  },
+  {
+   "n": 35,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "Beat 5 (mechanism): 13.3 divisions × 8 h is about 4.4 days, not '7 days'. The difference is not explained."
+  },
+  {
+   "n": 36,
+   "severity": "edge",
+   "kind": "unsaid",
+   "text": "Beat 6 (mechanism): '99% die, 1% stay' is shown, but the words do not say it."
+  },
+  {
+   "n": 37,
+   "severity": "edge",
+   "kind": "unsaid",
+   "text": "Beat 6 (mechanism): The words never say that 100,000 particles is below the symptom threshold (so: not sick)."
+  },
+  {
+   "n": 38,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "Beat 6 (mechanism): Why 1% stay."
+  },
+  {
+   "n": 39,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "Beat 6 (mechanism): 6.6 × 8 h is about 2.2 days, not '3 days'."
+  },
+  {
+   "n": 40,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "Beat 7 (name): adjuvant"
+  },
+  {
+   "n": 41,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "Beat 7 (name): beat 4–6"
+  },
+  {
+   "n": 42,
+   "severity": "edge",
+   "kind": "unsaid",
+   "text": "Beat 7 (name): The 'adjuvant' is shown, but the words say only 'why adjuvant' and never explain it (no danger signal is given)."
+  },
+  {
+   "n": 43,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "Beat 7 (name): It is not said why antigen alone causes no disease."
+  },
+  {
+   "n": 44,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "Beat 8 (objection): effectiveness"
+  },
+  {
+   "n": 45,
+   "severity": "edge",
+   "kind": "unsaid",
+   "text": "Beat 8 (objection): The flu vs measles comparison is shown, but no numbers or definition of effectiveness are given in the words."
+  },
+  {
+   "n": 46,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "Beat 8 (objection): It is not said why a change in antigen breaks memory (no new matching cells)."
+  },
+  {
+   "n": 47,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "Beat 9 (close): cache analogy"
+  },
+  {
+   "n": 48,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "Beat 9 (close): A new analogy appears at the very end, and its content and where it breaks are not given."
+  }
+ ]
+}

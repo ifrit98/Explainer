@@ -1,0 +1,12 @@
+{
+  "result": "I made `explainers/key-exchange/explanation.md`, as prose only, because the answer is a short chain of steps worked with small numbers (p = 23, g = 5) that a diagram or page would only repeat; it passed the probe and cold read and scored 15/15 on the blind test (a deliberately broken copy failed), and two scratch files that rm needed approval to delete, `calc.py` and `explainers/key-exchange-broken/`, are still there to remove.",
+  "error": null,
+  "cost": 2.4703193999999997,
+  "seconds": 1162,
+  "turns": 112,
+  "files": [
+    "explainers/key-exchange/explanation.md"
+  ],
+  "review_cost": 2.0136,
+  "reviews": 12
+}

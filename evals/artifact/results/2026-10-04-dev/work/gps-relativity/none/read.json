@@ -1,0 +1,44 @@
+{
+  "answers": {
+    "1": {
+      "answer": "The receiver records the time t_r when a timestamped part of the satellite's signal arrives. It subtracts the send time t_s that the signal carries, then multiplies that delay by the speed of light: distance = c × (t_r − t_s). Each nanosecond of timing error gives about 30 cm of distance error.",
+      "quote": "Your receiver notes the time *t*ᵣ when that part of the signal arrives. Radio waves travel at the speed of light, *c* ≈ 299,792,458 m/s, so"
+    },
+    "2": {
+      "answer": "The receiver's cheap clock has an unknown error, and that error is the same for every satellite. It adds the same offset b to every measured distance. So there are four unknowns (x, y, z and b), and four unknowns need four equations, which means four satellites.",
+      "quote": "That makes **four unknowns**: *x*, *y*, *z* and *b*. Four unknowns need four equations, so you need four satellites."
+    },
+    "3": {
+      "answer": "Relativity makes satellite clocks run at a different rate from ground clocks. They gain about 45 μs/day from weaker gravity and lose about 7 μs/day from their speed, a net gain of about 38 μs/day. At 30 cm per ns, that is about 11 km of light travel per day. The explanation warns that the system would not literally drift 11 km a day: the parts of the effect that differ between satellites would cause metre-level position errors, which is still enough to break it.",
+      "quote": "38 microseconds is 38,000 nanoseconds. At 30 cm per nanosecond, that much timing error is about **11 km of light travel per day**."
+    },
+    "4": {
+      "answer": "1 µs is 1,000 ns, and each ns is about 30 cm, so every computed distance is off by about 300 m. All three are off by the same amount, because one clock makes all the measurements. With only three satellites the receiver can't solve for that shared offset, so the 300 m error goes straight into its position.",
+      "quote": "Each measured distance is therefore wrong by the same amount, *b* = *c*·δ*t*."
+    }
+  },
+  "stops": [
+    "Ephemeris is defined, but it's not clear how often the upload happens or how accurate it is: \"regularly upload a precise description of its orbit, called the *ephemeris*\"",
+    "Why one of the two intersection points can be thrown out is only briefly justified: \"One of those points is usually far out in space or deep underground\"",
+    "The Jacobian/unit-vector step needs calculus the reader may not have, and its sign is confusing: \"For the position this is the unit vector pointing from the satellite to you\" while the code comment says \"-unit vector to satellite\"",
+    "Least-squares is used without being explained: \"the receiver does a least-squares fit, which averages out noise\"",
+    "The 11 km caveat is hard to follow, especially why a shared error would partly end up in b: \"part of the error would end up in the receiver's *b*\"",
+    "It points to \"next section\" for effects that vary between satellites, which isn't an obvious link: \"(next section) would put metre-level errors directly into your position\"",
+    "The receiver-correction formula uses terms that aren't really defined: \"*E* is where the satellite is in its orbit\"",
+    "The Sagnac explanation is brief, and it's unclear why the rotating frame matters: \"rotating each satellite's position back by the angle Earth turns during the signal's flight\"",
+    "The factory offset (4.465×10⁻¹⁰) doesn't obviously match the net of 5.3×10⁻¹⁰ and 8.3×10⁻¹¹: \"a fractional offset of about 4.465×10⁻¹⁰\""
+  ],
+  "excess": [
+    "The full Python code isn't needed for the conceptual questions: \"def solve_position(sat_pos, pseudoranges, iters=10):\"",
+    "The aside about time services goes beyond the question: \"used by phone networks, power grids and financial systems\"",
+    "The summary repeats points made earlier: \"GPS measures **time**, not distance. A delay multiplied by the speed of light gives a range, and 1 ns of error gives 30 cm of range error.\"",
+    "The list of other error sources is off-topic: \"the signal slowing down in the ionosphere and the troposphere, reflections off buildings\"",
+    "The GPS spec formula and constant are more detail than this reader needs: \"*F* = −4.4428×10⁻¹⁰ s/√m is a constant built from *G*, Earth's mass and *c*\""
+  ],
+  "grounded": {
+    "1": true,
+    "2": true,
+    "3": true,
+    "4": true
+  }
+}

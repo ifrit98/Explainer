@@ -1,0 +1,41 @@
+{
+  "answers": {
+    "1": {
+      "answer": "A write (decision) is committed only once a majority of the servers (more than half of all servers in the cluster, including those that are down) have accepted it.",
+      "quote": "A decision only counts once a majority of the servers have accepted it."
+    },
+    "2": {
+      "answer": "Any two majorities of the same group always share at least one server. So during a network partition at most one side can hold a majority and keep acting, which prevents split brain. If the rule were 'whoever is still reachable', both sides of a partition could keep accepting conflicting writes.",
+      "quote": "Two majorities of the same group always share at least one member."
+    },
+    "3": {
+      "answer": "2 failures. The quorum is 4, and 6 − 4 = 2. That is no more than a 5-server cluster survives.",
+      "quote": "| 6 | 4 | **2** |"
+    },
+    "4": {
+      "answer": "The group of 3 can commit writes, because 3 of 5 is a majority. The group of 2 is not a majority, so it stops and waits.",
+      "quote": "3 of 5:       ║   2 of 5:\n   majority,     ║   not a majority,\n   keeps going   ║   waits"
+    }
+  },
+  "stops": [
+    "The text uses 'decision' in the rule and 'writes' elsewhere, but never says that committing a write is a decision: \"A decision only counts once a majority of the servers have accepted it.\"",
+    "The term 'accepted' is never defined. It is not said who proposes a decision or how servers accept it: \"have accepted it\"",
+    "The overlap step is stated very briefly, and it is unclear how one shared server makes later decisions consistent: \"that server is what makes later decisions consistent with earlier ones\"",
+    "The floor notation appears without explanation: \"⌊n/2⌋ + 1\"",
+    "The claim that a majority is the 'smallest' size that works is asserted, not shown: \"It is the smallest group size that guarantees two groups can never both act independently.\"",
+    "The term 'warm spare' is not defined: \"act as a warm spare\"",
+    "The 3f + 1 figure for Byzantine failures is given without a reason: \"Surviving *f* such servers needs 3f + 1 machines.\""
+  ],
+  "excess": [
+    "A list of product names the reader doesn't need: \"Databases, configuration stores (etcd, ZooKeeper, Consul) and coordination services all do this.\"",
+    "The 4-server crash case is restated after the partition example already covered it: \"With 4 servers and 2 crashed, the 2 survivors are in exactly the position of the {A, B} group above.\"",
+    "The summary repeats points already made: \"With 5 servers, more than half is 3, so 2 can fail. With 4 servers, more than half is still 3, so only 1 can fail.\"",
+    "The Byzantine caveat goes beyond the question being explained: \"If servers might send wrong or malicious messages (called *Byzantine* failures), the arithmetic gets stricter.\""
+  ],
+  "grounded": {
+    "1": true,
+    "2": true,
+    "3": true,
+    "4": true
+  }
+}

@@ -1,0 +1,187 @@
+{
+ "tool": "quiz",
+ "rendering": "prose",
+ "slug": "key-exchange",
+ "at": "2026-10-04T15:10:36",
+ "model": "default",
+ "prompt_sha": "97e170ce48d4",
+ "reply": {
+  "answers": {
+   "1": "The main objects are Alice and Bob, Eve (who only reads messages) and Mallory (who can change them). There are two public numbers everyone sees: a prime modulus p and a base g. Each side has a private number (a for Alice, b for Bob) and a public number (A = g^a mod p, B = g^b mod p). Both sides end up with a shared secret s = g^(ab) mod p, which goes through a hash function to make the encryption key. The other objects are the one-way operation g^x mod p, the discrete logarithm (the reverse problem) and authentication (digital signatures).",
+   "2": "p and g are public. Each side's public number is made from its own private number using p and g. Each side then raises the other side's public number to its own private number, mod p, to get s. Hashing s gives the key. Eve sees p, g, A and B, but not a, b or s. To get s she would in effect have to solve the discrete logarithm for a or b. Mallory can put his own public number in place of A and B. Authentication is what stops him.",
+   "3": "Each side sends g raised to its private number mod p. Raising the other side's value to your own private number gives g^(ab) mod p for both, because of the exponent rule and because taking remainders along the way doesn't change the result. Eve, who sees only g^a and g^b mod p, would have to reverse the one-way operation, and no fast method for that is known.",
+   "4": "The key variable is the size of p (and of the range a and b are picked from). With p = 23, Eve can try exponents in order and finds a = 6 on the 6th try. With a 2048-bit p and random a and b, trying them one by one is hopeless. Even the best known methods need about 2^112 operations, roughly 10^14 years at a trillion operations per second. Alice's own work grows only slowly, about 4,000 steps for a 2048-bit exponent, because each squaring doubles the exponent. Another variable is the choice of g. A bad g (22 for p = 23) gives only two possible values for s.",
+   "5": "Assumption: no one has proven the discrete logarithm is hard, or that s can't be found from A and B some other way. Security rests on decades of failed attempts. Also, Eve is assumed to only read messages, never change them. Established facts: the exponent rule (x^a)^b = x^(ab), and the fact that taking remainders along the way doesn't change the final remainder. The text shows this with (x + 23k)y = xy + 23ky. In the example, 19^6 mod 23 = 8^15 mod 23 = 2.",
+   "6": "Alice and Bob agree in public on a prime p and a base g. Each secretly picks a random private number and sends g to that power, mod p. Each raises what they receive to their own private number, mod p, and both get g^(ab) mod p, which they hash to make the key. Eve sees only g^a and g^b mod p. Multiplying them only adds the exponents, and getting a back is the discrete logarithm, which has no known fast method when p is huge (an assumption, not a proof). The exchange doesn't stop someone who replaces messages, so real systems add digital signatures for authentication.",
+   "7": "The hardest part was the claim that powers mod p are hard to reverse. The text says the next section 'shows why no fast method for it is known', but it only lists values that 'jump around' and says 'a result near 8 says nothing about where 6 is'. That is intuition, not a reason. It would have helped to say plainly that this shows why the easy reversals (logarithm, undoing a multiplication) don't work, not that no other method exists. The '2^112 (an estimate)' figure also needed a word on where it comes from.",
+   "8": "Alice sends A = 5^3 mod 23 = 125 mod 23 = 10. Bob sends B = 5^2 mod 23 = 25 mod 23 = 2. Alice computes 2^3 mod 23 = 8. Bob computes 10^2 mod 23 = 100 mod 23 = 8. The shared secret is 8 (= 5^6 mod 23, matching the table).",
+   "9": "With plain powers, A = 5^6 = 15625, and Eve just takes log base 5 to get 6, because plain powers grow in order. Mod p makes the results jump around, so the size of the result says nothing about the exponent, and no fast reverse is known. Plain multiplication mod p doesn't work either, because Euclid's algorithm quickly finds the number that undoes it.",
+   "10": "No. The exchange stops someone who only reads, but nothing in it tells Alice who sent a public number. Authentication (a digital signature on B) is needed.",
+   "11": "If Alice sends one-way(key), Bob can't recover the key any more than Eve can, because both receive exactly the same thing. So each side needs its own private number. Each side does half the calculation, and the other finishes it without undoing anything.",
+   "12": "Alice sends A = 5^6 mod 23 = 8. Bob sends B = 5^15 mod 23 = 19. Alice computes 19^6 mod 23 = 2 and Bob computes 8^15 mod 23 = 2, so s = 2. They must be equal because (5^15)^6 = (5^6)^15 = 5^(90) by the exponent rule. Reducing mod 23 along the way removes only multiples of 23 at each multiplication, so the final remainder doesn't change.",
+   "13": "Multiplying powers adds the exponents: 8 × 19 mod 23 = 14 = 5^(6+15) mod 23. The secret needs the exponents multiplied, 5^(6×15) mod 23 = 2. There is no known way from A and B to s other than, in effect, finding a or b first.",
+   "14": "No. It is an assumption backed by decades of failed attempts, not a proof. The text also says a large quantum computer could solve the discrete logarithm fast.",
+   "15": "Mallory can put his own public number (for example 5^3 mod 23 = 10) in place of both A and B. He then shares one secret with Alice (6) and another with Bob (5). He decrypts each message, reads it, and re-encrypts it for the other side, and neither of them notices. Authentication with digital signatures prevents this."
+  },
+  "audit": {
+   "terms": [
+    "Line 14 calls 6 'a key' ('Alice chooses a key, the number 6'). In line 20 the same 6 is 'a private number', and from line 24 'key' means the hash of s. So one word covers two different things.",
+    "Line 14 says 'hard to reverse' and line 52 says 'one-way operation'. Line 39 calls the reverse problem 'the discrete logarithm'. It's the same idea, but the formal name comes after the informal phrase has been used twice.",
+    "Line 19 says 'modulus p' and also '(the number after \"mod\")', while line 11 says 'mod 23'. That's fine, but the reader has to connect 23 = p themselves before line 19."
+   ],
+   "unexplained": [
+    "Line 56 says 'about 2^112 operations (an estimate)' without saying where the estimate comes from, or how it changes for a bigger or smaller p.",
+    "Line 56 says 'a p of 2048 bits, about 617 decimal digits' without saying why 2048 was chosen, or what a smaller p would give up.",
+    "Line 80 says ECDH 'needs smaller numbers for the same security' but gives no measure of how much smaller."
+   ],
+   "missing_why": [
+    "Line 39 says 'the next section shows why no fast method for it is known'. Line 50 ('A result near 8 says nothing about where 6 is') only rules out the logarithm shortcut. It doesn't explain why other methods fail, and the 'best known methods are faster' in line 56 are never described.",
+    "Line 24 says Alice and Bob 'feed s into the same hash function' but doesn't say why s isn't used as the key directly.",
+    "Line 19 requires a prime modulus without saying why. The reason (a good g reaches every non-zero remainder) appears only in the Scope list at line 82.",
+    "Line 58 says '2048 squarings plus at most 2048 multiplications' but doesn't show how the exponent's binary digits decide when to multiply. The 5^6 example skips that step.",
+    "Line 56 says a and b are picked 'at random from that whole range' without saying why being random matters, beyond making one-by-one trying hopeless."
+   ],
+   "excess": [
+    "Lines 79–83 cover Scope items (AES, elliptic curves, quantum computers) that the argument and questions don't use.",
+    "Line 5 ('A version of it starts most HTTPS connections') is context the argument doesn't use.",
+    "Line 75 (Answer) repeats the summary at line 3 almost word for word."
+   ]
+  },
+  "gaps": [
+   "The explanation doesn't actually show why the discrete logarithm is hard. It only shows that the simple reversals fail, even though it promises to show why no fast method is known.",
+   "There's no explanation of where the 2^112 figure comes from, or what the 'best known methods' are.",
+   "The reason for using a prime p is left to the Scope section."
+  ]
+ },
+ "grade": {
+  "scores": {
+   "1": 2,
+   "2": 2,
+   "3": 2,
+   "4": 2,
+   "5": 2,
+   "6": 2,
+   "7": 2,
+   "8": 2,
+   "9": 2,
+   "10": 1,
+   "11": 2,
+   "12": 2,
+   "13": 2,
+   "14": 2,
+   "15": 2
+  },
+  "reasons": {
+   "10": "The answer correctly says 'No', notes that the exchange only stops a reader, and says authentication is needed. It never states the attack: an active attacker can replace A and B with his own public numbers and run a separate exchange with each side. Saying 'nothing tells Alice who sent a public number' points at the gap but does not say what an attacker does with it. Partial."
+  },
+  "pass": false
+ },
+ "usage": {
+  "cost": 0.1907202,
+  "seconds": 43
+ },
+ "findings": [
+  {
+   "n": 1,
+   "severity": "gap",
+   "kind": "terms",
+   "text": "Line 14 calls 6 'a key' ('Alice chooses a key, the number 6'). In line 20 the same 6 is 'a private number', and from line 24 'key' means the hash of s. So one word covers two different things."
+  },
+  {
+   "n": 2,
+   "severity": "gap",
+   "kind": "terms",
+   "text": "Line 14 says 'hard to reverse' and line 52 says 'one-way operation'. Line 39 calls the reverse problem 'the discrete logarithm'. It's the same idea, but the formal name comes after the informal phrase has been used twice."
+  },
+  {
+   "n": 3,
+   "severity": "gap",
+   "kind": "terms",
+   "text": "Line 19 says 'modulus p' and also '(the number after \"mod\")', while line 11 says 'mod 23'. That's fine, but the reader has to connect 23 = p themselves before line 19."
+  },
+  {
+   "n": 4,
+   "severity": "gap",
+   "kind": "unexplained",
+   "text": "Line 56 says 'about 2^112 operations (an estimate)' without saying where the estimate comes from, or how it changes for a bigger or smaller p."
+  },
+  {
+   "n": 5,
+   "severity": "gap",
+   "kind": "unexplained",
+   "text": "Line 56 says 'a p of 2048 bits, about 617 decimal digits' without saying why 2048 was chosen, or what a smaller p would give up."
+  },
+  {
+   "n": 6,
+   "severity": "gap",
+   "kind": "unexplained",
+   "text": "Line 80 says ECDH 'needs smaller numbers for the same security' but gives no measure of how much smaller."
+  },
+  {
+   "n": 7,
+   "severity": "gap",
+   "kind": "missing_why",
+   "text": "Line 39 says 'the next section shows why no fast method for it is known'. Line 50 ('A result near 8 says nothing about where 6 is') only rules out the logarithm shortcut. It doesn't explain why other methods fail, and the 'best known methods are faster' in line 56 are never described."
+  },
+  {
+   "n": 8,
+   "severity": "gap",
+   "kind": "missing_why",
+   "text": "Line 24 says Alice and Bob 'feed s into the same hash function' but doesn't say why s isn't used as the key directly."
+  },
+  {
+   "n": 9,
+   "severity": "gap",
+   "kind": "missing_why",
+   "text": "Line 19 requires a prime modulus without saying why. The reason (a good g reaches every non-zero remainder) appears only in the Scope list at line 82."
+  },
+  {
+   "n": 10,
+   "severity": "gap",
+   "kind": "missing_why",
+   "text": "Line 58 says '2048 squarings plus at most 2048 multiplications' but doesn't show how the exponent's binary digits decide when to multiply. The 5^6 example skips that step."
+  },
+  {
+   "n": 11,
+   "severity": "gap",
+   "kind": "missing_why",
+   "text": "Line 56 says a and b are picked 'at random from that whole range' without saying why being random matters, beyond making one-by-one trying hopeless."
+  },
+  {
+   "n": 12,
+   "severity": "excess",
+   "kind": "excess",
+   "text": "Lines 79–83 cover Scope items (AES, elliptic curves, quantum computers) that the argument and questions don't use."
+  },
+  {
+   "n": 13,
+   "severity": "excess",
+   "kind": "excess",
+   "text": "Line 5 ('A version of it starts most HTTPS connections') is context the argument doesn't use."
+  },
+  {
+   "n": 14,
+   "severity": "excess",
+   "kind": "excess",
+   "text": "Line 75 (Answer) repeats the summary at line 3 almost word for word."
+  },
+  {
+   "n": 15,
+   "severity": "gap",
+   "kind": "gap",
+   "text": "The explanation doesn't actually show why the discrete logarithm is hard. It only shows that the simple reversals fail, even though it promises to show why no fast method is known."
+  },
+  {
+   "n": 16,
+   "severity": "gap",
+   "kind": "gap",
+   "text": "There's no explanation of where the 2^112 figure comes from, or what the 'best known methods' are."
+  },
+  {
+   "n": 17,
+   "severity": "gap",
+   "kind": "gap",
+   "text": "The reason for using a prime p is left to the Scope section."
+  }
+ ]
+}

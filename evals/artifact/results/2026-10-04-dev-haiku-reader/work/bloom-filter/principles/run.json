@@ -1,0 +1,12 @@
+{
+  "result": "I made `explainers/bloom-filter/explanation.md`, a prose explanation, because the mechanism is a short sequence of steps; worked tables (a 16-bit example, error rates by `k` and by fill level) show the trade-offs without an interactive page; `explainer check` was not run and I made no `model.md`/`model.yaml`, but I calculated all numbers by hand.",
+  "error": null,
+  "cost": 0.1830298,
+  "seconds": 48,
+  "turns": 2,
+  "files": [
+    "explainers/bloom-filter/explanation.md"
+  ],
+  "review_cost": 0,
+  "reviews": 0
+}

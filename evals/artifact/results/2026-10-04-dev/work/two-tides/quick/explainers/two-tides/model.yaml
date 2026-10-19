@@ -1,0 +1,63 @@
+# Machine-readable half of model.md. `explainer check two-tides` holds every rendering to it.
+
+values:
+  moon_distance_km: 384400
+  earth_radius_km: 6371
+  earth_diameter_km: 12742
+  near_distance_km: 378029
+  far_distance_km: 390771
+  moon_deg_per_day: 12
+  daily_delay_min: 50
+  interval_hours: 12
+  interval_extra_min: 25
+  pull_near: 3.433e-5
+  pull_centre: 3.320e-5
+  pull_far: 3.213e-5
+  tidal_near: 1.13e-6
+  tidal_far: 1.07e-6
+  g: 9.81
+  sun_pull_ratio: 179
+  sun_tidal_ratio: 0.46
+  lunar_day: "24 h 50 min"
+  high_tide_interval: "12 h 25 min"
+  idealized_range_m: 0.5
+
+allow: [1, 2, 3, 180, 360, 24]
+
+require:
+  - path: pull_near
+    in: [prose]
+  - path: pull_far
+    in: [prose]
+  - path: lunar_day
+    in: [prose]
+  - path: sun_tidal_ratio
+    in: [prose]
+
+claims:
+  - id: why-subtract
+    kind: why
+    statement: "Only the pull at a point minus the pull at Earth's centre moves water relative to Earth."
+    alternative: "Use the raw pull: water flows toward the Moon."
+    counterexample: "Raw pull points toward the Moon everywhere (3.213e-5 to 3.433e-5 m/s²): one bulge, one high tide a day, and Sun tides 179x the Moon's. Observed: two highs, Sun 0.46x."
+    ask: "Why is there a bulge on the side of Earth away from the Moon?"
+  - id: mech-bulges
+    kind: mechanism
+    statement: "The near side is pulled more than the centre and the far side less, so relative to the centre both sides move outward."
+    example: "Near +1.13e-6 m/s² toward the Moon; far 1.07e-6 m/s² away from the Moon, relative to the centre."
+  - id: mech-rotation
+    kind: mechanism
+    statement: "Earth rotates under the two bulges, so a point passes two highs per lunar day."
+    example: "Lunar day 24 h 50 min; highs every 12 h 25 min."
+    ask: "How long between two high tides, and why not 12 h exactly?"
+  - id: misc-push
+    kind: misconception
+    statement: "Nothing pushes the far side away; it is pulled less than Earth's centre and falls behind."
+    correction: "The far side is pulled toward the Moon by 3.213e-5 m/s², less than the centre's 3.320e-5 m/s², so it lags behind Earth's fall."
+
+accept_unjustified: {}
+
+terms:
+  - term: tidal acceleration
+    means: "pull at a point minus pull at Earth's centre"
+    avoid: [tidal force pushes, pushed away]

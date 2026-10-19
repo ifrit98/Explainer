@@ -1,0 +1,50 @@
+{
+  "answers": {
+    "1": {
+      "answer": "Greenhouse gases let visible light pass through but absorb and emit infrared radiation (heat), redirecting it back toward the surface rather than letting it escape to space.",
+      "quote": "A greenhouse gas lets most sunlight pass but absorbs and emits infrared."
+    },
+    "2": {
+      "answer": "More CO2 raises the emission altitude to colder air, which emits less radiation; the surface must then warm until the cold air above reaches 255 K and restores energy balance.",
+      "quote": "Greenhouse gases make the Earth radiate its energy to space from high, cold air instead of from the warm surface."
+    },
+    "3": {
+      "answer": "Nitrogen and oxygen do not absorb infrared radiation, so they cannot trap heat the way greenhouse gases do.",
+      "quote": "Nitrogen and oxygen, 99% of dry air, are not: they barely absorb infrared at all."
+    },
+    "4": {
+      "answer": "Heat would radiate directly from the surface, and the surface temperature would be 255 K (−18 °C), determined by energy balance requiring the emitting body to be at this temperature.",
+      "quote": "If the surface emitted directly to space, the surface would be at 255 K."
+    }
+  },
+  "stops": [
+    "A body at temperature T emits σT⁴ watts per square metre (the Stefan–Boltzmann law, σ = 5.67 × 10⁻⁸ W m⁻² K⁻⁴).",
+    "Infrared really escapes from a spread of heights, which differ by wavelength.",
+    "More gas means the infrared must start higher before little gas remains above it.",
+    "Call their average the emission height.",
+    "infrared from the ground is absorbed by the air above it and emitted again, in all directions",
+    "convection keeps mixing the lower atmosphere",
+    "This imbalance, just after the change and before any warming, is the radiative forcing.",
+    "Suppose the atmosphere had the same temperature at every height (a lapse rate of 0).",
+    "Warming stops when the air at the new emission height is back at 255 K.",
+    "Colder air emits less: σ·254⁴ ≈ 236 W/m²."
+  ],
+  "excess": [
+    "The division by 4 matters: with 1361 × 0.70 instead, T = 360 K (87 °C), as if every point on Earth faced the noon Sun all day.",
+    "Sunlight peaks near 0.5 µm, in the visible.",
+    "Rising air expands and cools, and convection keeps mixing the lower atmosphere.",
+    "The air gets colder with height.",
+    "The surface at 288 K emits 390 W/m²",
+    "with this and other feedbacks, the estimated warming per doubling is about 3 K, likely 2.5–4 K",
+    "280 → 560 ppm gives 3.7 W/m², and 560 → 1120 ppm gives 3.7 W/m² again.",
+    "Convection still sets the lapse rate, so the temperature at every height rises by the same amount.",
+    "Water vapour, CO₂, and methane are greenhouse gases.",
+    "Why only some molecules absorb infrared: a molecular spectroscopy text."
+  ],
+  "grounded": {
+    "1": true,
+    "2": true,
+    "3": true,
+    "4": true
+  }
+}

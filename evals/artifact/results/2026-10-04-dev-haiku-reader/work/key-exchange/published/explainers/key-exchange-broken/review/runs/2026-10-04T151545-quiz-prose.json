@@ -1,0 +1,177 @@
+{
+ "tool": "quiz",
+ "rendering": "prose",
+ "slug": "key-exchange-broken",
+ "at": "2026-10-04T15:15:27",
+ "model": "default",
+ "prompt_sha": "e9a3f7e183fc",
+ "reply": {
+  "answers": {
+   "1": "The people: Alice and Bob, who want to talk, and Eve, who reads every message. The numbers: a public modulus p = 23, a public base g = 5, private numbers a (Alice's) and b (Bob's), public numbers A and B, and the shared secret s, which serves as the encryption key. The operation that ties them together is 'mod', the remainder after division.",
+   "2": "Alice and Bob agree on p and g in public. Each picks a private number and never sends it. Alice sends A = g^a mod p and Bob sends B = g^b mod p, so Eve sees A and B. Alice then computes B^a mod p and Bob computes A^b mod p. Both get s. Eve has only p, g, A and B.",
+   "3": "Each side raises g to its private number mod p and sends the result. Each then raises the number it received to its own private number mod p, and both arrive at the same s without ever sending it. The explanation never says why the two results match.",
+   "4": "The explanation says Eve is stuck because 'the numbers are too large to try'. Taken at face value, bigger numbers should make Eve's job harder and smaller ones easier. It never says which number matters (p, a or b), and it never explains why, so I can't predict this with confidence. It also seems to contradict itself: it says mod exists only to keep numbers small, yet relies on large numbers for security. With p = 23 the possible answers are 0 to 22, which looks easy to try.",
+   "5": "Assumption or simplification: it uses toy numbers (p = 23) and says nothing about the real sizes needed. Established fact: the worked arithmetic checks out. 5^6 mod 23 = 8, 5^15 mod 23 = 19, and 19^6 mod 23 = 8^15 mod 23 = 2.",
+   "6": "Alice and Bob need a shared key, but Eve sees everything they send. They agree in public on p and g. Each picks a secret exponent and sends g raised to it, mod p. Each raises what they received to their own secret, mod p, and both get the same number, which becomes the key. Eve sees only the public numbers. The explanation claims this is enough to stop her and also proves who Alice is talking to.",
+   "7": "The 'Why mod' section and the 'Who you are talking to' section. 'Why mod' says mod only keeps numbers small, but the next sentence says Eve is stopped because the numbers are too large. Also, plain 5^6 = 15625 seems easy to undo: just find which power of 5 gives 15625. That suggests mod is what does the hiding, but the text never says so. Two things would have helped: an explanation of why the two computations agree, and an explanation of why undoing 'power mod p' is hard while undoing a plain power is easy.",
+   "8": "Following the explanation's steps: Alice sends A = 5^3 mod 23 = 125 mod 23 = 10. Bob sends B = 5^2 mod 23 = 25 mod 23 = 2. Alice computes 2^3 mod 23 = 8. Bob computes 10^2 mod 23 = 100 mod 23 = 8. The shared secret is 8.",
+   "9": "The explanation says mod is only there to keep numbers small so computers can store them, and that plain powers would work 'just as well in principle'. I'm not convinced. With plain powers Eve sees 15625 and can simply find that 5^6 = 15625, which reveals a. That suggests mod is what hides the private number. The explanation gives no reason that resolves this.",
+   "10": "The explanation says yes: only Bob knows b, so only Bob can compute s, and no extra authentication is needed. Its own setup undercuts this, though. Alice receives a number such as 19 and has no way to tell who computed it. Anyone could pick their own private number and send the result. So I don't believe the claim, and the text doesn't back it up.",
+   "11": "Alice sends A = 5^6 mod 23 = 8. Bob sends B = 5^15 mod 23 = 19. Both get s = 2, since 19^6 mod 23 = 2 and 8^15 mod 23 = 2. The explanation never says why the two must be equal. I'd guess (5^15)^6 and (5^6)^15 are both 5^90, and that mod can be applied at each step, but the text gives neither reason."
+  },
+  "audit": {
+   "terms": [
+    "The shared value goes by three names: 'key' (title, line 7: 'the key itself can never be sent'), 'shared secret' (line 19) and 's' (lines 19, 27, 32). The text never says plainly that s is the encryption key.",
+    "Private values go by 'private number' (lines 3, 15) and by the letters a and b. Public values go by 'public number' (line 3) and by A and B (line 16). These pairs are never explicitly linked.",
+    "The modulus is written 'mod 23' (line 9) before p = 23 appears (line 14). p and g are never named or given a role."
+   ],
+   "unexplained": [
+    "Line 14, 'p = 23 and g = 5': no word on what p and g do, why 23 is prime, or how to choose them, or what changes if they are larger or smaller.",
+    "Line 27, 'the numbers are too large to try': it doesn't say which numbers or how large they must be, and 23 is plainly small enough to try.",
+    "Line 24, 'Plain 5^6 = 15625': it doesn't say what seeing this number would let Eve do."
+   ],
+   "missing_why": [
+    "Line 17: it never says why 19^6 mod 23 and 8^15 mod 23 must be equal. The rule (g^b)^a = g^(ab) = (g^a)^b, and the fact that mod can be taken at each step, are both missing.",
+    "Line 27: it never says why Eve can't recover a from 8, or why undoing 'power mod p' is hard.",
+    "Line 32: it says the exchange proves Alice is talking to Bob but never explains how Alice could tell Bob's number from anyone else's.",
+    "Line 16: it never says why the public number takes the form g^a mod p rather than something simpler."
+   ],
+   "excess": [
+    "Line 3 states the whole mechanism, and the steps on lines 14 to 17 then repeat it with nothing new beyond the numbers. This is minor."
+   ]
+  },
+  "gaps": [
+   "It never explains why both sides get the same secret, the exponent rule (g^a)^b = (g^b)^a.",
+   "'Why mod' (line 24) contradicts 'eve-stuck' (line 27): mod is said to only keep numbers small, yet security is said to come from numbers being large. Plain powers can be undone easily, so the claim that plain powers 'would work just as well' looks wrong.",
+   "It doesn't say what makes Eve's task hard, or how large p must be in practice. 23 can obviously be tried by hand.",
+   "The line 32 claim that no authentication is needed is unsupported: nothing lets Alice check who sent B.",
+   "The roles and choice of p and g are never explained."
+  ]
+ },
+ "grade": {
+  "scores": {
+   "1": 2,
+   "2": 2,
+   "3": 1,
+   "4": 1,
+   "5": 2,
+   "6": 1,
+   "7": 2,
+   "8": 2,
+   "9": 1,
+   "10": 1,
+   "11": 2
+  },
+  "reasons": {
+   "3": "The steps are described correctly, but the answer gives no reason the two results match. It states that the explanation never says why.",
+   "4": "It guesses that bigger numbers are harder for Eve but cannot say which number matters (p versus a or b) or why. It explicitly says it can't predict with confidence.",
+   "6": "The summary is otherwise accurate, but it repeats without correction the false claim that the exchange proves who Alice is talking to.",
+   "9": "It correctly notes that plain powers are reversible (5^6 = 15625 reveals a) and suspects mod does the hiding. It does not say that mod scrambles the order or that no fast reverse is known. It stops at 'not convinced' instead of giving the reason.",
+   "10": "It doubts the 'yes' claim and notes that anyone could send a number. It does not clearly answer 'No', describe the active attacker running a separate exchange with each side, or state that authentication is needed.",
+   "11": "Scored 2. The numbers (A = 8, B = 19, s = 2) are correct, and the reason given, (5^15)^6 = (5^6)^15 = 5^90 with mod applicable at each step, is correct and specific. The reasoning is hedged as a guess, but the content is right."
+  },
+  "pass": false
+ },
+ "usage": {
+  "cost": 0.1349254,
+  "seconds": 51
+ },
+ "findings": [
+  {
+   "n": 1,
+   "severity": "gap",
+   "kind": "terms",
+   "text": "The shared value goes by three names: 'key' (title, line 7: 'the key itself can never be sent'), 'shared secret' (line 19) and 's' (lines 19, 27, 32). The text never says plainly that s is the encryption key."
+  },
+  {
+   "n": 2,
+   "severity": "gap",
+   "kind": "terms",
+   "text": "Private values go by 'private number' (lines 3, 15) and by the letters a and b. Public values go by 'public number' (line 3) and by A and B (line 16). These pairs are never explicitly linked."
+  },
+  {
+   "n": 3,
+   "severity": "gap",
+   "kind": "terms",
+   "text": "The modulus is written 'mod 23' (line 9) before p = 23 appears (line 14). p and g are never named or given a role."
+  },
+  {
+   "n": 4,
+   "severity": "gap",
+   "kind": "unexplained",
+   "text": "Line 14, 'p = 23 and g = 5': no word on what p and g do, why 23 is prime, or how to choose them, or what changes if they are larger or smaller."
+  },
+  {
+   "n": 5,
+   "severity": "gap",
+   "kind": "unexplained",
+   "text": "Line 27, 'the numbers are too large to try': it doesn't say which numbers or how large they must be, and 23 is plainly small enough to try."
+  },
+  {
+   "n": 6,
+   "severity": "gap",
+   "kind": "unexplained",
+   "text": "Line 24, 'Plain 5^6 = 15625': it doesn't say what seeing this number would let Eve do."
+  },
+  {
+   "n": 7,
+   "severity": "gap",
+   "kind": "missing_why",
+   "text": "Line 17: it never says why 19^6 mod 23 and 8^15 mod 23 must be equal. The rule (g^b)^a = g^(ab) = (g^a)^b, and the fact that mod can be taken at each step, are both missing."
+  },
+  {
+   "n": 8,
+   "severity": "gap",
+   "kind": "missing_why",
+   "text": "Line 27: it never says why Eve can't recover a from 8, or why undoing 'power mod p' is hard."
+  },
+  {
+   "n": 9,
+   "severity": "gap",
+   "kind": "missing_why",
+   "text": "Line 32: it says the exchange proves Alice is talking to Bob but never explains how Alice could tell Bob's number from anyone else's."
+  },
+  {
+   "n": 10,
+   "severity": "gap",
+   "kind": "missing_why",
+   "text": "Line 16: it never says why the public number takes the form g^a mod p rather than something simpler."
+  },
+  {
+   "n": 11,
+   "severity": "excess",
+   "kind": "excess",
+   "text": "Line 3 states the whole mechanism, and the steps on lines 14 to 17 then repeat it with nothing new beyond the numbers. This is minor."
+  },
+  {
+   "n": 12,
+   "severity": "gap",
+   "kind": "gap",
+   "text": "It never explains why both sides get the same secret, the exponent rule (g^a)^b = (g^b)^a."
+  },
+  {
+   "n": 13,
+   "severity": "gap",
+   "kind": "gap",
+   "text": "'Why mod' (line 24) contradicts 'eve-stuck' (line 27): mod is said to only keep numbers small, yet security is said to come from numbers being large. Plain powers can be undone easily, so the claim that plain powers 'would work just as well' looks wrong."
+  },
+  {
+   "n": 14,
+   "severity": "gap",
+   "kind": "gap",
+   "text": "It doesn't say what makes Eve's task hard, or how large p must be in practice. 23 can obviously be tried by hand."
+  },
+  {
+   "n": 15,
+   "severity": "gap",
+   "kind": "gap",
+   "text": "The line 32 claim that no authentication is needed is unsupported: nothing lets Alice check who sent B."
+  },
+  {
+   "n": 16,
+   "severity": "gap",
+   "kind": "gap",
+   "text": "The roles and choice of p and g are never explained."
+  }
+ ]
+}

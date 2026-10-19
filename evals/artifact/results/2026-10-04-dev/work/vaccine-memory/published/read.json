@@ -1,0 +1,44 @@
+{
+  "answers": {
+    "1": {
+      "answer": "A vaccine has to contain the antigen, or instructions that make the body's cells produce it. It does not make you ill because it contains no pathogen that can multiply to disease levels. The slow first response happens while nothing is growing.",
+      "quote": "A **vaccine** contains the antigen, or instructions for the body's cells to make it. It contains no pathogen that can multiply to disease."
+    },
+    "2": {
+      "answer": "About 1% of the effector cells stay on as memory cells. In the illustrative numbers that is 10,000 cells instead of 100, so only about 6.6 divisions are needed instead of 13.3. Memory cells are also already waiting in the tissues and need less stimulation, so they activate in under a day. Control comes in about 3 days instead of 7.",
+      "quote": "Memory cells already wait in the tissues and need less stimulation, so they activate in under a day. Total: about 3 days."
+    },
+    "3": {
+      "answer": "Memory cells bind only the antigen that made them. An unrelated virus shows different antigens, so the expanded clones don't bind it. The response would start again from the small, random precursor count, which means a slow primary response. This is my inference from the text, which never discusses unrelated viruses directly.",
+      "quote": "Memory cells bind only the antigen that made them."
+    },
+    "4": {
+      "answer": "Protection falls. The old memory receptors bind the changed antigen poorly, so the response slides back toward the slow first response. The cause is the changed antigen, not memory cells wearing off. This is the influenza case, which is why flu vaccines are updated every year.",
+      "quote": "The old memory receptors bind poorly, so the response falls back toward the slow first one."
+    }
+  },
+  "stops": [
+    "Never says how symptoms or damage relate to particle count, or why 100 million is the threshold: \"symptoms start above 100 million particles\"",
+    "\"Controls\" is defined as removing the pathogen faster than it grows, but the 1,000,000-cell target is just asserted: \"Illustrative: 1,000,000 effector cells control the pathogen.\"",
+    "Gives no reason the first activation takes 2.5 days: \"The rare matching cells also need about 2.5 days to meet the antigen and activate.\"",
+    "\"Instructions for the body's cells to make it\" is not explained (mRNA is only named in Not covered): \"or instructions for the body's cells to make it\"",
+    "Unclear which cells give the danger signal and how they sense a threat: \"receives a **danger signal** from other immune cells that sense a threat\"",
+    "Unclear how a receptor can bind a whole \"family\" of shapes, and how similar is similar enough: \"A receptor is a protein that binds one family of similar molecular shapes.\"",
+    "The 1,000× gap in the table needs a moment to check: \"no, 1,000× below\"",
+    "Says a vaccine doesn't stop entry, but the earlier figure says it prevents 97% of cases, which seems to conflict: \"A vaccine does not stop the pathogen from entering. It shortens the race.\"",
+    "Doesn't say why only some effector cells become memory cells: \"About 1% stay for years or decades as **memory cells**.\""
+  ],
+  "excess": [
+    "Explains the receptor-generation mechanism in more detail than the questions need: \"adding random edits at the joins\"",
+    "The summary repeats points made earlier: \"The vaccine runs the slow primary response safely, so the real infection meets a secondary response that starts with 100× more cells.\"",
+    "The Not covered list and textbook pointer are off the question: \"A standard textbook such as *Janeway's Immunobiology* covers each.\"",
+    "A leftover authoring comment appears in the page: \"<!-- Stage 1, rendered from model.md in STE-80. -->\"",
+    "The rule of thumb restates what the table already shows: \"each doubling of the precursor count saves one division, which is 8 hours.\""
+  ],
+  "grounded": {
+    "1": true,
+    "2": true,
+    "3": true,
+    "4": true
+  }
+}

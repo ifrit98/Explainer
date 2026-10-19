@@ -1,0 +1,12 @@
+{
+  "result": "I made `explainers/gps-relativity/explanation.md` as prose only, because the subject is one chain of reasoning with worked numbers at each step, which needs no diagram or interactive page. The probe, the cold read and the blind test have all run, I fixed what they found, and `explainer check` passes.",
+  "error": null,
+  "cost": 1.5428533999999998,
+  "seconds": 567,
+  "turns": 79,
+  "files": [
+    "explainers/gps-relativity/explanation.md"
+  ],
+  "review_cost": 0.6484,
+  "reviews": 4
+}

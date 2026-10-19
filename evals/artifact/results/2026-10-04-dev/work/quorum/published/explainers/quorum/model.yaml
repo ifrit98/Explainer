@@ -1,0 +1,94 @@
+# Machine-readable half of model.md. `explainer check quorum` holds every rendering to it.
+
+values:
+  n_big: 5
+  n_small: 4
+  majority_5: 3
+  majority_4: 3
+  tolerance_5: 2
+  tolerance_4: 1
+  overlap_5: 1
+  table:
+    n: [3, 4, 5, 6, 7]
+    majority: [2, 3, 3, 4, 4]
+    tolerance: [1, 1, 2, 2, 3]
+
+allow: [0, 1, 2, 3, 4, 5, 6, 7]
+
+require:
+  - path: majority_5
+    in: [prose]
+  - path: tolerance_5
+    in: [prose]
+  - path: tolerance_4
+    in: [prose]
+
+claims:
+  - id: quorum-rule
+    kind: definition
+    statement: "A change is decided only when a quorum (a group of at least quorum-size servers) has accepted it; quorum size is the majority size of all n configured servers, floor(n/2) + 1."
+    example: "n = 5: quorum size 3. A, B, C accept x = 1, so x = 1 is decided."
+
+  - id: cannot-tell
+    kind: mechanism
+    statement: "A server cannot tell a crashed server from a cut-off one: both look like no reply."
+    example: "A sends to D and gets no reply, however long it waits. D crashed, or the A–D link is cut and D still accepts changes from E. A sees no reply in both cases."
+    ask: "Two of the four servers in a cluster stop answering. Why can the other two not simply go on deciding changes?"
+
+  - id: why-majority
+    kind: why
+    about: [majority]
+    statement: "Quorum size must be more than half of n, so that two groups cannot both decide."
+    alternative: "Quorum size = half: 2 of 4, so 2 survivors can go on."
+    counterexample: "Partition {A,B} / {C,D}: A, B decide x = 1 and C, D decide x = 2. Both groups have 2 = quorum size. Split brain."
+    ask: "In a 4-server cluster, why not set the quorum size to 2 so the cluster survives 2 failures?"
+
+  - id: why-all-n
+    kind: why
+    about: [count]
+    statement: "Count the majority of all n configured servers, not of the servers a side can reach."
+    alternative: "Each side counts the majority of the servers it can reach."
+    counterexample: "5 servers split {A,B,C} / {D,E}: D, E reach 2, majority of 2 is 2, so D, E decide x = 2 while A, B, C decide x = 1."
+
+  - id: overlap
+    kind: guarantee
+    statement: "Two quorums of majority size each hold more than half of n, so together more than n: they always share a server, and that server refuses a conflicting change for the same position."
+    example: "n = 5: {A,B,C} and {C,D,E}: 3 + 3 = 6 > 5, so C is in both. C accepted x = 1 and refuses x = 2; x = 2 gets 2 votes < 3."
+    counterexample: "If C restarts with an empty disk and accepts x = 2, C, D, E decide x = 2 too: split brain."
+
+  - id: count-5-4
+    kind: mechanism
+    statement: "Tolerance = n − majority size. Majority size of 5 and of 4 is 3, so 5 servers tolerate 2 failures and 4 tolerate 1."
+    example: "5 − 2 = 3 ≥ 3 keeps deciding; 4 − 2 = 2 < 3 stops."
+    ask: "Why does a 5-server cluster tolerate 2 failures but a 4-server cluster only 1?"
+
+  - id: even-adds-nothing
+    kind: mechanism
+    statement: "Adding a server to an odd cluster raises the majority size by 1, so tolerance does not grow."
+    example: "n = 5 → 6: majority size 3 → 4, tolerance 2 → 2, and each change waits for 4 acceptances instead of 3."
+
+  - id: stop-not-loss
+    kind: definition
+    statement: "A cluster that stops keeps every decided change; it only decides no new change until enough servers return."
+    example: "4 servers with C, D down: x = 1 gets 2 votes < 3 and waits until C or D returns."
+
+terms:
+  - term: quorum size
+    means: "a number of servers (e.g. 3); 'quorum' is a group of servers (e.g. {A, B, C})"
+    avoid: [quorum of 3, a quorum is 3]
+  - term: decide
+    means: "a change becomes final because a quorum accepted it"
+    avoid: [commit, writes]
+
+budget: {prose: 900, reason: "two why-claims each need a partition case with servers and values, plus the crash-vs-partition case and the n table"}
+
+quiz:
+  - q: "A cluster of 6 servers: how many failed servers can it lose and still decide new changes?"
+    expect: "2. Majority size is 4, so 6 − 4 = 2; the sixth server adds nothing over 5."
+    misconception: "3, because half of 6 is 3"
+  - q: "In a 4-server cluster, why not let 2 servers be enough to decide a change?"
+    expect: "A partition {A,B}/{C,D} would let both halves decide different changes (split brain); two groups of 2 out of 4 need not share a server."
+    misconception: "Because 2 servers are too slow or too few to store the data"
+  - q: "A 5-server cluster splits into a group of 3 and a group of 2. What does each group do?"
+    expect: "The 3-server group keeps deciding (3 ≥ 3); the 2-server group stops (2 < 3) and decides nothing, so the copies cannot disagree."
+    misconception: "The 2-server group keeps deciding with a majority of the 2 servers it can reach"

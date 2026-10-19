@@ -1,0 +1,61 @@
+{
+  "key": {
+    "A": "none",
+    "B": "principles",
+    "C": "published",
+    "D": "quick"
+  },
+  "grades": {
+    "none": {
+      "quiz": [
+        2,
+        2,
+        2,
+        2
+      ],
+      "misconception": "absent",
+      "errors": [
+        "Inactivated (e.g. many flu shots, polio IPV) | Whole pathogen, killed | Can't cause infection; usually needs adjuvant and boosters: most inactivated flu shots and IPV contain no adjuvant."
+      ]
+    },
+    "principles": {
+      "quiz": [
+        2,
+        2,
+        2,
+        2
+      ],
+      "misconception": "absent",
+      "errors": [
+        "Across the body's hundreds of billions of lymphocytes, the library contains millions of different shapes: this understates the repertoire, which is on the order of 10^8 or more distinct receptors."
+      ]
+    },
+    "published": {
+      "quiz": [
+        2,
+        2,
+        2,
+        2
+      ],
+      "misconception": "absent",
+      "errors": []
+    },
+    "quick": {
+      "quiz": [
+        1,
+        2,
+        2,
+        2
+      ],
+      "misconception": "absent",
+      "errors": []
+    }
+  },
+  "rank": [
+    "published",
+    "principles",
+    "none",
+    "quick"
+  ],
+  "why_best": "C carries one consistent worked model (rare precursors, division count, memory pool size, the race against a pathogen growing 10× per day) from start to finish, says explicitly that the vaccine contains no pathogen that can multiply, defines every term it uses, and leaves side topics to a short 'not covered' list, so the reader gets every quiz point without detours."
+}

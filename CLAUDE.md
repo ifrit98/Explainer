@@ -18,6 +18,7 @@ uv run explainer check                        # every example against its model.
 uv run explainer coldread <slug> --run        # first-viewing read by a fresh agent (claude -p), saved with numbered findings
 uv run explainer findings --stats             # how many review findings authors adopt, per tool
 uv run explainer eval chat                    # chat answers under each system prompt, graded blind (needs the claude CLI)
+uv run explainer eval artifact --split dev     # held-out subjects built under each condition, read and graded blind
 uv run explainer render <slug> --draft        # fast silent layout pass
 uv run explainer render <slug> --review       # 1080p60, voice, captions, chapters, review sheet
 uv run pytest -q                              # toolkit tests

@@ -1,0 +1,12 @@
+{
+  "result": "I made `explainers/bloom-filter/index.html`, a single interactive page. You learn a Bloom filter fastest by adding words, watching bits turn on and finding a false positive yourself, and the page puts the prose and the false-positive arithmetic right next to the hands-on filter and a trade-off chart (I haven't opened it in a browser yet).",
+  "error": null,
+  "cost": 0.40253520000000004,
+  "seconds": 118,
+  "turns": 3,
+  "files": [
+    "explainers/bloom-filter/index.html"
+  ],
+  "review_cost": 0,
+  "reviews": 0
+}

@@ -1,0 +1,85 @@
+# Machine-readable half of model.md. `explainer check heat-pump` holds every rendering to it.
+
+values:
+  electricity_kwh: 1
+  air_heat_kwh: 2
+  delivered_kwh: 3
+  cop_typical: 3
+  cop_resistance: 1
+  outdoor_c: 0
+  water_c: 35
+  radiator_hot_c: 55
+  evap_c: -10
+  cond_c: 40
+  evap_bar: 3.5
+  cond_bar: 14
+  evap_k: 263
+  cond_k: 313
+  lift_typical_k: 50
+  carnot_typical: 6.3
+  mild:
+    outdoor_c: 10
+    evap_c: 0
+    evap_k: 273
+    lift_k: 40
+    carnot: 7.8
+    cop: 4
+  cold:
+    outdoor_c: -15
+    evap_c: -25
+    evap_k: 248
+    lift_k: 65
+    carnot: 4.8
+    cop: 2
+
+allow: [5, 273, 2, 1, 3, 4]
+
+require:
+  - path: delivered_kwh
+    in: [diagram]
+  - path: air_heat_kwh
+    in: [diagram]
+  - path: carnot_typical
+    in: [diagram]
+
+claims:
+  - id: move-not-make
+    kind: why
+    about: [heat pump]
+    statement: "A heat pump moves heat that already exists in outdoor air; it does not turn electricity into heat."
+    alternative: "Turn electricity into heat directly (resistance heater)."
+    counterexample: "A resistance heater turns 1 kWh into 1 kWh of heat, COP 1; conservation of energy forbids more."
+    ask: "Where do the extra 2 kWh come from?"
+  - id: balance
+    kind: guarantee
+    statement: "Heat delivered = heat taken from the air + electricity: 3 = 2 + 1 kWh."
+    example: "2 kWh from 0 °C air plus 1 kWh electricity gives 3 kWh to the house."
+    counterexample: "Count only electricity as input and COP 3 looks like 300% efficiency, which seems to break conservation; it does not, because 2 kWh came from the air."
+  - id: compress
+    kind: why
+    about: [compressor]
+    statement: "The compressor raises the refrigerant to 40 °C so that it is hotter than the 35 °C water."
+    alternative: "Circulate the refrigerant without compressing it."
+    counterexample: "Refrigerant at −10 °C cannot heat 35 °C water; heat flows only from hot to cold."
+    ask: "Why is the compressor needed if the heat comes from the air?"
+  - id: valve
+    kind: why
+    about: [expansion valve]
+    statement: "The expansion valve drops pressure so the refrigerant is colder than the outdoor air again."
+    alternative: "Keep the refrigerant at high pressure."
+    counterexample: "At 40 °C it is hotter than 0 °C air and would lose heat outdoors instead of taking it in."
+  - id: lift-limit
+    kind: guarantee
+    statement: "COP falls as the temperature lift grows; the Carnot limit is T_hot / (T_hot − T_cold)."
+    example: "Lift 50 K: limit 313/50 ≈ 6.3, real COP about 3. Lift 40 K: limit 7.8, real about 4."
+    counterexample: "On a −15 °C day the lift is 65 K: limit 4.8, real COP about 2."
+    ask: "What happens to COP on a very cold day, and why?"
+
+accept_unjustified: {}
+
+terms:
+  - term: COP
+    means: "heat delivered ÷ electricity used; not an efficiency"
+    avoid: [300% efficient, efficiency of 300]
+
+quiz: []

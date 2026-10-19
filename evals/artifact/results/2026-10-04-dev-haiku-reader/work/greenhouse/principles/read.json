@@ -1,0 +1,48 @@
+{
+  "answers": {
+    "1": {
+      "answer": "Greenhouse gases absorb infrared radiation (Earth's heat) but not visible light (sunlight), because these have very different wavelengths. The atmosphere can be transparent to the incoming visible energy while being opaque to the outgoing infrared energy.",
+      "quote": "The two bands hardly overlap. So the atmosphere can be nearly transparent to the incoming energy and nearly opaque to the outgoing energy."
+    },
+    "2": {
+      "answer": "Adding CO2 raises the altitude from which infrared escapes to space (the emission level). Higher altitudes are colder, so they emit less infrared. To maintain energy balance and continue emitting 238 W/m² to space, the entire troposphere and surface must warm up.",
+      "quote": "More CO2 means more absorbing gas above each altitude. So a photon must start higher before it can escape, and the emission level rises."
+    },
+    "3": {
+      "answer": "N2 and O2 have two identical atoms. When they vibrate or stretch, the charge distribution remains perfectly symmetric around the molecule's center, producing no dipole moment. Without a changing dipole, they cannot absorb infrared radiation.",
+      "quote": "N2 and O2 (99% of dry air) have two identical atoms. When they stretch, the charge stays symmetric, so the dipole stays zero."
+    },
+    "4": {
+      "answer": "Heat would radiate directly from the surface (0 km altitude). The surface temperature would be approximately 255 K, with essentially no greenhouse effect to warm it further.",
+      "quote": "Near 0 km, there would be almost no greenhouse effect (surface near 255 K)."
+    }
+  },
+  "stops": [
+    "\"10% warmer means about 46% more emission\" — why does T⁴ scaling produce 46%?",
+    "\"peak wavelength ≈ 2898 µm·K / T\" — Wien's law stated without derivation or explanation",
+    "\"dipole, the separation of its positive and negative charge\" — abstract concept needs more grounding",
+    "\"window\" in \"few gases absorb, and some surface emission escapes directly through this window\" — technical term introduced without definition",
+    "\"Rising air expands as pressure falls, and expansion cools it\" — why does expansion cause cooling?",
+    "\"The mean lapse rate is about 6.5 K per km\" — why this specific value, why is it constant?",
+    "\"More CO2 means more absorbing gas above each altitude. So a photon must start higher before it can escape\" — causation between upper CO2 and lower photons unclear",
+    "\"The surface is now further below the emission level on the same slope → it is warmer\" — logical leap from position to temperature not justified",
+    "\"each doubling widens the band by a similar amount\" — why does logarithmic scaling follow from doubling?",
+    "\"the emission level must be colder than the air below it\" — why is this assumption necessary for the mechanism?"
+  ],
+  "excess": [
+    "\"The sections below build this answer step by step, with numbers.\" — meta-commentary about structure",
+    "\"Predict before you read on: will the surface be warmer than 255 K, colder, or the same?\" — pedagogical prompt",
+    "\"Predict: the centre of the CO2 band already absorbs almost all 15 µm light within the lowest few hundred metres. Does adding more CO2 still matter?\" — prediction prompt",
+    "\"Feedbacks amplify this. Warmer air holds about 7% more water vapour per K...\" — explains real warming vs basic mechanism, beyond scope",
+    "\"When the mechanism does not warm: the stratosphere\" — validates mechanism but doesn't explain surface warming",
+    "\"What the numbers mean\" (section 8) — interpretive summary rather than new explanation",
+    "\"Not covered here: cloud effects in detail, how fast the oceans take up heat...\" — acknowledgment of gaps",
+    "\"If the layer already absorbs everything, extra CO2 would change nothing. The next model fixes this.\" — redundant with following explanation"
+  ],
+  "grounded": {
+    "1": true,
+    "2": true,
+    "3": true,
+    "4": true
+  }
+}

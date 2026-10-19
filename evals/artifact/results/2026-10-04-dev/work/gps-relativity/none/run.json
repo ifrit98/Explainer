@@ -1,0 +1,12 @@
+{
+  "result": "I made `explainers/gps-relativity/explanation.md`, a prose explanation, because this topic is a chain of reasoning with worked numbers and a short Python position solver, and prose with inline calculations and code follows that chain best for a technical reader.",
+  "error": null,
+  "cost": 0.17838859999999995,
+  "seconds": 57,
+  "turns": 2,
+  "files": [
+    "explainers/gps-relativity/explanation.md"
+  ],
+  "review_cost": 0,
+  "reviews": 0
+}

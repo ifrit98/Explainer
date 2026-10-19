@@ -1,0 +1,20 @@
+formula:
+  quorum: "floor(n/2) + 1"
+  tolerated: "floor((n-1)/2)"
+clusters:
+  - {n: 1, quorum: 1, tolerated: 0}
+  - {n: 2, quorum: 2, tolerated: 0}
+  - {n: 3, quorum: 2, tolerated: 1}
+  - {n: 4, quorum: 3, tolerated: 1}
+  - {n: 5, quorum: 3, tolerated: 2}
+  - {n: 6, quorum: 4, tolerated: 2}
+  - {n: 7, quorum: 4, tolerated: 3}
+probability_example:
+  p_server_down: 0.01
+  p_no_quorum:
+    n3: 0.00030
+    n4: 0.00059
+    n5: 0.0000099
+assumptions:
+  - crash failures only (no lying servers)
+  - independent failures (probability example only)

@@ -12,8 +12,24 @@ ROOT = Path(__file__).resolve().parent.parent
 SKIP = {".venv", "media", "models", "node_modules", ".playwright-mcp", ".git", ".pytest_cache"}
 
 
-def markdown_files():
-    return [p for p in ROOT.rglob("*.md") if not SKIP & set(p.relative_to(ROOT).parts)]
+def markdown_files(root=ROOT):
+    # Eval output (evals/*/results/*/work and shown) is generated, kept as a record; it is not documentation.
+    parts = lambda p: set(p.relative_to(root).parts)  # noqa: E731 — relative, so the checkout path never matches
+    return [p for p in root.rglob("*.md") if not SKIP & parts(p)
+            and not ("results" in parts(p) and {"work", "shown"} & parts(p))]
+
+
+def test_markdown_files_ignore_where_the_repo_is_checked_out(tmp_path):
+    # GitHub runners check out to /home/runner/work/<repo>/<repo>: "work" above the repo must not hide its eval reports.
+    root = tmp_path / "work" / "repo"
+    report = root / "evals/artifact/results/2026-10-04-dev/report.md"
+    generated = root / "evals/artifact/results/2026-10-04-dev/work/subject/explanation.md"
+    for f in (report, generated):
+        f.parent.mkdir(parents=True)
+        f.write_text("# x\n")
+    files = markdown_files(root)
+    assert report in files
+    assert generated not in files
 
 
 @pytest.mark.parametrize("md", markdown_files(), ids=lambda p: str(p.relative_to(ROOT)))
@@ -43,6 +59,26 @@ def test_plugin_manifest_and_skills():
         assert (ROOT / ".claude/skills" / skill / "SKILL.md").exists(), f".claude/skills/{skill} link is missing"
     for ref in re.findall(r"`(references/[\w.-]+)`", (ROOT / "plugin/skills/explain/SKILL.md").read_text()):
         assert (ROOT / "plugin/skills/explain" / ref).exists(), ref
+
+
+def test_agents_md_is_self_contained():
+    """AGENTS.md is read by agents other than Claude Code: no @ imports, no paths that do not exist."""
+    text = (ROOT / "AGENTS.md").read_text()
+    assert not re.search(r"^@", text, re.M), "AGENTS.md uses Claude Code @ imports, which other agents ignore"
+    paths = [p for p in re.findall(r"`([\w.\-/]+/[\w.\-/]*)`", text) if not p.startswith("http")]
+    missing = [p for p in paths if not (ROOT / p.rstrip("/")).exists()]
+    assert not missing, f"AGENTS.md names paths that do not exist: {missing}"
+    assert "plugin/skills/explain/references/principles.md" in text
+    assert "claude -p" in text
+
+
+def test_agents_md_names_only_real_commands():
+    subcommands = set(re.findall(r'sub\.add_parser\("(\w+)"', (ROOT / "explainer_kit/cli.py").read_text()))
+    text = (ROOT / "AGENTS.md").read_text()
+    named = set(re.findall(r"\bexplainer (\w+)", text))
+    claude_line = next(line for line in text.splitlines() if "call the Claude CLI" in line)
+    named |= set(re.findall(r"`([a-z]+)`", claude_line))
+    assert not named - subcommands, f"AGENTS.md names commands the CLI does not have: {sorted(named - subcommands)}"
 
 
 @pytest.mark.parametrize("folder", sorted(d for d in (ROOT / "explainers").iterdir() if (d / "model.yaml").exists()),

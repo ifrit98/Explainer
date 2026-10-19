@@ -1,0 +1,43 @@
+{
+  "answers": {
+    "1": {
+      "answer": "When adding an item, the filter computes its k hash positions and sets those bits to 1. When looking up an item, it computes the same k positions and checks those bits; if any bit is 0, the answer is \"no\"; if all are 1, the answer is \"probably yes\".",
+      "quote": "Add an item: compute its k positions and set those bits to 1. Query an item: compute its k positions and look at those bits. If any bit is 0, answer \"no\". If all are 1, answer \"probably yes\"."
+    },
+    "2": {
+      "answer": "It can give false positives (saying \"yes\" for items never added) but can never give false negatives (saying \"no\" for items that were added). This is because adding items only changes bits from 0 to 1; nothing changes them back to 0.",
+      "quote": "Adding an item only changes bits from 0 to 1. Nothing changes a bit back to 0. So every item you added still has all its bits set, and it always gets \"probably yes\"."
+    },
+    "3": {
+      "answer": "You cannot delete an item by clearing its bits because multiple items share the same bits. If you clear a bit for one deleted item, you may clear a bit that another existing item still needs, causing that item to incorrectly answer \"no\".",
+      "quote": "Dog also uses bit 6. Now a query for dog finds bit 6 at 0 and answers \"no\", which is wrong. For this reason, a plain Bloom filter does not support deletion."
+    },
+    "4": {
+      "answer": "It answers \"probably yes\", because every item would find all its bits set to 1, regardless of whether it was actually added.",
+      "quote": "As you add more items, more bits become 1, and an unseen item is more likely to find all its bits already on."
+    }
+  },
+  "stops": [
+    "Hash functions described as turning items into positions \"that look random\" - what does random mean here?",
+    "Line 38: \"The filter cannot tell which item set a bit\" - why is it important that the filter cannot distinguish?",
+    "The false-positive rate formula (line 45) with e^(−kn/m)^k - variables and the exponential are not explained.",
+    "Line 47: \"assumes the hash positions are independent and uniform\" - what does uniform mean for positions?",
+    "Why the specific formula for optimal k (line 59) works is not derived or justified.",
+    "Line 3: \"other items can switch on the same bits\" - this key insight appears before fully explaining its consequences.",
+    "Transition between theory and the toy example (line 13) could clarify why using 10 bits and 2 functions."
+  ],
+  "excess": [
+    "The specific web address example with 50 MB and 1.2 MB sizes (lines 48-49) - illustrates but is not needed to understand the mechanism.",
+    "The table of false-positive rates for different k values (lines 53-57) - the concept is already explained in text.",
+    "The formula for optimal k as (m/n) × ln 2 (line 59) - detailed optimization beyond basic mechanism.",
+    "The case of putting 3,000,000 items into the filter (lines 61-62) - illustrative detail not essential.",
+    "The entire \"When to use one\" section (lines 63-66) - context about application rather than mechanism.",
+    "The note about counting Bloom filters and cuckoo filters (line 67) - explicitly marked as not covered."
+  ],
+  "grounded": {
+    "1": true,
+    "2": true,
+    "3": true,
+    "4": true
+  }
+}

@@ -1,0 +1,44 @@
+{
+  "answers": {
+    "1": {
+      "answer": "Sunlight and Earth's heat have different wavelengths. Sunlight peaks near 0.5 µm, where the air is mostly transparent, so it gets through. The Earth is much colder than the Sun, so it gives off infrared, which peaks near 10 µm. Greenhouse gases absorb infrared. The explanation does not say why these gases absorb infrared but not visible light.",
+      "quote": "Sunlight peaks near 0.5 µm, where the air is mostly transparent. The Earth is much colder than the Sun, so its radiation, **infrared**, peaks near 10 µm. A **greenhouse gas** absorbs and emits infrared."
+    },
+    "2": {
+      "answer": "Infrared escapes to space only from high air with little gas above it, about 5 km up, where the air is about 255 K. More gas raises that height (about 150 m for doubled CO2). Because air cools with height, the new emitting air is about 1 K colder and sends out 3.8 W/m² less. The planet then gains energy, and the whole column, surface included, warms until balance returns.",
+      "quote": "Add gas, and the emission height rises. Doubled CO2 lifts it about 150 m (estimate). The new emitting air is 1 K colder."
+    },
+    "3": {
+      "answer": "A molecule absorbs infrared only if its vibration moves electric charge unevenly. A two-atom molecule made of one element, like N2 or O2, cannot do that.",
+      "quote": "A molecule absorbs infrared only if its vibration moves electric charge unevenly; a two-atom molecule of one element cannot do that."
+    },
+    "4": {
+      "answer": "My inference: with no gas to absorb infrared, the heat would leave straight from the surface. The surface would then need to sit at the balance temperature, about 255 K (−18 °C), instead of 288 K, because the 33 K greenhouse effect would be gone.",
+      "quote": "To emit 238 W/m², a body must be at 255 K (−18 °C). The real mean surface is 288 K (15 °C) and emits 390 W/m²."
+    }
+  },
+  "stops": [
+    "Diagram label: \"re-emitted upward, absorbed again\" (how many times, and why does it stop at 5 km?)",
+    "\"cuts the output by 4σT³ × 1 K = 3.8 W/m²\" (where 4σT³ comes from is not explained)",
+    "\"warms by the same amount: about 1.2 K before feedbacks\" (the emitting air dropped 1 K, so why is the warming 1.2 K?)",
+    "\"Doubled CO2 lifts it about 150 m (estimate).\" (no reason given for 150 m)",
+    "\"the effect grows with the logarithm of CO2\" (not explained)",
+    "\"Near the ground, absorption is saturated.\" (\"saturated\" is not defined)",
+    "\"The whole column warms\" (\"column\" is not defined)",
+    "\"if its vibration moves electric charge unevenly\" (vague)",
+    "\"Water vapour absorbs across many bands.\" (\"bands\" is not defined)"
+  ],
+  "excess": [
+    "\"If you forget the 4, you get 360 K, which is wrong.\"",
+    "\"A glass greenhouse works mainly by stopping warm air from rising.\"",
+    "\"The estimated total for doubled CO2 is likely 2.5–4 K (IPCC AR6).\"",
+    "\"Clouds and ocean heat uptake are outside this explainer.\"",
+    "\"The source is sunlight. The gas slows energy loss to space.\""
+  ],
+  "grounded": {
+    "1": true,
+    "2": true,
+    "3": true,
+    "4": true
+  }
+}

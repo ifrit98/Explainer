@@ -1,0 +1,44 @@
+{
+  "answers": {
+    "1": {
+      "answer": "It has to contain or make the pathogen's antigens (the molecules with the patches the immune system recognises), together with enough of an alarm signal (often from an adjuvant) to start a real response. It doesn't make you ill because there is no pathogen in it that can cause the disease. It might be a killed whole pathogen, a purified protein, a toxoid, or mRNA that has your own cells briefly make the protein. A live attenuated vaccine is a weakened strain that only replicates a little.",
+      "quote": "It shows the body the right antigens, with enough of an alarm signal to trigger a real response, but without a pathogen that can cause the disease."
+    },
+    "2": {
+      "answer": "After the first encounter, memory cells are left behind. There are hundreds to thousands of times more of them than the original matching cells, their binding has been sharpened by affinity maturation, and they react faster to less stimulus. Some antibodies are also already circulating. So the response starts within days instead of 1–2 weeks.",
+      "quote": "When the real pathogen arrives, it meets a **secondary** response: antibodies already circulating, plus memory cells that expand within days."
+    },
+    "3": {
+      "answer": "Memory is specific. The vaccine selects and multiplies only the cells whose receptors fit the epitopes of that one pathogen. An unrelated virus has different surface shapes, so these memory cells don't fit it, and its first encounter is still a slow primary response.",
+      "quote": "Memory is specific to the epitopes it was selected on."
+    },
+    "4": {
+      "answer": "Protection gets weaker because the memory cells and antibodies were selected and refined to fit the old shape. They fit the changed patch less well. This is antigenic drift in flu, and it is why flu vaccines are updated every year. If the patch changes constantly (as in HIV), it is hard to get protective memory at all.",
+      "quote": "Influenza mutates its surface proteins quickly (**antigenic drift**), so last year's memory cells fit this year's virus less well."
+    }
+  },
+  "stops": [
+    "V, D and J segments are named but never explained beyond 'pools': \"(called V, D and J segments)\"",
+    "junk() appears in the code without a definition: \"random.choice(V_heavy) + junk() + random.choice(D)\"",
+    "heavy and light chains appear in the code, but the text only says \"two protein chains\": \"The receptor is built from two protein chains\"",
+    "It is unclear how helper T cells 'recognised' the pathogen or how they give permission: \"Helper T cells, which have recognised the same pathogen, give B cells permission to proceed.\"",
+    "'Naive' cells are used in the table without being defined: \"Memory cells differ from the original naive cells\"",
+    "Killer T cells spotting displayed fragments is mentioned without saying how: \"They recognise fragments of viral protein that infected cells display on their surface.\"",
+    "It is not clear why non-replicating antigens give a weaker response: \"Some antigens, especially non-replicating ones, give a weaker first response\"",
+    "It is not explained why memory cells don't fully protect against fast infections: \"as with infections of the nose and throat that move fast\""
+  ],
+  "excess": [
+    "The class-switch detail is not needed for the question: \"B cells can also **class-switch**, changing the antibody's \"tail\" while keeping the binding end.\"",
+    "Herd immunity is off the main question: \"If enough people have memory, a pathogen can't find enough hosts to keep spreading.\"",
+    "The autoimmune safety filter is a side point: \"There is also a safety filter. While they develop, cells whose receptors bind strongly to the body's *own* molecules\"",
+    "The summary repeats earlier points: \"A vaccine triggers this process with a harmless form of the antigen. The slow first response happens safely\"",
+    "The second pseudocode block adds little to the numbered list: \"population = [mutate(cell) for cell in population for _ in range(2)]\"",
+    "The plan line is just a signpost: \"The rest of this document goes through each step.\""
+  ],
+  "grounded": {
+    "1": true,
+    "2": true,
+    "3": true,
+    "4": true
+  }
+}

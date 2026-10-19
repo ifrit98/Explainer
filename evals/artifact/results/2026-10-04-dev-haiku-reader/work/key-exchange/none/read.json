@@ -1,0 +1,50 @@
+{
+  "answers": {
+    "1": {
+      "answer": "Modular exponentiation (g^x mod p) makes it possible. It is safe because the operation is easy to compute but very hard to reverse (solving discrete logarithm).",
+      "quote": "Use a calculation that is easy to do but very hard to undo. Eve sees the results but can't work back to the secrets."
+    },
+    "2": {
+      "answer": "Both people compute the same value because exponents combine the same way in either order. Alice computes (g^b)^a and Bob computes (g^a)^b, both equaling g^(ab).",
+      "quote": "Since ab = ba, the two values are equal, and the mod-p reduction doesn't change that."
+    },
+    "3": {
+      "answer": "The exchange alone does not stop a man-in-the-middle attack where Mallory intercepts and changes the messages. Digital signatures and certificates backed by a certificate authority stop it by proving identity.",
+      "quote": "To stop someone who swaps messages, the exchange must be authenticated, usually with signatures and certificates."
+    },
+    "4": {
+      "answer": "Alice sends 8, Bob sends 19, and they both derive the shared key 2.",
+      "quote": "Alice picks a = 6. She sends A = 5⁶ mod 23 = 8... Bob picks b = 15. He sends B = 5¹⁵ mod 23 = 19... The shared secret is 2."
+    }
+  },
+  "stops": [
+    "discrete logarithm problem: This is the discrete logarithm problem.",
+    "forward secrecy: This property is called forward secrecy.",
+    "key derivation function: It goes through a key derivation function (a hash-based procedure).",
+    "repeated squaring: The trick is repeated squaring.",
+    "man-in-the-middle attack: This is a man-in-the-middle attack.",
+    "why signatures stop MITM: The server signs its Diffie–Hellman value with a digital signature, using a private key.",
+    "why discrete log is hard: No method is known that solves this quickly when p is large.",
+    "modular equivalence: (a × b) mod p = ((a mod p) × (b mod p)) mod p",
+    "certificate authority trust: Alice must trust something in advance that tells her which public key belongs to Bob.",
+    "elliptic curve variant: 'Raise g to the power a' becomes 'add the point G to itself a times'."
+  ],
+  "excess": [
+    "Python code: Python's three-argument pow does fast modular exponentiation",
+    "historical names: Whitfield Diffie and Martin Hellman, 1976",
+    "discrete log table: | x | 1 | 2 | 3... 5^x mod 23 | 5 | 2 | 10...",
+    "atoms comparison: the table would have more rows than there are atoms in the universe",
+    "deployment status: Almost every secure web connection still uses it or a close variant",
+    "bit specifications: about 2048 bits (≈ 617 digits)",
+    "specific example: say, bank.example",
+    "implementation detail: Every intermediate value stays below 23",
+    "quantum threat: A large quantum computer running Shor's algorithm could solve discrete logarithms",
+    "post-quantum variants: Current systems often run a classical exchange and a post-quantum exchange together"
+  ],
+  "grounded": {
+    "1": true,
+    "2": true,
+    "3": true,
+    "4": true
+  }
+}

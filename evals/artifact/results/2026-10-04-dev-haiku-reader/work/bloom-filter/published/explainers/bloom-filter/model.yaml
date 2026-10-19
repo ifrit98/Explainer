@@ -1,0 +1,135 @@
+# Machine-readable half of model.md. `explainer check bloom-filter` holds every rendering to it.
+
+values:
+  toy_m: 16
+  toy_k: 3
+  toy_last_position: 15
+  toy_cat: [1, 6, 11]
+  toy_dog: [3, 9, 14]
+  toy_fox: [2, 6, 14]
+  toy_owl: [3, 6, 11]
+  hash_example_output: 3141593
+  hash_example_position: 9
+  items_million: 1
+  bits_per_item: 10
+  m_bits_million: 10
+  filter_mb: 1.25
+  url_bytes: 50
+  urls_mb: 50
+  k_best: 7
+  k_best_exact: 6.9
+  kn_over_m: 0.7
+  minus_kn_over_m: -0.7
+  e_term: 0.497
+  fill: 0.503
+  p_percent: 0.82
+  p_decimal: 0.0082
+  one_in: 120
+  queries: 1000000
+  wasted_lookups: 8200
+  k1_p_percent: 9.5
+  k1_fill: 0.095
+  k20: 20
+  k20_p_percent: 5.5
+  k20_fill: 0.865
+  overfill_2x_million: 2
+  overfill_2x_p_percent: 13.8
+  overfill_3x_million: 3
+  overfill_3x_p_percent: 40
+  overfill_3x_wasted: 400000
+  overfill_3x_kn_over_m: 2.1
+  overfill_3x_minus_kn_over_m: -2.1
+  overfill_3x_fill: 0.88
+  best_k_fill: 0.5
+  per_bit_factor: 0.62
+  ten_x_bits: 4.8
+  ln2: 0.69
+
+allow: [0, 1, 2, 3, 4, 5, 8, 10, 12, 13, 100]
+
+require:
+  - path: p_percent
+    in: [prose]
+  - path: filter_mb
+    in: [prose]
+  - path: overfill_3x_p_percent
+    in: [prose]
+  - path: k1_p_percent
+    in: [prose]
+
+claims:
+  - id: mechanism-add-query
+    kind: mechanism
+    statement: "Add sets the item's k positions to 1. Query reads them: any 0 means definitely not seen; all 1 means probably seen."
+    example: "m = 16, k = 3. cat → 1, 6, 11; dog → 3, 9, 14. fox → 2, 6, 14: bit 2 is 0, definitely not seen."
+    ask: "A filter has bits 1, 3, 6, 9, 11, 14 set. A query's positions are 2, 6, 14. What does the filter answer, and can that answer be wrong?"
+
+  - id: guarantee-no-false-negative
+    kind: guarantee
+    statement: "A 'definitely not seen' answer is always right, because add only sets bits to 1 and nothing sets them back to 0."
+    example: "cat sets 1, 6, 11; any later query for cat finds all three at 1."
+    counterexample: "Allow delete by clearing bits: add owl (3, 6, 11), then delete cat by clearing 1, 6, 11. Owl's bits 6 and 11 are now 0, so the filter says owl is definitely not seen, though owl was added."
+    ask: "Why can't you remove an item from a Bloom filter by setting its bits back to 0?"
+
+  - id: mechanism-false-positive
+    kind: mechanism
+    statement: "A false positive happens when other items have already set all k positions of an item that was never added."
+    example: "owl → 3, 6, 11. Bit 3 came from dog, bits 6 and 11 from cat. The filter says probably seen; owl was never added."
+
+  - id: why-bits-not-items
+    kind: why
+    statement: "The filter stores bits, not items, so memory depends on the number of items and the target error, not on item size."
+    alternative: "Store the items in a hash set."
+    counterexample: "1 million URLs of about 50 bytes = about 50 MB; a Bloom filter at 10 bits per item = 1.25 MB with 0.82% false positives."
+
+  - id: why-several-hashes
+    kind: why
+    statement: "Several hash functions make a false positive need several 1 bits at once; too many fill the array."
+    alternative: "One hash function (k = 1), or many (k = 20)."
+    counterexample: "At 10 bits per item: k = 1 gives 9.5%; k = 7 gives 0.82%; k = 20 gives 5.5%."
+    ask: "At 10 bits per item, what happens to the false-positive rate if you use 20 hash functions instead of 7, and why?"
+
+  - id: mechanism-rate
+    kind: mechanism
+    statement: "Each bit is still 0 with probability about e^(-kn/m), so the fill is f ≈ 1 − e^(-kn/m) and p ≈ f^k."
+    example: "m/n = 10, k = 7: e^(-0.7) = 0.497, f = 0.503, p = 0.503^7 = 0.0082."
+
+  - id: limit-overfill
+    kind: guarantee
+    statement: "The false-positive rate stays small only while n stays near the capacity the filter was sized for."
+    example: "10 million bits, k = 7, 1 million items: 0.82%."
+    counterexample: "Same filter, 3 million items: 40%."
+    ask: "A filter sized for 1 million items gives 0.82% false positives. What happens if 3 million items are added?"
+
+  - id: why-useful
+    kind: why
+    statement: "One-sided error is useful: put the filter before a slow exact lookup; 'definitely not seen' skips it, a false positive costs one wasted lookup."
+    alternative: "Do the slow lookup for every query."
+    counterexample: "1,000,000 queries for absent items: at 0.82%, about 8,200 lookups instead of 1,000,000."
+
+accept_unjustified:
+  ln: "ln 2 appears only in the best-k result (m/n)·ln 2, given as a result of the formula with its meaning (about half the bits are 1); deriving it needs calculus, out of scope for this reader."
+
+terms:
+  - term: add
+    means: "set the item's k positions to 1; the item itself is not kept"
+    avoid: [stores the item, stores the items, store the item]
+  - term: false positive
+    means: "'probably seen' for an item never added"
+    avoid: [false alarm, false hit]
+  - term: definitely not seen
+    means: "the answer when any position is 0"
+    avoid: [maybe not seen, probably not seen]
+
+budget: {prose: 1100, reason: "mechanism with a toy, two guarantees each with a breaking case, a derived rate with a worked number, and a use case"}
+
+quiz:
+  - q: "A Bloom filter says 'probably seen' for an item. Was the item added?"
+    expect: "Not necessarily: other items may have set all its bits (a false positive). Only 'definitely not seen' is certain."
+    misconception: "Yes, the item was certainly added."
+  - q: "You add more and more items to a fixed-size Bloom filter. What happens to its answers?"
+    expect: "More bits become 1, so false positives rise (0.82% at capacity to 40% at 3×). Items that were added still always read 'probably seen'."
+    misconception: "It starts forgetting items or gives false negatives."
+  - q: "Why does a Bloom filter use less memory than a hash set of the items?"
+    expect: "It keeps only about 10 bits per item, not the item; the price is a small chance of false positives."
+    misconception: "It compresses the items and can list them back."

@@ -1,0 +1,358 @@
+{
+ "tool": "coldread",
+ "rendering": "prose",
+ "slug": "key-exchange",
+ "at": "2026-10-04T15:06:25",
+ "model": "default",
+ "prompt_sha": "a76b387677f2",
+ "reply": {
+  "paragraphs": [
+   {
+    "at": "Title (line 1)",
+    "text": "How can two strangers agree on a secret key when anyone can read their messages?",
+    "unresolved": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Bold summary (line 3)",
+    "text": "They never send the key. Each person keeps a private number...",
+    "unresolved": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Line 5",
+    "text": "This method is the Diffie–Hellman key exchange. A version of it starts most HTTPS connections.",
+    "unresolved": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "The problem, para 1 (line 9)",
+    "text": "Alice and Bob want to encrypt their messages...",
+    "unresolved": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "The problem, para 2 (line 12)",
+    "text": "A first idea fails. Alice picks the key, 6, and sends 5^6 mod 23 = 8...",
+    "unresolved": [
+     "mod (in \"5^6 mod 23 = 8\"; it is defined only at line 16)"
+    ],
+    "leap": [
+     "\"Each side then does one half of a calculation, and the other side finishes it without undoing it\": what the 'halves' are stays unclear until the numbered steps"
+    ],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Exchange, mod definition (line 16)",
+    "text": "\"mod 23\" means \"the remainder after division by 23\"...",
+    "unresolved": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Exchange, step 1 (line 19)",
+    "text": "Alice and Bob agree in public on two numbers: a prime modulus p = 23 and a base g = 5.",
+    "unresolved": [],
+    "leap": [
+     "Why p has to be prime is not said here (Scope later touches on choosing g, not p)"
+    ],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Exchange, step 2 (line 20)",
+    "text": "Each picks a private number at random...",
+    "unresolved": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Exchange, step 3 (line 21)",
+    "text": "Each sends a public number: g raised to their private number, mod p...",
+    "unresolved": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Exchange, step 4 (line 22)",
+    "text": "Each raises the other's public number to their own private number, mod p...",
+    "unresolved": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Line 24",
+    "text": "The result, s = 2, is the shared secret...",
+    "unresolved": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Why both get 2 (line 26)",
+    "text": "Alice computed (5^15)^6, and Bob computed (5^6)^15...",
+    "unresolved": [
+     "k in \"(x + 23k) × y\" is not introduced (it can be inferred as 'some whole number')"
+    ],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "What Eve sees, table (lines 31-35)",
+    "text": "Who | p, g | a = 6 | b = 15 | A = 8, B = 19 | s = 2",
+    "unresolved": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Predict (line 37)",
+    "text": "Eve has 8 and 19. Can she combine them into 2?",
+    "unresolved": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Line 39",
+    "text": "Multiplying fails: 8 × 19 mod 23 = 152 mod 23 = 14...",
+    "unresolved": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Why powers, and why mod, intro (line 43)",
+    "text": "Each choice blocks a simpler way for Eve to find a private number.",
+    "unresolved": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Bullet: Without mod (line 46)",
+    "text": "Without mod, A = 5^6 = 15625. Eve takes the logarithm base 5...",
+    "unresolved": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Bullet: multiplication instead of power (line 49)",
+    "text": "With multiplication instead of a power, A = 5 × 6 mod 23 = 7...",
+    "unresolved": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Bullet: powers mod p (line 50)",
+    "text": "With powers mod p, the results jump around...",
+    "unresolved": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Line 52",
+    "text": "So g^x mod p is a one-way operation... the discrete logarithm.",
+    "unresolved": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Why real numbers are huge, para 1 (line 56)",
+    "text": "With p = 23, Eve can try exponents in order...",
+    "unresolved": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Line 58",
+    "text": "Alice's own work stays small...",
+    "unresolved": [
+     "the arrow in \"25 → 2\" (it can be inferred to mean 'take the remainder mod 23')"
+    ],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Assumption, not proof (line 61)",
+    "text": "No one has proven that the discrete logarithm is hard...",
+    "unresolved": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "The limit, para 1 (line 66)",
+    "text": "The exchange stops a reader. It does not stop Mallory...",
+    "unresolved": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Mallory bullets (lines 68-69)",
+    "text": "Alice computes 10^6 mod 23 = 6... Bob computes 10^15 mod 23 = 5...",
+    "unresolved": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Line 71",
+    "text": "Alice shares 6 with Mallory, and Bob shares 5 with Mallory...",
+    "unresolved": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Answer (line 75)",
+    "text": "The two strangers never send the key...",
+    "unresolved": [],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Scope (lines 79-83)",
+    "text": "Authentication... Elliptic-curve... hash function... AES... Quantum computers",
+    "unresolved": [
+     "certificates",
+     "Elliptic-curve",
+     "hash function",
+     "AES",
+     "Post-quantum"
+    ],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   }
+  ],
+  "blocking": [
+   "Line 12, \"sends 5^6 mod 23 = 8\": 'mod' is used before line 16 defines it. The reader has to guess what the operation is right at the point where the explanation shows why one shared number fails. This is a mild block, since the point 'hard to reverse' still comes through."
+  ],
+  "cuts": [
+   "Swap lines 12 and 16: put the 'mod 23 means remainder' definition before the 'first idea fails' paragraph. This is a move rather than a cut, and it costs no words.",
+   "No real cuts are needed. Every paragraph serves the argument."
+  ],
+  "question": {
+   "text": "How can two parties who share only a public channel, one that an eavesdropper can read, end up with the same secret key?",
+   "known_at": "Title (line 1), with the setting made concrete at line 9",
+   "result_stated": "Yes, in words at line 3: \"They never send the key. Each person keeps a private number and sends a public number computed from it... no known fast method gets the private numbers back from them.\""
+  },
+  "motive": "Reason to care: \"A version of it starts most HTTPS connections.\" (line 5). Reason for the approach: \"A first idea fails... If Eve cannot get 6 back from 8, Bob cannot either. So each side needs its own private number.\" (line 12). Also \"Each choice blocks a simpler way for Eve to find a private number.\" (line 43), followed by the three bullets.",
+  "close": "Yes. Line 75 reads: \"Each sends g raised to a private number, mod p. Each raises the other's public number to their own private number, and both get g^(ab) mod p. Eve sees only g^a and g^b mod p. To get further, Eve must find a or b, and no fast method is known for a large p.\"",
+  "recap": "Each side sends 5 raised to a secret power, remainder 23. Each then raises the other's number to its own secret power, so both reach 5^(ab). Eve can't do this because getting the exponent back out of the remainder is believed to be infeasibly slow.",
+  "strongest": "'Why powers, and why mod' (lines 43-52). It rules out plain powers (logarithm) and multiplication (an inverse via Euclid) with concrete numbers, then shows the scrambled table of 5^x mod 23.",
+  "weakest": "Line 12. It uses 'mod' four lines before defining it, and 'one half of a calculation... the other side finishes it' stays abstract until the steps arrive.",
+  "suggestions": [
+   "Define 'mod' before line 12, or move the 'first idea fails' paragraph to after the definition.",
+   "Add a short clause saying why p is prime, for example so that the powers of g can cover many values.",
+   "Say in a few words that k in (x + 23k) is any whole number."
+  ]
+ },
+ "usage": {
+  "cost": 0.1372968,
+  "seconds": 43
+ },
+ "findings": [
+  {
+   "n": 1,
+   "severity": "blocking",
+   "kind": "blocking",
+   "text": "Line 12, \"sends 5^6 mod 23 = 8\": 'mod' is used before line 16 defines it. The reader has to guess what the operation is right at the point where the explanation shows why one shared number fails. This is a mild block, since the point 'hard to reverse' still comes through."
+  },
+  {
+   "n": 2,
+   "severity": "excess",
+   "kind": "cut",
+   "text": "Swap lines 12 and 16: put the 'mod 23 means remainder' definition before the 'first idea fails' paragraph. This is a move rather than a cut, and it costs no words."
+  },
+  {
+   "n": 3,
+   "severity": "excess",
+   "kind": "cut",
+   "text": "No real cuts are needed. Every paragraph serves the argument."
+  },
+  {
+   "n": 4,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "The problem, para 2 (line 12): mod (in \"5^6 mod 23 = 8\"; it is defined only at line 16)"
+  },
+  {
+   "n": 5,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "The problem, para 2 (line 12): \"Each side then does one half of a calculation, and the other side finishes it without undoing it\": what the 'halves' are stays unclear until the numbered steps"
+  },
+  {
+   "n": 6,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "Exchange, step 1 (line 19): Why p has to be prime is not said here (Scope later touches on choosing g, not p)"
+  },
+  {
+   "n": 7,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "Why both get 2 (line 26): k in \"(x + 23k) × y\" is not introduced (it can be inferred as 'some whole number')"
+  },
+  {
+   "n": 8,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "Line 58: the arrow in \"25 → 2\" (it can be inferred to mean 'take the remainder mod 23')"
+  },
+  {
+   "n": 9,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "Scope (lines 79-83): certificates"
+  },
+  {
+   "n": 10,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "Scope (lines 79-83): Elliptic-curve"
+  },
+  {
+   "n": 11,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "Scope (lines 79-83): hash function"
+  },
+  {
+   "n": 12,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "Scope (lines 79-83): AES"
+  },
+  {
+   "n": 13,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "Scope (lines 79-83): Post-quantum"
+  }
+ ]
+}

@@ -1,0 +1,12 @@
+{
+  "result": "I made `explainers/quorum/explanation.md`, plus `model.md` and `model.yaml` as its source of truth. I chose prose because the argument is a short chain (a quiet server might be cut off rather than crashed → any two deciding groups must share a server → you need a strict majority → failures you can survive = n − majority), and a table plus one numbered example of two clusters splitting carries it with no diagram or interactive page needed. I didn't run `explainer check` because I had no shell in this session.",
+  "error": null,
+  "cost": 0.18852040000000003,
+  "seconds": 52,
+  "turns": 4,
+  "files": [
+    "explainers/quorum/explanation.md"
+  ],
+  "review_cost": 0,
+  "reviews": 0
+}

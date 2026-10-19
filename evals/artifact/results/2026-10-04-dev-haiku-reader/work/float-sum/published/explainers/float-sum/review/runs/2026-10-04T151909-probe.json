@@ -1,0 +1,218 @@
+{
+ "tool": "probe",
+ "rendering": null,
+ "slug": "float-sum",
+ "at": "2026-10-04T15:19:09",
+ "model": "default",
+ "prompt_sha": "22368ea1ea35",
+ "reply": {
+  "gaps": [
+   {
+    "rule": 4,
+    "severity": "main",
+    "about": "The model gives the result of rounding 1/10 to 53 bits but never works through how the rounding is done.",
+    "why_it_matters": "The causal chain says '0.1, 0.2, 0.3 rounded to 53 bits' but never shows that step. Without it the long decimal expansions look like magic, and the reader cannot check where the +5.55e-18 error comes from.",
+    "suggested_addition": "Write each value as a whole number times a power of two. 0.1 × 2^55 = 3602879701896396.8, which rounds up to 3602879701896397, so stored 0.1 = 3602879701896397 / 2^55 with error +0.2/2^55 ≈ +5.55e-18. Stored 0.2 = 3602879701896397 / 2^54 (error +1.11e-17). 0.3 × 2^54 = 5404319552844595.2, which rounds down to 5404319552844595, so the error is −0.2/2^54 ≈ −1.11e-17."
+   },
+   {
+    "rule": 2,
+    "severity": "main",
+    "about": "The claim 'the errors do not cancel to the error of 0.3' (Dependency 4) leaves its key step implicit: why 0.1 and 0.2 round up while 0.3 rounds down.",
+    "why_it_matters": "This sign difference is the whole reason the sum and stored 0.3 end up on different doubles. The file lists the signed errors but never adds them up or explains the signs.",
+    "suggested_addition": "Add the errors explicitly: +5.55e-18 + 1.11e-17 = +1.665e-17, while stored 0.3 has error −1.11e-17. The fractional parts .8 (0.1) and .2 (0.3) from the scaling above explain the signs. Contrast: for 0.5 + 0.25 all three errors are 0."
+   },
+   {
+    "rule": 2,
+    "severity": "main",
+    "about": "The causal chain says 'exact sum slightly above 0.3 → rounded to the double above 0.3', which hides the tie.",
+    "why_it_matters": "Being above 0.3 does not decide the result. The exact sum 0.30000000000000001665 is exactly halfway between the two neighboring doubles, and only the tie rule picks the upper one. As written, the chain names the wrong reason.",
+    "suggested_addition": "Rewrite the chain step as: exact sum = lower neighbor + 2.776e-17 = exactly half a gap (5.55e-17 / 2) → tie → round half to even picks 0.30000000000000004440 (the significand ending ...334, which is even, over ...333)."
+   },
+   {
+    "rule": 4,
+    "severity": "main",
+    "about": "The printed value ('shortest decimal that rounds back') has no worked example.",
+    "why_it_matters": "Confusion point 2 depends on it. The reader needs to see why stored 0.1 prints as '0.1' but the sum needs 17 digits.",
+    "suggested_addition": "'0.1' rounds to the stored 0.1, so 1 digit is enough. For the sum, '0.3' rounds to 0.29999999999999998889 (the wrong double), and so does every shorter candidate up to 0.3000000000000000. The first decimal that maps to 0.30000000000000004440 is 0.30000000000000004 (17 significant digits)."
+   },
+   {
+    "rule": 4,
+    "severity": "edge",
+    "about": "The binary expansion of 1/10 is stated, not derived.",
+    "why_it_matters": "The audience does not know what a binary fraction is. A repeated-doubling example shows why the block 0011 repeats.",
+    "suggested_addition": "Double and take the integer part: 0.1→0.2 (0), 0.4 (0), 0.8 (0), 1.6 (1), 1.2 (1), 0.4 (0) ... The value 0.4 has come back, so the digits 0011 repeat forever: 0.0001100110011..."
+   },
+   {
+    "rule": 2,
+    "severity": "edge",
+    "about": "The claim 'only power-of-two denominators end in binary' has no instance where it holds and no argument.",
+    "why_it_matters": "It is the mathematical core of the explanation, and the reason (the factor 5) appears only in the causal chain.",
+    "suggested_addition": "Holds: 3/8 = 0.011 in binary (3 × 2^3 / 8 is a whole number). Breaks: 1/10 × 2^k = 2^k/10 = 2^(k−1)/5 is never a whole number, because no power of 2 is divisible by 5."
+   },
+   {
+    "rule": 1,
+    "severity": "edge",
+    "about": "The truncation row in 'Why this form' says 'with numbers' but gives none, and round half to even has no stated alternative.",
+    "why_it_matters": "The table promises numbers. The reader may also ask whether the tie rule is what causes the result.",
+    "suggested_addition": "Truncation: stored 0.1 would be 0.09999999999999999167. The sum still differs from stored 0.3 (it truncates to about 0.29999999999999993339), so truncation does not fix it. Round half up would also pick 0.30000000000000004 here. Half-to-even exists to avoid an upward bias across many ties, not to cause this result."
+   },
+   {
+    "rule": 2,
+    "severity": "edge",
+    "about": "'Whole numbers below 2^53 are exact' and 'same result on every IEEE 754 machine' have no instance where the assumption is removed.",
+    "why_it_matters": "Each guarantee needs a breaking case.",
+    "suggested_addition": "2^53 + 1 = 9007199254740993 is stored as 9007199254740992. Determinism can break with x87 80-bit intermediates or with compiler fast-math/FMA contraction."
+   },
+   {
+    "rule": 3,
+    "severity": "edge",
+    "about": "Several concepts have more than one name, and some terms are used without definition.",
+    "why_it_matters": "In the file 'sum' means the exact sum, the rounded sum, and 'a double'. 'Significant bits', '53 bits' and 'fixed number of digits' name one idea. 'Stored value' is also called 'the double'. 'Error' and 'relative error' are used but never defined. 'Significant bits' and 'tie' are missing from Terms.",
+    "suggested_addition": "Define error = stored value − written decimal (for example +5.55e-18 for 0.1). Fix the names 'exact sum' (0.30000000000000001665) and 'rounded sum' (0.30000000000000004440). Add 'significant bits (53)' and 'tie' to Terms."
+   },
+   {
+    "rule": 5,
+    "severity": "edge",
+    "about": "The signed errors and the relative error 1.9e-16 are not interpreted for the reader.",
+    "why_it_matters": "The reader should know what a + or − sign means, and that the difference only shows up around the 17th significant digit.",
+    "suggested_addition": "A + sign means the stored value is above the decimal. 1.9e-16 relative means the first 15 digits agree: 0.300000000000000 | 04, so you only see a difference in about the 17th digit."
+   },
+   {
+    "rule": 6,
+    "severity": "edge",
+    "about": "The file says 'most programming languages' and lists Java under printed value without qualification.",
+    "why_it_matters": "The reader will ask which languages differ. Java's Double.toString was not always shortest before JDK 19.",
+    "suggested_addition": "Note that languages with default decimal or rational literals (for example Raku: 0.1 + 0.2 == 0.3 is True) differ. Qualify the Java status."
+   }
+  ],
+  "excess": [
+   "Hex bit patterns (0x3FB999999999999A etc.) belong to L4 and are out of scope for this audience.",
+   "The full 55-digit exact expansions could be shortened to about 20 significant digits.",
+   "The list of decimal types in three languages (one example is enough).",
+   "Mention of Kahan summation."
+  ],
+  "next_questions": [
+   {
+    "q": "How exactly does 0.1 become 0.1000000000000000055511...? What are the 53 bits?",
+    "answered_by_model": false,
+    "declared_out_of_scope": false
+   },
+   {
+    "q": "Why do 0.1 and 0.2 round up while 0.3 rounds down?",
+    "answered_by_model": false,
+    "declared_out_of_scope": false
+   },
+   {
+    "q": "If 0.1 isn't stored exactly, why does print(0.1) show 0.1?",
+    "answered_by_model": true,
+    "declared_out_of_scope": false
+   },
+   {
+    "q": "How should I compare floats then, and what tolerance should I use?",
+    "answered_by_model": false,
+    "declared_out_of_scope": true
+   },
+   {
+    "q": "Does adding 0.1 ten times give exactly 1.0, and do errors grow in long sums?",
+    "answered_by_model": false,
+    "declared_out_of_scope": true
+   }
+  ]
+ },
+ "usage": {
+  "cost": 0.1529652,
+  "seconds": 57
+ },
+ "findings": [
+  {
+   "n": 1,
+   "severity": "main",
+   "kind": "rule 4",
+   "text": "The model gives the result of rounding 1/10 to 53 bits but never works through how the rounding is done. → Write each value as a whole number times a power of two. 0.1 × 2^55 = 3602879701896396.8, which rounds up to 3602879701896397, so stored 0.1 = 3602879701896397 / 2^55 with error +0.2/2^55 ≈ +5.55e-18. Stored 0.2 = 3602879701896397 / 2^54 (error +1.11e-17). 0.3 × 2^54 = 5404319552844595.2, which rounds down to 5404319552844595, so the error is −0.2/2^54 ≈ −1.11e-17."
+  },
+  {
+   "n": 2,
+   "severity": "main",
+   "kind": "rule 2",
+   "text": "The claim 'the errors do not cancel to the error of 0.3' (Dependency 4) leaves its key step implicit: why 0.1 and 0.2 round up while 0.3 rounds down. → Add the errors explicitly: +5.55e-18 + 1.11e-17 = +1.665e-17, while stored 0.3 has error −1.11e-17. The fractional parts .8 (0.1) and .2 (0.3) from the scaling above explain the signs. Contrast: for 0.5 + 0.25 all three errors are 0."
+  },
+  {
+   "n": 3,
+   "severity": "main",
+   "kind": "rule 2",
+   "text": "The causal chain says 'exact sum slightly above 0.3 → rounded to the double above 0.3', which hides the tie. → Rewrite the chain step as: exact sum = lower neighbor + 2.776e-17 = exactly half a gap (5.55e-17 / 2) → tie → round half to even picks 0.30000000000000004440 (the significand ending ...334, which is even, over ...333)."
+  },
+  {
+   "n": 4,
+   "severity": "main",
+   "kind": "rule 4",
+   "text": "The printed value ('shortest decimal that rounds back') has no worked example. → '0.1' rounds to the stored 0.1, so 1 digit is enough. For the sum, '0.3' rounds to 0.29999999999999998889 (the wrong double), and so does every shorter candidate up to 0.3000000000000000. The first decimal that maps to 0.30000000000000004440 is 0.30000000000000004 (17 significant digits)."
+  },
+  {
+   "n": 5,
+   "severity": "edge",
+   "kind": "rule 4",
+   "text": "The binary expansion of 1/10 is stated, not derived. → Double and take the integer part: 0.1→0.2 (0), 0.4 (0), 0.8 (0), 1.6 (1), 1.2 (1), 0.4 (0) ... The value 0.4 has come back, so the digits 0011 repeat forever: 0.0001100110011..."
+  },
+  {
+   "n": 6,
+   "severity": "edge",
+   "kind": "rule 2",
+   "text": "The claim 'only power-of-two denominators end in binary' has no instance where it holds and no argument. → Holds: 3/8 = 0.011 in binary (3 × 2^3 / 8 is a whole number). Breaks: 1/10 × 2^k = 2^k/10 = 2^(k−1)/5 is never a whole number, because no power of 2 is divisible by 5."
+  },
+  {
+   "n": 7,
+   "severity": "edge",
+   "kind": "rule 1",
+   "text": "The truncation row in 'Why this form' says 'with numbers' but gives none, and round half to even has no stated alternative. → Truncation: stored 0.1 would be 0.09999999999999999167. The sum still differs from stored 0.3 (it truncates to about 0.29999999999999993339), so truncation does not fix it. Round half up would also pick 0.30000000000000004 here. Half-to-even exists to avoid an upward bias across many ties, not to cause this result."
+  },
+  {
+   "n": 8,
+   "severity": "edge",
+   "kind": "rule 2",
+   "text": "'Whole numbers below 2^53 are exact' and 'same result on every IEEE 754 machine' have no instance where the assumption is removed. → 2^53 + 1 = 9007199254740993 is stored as 9007199254740992. Determinism can break with x87 80-bit intermediates or with compiler fast-math/FMA contraction."
+  },
+  {
+   "n": 9,
+   "severity": "edge",
+   "kind": "rule 3",
+   "text": "Several concepts have more than one name, and some terms are used without definition. → Define error = stored value − written decimal (for example +5.55e-18 for 0.1). Fix the names 'exact sum' (0.30000000000000001665) and 'rounded sum' (0.30000000000000004440). Add 'significant bits (53)' and 'tie' to Terms."
+  },
+  {
+   "n": 10,
+   "severity": "edge",
+   "kind": "rule 5",
+   "text": "The signed errors and the relative error 1.9e-16 are not interpreted for the reader. → A + sign means the stored value is above the decimal. 1.9e-16 relative means the first 15 digits agree: 0.300000000000000 | 04, so you only see a difference in about the 17th digit."
+  },
+  {
+   "n": 11,
+   "severity": "edge",
+   "kind": "rule 6",
+   "text": "The file says 'most programming languages' and lists Java under printed value without qualification. → Note that languages with default decimal or rational literals (for example Raku: 0.1 + 0.2 == 0.3 is True) differ. Qualify the Java status."
+  },
+  {
+   "n": 12,
+   "severity": "excess",
+   "kind": "model entry",
+   "text": "Hex bit patterns (0x3FB999999999999A etc.) belong to L4 and are out of scope for this audience."
+  },
+  {
+   "n": 13,
+   "severity": "excess",
+   "kind": "model entry",
+   "text": "The full 55-digit exact expansions could be shortened to about 20 significant digits."
+  },
+  {
+   "n": 14,
+   "severity": "excess",
+   "kind": "model entry",
+   "text": "The list of decimal types in three languages (one example is enough)."
+  },
+  {
+   "n": 15,
+   "severity": "excess",
+   "kind": "model entry",
+   "text": "Mention of Kahan summation."
+  }
+ ]
+}

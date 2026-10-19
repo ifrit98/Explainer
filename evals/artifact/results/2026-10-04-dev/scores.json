@@ -1,0 +1,1483 @@
+{
+  "none": {
+    "subjects": [
+      {
+        "id": "gps-relativity",
+        "raw": [
+          2,
+          2,
+          2,
+          2
+        ],
+        "score": [
+          2,
+          2,
+          2,
+          2
+        ],
+        "grounded": [
+          true,
+          true,
+          true,
+          true
+        ],
+        "predict": [
+          3
+        ],
+        "misconception": "absent",
+        "errors": [],
+        "stops": 9,
+        "excess": 5,
+        "words": 1500,
+        "forms": [
+          "prose"
+        ],
+        "rank": 4,
+        "cost": 0.17838859999999995,
+        "seconds": 57,
+        "failed": false
+      },
+      {
+        "id": "vaccine-memory",
+        "raw": [
+          2,
+          2,
+          2,
+          2
+        ],
+        "score": [
+          2,
+          2,
+          2,
+          2
+        ],
+        "grounded": [
+          true,
+          true,
+          true,
+          true
+        ],
+        "predict": [
+          3
+        ],
+        "misconception": "absent",
+        "errors": [
+          "Inactivated (e.g. many flu shots, polio IPV) | Whole pathogen, killed | Can't cause infection; usually needs adjuvant and boosters: most inactivated flu shots and IPV contain no adjuvant."
+        ],
+        "stops": 8,
+        "excess": 6,
+        "words": 1953,
+        "forms": [
+          "prose"
+        ],
+        "rank": 3,
+        "cost": 0.16533019999999998,
+        "seconds": 62,
+        "failed": false
+      },
+      {
+        "id": "key-exchange",
+        "raw": [
+          2,
+          2,
+          2,
+          2
+        ],
+        "score": [
+          2,
+          2,
+          2,
+          2
+        ],
+        "grounded": [
+          true,
+          true,
+          true,
+          true
+        ],
+        "predict": [
+          3
+        ],
+        "misconception": "corrected",
+        "errors": [],
+        "stops": 10,
+        "excess": 8,
+        "words": 1822,
+        "forms": [
+          "prose",
+          "html"
+        ],
+        "rank": 4,
+        "cost": 0.3186072,
+        "seconds": 96,
+        "failed": false
+      },
+      {
+        "id": "two-tides",
+        "raw": [
+          2,
+          2,
+          2,
+          2
+        ],
+        "score": [
+          2,
+          2,
+          2,
+          2
+        ],
+        "grounded": [
+          true,
+          true,
+          true,
+          true
+        ],
+        "predict": [
+          3
+        ],
+        "misconception": "absent",
+        "errors": [],
+        "stops": 10,
+        "excess": 5,
+        "words": 1929,
+        "forms": [
+          "prose",
+          "html"
+        ],
+        "rank": 2,
+        "cost": 0.4116578,
+        "seconds": 131,
+        "failed": false
+      },
+      {
+        "id": "bloom-filter",
+        "raw": [
+          2,
+          2,
+          2,
+          2
+        ],
+        "score": [
+          2,
+          2,
+          2,
+          2
+        ],
+        "grounded": [
+          true,
+          true,
+          true,
+          true
+        ],
+        "predict": [
+          3
+        ],
+        "misconception": "corrected",
+        "errors": [],
+        "stops": 8,
+        "excess": 6,
+        "words": 1439,
+        "forms": [
+          "html"
+        ],
+        "rank": 4,
+        "cost": 0.40253520000000004,
+        "seconds": 118,
+        "failed": false
+      },
+      {
+        "id": "heat-pump",
+        "raw": [
+          2,
+          2,
+          2,
+          2
+        ],
+        "score": [
+          2,
+          2,
+          2,
+          2
+        ],
+        "grounded": [
+          true,
+          true,
+          true,
+          true
+        ],
+        "predict": [
+          3
+        ],
+        "misconception": "corrected",
+        "errors": [
+          "absolute zero, where molecular motion stops",
+          "the loop diagram routes the compressor's output down to the expansion valve and the condenser's output to the compressor, which contradicts the text order evaporator → compressor → condenser → valve"
+        ],
+        "stops": 9,
+        "excess": 7,
+        "words": 1339,
+        "forms": [
+          "prose"
+        ],
+        "rank": 2,
+        "cost": 0.1563,
+        "seconds": 49,
+        "failed": false
+      },
+      {
+        "id": "quorum",
+        "raw": [
+          2,
+          2,
+          2,
+          2
+        ],
+        "score": [
+          2,
+          2,
+          2,
+          2
+        ],
+        "grounded": [
+          true,
+          true,
+          true,
+          true
+        ],
+        "predict": [
+          3
+        ],
+        "misconception": "corrected",
+        "errors": [],
+        "stops": 7,
+        "excess": 4,
+        "words": 1072,
+        "forms": [
+          "prose"
+        ],
+        "rank": 4,
+        "cost": 0.0993212,
+        "seconds": 32,
+        "failed": false
+      },
+      {
+        "id": "antibiotic-resistance",
+        "raw": [
+          2,
+          2,
+          2,
+          2
+        ],
+        "score": [
+          2,
+          2,
+          2,
+          2
+        ],
+        "grounded": [
+          true,
+          true,
+          true,
+          true
+        ],
+        "predict": [
+          3
+        ],
+        "misconception": "corrected",
+        "errors": [],
+        "stops": 10,
+        "excess": 6,
+        "words": 2511,
+        "forms": [
+          "prose",
+          "html"
+        ],
+        "rank": 4,
+        "cost": 0.502619,
+        "seconds": 162,
+        "failed": false
+      },
+      {
+        "id": "float-sum",
+        "raw": [
+          2,
+          2,
+          2,
+          2
+        ],
+        "score": [
+          2,
+          2,
+          2,
+          2
+        ],
+        "grounded": [
+          true,
+          true,
+          true,
+          true
+        ],
+        "predict": [
+          3
+        ],
+        "misconception": "corrected",
+        "errors": [
+          "The digits after the point (the *significand*) get a fixed budget: **53 significant binary digits**."
+        ],
+        "stops": 7,
+        "excess": 6,
+        "words": 1056,
+        "forms": [
+          "prose"
+        ],
+        "rank": 2,
+        "cost": 0.1607036,
+        "seconds": 49,
+        "failed": false
+      },
+      {
+        "id": "greenhouse",
+        "raw": [
+          2,
+          2,
+          2,
+          2
+        ],
+        "score": [
+          2,
+          2,
+          2,
+          2
+        ],
+        "grounded": [
+          true,
+          true,
+          true,
+          true
+        ],
+        "predict": [
+          3
+        ],
+        "misconception": "corrected",
+        "errors": [],
+        "stops": 9,
+        "excess": 7,
+        "words": 2271,
+        "forms": [
+          "prose",
+          "html"
+        ],
+        "rank": 2,
+        "cost": 0.3816954,
+        "seconds": 124,
+        "failed": false
+      }
+    ]
+  },
+  "principles": {
+    "subjects": [
+      {
+        "id": "gps-relativity",
+        "raw": [
+          2,
+          2,
+          2,
+          2
+        ],
+        "score": [
+          2,
+          2,
+          2,
+          2
+        ],
+        "grounded": [
+          true,
+          true,
+          true,
+          true
+        ],
+        "predict": [
+          3
+        ],
+        "misconception": "corrected",
+        "errors": [],
+        "stops": 8,
+        "excess": 5,
+        "words": 1158,
+        "forms": [
+          "prose"
+        ],
+        "rank": 2,
+        "cost": 0.28801780000000005,
+        "seconds": 89,
+        "failed": false
+      },
+      {
+        "id": "vaccine-memory",
+        "raw": [
+          2,
+          2,
+          2,
+          2
+        ],
+        "score": [
+          2,
+          2,
+          2,
+          2
+        ],
+        "grounded": [
+          true,
+          true,
+          true,
+          true
+        ],
+        "predict": [
+          3
+        ],
+        "misconception": "absent",
+        "errors": [
+          "Across the body's hundreds of billions of lymphocytes, the library contains millions of different shapes: this understates the repertoire, which is on the order of 10^8 or more distinct receptors."
+        ],
+        "stops": 9,
+        "excess": 5,
+        "words": 1067,
+        "forms": [
+          "prose"
+        ],
+        "rank": 2,
+        "cost": 0.2302082,
+        "seconds": 68,
+        "failed": false
+      },
+      {
+        "id": "key-exchange",
+        "raw": [
+          2,
+          2,
+          2,
+          2
+        ],
+        "score": [
+          2,
+          2,
+          2,
+          2
+        ],
+        "grounded": [
+          true,
+          true,
+          true,
+          true
+        ],
+        "predict": [
+          3
+        ],
+        "misconception": "absent",
+        "errors": [],
+        "stops": 8,
+        "excess": 4,
+        "words": 931,
+        "forms": [
+          "prose"
+        ],
+        "rank": 2,
+        "cost": 0.16838920000000002,
+        "seconds": 43,
+        "failed": false
+      },
+      {
+        "id": "two-tides",
+        "raw": [
+          2,
+          2,
+          2,
+          2
+        ],
+        "score": [
+          2,
+          2,
+          2,
+          2
+        ],
+        "grounded": [
+          true,
+          true,
+          true,
+          true
+        ],
+        "predict": [
+          3
+        ],
+        "misconception": "corrected",
+        "errors": [],
+        "stops": 9,
+        "excess": 3,
+        "words": 884,
+        "forms": [
+          "prose"
+        ],
+        "rank": 1,
+        "cost": 0.1563002,
+        "seconds": 42,
+        "failed": false
+      },
+      {
+        "id": "bloom-filter",
+        "raw": [
+          2,
+          2,
+          2,
+          2
+        ],
+        "score": [
+          2,
+          2,
+          2,
+          2
+        ],
+        "grounded": [
+          true,
+          true,
+          true,
+          true
+        ],
+        "predict": [
+          3
+        ],
+        "misconception": "corrected",
+        "errors": [],
+        "stops": 6,
+        "excess": 3,
+        "words": 1083,
+        "forms": [
+          "prose"
+        ],
+        "rank": 2,
+        "cost": 0.1830298,
+        "seconds": 48,
+        "failed": false
+      },
+      {
+        "id": "heat-pump",
+        "raw": [
+          2,
+          2,
+          2,
+          1
+        ],
+        "score": [
+          2,
+          2,
+          2,
+          1
+        ],
+        "grounded": [
+          true,
+          true,
+          true,
+          true
+        ],
+        "predict": [
+          3
+        ],
+        "misconception": "corrected",
+        "errors": [],
+        "stops": 8,
+        "excess": 5,
+        "words": 784,
+        "forms": [
+          "prose"
+        ],
+        "rank": 3,
+        "cost": 0.2534982,
+        "seconds": 67,
+        "failed": false
+      },
+      {
+        "id": "quorum",
+        "raw": [
+          2,
+          2,
+          2,
+          2
+        ],
+        "score": [
+          2,
+          2,
+          2,
+          2
+        ],
+        "grounded": [
+          true,
+          true,
+          true,
+          true
+        ],
+        "predict": [
+          3
+        ],
+        "misconception": "corrected",
+        "errors": [],
+        "stops": 6,
+        "excess": 4,
+        "words": 777,
+        "forms": [
+          "prose"
+        ],
+        "rank": 2,
+        "cost": 0.18852040000000003,
+        "seconds": 52,
+        "failed": false
+      },
+      {
+        "id": "antibiotic-resistance",
+        "raw": [
+          2,
+          2,
+          2,
+          2
+        ],
+        "score": [
+          2,
+          2,
+          2,
+          2
+        ],
+        "grounded": [
+          true,
+          true,
+          true,
+          true
+        ],
+        "predict": [
+          3
+        ],
+        "misconception": "corrected",
+        "errors": [],
+        "stops": 8,
+        "excess": 4,
+        "words": 1194,
+        "forms": [
+          "prose"
+        ],
+        "rank": 2,
+        "cost": 0.1721862,
+        "seconds": 49,
+        "failed": false
+      },
+      {
+        "id": "float-sum",
+        "raw": [
+          2,
+          2,
+          2,
+          2
+        ],
+        "score": [
+          2,
+          2,
+          2,
+          2
+        ],
+        "grounded": [
+          true,
+          true,
+          true,
+          true
+        ],
+        "predict": [
+          3
+        ],
+        "misconception": "corrected",
+        "errors": [],
+        "stops": 7,
+        "excess": 4,
+        "words": 661,
+        "forms": [
+          "prose"
+        ],
+        "rank": 1,
+        "cost": 0.2104636,
+        "seconds": 55,
+        "failed": false
+      },
+      {
+        "id": "greenhouse",
+        "raw": [
+          2,
+          2,
+          2,
+          2
+        ],
+        "score": [
+          2,
+          2,
+          2,
+          2
+        ],
+        "grounded": [
+          true,
+          true,
+          true,
+          true
+        ],
+        "predict": [
+          3
+        ],
+        "misconception": "absent",
+        "errors": [],
+        "stops": 8,
+        "excess": 6,
+        "words": 1522,
+        "forms": [
+          "prose"
+        ],
+        "rank": 1,
+        "cost": 0.29882359999999997,
+        "seconds": 89,
+        "failed": false
+      }
+    ]
+  },
+  "quick": {
+    "subjects": [
+      {
+        "id": "gps-relativity",
+        "raw": [
+          2,
+          2,
+          2,
+          2
+        ],
+        "score": [
+          2,
+          2,
+          2,
+          2
+        ],
+        "grounded": [
+          true,
+          true,
+          true,
+          true
+        ],
+        "predict": [
+          3
+        ],
+        "misconception": "absent",
+        "errors": [
+          "Three spheres meet at a point. (Three spheres generally meet at two points; the receiver discards one of them.)"
+        ],
+        "stops": 6,
+        "excess": 5,
+        "words": 676,
+        "forms": [
+          "prose"
+        ],
+        "rank": 3,
+        "cost": 0.44009420000000005,
+        "seconds": 91,
+        "failed": false
+      },
+      {
+        "id": "vaccine-memory",
+        "raw": [
+          1,
+          2,
+          2,
+          2
+        ],
+        "score": [
+          1,
+          2,
+          2,
+          2
+        ],
+        "grounded": [
+          true,
+          true,
+          true,
+          true
+        ],
+        "predict": [
+          3
+        ],
+        "misconception": "absent",
+        "errors": [],
+        "stops": 9,
+        "excess": 5,
+        "words": 600,
+        "forms": [
+          "prose"
+        ],
+        "rank": 4,
+        "cost": 0.4694588000000001,
+        "seconds": 94,
+        "failed": false
+      },
+      {
+        "id": "key-exchange",
+        "raw": [
+          2,
+          2,
+          2,
+          2
+        ],
+        "score": [
+          2,
+          2,
+          2,
+          2
+        ],
+        "grounded": [
+          true,
+          true,
+          true,
+          true
+        ],
+        "predict": [
+          3
+        ],
+        "misconception": "absent",
+        "errors": [
+          "\"19 = 5^15 and 8 = 5^6\" (these hold only mod 23, not as plain equalities)"
+        ],
+        "stops": 6,
+        "excess": 3,
+        "words": 506,
+        "forms": [
+          "prose"
+        ],
+        "rank": 1,
+        "cost": 0.36011959999999993,
+        "seconds": 80,
+        "failed": false
+      },
+      {
+        "id": "two-tides",
+        "raw": [
+          2,
+          2,
+          0,
+          2
+        ],
+        "score": [
+          2,
+          2,
+          0,
+          2
+        ],
+        "grounded": [
+          true,
+          true,
+          false,
+          true
+        ],
+        "predict": [
+          3
+        ],
+        "misconception": "absent",
+        "errors": [],
+        "stops": 7,
+        "excess": 4,
+        "words": 599,
+        "forms": [
+          "prose"
+        ],
+        "rank": 4,
+        "cost": 0.5251108,
+        "seconds": 114,
+        "failed": false
+      },
+      {
+        "id": "bloom-filter",
+        "raw": [
+          2,
+          2,
+          2,
+          2
+        ],
+        "score": [
+          2,
+          2,
+          2,
+          2
+        ],
+        "grounded": [
+          true,
+          true,
+          true,
+          true
+        ],
+        "predict": [
+          3
+        ],
+        "misconception": "corrected",
+        "errors": [],
+        "stops": 5,
+        "excess": 1,
+        "words": 599,
+        "forms": [
+          "prose"
+        ],
+        "rank": 3,
+        "cost": 0.5246917999999999,
+        "seconds": 99,
+        "failed": false
+      },
+      {
+        "id": "heat-pump",
+        "raw": [
+          2,
+          2,
+          2,
+          1
+        ],
+        "score": [
+          2,
+          2,
+          2,
+          1
+        ],
+        "grounded": [
+          true,
+          true,
+          true,
+          true
+        ],
+        "predict": [
+          3
+        ],
+        "misconception": "corrected",
+        "errors": [],
+        "stops": 8,
+        "excess": 5,
+        "words": 814,
+        "forms": [
+          "diagram"
+        ],
+        "rank": 4,
+        "cost": 0.47279319999999997,
+        "seconds": 98,
+        "failed": false
+      },
+      {
+        "id": "quorum",
+        "raw": [
+          2,
+          2,
+          2,
+          2
+        ],
+        "score": [
+          2,
+          2,
+          2,
+          2
+        ],
+        "grounded": [
+          true,
+          true,
+          true,
+          true
+        ],
+        "predict": [
+          3
+        ],
+        "misconception": "corrected",
+        "errors": [],
+        "stops": 7,
+        "excess": 3,
+        "words": 502,
+        "forms": [
+          "prose"
+        ],
+        "rank": 1,
+        "cost": 0.41601699999999997,
+        "seconds": 71,
+        "failed": false
+      },
+      {
+        "id": "antibiotic-resistance",
+        "raw": [
+          2,
+          2,
+          2,
+          2
+        ],
+        "score": [
+          2,
+          2,
+          2,
+          2
+        ],
+        "grounded": [
+          true,
+          true,
+          true,
+          true
+        ],
+        "predict": [
+          3
+        ],
+        "misconception": "corrected",
+        "errors": [
+          "Then every cell would have the same chance to survive. Instead, a rare fraction survives, and those cells were resistant before they met the drug.",
+          "Change the target | The target protein changes shape, so the drug cannot bind | MRSA makes a cell-wall enzyme that penicillin-type drugs do not bind"
+        ],
+        "stops": 7,
+        "excess": 3,
+        "words": 600,
+        "forms": [
+          "prose"
+        ],
+        "rank": 3,
+        "cost": 0.430636,
+        "seconds": 104,
+        "failed": false
+      },
+      {
+        "id": "float-sum",
+        "raw": [
+          2,
+          2,
+          2,
+          2
+        ],
+        "score": [
+          2,
+          2,
+          2,
+          2
+        ],
+        "grounded": [
+          true,
+          true,
+          true,
+          true
+        ],
+        "predict": [
+          3
+        ],
+        "misconception": "corrected",
+        "errors": [],
+        "stops": 7,
+        "excess": 4,
+        "words": 412,
+        "forms": [
+          "prose"
+        ],
+        "rank": 3,
+        "cost": 0.4691284,
+        "seconds": 83,
+        "failed": false
+      },
+      {
+        "id": "greenhouse",
+        "raw": [
+          2,
+          2,
+          2,
+          2
+        ],
+        "score": [
+          2,
+          2,
+          2,
+          2
+        ],
+        "grounded": [
+          true,
+          true,
+          true,
+          true
+        ],
+        "predict": [
+          3
+        ],
+        "misconception": "absent",
+        "errors": [
+          "\"the infrared escapes to space only from high, cold air, about 5 km up\" (overstated: through the 8–13 µm window much surface infrared escapes directly, and the text never mentions this)",
+          "\"The new emitting air is 1 K colder... The surface... warms by the same amount: about 1.2 K before feedbacks\" (inconsistent: the 1 K drop it just derived implies about 1 K of warming, and the 1.2 K figure is given without its source)"
+        ],
+        "stops": 9,
+        "excess": 5,
+        "words": 749,
+        "forms": [
+          "diagram"
+        ],
+        "rank": 3,
+        "cost": 0.507285,
+        "seconds": 120,
+        "failed": false
+      }
+    ]
+  },
+  "published": {
+    "subjects": [
+      {
+        "id": "gps-relativity",
+        "raw": [
+          2,
+          2,
+          2,
+          2
+        ],
+        "score": [
+          2,
+          2,
+          2,
+          2
+        ],
+        "grounded": [
+          true,
+          true,
+          true,
+          true
+        ],
+        "predict": [
+          3
+        ],
+        "misconception": "corrected",
+        "errors": [],
+        "stops": 8,
+        "excess": 7,
+        "words": 999,
+        "forms": [
+          "prose"
+        ],
+        "rank": 1,
+        "cost": 2.1912534,
+        "seconds": 567,
+        "failed": false
+      },
+      {
+        "id": "vaccine-memory",
+        "raw": [
+          2,
+          2,
+          2,
+          2
+        ],
+        "score": [
+          2,
+          2,
+          2,
+          2
+        ],
+        "grounded": [
+          true,
+          true,
+          true,
+          true
+        ],
+        "predict": [
+          3
+        ],
+        "misconception": "absent",
+        "errors": [],
+        "stops": 9,
+        "excess": 5,
+        "words": 992,
+        "forms": [
+          "prose"
+        ],
+        "rank": 1,
+        "cost": 2.1222304000000003,
+        "seconds": 543,
+        "failed": false
+      },
+      {
+        "id": "key-exchange",
+        "raw": [
+          2,
+          2,
+          2,
+          2
+        ],
+        "score": [
+          2,
+          2,
+          2,
+          2
+        ],
+        "grounded": [
+          true,
+          true,
+          true,
+          true
+        ],
+        "predict": [
+          3
+        ],
+        "misconception": "absent",
+        "errors": [],
+        "stops": 7,
+        "excess": 5,
+        "words": 1086,
+        "forms": [
+          "prose"
+        ],
+        "rank": 3,
+        "cost": 4.4839193999999996,
+        "seconds": 1162,
+        "failed": false
+      },
+      {
+        "id": "two-tides",
+        "raw": [
+          2,
+          2,
+          0,
+          2
+        ],
+        "score": [
+          2,
+          2,
+          0,
+          2
+        ],
+        "grounded": [
+          true,
+          true,
+          false,
+          true
+        ],
+        "predict": [
+          3
+        ],
+        "misconception": "corrected",
+        "errors": [],
+        "stops": 9,
+        "excess": 6,
+        "words": 948,
+        "forms": [
+          "prose"
+        ],
+        "rank": 3,
+        "cost": 2.838019,
+        "seconds": 705,
+        "failed": false
+      },
+      {
+        "id": "bloom-filter",
+        "raw": [
+          2,
+          2,
+          2,
+          2
+        ],
+        "score": [
+          2,
+          2,
+          2,
+          2
+        ],
+        "grounded": [
+          true,
+          true,
+          true,
+          true
+        ],
+        "predict": [
+          3
+        ],
+        "misconception": "corrected",
+        "errors": [],
+        "stops": 8,
+        "excess": 5,
+        "words": 1059,
+        "forms": [
+          "prose"
+        ],
+        "rank": 1,
+        "cost": 2.3029966,
+        "seconds": 553,
+        "failed": false
+      },
+      {
+        "id": "heat-pump",
+        "raw": [
+          2,
+          2,
+          2,
+          2
+        ],
+        "score": [
+          2,
+          2,
+          2,
+          2
+        ],
+        "grounded": [
+          true,
+          true,
+          true,
+          true
+        ],
+        "predict": [
+          3
+        ],
+        "misconception": "corrected",
+        "errors": [],
+        "stops": 8,
+        "excess": 5,
+        "words": 1437,
+        "forms": [
+          "diagram"
+        ],
+        "rank": 1,
+        "cost": 3.399423,
+        "seconds": 845,
+        "failed": false
+      },
+      {
+        "id": "quorum",
+        "raw": [
+          2,
+          2,
+          2,
+          2
+        ],
+        "score": [
+          2,
+          2,
+          2,
+          2
+        ],
+        "grounded": [
+          true,
+          true,
+          true,
+          true
+        ],
+        "predict": [
+          3
+        ],
+        "misconception": "corrected",
+        "errors": [],
+        "stops": 8,
+        "excess": 3,
+        "words": 896,
+        "forms": [
+          "prose"
+        ],
+        "rank": 3,
+        "cost": 2.3876656,
+        "seconds": 589,
+        "failed": false
+      },
+      {
+        "id": "antibiotic-resistance",
+        "raw": [
+          2,
+          2,
+          2,
+          2
+        ],
+        "score": [
+          2,
+          2,
+          2,
+          2
+        ],
+        "grounded": [
+          true,
+          true,
+          true,
+          true
+        ],
+        "predict": [
+          3
+        ],
+        "misconception": "corrected",
+        "errors": [],
+        "stops": 8,
+        "excess": 6,
+        "words": 949,
+        "forms": [
+          "prose"
+        ],
+        "rank": 1,
+        "cost": 2.7889748,
+        "seconds": 686,
+        "failed": false
+      },
+      {
+        "id": "float-sum",
+        "raw": [
+          2,
+          2,
+          2,
+          2
+        ],
+        "score": [
+          2,
+          2,
+          2,
+          2
+        ],
+        "grounded": [
+          true,
+          true,
+          true,
+          true
+        ],
+        "predict": [
+          3
+        ],
+        "misconception": "corrected",
+        "errors": [
+          "The other 11 bits hold the sign and the power."
+        ],
+        "stops": 6,
+        "excess": 4,
+        "words": 721,
+        "forms": [
+          "prose"
+        ],
+        "rank": 4,
+        "cost": 2.377155,
+        "seconds": 607,
+        "failed": false
+      },
+      {
+        "id": "greenhouse",
+        "raw": [
+          2,
+          2,
+          0,
+          2
+        ],
+        "score": [
+          2,
+          2,
+          0,
+          2
+        ],
+        "grounded": [
+          true,
+          true,
+          true,
+          true
+        ],
+        "predict": [
+          3
+        ],
+        "misconception": "absent",
+        "errors": [],
+        "stops": 8,
+        "excess": 4,
+        "words": 1072,
+        "forms": [
+          "prose"
+        ],
+        "rank": 4,
+        "cost": 3.234709,
+        "seconds": 804,
+        "failed": false
+      }
+    ]
+  }
+}

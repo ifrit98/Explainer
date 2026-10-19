@@ -1,0 +1,414 @@
+{
+ "tool": "coldread",
+ "rendering": "narrative",
+ "slug": "float-sum",
+ "at": "2026-10-04T15:21:28",
+ "model": "default",
+ "prompt_sha": "cce588df23ed",
+ "reply": {
+  "beats": [
+   {
+    "at": "Beat 1 (hook)",
+    "text": "Shown: `0.1 + 0.2 == 0.3` → false; prints 0.30000000000000004. Said: The answer in three sentences.",
+    "unresolved": [
+     "The answer in three sentences."
+    ],
+    "unsaid": [],
+    "leap": [
+     "The 'Said' cell describes the narration instead of giving it. The reader never hears the three sentences, so the promised result is not delivered here."
+    ],
+    "excess": [
+     "prints 0.30000000000000004: the reader has already seen or heard of this. It works as a hook, but it tells them nothing new."
+    ],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Beat 2 (instance)",
+    "text": "Shown: 0.75 = 3 × 2^-2. Said: A double is a whole number (53 bits) times a power of two.",
+    "unresolved": [
+     "double",
+     "(53 bits)"
+    ],
+    "unsaid": [
+     "The example does not connect 0.75 to 'double'. The words do not say that 3 is the 'whole number' and 2^-2 is the 'power of two'."
+    ],
+    "leap": [
+     "The beat does not say why a float is stored this way, or that a double is what the computer holds for `0.1`. 'Double' is never tied to the code in Beat 1.",
+     "The beat does not say what the 53-bit limit means in practice: that the whole number must be below 2^53."
+    ],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Beat 3 (mechanism)",
+    "text": "Shown: 1/3 = 0.3333… in decimal; 1/10 = 0.000110011… in binary. Said: Only power-of-two denominators end; 10 has a factor 5.",
+    "unresolved": [
+     "end (meaning: the binary expansion terminates)"
+    ],
+    "unsaid": [
+     "The beat never says aloud that 1/10 repeats forever in binary, the way 1/3 does in decimal. The analogy is shown but not spoken."
+    ],
+    "leap": [
+     "The beat does not explicitly link a non-ending binary fraction to 'cannot be a whole number times a power of two, so it must be rounded'. The words never say the conclusion, 'must be rounded'."
+    ],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Beat 4 (mechanism)",
+    "text": "Shown: table: exact and stored values in u; errors. Said: 0.1 and 0.2 round up, 0.3 rounds down.",
+    "unresolved": [
+     "u",
+     "stored values",
+     "errors (sign convention)"
+    ],
+    "unsaid": [
+     "The table's unit u is never defined in the words: not what it is, and not that it equals 2^-54.",
+     "The table's columns (exact, stored, error) are not walked through in the words.",
+     "The words never say what 'round up/down' is measured against: the nearest double."
+    ],
+    "leap": [
+     "The beat does not say why the stored value is the nearest one, or that neighboring doubles are spaced one gap apart.",
+     "The beat does not say why 0.1 rounds up and 0.3 rounds down. The reader has to take it from the table."
+    ],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Beat 5 (mechanism)",
+    "text": "Shown: …198.5 + …397 = …595.5 → …596. Said: Exact sum is a tie; it rounds to the even neighbor, one gap above stored 0.3.",
+    "unresolved": [
+     "…198.5 / …397 / …595.5 / …596 (the truncated digits and their units)",
+     "tie",
+     "even neighbor"
+    ],
+    "unsaid": [
+     "The words do not say that these numbers are counts of u, or that …595 is stored 0.3.",
+     "The beat does not say why stored 0.1 can be a half-u (…198.5) when doubles were described as whole numbers. The explanation never says that the gap is smaller near 0.1."
+    ],
+    "leap": [
+     "The beat does not give a reason for the rule that ties go to the even neighbor.",
+     "The beat does not explain why the sum is rounded at all: that the result of + is itself rounded to a double."
+    ],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Beat 6 (objection)",
+    "text": "Shown: \"0.1\" vs \"0.30000000000000004\". Said: Printing shows the shortest decimal that picks out the double.",
+    "unresolved": [
+     "picks out the double"
+    ],
+    "unsaid": [],
+    "leap": [
+     "The beat does not explain why 0.30000000000000004 is the shortest decimal for …596 u. The reader needs to know that '0.3' would pick out …595 instead, and the beat does not say so."
+    ],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Beat 7 (test)",
+    "text": "Shown: 0.5 + 0.25 == 0.75 → true; Decimal('0.1') + Decimal('0.2') == Decimal('0.3') → true. Said: Exact when denominators are powers of two, or when the base is 10.",
+    "unresolved": [
+     "Decimal('0.1')",
+     "the base is 10"
+    ],
+    "unsaid": [
+     "The beat never says that Decimal is a type that stores numbers in base 10."
+    ],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   },
+   {
+    "at": "Beat 8 (close)",
+    "text": "Shown: `abs(a - b) < 1e-9`; integer cents; Decimal. Said: Compare with a tolerance, or avoid binary for decimal money.",
+    "unresolved": [
+     "tolerance"
+    ],
+    "unsaid": [
+     "The beat does not say why the threshold is 1e-9.",
+     "The words do not explain 'integer cents'."
+    ],
+    "leap": [],
+    "excess": [],
+    "purpose_unclear": false
+   }
+  ],
+  "blocking": [
+   "Beat 1: 'The answer in three sentences.' The beat describes the narration instead of giving it, so the reader never actually receives the result.",
+   "Beat 4: 'u' is used in the table but never defined in the words. Everything numeric after this depends on it.",
+   "Beat 5: '…198.5 + …397 = …595.5 → …596'. The truncated numbers in u are not explained, and the half-u for 0.1 contradicts 'whole number times a power of two' from Beat 2.",
+   "Beat 5: 'tie' and 'even neighbor' are not introduced. This is the step that decides the result.",
+   "Beat 2: 'double' is never tied to what Python or JavaScript stores for `0.1`."
+  ],
+  "cuts": [
+   "Beat 1's re-display of 0.30000000000000004 could be shortened, since the reader already knows it. This is a minor saving.",
+   "Beat 8: the three fixes could be reduced to one sentence. The integer-cents detail is not needed for the argument."
+  ],
+  "question": {
+   "text": "Why does `0.1 + 0.2 == 0.3` evaluate to false?",
+   "known_at": "Beat 1",
+   "result_stated": "Not in words. Beat 1 says only 'The answer in three sentences.' Pieces show up later: Beat 4 says '0.1 and 0.2 round up, 0.3 rounds down', and Beat 5 says 'one gap above stored 0.3'. The result is never stated as a whole."
+  },
+  "motive": "Reason to care: missing from the beats. Beat 8's 'avoid binary for decimal money' hints at it only at the very end. Reason for the approach: missing. Beat 2's question, 'What does the computer hold?', appears only in the Reader's-question column, not in what is Said.",
+  "close": "No. Beat 8 gives fixes ('Compare with a tolerance, or avoid binary for decimal money') but does not restate the answer to the opening question. The general argument, that any decimal whose denominator has a factor 5 gets rounded and that sums of rounded numbers can land on a different neighbor, is never said in the beats.",
+  "recap": "0.1, 0.2 and 0.3 can't be stored exactly in binary, so the computer adds two slightly-high approximations, and the result rounds to the double just above the one it uses for 0.3.",
+  "strongest": "Beat 3: the parallel between 1/3 = 0.3333… in decimal and 1/10 = 0.000110011… in binary, plus '10 has a factor 5'. It is clear and fits what this reader already knows.",
+  "weakest": "Beat 5: the elided '…' numbers in an undefined unit u, a half-unit value, and an unexplained tie rule all arrive in the single step that delivers the answer.",
+  "suggestions": [
+   "Write the actual three sentences in Beat 1's Said column.",
+   "Define u in Beat 4's words: the gap between neighboring doubles near 0.3, equal to 2^-54.",
+   "Explain that the gap is smaller near 0.1, which is why it can sit on a half-u, or express each value in its own gap.",
+   "Say in Beat 5 that + rounds its exact result to the nearest double, and give a one-line reason for round-half-to-even.",
+   "Add a sentence early on about why to care, such as prices, loops, or tests.",
+   "End Beat 8 by restating the answer and the general rule about factors of 5 before giving the fixes."
+  ]
+ },
+ "usage": {
+  "cost": 0.0989208,
+  "seconds": 33
+ },
+ "findings": [
+  {
+   "n": 1,
+   "severity": "blocking",
+   "kind": "blocking",
+   "text": "Beat 1: 'The answer in three sentences.' The beat describes the narration instead of giving it, so the reader never actually receives the result."
+  },
+  {
+   "n": 2,
+   "severity": "blocking",
+   "kind": "blocking",
+   "text": "Beat 4: 'u' is used in the table but never defined in the words. Everything numeric after this depends on it."
+  },
+  {
+   "n": 3,
+   "severity": "blocking",
+   "kind": "blocking",
+   "text": "Beat 5: '…198.5 + …397 = …595.5 → …596'. The truncated numbers in u are not explained, and the half-u for 0.1 contradicts 'whole number times a power of two' from Beat 2."
+  },
+  {
+   "n": 4,
+   "severity": "blocking",
+   "kind": "blocking",
+   "text": "Beat 5: 'tie' and 'even neighbor' are not introduced. This is the step that decides the result."
+  },
+  {
+   "n": 5,
+   "severity": "blocking",
+   "kind": "blocking",
+   "text": "Beat 2: 'double' is never tied to what Python or JavaScript stores for `0.1`."
+  },
+  {
+   "n": 6,
+   "severity": "excess",
+   "kind": "cut",
+   "text": "Beat 1's re-display of 0.30000000000000004 could be shortened, since the reader already knows it. This is a minor saving."
+  },
+  {
+   "n": 7,
+   "severity": "excess",
+   "kind": "cut",
+   "text": "Beat 8: the three fixes could be reduced to one sentence. The integer-cents detail is not needed for the argument."
+  },
+  {
+   "n": 8,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "Beat 1 (hook): The answer in three sentences."
+  },
+  {
+   "n": 9,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "Beat 1 (hook): The 'Said' cell describes the narration instead of giving it. The reader never hears the three sentences, so the promised result is not delivered here."
+  },
+  {
+   "n": 10,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "Beat 2 (instance): double"
+  },
+  {
+   "n": 11,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "Beat 2 (instance): (53 bits)"
+  },
+  {
+   "n": 12,
+   "severity": "edge",
+   "kind": "unsaid",
+   "text": "Beat 2 (instance): The example does not connect 0.75 to 'double'. The words do not say that 3 is the 'whole number' and 2^-2 is the 'power of two'."
+  },
+  {
+   "n": 13,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "Beat 2 (instance): The beat does not say why a float is stored this way, or that a double is what the computer holds for `0.1`. 'Double' is never tied to the code in Beat 1."
+  },
+  {
+   "n": 14,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "Beat 2 (instance): The beat does not say what the 53-bit limit means in practice: that the whole number must be below 2^53."
+  },
+  {
+   "n": 15,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "Beat 3 (mechanism): end (meaning: the binary expansion terminates)"
+  },
+  {
+   "n": 16,
+   "severity": "edge",
+   "kind": "unsaid",
+   "text": "Beat 3 (mechanism): The beat never says aloud that 1/10 repeats forever in binary, the way 1/3 does in decimal. The analogy is shown but not spoken."
+  },
+  {
+   "n": 17,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "Beat 3 (mechanism): The beat does not explicitly link a non-ending binary fraction to 'cannot be a whole number times a power of two, so it must be rounded'. The words never say the conclusion, 'must be rounded'."
+  },
+  {
+   "n": 18,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "Beat 4 (mechanism): u"
+  },
+  {
+   "n": 19,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "Beat 4 (mechanism): stored values"
+  },
+  {
+   "n": 20,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "Beat 4 (mechanism): errors (sign convention)"
+  },
+  {
+   "n": 21,
+   "severity": "edge",
+   "kind": "unsaid",
+   "text": "Beat 4 (mechanism): The table's unit u is never defined in the words: not what it is, and not that it equals 2^-54."
+  },
+  {
+   "n": 22,
+   "severity": "edge",
+   "kind": "unsaid",
+   "text": "Beat 4 (mechanism): The table's columns (exact, stored, error) are not walked through in the words."
+  },
+  {
+   "n": 23,
+   "severity": "edge",
+   "kind": "unsaid",
+   "text": "Beat 4 (mechanism): The words never say what 'round up/down' is measured against: the nearest double."
+  },
+  {
+   "n": 24,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "Beat 4 (mechanism): The beat does not say why the stored value is the nearest one, or that neighboring doubles are spaced one gap apart."
+  },
+  {
+   "n": 25,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "Beat 4 (mechanism): The beat does not say why 0.1 rounds up and 0.3 rounds down. The reader has to take it from the table."
+  },
+  {
+   "n": 26,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "Beat 5 (mechanism): …198.5 / …397 / …595.5 / …596 (the truncated digits and their units)"
+  },
+  {
+   "n": 27,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "Beat 5 (mechanism): tie"
+  },
+  {
+   "n": 28,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "Beat 5 (mechanism): even neighbor"
+  },
+  {
+   "n": 29,
+   "severity": "edge",
+   "kind": "unsaid",
+   "text": "Beat 5 (mechanism): The words do not say that these numbers are counts of u, or that …595 is stored 0.3."
+  },
+  {
+   "n": 30,
+   "severity": "edge",
+   "kind": "unsaid",
+   "text": "Beat 5 (mechanism): The beat does not say why stored 0.1 can be a half-u (…198.5) when doubles were described as whole numbers. The explanation never says that the gap is smaller near 0.1."
+  },
+  {
+   "n": 31,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "Beat 5 (mechanism): The beat does not give a reason for the rule that ties go to the even neighbor."
+  },
+  {
+   "n": 32,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "Beat 5 (mechanism): The beat does not explain why the sum is rounded at all: that the result of + is itself rounded to a double."
+  },
+  {
+   "n": 33,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "Beat 6 (objection): picks out the double"
+  },
+  {
+   "n": 34,
+   "severity": "edge",
+   "kind": "leap",
+   "text": "Beat 6 (objection): The beat does not explain why 0.30000000000000004 is the shortest decimal for …596 u. The reader needs to know that '0.3' would pick out …595 instead, and the beat does not say so."
+  },
+  {
+   "n": 35,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "Beat 7 (test): Decimal('0.1')"
+  },
+  {
+   "n": 36,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "Beat 7 (test): the base is 10"
+  },
+  {
+   "n": 37,
+   "severity": "edge",
+   "kind": "unsaid",
+   "text": "Beat 7 (test): The beat never says that Decimal is a type that stores numbers in base 10."
+  },
+  {
+   "n": 38,
+   "severity": "edge",
+   "kind": "unresolved",
+   "text": "Beat 8 (close): tolerance"
+  },
+  {
+   "n": 39,
+   "severity": "edge",
+   "kind": "unsaid",
+   "text": "Beat 8 (close): The beat does not say why the threshold is 1e-9."
+  },
+  {
+   "n": 40,
+   "severity": "edge",
+   "kind": "unsaid",
+   "text": "Beat 8 (close): The words do not explain 'integer cents'."
+  }
+ ]
+}
