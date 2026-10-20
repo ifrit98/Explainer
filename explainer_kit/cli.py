@@ -225,7 +225,7 @@ def cmd_eval(args) -> None:
         print(f"targets   {verdicts.count('pass')} pass, {verdicts.count('fail')} fail   {display(path)}")
         return
     default = {"chat": ["none", "v0.5=git:v0.5.0", "v0.6=principles"],
-               "artifact": ["none", "principles", "quick", "published"]}[args.suite]
+               "artifact": ["none", "principles", "quick", "published"]}.get(args.suite, [])
     conditions = dict(c.split("=", 1) if "=" in c else (c, c) for c in (args.conditions or default))
     if args.suite == "chat":
         from explainer_kit.evals import run
@@ -233,12 +233,20 @@ def cmd_eval(args) -> None:
         out = Path(args.out) if args.out else project_root() / "evals" / "chat" / "results" / date.today().isoformat()
         run(conditions, out, model=args.model, workers=args.workers)
         return
-    from explainer_kit.artifact_eval import run
+    from explainer_kit import artifact_eval, rederive
 
-    out = Path(args.out) if args.out else (project_root() / "evals" / "artifact" / "results"
-                                           / f"{date.today().isoformat()}-{args.split}")
-    run(conditions, out, split=args.split, only=args.only, model=args.model, workers=args.workers,
-        reader_model=args.reader_model)
+    results = project_root() / "evals" / "artifact" / "results"
+    stage = dict(split=args.split, only=args.only, model=args.model, reader_model=args.reader_model,
+                 workers=args.workers)
+    if args.suite == "rederive":
+        if not args.builds:
+            raise SystemExit("eval rederive needs --builds <an artifact run folder>")
+        out = Path(args.out) if args.out else results / f"{date.today().isoformat()}-{args.split}-rederive"
+        rederive.run(out, Path(args.builds), **stage)
+        return
+    out = Path(args.out) if args.out else results / f"{date.today().isoformat()}-{args.split}"
+    artifact_eval.run(conditions, out, **stage)
+    rederive.run(out, out, **stage)
 
 
 def cmd_frames(args) -> None:
@@ -347,9 +355,11 @@ def main() -> None:
     p.set_defaults(fn=cmd_decide)
 
     p = sub.add_parser("eval", help="chat: answers under several system prompts; artifact: explainers built under "
-                                     "several conditions, read and graded blind; targets: check the rederivation "
-                                     "targets")
-    p.add_argument("suite", choices=["chat", "artifact", "targets"])
+                                     "several conditions, read and graded blind (then the rederivation stage); "
+                                     "targets: check the rederivation targets; rederive: the rederivation stage on "
+                                     "an earlier artifact run's builds")
+    p.add_argument("suite", choices=["chat", "artifact", "targets", "rederive"])
+    p.add_argument("--builds", help="rederive: the artifact run folder whose builds are read (it is not changed)")
     p.add_argument("--conditions", nargs="+",
                    help="name=source; source is none, principles, git:<rev>, or a file; for artifact also quick or "
                         "published (the explain skill at that tier). Default: chat none v0.5 v0.6; artifact none "

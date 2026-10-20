@@ -17,14 +17,19 @@ from __future__ import annotations
 
 import hashlib
 import json
+import os
+import random
 import re
 import shutil
 import tempfile
+from concurrent.futures import ThreadPoolExecutor
+from datetime import date
 from pathlib import Path
 
 from explainer_kit import agent
 from explainer_kit import artifact_eval as ae
-from explainer_kit.paths import project_root
+from explainer_kit.evals import words
+from explainer_kit.paths import display, project_root
 
 KINDS = ("block", "derived")
 MARKS = ("supported", "unsupported", "missing", "stated")
@@ -306,3 +311,119 @@ def grade_subject(subject: dict, key: dict[str, str], reader: str, builds: Path,
     saved.parent.mkdir(parents=True, exist_ok=True)
     saved.write_text(json.dumps(result, indent=2, ensure_ascii=False))
     return result
+
+
+# ---------------------------------------------------------------- run and report
+
+def run(out: Path, builds: Path, split: str = "dev", only: list[str] | None = None, model: str | None = None,
+        reader_model: str | None = None, workers: int = 4, passes: int = 3) -> Path:
+    """Reads and grades the builds in `builds` (an artifact run folder, only read) into `out`."""
+    reader, subjects = ae.load(split, only)
+    subjects = [s for s in subjects if s.get("rederive")]
+    if not subjects:
+        raise SystemExit(f"no subjects with a rederivation target for split {split!r}" + (f" and ids {only}" if only else ""))
+    names = list(json.loads((builds / "conditions.json").read_text()))
+    stage = out / "rederive"
+    stage.mkdir(parents=True, exist_ok=True)
+    # The targets this folder ran, so a rerun after a target changed cannot mix two versions in one folder.
+    snapshot, targets = stage / "targets.json", {s["id"]: s["rederive"] for s in subjects}
+    if snapshot.exists():
+        before = json.loads(snapshot.read_text())
+        changed = sorted(i for i in targets if i in before and before[i] != targets[i])
+        if changed:
+            raise SystemExit(f"targets changed since this run: {', '.join(changed)}")
+        targets = {**before, **targets}
+    snapshot.write_text(json.dumps(dict(sorted(targets.items())), indent=2, ensure_ascii=False) + "\n")
+    source = os.path.relpath(builds.resolve(), out.resolve())
+    (stage / "source.json").write_text(json.dumps({"builds": source}) + "\n")
+
+    def read_job(job):
+        k, s, n = job
+        r = read_chain(s, n, reader, builds, out, k, reader_model or model)
+        print(f"read    pass {k}  {s['id']:22} {n:12} {len(r['steps'])} steps{'  gap' if r['gap'] else ''}"
+              f"{'  NO EXPLANATION' if r.get('missing') else ''}", flush=True)
+
+    ks = range(1, passes + 1)
+    with ThreadPoolExecutor(workers) as pool:
+        list(pool.map(read_job, [(k, s, n) for k in ks for s in subjects for n in names]))
+    keys = {}
+    for k in ks:
+        rng = random.Random(k)
+        for s in subjects:
+            labels = list(names)
+            rng.shuffle(labels)
+            keys[k, s["id"]] = {chr(ord("A") + i): n for i, n in enumerate(labels)}
+    with ThreadPoolExecutor(workers) as pool:
+        futures = {(k, s["id"]): pool.submit(grade_subject, s, keys[k, s["id"]], reader, builds, out, k, model)
+                   for k in ks for s in subjects}
+        grades = {key: f.result() for key, f in futures.items()}
+    report = out / "rederive.md"
+    report.write_text(summary(names, subjects, builds, out, grades, passes, split, source, model, reader_model))
+    print(f"\nreport  {display(report)}")
+    return report
+
+
+def summary(names: list[str], subjects: list[dict], builds: Path, out: Path, grades: dict, passes: int, split: str,
+            source: str, model: str | None, reader_model: str | None) -> str:
+    ks = range(1, passes + 1)
+    tallies = {k: {n: [] for n in names} for k in ks}
+    for k in ks:
+        for s in subjects:
+            kinds = [step["kind"] for step in s["rederive"]["steps"]]
+            for n in names:
+                g = grades[k, s["id"]]["grades"][n]
+                tallies[k][n].append(tally(g["marks"], kinds, g["result_right"], g["result_stated"]))
+    scores = [pass_scores(tallies[k]) for k in ks]
+    seps = separations(scores)
+    (out / "rederive-scores.json").write_text(json.dumps(
+        {"passes": scores, "tallies": {str(k): v for k, v in tallies.items()}, "separations": [list(p) for p in seps]},
+        indent=2, ensure_ascii=False) + "\n")
+    pct = lambda x: "–" if x is None else f"{x:.0%}"  # noqa: E731
+    ids = {s["id"] for s in subjects}
+    quiz_file = builds / "scores.json"
+    quiz = json.loads(quiz_file.read_text()) if quiz_file.exists() else {}
+
+    def quiz_share(n: str) -> str:
+        per = [p for p in quiz.get(n, {}).get("subjects", []) if p["id"] in ids]
+        full = sum(2 * len(p["raw"]) for p in per)
+        return f"{sum(sum(p['score']) for p in per) / full:.0%}" if full else "–"
+
+    def mean_words(n: str) -> str:
+        counts = [sum(words(ae.visible(f)) for f in ae.renderings(builds / "work" / s["id"] / n, s["id"])) for s in subjects]
+        return f"{sum(counts) / len(counts):.0f}"
+
+    head = ["condition", "supported", "raw", "result right", "stated steps", "stated results", "words", "quiz (grounded)"]
+    table = ["| " + " | ".join(head) + " |", "|" + "---|" * len(head)]
+    for n in names:
+        table.append("| " + " | ".join([
+            n,
+            ", ".join(pct(sc[n]["supported"]) for sc in scores),
+            ", ".join(pct(sc[n]["raw"]) for sc in scores),
+            ", ".join(pct(sc[n]["result"]) for sc in scores),
+            ", ".join(str(sum(t["stated"] for t in tallies[k][n])) for k in ks),
+            ", ".join(str(sum(t["results_stated"] for t in tallies[k][n])) for k in ks),
+            mean_words(n),
+            quiz_share(n),
+        ]) + " |")
+    rule = "in all three passes" if passes == 3 else f"in all {passes} passes"
+    sep = ", ".join(f"{a} > {b}" for a, b in seps) or "none"
+    lines = [
+        f"# Rederivation, {date.today().isoformat()} ({split}, {len(subjects)} subjects)", "",
+        f"Builds: `{source}`. Reader and grader: fresh `claude -p`{f' --model {model}' if model else ''} agents"
+        f"{f' (reader: --model {reader_model})' if reader_model else ''}. The reader saw only the renderings and the "
+        "target's question; the grader saw each subject's explanations and the readers' working under shuffled "
+        f"labels. {passes} passes: each a fresh reader run over every build, graded once under its own shuffle.", "",
+        *table, "",
+        f"Separation (higher supported score {rule}): {sep}.", "",
+        "Each cell lists the passes in order. Supported: the share of expected steps the reader made and grounded in a "
+        "part of the explanation it named (or in background this reader has); raw: the share made at all; result "
+        "right: the share of results that match. Stated steps and stated results: derived steps and results the "
+        "explanation states outright, left out of the shares above. Words: visible words per explanation. Quiz: the "
+        "grounded quiz score of the same builds.", "",
+        "## Per subject (supported/counted steps, per pass)", "",
+        "| subject | " + " | ".join(names) + " |", "|---|" + "---|" * len(names),
+    ]
+    for i, s in enumerate(subjects):
+        cells = [", ".join(f"{tallies[k][n][i]['supported']}/{tallies[k][n][i]['counted']}" for k in ks) for n in names]
+        lines.append(f"| {s['id']} | " + " | ".join(cells) + " |")
+    return "\n".join(lines) + "\n"

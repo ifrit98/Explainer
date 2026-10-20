@@ -2,6 +2,8 @@
 
 import hashlib
 import json
+import re
+import sys
 from pathlib import Path
 
 import pytest
@@ -249,3 +251,98 @@ def test_grade_subject_maps_labels_back_and_fills_missing(monkeypatch, tmp_path)
     assert (out / "rederive" / "pass-1" / "grades" / "s1.json").exists()
     rederive.grade_subject(s, {"A": "b", "B": "a"}, "A reader.", builds, out, 1, None)
     assert len(calls) == 1
+
+
+ROOT = Path(__file__).resolve().parent.parent
+
+
+def run_fixture(monkeypatch, tmp_path):
+    """One subject, two conditions (a: ALPHA, b: BETA), a stub reader, and a grader that supports every step of the
+    ALPHA explanation and none of the other. Returns builds, out, and the list of calls."""
+    monkeypatch.setattr(ae, "questions_file", lambda: subjects_file(tmp_path, {"s1": target()}))
+    builds = builds_folder(tmp_path)
+    (builds / "conditions.json").write_text(json.dumps({"a": "none", "b": "quick"}))
+    (builds / "scores.json").write_text(json.dumps({
+        "a": {"subjects": [{"id": "s1", "score": [2, 2, 1, 2], "raw": [2, 2, 2, 2]}]},
+        "b": {"subjects": [{"id": "s1", "score": [1, 0, 0, 0], "raw": [1, 0, 2, 0]}]}}))
+    calls = []
+
+    def ask(system, prompt, model=None, **kw):
+        calls.append(system)
+        if system == ae.READER_SYSTEM:
+            return json.dumps(CHAIN)
+        blocks = dict(re.findall(r"=== Explanation (\w) ===\n(.*?)(?==== Explanation|\Z)", prompt, re.S))
+        return json.dumps({"grades": {lab: {"marks": ["supported" if "ALPHA" in b else "missing"] * 3,
+                                            "result_right": "ALPHA" in b, "result_stated": False}
+                                      for lab, b in blocks.items()}})
+
+    monkeypatch.setattr(agent, "ask", ask)
+    return builds, tmp_path / "out", calls
+
+
+def test_run_end_to_end(monkeypatch, tmp_path):
+    builds, out, calls = run_fixture(monkeypatch, tmp_path)
+    report = rederive.run(out, builds).read_text()
+    assert calls.count(ae.READER_SYSTEM) == 3 * 2 and calls.count(ae.GRADER_SYSTEM) == 3
+    assert ("| condition | supported | raw | result right | stated steps | stated results | words | quiz (grounded) |"
+            in report)
+    assert "| a | 100%, 100%, 100% | 100%, 100%, 100% |" in report
+    assert "| b | 0%, 0%, 0% | 0%, 0%, 0% |" in report
+    assert "Separation (higher supported score in all three passes): a > b." in report
+    assert "| s1 | 3/3, 3/3, 3/3 | 0/3, 0/3, 0/3 |" in report
+    scores = json.loads((out / "rederive-scores.json").read_text())
+    assert scores["separations"] == [["a", "b"]] and len(scores["passes"]) == 3
+
+
+def test_rerun_makes_no_calls(monkeypatch, tmp_path):
+    builds, out, calls = run_fixture(monkeypatch, tmp_path)
+    first = rederive.run(out, builds).read_text()
+    calls.clear()
+    assert rederive.run(out, builds).read_text() == first and calls == []
+
+
+def test_rerun_refuses_changed_targets(monkeypatch, tmp_path):
+    builds, out, _ = run_fixture(monkeypatch, tmp_path)
+    rederive.run(out, builds)
+    monkeypatch.setattr(ae, "questions_file", lambda: subjects_file(tmp_path, {"s1": target(result="Four.")}))
+    with pytest.raises(SystemExit, match="targets changed since this run: s1"):
+        rederive.run(out, builds)
+
+
+def test_outputs_hold_no_absolute_paths(monkeypatch, tmp_path):
+    builds, out, _ = run_fixture(monkeypatch, tmp_path)
+    rederive.run(out, builds)
+    leaks = [p for p in out.rglob("*") if p.is_file() and str(tmp_path) in p.read_text()]
+    assert not leaks, leaks
+    assert json.loads((out / "rederive" / "source.json").read_text()) == {"builds": "../builds"}
+
+
+def test_builds_folder_is_untouched(monkeypatch, tmp_path):
+    builds, out, _ = run_fixture(monkeypatch, tmp_path)
+    before = tree(builds)
+    rederive.run(out, builds)
+    assert tree(builds) == before
+
+
+def test_frozen_targets_match_every_results_folder():
+    # A results folder records the targets it ran; they must still be the targets in questions.yaml (the freeze).
+    current = {s["id"]: s.get("rederive") for s in ae.load("all")[1]}
+    for snap in (ROOT / "evals" / "artifact" / "results").glob("*/rederive/targets.json"):
+        for sid, t in json.loads(snap.read_text()).items():
+            assert current.get(sid) == t, f"{snap.parent.parent.name}: the target for {sid} changed after the run"
+
+
+def test_cli_rederive_and_artifact_call_the_stage(monkeypatch, tmp_path):
+    from explainer_kit import cli
+
+    seen = []
+    monkeypatch.setattr(rederive, "run", lambda out, builds, **kw: seen.append(("rederive", out, builds)))
+    monkeypatch.setattr(ae, "run", lambda conditions, out, **kw: seen.append(("artifact", out)))
+    b, o = tmp_path / "b", tmp_path / "o"
+    monkeypatch.setattr(sys, "argv", ["explainer", "eval", "rederive", "--builds", str(b), "--out", str(o)])
+    cli.main()
+    assert seen == [("rederive", o, b)]
+    seen.clear()
+    monkeypatch.setattr(sys, "argv", ["explainer", "eval", "artifact", "--out", str(o)])
+    cli.main()
+    assert seen == [("artifact", o), ("rederive", o, o)]
