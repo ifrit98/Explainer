@@ -19,6 +19,7 @@ uv run explainer coldread <slug> --run        # first-viewing read by a fresh ag
 uv run explainer findings --stats             # how many review findings authors adopt, per tool
 uv run explainer eval chat                    # chat answers under each system prompt, graded blind
 uv run explainer eval artifact --split dev    # held-out subjects built under each condition, read and graded blind
+uv run explainer eval rederive --builds <run> # a fresh reader works out a result each explanation never states, graded blind
 uv run explainer render <slug> --draft        # fast silent layout pass
 uv run pytest -q                              # toolkit tests
 ```

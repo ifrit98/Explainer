@@ -1,0 +1,226 @@
+{
+  "antibiotic-resistance": {
+    "q": "In an infection of 10^10 bacteria, one in 10^8 resists drug A and one in 10^9 resists drug B, by unrelated mutations. Why is giving both drugs together much less likely to end with a resistant infection than giving either alone?",
+    "steps": [
+      {
+        "kind": "block",
+        "text": "Resistance comes from random mutations that already exist before the drug is used."
+      },
+      {
+        "kind": "block",
+        "text": "A drug kills the susceptible bacteria, and the resistant ones survive and multiply (selection)."
+      },
+      {
+        "kind": "derived",
+        "text": "With unrelated mutations, a bacterium resists both with probability about 10^-8 × 10^-9 = 10^-17."
+      },
+      {
+        "kind": "derived",
+        "text": "The infection holds about 100 cells resistant to A and about 10 resistant to B, which either drug alone would select, but expects only 10^10 × 10^-17 = 10^-7 cells resistant to both, so with both drugs there is almost surely nothing to select."
+      }
+    ],
+    "result": "About 100 A-resistant and 10 B-resistant cells are present, which either drug alone would select, but a double-resistant cell has a probability of about 10^-17 each, so the infection almost surely holds none and the combination leaves no survivors to multiply."
+  },
+  "bloom-filter": {
+    "q": "Two Bloom filters have the same size and the same hash functions; one was built from a set A and the other from a set B. How can you get a filter for A ∪ B without the items, and is it exact? What does a bitwise AND of the two give?",
+    "steps": [
+      {
+        "kind": "block",
+        "text": "Adding an item sets the k bits its hash functions choose to 1, and bits are never cleared."
+      },
+      {
+        "kind": "derived",
+        "text": "So a bit in a filter is 1 exactly when at least one added item chose it."
+      },
+      {
+        "kind": "derived",
+        "text": "The items of A ∪ B choose exactly the bits chosen by A's items or by B's items, so OR-ing the two arrays gives the same bits as building the filter from A ∪ B: exact."
+      },
+      {
+        "kind": "derived",
+        "text": "AND keeps a bit that one item of A and a different item of B both chose, even when no item in both sets chose it; every item in both sets still has all its bits set, so AND gives a filter for A ∩ B with no false negatives but possibly extra 1s."
+      }
+    ],
+    "result": "OR the bit arrays: the result is exactly the filter built from A ∪ B. AND gives a filter for A ∩ B that never misses a common item but can have extra 1s, so more false positives than one built from A ∩ B."
+  },
+  "float-sum": {
+    "q": "Which of these can a double store exactly: 0.375, 0.2, 0.0625, 0.3? And why does adding 0.125 eight times give exactly 1.0, while adding 0.1 ten times does not?",
+    "steps": [
+      {
+        "kind": "block",
+        "text": "Floating-point numbers are binary fractions: a value is stored exactly only if it is a fraction whose denominator is a power of 2 (within the available digits)."
+      },
+      {
+        "kind": "block",
+        "text": "0.1 has no finite binary expansion, so it is stored as the nearest double, with a small error."
+      },
+      {
+        "kind": "derived",
+        "text": "0.375 = 3/8 and 0.0625 = 1/16 have power-of-2 denominators and are exact; 0.2 = 1/5 and 0.3 = 3/10 have a factor of 5 in the denominator and are not."
+      },
+      {
+        "kind": "derived",
+        "text": "0.125 = 1/8 and every sum of eighths up to 1 is exact, so eight additions give exactly 1.0; the stored 0.1 carries an error, and the additions round again, so ten of them do not land exactly on 1.0."
+      }
+    ],
+    "result": "Exact: 0.375 and 0.0625; not exact: 0.2 and 0.3. Eighths add exactly to 1.0, but ten copies of the inexact 0.1 sum to a nearby double (0.9999999999999999), not 1.0."
+  },
+  "gps-relativity": {
+    "q": "A receiver's own clock is right, but one of the four satellites it uses has a clock 10 nanoseconds fast that nothing corrects. Roughly how wrong is the distance to that satellite, and why can the receiver's fourth unknown not absorb this error the way it absorbs its own clock error?",
+    "steps": [
+      {
+        "kind": "block",
+        "text": "The receiver turns each signal's travel time into a distance: distance = speed of light × travel time, where the travel time is the arrival time minus the send time stamped in the signal."
+      },
+      {
+        "kind": "block",
+        "text": "The receiver's own clock error is a fourth unknown, solved for together with the three coordinates from four distances."
+      },
+      {
+        "kind": "derived",
+        "text": "A satellite clock 10 ns fast stamps its signal 10 ns too late, so that travel time comes out 10 ns short and that one distance about 3 m short (3×10^8 m/s × 10^-8 s)."
+      },
+      {
+        "kind": "derived",
+        "text": "An error in the receiver's clock shifts every distance by the same amount; an error in one satellite's distance alone does not have that form, so solving for the clock error cannot remove it, and it moves the computed position."
+      }
+    ],
+    "result": "About 3 m, in that one distance only; the clock unknown can absorb only an error shared by all the distances, so this one shifts the position fix."
+  },
+  "greenhouse": {
+    "q": "Suppose the atmosphere had the same temperature at every height. What would adding CO2 then do to the surface temperature, and why?",
+    "steps": [
+      {
+        "kind": "block",
+        "text": "The Earth radiates to space from the height at which infrared can escape, and adding CO2 raises that height."
+      },
+      {
+        "kind": "block",
+        "text": "Higher air is normally colder and radiates less, so raising the emission height makes the Earth give off less than it takes in until the surface and lower air warm."
+      },
+      {
+        "kind": "derived",
+        "text": "If temperature did not fall with height, the new emission height would be as warm as the old one, so the Earth would give off as much as before."
+      },
+      {
+        "kind": "derived",
+        "text": "With no imbalance between what comes in and what goes out, nothing would have to warm: adding CO2 would not warm the surface."
+      }
+    ],
+    "result": "Nothing: with no drop in temperature with height, raising the emission height does not reduce the outgoing radiation, so there is no imbalance and no warming."
+  },
+  "heat-pump": {
+    "q": "The same machine run in reverse is an air conditioner: it takes heat from the cold inside and gives it to the warm outside. What is its ideal limit on heat removed per unit of electricity, and why is it exactly one less than the heating limit for the same two temperatures?",
+    "steps": [
+      {
+        "kind": "block",
+        "text": "Energy is conserved: the heat given off on the warm side = the heat taken from the cold side + the electrical work."
+      },
+      {
+        "kind": "block",
+        "text": "The ideal heating limit is COP = T_hot ÷ (T_hot − T_cold), in kelvin."
+      },
+      {
+        "kind": "derived",
+        "text": "The heat taken from the cold side is the heat given off minus the work, so the heat removed per unit of work is the heating COP minus 1."
+      },
+      {
+        "kind": "derived",
+        "text": "T_hot ÷ (T_hot − T_cold) − 1 = T_cold ÷ (T_hot − T_cold)."
+      }
+    ],
+    "result": "COP_cooling = T_cold ÷ (T_hot − T_cold), exactly one less than the heating limit, because the work ends up in the heat given off but not in the heat removed."
+  },
+  "key-exchange": {
+    "q": "Three people, Alice, Bob, and Carol, want one shared secret key, using the same public p and g and sending only messages anyone can read. How can they do it, and why does an eavesdropper still not get the key?",
+    "steps": [
+      {
+        "kind": "block",
+        "text": "Each person keeps a secret exponent and can raise any number they receive to it, mod p."
+      },
+      {
+        "kind": "block",
+        "text": "Exponents multiply and their order does not matter: (g^a)^b = (g^b)^a = g^(ab) mod p."
+      },
+      {
+        "kind": "block",
+        "text": "Recovering an exponent from g^x mod p (the discrete logarithm) is infeasible for large p."
+      },
+      {
+        "kind": "derived",
+        "text": "So the key can be g^(abc): each person needs g raised to the product of the other two secrets, which can be built by passing values around (Alice sends g^a to Bob, who sends g^(ab) to Carol, and likewise from each starting person), and then raises it to their own secret."
+      },
+      {
+        "kind": "derived",
+        "text": "The eavesdropper sees only values like g^a and g^(ab); getting g^(abc) needs one of the secret exponents, which means solving a discrete logarithm."
+      }
+    ],
+    "result": "Each computes g^(abc) mod p by raising a public value g^(product of the other two secrets), built by passing values around, to their own secret; the eavesdropper sees only values like g^a and g^(ab), and undoing them needs a discrete logarithm."
+  },
+  "quorum": {
+    "q": "A five-server store uses a write group of W servers and a read group of R servers, not necessarily majorities. What must W and R satisfy for every read to see the latest committed write, and with W = 4 and R = 2, how many failures can writes and reads each survive?",
+    "steps": [
+      {
+        "kind": "block",
+        "text": "A write is committed when a group of servers acknowledges it."
+      },
+      {
+        "kind": "block",
+        "text": "Majorities are used because any two majorities share at least one server, so the next group always sees every committed write."
+      },
+      {
+        "kind": "derived",
+        "text": "What matters is the overlap: a read group of R and a write group of W among N servers must share a server whenever R + W > N."
+      },
+      {
+        "kind": "derived",
+        "text": "With N = 5, W = 4, R = 2: 4 + 2 > 5, so every read sees the latest write; writes need 4 of 5 servers and survive 1 failure, reads need 2 and survive 3."
+      }
+    ],
+    "result": "R + W > N (here R + W > 5); with W = 4 and R = 2, every read overlaps every write, writes survive 1 failure, and reads survive 3."
+  },
+  "two-tides": {
+    "q": "At first and third quarter Moon, the Sun and Moon are at right angles as seen from Earth. How large are the tides then, compared with spring tides?",
+    "steps": [
+      {
+        "kind": "block",
+        "text": "Each body stretches the oceans along the line toward it, raising water at both ends of that line and lowering it in between."
+      },
+      {
+        "kind": "block",
+        "text": "The Sun's tidal effect is about half the Moon's; at new and full Moon the two lie in line and their effects add."
+      },
+      {
+        "kind": "derived",
+        "text": "At right angles, the Sun's stretch raises water where the Moon's lowers it, so the two effects work against each other."
+      },
+      {
+        "kind": "derived",
+        "text": "The range is then about 1 − ½ of the Moon's alone, against 1 + ½ at spring tide: about a third of a spring tide's range."
+      }
+    ],
+    "result": "Smallest (neap) tides, with a range of about (1 − ½) ÷ (1 + ½) ≈ one third of a spring tide's, because the Sun's stretch works against the Moon's."
+  },
+  "vaccine-memory": {
+    "q": "In a simple model, the immune cells that match an antigen double every 12 hours until there are enough to clear the infection. Vaccination leaves 1,000 times more matching cells than a first infection starts with. About how much sooner does the response reach full strength, and why does the answer not depend on how many cells count as 'enough'?",
+    "steps": [
+      {
+        "kind": "block",
+        "text": "A first response starts from few matching cells and must select and multiply them, which takes one to two weeks."
+      },
+      {
+        "kind": "block",
+        "text": "After vaccination, memory cells specific to that antigen remain, so the response starts from many more matching cells."
+      },
+      {
+        "kind": "derived",
+        "text": "Starting with 1,000 times more cells saves the doublings needed to grow 1,000-fold: about 10 doublings, since 2^10 ≈ 1,000."
+      },
+      {
+        "kind": "derived",
+        "text": "Ten doublings at 12 hours each is about 5 days; each start needs log2(enough ÷ start) doublings, so the difference between the two starts is log2(1,000) whatever 'enough' is."
+      }
+    ],
+    "result": "About 5 days sooner (about 10 doublings saved); the saving is the same whatever number of cells counts as enough."
+  }
+}

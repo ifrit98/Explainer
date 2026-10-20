@@ -1,0 +1,36 @@
+{
+  "steps": [
+    {
+      "step": "An air conditioner is the same machine doing the same job: heat goes in at the cold side (the evaporator) and comes out at the hot side (the condenser), with electricity driving the compressor. Only the useful output is different.",
+      "part": "Level 2 paragraph 'A refrigerator uses the same loop…' and the refrigerant-loop diagram",
+      "idea": "The same loop moves heat from a cold place to a warm one. In a fridge or an air conditioner, the evaporator is in the space being cooled and the condenser is outside where it is warm."
+    },
+    {
+      "step": "Energy balance for the machine: Q_hot = Q_cold + W, where W is the electricity.",
+      "part": "Level 1 diagram and the sentence 'heat delivered = heat taken from the air + electricity'",
+      "idea": "No energy is created. The heat given out on the warm side equals the heat taken in on the cold side plus the electricity (3 = 2 + 1)."
+    },
+    {
+      "step": "Define cooling COP = Q_cold / W, heat removed per unit of electricity. By comparison, heating COP = Q_hot / W.",
+      "part": "Level 1 definition of COP",
+      "idea": "COP is useful heat divided by the paid input (electricity). For heating, the useful heat is what reaches the house. For cooling, it is what is taken from the cold inside."
+    },
+    {
+      "step": "Divide the balance by W: Q_cold/W = Q_hot/W − 1, so COP_cool = COP_heat − 1. In the example, 2 kWh removed for 1 kWh of electricity gives 2, which is one less than 3.",
+      "part": "Steps 2 and 3 (algebra: background)",
+      "idea": "The heat delivered to the warm side always includes the electricity itself. The heat taken from the cold side does not. So the two ratios always differ by exactly 1."
+    },
+    {
+      "step": "Ideal heating limit for the same two temperatures: COP_heat,max = T_hot / (T_hot − T_cold), with temperatures in kelvin.",
+      "part": "Level 3, Carnot limit formula and table",
+      "idea": "Physics caps the ratio of heat delivered to work. The cap depends only on the hot and cold temperatures."
+    },
+    {
+      "step": "Ideal cooling limit: COP_cool,max = T_hot/(T_hot − T_cold) − 1 = T_cold/(T_hot − T_cold). Example: with 263 K and 313 K, 313/50 − 1 = 263/50 ≈ 5.3, against 6.3 for heating.",
+      "part": "Steps 4 and 5 (algebra: background)",
+      "idea": "Apply the 'minus one' relation at the ideal limit and simplify. The cooling limit is the cold temperature divided by the temperature lift."
+    }
+  ],
+  "result": "Ideal air-conditioner limit: heat removed per unit of electricity = T_cold / (T_hot − T_cold), with temperatures in kelvin. It is exactly one less than the heating limit T_hot / (T_hot − T_cold). The reason is energy conservation: the heat dumped on the warm side equals the heat taken from the cold side plus the electricity. So the heat delivered per kWh always includes that 1 kWh of electricity, and the heat removed per kWh does not. Dividing Q_hot = Q_cold + W by W gives COP_cool = COP_heat − 1, and T_hot/ΔT − 1 = T_cold/ΔT. Example: −10 °C and 40 °C give a heating limit of 6.3 and a cooling limit of 5.3. One assumption: the explanation states the Carnot limit only for heating. I took it to cover the same loop used for cooling because the explanation says a refrigerator uses the same loop.",
+  "gap": ""
+}

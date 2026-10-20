@@ -22,6 +22,7 @@ In the Explainer repo, prefix commands with `uv run`.
 from __future__ import annotations
 
 import argparse
+import json
 import os
 import re
 import shutil
@@ -216,8 +217,15 @@ def cmd_decide(args) -> None:
 
 
 def cmd_eval(args) -> None:
+    if args.suite == "targets":
+        from explainer_kit.rederive import check_targets
+
+        path = check_targets(args.only, args.model)
+        verdicts = [c["verdict"] for c in json.loads(path.read_text()).values()] if path.exists() else []
+        print(f"targets   {verdicts.count('pass')} pass, {verdicts.count('fail')} fail   {display(path)}")
+        return
     default = {"chat": ["none", "v0.5=git:v0.5.0", "v0.6=principles"],
-               "artifact": ["none", "principles", "quick", "published"]}[args.suite]
+               "artifact": ["none", "principles", "quick", "published"]}.get(args.suite, [])
     conditions = dict(c.split("=", 1) if "=" in c else (c, c) for c in (args.conditions or default))
     if args.suite == "chat":
         from explainer_kit.evals import run
@@ -225,12 +233,29 @@ def cmd_eval(args) -> None:
         out = Path(args.out) if args.out else project_root() / "evals" / "chat" / "results" / date.today().isoformat()
         run(conditions, out, model=args.model, workers=args.workers)
         return
-    from explainer_kit.artifact_eval import run
+    from explainer_kit import artifact_eval, rederive
 
-    out = Path(args.out) if args.out else (project_root() / "evals" / "artifact" / "results"
-                                           / f"{date.today().isoformat()}-{args.split}")
-    run(conditions, out, split=args.split, only=args.only, model=args.model, workers=args.workers,
-        reader_model=args.reader_model)
+    results = project_root() / "evals" / "artifact" / "results"
+    stage = dict(split=args.split, only=args.only, model=args.model, reader_model=args.reader_model,
+                 workers=args.workers)
+    if args.suite in ("rederive", "human") and not args.builds:
+        raise SystemExit(f"eval {args.suite} needs --builds <an artifact run folder>")
+    if args.suite == "human":
+        if not args.chain:
+            raise SystemExit("eval human needs --chain <a person's working, see evals/artifact/human-check.md>")
+        r = rederive.grade_human(Path(args.chain), Path(args.builds), args.model)
+        t = r["tally"]
+        print(f"human   {r['subject']} ({r['condition']}): {t['supported']}/{t['counted']} steps supported, "
+              f"result {'right' if r['result_right'] else 'stated' if r['result_stated'] else 'wrong'}   "
+              f"{', '.join(r['marks'])}")
+        return
+    if args.suite == "rederive":
+        out = Path(args.out) if args.out else results / f"{date.today().isoformat()}-{args.split}-rederive"
+        rederive.run(out, Path(args.builds), **stage)
+        return
+    out = Path(args.out) if args.out else results / f"{date.today().isoformat()}-{args.split}"
+    artifact_eval.run(conditions, out, **stage)
+    rederive.run(out, out, **stage)
 
 
 def cmd_frames(args) -> None:
@@ -339,8 +364,13 @@ def main() -> None:
     p.set_defaults(fn=cmd_decide)
 
     p = sub.add_parser("eval", help="chat: answers under several system prompts; artifact: explainers built under "
-                                     "several conditions, read and graded blind")
-    p.add_argument("suite", choices=["chat", "artifact"])
+                                     "several conditions, read and graded blind (then the rederivation stage); "
+                                     "targets: check the rederivation targets; rederive: the rederivation stage on "
+                                     "an earlier artifact run's builds; human: grade a person's working")
+    p.add_argument("suite", choices=["chat", "artifact", "targets", "rederive", "human"])
+    p.add_argument("--builds", help="rederive, human: the artifact run folder whose builds are read (it is not "
+                                    "changed)")
+    p.add_argument("--chain", help="human: a person's working, as in evals/artifact/human-check.md")
     p.add_argument("--conditions", nargs="+",
                    help="name=source; source is none, principles, git:<rev>, or a file; for artifact also quick or "
                         "published (the explain skill at that tier). Default: chat none v0.5 v0.6; artifact none "

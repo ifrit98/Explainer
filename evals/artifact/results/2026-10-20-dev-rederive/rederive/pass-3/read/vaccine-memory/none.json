@@ -1,0 +1,36 @@
+{
+  "steps": [
+    {
+      "step": "Matching cells grow by repeated division, so the number doubles at each step.",
+      "part": "Step 3, 'Amplify: clonal expansion'",
+      "idea": "A selected cell divides about once every 6 to 12 hours for days, so one cell becomes thousands of copies. The question fixes the doubling time at 12 hours."
+    },
+    {
+      "step": "A first infection starts with only a handful of matching cells, while memory after vaccination leaves hundreds to thousands of times more.",
+      "part": "Step 1, 'Each match is rare' bullet; Step 4 table (Naive vs Memory)",
+      "idea": "Naive matching cells are rare. Memory leaves a much larger matching pool. The question sets that factor at 1,000."
+    },
+    {
+      "step": "A vaccine supplies the first encounter, so the real infection begins from the memory-sized pool.",
+      "part": "'So what does a vaccine do?' section",
+      "idea": "The real pathogen meets a secondary response that starts from memory cells, not from the few naive cells."
+    },
+    {
+      "step": "Doublings needed = log2(enough ÷ starting count). Starting with 1,000 times more cells removes log2(1000) ≈ 9.97, or about 10, doublings.",
+      "part": "background (exponential growth and logarithms), applied to steps 1–3",
+      "idea": "log2(N/s) − log2(N/(1000s)) = log2(1000). N cancels out, so the size of 'enough' does not matter."
+    },
+    {
+      "step": "Time saved ≈ 10 doublings × 12 h ≈ 120 h ≈ 5 days.",
+      "part": "4, 1",
+      "idea": "Multiply the doublings saved by the doubling time."
+    },
+    {
+      "step": "Check this against the explanation's timescales.",
+      "part": "Step 4 paragraph after the table, and the antibody-level diagram",
+      "idea": "The primary lag is about 1–2 weeks and the secondary starts within days, so a gap of a few days fits."
+    }
+  ],
+  "result": "About 10 doublings sooner (2^10 ≈ 1000), which is about 10 × 12 h ≈ 120 hours, or roughly 5 days. Getting from a starting count s to a target N takes log2(N/s) doublings. Starting 1,000 times higher changes that by exactly log2(1000) whatever N is, because the target cancels. In multiplicative growth, a head start by a fixed factor always saves the same number of doublings, so it saves the same amount of time.",
+  "gap": ""
+}

@@ -1,0 +1,41 @@
+{
+  "steps": [
+    {
+      "step": "About 10^10 cell divisions happen as the infection grows to 10^10 cells, so the expected number of mutants is 10^10 times the mutation rate.",
+      "part": "Section 3, Mutation: worked example",
+      "idea": "Growing from one cell to 10^10 cells takes about 10^10 divisions. Each division has a small chance of producing a given resistance mutation."
+    },
+    {
+      "step": "Before treatment, about 10^10 × 10^-8 = 100 cells resist A, and about 10^10 × 10^-9 = 10 cells resist B.",
+      "part": "Section 3, Mutation: worked example; step 1",
+      "idea": "Expected mutants equal divisions times rate. In a large population, resistant cells are usually already there before the first dose. The drug does not create them."
+    },
+    {
+      "step": "If only one drug is given, those few resistant cells survive and regrow the infection.",
+      "part": "Section 4, How the drug makes resistance common",
+      "idea": "The drug kills the susceptible cells. The roughly 100 resistant cells double about every hour and reach about 1.7 × 10^9 in a day. This is selection: the drug removes their competition."
+    },
+    {
+      "step": "With both drugs, a cell survives only if it resists both, so it needs both mutations. The mutations are unrelated, so the chance that one cell carries both is the product of the two rates: 10^-8 × 10^-9 = 10^-17.",
+      "part": "Section 4, Dose controls which cells survive: last two sentences",
+      "idea": "Two drugs at once mean a cell needs two independent mutations. The text multiplies the two rates (its example is 10^-8 × 10^-8 = 10^-16), and the result is far rarer than the size of the infection."
+    },
+    {
+      "step": "Expected double-resistant cells: 10^10 × 10^-17 = 10^-7. That is about a 1-in-10-million chance that even one such cell exists.",
+      "part": "Steps 1 and 4; background (arithmetic)",
+      "idea": "Expected count equals divisions times probability per division. Here the count is far below one."
+    },
+    {
+      "step": "Each drug kills the cells that resist only the other drug. So the 100 A-resistant cells and the 10 B-resistant cells all die, and there is almost certainly no cell left to be selected.",
+      "part": "Section 4 (selection); step 4",
+      "idea": "Selection can only make a resistant group common if at least one resistant cell exists to start it."
+    },
+    {
+      "step": "Caveat: this argument holds only for independent mutations. A plasmid passed from another bacterium can carry genes for several mechanisms, so one transfer can give resistance to both drugs at once.",
+      "part": "Section 3, Gene transfer",
+      "idea": "One transfer event can make a cell resistant to several drugs, which gets around the multiplication."
+    }
+  ],
+  "result": "Given alone, each drug leaves cells that were already resistant before treatment: about 100 for drug A (10^10 × 10^-8) and about 10 for drug B (10^10 × 10^-9). Selection then lets those survivors take over the infection. Given together, a cell survives only if it carries both unrelated mutations. The chance of that per division is 10^-8 × 10^-9 = 10^-17, so you expect 10^10 × 10^-17 = 10^-7 such cells: about a 1-in-10-million chance that even one exists. Each drug kills the cells that resist only the other drug, so almost certainly nothing is left to regrow. The one exception is gene transfer: a plasmid carrying both resistance genes would get around this.",
+  "gap": ""
+}

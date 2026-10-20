@@ -1,0 +1,36 @@
+{
+  "steps": [
+    {
+      "step": "In cooling mode the useful output is the heat taken from the cold side, Q_C. The input is still the electrical work W. So the figure of merit is Q_C / W.",
+      "part": "Paragraph after 'A refrigerator is the same machine' in 'The trick: boiling point depends on pressure', plus the COP definition in 'Why this matters'",
+      "idea": "A refrigerator is the same loop: it takes heat from the cold box and dumps it at the warm side. COP is useful heat divided by electrical work. For cooling, the useful heat is the heat removed from the cold side."
+    },
+    {
+      "step": "Energy balance: Q_H = Q_C + W, so Q_C = Q_H − W.",
+      "part": "Short answer (heat delivered = heat taken from outside + electrical work) and the line W = Q_H − Q_C in 'Why the COP is not unlimited'",
+      "idea": "The heat dumped on the hot side equals the heat picked up on the cold side plus the compressor work. Energy is conserved."
+    },
+    {
+      "step": "Divide by W: Q_C/W = Q_H/W − 1. So for any machine the cooling COP is exactly one less than the heating COP, because the work itself ends up as part of the heat dumped on the hot side but is not heat removed from the cold side.",
+      "part": "Step 2",
+      "idea": "Q_H counts the electrical work as delivered heat. Q_C does not include it. The difference W/W is exactly 1."
+    },
+    {
+      "step": "Second-law limit: Q_H/T_H ≥ Q_C/T_C, so Q_C/Q_H ≤ T_C/T_H.",
+      "part": "'Why the COP is not unlimited' (entropy Q/T, total entropy cannot decrease)",
+      "idea": "The entropy dumped on the hot side must be at least the entropy taken from the cold side. Temperatures are in kelvin."
+    },
+    {
+      "step": "Cooling limit: Q_C/W = Q_C/(Q_H − Q_C) = 1/(Q_H/Q_C − 1) ≤ 1/(T_H/T_C − 1) = T_C/(T_H − T_C).",
+      "part": "Steps 2 and 4, background algebra",
+      "idea": "Q_H/Q_C ≥ T_H/T_C. A larger denominator gives a smaller ratio, which gives the upper bound."
+    },
+    {
+      "step": "Check: T_H/(T_H − T_C) − 1 = (T_H − (T_H − T_C))/(T_H − T_C) = T_C/(T_H − T_C). This matches the heating limit minus one.",
+      "part": "Formula COP ≤ T_H/(T_H − T_C) in 'Why the COP is not unlimited', plus step 3",
+      "idea": "The two ideal limits differ by exactly 1, just as the actual COPs do. Example: with 268 K and 318 K, the heating limit is 6.4 and the cooling limit is 268/50 = 5.4."
+    }
+  ],
+  "result": "The ideal cooling COP is Q_C/W ≤ T_C/(T_H − T_C), with temperatures in kelvin: the cold temperature divided by the temperature lift. It is exactly one less than the heating limit T_H/(T_H − T_C) because Q_H = Q_C + W. The electrical work ends up as heat dumped on the hot side, so it counts towards heating output. It does not count as heat removed from the cold side. So Q_H/W = Q_C/W + 1, and the same relation holds between the two ideal limits.",
+  "gap": ""
+}

@@ -1,0 +1,36 @@
+{
+  "steps": [
+    {
+      "step": "Matching cells grow by repeated division, so a bigger starting population reaches a working clone sooner.",
+      "part": "How it works, item 3 (Clonal expansion), and item 4 (Memory cells remain)",
+      "idea": "A lymphocyte that binds the antigen divides into a clone of thousands of identical cells. After vaccination, memory cells leave more matching cells than before, so the response starts from a larger population."
+    },
+    {
+      "step": "A head start in cell numbers turns into a head start in time.",
+      "part": "Why it works: a race (table rows 'Matching cells at the start' and 'Useful antibody after')",
+      "idea": "With more matching cells at the start, useful antibody comes after 2–4 days instead of 7–14 days. Starting larger means getting there sooner."
+    },
+    {
+      "step": "Write the model: cells at time t = N0 × 2^(t/12 h). Full strength is reached when this equals the 'enough' level K, so t = 12 h × log2(K/N0).",
+      "part": "background (the question's model; exponentials and logarithms from school maths)",
+      "idea": "Doubling every 12 hours means growth by a factor of 2 for each 12 hours."
+    },
+    {
+      "step": "Compare the two starts: N0 for a first infection and 1000·N0 after vaccination. The time difference is 12 h × [log2(K/N0) − log2(K/1000N0)] = 12 h × log2(1000).",
+      "part": "Step 3; background (algebra of logarithms)",
+      "idea": "K appears in both times and cancels in the difference, so the threshold does not matter."
+    },
+    {
+      "step": "log2(1000) ≈ 9.97, so about 10 doublings: 10 × 12 h ≈ 120 h ≈ 5 days.",
+      "part": "Step 4; background (2^10 = 1024 ≈ 1000)",
+      "idea": "A 1000-fold head start is worth about ten doubling times."
+    },
+    {
+      "step": "Check against the explanation: a gain of about 5 days fits the move from 7–14 days to 2–4 days.",
+      "part": "Why it works: a race (table)",
+      "idea": "The table's typical first and second response times differ by about 5–10 days."
+    }
+  ],
+  "result": "The response reaches full strength about 5 days sooner, because 1000 ≈ 2^10 is about 10 doublings of 12 hours each, which is about 120 hours. The 'enough' level does not matter because of how doubling works. Each doubling period multiplies the cell count by 2, so any starting count needs a fixed number of doublings to reach any target. The vaccinated start is the unvaccinated start 10 doublings further along. Both groups then follow the same curve to whatever count is 'enough', so the vaccinated group always arrives the same 10 doublings, about 5 days, earlier. In symbols, the threshold K cancels: 12 h × log2(K/N0) − 12 h × log2(K/1000N0) = 12 h × log2(1000). The explanation does not state this model; the steps above that rely on it come from the question and school maths.",
+  "gap": ""
+}

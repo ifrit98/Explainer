@@ -1,0 +1,36 @@
+{
+  "steps": [
+    {
+      "step": "Drug A alone: you'd expect about 10^10 × 10^-8 = 100 cells already resistant to A before treatment starts.",
+      "part": "Resistant cells are there before the drug",
+      "idea": "Growing to 10^10 cells takes about 10^10 divisions. With one mutation per 10^8 divisions, that gives about 100 resistant mutants before any drug is given."
+    },
+    {
+      "step": "Drug B alone: you'd expect about 10^10 × 10^-9 = 10 cells already resistant to B.",
+      "part": "Resistant cells are there before the drug",
+      "idea": "The same counting (number of divisions times mutation rate) works with B's rate of 10^-9. So at least one B-resistant cell is almost certainly there."
+    },
+    {
+      "step": "With either drug alone, those few resistant cells survive and grow back into a resistant infection.",
+      "part": "The drug selects them",
+      "idea": "The drug removes the susceptible cells, and the resistant ones keep doubling until they fill the infection again (100 cells take 27 doublings, about 13 hours). The drug selects resistance; it does not create it."
+    },
+    {
+      "step": "To survive both drugs given together, one cell must carry both mutations. The chance of that is 10^-8 × 10^-9 = 10^-17 per cell.",
+      "part": "What this predicts (combination bullet)",
+      "idea": "With independent targets, two mutations are needed in the same cell. Independent events multiply their chances. The explanation's example uses 10^-8 × 10^-8; here I put in the question's 10^-9 for B."
+    },
+    {
+      "step": "Expected number of double-resistant cells: 10^10 × 10^-17 = 10^-7. That is about a 1-in-10-million chance that even one exists.",
+      "part": "What this predicts (combination bullet); step 4",
+      "idea": "Multiply the population by the per-cell chance. A cell resistant to only A is killed by B, and one resistant to only B is killed by A, so the treatment clears the infection."
+    },
+    {
+      "step": "This holds only because the two mutations are unrelated. If a single event gave resistance to both drugs, the protection would be lost.",
+      "part": "What this predicts (combination bullet)",
+      "idea": "If one plasmid carried both genes, or one pump exported both drugs, the chances would not multiply and about as many survivors as with one drug would come back."
+    }
+  ],
+  "result": "With one drug, cells resistant to it are almost certainly already present before treatment: about 100 for drug A and about 10 for drug B. The drug kills the susceptible cells, and those few resistant ones regrow the infection. With both drugs, a surviving cell needs both unrelated mutations. Their chances multiply to 10^-8 × 10^-9 = 10^-17 per cell, so in 10^10 cells you'd expect only 10^-7 double-resistant cells, about a 1-in-10-million chance that even one exists. Any cell resistant to just one drug is killed by the other, so the infection is cleared. This works only while no single gene, plasmid or pump gives resistance to both drugs.",
+  "gap": ""
+}

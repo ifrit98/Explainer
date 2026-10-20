@@ -1,0 +1,26 @@
+{
+  "steps": [
+    {
+      "step": "Adding greenhouse gas makes the height at which infrared escapes to space go up.",
+      "part": "Level 2, paragraph on emission height (claim mech-emission-height) and the paragraph after it ('Add gas, and the emission height rises')",
+      "idea": "Infrared escapes to space only from air that has little gas above it. More gas puts that air higher: doubling CO2 lifts it by about 150 m."
+    },
+    {
+      "step": "In the real atmosphere, a higher emission height means colder emitting air, so less energy goes out to space and the planet warms.",
+      "part": "Level 2 flowchart and the paragraph 'Add gas, and the emission height rises...'",
+      "idea": "Air cools by about 6.5 K per km, so the higher emitting air is about 1 K colder. Emission goes as T⁴, so the output falls by about 3.8 W/m². The planet then takes in more than it gives out and warms until balance returns."
+    },
+    {
+      "step": "If the temperature were the same at every height, the higher emitting air would be just as warm as the old emitting air.",
+      "part": "Level 2, final paragraph (claim guar-lapse-rate)",
+      "idea": "The warming works only because air gets colder with height. With no lapse rate, moving the emitter up does not change its temperature."
+    },
+    {
+      "step": "So the energy going out to space would not fall, energy balance would not be broken, and nothing would push the surface to warm.",
+      "part": "Step 3; Level 1 paragraph on Stefan–Boltzmann; Level 2, final paragraph",
+      "idea": "Emission depends only on the emitter's temperature through σT⁴. Same temperature means the same 240 W/m² goes out, so there is no energy imbalance and the column does not warm."
+    }
+  ],
+  "result": "Adding CO2 would not warm the surface. It would still raise the emission height, but in air with the same temperature at every height, the new higher emitting air is just as warm as before. It therefore sends out the same amount of infrared (σT⁴), outgoing energy still matches the 240 W/m² absorbed, and nothing breaks the balance that would force the surface to warm. The greenhouse warming from extra gas depends on air getting colder with height.",
+  "gap": ""
+}

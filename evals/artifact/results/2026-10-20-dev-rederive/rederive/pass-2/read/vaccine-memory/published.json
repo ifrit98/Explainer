@@ -1,0 +1,31 @@
+{
+  "steps": [
+    {
+      "step": "Model growth as starting count × 2^n = target, where n is the number of doublings needed to reach the target.",
+      "part": "The first meeting is slow (paragraph: 100 × 2^n = 1,000,000)",
+      "idea": "The response grows by repeated doubling from the precursor count until it reaches the number of cells that controls the infection. You find n by solving start × 2^n = target."
+    },
+    {
+      "step": "Each doubling of the starting count saves exactly one division.",
+      "part": "What stays behind (the rule under the table)",
+      "idea": "If you start with twice as many cells, you need one fewer doubling to reach the same target. The 100× memory head start cut 13.3 divisions to 6.6."
+    },
+    {
+      "step": "A 1,000× head start saves log2(1000) ≈ 10 doublings.",
+      "part": "Step 2 + background (logarithms)",
+      "idea": "1000 is about 2^10 (1024), so 1,000× more cells is about 10 doublings' worth of head start."
+    },
+    {
+      "step": "At 12 hours per doubling, the response reaches full strength about 10 × 12 h ≈ 120 h ≈ 5 days sooner.",
+      "part": "Step 3 + the question's 12-hour doubling time",
+      "idea": "Multiply the doublings saved by the time each doubling takes."
+    },
+    {
+      "step": "The target cancels out. n = log2(target/start), so the difference between the two cases is log2(target/P) − log2(target/1000P) = log2(1000), whatever the target is.",
+      "part": "Steps 1–2 + background (algebra of logarithms)",
+      "idea": "Both cases aim for the same target, and the explanation uses one target for both. So only the ratio of the starting counts matters. The doublings saved are the same whether 'enough' is 1 million cells or 1 billion."
+    }
+  ],
+  "result": "About 10 doublings fewer (2^10 ≈ 1000), so about 120 hours, or roughly 5 days sooner, counting doubling time only. In the explanation, memory cells also activate faster, which would save a little more. The answer does not depend on what counts as 'enough' because the number of doublings needed is log2(target ÷ start). Both cases have the same target, so when you subtract one from the other the target cancels. The saving is log2(1000) doublings whatever the target is: each doubling of the head start removes one division.",
+  "gap": ""
+}

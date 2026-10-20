@@ -1,0 +1,46 @@
+{
+  "steps": [
+    {
+      "step": "A filter's bits are exactly the union of the positions of all added items. A bit is 1 only if some added item hashes to it.",
+      "part": "How it works (Add step) and the cat/dog table",
+      "idea": "Adding an item sets its k positions to 1. Nothing else sets bits, and the array starts all 0. The table shows only the bits from cat and dog switched on."
+    },
+    {
+      "step": "The same item always lands on the same positions in both filters.",
+      "part": "The parts (hash functions)",
+      "idea": "A hash function always gives the same position for the same item. Both filters use the same m and the same hash functions, so position i means the same thing in each."
+    },
+    {
+      "step": "Adding items only turns bits from 0 to 1, so the order and grouping of adds do not matter.",
+      "part": "Why \"no\" is always right, first paragraph",
+      "idea": "Adding only changes bits from 0 to 1 and nothing clears them. So the final array is just the set of all positions the items hash to."
+    },
+    {
+      "step": "A bitwise OR of the two arrays gives the filter for A ∪ B, without needing the items.",
+      "part": "Steps 1–3",
+      "idea": "Building a filter from A ∪ B switches on (positions of A's items) ∪ (positions of B's items). By steps 1–2, that is the bits on in A's filter or in B's filter, which is exactly their bitwise OR."
+    },
+    {
+      "step": "The OR is exact: it matches, bit for bit, a filter built directly from A ∪ B, and it has the same false-positive behaviour as that filter.",
+      "part": "Step 4; How much memory, and how often wrong",
+      "idea": "Because the arrays are identical, queries give identical answers. The false-positive rate is the one for n = |A ∪ B| items. Items in both sets count once."
+    },
+    {
+      "step": "A bitwise AND keeps every bit of each item in A ∩ B, so it never gives a false negative for the intersection.",
+      "part": "Step 1; Why \"no\" is always right",
+      "idea": "An item in both sets has its bits set in both filters, so all its bits survive the AND."
+    },
+    {
+      "step": "The AND can also keep bits that no item of A ∩ B set: a bit that one item only in A turned on and a different item only in B also turned on.",
+      "part": "How \"yes\" can be wrong (the filter cannot tell which item set a bit); cat/dog example",
+      "idea": "Bits are shared without any record of who set them. For example, if A = {cat} and B = {dog}, both set bit 6. A ∩ B is empty, but the AND still has bit 6 = 1."
+    },
+    {
+      "step": "So the AND is only an approximation of the filter for A ∩ B. It has all the bits of the true intersection filter plus possibly extra ones, which gives more false positives.",
+      "part": "Steps 6–7; How \"yes\" can be wrong",
+      "idea": "Extra 1 bits make it likelier that an unseen item finds all its bits on. The AND still never says \"no\" wrongly, but it says \"probably yes\" too often."
+    }
+  ],
+  "result": "Take the bitwise OR of the two bit arrays. This works because the size and hash functions match. The result is exactly the filter you would get by adding every item of A ∪ B, bit for bit, so it is exact: it has no false negatives and the same false-positive rate as a filter built directly from A ∪ B. A bitwise AND gives a filter that contains everything in A ∩ B, so it never gives a false negative there. But it is not exact: a bit set by an item only in A and by a different item only in B also survives. The AND therefore has all the bits of the true A ∩ B filter, sometimes more, and gives more false positives.",
+  "gap": ""
+}

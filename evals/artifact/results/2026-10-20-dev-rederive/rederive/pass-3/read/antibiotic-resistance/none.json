@@ -1,0 +1,36 @@
+{
+  "steps": [
+    {
+      "step": "Before any drug is given, resistant mutants are already in the population because of random mutation. The drug doesn't create them; it picks them out.",
+      "part": "Section 3a (Mutation) and 'The short answer'",
+      "idea": "A particular resistance mutation turns up about once in 10^8–10^9 divisions. Infections hold 10^9–10^11 cells, so a few resistant cells are probably there before treatment starts."
+    },
+    {
+      "step": "With drug A alone, about 10^10/10^8 = 100 cells are already resistant. With drug B alone, about 10^10/10^9 = 10 are.",
+      "part": "Section 3a, 'Quick estimate' box",
+      "idea": "Expected number of resistant cells = population size × the fraction that carry the mutation."
+    },
+    {
+      "step": "A single drug kills the susceptible cells, and those 100 (or 10) resistant cells grow until they make up most of the infection.",
+      "part": "Section 4, 'A toy calculation'",
+      "idea": "Exponential growth turns 100 survivors into about 10^8 within roughly 10 hours, however rare they were to begin with."
+    },
+    {
+      "step": "With both drugs, a cell survives only if it resists both, so it needs both mutations. The mutations are unrelated, so the chance of having both is the product of the two chances: 10^-8 × 10^-9 = 10^-17.",
+      "part": "Section 8, 'Combine drugs, sometimes'",
+      "idea": "Being resistant to both by chance is the product of the separate odds. The example there, 1 in 10^8 × 1 in 10^8 = 1 in 10^16, is more cells than an infection holds. Multiplying independent chances is background maths."
+    },
+    {
+      "step": "Expected number of cells resistant to both = 10^10 × 10^-17 = 10^-7. Most likely there are none.",
+      "part": "Steps 2 and 4; index.html 'What to try', point on lowering the mutation rate",
+      "idea": "Resistance is a numbers game: population size × mutation rate. When that product is far below 1, usually no resistant cell exists when the drug arrives, and treatment succeeds."
+    },
+    {
+      "step": "With no cell resistant to both, there is nothing for selection to pick out. Each drug kills the cells that resist only the other one, and the infection can be cleared.",
+      "part": "'The short answer' (the drug selects; survivors multiply); Section 4",
+      "idea": "Selection can only multiply variants that already exist. If the starting number is zero, exponential growth has nothing to work with."
+    }
+  ],
+  "result": "Alone, drug A starts out facing about 100 resistant cells (10^10/10^8) and drug B about 10 (10^10/10^9). Those cells survive and multiply until they take over. To survive both drugs together, a cell needs both unrelated mutations, which happens with odds of about 10^-8 × 10^-9 = 10^-17. In 10^10 cells that means an expected 10^-7 doubly resistant cells, about 1 chance in 10 million that even one exists. Each drug kills the cells that resist only the other, so selection has nothing to multiply. The odds of ending with a resistant infection drop from near certain to tiny.",
+  "gap": ""
+}

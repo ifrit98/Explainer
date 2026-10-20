@@ -1,0 +1,51 @@
+{
+  "steps": [
+    {
+      "step": "Two properties are needed: everyone combining in any order reaches the same value, and an outsider can't undo a combination. Each person keeps a secret that is never sent.",
+      "part": "Opening section ('Two ideas solve it') and 'An analogy: mixing paint'",
+      "idea": "Only results computed from secrets go over the channel. The method relies on a calculation that is easy to do and very hard to undo, and on the order of combining not mattering."
+    },
+    {
+      "step": "Raising a public value to your own secret power mod p is the basic move, and it is fast.",
+      "part": "'The easy direction' and 'The protocol' table",
+      "idea": "g^x mod p is cheap to compute with repeated squaring. Raising someone else's public value to your secret gives a shared power of g, e.g. (g^b)^a = g^(ab)."
+    },
+    {
+      "step": "Exponents multiply in any order, and reducing mod p along the way doesn't change the result. So (g^x)^y mod p = g^(xy) mod p for any x and y.",
+      "part": "'The protocol' (paragraph 'Since ab = ba…') and 'Modular arithmetic' (reduce at every step)",
+      "idea": "Order of mixing doesn't matter, and reducing mod p at any stage gives the same final value."
+    },
+    {
+      "step": "Round 1: Alice, Bob and Carol pick secrets a, b, c and publish A = g^a, B = g^b, C = g^c (all mod p).",
+      "part": "'The protocol' step 1–2 pattern, extended to three people; step 1",
+      "idea": "Same as two-party Diffie–Hellman: each person publishes g^secret mod p and never sends the secret."
+    },
+    {
+      "step": "Round 2: each person raises one neighbour's public value to their own secret and publishes the result. Alice publishes C^a = g^(ca), Bob publishes A^b = g^(ab), Carol publishes B^c = g^(bc).",
+      "part": "Step 3; 'The protocol' step 4",
+      "idea": "This is the two-party computation of s, but its result is published, not kept. It is a combination of two secrets that still lacks the third."
+    },
+    {
+      "step": "Each person raises the round-2 value that is missing their own secret to their own secret. Alice computes (g^(bc))^a, Bob computes (g^(ca))^b, Carol computes (g^(ab))^c. All three get g^(abc) mod p.",
+      "part": "Step 3",
+      "idea": "abc = bca = cab, so the three results are equal. This is the paint analogy with three secret colours added to yellow."
+    },
+    {
+      "step": "Eve sees p, g, g^a, g^b, g^c, g^(ab), g^(bc) and g^(ca). Every value she has is missing at least one secret. Multiplying values together only adds exponents (e.g. g^(ab)·g^c = g^(ab+c)), which is not g^(abc).",
+      "part": "'The protocol' paragraph 'Multiplying A by B gives her g^(a+b), not g^(ab)…' and the paint analogy (orange + green has too much yellow)",
+      "idea": "Combining public values gives the wrong mixture. To get the key you have to remove a secret from a published value."
+    },
+    {
+      "step": "Getting g^(abc) from g^(ab) and g^c is a two-party exchange in disguise: g^(ab) acts as one public value with secret ab, and g^c as the other with secret c. So Eve faces the same problem as in the two-party case: find a secret exponent from a public value. That is a discrete logarithm.",
+      "part": "Steps 5 and 7; 'The hard direction'; Summary bullet 3; page section 'Eve's attack: undo the exponent'",
+      "idea": "Undoing g^x mod p is the discrete logarithm problem. It is infeasible for well-chosen primes of about 2048 bits (roughly 2^110 operations even for the best known algorithms). The brute-force control shows it works only for tiny p."
+    },
+    {
+      "step": "Limits: this holds only against a listener. Someone who can change messages could swap values, as in the two-party case, so the messages would need to be authenticated.",
+      "part": "'The catch: Eve who only listens vs. Mallory who interferes' and the Mallory checkbox on the page",
+      "idea": "Diffie–Hellman alone protects against eavesdropping only. Stopping someone who swaps messages needs signatures or certificates."
+    }
+  ],
+  "result": "All three use the public p and g, and it takes two rounds of public messages. Round 1: Alice, Bob and Carol pick secrets a, b, c and publish g^a, g^b, g^c mod p. Round 2: Alice publishes (g^c)^a = g^(ca), Bob publishes (g^a)^b = g^(ab), and Carol publishes (g^b)^c = g^(bc). Then each person raises the round-2 value that doesn't include their own secret to their own secret: Alice computes (g^(bc))^a, Bob computes (g^(ca))^b, Carol computes (g^(ab))^c. Because exponents multiply in any order, and reducing mod p doesn't change that, all three get the same key, g^(abc) mod p. Eve sees p, g and six public values, but each one is missing at least one secret. Multiplying them only adds exponents, which gives the wrong 'colour'. To get g^(abc) she would have to pull a secret exponent out of a published value, for example getting c from g^c to raise g^(ab) to it. That is a discrete logarithm, which is infeasible for large, well-chosen p. Caveats: this protects only against a listener. Someone who can change messages could swap values, so the messages need authentication. The explanation says outright that the two-party problem (getting g^(ab) from g^a and g^b) appears to need a discrete log. Applying that to three people is my own step: I treat g^(ab) and g^c as a two-party exchange with secrets ab and c.",
+  "gap": ""
+}

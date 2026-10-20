@@ -221,6 +221,7 @@ Rounds 2 and 3 also produced general rules: names match pictures (call it an L o
 - The examples are frozen as reference implementations and regression fixtures: `explainer check` must pass; no more review rounds.
 - `evals/artifact/questions.yaml`: 30 held-out subjects (10 dev, 20 test), none an example or a chat-eval question, each with a fixed quiz of four questions; the last is a prediction about a case the explanation need not mention.
 - `explainer eval artifact`: per subject and condition, a fresh agent builds the explainer (none, the principles, or the explain skill at the quick or published tier), a second reads only the renderings and answers the quiz with a quote for each answer (an answer whose quote is not in the renderings scores 0), and a third grades blind. [docs/evals.md](docs/evals.md#the-artifact-eval).
+- Rederivation (PRD-002): each subject also has a frozen, model-checked target, a result its explanation was never asked to state. A fresh reader works it out from the renderings, naming the part each step rests on; a grader marks each expected step blind, in three passes. `eval artifact` runs it; `eval rederive --builds <run>` runs it on saved builds. [docs/evals.md](docs/evals.md#rederivation).
 
 **Rules.**
 
@@ -233,12 +234,14 @@ Rounds 2 and 3 also produced general rules: names match pictures (call it an L o
 - The quiz is at its ceiling (94–100% in every condition, with a strong reader and with Haiku): a model reader cannot measure the difference. The same holds for the published tier's blind test.
 - The principles alone cut length 40% and rank first on effort in every grading pass, at the lowest cost. The quick tier is shortest but ranks below them and makes the most errors; the published tier costs 13× as much for no measured gain.
 - The first run was invalid: builders inside the repo loaded its CLAUDE.md in every condition. Builds now run outside every project.
+- Rederivation is also near its ceiling (90–100% of steps supported). One pair separates under the rule fixed before the run, none > published, by about two of 38 steps, from one subject (two-tides) where the published explanation lacks part of a building block (when the Sun's and Moon's tides add), a gap the quiz also found. Two target defects and three subjects whose explanations state the derived steps are reported with it ([docs/evals.md](docs/evals.md#what-the-dev-baseline-found)).
 
 **Next.**
 
 - A person ranks a sample (principles, quick, published on three subjects); the grader's ranking is used only if it agrees.
 - If it agrees: decide what the skill keeps. Candidates: the model file and the reviews only for the published tier, or the reviews dropped where they do not change the result.
 - A quiz that discriminates: harder subjects, or a reader limited in another way (time, words read), since a weaker model was not enough.
+- Open: whether PRD-003 adopts rederivation as its measure. With a strong model reader it mostly re-detects missing building blocks. Options: a weaker or constrained reader, harder targets with more derived steps (and a checker that tests "not stated" against real explanations), or human readers (`evals/artifact/human-check.md`). Recommendation: get two or three human checks before adopting it.
 - `plugin/skills/explain/references/html.md` says "the seven understanding questions from principles.md §7", but §7 has eight. Fix it with the principles rewrite, because skill text is measured.
 - The blind test (`explainer_kit/review.py`) does not ask "Could anything be cut with no loss?" Decide whether it should when the objective becomes least *wasted* effort.
 

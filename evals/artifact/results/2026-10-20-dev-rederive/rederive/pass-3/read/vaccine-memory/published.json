@@ -1,0 +1,31 @@
+{
+  "steps": [
+    {
+      "step": "The matching cells grow by doubling: start count × 2^n = target, where n is the number of divisions.",
+      "part": "The first meeting is slow (paragraph: 100 × 2^n = 1,000,000)",
+      "idea": "The time to reach a full response is set by how many doublings it takes to get from the starting (precursor) count up to the target number of effector cells."
+    },
+    {
+      "step": "Each doubling of the starting count saves exactly one division.",
+      "part": "What stays behind (the table and 'The rule behind the table')",
+      "idea": "Starting with 100× more cells (10,000 instead of 100) cut 13.3 divisions to 6.6. In general, each doubling of the starting count removes one division."
+    },
+    {
+      "step": "Starting with 1,000× more cells saves log2(1000) ≈ 9.97, so about 10 divisions.",
+      "part": "Step 2 + background",
+      "idea": "1,000 is about 2^10, so 1,000× more starting cells is worth about 10 doublings, and each one saves a division."
+    },
+    {
+      "step": "At 12 hours per division, 10 divisions are about 120 hours, which is about 5 days sooner.",
+      "part": "Step 3 + the question's 12-hour doubling time",
+      "idea": "The time saved is the number of divisions saved times the time per division."
+    },
+    {
+      "step": "The saving does not depend on the target number.",
+      "part": "Step 1 + background (logarithms)",
+      "idea": "n = log2(target/start), so the difference between the two cases is log2(target/start1) − log2(target/start2) = log2(start2/start1) = log2(1000). The target cancels out. Only the ratio of the starting counts matters. The explanation's own table shows this: both cases use the same 1,000,000 target, and the saving still follows from the 100× ratio alone."
+    }
+  ],
+  "result": "In this model the response reaches full strength about 10 doublings sooner, which at 12 hours each is about 120 hours, or about 5 days. The number of doublings needed is log2(enough ÷ starting cells). When you compare the two cases, the 'enough' number cancels out, so the saving is log2(1000) ≈ 10 doublings whatever the target is. This counts only the multiplying stage. Faster activation of memory cells, which the explanation mentions, would save some extra time.",
+  "gap": ""
+}

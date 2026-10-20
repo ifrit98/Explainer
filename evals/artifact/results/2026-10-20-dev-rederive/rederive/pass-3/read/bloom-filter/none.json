@@ -1,0 +1,41 @@
+{
+  "steps": [
+    {
+      "step": "Each bit of a filter is a record of whether any added item hashed to that position. Bit i is 1 exactly when at least one added item has i among its k positions. Adding only ever sets bits to 1, and setting a bit that is already 1 changes nothing.",
+      "part": "Section 2, 'The machinery: bits and hash functions' (the Add/Check box and the line 'The filter never stores the item itself')",
+      "idea": "Adding an item sets its k positions to 1. A bit that is already 1 stays 1, and bits never go back to 0. So the array depends only on which items were added, not on their order or on repeats."
+    },
+    {
+      "step": "Because the two filters have the same m and the same hash functions, any given item maps to the same k positions in both. So bit i means the same thing in both filters, and they can be combined bit by bit.",
+      "part": "Section 2 (hash functions give the same number for the same input, taken modulo m) and the k selector in the section 3 demo",
+      "idea": "An item's positions depend only on the item, the hash functions and m. The demo's script points the other way too: changing k changes every word's positions and forces a rebuild, so filters built with different settings could not be combined."
+    },
+    {
+      "step": "A bitwise OR of the two arrays gives the filter for A ∪ B. Bit i of the OR is 1 exactly when some item of A or some item of B hits i. That is the same as some item of A ∪ B hitting i, which is the rule for a filter built directly from A ∪ B.",
+      "part": "Steps 1 and 2",
+      "idea": "Building from A ∪ B means adding every item of A and every item of B to an empty array. Since the result does not depend on order, it is just the union of the bit sets that A and B switch on."
+    },
+    {
+      "step": "The OR is exact. It is bit-for-bit the same as a filter built from A ∪ B, so it has no false negatives and the same false positive rate as building directly. That rate is about (1 − e^(−kn/m))^k, where n = |A ∪ B|. An item in both sets counts only once.",
+      "part": "Step 3; Section 5, Steps 1–2 (the false positive formula); Section 4 (no false negatives)",
+      "idea": "Two identical arrays answer every check identically, so all the properties of a directly built filter carry over. The OR also fills the array more than either filter alone, so the combined filter needs to be sized for |A ∪ B| (Section 6, on overfilling)."
+    },
+    {
+      "step": "A bitwise AND sets bit i to 1 exactly when some item of A hits i and some item of B hits i. Those may be two different items.",
+      "part": "Step 1",
+      "idea": "Apply the 'bit is 1 if and only if some added item hits it' rule to each filter, then require both."
+    },
+    {
+      "step": "Every bit that a filter built from A ∩ B would set is also set in the AND. An item in both sets switches on its own bits in both filters. So the AND never gives a false negative for A ∩ B.",
+      "part": "Step 5 and Section 4 (no false negatives)",
+      "idea": "An item in A ∩ B was added to both filters, so all its k positions are 1 in both, and therefore 1 in the AND."
+    },
+    {
+      "step": "The AND is not exact. It can have extra 1s where an item that is only in A and a different item that is only in B share a position. A filter built directly from A ∩ B would leave those bits at 0.",
+      "part": "Section 3, 'Things to notice' (different words sometimes share positions), and the 'Hunt for a false positive' explanation of which words set which bits",
+      "idea": "Different items share positions. So 'some item of A hits i and some item of B hits i' does not mean 'some single item in both sets hits i'. The AND therefore has at least as many 1s as the true A ∩ B filter, which can only raise the false positive rate (about f^k, Section 5)."
+    }
+  ],
+  "result": "Take the bitwise OR of the two bit arrays. Bit i of the OR is 1 exactly when some item of A or of B set it, which is the rule for a filter built directly from A ∪ B. So the OR is identical to that filter. It is exact, with the same answers and the same false positive rate as building from A ∪ B (sized for |A ∪ B| items). A bitwise AND gives a filter that answers 'probably yes' for every item in A ∩ B, so it has no false negatives. But it is not exact. It can keep 1s that were set by an item only in A and a different item only in B landing on the same position. So it is a superset of the true A ∩ B filter, and its false positive rate is at least as high and usually higher.",
+  "gap": ""
+}

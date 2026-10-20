@@ -1,0 +1,31 @@
+{
+  "steps": [
+    {
+      "step": "A committed write is on all W servers of its write group. A failure is a server that does not reply, and an operation can only go ahead while enough of its group can still reply.",
+      "part": "The setup (definitions of quorum and failure, and the tolerance paragraph)",
+      "idea": "An operation needs its quorum of servers to reply. The number of failures it survives is servers minus quorum."
+    },
+    {
+      "step": "For a read to see the latest committed write, its read group must share at least one server with that write group. That shared server holds the write.",
+      "part": "Why the quorum must be a majority (the paragraph on fixing split brain)",
+      "idea": "Safety comes from forcing any two quorums to share a server. The shared server links the two groups."
+    },
+    {
+      "step": "A group of W servers and a group of R servers can avoid sharing a server only if W + R ≤ 5. So we need W + R > 5, which means W + R ≥ 6. With five servers, W = 4 and R = 2 just meets this (4 + 2 = 6 > 5).",
+      "part": "Why the quorum must be a majority ('Two groups of size q fit into n servers without a shared server only if 2q ≤ n'), extended to two different sizes with simple counting (background)",
+      "idea": "Two groups can be kept apart only if their sizes add up to no more than n. To force a shared server, the sizes must add up to more than n."
+    },
+    {
+      "step": "Two writes must not both succeed without seeing each other, so write groups must also overlap: 2W > 5, which means W ≥ 3. W = 4 meets this (8 > 5).",
+      "part": "Why the quorum must be a majority (split brain example and the 2q > n rule)",
+      "idea": "Two decision-making groups that do not overlap can commit conflicting values."
+    },
+    {
+      "step": "Writes survive 5 − 4 = 1 failure. Reads survive 5 − 2 = 3 failures.",
+      "part": "The setup (tolerance claim: failures tolerated = servers − quorum)",
+      "idea": "An operation keeps working while at least its quorum can still reply."
+    }
+  ],
+  "result": "W + R > 5, which here means W + R ≥ 6. Writes also need 2W > 5 so that two writes cannot conflict. With W = 4 and R = 2: 4 + 2 = 6 > 5 and 2·4 = 8 > 5, so both hold. Writes survive 1 failure (5 − 4) and reads survive 3 failures (5 − 2). One assumption is not in the explanation: that a reader can tell which reply is the newest, for example by a version number.",
+  "gap": ""
+}

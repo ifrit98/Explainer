@@ -1,0 +1,41 @@
+{
+  "steps": [
+    {
+      "step": "A fraction has a finite binary expansion only if its denominator in lowest terms has no prime factor other than 2. If it has another factor, the expansion repeats and the stored value must be rounded.",
+      "part": "Section 2, 'Why 0.1 has no exact binary form'",
+      "idea": "In base 10 the allowed prime factors of the denominator are 2 and 5. In base 2 only 2 is allowed. A factor of 5 makes the binary expansion repeat forever, so the computer has to cut it off and round."
+    },
+    {
+      "step": "A double holds values of the form (an integer of at most 53 bits) × (a power of 2). These values form a grid, and fractions with power-of-2 denominators are grid points, so they are stored exactly.",
+      "part": "Section 3, 'What the computer actually stores', and Section 6, 'When addition is exact'",
+      "idea": "Values on the grid are stored with no error. Any other value is rounded to the nearest grid point."
+    },
+    {
+      "step": "0.375 = 3/8 and 0.0625 = 1/16. Both denominators are powers of 2, so a double stores both exactly.",
+      "part": "Step 2 plus background (converting a decimal to a fraction in lowest terms)",
+      "idea": "3 × 2⁻³ and 1 × 2⁻⁴ are small integers times powers of 2, so they are grid points."
+    },
+    {
+      "step": "0.2 = 1/5 and 0.3 = 3/10. Both denominators contain the factor 5, so neither can be stored exactly. The table confirms this: stored 0.2 ≈ 0.20000000000000001110 and stored 0.3 ≈ 0.29999999999999998890.",
+      "part": "Section 2 and the table in Section 3",
+      "idea": "A factor of 5 in the denominator means a repeating binary expansion, so the value is rounded to a nearby grid point."
+    },
+    {
+      "step": "0.125 = 1/8 is stored exactly. Every running total k/8 (k = 1…8) has a power-of-2 denominator and needs only a few bits, so each one is a grid point. No addition ever rounds, and the eighth sum is exactly 8/8 = 1.0.",
+      "part": "Section 6, 'When addition is exact' (sums of power-of-2 fractions are exact while they fit in 53 bits), plus Step 2",
+      "idea": "When every input and every result is a grid point, nothing is rounded, so the sum is exact. The 0.5 + 0.25 == 0.75 example works the same way."
+    },
+    {
+      "step": "0.1 is stored slightly high (≈ 0.1000000000000000055511). So the stored 0.1 is not 1/10, and ten copies of it add up exactly to about 1 + 5.55×10⁻¹⁷, not 1. Each running total (0.2, 0.3, …) is also not a grid point, so it is rounded again, as with 0.1 + 0.2. That sum already lands one grid step away from the stored 0.3.",
+      "part": "Section 1 (separate roundings do not cancel), the table in Section 3, and Section 4 (the sum is rounded again)",
+      "idea": "Every addition can add its own rounding error, and these errors do not cancel neatly. So there is no reason for the total to land exactly on 1.0."
+    },
+    {
+      "step": "To show that the tenth sum is definitely not 1.0, and to find which double it is, I would need to follow the rounding through all ten additions. The explanation does this for only one addition and says it does not cover longer chains.",
+      "part": "Summary ('Not covered: … how errors grow across long chains of operations')",
+      "idea": "The explanation does not give the rounded result of each running total from 0.3 up to 1.0."
+    }
+  ],
+  "result": "Stored exactly: 0.375 (3/8) and 0.0625 (1/16), because their denominators are powers of 2. Not exact: 0.2 (1/5) and 0.3 (3/10), because the factor 5 makes the binary expansion repeat. Adding 0.125 eight times gives exactly 1.0 because 1/8 and every running total k/8 are grid points, so no step rounds. Adding 0.1 ten times starts from a value that is already slightly wrong, and most of the running totals have to be rounded again. Those separate errors do not cancel, so there is no reason to expect exactly 1.0. The explanation cannot show the exact final value, though (see gap).",
+  "gap": "The explanation follows the rounding through only one addition (0.1 + 0.2) and says it does not cover how errors grow across long chains of operations. So it does not let me confirm that ten additions of 0.1 end on a double other than 1.0, or say which double that is."
+}

@@ -1,0 +1,41 @@
+{
+  "steps": [
+    {
+      "step": "What the planet sends to space depends on the temperature of the air that does the emitting.",
+      "part": "Section 3, last paragraph ('what a layer of air emits depends on how warm that layer is')",
+      "idea": "CO2 gives off infrared at a rate set by the local air temperature. Emission depends on how warm the layer is, not on how much CO2 it holds."
+    },
+    {
+      "step": "To balance its energy budget, the planet must radiate 238 W/m² to space. That takes emission at an effective temperature of 255 K.",
+      "part": "Section 1, 'Balance'; Section 5, paragraph 'Averaged over all wavelengths...'",
+      "idea": "σT⁴ = 238 gives T ≈ 255 K. On average the Earth radiates to space like a black body at 255 K."
+    },
+    {
+      "step": "Radiation reaches space from an effective emission height. It carries the temperature of that height, not the temperature of the surface.",
+      "part": "Section 5, fact 2 and the paragraph on effective emission height",
+      "idea": "Only photons emitted high enough, with little absorbing gas above them, get out to space."
+    },
+    {
+      "step": "The greenhouse warming of the surface comes from the fall in temperature with height: T_surface ≈ T_emission + Γ × H.",
+      "part": "Section 5, fact 1 (lapse rate) and the formula T_surface ≈ 255 + 6.5 × 5",
+      "idea": "The surface is warmer than the emission level by the lapse rate times the emission height."
+    },
+    {
+      "step": "If the atmosphere has the same temperature at every height, then Γ = 0, so T_surface = T_emission = 255 K. There is no greenhouse warming at any CO2 level.",
+      "part": "Step 4 with Γ set to 0",
+      "idea": "Put Γ = 0 into the lapse-rate formula. The surface is the same temperature as the emission level."
+    },
+    {
+      "step": "Adding CO2 still pushes the emission height up. But the air up there is no colder, so the planet radiates just as much as before. Outgoing radiation does not drop and there is no forcing.",
+      "part": "Section 5, 'Now add CO₂' paragraph; steps 1 and 5",
+      "idea": "Extra CO2 reduces outgoing energy only because the higher emission level is colder. With no change in temperature with height, the higher level radiates the same."
+    },
+    {
+      "step": "With no energy shortfall, the planet never needs to warm. In the explanation's own words, the surface ends up warmer by Γ × (rise in emission height), and that is 0 × Δh = 0.",
+      "part": "Section 5, end of 'Now add CO₂' paragraph; Section 6 (ΔT = ΔF/λ)",
+      "idea": "Warming equals forcing divided by the restoring strength. Zero forcing means zero warming. Equivalently, the warming is Γ times the rise in emission height, which is zero when Γ = 0."
+    }
+  ],
+  "result": "The surface temperature would not change. It would stay at about 255 K, the value with no greenhouse effect. Adding CO2 still lifts the height from which Earth radiates to space, but in an isothermal atmosphere that higher air is just as warm. It therefore sends out the same 238 W/m², so there is no radiative forcing and the planet does not need to warm. The effect depends on temperature falling with height (the lapse rate). One caveat: the one-layer model in Section 4 has the air colder than the surface (E_a = E_s/2), so it already assumes the temperature changes with height. It doesn't apply to this case.",
+  "gap": ""
+}

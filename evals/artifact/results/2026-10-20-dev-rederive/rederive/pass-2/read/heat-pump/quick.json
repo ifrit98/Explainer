@@ -1,0 +1,41 @@
+{
+  "steps": [
+    {
+      "step": "In the reversed machine (an air conditioner), the cold indoors plays the outdoor air's role: heat is taken in at the cold side. Electricity drives the compressor, and heat is released at the warm outdoor side.",
+      "part": "Level 2, the line 'A refrigerator uses the same loop', together with the refrigerant-loop diagram",
+      "idea": "The same loop can serve different purposes. Its evaporator is wherever heat is taken from the cold place, and its condenser is wherever heat is given to the warm place. So an air conditioner is this loop with the cold side indoors and the warm side outdoors."
+    },
+    {
+      "step": "Energy balance for the loop: heat given out at the hot side = heat taken in at the cold side + electricity, so Q_hot = Q_cold + W.",
+      "part": "Level 1, the energy-conservation sentence (3 kWh = 2 kWh + 1 kWh); Level 2, step 3 (Condenser)",
+      "idea": "No energy is created. The heat released at the condenser is the heat taken in at the evaporator plus the compressor work."
+    },
+    {
+      "step": "Define the air conditioner's figure of merit as useful heat removed per unit of electricity, Q_cold ÷ W. This is the counterpart of heating COP = Q_hot ÷ W.",
+      "part": "Level 1, the paragraph defining COP",
+      "idea": "COP is the useful output divided by the paid input (electricity). For heating the useful output is the heat delivered. For cooling it is the heat removed from the cold space."
+    },
+    {
+      "step": "Divide the balance by W: Q_cold/W = Q_hot/W − 1. So cooling COP = heating COP − 1, for the same machine running between the same temperatures.",
+      "part": "Step 2 and step 3, plus background algebra",
+      "idea": "The heat delivered is bigger than the heat removed by exactly the electricity used. Per unit of electricity, that difference is exactly 1."
+    },
+    {
+      "step": "Ideal heating limit for the same two temperatures: T_hot ÷ (T_hot − T_cold), with temperatures in kelvin.",
+      "part": "Level 3, the Carnot limit formula",
+      "idea": "No machine can beat COP_max = T_hot/(T_hot − T_cold) for moving heat from T_cold up to T_hot."
+    },
+    {
+      "step": "Ideal cooling limit = T_hot/(T_hot − T_cold) − 1 = [T_hot − (T_hot − T_cold)]/(T_hot − T_cold) = T_cold ÷ (T_hot − T_cold).",
+      "part": "Steps 4 and 5, plus background algebra",
+      "idea": "Subtract 1 from the heating limit and put it over a common denominator."
+    },
+    {
+      "step": "Example: with the cold side at 263 K and the hot side at 313 K (lift 50 K), the ideal heating COP is 313/50 ≈ 6.3, so the ideal cooling COP is 263/50 ≈ 5.3. That is exactly 1 less.",
+      "part": "Level 3 table, the Typical row",
+      "idea": "The table gives the temperatures and the heating Carnot limit to check against."
+    }
+  ],
+  "result": "The ideal air-conditioner limit is heat removed ÷ electricity = T_cold ÷ (T_hot − T_cold), with temperatures in kelvin. It is exactly 1 less than the heating limit T_hot ÷ (T_hot − T_cold) because of energy conservation. The heat sent out to the warm side is the heat removed from the cold side plus the electricity (Q_hot = Q_cold + W). So Q_cold/W = Q_hot/W − 1. A heater gets to count the compressor work as useful heat; an air conditioner doesn't, because that work only adds to what must be dumped outside. One assumption: the Carnot limit is stated only for heating, and I've taken it to apply to the same loop running the other way. The explanation's 'a refrigerator uses the same loop' supports this but doesn't say it outright.",
+  "gap": ""
+}

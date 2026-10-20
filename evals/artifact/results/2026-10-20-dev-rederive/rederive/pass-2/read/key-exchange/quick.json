@@ -1,0 +1,51 @@
+{
+  "steps": [
+    {
+      "step": "All three agree in public on p and g (for example p = 23, g = 5). Eve knows these too.",
+      "part": "How it works, step 1",
+      "idea": "The prime and the base are public. Only the private numbers are kept secret."
+    },
+    {
+      "step": "Each person picks a private number and never sends it: Alice picks a, Bob picks b, Carol picks c.",
+      "part": "How it works, step 2",
+      "idea": "Each person's private number stays secret. Every message is built from it but never contains it directly."
+    },
+    {
+      "step": "Round 1: each person sends a public value. Alice sends g^a mod p, Bob sends g^b mod p, Carol sends g^c mod p.",
+      "part": "How it works, step 3",
+      "idea": "A public value is g raised to your private number, mod p, and you send it openly."
+    },
+    {
+      "step": "Round 2: each person raises the public value they got from a neighbour to their own private number, then sends the result on. Bob takes Alice's g^a and sends (g^a)^b = g^(ab). Carol takes Bob's g^b and sends g^(bc). Alice takes Carol's g^c and sends g^(ca). All of these are still mod p.",
+      "part": "How it works, step 4 and the paragraph under it",
+      "idea": "Raising someone else's public value to your own private number gives g to the product of the two exponents, (g^b)^a = g^(ab). This result can itself be sent openly as a new value."
+    },
+    {
+      "step": "Final step: each person raises the two-exponent value that is missing their own number to their private number. Carol computes (g^(ab))^c, Alice computes (g^(bc))^a, and Bob computes (g^(ca))^b. Each gets g^(abc) mod p, so all three hold the same key, and the key itself is never sent.",
+      "part": "Paragraph under How it works ('Order does not matter') plus background exponent rules",
+      "idea": "The order of exponents does not matter, so every route gives g to the product abc. Example with a = 6, b = 15: g^(ab) mod 23 = 2. If Carol picks c = 3, she gets 2^3 mod 23 = 8."
+    },
+    {
+      "step": "Eve sees p, g, g^a, g^b, g^c, g^(ab), g^(bc) and g^(ca). To get g^(abc) she must put one more private exponent onto one of these values. For example, she needs c to turn g^(ab) into the key, and finding c from g^c means solving g^c mod p = value. That is the discrete logarithm.",
+      "part": "Why Eve fails, paragraph 1",
+      "idea": "Getting the key needs a private exponent, and recovering an exponent from a public value is the discrete logarithm problem."
+    },
+    {
+      "step": "Eve cannot just combine the public values she sees. Multiplying them only adds exponents. For example, g^(ab)·g^c = g^(ab+c), not g^(abc).",
+      "part": "Why Eve fails, last paragraph",
+      "idea": "Multiplying public values adds their exponents. It never multiplies them."
+    },
+    {
+      "step": "With a large p (2048 bits), solving the discrete logarithm takes about 2^112 operations, which is out of reach. The honest parties need only fast exponentiation, about two exponentiations each.",
+      "part": "Why Eve fails, paragraph 2",
+      "idea": "Going forward is easy and going backward is infeasible, as long as p is large."
+    },
+    {
+      "step": "This holds only if Eve can read messages but not change them, and only if the discrete logarithm really is hard.",
+      "part": "Limits",
+      "idea": "An attacker who can swap messages (man-in-the-middle) breaks the scheme unless the values are authenticated. Also, the hardness is assumed, not proven."
+    }
+  ],
+  "result": "They take two rounds of public messages. First, each person sends g^x mod p for their own private x. Second, each person raises a neighbour's value to their own private number and passes it on (giving g^ab, g^bc, g^ca). Finally, each person raises the value that lacks their own number to their private number, so all three get g^(abc) mod p. Eve sees only values of the form g^(one or two exponents). To turn any of them into the key she needs a missing private exponent, which means solving a discrete logarithm. That is infeasible for a large p, and multiplying the values she sees only adds exponents. This assumes Eve can only listen, cannot change messages, and that the discrete logarithm is hard. The explanation covers only two people, so the three-person version is my own extension of its exponent rule. Its claim that the extra round-2 values give Eve nothing useful also goes a little beyond what the explanation's argument directly covers.",
+  "gap": ""
+}

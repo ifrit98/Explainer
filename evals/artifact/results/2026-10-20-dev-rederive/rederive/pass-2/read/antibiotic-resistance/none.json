@@ -1,0 +1,41 @@
+{
+  "steps": [
+    {
+      "step": "If you give one drug, the resistant cells are already there before treatment starts. The drug doesn't create them.",
+      "part": "Section 3a 'Mutation', the paragraph after the bullets ('very likely already contains... It reveals them')",
+      "idea": "Resistance mutations happen at random as cells divide. In a big population a few resistant cells exist before any drug arrives, and the drug simply removes everyone else."
+    },
+    {
+      "step": "Drug A alone: about 10^10 / 10^8 = 100 cells already resist A.",
+      "part": "Section 3a, the 'Quick estimate' box",
+      "idea": "Expected number of resistant cells = population size × the fraction that resists. The box works this exact case: 10^10 cells at 1 in 10^8 gives 100."
+    },
+    {
+      "step": "Drug B alone: about 10^10 / 10^9 = 10 cells already resist B.",
+      "part": "Step 2 plus the page's 'Lower the mutation rate' tip ('Resistance is a numbers game: (population size) × (mutation rate)')",
+      "idea": "Use the same population × rate calculation with B's rate."
+    },
+    {
+      "step": "Even 10 or 100 survivors are enough for one drug to fail.",
+      "part": "Section 4, 'A toy calculation'",
+      "idea": "Once the drug removes the susceptible cells, 100 resistant cells dividing every 30 minutes reach about 10^8 in 10 hours. How rare they were at the start hardly matters, because exponential growth makes up the difference."
+    },
+    {
+      "step": "With both drugs, a cell survives only if it resists both. Because the mutations are unrelated, multiply the chances: 1/10^8 × 1/10^9 = 1 in 10^17.",
+      "part": "Section 8, the 'Combine drugs, sometimes' bullet (plus background: multiplying independent probabilities)",
+      "idea": "The explanation multiplies the two single-drug rates to get the chance of a cell resisting both by chance. In its example, 1 in 10^8 times 1 in 10^8 gives 1 in 10^16, more cells than are in the infection."
+    },
+    {
+      "step": "Expected number of cells resisting both = 10^10 / 10^17 = 10^-7. Almost certainly no such cell exists when treatment starts.",
+      "part": "Step 5 plus the population × rate rule from step 2",
+      "idea": "The infection has 10 million times fewer cells than you would need to expect even one double-resistant cell."
+    },
+    {
+      "step": "With no double-resistant cell present, nothing survives to multiply, so the treatment succeeds. A single-resistant cell is still killed by the other drug.",
+      "part": "The page's 'Lower the mutation rate to 10⁻¹⁰' tip; Section 4's 'Above MIC_R' bullet",
+      "idea": "If no resistant cell exists when the drug arrives, treatment succeeds. To escape, a survivor would need a second resistance step, and here that means a separate rare mutation."
+    }
+  ],
+  "result": "Each drug alone fails because resistant cells already exist before treatment starts: about 100 resist A (10^10/10^8) and about 10 resist B (10^10/10^9). The drug kills the rest, and those few multiply to take over. With both drugs, a cell survives only if it carries both unrelated mutations. Multiplying the chances gives 1 in 10^17, so the infection is expected to hold only about 10^-7 such cells, which in practice means none. Any cell that resists one drug is still killed by the other, so there are no survivors for selection to work on. Resistance would need two separate rare events to happen in the same lineage.",
+  "gap": ""
+}

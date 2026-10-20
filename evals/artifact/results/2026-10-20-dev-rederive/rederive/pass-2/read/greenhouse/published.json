@@ -1,0 +1,36 @@
+{
+  "steps": [
+    {
+      "step": "The Earth has to emit as much as it absorbs, about 240 W/m². Whatever does the emitting must therefore be at 255 K.",
+      "part": "Section 1, 'Without greenhouse gases: 255 K' (energy balance, Stefan–Boltzmann law, emission temperature)",
+      "idea": "Absorbed sunlight is 340 × 0.70 ≈ 240 W/m². Setting σT⁴ = 240 W/m² gives T = 255 K for the emitter."
+    },
+    {
+      "step": "Infrared escapes to space from the emission height, and the air there must be at 255 K.",
+      "part": "Section 3, 'Where the infrared escapes: 5 km up', first two paragraphs",
+      "idea": "Infrared only reaches space from air with little greenhouse gas above it. That air has to emit 240 W/m², so it sits at the emission temperature."
+    },
+    {
+      "step": "Adding CO2 raises the emission height.",
+      "part": "Section 4, 'Adding CO₂', point 1",
+      "idea": "With more gas, the infrared has to start from higher up before little gas is left above it. For a doubling, the rise is about 150 m."
+    },
+    {
+      "step": "Normally the higher air is colder and so emits less. That shortfall (the forcing) is what warms the planet.",
+      "part": "Section 4, points 2–5",
+      "idea": "With a lapse rate of 6.5 K/km, 150 m higher is about 1 K colder (254 K). That air emits about 236 W/m², roughly 3.7 W/m² too little, so the Earth warms until the new emission height is back at 255 K."
+    },
+    {
+      "step": "If every height has the same temperature, the higher emission height is still at 255 K. It still emits 240 W/m², so there is no imbalance.",
+      "part": "Section 5, 'The condition: colder air above', test-case paragraph",
+      "idea": "With a lapse rate of 0, raising the emission height doesn't change the temperature of the emitting air. Emission stays at 240 W/m², the forcing is zero, and nothing pushes the system to warm."
+    },
+    {
+      "step": "So the surface temperature doesn't change. In a uniform atmosphere the surface would also be at 255 K, with no greenhouse warming either before or after adding CO2.",
+      "part": "Section 3, the step 255 K + 6.5 K/km × 5 km ≈ 288 K; Step 5; Section 5, last paragraph",
+      "idea": "The surface is warmer than the emitting air only by lapse rate × emission height. With a lapse rate of 0 that difference is zero however high the emission height goes. Warming needs both a rising emission height and air that gets colder with height."
+    }
+  ],
+  "result": "Adding CO2 would not change the surface temperature. The emission height would still rise, but the air up there would be at the same temperature as everywhere else. With the whole column at 255 K, that air still emits 240 W/m², which matches the 240 W/m² absorbed. So there is no radiative forcing, no build-up of energy, and no warming. Since the surface is warmer than the emitting air only by lapse rate × emission height, and the lapse rate here is 0, the surface would just be at the emission temperature of about 255 K, before and after the CO2 is added. Greenhouse warming needs the gas to lift the emission height and the air to get colder with height.",
+  "gap": ""
+}

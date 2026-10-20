@@ -1,0 +1,41 @@
+{
+  "steps": [
+    {
+      "step": "In this picture, the planet's surface temperature is set by matching the energy coming in with the energy going out.",
+      "part": "Section 1, 'The planet is a budget: energy in = energy out'",
+      "idea": "The planet absorbs about 238 W/m² of sunlight and gives off σT⁴. It warms or cools until the two are equal. Giving off 238 W/m² needs a temperature of 255 K."
+    },
+    {
+      "step": "What a layer of air gives off depends only on that layer's own temperature.",
+      "part": "Section 3, last paragraph ('what a layer of air emits depends on how warm that layer is')",
+      "idea": "CO₂ gives off infrared at a rate set by the temperature of the air around it. Radiation from air at a given temperature has a fixed strength, wherever that air is."
+    },
+    {
+      "step": "Space receives radiation from the 'effective emission height', at the temperature found at that height.",
+      "part": "Section 5, fact 2 and the paragraph on 'effective emission height'",
+      "idea": "The infrared that escapes comes from the level above which there is too little gas to absorb it. Space sees the temperature of that level, not the temperature of the surface."
+    },
+    {
+      "step": "Adding CO₂ only has an effect because a higher level is colder.",
+      "part": "Section 5, 'Now add CO₂' paragraph",
+      "idea": "More CO₂ lifts the emission height. Forcing (energy going out falling below 238 W/m²) happens only because the higher air is colder and so gives off less (T⁴)."
+    },
+    {
+      "step": "If temperature is the same at every height, the lapse rate Γ is 0.",
+      "part": "Section 5, fact 1 (definition of lapse rate) + the question's assumption",
+      "idea": "The lapse rate is how fast temperature falls with height. In an atmosphere at one temperature throughout, it falls by 0 K per km."
+    },
+    {
+      "step": "With Γ = 0, raising the emission height leaves its temperature unchanged, so the energy going out does not change and there is no forcing.",
+      "part": "Steps 2, 3, 4, 5",
+      "idea": "The new, higher level is just as warm as the old one. It gives off the same σT⁴, so the outgoing radiation still matches the incoming 238 W/m², and the planet has no shortfall to warm up from."
+    },
+    {
+      "step": "The surface temperature formula gives no greenhouse warming and no change.",
+      "part": "Section 5 formula T_surface ≈ T_emission + Γ × H, and 'surface ends up warmer by about Γ × (rise in emission height)'",
+      "idea": "With Γ = 0: T_surface = T_emission = 255 K whatever the height H, and the warming Γ × Δh = 0. Model 2 on the page shows the same thing. Its profile lines are drawn using slope Γ and the surface temperature is 255 + Γ·H0, so a flat profile would leave nothing to shift."
+    }
+  ],
+  "result": "Adding CO₂ would leave the surface temperature unchanged. In the explanation's emission-height picture, the planet radiates to space from a level whose temperature sets how much energy leaves. More CO₂ lifts that level, but if every height has the same temperature, the higher level is no colder. It gives off the same amount, so there is no forcing and no reason to warm. Using the explanation's formula, the warming is Γ × (rise in emission height) = 0 × Δh = 0. The surface would also have no greenhouse warming to begin with: it would sit at the emission temperature, about 255 K. The effect depends on air getting colder with height.",
+  "gap": ""
+}

@@ -1,0 +1,31 @@
+{
+  "steps": [
+    {
+      "step": "More CO2 means more absorbing gas above each altitude, so the emission level (the height from which infrared escapes to space) moves higher.",
+      "part": "Section 6, chain item 1, and Section 5, Fact 1",
+      "idea": "A photon can reach space only if little absorbing gas lies above it. Adding CO2 adds gas above every height, so photons must start higher before they can escape."
+    },
+    {
+      "step": "How much a layer emits depends only on its temperature, through P = σT⁴.",
+      "part": "Section 1, Stefan–Boltzmann law",
+      "idea": "Emission per square metre is fixed by the absolute temperature. The same temperature gives the same emission."
+    },
+    {
+      "step": "In an isothermal atmosphere, the higher emission level has the same temperature as the old one, so its emission to space stays the same.",
+      "part": "Steps 1–2 and Section 7, 'Breaks (isothermal air)' bullet",
+      "idea": "With no fall in temperature with height, raising the emission level does not make it colder, so σT⁴ does not change."
+    },
+    {
+      "step": "Outgoing energy still equals the 238 W/m² absorbed from the Sun, so there is no imbalance (no radiative forcing) and the planet gains no energy.",
+      "part": "Step 3, Section 6 chain items 2–4, and Section 8 (238 W/m² is fixed by sunlight and reflectivity)",
+      "idea": "Warming happens only when less energy leaves than arrives. That requires the emission level to emit less, which needs it to be colder."
+    },
+    {
+      "step": "The surface temperature does not change. With no lapse rate, the surface is at the same temperature as the emission level (about 255 K), however high that level sits.",
+      "part": "Step 4, Section 5 (diagram: surface = emission-level temperature + lapse rate × height), Section 7",
+      "idea": "The surface's excess warmth comes from lapse rate × emission height. With a lapse rate of 0, that excess is 0 and stays 0 when the height increases."
+    }
+  ],
+  "result": "Adding CO2 would not change the surface temperature, because there would be no warming. The extra CO2 still raises the emission level. But at the same temperature everywhere, the new level is as warm as the old one, so by σT⁴ it sends the same 238 W/m² to space. Energy in still equals energy out, so there is no forcing and nothing pushes the surface to warm. The greenhouse effect described here depends on air getting colder with height. Without that, the surface would stay at the same temperature as the emitting layer (about 255 K), whatever the amount of CO2.",
+  "gap": ""
+}

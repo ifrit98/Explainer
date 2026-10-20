@@ -1,0 +1,26 @@
+{
+  "steps": [
+    {
+      "step": "Matching cells grow by repeated doubling, so the number of doublings needed is log2(target count ÷ starting count).",
+      "part": "Step 3: the selected cells multiply, then most die (worked example: 100 × 2^15, and log2(20) ≈ 4.3 doublings to get from 164,000 to 3.3 million)",
+      "idea": "Clonal expansion is exponential doubling. The time to reach a target is the number of doublings, found with log base 2 of the ratio, multiplied by the time per doubling."
+    },
+    {
+      "step": "A first infection needs log2(N/S) doublings to reach a target of N cells from S starting cells. After vaccination the pool starts at 1000S, so it needs log2(N/(1000S)) = log2(N/S) − log2(1000) doublings.",
+      "part": "Step 1 + 1 + Summary of the chain (memory pool ~1000× naive pool)",
+      "idea": "Vaccination leaves a memory pool about 1000 times the naive pool, so the vaccinated response starts 1000 times higher on the same doubling curve."
+    },
+    {
+      "step": "The difference is log2(1000) ≈ 9.97, so about 10 doublings are saved. The target N cancels when one count is subtracted from the other.",
+      "part": "Step 2 + background (logarithms)",
+      "idea": "log(a/b) = log a − log b. The term with N appears in both counts and cancels, so the head start depends only on the ratio of the starting pools."
+    },
+    {
+      "step": "10 doublings × 12 hours ≈ 120 hours ≈ 5 days sooner.",
+      "part": "Step 3 + background (arithmetic)",
+      "idea": "Multiply the doublings saved by the doubling time given in the question (12 h; the explanation itself uses about 8 h)."
+    }
+  ],
+  "result": "The response reaches full strength about 5 days sooner, because log2(1000) ≈ 10 doublings × 12 h ≈ 120 h. The answer doesn't depend on how many cells count as 'enough'. With exponential growth, the time to any target is log2(target ÷ start) × doubling time. Both responses grow toward the same target, so when you subtract one time from the other the target cancels. Only the 1000-fold head start is left. A 1000-fold head start is always about 10 doublings behind the finish line, wherever that line is. The explanation adds that in reality the gap is even larger, because memory cells activate more easily and some antibody is already present on day 0.",
+  "gap": ""
+}

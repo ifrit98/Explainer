@@ -1,0 +1,26 @@
+{
+  "steps": [
+    {
+      "step": "The Moon raises a pair of bulges along the Earth–Moon line.",
+      "part": "Only the difference in pull moves water (bullets and diagram)",
+      "idea": "The near side is pulled more than Earth's centre and the far side less, so one bulge points toward the Moon and one points away."
+    },
+    {
+      "step": "The Sun raises a weaker pair of bulges, 0.46 the size of the Moon's.",
+      "part": "Evidence that the difference is what counts: the Sun",
+      "idea": "Solar tides are 0.46 of lunar tides, because tidal acceleration falls off as 1/d³."
+    },
+    {
+      "step": "The two pairs of bulges combine, and how much depends on where the Sun is relative to the Moon.",
+      "part": "Limits, 'Not covered' bullet",
+      "idea": "With spring and neap tides, the Sun's smaller pair of bulges adds to the Moon's or partly cancels it. The explanation names this effect but says it does not cover it."
+    },
+    {
+      "step": "Try to say what happens at right angles.",
+      "part": "Steps 1–3",
+      "idea": "At quarter Moon the Sun's bulge line is 90° from the Moon's. The explanation never says where low water sits relative to the bulges. It also never says which alignment makes spring tides and which makes neap tides, or how bulges at 90° combine. So I can't establish from the text that the Sun's highs fall on the Moon's lows and cut the tide, rather than add to it."
+    }
+  ],
+  "result": "No firm answer from the explanation. A guess, not supported by the text: if the right-angle position is the 'partly cancels' case and spring tides are the 'adds' case, the tides would be about (1 − 0.46)/(1 + 0.46), roughly 0.37 of spring tides, or about a third. I'm not claiming this, because the needed geometry isn't given.",
+  "gap": "The explanation says outright that spring and neap tides are not covered. It doesn't say that spring tides come when the Sun and Moon line up. It doesn't say that at right angles the Sun's bulges fall where the Moon's low water is, so they partly cancel. And it doesn't say how the two tides combine in size (lunar minus solar, versus lunar plus solar)."
+}

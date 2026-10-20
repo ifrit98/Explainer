@@ -1,0 +1,31 @@
+{
+  "steps": [
+    {
+      "step": "Each group can keep working only while enough servers reply. The number of failures a group size survives is servers minus group size.",
+      "part": "The setup (claim: tolerance)",
+      "idea": "The cluster keeps going while at least a quorum of servers reply, so it tolerates (servers − quorum) failures."
+    },
+    {
+      "step": "A read sees the latest committed write only if at least one server in the read group was also in the write group. Only such a server holds that write.",
+      "part": "Why the quorum must be a majority (claim: why-majority)",
+      "idea": "Safety comes from making any two quorums share at least one server, so that a shared server links the two groups. I apply the same idea to a write group and a read group. The explanation itself only covers two deciding groups of the same size."
+    },
+    {
+      "step": "A write group of W servers and a read group of R servers can avoid sharing a server only if W + R ≤ n. So they must satisfy W + R > n, which here is W + R > 5.",
+      "part": "Why the quorum must be a majority, the counting sentence (two groups of size q fit into n servers without overlap only if 2q ≤ n), plus background arithmetic",
+      "idea": "Two disjoint groups need room for both in n servers. Using sizes W and R in place of q and q gives W + R ≤ n for disjoint groups, so overlap needs W + R > n."
+    },
+    {
+      "step": "Check W = 4, R = 2: 4 + 2 = 6 > 5, so every read group overlaps every write group.",
+      "part": "Step 3",
+      "idea": "Apply the condition."
+    },
+    {
+      "step": "Writes need 4 replies out of 5, so they survive 5 − 4 = 1 failure. Reads need 2 replies, so they survive 5 − 2 = 3 failures.",
+      "part": "Steps 1 and 4",
+      "idea": "Tolerance is servers minus group size."
+    }
+  ],
+  "result": "W + R > 5 (in general W + R > n, so any read group shares a server with any write group). With W = 4 and R = 2 (4 + 2 = 6 > 5): writes survive 1 failure and reads survive 3. Caveat: the explanation only shows overlap for two equal-sized majority groups that make decisions. Applying it to separate read and write groups is my own extension of its counting argument. It also doesn't say whether two write groups need to overlap each other (2W > n). Here 2·4 = 8 > 5, so they do.",
+  "gap": ""
+}

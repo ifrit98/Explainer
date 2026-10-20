@@ -1,0 +1,36 @@
+{
+  "steps": [
+    {
+      "step": "Pseudorange is light speed × (receive time on the receiver clock − send time on the satellite clock), so any error in the satellite's send timestamp goes straight into that satellite's pseudorange.",
+      "part": "Section 2, paragraph defining pseudorange (claim def-pseudorange)",
+      "idea": "The measured distance is a time difference multiplied by c. One of the two times comes from the satellite's clock."
+    },
+    {
+      "step": "Each nanosecond of timing error gives 0.3 m of range error, so a 10 ns error gives about 10 × 0.3 m = 3 m.",
+      "part": "Section 1, paragraph on 300 m per µs and 0.3 m per ns; Section 3, 'Each nanosecond of satellite clock error is 0.3 m of range error'",
+      "idea": "A timing error becomes a range error at the rate c, which is 0.3 m per ns."
+    },
+    {
+      "step": "Direction: a clock that is 10 ns fast stamps the send time 10 ns too late. Receive time minus send time then comes out 10 ns too small, so the pseudorange to that satellite is about 3 m too short.",
+      "part": "Step 1 plus background arithmetic",
+      "idea": "A send time that is too large shrinks the time difference."
+    },
+    {
+      "step": "The receiver's clock error b can be solved for only because one clock makes every measurement, so b is the same in all four pseudoranges.",
+      "part": "Section 2, pseudorange paragraph and the worked example on a line",
+      "idea": "An error shared by every measurement can be found and removed as one extra unknown, next to x, y, z."
+    },
+    {
+      "step": "The satellite's error is in only one pseudorange. No single shared unknown can absorb it, so it shows up as a wrong position.",
+      "part": "Section 3, first paragraph (claim mech-clock-to-range); Section 5",
+      "idea": "b absorbs only errors that are the same in every pseudorange. An error that differs between satellites, like the different drifts in Section 5, cannot be absorbed."
+    },
+    {
+      "step": "3 m is within the 17 ns (about 5 m) budget, so this error would degrade the fix only slightly.",
+      "part": "Section 3, second paragraph",
+      "idea": "Satellite clocks need to stay within about 17 ns of GPS time for a fix within about 5 m."
+    }
+  ],
+  "result": "The pseudorange to that satellite is off by about 3 m (10 ns × 0.3 m/ns). It comes out about 3 m too short, because the fast clock stamps the send time too late. The receiver's fourth unknown b can absorb only an error that is the same in every pseudorange, as its own clock error is, since one receiver clock times them all. This satellite's clock error appears in just one of the four pseudoranges. It is not shared, so no single b can remove it, and it goes straight into the position. It stays within the roughly 17 ns (about 5 m) budget.",
+  "gap": ""
+}

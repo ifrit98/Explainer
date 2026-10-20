@@ -1,0 +1,392 @@
+{
+  "antibiotic-resistance": {
+    "verdict": "pass",
+    "tests": {
+      "correct": true,
+      "blocks": true,
+      "derived_follow": true,
+      "steps": true,
+      "not_stated": true
+    },
+    "reason": "Every step holds: blocks 1 and 2 come straight from the quiz's expected answers on pre-existing mutations and selection, step 3 multiplies independent probabilities (10^-8 × 10^-9 = 10^-17), and step 4 correctly counts 100 A-resistant, 10 B-resistant and 10^-7 expected double-resistant cells, a combination-therapy result a good answer to the subject question would not state.",
+    "hash": "20ab0c96ca5c",
+    "attempt": 1
+  },
+  "backprop": {
+    "verdict": "pass",
+    "tests": {
+      "correct": true,
+      "blocks": true,
+      "derived_follow": true,
+      "steps": true,
+      "not_stated": true
+    },
+    "reason": "All steps hold: steps 1 and 2 come from the quiz answers. Step 3 (gradient −6, so w = 0.6) and step 4 (distance scales by 1 − 2η, so it settles only for 0 < η < 1, and η = 1 bounces between 0 and 6) use only school calculus and algebra. A general explanation would not state this specific result.",
+    "hash": "3bc7edde990c",
+    "attempt": 1
+  },
+  "bloom-filter": {
+    "verdict": "pass",
+    "tests": {
+      "correct": true,
+      "blocks": true,
+      "derived_follow": true,
+      "steps": true,
+      "not_stated": true
+    },
+    "reason": "Every step holds: step 1 comes from the quiz's add/lookup and no-false-negatives answers, steps 2–4 follow by plain set reasoning (OR exactly reproduces the A ∪ B filter; AND covers every common item but may keep bits set by different items), and the subject's question does not ask about combining filters.",
+    "hash": "560ff6efa258",
+    "attempt": 1
+  },
+  "bond-prices": {
+    "verdict": "pass",
+    "tests": {
+      "correct": true,
+      "blocks": true,
+      "derived_follow": true,
+      "steps": true,
+      "not_stated": true
+    },
+    "reason": "Every step holds: 1,000/1.03^10 ≈ $744 and 1,000/1.05^10 ≈ $614 give a fall of about 17.5%, which \"about 17%\" covers. The two block steps come from the quiz's discounting answers, the derived steps are plain arithmetic, and a good explanation would give the 9% coupon-bond example, not this zero-coupon result.",
+    "hash": "df104d611f07",
+    "attempt": 2
+  },
+  "cache-order": {
+    "verdict": "pass",
+    "tests": {
+      "correct": true,
+      "blocks": true,
+      "derived_follow": true,
+      "steps": true,
+      "not_stated": true
+    },
+    "reason": "All steps hold: blocks 1 and 2 come straight from the expected answers. Step 3 is arithmetic (8,000,000/64 = 125,000 against 1,000,000), and step 4 applies the same reasoning to 64 one-byte values per line (about 15,600 against 1,000,000). A good explanation might imply the 8-doubles-per-line factor but would not give the line counts or the 64× result for chars.",
+    "hash": "ebcc3f60beb0",
+    "attempt": 1
+  },
+  "double-spend": {
+    "verdict": "pass",
+    "tests": {
+      "correct": true,
+      "blocks": true,
+      "derived_follow": true,
+      "steps": true,
+      "not_stated": true
+    },
+    "reason": "Steps 1 and 2 come straight from the quiz answers. Step 3 follows from the basic fact that changing data changes its hash. Step 4 follows from removing the link, giving a correct result that a standard explanation would not state; no step fails.",
+    "hash": "4dd74969073e",
+    "attempt": 1
+  },
+  "float-sum": {
+    "verdict": "pass",
+    "tests": {
+      "correct": true,
+      "blocks": true,
+      "derived_follow": true,
+      "steps": true,
+      "not_stated": true
+    },
+    "reason": "Every step holds: steps 1 and 2 come from the quiz answers on binary fractions and power-of-2 denominators; steps 3 and 4 follow by factoring the denominators and reasoning about accumulated rounding; and the result (0.9999999999999999) is correct and not something a good explanation would have to state.",
+    "hash": "689ec94927ed",
+    "attempt": 1
+  },
+  "garbage-collection": {
+    "verdict": "pass",
+    "tests": {
+      "correct": true,
+      "blocks": true,
+      "derived_follow": true,
+      "steps": true,
+      "not_stated": true
+    },
+    "reason": "Every step holds: steps 1 and 2 come straight from the quiz answers on reachability and cycles. Steps 3–5 apply them, since each adjacent pair of nodes forms a mutual-reference cycle and the back links make every node reachable from the tail. A good explanation covers a two-object cycle, not this list-plus-cache case.",
+    "hash": "6f783b2ee8c0",
+    "attempt": 1
+  },
+  "gps-relativity": {
+    "verdict": "pass",
+    "tests": {
+      "correct": true,
+      "blocks": true,
+      "derived_follow": true,
+      "steps": true,
+      "not_stated": true
+    },
+    "reason": "No step fails: both block steps come from the quiz answers, step 3 (10 ns stamped late gives a distance about 3 m short) follows from distance = c × travel time, step 4 (a receiver clock error shifts every distance equally, so a single-satellite error cannot be absorbed and moves the fix) follows from the clock being a shared fourth unknown, and a good explanation would not state this result.",
+    "hash": "5923692adc45",
+    "attempt": 1
+  },
+  "greenhouse": {
+    "verdict": "pass",
+    "tests": {
+      "correct": true,
+      "blocks": true,
+      "derived_follow": true,
+      "steps": true,
+      "not_stated": true
+    },
+    "reason": "Steps 1 and 2 come straight from the quiz's expected answer on emission height and colder upper air. Steps 3 and 4 follow from those by setting the temperature drop with height to zero, which gives the standard result that an isothermal atmosphere produces no warming from extra CO2. A good explanation would rely on the drop in temperature with height but would not usually spell out the isothermal case, so no step fails.",
+    "hash": "226ec88cb282",
+    "attempt": 1
+  },
+  "heat-pump": {
+    "verdict": "pass",
+    "tests": {
+      "correct": true,
+      "blocks": true,
+      "derived_follow": true,
+      "steps": true,
+      "not_stated": true
+    },
+    "reason": "All steps hold: steps 1 and 2 are blocks taken from the quiz answers, step 3 follows by subtracting the work from the heat given off, step 4 is algebra, and an explanation of heating would not state the cooling limit.",
+    "hash": "ce4d6e45f052",
+    "attempt": 1
+  },
+  "https-identity": {
+    "verdict": "pass",
+    "tests": {
+      "correct": true,
+      "blocks": true,
+      "derived_follow": true,
+      "steps": true,
+      "not_stated": true
+    },
+    "reason": "All steps hold: blocks 1 and 2 come directly from the quiz's expected answers on certificates and the handshake proof. Steps 3 and 4 follow from them without new facts. A good explanation of how HTTPS proves identity would not have to spell out the consequence of a stolen site key.",
+    "hash": "031a92e3530a",
+    "attempt": 1
+  },
+  "jpeg": {
+    "verdict": "pass",
+    "tests": {
+      "correct": true,
+      "blocks": true,
+      "derived_follow": true,
+      "steps": true,
+      "not_stated": true
+    },
+    "reason": "All steps hold: steps 1 and 2 restate the quiz's DCT and quantization ideas (a multiple of a step size is just what coarse rounding means); step 3 follows because decoding inverts the transform on the same block grid with the same step sizes, step 4 follows from rounding an on-grid value being nearly a no-op, and a good answer to the main question would not state this re-save result.",
+    "hash": "a3bad24d6a30",
+    "attempt": 1
+  },
+  "key-exchange": {
+    "verdict": "pass",
+    "tests": {
+      "correct": true,
+      "blocks": true,
+      "derived_follow": true,
+      "steps": true,
+      "not_stated": true
+    },
+    "reason": "All three blocks (secret exponents, exponents commuting, discrete-log hardness) come from the expected answers, steps 4 and 5 follow from them, and a two-party explanation would not state the three-party scheme; one caveat is that step 5's claim that getting g^(abc) needs a secret exponent is slightly strong, since security strictly rests on the computational Diffie-Hellman assumption, but the subject's own expected answer makes the same simplification.",
+    "hash": "b85695538fee",
+    "attempt": 1
+  },
+  "kidney-filter": {
+    "verdict": "pass",
+    "tests": {
+      "correct": true,
+      "blocks": true,
+      "derived_follow": true,
+      "steps": true,
+      "not_stated": true
+    },
+    "reason": "All steps hold: steps 1 and 2 come from the quiz's expected answers, and steps 3 and 4 follow by simple arithmetic (2% of 180 L is 3.6 L, and 1% of 180 L is 1.8 L); the only quibble is that exactly 99% of 180 L gives 1.8 L rather than 1.5 L, so 'about double' is approximate, but this is within the stated 'about' figures.",
+    "hash": "6cb220af6b63",
+    "attempt": 1
+  },
+  "lightning": {
+    "verdict": "pass",
+    "tests": {
+      "correct": true,
+      "blocks": true,
+      "derived_follow": true,
+      "steps": true,
+      "not_stated": true
+    },
+    "reason": "Every step holds: both blocks come from the quiz's expected answers (the channel is heated and expands, and sound takes about 3 s/km), step 3 follows from sound starting along the whole channel at different distances, and step 4 (1 km gives 3 s, 4 km gives 12 s, so a 9 s rumble) is simple arithmetic that a good answer would not state.",
+    "hash": "1b76a18bf3c2",
+    "attempt": 1
+  },
+  "liquid-core": {
+    "verdict": "pass",
+    "tests": {
+      "correct": true,
+      "blocks": true,
+      "derived_follow": true,
+      "steps": true,
+      "not_stated": true
+    },
+    "reason": "Every step holds: steps 1 and 2 come from the quiz answers, step 3 follows by simple ray geometry, and step 4 follows because a larger core is grazed by rays reaching the surface at smaller angles, so the shadow starts before 104° and covers more of the surface, a result a good explanation would not state.",
+    "hash": "f4c8c1cfb18a",
+    "attempt": 1
+  },
+  "mountain-boiling": {
+    "verdict": "pass",
+    "tests": {
+      "correct": true,
+      "blocks": true,
+      "derived_follow": true,
+      "steps": true,
+      "not_stated": true
+    },
+    "reason": "All steps hold: blocks 1–3 come straight from the quiz's expected answers, step 4 is simple addition (0.7 + 1 ≈ 1.7 atm), step 5 applies step 1 to give roughly 115 °C, which is a few degrees below 120 °C and well above 90 °C, and an explanation of why water boils lower on mountains would not state this combined result.",
+    "hash": "a9f022e889be",
+    "attempt": 1
+  },
+  "muscle-contraction": {
+    "verdict": "pass",
+    "tests": {
+      "correct": true,
+      "blocks": true,
+      "derived_follow": true,
+      "steps": true,
+      "not_stated": true
+    },
+    "reason": "Steps 1 and 2 come straight from the quiz's expected answers on calcium control and ATP. Step 3 follows because calcium that stays high keeps the sites uncovered. Step 4 follows from step 2, since cycling heads keep splitting ATP and lock once it is gone. The result needs this inference and is not something an explanation of contraction would state.",
+    "hash": "224f36e68f92",
+    "attempt": 1
+  },
+  "noise-cancelling": {
+    "verdict": "pass",
+    "tests": {
+      "correct": true,
+      "blocks": true,
+      "derived_follow": true,
+      "steps": true,
+      "not_stated": true
+    },
+    "reason": "All steps hold: 1/340 s ≈ 2.9 ms is half of the 5.9 ms period of 170 Hz. Both blocks come from the quiz answers (inversion cancels and in-step adds; a half-cycle shift reverses the effect). The derived steps use only distance ÷ speed. A good answer about headphones would not state the two-speaker result.",
+    "hash": "8bd54e521de1",
+    "attempt": 1
+  },
+  "pagerank": {
+    "verdict": "pass",
+    "tests": {
+      "correct": true,
+      "blocks": true,
+      "derived_follow": true,
+      "steps": true,
+      "not_stated": true
+    },
+    "reason": "All steps hold: C receives no links, so its rank is only its share of the jumps (0.15/3 = 0.05); solving A = 0.05 + 0.85(B + C) and B = 0.05 + 0.85A gives A ≈ 0.49 and B ≈ 0.46; both block steps come from the quiz's expected answers, and the derived steps use only that sharing and jump rule plus algebra.",
+    "hash": "502ad9c4b075",
+    "attempt": 1
+  },
+  "quorum": {
+    "verdict": "pass",
+    "tests": {
+      "correct": true,
+      "blocks": true,
+      "derived_follow": true,
+      "steps": true,
+      "not_stated": true
+    },
+    "reason": "Every step holds: steps 1 and 2 come straight from the quiz answers, step 3 is a pigeonhole count (R + W > N forces overlap) that this reader can do, step 4 is arithmetic (writes need 4 of 5 and survive 1 failure, reads need 2 and survive 3), and a majority-quorum explanation would not state the general R + W > N rule or these numbers.",
+    "hash": "b214be60e719",
+    "attempt": 1
+  },
+  "rent-cap": {
+    "verdict": "pass",
+    "tests": {
+      "correct": true,
+      "blocks": true,
+      "derived_follow": true,
+      "steps": true,
+      "not_stated": true
+    },
+    "reason": "All steps pass: step 1's 'only when' is the plain contrapositive of the expected mechanism (a price held below the market level), step 2 restates the expected answer on time, steps 3 and 4 follow from them without new subject facts, and a good explanation would not normally discuss non-binding caps that later bind.",
+    "hash": "7f2c4e8c5d88",
+    "attempt": 1
+  },
+  "screen-yellow": {
+    "verdict": "pass",
+    "tests": {
+      "correct": true,
+      "blocks": true,
+      "derived_follow": true,
+      "steps": true,
+      "not_stated": true
+    },
+    "reason": "Both block steps come from the quiz's expected answers on cone ratios and metamers. Step 3 extends the cone-response idea to four cone kinds. Step 4 follows from counting: three or fewer adjustable intensities cannot generally match four responses. The four-cone result is not something a good explanation of the subject would state, so no step fails.",
+    "hash": "db2f9e6b3adb",
+    "attempt": 1
+  },
+  "skater-spin": {
+    "verdict": "pass",
+    "tests": {
+      "correct": true,
+      "blocks": true,
+      "derived_follow": true,
+      "steps": true,
+      "not_stated": true
+    },
+    "reason": "All three block steps come from the quiz's expected answers. Step 4 (half the distance makes I a quarter, so ω is four times) and step 5 (KE = ½Lω with L fixed, so KE is four times) follow by algebra alone. The good answer covers only halving I and doubling energy, so the factor-of-four result is not stated.",
+    "hash": "af0fba675bc5",
+    "attempt": 1
+  },
+  "sort-bound": {
+    "verdict": "pass",
+    "tests": {
+      "correct": true,
+      "blocks": true,
+      "derived_follow": true,
+      "steps": true,
+      "not_stated": true
+    },
+    "reason": "Every step holds: steps 1 and 2 come straight from the quiz's expected answers, step 3 counts the 4!/(2!·2!) = 6 interleavings with school combinatorics, step 4 compares 6 with 4 and 8 to give at least 3 (which a standard merge also achieves), and an explanation of the sorting lower bound would not mention merging.",
+    "hash": "6ebaa9162a54",
+    "attempt": 1
+  },
+  "ssd-wear": {
+    "verdict": "pass",
+    "tests": {
+      "correct": true,
+      "blocks": true,
+      "derived_follow": true,
+      "steps": true,
+      "not_stated": true
+    },
+    "reason": "Both block steps (the limited program/erase cycles and wear leveling) come from the quiz's expected answers, and the two derived steps follow by plain arithmetic: 1 TB × 1,000 cycles = 1 PB, and 1,000,000 GB ÷ 50 GB/day = 20,000 days, about 55 years. Every step is needed, and a good explanation would not state this result.",
+    "hash": "76b77b030ab4",
+    "attempt": 2
+  },
+  "transistor-switch": {
+    "verdict": "pass",
+    "tests": {
+      "correct": true,
+      "blocks": true,
+      "derived_follow": true,
+      "steps": true,
+      "not_stated": true
+    },
+    "reason": "All steps hold: blocks 1 and 2 come from the quiz answers. Step 3 follows from school physics: Q = CV, and energy drawn is QV, all of which ends up as heat over a charge-discharge cycle. Step 4 combines these to give the V² scaling (0.64, about 36% less), which a good explanation of transistor switching would not state outright.",
+    "hash": "54acd6f25a3a",
+    "attempt": 1
+  },
+  "two-tides": {
+    "verdict": "pass",
+    "tests": {
+      "correct": true,
+      "blocks": true,
+      "derived_follow": true,
+      "steps": true,
+      "not_stated": true
+    },
+    "reason": "All steps hold: steps 1 and 2 come from the quiz's answers on the two bulges and on spring tides (the dip between bulges follows from the stretching picture), step 3 follows from the right-angle geometry, and step 4's (1 − ½)/(1 + ½) ≈ ⅓ matches the real ratio of about 0.37; though an explanation might name neap tides in passing, it would not work out the one-third figure.",
+    "hash": "fd810e590ec0",
+    "attempt": 1
+  },
+  "vaccine-memory": {
+    "verdict": "pass",
+    "tests": {
+      "correct": true,
+      "blocks": true,
+      "derived_follow": true,
+      "steps": true,
+      "not_stated": true
+    },
+    "reason": "All steps hold: 10 doublings at 12 hours each is 120 hours, about 5 days. Steps 1 and 2 come from the quiz's expected answers. Steps 3 and 4 need only logarithms, and the 'enough' term cancels in the difference. A good explanation would say 'within days' but not derive the 5-day saving.",
+    "hash": "549a8fdc9fc9",
+    "attempt": 1
+  }
+}
