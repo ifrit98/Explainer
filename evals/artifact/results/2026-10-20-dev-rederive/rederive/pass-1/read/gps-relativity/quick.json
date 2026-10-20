@@ -1,0 +1,36 @@
+{
+  "steps": [
+    {
+      "step": "The measured distance to a satellite is its travel time multiplied by c, where travel time is receive time minus the send time stamped by the satellite.",
+      "part": "Step 1: time becomes distance (paragraphs 2–3)",
+      "idea": "Each signal carries the satellite's own send time. The receiver subtracts it from the arrival time and multiplies by c, so any error in that time stamp turns straight into a distance error."
+    },
+    {
+      "step": "10 ns of clock error is about 3 m of distance (10 ns × 30 cm/ns).",
+      "part": "Step 1: time becomes distance (paragraph 3)",
+      "idea": "Light travels about 30 cm per nanosecond, so a timing error of a few nanoseconds gives an error of about a metre."
+    },
+    {
+      "step": "If the satellite clock is 10 ns fast, its send stamp is 10 ns too late. The computed travel time is then 10 ns too short, so that one distance comes out about 3 m too short.",
+      "part": "Step 1 (travel time = receive − send) and step 2; background arithmetic",
+      "idea": "A later send time subtracted from the correct receive time gives a smaller travel time, and so a shorter distance."
+    },
+    {
+      "step": "The fourth unknown b enters every pseudorange as the same term c·b.",
+      "part": "Step 2: why four satellites, not three (pseudorange equation ρᵢ = √(...) + c·b)",
+      "idea": "The receiver clock bias adds one shared offset to all four measured distances. That is how one extra unknown can soak up the error from the receiver's own clock."
+    },
+    {
+      "step": "b can absorb only an error that all satellites share. The 10 ns error is in just one satellite, so no single value of b can cancel it. The four equations then disagree, and the solution shifts the computed position (and b) by a few metres.",
+      "part": "Limits (first bullet: 'the bias b absorbs part of an error that all satellites share') and step 4",
+      "idea": "A shared error disappears into b. An error in one satellite alone is not shared, so it spreads into the position solution instead."
+    },
+    {
+      "step": "So every satellite clock must keep GPS time. The method works only on that condition.",
+      "part": "Step 2, last paragraph ('This method works only if the satellite clocks all keep GPS time')",
+      "idea": "The receiver's model assumes each satellite's time stamps are correct. Only the receiver's own clock is treated as unknown."
+    }
+  ],
+  "result": "The distance to that satellite is wrong by about 3 m (10 ns × 30 cm/ns). Because the clock is fast, the send time is stamped late, so the distance comes out about 3 m too short. The receiver's bias b adds the same amount, c·b, to all four pseudoranges, so it can only absorb an error that every satellite shares, like the receiver's own clock error. An error in one satellite alone does not fit that pattern. No single b can cancel it, so it pushes the computed position off by a few metres.",
+  "gap": ""
+}

@@ -1,0 +1,21 @@
+{
+  "steps": [
+    {
+      "step": "A change is decided once a quorum of servers has accepted it, and the cluster stops if fewer than a quorum answer.",
+      "part": "The rule",
+      "idea": "The quorum size is the number of accepts needed. If fewer than that many servers answer, nothing new is decided, but nothing already decided is lost."
+    },
+    {
+      "step": "Two groups are certain to share a server only when their sizes add up to more than n.",
+      "part": "Why more than half works (overlap paragraph: 3 + 3 = 6 > 5, so C is in both)",
+      "idea": "The page argues by counting: if two groups together list more than n servers, some server must be in both. The page applies this to two majorities, but the count works for any two sizes. So a W-group and an R-group must share a server for sure when W + R > n, that is W + R > 5. With W = 4 and R = 2, 4 + 2 = 6 > 5, so every read group contains at least one server that accepted the latest write."
+    },
+    {
+      "step": "Why the shared server matters: it carries the decided value from one group to the other.",
+      "part": "Why more than half works (shared-server paragraph) and Limits ('Simplified': the shared server reports x = 1 to the new group)",
+      "idea": "The page only shows this for two write groups competing for the same position. There, the shared server refuses the second change, or in real protocols reports the decided value. It never shows a read group asking servers for a value and using the shared server's reply to find the latest write."
+    }
+  ],
+  "result": "Only partly worked out. Applying the page's counting argument to groups of different sizes says a W-group and an R-group always share a server exactly when W + R > 5, and W = 4, R = 2 meets that (6 > 5). By the page's rule (tolerance = n minus the group size), writes would survive 5 − 4 = 1 failure and reads 5 − 2 = 3. Both answers depend on the read mechanism that the page leaves out.",
+  "gap": "The page says plainly that it does not cover 'how reads work' (Limits). It also only treats a single quorum size used for every decision, not separate write and read groups. It never says that a read is correct when its group shares a server with the last write group, or how a reader tells which reply holds the latest write. So W + R > n as the condition for 'every read sees the latest write' cannot be fully derived from it. The same applies to tolerance = n − W for writes and n − R for reads, which needs the page's rule carried over to the two kinds of group."
+}

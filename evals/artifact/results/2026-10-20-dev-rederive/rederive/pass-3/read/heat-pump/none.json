@@ -1,0 +1,36 @@
+{
+  "steps": [
+    {
+      "step": "For the air conditioner, the useful output is the heat taken from the cold inside, Q_cold. Its performance ratio is therefore Q_cold / W, the heat removed per unit of electrical work.",
+      "part": "'Run backwards, it's an air conditioner' bullet; COP definition in 'The short answer'; the question's wording",
+      "idea": "It is the same machine with the coils swapped. COP means useful heat divided by the work you pay for, and here the useful heat is the heat removed from the cold side."
+    },
+    {
+      "step": "Energy balance: Q_hot = Q_cold + W, so Q_cold = Q_hot − W.",
+      "part": "Section 3, 'Energy conservation gives Q_cold = Q_hot − W'; 'It's not perpetual motion' bullet",
+      "idea": "The heat released on the warm side is exactly the heat taken in on the cold side plus the electrical work."
+    },
+    {
+      "step": "Second law: Q_hot / T_hot ≥ Q_cold / T_cold, so Q_hot ≥ Q_cold × T_hot / T_cold.",
+      "part": "Section 3, 'Entropy bookkeeping'",
+      "idea": "Heat Q at absolute temperature T carries entropy Q/T, and work carries none. A machine running in a steady cycle must give out at least as much entropy as it takes in. This holds whichever room is the cold one."
+    },
+    {
+      "step": "W = Q_hot − Q_cold ≥ Q_cold × (T_hot/T_cold − 1) = Q_cold × (T_hot − T_cold)/T_cold. So the cooling COP is Q_cold / W ≤ T_cold / (T_hot − T_cold).",
+      "part": "Steps 2 and 3; background algebra",
+      "idea": "Put the energy balance into the entropy inequality and rearrange to get heat removed over work. This is the same algebra Section 3 uses for the heating limit."
+    },
+    {
+      "step": "For any machine, Q_cold / W = (Q_hot − W)/W = Q_hot/W − 1. So the cooling COP is always the heating COP minus 1. At the ideal limit, T_cold/(T_hot − T_cold) = T_hot/(T_hot − T_cold) − 1, because T_hot − (T_hot − T_cold) = T_cold.",
+      "part": "Step 2; Section 3 Carnot limit 'COP ≤ T_hot/(T_hot − T_cold)'",
+      "idea": "The heat delivered on the hot side is the heat removed plus the work. The heating ratio counts the work as useful output, and the cooling ratio does not. Dividing by W, that difference is exactly W/W = 1."
+    },
+    {
+      "step": "Example for 0 °C and 35 °C (273 K and 308 K): the cooling limit is 273/35 ≈ 7.8, compared with the heating limit of 308/35 ≈ 8.8.",
+      "part": "Section 3, 'Plugging in numbers'",
+      "idea": "These are the same absolute temperatures the explanation uses for its heating example."
+    }
+  ],
+  "result": "The ideal air-conditioner limit is heat removed per unit of electricity ≤ T_cold / (T_hot − T_cold), using absolute temperatures. For 273 K and 308 K that is about 7.8. It is exactly one less than the heating limit T_hot/(T_hot − T_cold) because of energy conservation, Q_hot = Q_cold + W. The heat delivered to the warm side includes the electrical work itself, which turns into heat. Heating counts that work as useful output, and cooling doesn't. So Q_cold/W = Q_hot/W − W/W = COP_heat − 1.",
+  "gap": ""
+}

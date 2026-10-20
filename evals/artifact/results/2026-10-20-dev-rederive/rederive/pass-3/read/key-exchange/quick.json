@@ -1,0 +1,46 @@
+{
+  "steps": [
+    {
+      "step": "All three agree in public on p and g (for example p = 23, g = 5). Each person picks a private number and never sends it: Alice a, Bob b, Carol c (for example a = 6, b = 15, c = 3).",
+      "part": "How it works, steps 1–2",
+      "idea": "p and g are public and Eve knows them too. Each person's private number stays secret."
+    },
+    {
+      "step": "Round 1: each person sends their public value g^x mod p. Alice sends g^a, Bob sends g^b, Carol sends g^c. In the example these are 8, 19 and 5^3 mod 23 = 10.",
+      "part": "How it works, step 3",
+      "idea": "A public value is g raised to your private number, mod p, and you send it openly."
+    },
+    {
+      "step": "Raising someone else's public value to your own private number adds your exponent to theirs: (g^b)^a = g^(ab). Doing it again adds a third exponent: (g^(ab))^c = g^(abc). The order makes no difference.",
+      "part": "How it works, paragraph after step 4",
+      "idea": "Order does not matter: (g^b)^a = (g^a)^b = g^(ab). I apply the same rule one more time to get three exponents."
+    },
+    {
+      "step": "Round 2, passed around in a ring: Alice raises Bob's g^b to a and sends g^(ab) to Carol. Bob raises Carol's g^c to b and sends g^(bc) to Alice. Carol raises Alice's g^a to c and sends g^(ca) to Bob. Example: Alice sends 19^6 mod 23 = 2.",
+      "part": "Steps 2–3; How it works, step 4",
+      "idea": "This is the same step as in the two-person method, done once more on a value that already carries two exponents. The results g^(ab), g^(bc) and g^(ca) are sent in public."
+    },
+    {
+      "step": "Each person raises what they received to their own private number. Carol gets (g^(ab))^c, Alice gets (g^(bc))^a, Bob gets (g^(ca))^b. All three equal g^(abc) mod p, which is the shared key, and nobody ever sends it. Example: Carol computes 2^3 mod 23 = 8, and Alice gets 5^(6·45) mod 23, which also comes to 8.",
+      "part": "Step 3",
+      "idea": "Every path multiplies all three private numbers into the exponent, so all three people get the same key."
+    },
+    {
+      "step": "Eve sees p, g, g^a, g^b, g^c, g^(ab), g^(bc) and g^(ca). To raise any of these to the missing private number, she would first have to recover a, b or c from a public value such as g^c mod p = 10. That is the discrete logarithm problem.",
+      "part": "Why Eve fails, paragraph 1",
+      "idea": "Getting a private number back from g^x mod p is the discrete logarithm, which is what blocks Eve."
+    },
+    {
+      "step": "Eve also cannot just combine the public values. Multiplying g^(ab) by g^c gives g^(ab+c), not g^(abc). Every value she sees has at most two of the three exponents.",
+      "part": "Why Eve fails, final paragraph",
+      "idea": "Multiplying public values adds exponents; it does not multiply them, so it does not give the key."
+    },
+    {
+      "step": "With a large p (2048 bits), solving the discrete logarithm takes about 2^112 operations, while the honest users still compute quickly. This rests on two assumptions: the hardness is assumed, not proven, and Eve can only read messages. Anyone who can replace messages could use the man-in-the-middle attack, so the public values need authentication.",
+      "part": "Why Eve fails, paragraph 2; Limits",
+      "idea": "p must be large. Security depends on discrete logs being hard and on an eavesdropper who only reads."
+    }
+  ],
+  "result": "Each person picks a secret number (a, b, c) and sends g^x mod p. In a second round, each one raises the value from the next person to their own secret and passes it on: g^(ab) goes to Carol, g^(bc) to Alice, g^(ca) to Bob. Each then raises what they received to their own secret, and all three get g^(abc) mod p. In the example with p = 23, g = 5 and secrets 6, 15, 3, the key is 8. Eve sees only values with at most two of the exponents: g^a, g^b, g^c, g^(ab), g^(bc), g^(ca). To add the third exponent she would need a secret number, which means solving a discrete logarithm; that is infeasible for a 2048-bit p. Multiplying the public values only adds exponents, so it does not help her. This assumes Eve can only read; the public values must be authenticated against someone who can replace messages.",
+  "gap": ""
+}

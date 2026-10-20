@@ -1,0 +1,36 @@
+{
+  "steps": [
+    {
+      "step": "Infrared reaches space only from the emission height, the high air that has little gas above it. That air's temperature sets how much energy the planet sends to space.",
+      "part": "Level 2, paragraph starting 'Infrared that leaves near the ground…'",
+      "idea": "Infrared given off lower down is absorbed again. Only the upper air, about 5 km up, emits straight to space, and how much it emits depends on its temperature."
+    },
+    {
+      "step": "How much a layer emits depends only on its temperature, as σT⁴.",
+      "part": "Level 1, Stefan–Boltzmann paragraph",
+      "idea": "The power emitted per m² is σT⁴, so two layers at the same temperature emit the same amount."
+    },
+    {
+      "step": "Adding CO2 lifts the emission height.",
+      "part": "Level 2, flowchart boxes A→B and the paragraph 'Add gas, and the emission height rises'",
+      "idea": "More gas means you must go higher before little gas is left above, so the escape point moves up. Doubling CO2 lifts it about 150 m."
+    },
+    {
+      "step": "If temperature is the same at every height (no lapse rate), the higher emitting layer is exactly as warm as the old one.",
+      "part": "Level 2, final paragraph ('This works only because air gets colder with height…')",
+      "idea": "When there is no cooling with height, moving the emitter up does not change its temperature."
+    },
+    {
+      "step": "So the infrared sent to space does not fall, and energy balance is not broken.",
+      "part": "Steps 2 and 4; Level 2 flowchart boxes C–E",
+      "idea": "Warming starts only when the emitting air is colder and sends out less (3.8 W/m² less in the real case). With the same temperature there is no drop, so the planet does not gain energy."
+    },
+    {
+      "step": "So the surface does not warm.",
+      "part": "Level 2, final paragraph",
+      "idea": "The explanation says outright that in air of one temperature at every height, more gas would not warm the surface."
+    }
+  ],
+  "result": "Adding CO2 would not change the surface temperature. The extra gas would still lift the emission height, but every height has the same temperature, so the new emitting layer is just as warm as the old one. Emission depends only on temperature (σT⁴), so the infrared going to space stays the same. Energy balance is never broken, so nothing makes the surface warm. The effect only works because air gets colder with height.",
+  "gap": ""
+}

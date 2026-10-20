@@ -1,0 +1,36 @@
+{
+  "steps": [
+    {
+      "step": "Establish the conversion rate: 1 ns of timing error is about 0.3 m of distance error.",
+      "part": "Section 1, 'Time gives distance' (paragraph on light covering 300 m per µs and 0.3 m per ns)",
+      "idea": "Light travels 0.3 m in one nanosecond, so any timing error becomes a range error at that rate."
+    },
+    {
+      "step": "Apply the rate to the satellite clock: 10 ns × 0.3 m/ns ≈ 3 m of error in that satellite's pseudorange.",
+      "part": "Section 3, 'The satellite clocks must be almost perfect' (second paragraph) and step 1",
+      "idea": "Each nanosecond of satellite clock error gives 0.3 m of range error."
+    },
+    {
+      "step": "Find the direction of the error. The pseudorange is c × (receive time on the receiver clock − send time on the satellite clock). A fast satellite clock stamps a send time 10 ns later than the true one, so the computed travel time is 10 ns too short and the distance comes out about 3 m too short.",
+      "part": "Section 2, paragraph defining **pseudorange**",
+      "idea": "The pseudorange is light speed times the receive time minus the send time read from the satellite's clock, so an error in the send-time stamp goes straight into it."
+    },
+    {
+      "step": "Show why b can absorb the receiver's own clock error: one receiver clock makes every measurement, so its error adds the same b to every pseudorange, and b is solved for as a fourth unknown alongside x, y and z.",
+      "part": "Section 2, pseudorange paragraph, the worked example on a line, and the paragraph on four unknowns",
+      "idea": "b is shared by all pseudoranges. With four equations the shared offset can be solved for and subtracted, as the 1.5 km is in the beacon example."
+    },
+    {
+      "step": "Show why b cannot absorb the satellite's clock error: the 10 ns error is in only that one satellite's pseudorange, so it is not shared. A single b that shifts all four pseudoranges equally cannot fix one of them alone. The 3 m error stays in the equations and moves the position fix.",
+      "part": "Section 3, first paragraph; Section 5, 'Why the receiver's b does not cancel the drift'",
+      "idea": "A satellite clock error sits in only one pseudorange, so no unknown absorbs it. b can only absorb errors that are the same in every pseudorange at the same moment."
+    },
+    {
+      "step": "Check the size: 10 ns is within the roughly 17 ns limit for a fix within about 5 m, so the error is small but still not removed.",
+      "part": "Section 3, second paragraph",
+      "idea": "Satellite clocks must agree with GPS time to about 17 ns for a fix within about 5 m."
+    }
+  ],
+  "result": "The distance to that satellite is wrong by about 3 m (10 ns × 0.3 m/ns). Because the satellite stamps a send time that is too late, the measured travel time is too short, so the distance comes out about 3 m too short. The fourth unknown, b, works only because the receiver's single clock adds the same offset to every pseudorange. This satellite's clock error is in just one of the four pseudoranges, so it is not shared, and no single common offset can remove it. The 3 m stays in that one equation and shifts the position fix, though at 10 ns it is still inside the roughly 17 ns limit for a fix within about 5 m.",
+  "gap": ""
+}

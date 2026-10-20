@@ -1,0 +1,46 @@
+{
+  "steps": [
+    {
+      "step": "All three agree in public on p and g (e.g. p = 23, g = 5) and each picks a private exponent that is never sent: a for Alice, b for Bob, c for Carol (e.g. a = 6, b = 15, c = 3).",
+      "part": "Summary, points 1–2; 'The working method' table, step 1",
+      "idea": "The public settings p and g can be shared openly. Each person's private number stays at home."
+    },
+    {
+      "step": "Round 1: each person broadcasts g^(own private number) mod p. With the example numbers that is A = 5^6 mod 23 = 8, B = 5^15 mod 23 = 19 and C = 5^3 mod 23 = 10.",
+      "part": "'The working method' table, step 2; Mallory section (5^3 mod 23 = 10)",
+      "idea": "A public value is g raised to the private exponent, mod p. It is quick to compute and hard to undo."
+    },
+    {
+      "step": "Target: the shared key will be g^(a×b×c) mod p. Raising a public value to your own exponent adds your exponent to the product in the exponent, and the order does not matter.",
+      "part": "'Why the two results are equal'",
+      "idea": "(g^b)^a = (g^a)^b = g^(ab), and taking mod p at each step does not change this. The same rule applies again: (g^(ab))^c = g^(abc)."
+    },
+    {
+      "step": "Round 2: each person raises a neighbour's public value to their own exponent and broadcasts the result. Bob sends A^b = g^(ab) = 8^15 mod 23 = 2. Carol sends B^c = g^(bc) = 19^3 mod 23 = 5. Alice sends C^a = g^(ca) = 10^6 mod 23 = 6.",
+      "part": "Step 3; 'The working method' table, step 3; Mallory section (10^6 mod 23 = 6)",
+      "idea": "Combining a received value with your own exponent is the same operation used in the two-person method. Here the result is passed on instead of kept."
+    },
+    {
+      "step": "Final step: each person raises the round-2 value that is missing their own exponent to that exponent. Alice computes 5^6 mod 23 = 8. Bob computes 6^15 mod 23 = 8. Carol computes 2^3 mod 23 = 8. All three get 8 = g^(abc) mod 23.",
+      "part": "Steps 3–4; 'Why the two results are equal'",
+      "idea": "Because exponents can be applied in any order, all three reach the same g^(abc)."
+    },
+    {
+      "step": "What Eve sees: p, g, g^a, g^b, g^c, g^(ab), g^(bc) and g^(ca). She never sees a, b, c or g^(abc). Every value she sees is missing at least one person's exponent.",
+      "part": "'The working method' (Eve saw only the public values); 'First attempt' (never send the secret itself)",
+      "idea": "Only public values go over the channel. The secret itself is never sent."
+    },
+    {
+      "step": "To add the missing exponent herself, Eve would have to recover one of a, b or c from a public value such as g^a mod p. That is the discrete logarithm problem.",
+      "part": "'Why Eve cannot do the same'",
+      "idea": "Getting an exponent back from g^x mod p means solving a discrete logarithm. With p = 23 she can try all exponents, but for a 2048-bit p the best known methods need about 2^112 operations."
+    },
+    {
+      "step": "So the method is safe against Eve only if p is large, and it still rests on an unproven assumption. It does not protect against an attacker who changes messages.",
+      "part": "'Why Eve cannot do the same' (size of p, epistemic status); 'Where the guarantee breaks'",
+      "idea": "Security depends on the size of p and on the assumption that discrete logs are hard. Messages also need authentication, or a man in the middle can take part in the exchange."
+    }
+  ],
+  "result": "They use two public rounds. In round 1, each person broadcasts g^x mod p using their own private x. In round 2, each person raises one neighbour's value to their own exponent and broadcasts the result: Bob sends g^(ab), Carol sends g^(bc) and Alice sends g^(ca). Then each person raises the value that lacks their own exponent to that exponent, so all three get g^(abc) mod p. With p = 23, g = 5, a = 6, b = 15 and c = 3, the key is 8. Eve sees g^a, g^b, g^c, g^(ab), g^(bc) and g^(ca), and each of these is missing at least one exponent. To finish the key she would need a private exponent, which means solving a discrete logarithm. That is infeasible for a large p, though it is an assumption, not a proof. One point is stretched: the explanation says only for two people that Eve 'needs a or b'. It does not show that combining several public values (for example g^(ab) with g^c) gives Eve no shortcut. I extend its claim to three people here. As in the two-person case, the public values must be authenticated to stop a man-in-the-middle attack.",
+  "gap": ""
+}

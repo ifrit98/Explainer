@@ -1,0 +1,31 @@
+{
+  "steps": [
+    {
+      "step": "More CO2 raises the emission level, the height from which infrared escapes to space.",
+      "part": "Section 6, chain step 1; Section 5, Fact 1",
+      "idea": "Infrared reaches space mostly from the height above which little absorbing gas remains. Adding CO2 puts more absorber above every height, so the escape height moves up."
+    },
+    {
+      "step": "How much the planet emits depends only on the temperature at the emission level.",
+      "part": "Section 1 (Stefan–Boltzmann law); Section 5 diagram",
+      "idea": "Emission to space is σT⁴, where T is the temperature at the emission level. The planet must shed 238 W/m², which needs 255 K at that level."
+    },
+    {
+      "step": "If the atmosphere is the same temperature at every height, the raised emission level is no colder than the old one.",
+      "part": "Section 7, 'Breaks (isothermal air)'; Section 5, Fact 2",
+      "idea": "Warming normally comes from the lapse rate: higher air is colder. With no lapse rate, moving the emission level up leaves its temperature unchanged."
+    },
+    {
+      "step": "Outgoing emission stays the same, so no energy imbalance (radiative forcing) appears.",
+      "part": "Steps 2 and 3; Section 6, chain steps 2–3",
+      "idea": "Same temperature means the same σT⁴ output. Outgoing energy still equals the 238 W/m² coming in, so the planet does not gain energy."
+    },
+    {
+      "step": "The surface does not warm.",
+      "part": "Step 4; Section 6, chain steps 4–5; Section 7",
+      "idea": "Warming only happens when the troposphere and surface heat up to fix an imbalance, and there is none. Also, a surface 'further below' the emission level is no warmer on a flat temperature profile, so the surface stays where it was."
+    }
+  ],
+  "result": "Adding CO2 would not change the surface temperature. More CO2 still raises the height from which infrared escapes to space. But if the air is the same temperature at every height, that new height is just as warm as the old one. It therefore emits the same σT⁴, and the planet keeps shedding the 238 W/m² it absorbs. No energy imbalance arises, so nothing forces the surface to warm. The greenhouse warming from extra CO2 depends on air getting colder with height (the lapse rate).",
+  "gap": ""
+}

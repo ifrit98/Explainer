@@ -1,0 +1,46 @@
+{
+  "steps": [
+    {
+      "step": "Set the target. All three must end up with the same number, and none of them may send it or anything that reveals it. That means each keeps a private exponent: Alice a, Bob b, Carol c.",
+      "part": "First attempt: send the key; The answer in one paragraph",
+      "idea": "Anything sent can be read, so the secret is never sent. Each person keeps a private number and sends only a public value made from it."
+    },
+    {
+      "step": "Use the same public setup: p = 23, g = 5. Alice sends A = g^a mod p, Bob sends B = g^b mod p and Carol sends C = g^c mod p. With a = 6, b = 15 and c = 3 (c is my own choice), this gives A = 8, B = 19 and C = 10.",
+      "part": "The working method table, step 2; the Mallory paragraph (5³ mod 23 = 10)",
+      "idea": "A public value is g raised to the private exponent, mod p. The explanation already gives 5⁶=8, 5¹⁵=19 and 5³=10 mod 23."
+    },
+    {
+      "step": "Choose a shared key that all three can reach: g^(a×b×c) mod p. Exponents can be applied one after another in any order, so each person can add their own exponent to a value that already holds the other two.",
+      "part": "Why the two results are equal",
+      "idea": "(g^b)^a = (g^a)^b = g^(a×b), because the order of the exponents does not matter. Reducing mod p at each step does not change the result."
+    },
+    {
+      "step": "Round 2, sent in public: each person raises the next person's value to their own exponent and sends the result on. Alice sends B^a = g^(ab). Bob sends C^b = g^(bc). Carol sends A^c = g^(ca). In numbers: 19⁶ mod 23 = 2, 10¹⁵ mod 23 = 5, and 8³ mod 23 = 512 mod 23 = 6.",
+      "part": "The working method table, step 3; step 3",
+      "idea": "Raising someone's public value to your private exponent gives g to the product of the two exponents. The table gives 19⁶ mod 23 = 2. I worked out the other two by hand."
+    },
+    {
+      "step": "Round 3, done privately: each person raises the two-exponent value they receive to their own exponent. Carol takes g^(ab) to the power c: 2³ = 8. Alice takes g^(bc) to the power a: 5⁶ = 8. Bob takes g^(ca) to the power b: 6¹⁵ mod 23 = 8. All three get g^(abc) mod p = 8.",
+      "part": "Why the two results are equal; step 4",
+      "idea": "Since the order of exponents does not matter, all three results equal g^(a×b×c) mod p. The explanation's table of powers gives 5⁶ = 8. I worked out 6¹⁵ mod 23 = 8 by hand."
+    },
+    {
+      "step": "Eve's view: she sees p, g, g^a, g^b, g^c, g^(ab), g^(bc) and g^(ca). These are 23, 5, 8, 19, 10, 2, 5 and 6. She never sees a, b, c or the key 8.",
+      "part": "The working method (what Eve sees); steps 2 and 4",
+      "idea": "Only public values travel on the channel. The private exponents and the final combination never do."
+    },
+    {
+      "step": "Why Eve is stuck: every value she has is missing at least one exponent. To add the missing one she needs that exponent, for example c from g^c. Getting it means solving 'g to what power gives this, mod p?', which is the discrete logarithm problem. For a 2048-bit p that takes about 2¹¹² operations, while the three honest users each do only a few thousand multiplications per power.",
+      "part": "Why Eve cannot do the same; Epistemic status",
+      "idea": "The explanation says that to get the secret Eve needs a private exponent. Getting one means undoing exponentiation mod p (the discrete logarithm), which is assumed to be infeasible for large p. Computing powers forward is fast."
+    },
+    {
+      "step": "Caveat: this only stops a passive eavesdropper. Someone who can change messages (Mallory) could replace the values, so all six messages would need authentication.",
+      "part": "Where the guarantee breaks: an attacker who can change messages",
+      "idea": "Diffie–Hellman defeats someone who only reads, not a man-in-the-middle. Public values must be signed."
+    }
+  ],
+  "result": "1. All three agree in public on p and g.\n2. Each person sends g^(own exponent) mod p.\n3. Each person raises one other person's public value to their own exponent and sends the result: g^(ab), g^(bc) and g^(ca).\n4. Each person raises the two-exponent value that lacks their own exponent to that exponent. All three get g^(abc) mod p, because the order of exponents doesn't matter. With p = 23, g = 5, a = 6, b = 15 and c = 3, all three get 8.\n\nEve sees only values that are each missing at least one exponent. To finish any of them she must recover a private exponent, which is a discrete logarithm, and that is infeasible for large p. This holds only for an eavesdropper who reads; against someone who changes messages, the messages must also be authenticated.",
+  "gap": "Minor: the explanation only describes the discrete logarithm with base g. It doesn't say that recovering b from g^a and g^(ab), which uses base g^a, is equally hard. It also doesn't rule out Eve combining g^(ab), g^(bc) and g^(ca) some other way. I extended its claim 'to find the secret, Eve needs a or b' to cover this case."
+}

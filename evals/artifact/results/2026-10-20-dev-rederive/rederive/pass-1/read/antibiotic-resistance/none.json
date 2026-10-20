@@ -1,0 +1,36 @@
+{
+  "steps": [
+    {
+      "step": "Before any drug is given, the infection already contains about 10^10 / 10^8 = 100 cells resistant to A and about 10^10 / 10^9 = 10 cells resistant to B.",
+      "part": "Section 3a, 'Mutation', including the 'Quick estimate' box",
+      "idea": "Resistant mutants appear at random before the drug is given. To get the expected number, divide the population size by 1 over the mutation frequency (10^10 / 10^8 = 100). The page's last 'What to try' bullet says the same thing: resistance is a numbers game of population size × mutation rate."
+    },
+    {
+      "step": "Giving drug A alone kills the susceptible cells but spares the roughly 100 A-resistant cells. Those survivors multiply until they make up most of the infection. Drug B alone does the same thing with its roughly 10 B-resistant cells.",
+      "part": "Section 4, 'Selection', and the 'A toy calculation' paragraph; the short answer, points 2 and 3",
+      "idea": "The drug removes the competition. Exponential growth then turns a handful of survivors (100 × 2^20 ≈ 10^8 in 10 hours) into most of the population, so a starting count of even 10 or 100 cells is plenty."
+    },
+    {
+      "step": "When both drugs are given together, only a cell resistant to both drugs survives. A cell resistant to A alone is still killed by B, and a cell resistant to B alone is still killed by A.",
+      "part": "Section 8, 'Combine drugs, sometimes'",
+      "idea": "With a combination, the cell that matters is one that is resistant to both drugs."
+    },
+    {
+      "step": "The mutations are unrelated, so the chance that one cell carries both is the product of the two chances: 10^-8 × 10^-9 = 10^-17.",
+      "part": "Section 8, 'Combine drugs, sometimes', plus background (multiplying probabilities of independent events)",
+      "idea": "The section works the same example with two rates of 1 in 10^8: a cell resistant to both arises by chance only about 1 in 10^16 times."
+    },
+    {
+      "step": "The expected number of doubly resistant cells is 10^10 × 10^-17 = 10^-7. In practice that means almost certainly none, about a 1-in-10-million chance of even one.",
+      "part": "Steps 1 and 4; Section 8 ('more cells than are in the infection')",
+      "idea": "10^17 is far more than the 10^10 cells present, so there is almost certainly no doubly resistant cell for the drugs to select."
+    },
+    {
+      "step": "With no resistant cell present, the treatment wipes out the population.",
+      "part": "index.html, 'What to try' bullet 'Lower the mutation rate to 10⁻¹⁰' and the readout text for the case where every cell dies",
+      "idea": "If no resistant cell exists when the drug arrives, treatment succeeds. Selection only works when a resistant cell is already there for it to act on."
+    }
+  ],
+  "result": "Either drug alone faces cells that already resist it: about 100 resistant to A, or about 10 resistant to B. The drug kills everything else, and those few survivors multiply until they take over. With both drugs, a cell must resist both to survive. The mutations are unrelated, so that chance is 10^-8 × 10^-9 = 10^-17 per cell. In 10^10 cells that means about 10^-7 doubly resistant cells, almost certainly none. With no doubly resistant cell for the drugs to select, the combination clears the infection. That makes ending with a resistant infection about ten million times less likely than with either drug alone.",
+  "gap": ""
+}

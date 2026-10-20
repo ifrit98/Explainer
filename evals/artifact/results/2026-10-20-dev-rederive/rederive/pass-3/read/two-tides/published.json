@@ -1,0 +1,26 @@
+{
+  "steps": [
+    {
+      "step": "The Sun's tidal acceleration is about 0.46 times the Moon's, so solar tides are about half the size of lunar tides.",
+      "part": "Why subtract: two tests (second test, the Sun)",
+      "idea": "Tidal acceleration is roughly the pull times 2R/d. The Sun pulls 179 times harder than the Moon but is 389 times farther away, so its tidal effect is 179/389 ≈ 0.46 of the Moon's. Observed solar tides are about half the Moon's."
+    },
+    {
+      "step": "Each body stretches the Earth along its own line, so the Sun raises its own pair of bulges on the Earth–Sun line.",
+      "part": "Only the part that differs from the centre's pull acts (side-point paragraph); How a tiny acceleration moves an ocean",
+      "idea": "The tidal acceleration stretches the Earth along the line to the attracting body and squeezes it across that line. The water gathers into two bulges on that line, with low water at the 90° side points."
+    },
+    {
+      "step": "At quarter Moon the Sun's line is at 90° to the Moon's line. So where the Moon makes high water, the Sun makes low water, and the two effects work against each other.",
+      "part": "Step 2, with the question's statement that the Sun and Moon are at right angles",
+      "idea": "The Moon's bulge points sit at the Sun's side points, where the Sun squeezes instead of stretching. This suggests a reduced tide of roughly 1 − 0.46 of the Moon's tide, compared with 1 + 0.46 when the Sun and Moon line up."
+    },
+    {
+      "step": "Compare with spring tides.",
+      "part": "none: the explanation never mentions spring tides",
+      "idea": "The explanation does not define spring tides. It also never says that the Sun's and Moon's tides add together, or how they combine at an angle. So it does not support the comparison the question asks for."
+    }
+  ],
+  "result": "",
+  "gap": "The explanation does not define spring tides. It also never says how the Sun's and Moon's bulges combine: that they add when the two bodies line up and partly cancel when they are at right angles. It only gives the Sun's tide as about 0.46 of the Moon's. If you assume the tides simply add, the quarter-Moon tides would be about (1 − 0.46)/(1 + 0.46) ≈ 0.37 of spring tides. But both that assumption and the meaning of 'spring tide' have to come from outside the explanation."
+}

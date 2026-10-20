@@ -1,0 +1,46 @@
+{
+  "steps": [
+    {
+      "step": "A double can store a value exactly only if that value is a grid point: an integer of at most 53 bits times a power of 2. Any other value is rounded to the nearest grid point.",
+      "part": "Section 3, 'What the computer actually stores'",
+      "idea": "A double is (an integer of at most 53 bits) × (a power of 2), so the values it can hold form a grid. Any literal that is not on the grid gets rounded."
+    },
+    {
+      "step": "A fraction has a finite binary expansion only if its denominator, in lowest terms, has no prime factor other than 2. A factor of 5 makes the binary expansion repeat forever, so the value must be rounded.",
+      "part": "Section 2, 'Why 0.1 has no exact binary form'",
+      "idea": "In base 10 the allowed prime factors are 2 and 5. In base 2 only 2 is allowed. The 5 in 1/10 = 1/(2×5) makes the binary form repeat."
+    },
+    {
+      "step": "Write each number as a fraction in lowest terms: 0.375 = 3/8, 0.0625 = 1/16, 0.2 = 1/5, 0.3 = 3/10.",
+      "part": "background",
+      "idea": "Turning a decimal into a fraction is school arithmetic."
+    },
+    {
+      "step": "0.375 = 3 × 2⁻³ and 0.0625 = 1 × 2⁻⁴. Both have power-of-2 denominators and small integers, so both are grid points and are stored exactly.",
+      "part": "Section 6, 'When addition is exact', with steps 1-3",
+      "idea": "Fractions with power-of-2 denominators are stored exactly. 1/2, 1/4 and 3/4 are given as examples of grid points."
+    },
+    {
+      "step": "0.2 (denominator 5) and 0.3 (denominator 10 = 2×5) are not stored exactly. The table confirms this: stored 0.2 ≈ 0.20000000000000001110 (slightly high) and stored 0.3 ≈ 0.29999999999999998890 (slightly low).",
+      "part": "Section 2 and the table in Section 3",
+      "idea": "A factor of 5 forces a repeating binary expansion, so the value is rounded. The table shows the exact stored values and their errors."
+    },
+    {
+      "step": "0.125 = 1/8 = 2⁻³ is stored exactly. Every running total 0.125 × k = k/8 (k = 1…8) is a small integer times 2⁻³, which is a grid point. So no addition needs rounding, and the eighth sum is exactly 8/8 = 1.0.",
+      "part": "Section 6 and Section 3",
+      "idea": "Sums of power-of-2 fractions are exact while they fit in 53 bits. If the exact sum is already a grid point, nothing is rounded."
+    },
+    {
+      "step": "The stored 0.1 is not 1/10. It is 7205759403792794 × 2⁻⁵⁶, slightly high. So even an exact sum of ten copies would be ten times that value, not exactly 1.",
+      "part": "Section 3 table and Section 2",
+      "idea": "0.1 is rounded when it is stored, so the starting value already carries an error."
+    },
+    {
+      "step": "Also, a running total of the stored 0.1 is generally not a grid point. Each addition must be rounded again, and each rounding is done on its own, so the errors need not cancel. In 0.1 + 0.2, one such rounding pushed the result to a different double from the stored 0.3.",
+      "part": "Section 1 (4-digit calculator), Section 4 (the addition, step by step), and the Summary",
+      "idea": "Each number and each result is rounded separately, and the errors do not cancel. Section 4 shows an exact sum that fell between grid points and was rounded by round-half-to-even."
+    }
+  ],
+  "result": "Stored exactly: 0.375 (3/8) and 0.0625 (1/16). Their denominators are powers of 2, so both are grid points (integer × power of 2). Not stored exactly: 0.2 (1/5) and 0.3 (3/10). The factor 5 in each denominator makes the binary expansion repeat, so each is rounded to the nearest double (stored 0.2 is slightly high, stored 0.3 slightly low). Adding 0.125 eight times gives exactly 1.0 because 0.125 = 2⁻³ is exact, and every running total k/8 is also a grid point. No step ever rounds. Adding 0.1 ten times starts from a stored value that is already slightly more than 1/10, and the running totals land between grid points, so each addition is rounded again. Those separate errors do not cancel out, so the final double is not 1.0.",
+  "gap": "The explanation does not trace a chain of ten additions. It says 'how errors grow across long chains of operations' is not covered. So it gives the reason the sum can miss 1.0, but not the actual result after ten additions or which direction it misses in. That the sum is not 1.0 comes from the question itself, not from anything shown in the explanation."
+}

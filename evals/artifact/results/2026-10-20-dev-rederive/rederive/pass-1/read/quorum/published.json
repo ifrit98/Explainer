@@ -1,0 +1,41 @@
+{
+  "steps": [
+    {
+      "step": "Any two groups of servers whose sizes add up to more than n must have at least one server in common.",
+      "part": "Why more than half works, paragraph 2 (overlap)",
+      "idea": "If two quorums together list more than n servers, some server has to appear in both. The page uses this for two majorities (3 + 3 = 6 > 5), but the counting works for any two group sizes."
+    },
+    {
+      "step": "A server that belongs to both groups is what carries a decided change from one group to the next.",
+      "part": "Why more than half works, paragraph 3, and Limits, 'Simplified' bullet",
+      "idea": "The shared server already accepted x = 1. In real protocols it reports x = 1 to the new group, so the new group learns about the earlier decision. Limits says reads are 'not covered', so I am treating a read group as one more group that must contain such a server."
+    },
+    {
+      "step": "For a read to see the latest committed write, every read group of R servers must share a server with every write group of W servers. So W + R > 5.",
+      "part": "Steps 1 and 2",
+      "idea": "By the counting in step 1, the groups are certain to overlap only if W + R > n = 5. If W + R ≤ 5, a read group can be completely separate from the write group and miss the write. That is the same failure as the {A,B} / {C,D} split in 'Why not let the survivors go on?'."
+    },
+    {
+      "step": "Two write groups must also overlap so that two different writes cannot both be decided. So W + W > 5, which means W ≥ 3.",
+      "part": "Why not let the survivors go on? (split brain table) and step 1",
+      "idea": "Two write groups with no server in common can each decide a different change 7. Requiring 2W > n rules that out."
+    },
+    {
+      "step": "Check W = 4 and R = 2: 4 + 2 = 6 > 5, and 4 + 4 = 8 > 5. Both conditions hold.",
+      "part": "Steps 3 and 4",
+      "idea": "Simple arithmetic against the two conditions."
+    },
+    {
+      "step": "An operation that needs a group of size Q can survive n − Q failures.",
+      "part": "Counting failures (tolerance = n − majority size), and 'Why more than half works', paragraph 1",
+      "idea": "If fewer than the needed number of servers answer, the operation stops. A larger group is still safe but lets fewer servers fail. So the tolerance is n minus the group size."
+    },
+    {
+      "step": "Writes survive 5 − 4 = 1 failure. Reads survive 5 − 2 = 3 failures.",
+      "part": "Steps 5 and 6",
+      "idea": "Apply tolerance = n − group size to W = 4 and R = 2."
+    }
+  ],
+  "result": "W and R must satisfy W + R > 5, so that every read group shares at least one server with every write group. To stop two writes from both being decided, W must also be more than half of 5 (2W > 5, so W ≥ 3). W = 4 and R = 2 meet both conditions (4 + 2 = 6 > 5). Writes can survive 5 − 4 = 1 failure and reads can survive 5 − 2 = 3 failures. One caveat: the explanation says it does not cover reads. Applying the overlap argument to read groups is my extension of its counting argument and its 'Simplified' note.",
+  "gap": ""
+}

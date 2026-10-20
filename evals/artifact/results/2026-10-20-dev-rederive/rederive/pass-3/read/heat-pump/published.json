@@ -1,0 +1,36 @@
+{
+  "steps": [
+    {
+      "step": "An air conditioner is the same loop with the cold coil inside the house. It takes heat Q_cold from the cold side, uses electricity W, and gives heat Q_hot to the warm side. What it is useful for is Q_cold, so its figure of merit is Q_cold / W.",
+      "part": "Summary (\"A fridge uses the same loop, with the cold coil inside the fridge\") and the COP definition in the introduction",
+      "idea": "The same four-part loop can cool a space by putting the cold coil where you want heat removed. COP is useful heat divided by electricity used."
+    },
+    {
+      "step": "Energy balance: Q_hot = Q_cold + W. All the electricity ends up as heat on the hot side.",
+      "part": "Level 1 diagram and Level 2 step 3 (Condenser); 'Energy conservation gives Q_cold = Q_hot − W'",
+      "idea": "The heat delivered to the hot side is the heat taken from the cold side plus the compressor's electricity (2 + 1 = 3)."
+    },
+    {
+      "step": "Entropy condition: Q_hot / T_hot ≥ Q_cold / T_cold, with temperatures in kelvin.",
+      "part": "Where the limit comes from",
+      "idea": "Heat Q at temperature T carries entropy Q/T. Electricity carries none, the refrigerant stores none over a cycle, and entropy cannot be destroyed. So the hot side must gain at least the entropy the cold side loses. This does not depend on which side is the house."
+    },
+    {
+      "step": "Substitute Q_hot = Q_cold + W: (Q_cold + W)/T_hot ≥ Q_cold/T_cold. Multiply both sides by T_hot·T_cold: W·T_cold ≥ Q_cold·(T_hot − T_cold). So Q_cold / W ≤ T_cold / (T_hot − T_cold).",
+      "part": "Steps 2 and 3; algebra is background (same steps as the explanation's 4-line derivation, solved for Q_cold instead of Q_hot)",
+      "idea": "The ideal cooling limit is the cold temperature divided by the temperature lift."
+    },
+    {
+      "step": "Why it is exactly one less: Q_cold / W = (Q_hot − W)/W = Q_hot/W − 1. This holds for any machine, ideal or not. At the limit: T_hot/(T_hot − T_cold) − 1 = (T_hot − (T_hot − T_cold))/(T_hot − T_cold) = T_cold/(T_hot − T_cold).",
+      "part": "Step 2 and the ideal limit formula in 'The ideal limit'",
+      "idea": "The heat delivered to the hot side always includes the electricity itself. Heat removed from the cold side is that amount minus the electricity, so per kWh of electricity it is always exactly 1 less."
+    },
+    {
+      "step": "Worked number: for 308.15 K and 273.15 K (lift 35 K), the heating limit is 8.8, so the cooling limit is 273.15/35 ≈ 7.8.",
+      "part": "The ideal limit (308.15/35 = 8.8)",
+      "idea": "These are the same two temperatures as the explanation's example, used for an illustration."
+    }
+  ],
+  "result": "The ideal cooling limit is Q_cold/W ≤ T_cold/(T_hot − T_cold), with temperatures in kelvin. For example, 273.15/35 ≈ 7.8, compared with 8.8 for heating between the same two temperatures. It is exactly one less because by energy conservation Q_hot = Q_cold + W. The heat dumped outside always includes the 1 unit of electricity on top of the heat taken from the cold side, so Q_cold/W = Q_hot/W − 1, and T_hot/ΔT − 1 = T_cold/ΔT.",
+  "gap": ""
+}

@@ -1,0 +1,36 @@
+{
+  "steps": [
+    {
+      "step": "For a read to see the latest committed write, every possible read group has to share at least one server with every possible write group. That shared server holds the write and reports it to the reader.",
+      "part": "Why a majority, and not \"whoever is still up\"? (the paragraph after 'Two majorities of the same group always share at least one member')",
+      "idea": "Safety comes from groups overlapping. Because any two quorums share a member, every decision is seen by at least one server that took part in the earlier decision, and that server keeps later actions consistent with earlier ones."
+    },
+    {
+      "step": "Two groups of sizes W and R, taken from n servers, must overlap whenever W + R > n.",
+      "part": "Why a majority, and not \"whoever is still up\"? (the counting argument: 'together they would contain more than all of them, which is impossible unless some server is in both')",
+      "idea": "If two groups together contain more servers than exist, some server must be in both. The explanation uses this for two majorities, but the same counting works for any two sizes. If W + R ≤ n, the two groups can be picked with no server in common, and the read could miss the write."
+    },
+    {
+      "step": "With n = 5, the condition is W + R > 5, which means W + R ≥ 6. Writes also need to overlap each other, so that two writes can't both commit on separate sides of a split: W + W > 5, which means W ≥ 3.",
+      "part": "Step 2; 'The setting' and the split-brain paragraph",
+      "idea": "Applying the overlap count to read–write pairs gives R + W > n. Applying it to write–write pairs stops two sides from both accepting conflicting writes (split brain)."
+    },
+    {
+      "step": "W = 4 and R = 2 meet the conditions: 4 + 2 = 6 > 5, and 2·4 = 8 > 5.",
+      "part": "Step 3",
+      "idea": "Plugging the numbers into the conditions."
+    },
+    {
+      "step": "A group of size q can still form as long as at least q servers are up, so it survives n − q failures.",
+      "part": "Now count ('failures tolerated = n − quorum size')",
+      "idea": "Failures tolerated equals the total number of servers minus the size of the group that must still be reachable."
+    },
+    {
+      "step": "Writes survive 5 − 4 = 1 failure. Reads survive 5 − 2 = 3 failures.",
+      "part": "Step 5",
+      "idea": "Applying n − q separately to the write group size and the read group size."
+    }
+  ],
+  "result": "W and R must satisfy W + R > 5, so W + R ≥ 6, which makes every read group share a server with every write group. To keep two writes from both committing, W must also be more than half: 2W > 5, so W ≥ 3. With W = 4 and R = 2, both conditions hold. Writes survive 1 failure (5 − 4) and reads survive 3 failures (5 − 2).",
+  "gap": ""
+}

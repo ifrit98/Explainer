@@ -1,0 +1,31 @@
+{
+  "steps": [
+    {
+      "step": "Time error converts to distance error at about 30 cm per nanosecond.",
+      "part": "Step 1: time becomes distance (paragraph 'Distance = travel time × c… about 30 cm per nanosecond')",
+      "idea": "Distance is travel time multiplied by c, and light covers about 30 cm in each nanosecond. Any timing error therefore becomes a distance error at that rate."
+    },
+    {
+      "step": "A satellite clock that is 10 ns fast puts a wrong send time on its signal, so the travel time to that one satellite is wrong by 10 ns.",
+      "part": "Step 1 (the signal says 'I sent this at time t'; travel time = receive time − send time) and Step 2's last line ('This method works only if the satellite clocks all keep GPS time')",
+      "idea": "The receiver works out travel time from the satellite's time stamp. If the stamp is 10 ns off, the travel time to that satellite is 10 ns off as well."
+    },
+    {
+      "step": "The distance to that satellite is wrong by about 10 × 30 cm ≈ 3 m. Taking the sign literally: a fast clock stamps a later send time, so the travel time looks shorter and the distance comes out about 3 m too short.",
+      "part": "Steps 1 and 2 of this answer",
+      "idea": "10 ns × 0.3 m/ns ≈ 3 m. The error affects the pseudorange to that one satellite only."
+    },
+    {
+      "step": "The fourth unknown b can only absorb an error that is the same in every equation.",
+      "part": "Step 2: why four satellites (pseudorange equation ρᵢ = √(...) + c·b)",
+      "idea": "b is the receiver's clock offset, and it enters every satellite's equation as the same added term c·b. That is how one unknown can soak up the receiver's own clock error."
+    },
+    {
+      "step": "A single satellite's clock error is different in each equation, so b cannot cancel it. The four equations no longer agree on one point, and the solution shifts the position (and b) to spread the error out.",
+      "part": "Step 2 (one shared c·b term in all four equations); Limits ('the bias b absorbs part of an error that all satellites share')",
+      "idea": "The equations have room for only one shared offset. An error that appears in one pseudorange and not the others does not fit that form, so it ends up as a position error rather than being absorbed."
+    }
+  ],
+  "result": "The distance to that satellite is wrong by about 3 m (10 ns × about 30 cm/ns). Read literally, a fast clock gives a later send time, so the distance comes out about 3 m too short. b cannot absorb this because it is one offset added equally to all four pseudoranges (c·b in every equation), which is why it can cancel the receiver's own clock error. The 10 ns error sits in one satellite's equation only. The four equations then don't meet at the true point, and the solution comes out wrong by metres. The explanation doesn't say exactly how this error splits between position and b.",
+  "gap": ""
+}

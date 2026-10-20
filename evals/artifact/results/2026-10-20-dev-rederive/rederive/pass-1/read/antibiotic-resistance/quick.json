@@ -1,0 +1,36 @@
+{
+  "steps": [
+    {
+      "step": "A resistant cell must already exist before the drug is given; the drug only selects the cells that are already resistant, and they then regrow the infection.",
+      "part": "Step 2: the antibiotic selects the resistant cells; Why selection, and not adaptation",
+      "idea": "Survivors were resistant before they met the drug. When the drug kills the susceptible cells, about 10 resistant cells can rebuild 10^10 in about 30 doublings. So the outcome depends on whether any resistant cell is present at the start."
+    },
+    {
+      "step": "Drug A alone: the expected number of A-resistant cells is 10^10 × 10^-8 = 100, so the infection almost certainly comes back resistant.",
+      "part": "Step 2 worked numbers (multiply the population by the frequency)",
+      "idea": "Expected resistant cells = population × chance per cell. Here that is 100, far more than 1."
+    },
+    {
+      "step": "Drug B alone: 10^10 × 10^-9 = 10 expected resistant cells, which is again enough to regrow a resistant infection.",
+      "part": "Step 2 worked numbers",
+      "idea": "This is the same calculation as the explanation's own example, which gives 10 survivors."
+    },
+    {
+      "step": "Both drugs together: a cell survives only if it resists both, which needs two independent rare events, so the chances multiply: 10^-8 × 10^-9 = 10^-17 per cell.",
+      "part": "What follows from this: 'Two drugs at once help'",
+      "idea": "Two independent rare events are both needed, so their probabilities multiply (the explanation's example is 10^-9 × 10^-9)."
+    },
+    {
+      "step": "Expected doubly resistant cells = 10^10 × 10^-17 = 10^-7, which is effectively zero. No cell is there to be selected, so the drugs clear the infection.",
+      "part": "What follows from this (combination) together with the small-population prediction in Step 2",
+      "idea": "When the expected count is far below 1, usually no resistant cell exists, and the drug clears the infection."
+    },
+    {
+      "step": "Caveat: this holds only because the mutations are unrelated. One plasmid carrying both resistance genes would break the multiplication.",
+      "part": "What follows from this: 'This fails if one plasmid carries both resistance genes'; Step 1 gene transfer",
+      "idea": "A single transfer can give resistance to several drugs at once, so the two events would no longer be independent."
+    }
+  ],
+  "result": "With one drug, about 100 cells already resist A (or about 10 resist B) before treatment. The drug kills the rest, and those survivors regrow a resistant infection. With both drugs, a survivor must resist both. The two mutations are independent, so the chances multiply to 10^-17 per cell, and the expected number of doubly resistant cells is 10^10 × 10^-17 = 10^-7. In practice no such cell exists to be selected, so the combination clears the infection. That is about 10^8 to 10^9 times less likely to fail than either drug alone, provided no single plasmid carries both resistance genes.",
+  "gap": ""
+}

@@ -1,0 +1,31 @@
+{
+  "steps": [
+    {
+      "step": "Convert the satellite's 10 ns clock error into a distance error: 10 ns × about 30 cm/ns ≈ 3 m.",
+      "part": "Section 1, 'Distance from time' (the bold sentence: every nanosecond of timing error is about 30 cm of position error)",
+      "idea": "Range is c × (t_r − t_s), so an error in either timestamp turns straight into a range error of about 30 cm per nanosecond."
+    },
+    {
+      "step": "Find the direction of the error. A fast satellite clock stamps a send time t_s that is 10 ns too late, so the measured delay t_r − t_s is 10 ns too short. That makes the range to that satellite about 3 m too short.",
+      "part": "Section 1, the formula distance = c × (t_r − t_s); background arithmetic",
+      "idea": "If t_s is too large, the difference gets smaller, so the computed distance gets smaller."
+    },
+    {
+      "step": "Note a possible inconsistency. The explanation's own example calls a 10 ns fast satellite clock equivalent to the satellite being '3 m farther away'. That matches step 1 on size but seems to disagree with step 2 on direction.",
+      "part": "Section 3, final paragraph ('Note what the whole method assumes…')",
+      "idea": "The receiver cannot tell a 10 ns error in one satellite's clock from a change of about 3 m in that satellite's distance."
+    },
+    {
+      "step": "Explain why the receiver can absorb its own clock error. That error is the same for every satellite, so it adds the same b = c·δt to every pseudorange. The fourth unknown b models exactly that.",
+      "part": "Section 2 (pseudorange equation ρᵢ = |sᵢ − p| + b) and Section 3, Jacobian step ('For b it is simply 1')",
+      "idea": "b is one shared offset with the same effect (coefficient 1) on every satellite's equation, so the solver can separate it from position."
+    },
+    {
+      "step": "Explain why b cannot absorb the satellite's error. It belongs to one satellite only, so it is not a shared offset. The model has no unknown for it. The solver treats it as a real 3 m change in that one range and moves the computed position (x, y, z) to fit it.",
+      "part": "Section 3, final paragraph ('It cannot absorb errors that differ from satellite to satellite'); Section 4 note on the '11 km a day' claim (errors that differ from satellite to satellite go directly into your position)",
+      "idea": "Only the part of an error that is common to all satellites ends up in b. An error in one satellite becomes a position error."
+    }
+  ],
+  "result": "The range to that satellite is off by about 3 m (10 ns × 30 cm/ns). By the formula it should come out about 3 m too short, though the explanation's own example says 'farther'. The fourth unknown b is a single clock offset that adds the same amount to every pseudorange, so it can only absorb errors that all satellites share. A 10 ns error in one satellite's clock affects only that satellite's equation. To the receiver it looks exactly like that satellite being about 3 m nearer or farther, so the solver bends the computed position to fit it, and the error ends up in your position.",
+  "gap": ""
+}

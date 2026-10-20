@@ -1,0 +1,31 @@
+{
+  "steps": [
+    {
+      "step": "A 10 ns timing error becomes a distance error of about 3 m.",
+      "part": "1. Time becomes distance (paragraph 'This conversion is unforgiving')",
+      "idea": "Distance is c times the travel time, and light covers 30 cm per nanosecond, so 10 ns × 30 cm/ns = 3 m. The section gives this exact case."
+    },
+    {
+      "step": "Direction of the error: the distance comes out about 3 m too short.",
+      "part": "1. Time becomes distance (formula distance = c × (time received − time sent)); background arithmetic",
+      "idea": "The satellite stamps its send time from its own clock. If that clock is 10 ns fast, the stamped send time is 10 ns too late. The receiver's clock is right, so received − sent comes out 10 ns too small, and the distance is about 3 m too small."
+    },
+    {
+      "step": "The receiver's fourth unknown b only stands for an error that is added equally to every distance.",
+      "part": "3. The receiver's clock is the weak link (equation measured_distanceᵢ = √(...) + c·b)",
+      "idea": "The receiver's own clock error shifts every satellite's measured distance by the same amount c·b. One extra unknown can therefore soak it up in all four equations at once."
+    },
+    {
+      "step": "A clock error on one satellite affects only that satellite's distance, so it does not fit the shared c·b term and the solve cannot pull it out.",
+      "part": "3. 'What this trick cannot fix' paragraph",
+      "idea": "c·b removes only an error that is the same for every signal. An error in one satellite's clock (their example is 30 ns → 9 m) cannot be detected by the solve. Instead it gets mixed into the position, and possibly into b, as a wrong answer."
+    },
+    {
+      "step": "So satellite clocks must be held to a shared GPS time to within nanoseconds, by other means.",
+      "part": "3. last sentences; 5. 'From the ground'",
+      "idea": "Each satellite clock must match GPS time to within a few ns. Ground stations track the clocks and upload corrections. Here that correction is missing, so the 3 m error stays."
+    }
+  ],
+  "result": "The range to that satellite is off by about 3 m (10 ns × 30 cm/ns). Because the satellite's clock is fast, its send-time stamp is too late, so the measured distance comes out about 3 m too short. The receiver's fourth unknown b can only remove an error that adds the same c·b to every distance. That is true of the receiver's own clock error. This error belongs to one satellite only, so it does not match the shared term. The solve cannot detect it or separate it out, and it turns into an error of a few metres in the computed position.",
+  "gap": ""
+}

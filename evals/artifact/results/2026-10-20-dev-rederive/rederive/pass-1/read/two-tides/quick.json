@@ -1,0 +1,36 @@
+{
+  "steps": [
+    {
+      "step": "The Moon's tide is two bulges lined up with the Moon, one on the side facing it and one on the far side.",
+      "part": "Opening summary paragraph and the section 'Only the difference in pull moves water' (bullets and diagram)",
+      "idea": "Water on the near side is pulled more than Earth's centre and water on the far side is pulled less, so the water bulges out at both ends of the Earth–Moon line."
+    },
+    {
+      "step": "Between the two lunar bulges, at 90° from the Earth–Moon line, the water is lowest.",
+      "part": "Opening summary paragraph, the diagram, and the section 'Why two highs, and why not exactly every 12 hours'",
+      "idea": "A coast point meets a high a quarter turn before and after each low, so it meets a low halfway between the bulges. This is my own geometric inference: the text never says where low water is."
+    },
+    {
+      "step": "The Sun makes the same kind of tide: a smaller pair of bulges lined up with the Sun, about 0.46 the size of the Moon's.",
+      "part": "Section 'Evidence that the difference is what counts: the Sun', plus the Limits bullet 'Not covered'",
+      "idea": "Only the difference in pull across Earth matters, and it falls off as 1/d³. So the Sun's tide is 0.46 of the Moon's, and the Limits bullet calls it the Sun's 'smaller pair of bulges'."
+    },
+    {
+      "step": "At spring tides the two pairs of bulges add.",
+      "part": "Limits bullet 'Not covered: spring and neap tides…adds to'",
+      "idea": "When the Sun and Moon lie on one line, the two pairs of bulges sit in the same places and add, giving a range of about 1 + 0.46 = 1.46 times the Moon's tide alone. Assumption: the sizes add simply. The text says 'adds' but does not say how."
+    },
+    {
+      "step": "At first and third quarter the Sun's bulges sit at the Moon's lows, so they partly cancel.",
+      "part": "Steps 2–3 and Limits bullet '…or partly cancels the Moon's'",
+      "idea": "With the Sun at 90° to the Moon, the Sun raises water where the Moon's tide is low and lowers it under the Moon's bulges. The range is about 1 − 0.46 = 0.54 times the Moon's tide alone."
+    },
+    {
+      "step": "Compare the two cases.",
+      "part": "Steps 4 and 5",
+      "idea": "0.54 / 1.46 ≈ 0.37."
+    }
+  ],
+  "result": "The tides are smaller. At quarter Moon the Sun's bulges partly cancel the Moon's, so the range is about 1 − 0.46 = 0.54 of the Moon's tide alone, compared with about 1.46 at spring tides. That makes these tides (neap tides) roughly 0.37 of spring tides, a bit over a third, in the idealized single-ocean model. One caution: the explanation says spring and neap tides are 'not covered'. It only says the Sun's bulges 'add to or partly cancel' the Moon's. That the right-angle case is the cancelling one, and that the sizes simply add or subtract, are my own inferences.",
+  "gap": ""
+}

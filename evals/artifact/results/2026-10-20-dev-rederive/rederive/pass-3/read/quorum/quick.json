@@ -1,0 +1,36 @@
+{
+  "steps": [
+    {
+      "step": "Every decision needs a group of servers to agree, and a server that does not reply counts as a failure. The cluster keeps working while at least a quorum of servers can reply, so it tolerates (servers − quorum) failures.",
+      "part": "The setup (the tolerance paragraph and the 5-server and 4-server examples)",
+      "idea": "The number of failures survived equals the total number of servers minus the size of the group that must reply."
+    },
+    {
+      "step": "Safety comes from overlap. Two groups of sizes a and b can fit inside n servers without sharing a server only if a + b ≤ n. If a + b > n, they must share at least one server.",
+      "part": "Why the quorum must be a majority (the paragraph on 2q ≤ n vs 2q > n)",
+      "idea": "The explanation proves this for two groups of the same size q. Counting servers works the same way when the two groups have different sizes; that step is plain arithmetic."
+    },
+    {
+      "step": "For a read to see the latest committed write, every read group must share at least one server with every write group. That shared server holds the write. So W + R > 5, which means W + R ≥ 6.",
+      "part": "Step 2, plus 'Any two majorities then share at least one server' in Why the quorum must be a majority",
+      "idea": "The shared server links the two groups. Here the pair is a read group and a write group instead of two decision groups. The explanation only says this server refuses conflicting decisions; that it gives the read the latest value is my inference."
+    },
+    {
+      "step": "Two write groups must also overlap, or split brain could happen between writes: W + W > 5, so W ≥ 3.",
+      "part": "Why the quorum must be a majority (the split-brain paragraph)",
+      "idea": "Two separate groups that each make a decision can commit conflicting values."
+    },
+    {
+      "step": "Check W = 4 and R = 2: 4 + 2 = 6 > 5, so reads and writes overlap. 4 + 4 = 8 > 5, so writes overlap with each other.",
+      "part": "Steps 3 and 4",
+      "idea": "Both overlap conditions hold."
+    },
+    {
+      "step": "Failures survived: writes 5 − 4 = 1, reads 5 − 2 = 3.",
+      "part": "Step 1 (the tolerance paragraph in The setup)",
+      "idea": "For each operation, failures tolerated = servers − size of the group needed."
+    }
+  ],
+  "result": "W and R must satisfy W + R > 5 (that is, W + R ≥ 6) so that every read group overlaps every write group. Writes should also satisfy 2W > 5 so that two writes cannot conflict. With W = 4 and R = 2, both conditions hold. Writes survive 5 − 4 = 1 failure, and reads survive 5 − 2 = 3 failures.",
+  "gap": "The explanation never talks about separate read and write groups. It proves the overlap rule only for two groups of the same size, so I extended it to W + R > n with arithmetic. It also never says that the shared server lets a read see the latest write; I inferred that from 'any two majorities share at least one server'."
+}

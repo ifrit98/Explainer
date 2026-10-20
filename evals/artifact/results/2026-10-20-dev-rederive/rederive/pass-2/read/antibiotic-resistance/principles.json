@@ -1,0 +1,26 @@
+{
+  "steps": [
+    {
+      "step": "Resistant cells for one drug are already there before treatment, in proportion to population × rate. With A: 10^10 × 1/10^8 ≈ 100 cells. With B: 10^10 × 1/10^9 ≈ 10 cells.",
+      "part": "Section 3, Mutation: worked example",
+      "idea": "The expected number of resistant cells is about the number of divisions times the mutation rate, and they exist before the first dose. The drug does not create them."
+    },
+    {
+      "step": "With either drug alone, the few resistant cells survive and multiply until they make up most of the infection.",
+      "part": "Section 4: How the drug makes resistance common",
+      "idea": "The drug kills the susceptible cells but not the resistant ones. These double about once an hour (the 100 cells reach about 1.7×10^9 in a day), so treatment fails."
+    },
+    {
+      "step": "With both drugs at once, only a cell resistant to both survives. Because the mutations are unrelated (independent), the chance a cell has both is the product of the two rates: 1/10^8 × 1/10^9 = 1 in 10^17.",
+      "part": "Section 4, 'Dose controls which cells survive', last paragraph (two drugs)",
+      "idea": "Combination therapy needs two independent mutations in one cell, so you multiply the probabilities. The explanation's own example is 1 in 10^8 × 1 in 10^8 = 1 in 10^16."
+    },
+    {
+      "step": "Expected double-resistant cells: 10^10 × 10^-17 = 10^-7, which is effectively none. A cell resistant to only A is killed by B, and a cell resistant to only B is killed by A.",
+      "part": "Steps 1 and 3; Section 4 two-drug paragraph",
+      "idea": "The combined rate needs far more divisions (10^17) than the whole infection makes (10^10). So almost certainly no cell can survive both drugs, and selection has nothing to work on."
+    }
+  ],
+  "result": "Alone, drug A leaves about 100 resistant cells and drug B about 10. Those survivors take over the infection. Together, a survivor would need both unrelated mutations, so the odds multiply: 10^-8 × 10^-9 = 10^-17 per cell. Among 10^10 cells that means an expected 10^-7 double-resistant cells, which is almost certainly none. A cell that resists only one drug is killed by the other. That makes a resistant outcome roughly 10 million times less likely. (Caveat: the explanation notes that a plasmid passed between bacteria can carry several resistance genes at once, which could get around this protection.)",
+  "gap": ""
+}

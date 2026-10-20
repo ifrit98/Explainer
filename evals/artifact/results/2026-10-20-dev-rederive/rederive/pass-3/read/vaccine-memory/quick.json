@@ -1,0 +1,31 @@
+{
+  "steps": [
+    {
+      "step": "The response depends on matching cells multiplying from a starting number up to a working population.",
+      "part": "How it works, item 3 (Clonal expansion)",
+      "idea": "A lymphocyte that binds the antigen and gets an alarm signal starts dividing. Over about a week it becomes a clone of thousands of identical cells, and the clone makes antibodies."
+    },
+    {
+      "step": "Vaccination gives the second response a larger starting number of matching cells, so it reaches full strength sooner.",
+      "part": "How it works, item 4 (Memory cells remain), and the table in 'Why it works: a race'",
+      "idea": "Memory cells leave more matching cells than before (the explanation says 10–100 times; the question uses 1,000 times). Useful antibody then comes after 2–4 days instead of 7–14."
+    },
+    {
+      "step": "Under the question's model, the time to reach a target N from a start S is the number of doublings, log2(N/S), times 12 hours.",
+      "part": "background",
+      "idea": "With doubling growth, the count after k doublings is S·2^k. Reaching N takes k = log2(N/S) doublings."
+    },
+    {
+      "step": "The time saved is 12 h × [log2(N/S) − log2(N/(1000S))] = 12 h × log2(1000), and N cancels out.",
+      "part": "Step 3 (background algebra on logarithms)",
+      "idea": "Both responses must reach the same threshold N, so N drops out of the difference. Only the 1,000-fold head start matters. In other words, the vaccinated response simply skips the first log2(1000) doublings."
+    },
+    {
+      "step": "log2(1000) ≈ 9.97, which is about 10 doublings, so the time saved is about 10 × 12 h = 120 h, or about 5 days.",
+      "part": "Step 4 (background arithmetic: 2^10 = 1024 ≈ 1000)",
+      "idea": "Ten doublings at 12 hours each add up to about 5 days. This roughly fits the explanation's gap between 7–14 days and 2–4 days."
+    }
+  ],
+  "result": "The response reaches full strength about 5 days sooner. A 1,000-fold head start is about 10 doublings (2^10 = 1024), and 10 × 12 h is about 120 h. The threshold doesn't matter because both responses grow by the same doubling until they reach the same 'enough' level. That level cancels when you subtract the two times, so only the ratio of starting numbers (1,000) sets the gap. The vaccinated population is just 10 doublings further along on the same curve. The explanation itself gives only 10–100 times more memory cells, not 1,000, and it never states the doubling model; both of those come from the question.",
+  "gap": ""
+}

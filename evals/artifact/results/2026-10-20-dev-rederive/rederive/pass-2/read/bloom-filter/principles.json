@@ -1,0 +1,46 @@
+{
+  "steps": [
+    {
+      "step": "A filter's contents depend only on which bit positions have been set to 1. Adding an item sets that item's k positions to 1 and changes nothing else.",
+      "part": "The parts (Add(x) and Query(x) operations; Hash function: the same item always gives the same number)",
+      "idea": "Add computes k positions from the item alone and sets them to 1. Because the hashes are deterministic, an item lands on the same positions in any filter that has the same m and the same hash functions."
+    },
+    {
+      "step": "A bit is 1 in a filter exactly when at least one added item maps to it. Adding the same item twice, or adding items in a different order, gives the same array.",
+      "part": "Why it never misses an item it saw (Add only changes bits from 0 to 1; nothing clears a bit)",
+      "idea": "Bits only go from 0 to 1 and never back. So the final array is the union of every added item's positions, whatever the order and however many repeats."
+    },
+    {
+      "step": "The filter you would build from A ∪ B has a 1 at bit i exactly when some item in A or some item in B maps to i. That is the same as: bit i is 1 in filter A, or bit i is 1 in filter B.",
+      "part": "Steps 1–2",
+      "idea": "Each item in A ∪ B lies in A or in B, and it sets the same positions in either filter. So the union filter's set bits are exactly the bits set in A's filter together with those set in B's filter."
+    },
+    {
+      "step": "Taking the bitwise OR of the two arrays therefore gives the A ∪ B filter, with no access to the items. The result is exact: it is the same bit array you would get by adding every item of A ∪ B to an empty filter.",
+      "part": "Step 3; background (bitwise OR)",
+      "idea": "OR is 1 exactly when either input bit is 1, which is the condition from step 3."
+    },
+    {
+      "step": "The merged filter works like a filter holding all of A ∪ B, so its error rate follows from that larger number of items.",
+      "part": "How often it is wrong; What happens when the filter fills up",
+      "idea": "The false-positive rate p ≈ (1 − e^(−kn/m))^k uses the total number of items in the filter, here |A ∪ B|. The merge itself adds no error, but a fuller array means more false positives."
+    },
+    {
+      "step": "Bitwise AND gives 1 only where both filters have a 1. Every item in A ∩ B sets its k bits in both filters, so all of its bits survive the AND. A query for such an item still says 'probably seen': there are no false negatives for the intersection.",
+      "part": "Steps 1–2; Why it never misses an item it saw",
+      "idea": "An item in both sets maps to the same positions in both arrays, and those bits are 1 in each, so they are 1 after the AND."
+    },
+    {
+      "step": "AND is not exact for A ∩ B. A bit can be 1 in both filters because one item of A and a different item of B happen to share it, even when no common item maps there. So the AND result can have more 1s than the filter you would build from A ∩ B directly.",
+      "part": "A worked example (\"cat\" and \"dog\" share bit 6; the filter has no record of which item set a bit)",
+      "idea": "Different items can share bits, and the filter cannot tell who set a bit. So 'set in both filters' does not mean 'set by an item that is in both sets'."
+    },
+    {
+      "step": "The AND result therefore contains every bit of the true A ∩ B filter, plus possibly some extra bits. It still gives no false negatives, but its false-positive rate can be higher than that of a filter built directly from A ∩ B.",
+      "part": "Steps 6–7; How often it is wrong",
+      "idea": "Extra 1s make it more likely that all k bits of an absent item are 1, which is exactly the false-positive condition."
+    }
+  ],
+  "result": "Take the bitwise OR of the two bit arrays. Because every item sets the same positions in both filters and bits only ever go from 0 to 1, the OR is exactly the filter you would get by adding every item of A ∪ B, so the union is exact. Its error rate is the normal one for |A ∪ B| items in m bits. The bitwise AND gives a filter that says 'probably seen' for every item in A ∩ B, so it has no false negatives, but it is not exact. Bits set by different items in A and in B can collide and survive the AND, so it may have extra 1s compared with the true A ∩ B filter, and therefore more false positives. It is a safe approximation, not the true intersection filter.",
+  "gap": ""
+}

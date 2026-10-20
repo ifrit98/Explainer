@@ -1,0 +1,36 @@
+{
+  "steps": [
+    {
+      "step": "Matching cells grow by repeated doubling, so after d doublings a starting pool S becomes S × 2^d.",
+      "part": "Step 3: the selected cells multiply, then most die (clonal expansion and the worked example)",
+      "idea": "An activated lymphocyte divides again and again, and all its descendants carry the same receptor. The example works this out as 100 × 2^15 ≈ 3.3 million."
+    },
+    {
+      "step": "The number of doublings needed to grow from S to a target N is log2(N/S).",
+      "part": "Step 3, the second-encounter paragraph",
+      "idea": "Going from 164,000 to 3.3 million takes log2(20) ≈ 4.3 doublings. The count depends only on the ratio between the target and the starting pool."
+    },
+    {
+      "step": "A first infection starting from S needs log2(N/S) doublings. After vaccination the start is 1000S, so it needs log2(N/(1000S)) = log2(N/S) − log2(1000) doublings.",
+      "part": "2 + background (logarithm rules)",
+      "idea": "Multiplying the starting pool by 1000 subtracts log2(1000) doublings, whatever N is."
+    },
+    {
+      "step": "The saving is log2(1000) ≈ 9.97, so about 10 doublings.",
+      "part": "3 + background",
+      "idea": "2^10 = 1024 ≈ 1000."
+    },
+    {
+      "step": "With one doubling every 12 hours (the question's figure, not the explanation's 8 hours), 10 doublings take about 120 hours, which is about 5 days.",
+      "part": "4 + question's data",
+      "idea": "Time saved = number of doublings saved × time per doubling."
+    },
+    {
+      "step": "N, the number of cells that counts as 'enough', cancels out of the difference.",
+      "part": "3; Step 3 worked example",
+      "idea": "Both responses must reach the same N. Each response's doubling count is log2(N/start), so the difference is the log of the ratio of the two starting pools, and N drops out. The 1,000× head start is always 10 doublings, wherever the finish line is. This matches the summary's note that the memory pool is about 1000× the naive pool."
+    }
+  ],
+  "result": "In this model the response reaches full strength about 5 days sooner: log2(1000) ≈ 10 doublings × 12 h ≈ 120 h. The answer doesn't depend on what counts as 'enough' because the number of doublings to reach a threshold N is log2(N/start). Subtracting the vaccinated count from the first-infection count leaves log2(1000), and N cancels. A 1,000-fold head start always saves the same 10 doublings. The explanation adds that memory cells also activate more easily, so the real gap is larger than this arithmetic shows.",
+  "gap": ""
+}

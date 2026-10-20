@@ -1,0 +1,36 @@
+{
+  "steps": [
+    {
+      "step": "Matching cells grow by repeated division, so their number doubles at a fixed rate.",
+      "part": "Step 3: Amplify and refine — 'Amplify: clonal expansion' paragraph",
+      "idea": "A selected cell divides about once every 6 to 12 hours for days, and one cell becomes thousands of identical copies. That makes the 'double every 12 hours' model reasonable."
+    },
+    {
+      "step": "Vaccination means the response starts from many more matching cells than a first infection does.",
+      "part": "Step 4: Keep copies — memory, the naive-vs-memory table",
+      "idea": "Before any exposure only a handful of cells fit the antigen. Memory leaves hundreds to thousands of times more, which matches the factor of 1,000 in the question."
+    },
+    {
+      "step": "Time needed to reach 'enough' cells, N, starting from N0 cells: t = 12 h × log2(N/N0).",
+      "part": "background",
+      "idea": "Doubling arithmetic: after k doublings you have N0 × 2^k cells, so you need k = log2(N/N0) doublings."
+    },
+    {
+      "step": "Time saved = 12 h × [log2(N/N0) − log2(N/(1000·N0))] = 12 h × log2(1000).",
+      "part": "3 (with background log rules)",
+      "idea": "Take the difference of the two times. N cancels, so the saving depends only on the starting ratio and the doubling time."
+    },
+    {
+      "step": "log2(1000) ≈ 10, because 2^10 = 1024. So the saving is about 10 doublings × 12 h = 120 h, which is about 5 days.",
+      "part": "4",
+      "idea": "Starting 1,000 times bigger is the same as having already done about 10 doublings."
+    },
+    {
+      "step": "Check against the explanation's timings.",
+      "part": "Step 4 paragraph and antibody-level diagram; 'So what does a vaccine do?'",
+      "idea": "The primary response takes about 1–2 weeks to reach useful levels and the secondary one starts within days. A head start of about 5 days fits that."
+    }
+  ],
+  "result": "It reaches full strength about 5 days sooner: 1000 ≈ 2^10, so the vaccinated person skips about 10 doublings of 12 h each, about 120 h. This doesn't depend on the threshold because growth is by multiplication. The time to reach any target N is 12 h × log2(N/start), so the difference between the two starts is 12 h × log2(1000) and N cancels out. Whatever counts as 'enough', the bigger starting group is always the same 10 doublings ahead. (If the doubling time were 6 h, the low end the explanation gives, the saving would be about 2.5 days.)",
+  "gap": ""
+}

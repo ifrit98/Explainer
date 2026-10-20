@@ -1,0 +1,51 @@
+{
+  "steps": [
+    {
+      "step": "Set up the public values: everyone, Eve included, knows p and g. Each of Alice, Bob and Carol privately picks a secret a, b or c and never sends it.",
+      "part": "Two ideas solve it (idea 1); The protocol (public p and g, step 1)",
+      "idea": "Each person keeps a secret that never goes over the channel. Only results computed from the secrets are sent."
+    },
+    {
+      "step": "Round 1: each person publishes g^secret mod p, so A = g^a, B = g^b and C = g^c (all mod p).",
+      "part": "The protocol, step 2–3; Summary bullet 1",
+      "idea": "Publishing g^x mod p is safe and quick to compute. Fast repeated squaring makes it cheap even for huge numbers."
+    },
+    {
+      "step": "Key fact: raising a public value to your own secret multiplies the exponents, and the order does not matter: (g^x)^y = (g^y)^x = g^(xy) mod p. This works again on a value that already holds two exponents: (g^(ab))^c = g^(abc).",
+      "part": "The protocol: 'Both get the same s' (B^a = g^(ba), A^b = g^(ab), ab = ba, and mod-p reduction doesn't change it); Modular arithmetic (you can reduce at every step); background (multiplying numbers is commutative and associative)",
+      "idea": "Exponents stack by multiplication in any order, so whoever adds the last secret gets the same result."
+    },
+    {
+      "step": "Round 2: arrange the three in a ring. Alice takes Carol's C and computes C^a = g^(ac). Bob takes A and computes A^b = g^(ab). Carol takes B and computes B^c = g^(bc). Each one publishes this two-secret value.",
+      "part": "Step 3; paint analogy (step 4: adding your own secret colour to someone else's mixture)",
+      "idea": "Each person 'adds their colour' to a mixture they received and passes it on. Only results go over the channel, never the secrets."
+    },
+    {
+      "step": "Round 3: each person adds their own secret to the two-secret value that is missing it. Alice computes (g^(bc))^a, Bob computes (g^(ac))^b and Carol computes (g^(ab))^c. All three equal g^(abc) mod p, the shared key s.",
+      "part": "Step 3; The protocol ('Since ab = ba, the two values are equal')",
+      "idea": "Every product of a, b and c in any order is the same number, so all three get the same g^(abc). It would then go through a key derivation function, as in 'After the exchange'."
+    },
+    {
+      "step": "What Eve sees: p, g, g^a, g^b, g^c, g^(ab), g^(bc) and g^(ac). None of these is g^(abc).",
+      "part": "The protocol: what Eve knows ('Eve knows p, g, A and B')",
+      "idea": "She has every public message but no secret."
+    },
+    {
+      "step": "Combining public values doesn't help her. Multiplying them only adds exponents, for example g^(ab) · g^c = g^(ab+c), which is not g^(abc). This is the 'too much yellow' wrong colour.",
+      "part": "The protocol ('Multiplying A by B gives her g^(a+b), not g^(ab)'); paint analogy (mixing orange and green gives the wrong colour)",
+      "idea": "Putting public values together gives sums of exponents. The key needs a product of all three secrets."
+    },
+    {
+      "step": "To make g^(abc), Eve would have to raise some public value such as g^(ab) to a missing secret like c. Getting c from g^c (or a from g^a, and so on) is a discrete logarithm problem, which can't be done in practice for a well-chosen ~2048-bit p. The page's brute-force control shows the search only works for tiny p.",
+      "part": "The hard direction (discrete logarithm problem); index.html 'Run Eve's brute-force search' button and its scale note; Summary bullet 3",
+      "idea": "Undoing g^x mod p is infeasible at real sizes. The work doubles with each extra bit, while the honest parties' work only grows with the number of bits."
+    },
+    {
+      "step": "Limits: this protects only against someone who listens. With three people there are more messages that someone like Mallory could swap, so every public value would need to be authenticated, for example with signatures and certificates.",
+      "part": "The catch: Eve who only listens vs. Mallory who interferes",
+      "idea": "Diffie–Hellman alone does not prove who sent a value. Someone who swaps messages can break it unless the messages are authenticated."
+    }
+  ],
+  "result": "Alice, Bob and Carol each keep a secret (a, b, c) and publish g^a, g^b and g^c mod p. Next, in a ring, each raises the value they received to their own secret and publishes the result: g^(ac), g^(ab) and g^(bc). Finally, each raises the two-secret value that lacks their secret to their own secret. Alice computes (g^(bc))^a, Bob computes (g^(ac))^b and Carol computes (g^(ab))^c. All three get g^(abc) mod p, because exponents multiply in any order. Eve sees only g^a, g^b, g^c, g^(ab), g^(bc) and g^(ac). Multiplying these only adds exponents and never gives abc. To get g^(abc) she would have to recover one of the missing secrets from its public power, which is a discrete logarithm and can't be done in practice for a large, well-chosen p. One caveat: the explanation only says this hardness 'appears to' hold for the two-person case. That it holds for three people is my extension by the same reasoning, not something the text proves. As with two people, this is safe only against listening. Stopping someone who swaps messages needs authentication.",
+  "gap": ""
+}

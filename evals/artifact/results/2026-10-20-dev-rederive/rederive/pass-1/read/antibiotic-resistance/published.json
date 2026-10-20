@@ -1,0 +1,36 @@
+{
+  "steps": [
+    {
+      "step": "Before any drug, the 10^10-cell infection already holds about 10^10 × 10^-8 = 100 cells resistant to A, and about 10^10 × 10^-9 = 10 cells resistant to B.",
+      "part": "Resistant cells are there before the drug",
+      "idea": "Growing to 10^10 cells takes about 10^10 divisions. Expected number of resistant mutants = number of divisions × chance of the mutation per division, and they exist before treatment starts."
+    },
+    {
+      "step": "So giving A alone, or B alone, almost certainly leaves some resistant cells, and the drug selects them: they regrow into a resistant infection.",
+      "part": "The drug selects them",
+      "idea": "The drug removes the susceptible cells. The resistant cells keep dividing (100 cells need about 27 doublings to reach 10^10 again), and the infection comes back almost entirely resistant."
+    },
+    {
+      "step": "To survive both drugs together, one cell must carry both mutations. The mutations are unrelated, so their chances multiply: 10^-8 × 10^-9 = 10^-17 per cell.",
+      "part": "What this predicts (combination bullet)",
+      "idea": "Two drugs with independent targets need two independent mutations in the same cell, so the probabilities multiply. The explanation's example uses 10^-8 × 10^-8; I applied the same rule to 10^-9."
+    },
+    {
+      "step": "Expected number of cells resistant to both: 10^10 × 10^-17 = 10^-7, so about a one-in-ten-million chance that even one such cell exists.",
+      "part": "Step 3; background arithmetic",
+      "idea": "Multiply the population size by the per-cell chance, as the explanation does to get 10^-6 in its own example."
+    },
+    {
+      "step": "With almost certainly no cell resistant to both, the combination kills or stops every cell, including the single-drug mutants: cells resistant to A are still stopped by B, and the other way round. The treatment clears the infection.",
+      "part": "What this predicts (combination bullet); The drug selects them",
+      "idea": "Selection can only work on resistant cells that already exist. If no cell resists both drugs, nothing survives to regrow."
+    },
+    {
+      "step": "Caveat: this only holds if the two resistances really are separate events. If one plasmid carries both genes, or one pump exports both drugs, a single event gives resistance to both, and about as many cells survive as with one drug.",
+      "part": "What this predicts (combination bullet); Genes from other bacteria",
+      "idea": "A single event giving resistance to both drugs means the chances no longer multiply, and plasmids often carry several resistance genes."
+    }
+  ],
+  "result": "Used alone, either drug faces resistant cells that are already there: about 100 that resist A and about 10 that resist B in 10^10 cells. The drug clears the susceptible cells and those resistant cells regrow. Used together, a cell survives only if it carries both unrelated mutations. That chance is 10^-8 × 10^-9 = 10^-17 per cell, so only about 10^-7 such cells are expected in 10^10. Almost certainly no cell resists both, so the combination clears the infection. This only works as long as no single plasmid or pump gives resistance to both drugs.",
+  "gap": ""
+}

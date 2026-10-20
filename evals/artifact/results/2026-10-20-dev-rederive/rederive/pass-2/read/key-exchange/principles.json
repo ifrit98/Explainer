@@ -1,0 +1,41 @@
+{
+  "steps": [
+    {
+      "step": "Alice, Bob and Carol agree on p and g in public, and each picks a private exponent (a, b, c) that they never send.",
+      "part": "Summary, points 1–2; 'The answer in one paragraph'",
+      "idea": "The public settings p and g can be known to everyone. Each person's private number stays with them and is never sent."
+    },
+    {
+      "step": "Round 1: each person sends a public value. A = g^a mod p, B = g^b mod p, C = g^c mod p. Using the explanation's numbers (p=23, g=5, a=6, b=15, and c=3 for Carol), these are A=8, B=19, C=10.",
+      "part": "'The working method' table, step 2; Mallory section (5³ mod 23 = 10)",
+      "idea": "Raising g to a private exponent mod p makes a public value. This is fast to compute and hard to undo."
+    },
+    {
+      "step": "Round 2: each person raises one neighbour's public value to their own exponent and sends the result. Bob sends A^b = g^(ab) = 8^15 mod 23 = 2. Carol sends B^c = g^(bc) = 19^3 mod 23 = 5. Alice sends C^a = g^(ca) = 10^6 mod 23 = 6.",
+      "part": "'The working method' table, step 3; 'Why the two results are equal'",
+      "idea": "The 'combine' step (raise someone else's public value to your private exponent) also works on an intermediate value, and it gives g to the product of the exponents."
+    },
+    {
+      "step": "Round 3: each person raises the value they just received, which is missing only their own exponent, to their exponent. Alice: (g^(bc))^a = 5^6 = 8. Bob: (g^(ca))^b = 6^15 mod 23 = 8. Carol: (g^(ab))^c = 2^3 = 8. All three get g^(abc) mod p = 8.",
+      "part": "'Why the two results are equal'",
+      "idea": "The order of the exponents does not matter, and taking mod p at each step does not change this. So every route gives g^(a×b×c). Check: 5^270 mod 23 = 5^6 = 8, because the powers of 5 mod 23 repeat every 22 and 270 mod 22 = 6."
+    },
+    {
+      "step": "Eve sees p, g, g^a, g^b, g^c, g^(ab), g^(bc) and g^(ca), but never a, b, c or g^(abc).",
+      "part": "'The working method' (what Eve sees); 'First attempt'",
+      "idea": "Only public values go over the channel. Neither the private numbers nor the key itself are ever sent."
+    },
+    {
+      "step": "To get the key, Eve would have to recover a private exponent from a public value (for example c from g^c) and then raise g^(ab) to it. That is a discrete logarithm problem, which is infeasible when p is large.",
+      "part": "'Why Eve cannot do the same'; Summary point 4; Epistemic status",
+      "idea": "Undoing exponentiation mod a large p is believed to be infeasible, at about 2^112 operations for a 2048-bit p. The two-person argument (Eve needs a private number) carries over by analogy. The explanation only argues this for two people, and the hardness is an assumption, not a proof."
+    },
+    {
+      "step": "Caveat: this protects against someone who only reads the messages, not against someone who can change them.",
+      "part": "'Where the guarantee breaks'",
+      "idea": "An active attacker can sit in the middle unless the public values are authenticated, for example with signatures."
+    }
+  ],
+  "result": "All three use the same p and g. Round 1: each sends g^own mod p (8, 19 and 10 in the example). Round 2: each raises one neighbour's value to their own exponent and sends it on: g^(ab)=2, g^(bc)=5, g^(ca)=6. Round 3: each raises the value that lacks only their own exponent to that exponent. All three get g^(abc) mod p, which is 8 in the example, because the order of the exponents doesn't matter. Eve sees only g^a, g^b, g^c, g^(ab), g^(bc) and g^(ca). To build g^(abc) she would need one private exponent, which means solving a discrete logarithm. That is assumed infeasible for a large p. This only protects against someone reading the messages: without authentication, an attacker who can change messages can still sit in the middle.",
+  "gap": ""
+}

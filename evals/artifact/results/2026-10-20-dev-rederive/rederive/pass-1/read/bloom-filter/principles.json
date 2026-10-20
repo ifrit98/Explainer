@@ -1,0 +1,41 @@
+{
+  "steps": [
+    {
+      "step": "Write down what a filter's bits are. Every bit starts at 0, and a bit is 1 exactly when at least one added item hashed to that position.",
+      "part": "The parts (Bit array; Add(x)) and 'Why it never misses an item it saw'",
+      "idea": "The array starts all 0. Add only sets the k positions of each item to 1, and nothing ever clears a bit. So the final array depends only on which positions the added items cover, not on the order they were added."
+    },
+    {
+      "step": "So filter(A) is the set of positions covered by items of A, and filter(B) is the set covered by items of B. They use the same m and the same hashes, so a given item hashes to the same positions in both.",
+      "part": "Step 1; The parts (Hash function: the same item always gives the same number)",
+      "idea": "Shared size and hashes mean position i means the same thing in both arrays."
+    },
+    {
+      "step": "Bitwise OR the two arrays. A bit is 1 in the OR exactly when some item of A or some item of B covers it, which means some item of A ∪ B covers it.",
+      "part": "Steps 1–2; background (what OR does)",
+      "idea": "The positions covered by A ∪ B are the positions covered by A together with those covered by B."
+    },
+    {
+      "step": "The OR is exact: it is bit-for-bit the filter you would get by adding every item of A ∪ B to an empty filter. An item in both sets just sets the same bits twice, which changes nothing. So it never misses an item, and its false-positive rate is that of a filter holding n = |A ∪ B| items.",
+      "part": "Step 3; 'Why it never misses an item it saw'; 'How often it is wrong' (p ≈ (1 − e^(−kn/m))^k)",
+      "idea": "The two arrays are identical, so the merged filter keeps all the usual guarantees. Its fill, and so its error rate, is set by how many distinct items it holds. The arrays must match in size and hashes, because 'The bits cannot be resized'."
+    },
+    {
+      "step": "Bitwise AND the two arrays. Every item of A ∩ B sets its k bits in both filters, so all its bits are 1 in the AND. A query for it says 'probably seen', so the AND never misses an item of A ∩ B.",
+      "part": "Step 2; 'Why it never misses an item it saw'",
+      "idea": "An item in both sets has all its bits set in both arrays."
+    },
+    {
+      "step": "But a bit can be 1 in filter(A) because of one item of A and 1 in filter(B) because of a different item of B, even when no item is in both sets. The AND keeps that bit, but a filter built from A ∩ B would have it at 0.",
+      "part": "Worked example, the 'owl' paragraph ('The filter has no record of which item set a bit')",
+      "idea": "Bits do not record which item set them, so a bit that is 1 in both arrays does not mean one shared item set it."
+    },
+    {
+      "step": "So the AND acts like a filter for A ∩ B with no false negatives. It is not exact: it can have more 1s than the filter built from A ∩ B, so its false-positive rate can be higher. That rate is driven by how full A's and B's filters are, not by the size of A ∩ B. If A and B share no items, it can still answer 'probably seen'.",
+      "part": "Steps 5–6; 'How often it is wrong' (the error rate depends on how full the array is)",
+      "idea": "Extra 1 bits make the array look fuller, and a fuller array gives more false positives."
+    }
+  ],
+  "result": "OR the two bit arrays bit by bit. The result is exactly the Bloom filter you would get by adding every item of A ∪ B, so it is exact. Like any Bloom filter, it never misses an item and can sometimes give a false 'yes', at the rate expected for n = |A ∪ B| items. A bitwise AND gives an approximate filter for A ∩ B. Every item in both sets still answers 'probably seen'. But the AND can keep bits that were set by different items in A and in B, so it may have more 1s than the true filter for A ∩ B. That gives it a false-positive rate that can be higher, and it is not exact.",
+  "gap": ""
+}

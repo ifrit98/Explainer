@@ -1,0 +1,36 @@
+{
+  "steps": [
+    {
+      "step": "Matching cells grow by doubling: after n doublings, a starting count S becomes S × 2^n.",
+      "part": "Step 3: the selected cells multiply, then most die (clonal expansion and the worked example 100 × 2¹⁵)",
+      "idea": "Activated lymphocytes divide over and over and all their descendants carry the same receptor, so the count grows exponentially. The worked example multiplies the starting count by 2 for each doubling."
+    },
+    {
+      "step": "The number of doublings needed to reach a target N from a start S is log₂(N/S).",
+      "part": "Step 3, the 'second encounter' paragraph (log₂(20) ≈ 4.3 doublings)",
+      "idea": "The explanation works out the time to reach 3.3 million cells from 164,000 as log₂ of the ratio between the target and the starting count, then turns those doublings into days."
+    },
+    {
+      "step": "First infection: doublings = log₂(N/S). After vaccination: doublings = log₂(N/(1000S)) = log₂(N/S) − log₂(1000).",
+      "part": "steps 1–2; background (rules of logarithms)",
+      "idea": "Starting with 1,000 times as many cells removes a fixed number of doublings, log₂(1000), whatever N is."
+    },
+    {
+      "step": "log₂(1000) ≈ 9.97, so about 10 doublings are saved (2¹⁰ = 1024).",
+      "part": "background (arithmetic)",
+      "idea": "1000 is very close to 2¹⁰."
+    },
+    {
+      "step": "Time saved ≈ 10 × 12 h ≈ 120 h ≈ 5 days.",
+      "part": "step 4; question's 12-hour doubling time",
+      "idea": "Each doubling saved cuts 12 hours from the time it takes to reach full strength."
+    },
+    {
+      "step": "The threshold N cancels out: it appears in both doubling counts, so the difference is log₂(1000) whatever N is. Only the ratio of starting counts matters.",
+      "part": "step 3; Step 3's comparison of first vs second encounter",
+      "idea": "With exponential growth, a head start multiplies the count by a fixed factor. That equals a fixed number of doublings, so it saves the same amount of time for any finish line."
+    }
+  ],
+  "result": "The response reaches full strength about 5 days sooner: log₂(1000) ≈ 10 doublings × 12 h ≈ 120 h. The answer doesn't depend on how many cells count as 'enough' because the doublings needed are log₂(enough/start). Starting 1,000 times higher always subtracts the same log₂(1000) ≈ 10 doublings, so the threshold cancels out.",
+  "gap": ""
+}

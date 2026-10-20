@@ -1,0 +1,36 @@
+{
+  "steps": [
+    {
+      "step": "When run in reverse, the machine has the same three energy flows. W is the electricity. Q_cold is the heat taken from the cold side, which is now the indoor air. Q_hot is the heat given to the warm side, which is now the outdoor air. The same loop can have its cold coil inside the cooled space.",
+      "part": "Level 2 loop diagram and the Summary line 'A fridge uses the same loop, with the cold coil inside the fridge'",
+      "idea": "The loop takes in heat at the cold coil, takes in electricity at the compressor, and gives out heat at the hot coil. Which side counts as 'inside' does not change these flows."
+    },
+    {
+      "step": "Energy balance: Q_hot = Q_cold + W. Rearranged, Q_cold = Q_hot − W.",
+      "part": "Level 1 diagram (2 + 1 = 3 kWh), and 'Energy conservation gives Q_cold = Q_hot − W' in 'Where the limit comes from'",
+      "idea": "All the heat taken from the cold side plus all the electricity comes out as heat on the hot side."
+    },
+    {
+      "step": "Entropy condition: Q_hot / T_hot ≥ Q_cold / T_cold, with temperatures in kelvin.",
+      "part": "'Where the limit comes from' (entropy paragraph and inequality); 'Use kelvin, not Celsius'",
+      "idea": "The refrigerant stores no entropy over a cycle and electricity carries none. Entropy cannot be destroyed, so the hot side must receive at least as much entropy as the cold side loses."
+    },
+    {
+      "step": "Put Q_hot = Q_cold + W into the condition: (Q_cold + W)/T_hot ≥ Q_cold/T_cold. Multiply by T_hot·T_cold to get Q_cold·T_cold + W·T_cold ≥ Q_cold·T_hot. Then W·T_cold ≥ Q_cold·(T_hot − T_cold). So the cooling COP Q_cold/W ≤ T_cold / (T_hot − T_cold).",
+      "part": "Steps 2 and 3; the algebra follows the same pattern as the explanation's four-line derivation",
+      "idea": "The same rearrangement, solved for heat removed per unit of electricity instead of heat delivered."
+    },
+    {
+      "step": "Why it is exactly one less: Q_cold/W = (Q_hot − W)/W = Q_hot/W − 1. Every kWh of electricity becomes heat dumped on the hot side, not heat removed. So the heat removed per kWh is always the heat delivered per kWh minus 1, both for the ideal limit and for any real machine. Check: T_hot/(T_hot − T_cold) − 1 = T_cold/(T_hot − T_cold).",
+      "part": "Step 2; ideal limit formula T_hot/(T_hot − T_cold) in 'The ideal limit'",
+      "idea": "Energy conservation, with the electricity ending up as heat on the hot side (Level 1, and compressor step 3: 'The compressor's 1 kWh is in the vapour too')."
+    },
+    {
+      "step": "Numerical example using the explanation's temperatures (308.15 K and 273.15 K, 35 K lift): heating limit 308.15/35 = 8.8, cooling limit 273.15/35 = 7.8. The explanation's COP-3 heating example would cool with 2 kWh removed per 1 kWh.",
+      "part": "'The ideal limit' (8.8) and Level 1 (2 kWh outdoor heat for 1 kWh)",
+      "idea": "The numbers confirm the cooling value is one less than the heating value."
+    }
+  ],
+  "result": "The ideal cooling limit is heat removed ÷ electricity ≤ T_cold / (T_hot − T_cold), with temperatures in kelvin. For example, a 35 K lift with the cold side at 273.15 K gives 273.15/35 ≈ 7.8, compared with 8.8 for heating. It is exactly one less because energy is conserved: heat delivered = heat removed + electricity. So heat removed per kWh = heat delivered per kWh − 1, which means T_hot/(T_hot − T_cold) − 1 = T_cold/(T_hot − T_cold). The electricity ends up as heat on the warm side, so it counts toward heating but not toward cooling.",
+  "gap": ""
+}

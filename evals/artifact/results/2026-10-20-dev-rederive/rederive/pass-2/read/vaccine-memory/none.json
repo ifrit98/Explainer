@@ -1,0 +1,41 @@
+{
+  "steps": [
+    {
+      "step": "Matching cells grow by repeated division, so their number doubles at a steady rate.",
+      "part": "Step 3: Amplify and refine — Amplify: clonal expansion",
+      "idea": "A selected cell divides about every 6 to 12 hours for days, so one cell becomes thousands of identical copies. The question fixes the doubling time at 12 hours."
+    },
+    {
+      "step": "After vaccination, the starting number of matching cells is much larger than before any exposure.",
+      "part": "Step 4: Keep copies — memory (table of naive vs memory cells)",
+      "idea": "Memory leaves hundreds to thousands of times more cells that fit the antigen than the handful of naive cells. The question uses a factor of 1,000."
+    },
+    {
+      "step": "Both responses climb the same doubling curve. The only difference is where they start, so the vaccinated response skips the doublings needed to go from N0 to 1000·N0.",
+      "part": "background (exponential growth), using steps 1–2",
+      "idea": "The cell count is N0·2^(t/12). To reach a threshold T you need t = 12·log2(T/N0) hours. Starting at 1000·N0 gives t' = 12·log2(T/(1000·N0)) = t − 12·log2(1000)."
+    },
+    {
+      "step": "Work out how many doublings are saved.",
+      "part": "background (arithmetic), step 3",
+      "idea": "log2(1000) ≈ 9.97, so about 10 doublings, because 2^10 = 1024."
+    },
+    {
+      "step": "Turn the saved doublings into time.",
+      "part": "step 4, step 1",
+      "idea": "10 doublings × 12 hours = about 120 hours, or about 5 days."
+    },
+    {
+      "step": "The time saved does not depend on the threshold T.",
+      "part": "step 3 (background: logarithms)",
+      "idea": "When you subtract t' from t, the log2(T) terms cancel and only 12·log2(1000) is left. With constant doubling, being ahead by a factor of 1,000 always means being the same 10 doublings ahead, wherever the finish line is."
+    },
+    {
+      "step": "Check that this fits the observed timing.",
+      "part": "Step 4 (primary vs secondary response paragraph and diagram); So what does a vaccine do?",
+      "idea": "The primary response takes about 1–2 weeks, and the secondary response starts within days. Saving about 5 days fits that gap. The explanation also says memory cells respond to less stimulus, which could shorten the delay further, but this simple model ignores that."
+    }
+  ],
+  "result": "About 5 days sooner. A factor of 1,000 is about 2^10, so the vaccinated response skips about 10 doublings, and 10 × 12 h ≈ 120 h. The saving doesn't depend on how many cells count as 'enough' because growth is exponential. The time to reach any threshold T is 12·log2(T/N0) hours. Raising the start by 1,000× takes off the same 12·log2(1000) ≈ 120 h whatever T is, since the T term cancels.",
+  "gap": ""
+}

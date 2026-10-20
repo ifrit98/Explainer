@@ -1,0 +1,31 @@
+{
+  "steps": [
+    {
+      "step": "Getting either drug alone leaves resistant cells already present: 10^10 × 10^-8 = 100 cells resistant to A, and 10^10 × 10^-9 = 10 resistant to B.",
+      "part": "Step 2: the antibiotic selects the resistant cells (worked numbers)",
+      "idea": "The expected number of resistant cells before treatment is population × chance per cell. Resistance comes from random variation that happens before the drug arrives."
+    },
+    {
+      "step": "With one drug, those survivors grow back into a resistant infection.",
+      "part": "Step 2 (the doubling bullet and the paragraph on selection); Why selection, and not adaptation",
+      "idea": "The drug kills the susceptible cells. The few resistant ones keep dividing, and about 30 doublings rebuild 10^10 cells, nearly all resistant. The drug does not cause resistance; it picks out the cells that already had it."
+    },
+    {
+      "step": "With both drugs, a cell survives only if it resists both. Because the two mutations are unrelated, the chances multiply: 10^-8 × 10^-9 = 10^-17 per cell.",
+      "part": "What follows from this: 'Two drugs at once help'",
+      "idea": "Two independent rare events must both happen in the same cell, so their probabilities multiply (the page's example uses 10^-9 × 10^-9)."
+    },
+    {
+      "step": "Expected number of doubly resistant cells: 10^10 × 10^-17 = 10^-7, so almost certainly none exists.",
+      "part": "Step 1, 'Two drugs at once help', and the small-population prediction in Step 2",
+      "idea": "When the expected count is far below 1, usually no resistant cell exists. Then there is nothing to select, and the drugs clear the infection."
+    },
+    {
+      "step": "Caveat: this only holds if the two resistances arise separately. A plasmid that carries both genes would defeat it.",
+      "part": "Step 1 (Gene transfer); 'Two drugs at once help'",
+      "idea": "One plasmid can carry several resistance genes, so a single transfer could give resistance to both drugs. The page says the argument fails in that case."
+    }
+  ],
+  "result": "Each drug alone leaves resistant cells that already exist: about 100 resist A and about 10 resist B. The drug then lets those cells regrow the infection. With both drugs, a cell must carry both unrelated mutations. The chance of that is 10^-8 × 10^-9 = 10^-17 per cell, so a population of 10^10 is expected to hold only 10^-7 such cells, which in practice means none. With no doubly resistant cell to select, the combination clears the infection. This holds unless a single plasmid carries both resistance genes.",
+  "gap": ""
+}

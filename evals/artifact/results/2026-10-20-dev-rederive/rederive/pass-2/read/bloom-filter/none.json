@@ -1,0 +1,41 @@
+{
+  "steps": [
+    {
+      "step": "A filter's bit array is fully determined by the items added and the hash functions: each item turns on its k positions, and a bit that is already 1 stays 1. So bit i is 1 exactly when at least one added item hashes to position i.",
+      "part": "Section 2 key box ('Add an item … If a bit is already 1, it stays 1'), plus the paragraph 'The filter never stores the item itself. It only stores the bits that items have switched on.'",
+      "idea": "Adding only ever switches bits on, so the final array is the OR over all added items of each item's set of k positions. Because adding only switches bits on, the order of adding doesn't matter."
+    },
+    {
+      "step": "The two filters can only be combined position by position if they share m and the same k hash functions.",
+      "part": "Section 2 (each hash is taken modulo m to pick a position) and the script's kSel handler comment ('Changing k changes every item's positions, so the old bits no longer mean anything: rebuild')",
+      "idea": "Position i means the same thing in both arrays only if every item maps to the same positions in both. The question gives us this condition."
+    },
+    {
+      "step": "Filter for A ∪ B: take the bitwise OR of the two arrays.",
+      "part": "Steps 1 and 2",
+      "idea": "In the A filter, bit i is 1 if some item of A hits i. In the B filter, bit i is 1 if some item of B hits i. The OR is 1 if some item of A ∪ B hits i, which is exactly the rule from step 1 for a filter built by adding every item of A ∪ B. No items are needed."
+    },
+    {
+      "step": "The OR is exact: it is bit-for-bit the same as the filter you would get by inserting A ∪ B directly.",
+      "part": "Step 3; Section 4 table; Section 5 Step 2",
+      "idea": "Because the arrays are identical, the union filter behaves like a normal filter. It gives no false negatives for any item in A or B. Its false positive rate is about f^k, where f is the fraction of 1s, which is the same as for a filter of n = |A ∪ B| items. Like any filter, it can be overfilled if m was sized for fewer items."
+    },
+    {
+      "step": "A bitwise AND gives a 1 at position i only where some item of A and some item of B both hit i.",
+      "part": "Step 1",
+      "idea": "AND keeps a bit only if it is on in both arrays."
+    },
+    {
+      "step": "Every item in A ∩ B still passes the check in the AND filter, so it has no false negatives for the intersection.",
+      "part": "Step 5; Section 2 check rule; Section 4 'Impossible' cell",
+      "idea": "An item in both sets set all k of its bits in both filters, so all k bits survive the AND and the check says 'probably yes'."
+    },
+    {
+      "step": "The AND is not exact. It can have 1s that a filter built directly from A ∩ B would have as 0, so its false positive rate can be higher than a filter built directly from A ∩ B.",
+      "part": "Section 3 'Things to notice' (different words share positions; sharing causes false positives); Steps 1 and 5",
+      "idea": "A bit can be 1 in A's filter because of an item only in A, and 1 in B's filter because of a different item only in B. That bit survives the AND even though no item of A ∩ B set it. The AND array therefore contains every bit of the true A ∩ B filter, and possibly more. More 1s means more false positives (f^k)."
+    }
+  ],
+  "result": "Union: OR the two bit arrays. This is exact: the result is identical, bit for bit, to a filter built by inserting every item of A ∪ B. That is because a bit is 1 exactly when some added item hashes to it, and bits never go back to 0. It still has no false negatives, and its false positive rate is that of a filter holding |A ∪ B| items. Intersection: the AND gives a filter that still says 'probably yes' for every item in A ∩ B, so it has no false negatives. But it is only an approximation. A bit can stay on because one item only in A and a different item only in B happen to share that position. So the AND can contain extra 1s compared with a filter built directly from A ∩ B, and can give more false positives than that filter. Both operations need the same m and the same hash functions.",
+  "gap": "The explanation never covers combining filters with OR or AND. Both answers are worked out from its rule for adding items and its points about shared bits."
+}
