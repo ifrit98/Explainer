@@ -83,3 +83,16 @@ def test_check_targets_records_and_resumes(monkeypatch, tmp_path):
     rederive.check_targets()
     saved = json.loads(checks.read_text())
     assert asked == ["s2"] and saved["s2"]["attempt"] == 2 and saved["s1"]["attempt"] == 1
+
+
+def test_every_subject_has_a_checked_target():
+    # Targets are frozen once checked: a target that changed since its check, or a subject with neither a passing
+    # target nor a record of three failed attempts, fails here.
+    checks = json.loads(rederive.checks_file().read_text())
+    for s in ae.load("all")[1]:
+        c = checks.get(s["id"], {})
+        if "rederive" in s:
+            assert rederive.target_problems(s["rederive"]) == [], s["id"]
+            assert c.get("verdict") == "pass" and c.get("hash") == rederive.target_hash(s["rederive"]), s["id"]
+        else:
+            assert c.get("verdict") == "fail" and c.get("attempt") == 3, s["id"]
