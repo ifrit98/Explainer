@@ -356,3 +356,31 @@ def test_cli_rederive_and_artifact_call_the_stage(monkeypatch, tmp_path):
     monkeypatch.setattr(sys, "argv", ["explainer", "eval", "artifact", "--out", str(o)])
     cli.main()
     assert seen == [("artifact", o), ("rederive", o, o)]
+
+
+def test_grade_human_uses_the_same_rubric(monkeypatch, tmp_path):
+    builds, _, _ = run_fixture(monkeypatch, tmp_path)
+    chain = tmp_path / "s1-a.md"
+    chain.write_text("---\nsubject: s1\ncondition: a\n---\n\nIdea one gives idea two, so three.\n")
+    seen = []
+
+    def ask(system, prompt, model=None, **kw):
+        seen.append(prompt)
+        return json.dumps({"grades": {"A": {"marks": ["supported", "unsupported", "missing"], "result_right": True,
+                                            "result_stated": False}}})
+
+    monkeypatch.setattr(agent, "ask", ask)
+    r = rederive.grade_human(chain, builds)
+    assert rederive.OUTSIDE_RULE in seen[0] and "Idea one gives idea two, so three." in seen[0] and "ALPHA" in seen[0]
+    kinds = [s["kind"] for s in TARGET["steps"]]
+    assert r["tally"] == rederive.tally(["supported", "unsupported", "missing"], kinds, True, False)
+    assert json.loads((tmp_path / "s1-a.grade.json").read_text()) == r
+    assert r["subject"] == "s1" and r["condition"] == "a"
+
+
+def test_human_check_lists_only_questions():
+    text = (ROOT / "evals" / "artifact" / "human-check.md").read_text()
+    for s in ae.load("dev")[1]:
+        if "rederive" in s:
+            assert s["rederive"]["q"] in text, s["id"]
+            assert all(step["text"] not in text for step in s["rederive"]["steps"]) and s["rederive"]["result"] not in text

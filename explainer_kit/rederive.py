@@ -25,6 +25,8 @@ from concurrent.futures import ThreadPoolExecutor
 from datetime import date
 from pathlib import Path
 
+import yaml
+
 from explainer_kit import agent
 from explainer_kit import artifact_eval as ae
 from explainer_kit.evals import words
@@ -430,3 +432,31 @@ def summary(names: list[str], subjects: list[dict], builds: Path, out: Path, gra
         cells = [", ".join(f"{tallies[k][n][i]['supported']}/{tallies[k][n][i]['counted']}" for k in ks) for n in names]
         lines.append(f"| {s['id']} | " + " | ".join(cells) + " |")
     return "\n".join(lines) + "\n"
+
+
+# ---------------------------------------------------------------- a person's working
+
+def grade_human(chain_file: Path, builds: Path, model: str | None = None) -> dict:
+    """Grades a person's working (evals/artifact/human-check.md) with the same rubric as a model reader's. The file
+    is Markdown with front matter naming the subject and the condition whose explanation the person read."""
+    m = re.match(r"---\n(.*?)\n---\n(.*)", chain_file.read_text(), re.S)
+    meta = (yaml.safe_load(m.group(1)) or {}) if m else {}
+    if not m or "subject" not in meta or "condition" not in meta:
+        raise SystemExit(f"{chain_file.name}: needs front matter with subject and condition")
+    reader, subjects = ae.load("all", [meta["subject"]])
+    if not subjects or not subjects[0].get("rederive"):
+        raise SystemExit(f"no subject {meta['subject']!r} with a rederivation target")
+    s, cond = subjects[0], meta["condition"]
+    files = ae.renderings(builds / "work" / s["id"] / cond, s["id"])
+    if not files:
+        raise SystemExit(f"no explanation for {s['id']} under {cond!r} in {builds.name}")
+    entries = {"A": {"text": "\n\n".join(grader_text(f) for f in files), "chain": m.group(2).strip()}}
+    reply = agent.parse_json(agent.ask(ae.GRADER_SYSTEM, grade_prompt(s, reader, entries), model=model))
+    g = (reply.get("grades") or {}).get("A")
+    g = g if isinstance(g, dict) else {}
+    kinds = [step["kind"] for step in s["rederive"]["steps"]]
+    mk, right, stated = marks(g.get("marks"), kinds), g.get("result_right") is True, g.get("result_stated") is True
+    result = {"subject": s["id"], "condition": cond, "marks": mk, "result_right": right, "result_stated": stated,
+              "tally": tally(mk, kinds, right, stated)}
+    chain_file.with_suffix(".grade.json").write_text(json.dumps(result, indent=2, ensure_ascii=False) + "\n")
+    return result

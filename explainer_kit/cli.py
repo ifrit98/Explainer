@@ -238,9 +238,18 @@ def cmd_eval(args) -> None:
     results = project_root() / "evals" / "artifact" / "results"
     stage = dict(split=args.split, only=args.only, model=args.model, reader_model=args.reader_model,
                  workers=args.workers)
+    if args.suite in ("rederive", "human") and not args.builds:
+        raise SystemExit(f"eval {args.suite} needs --builds <an artifact run folder>")
+    if args.suite == "human":
+        if not args.chain:
+            raise SystemExit("eval human needs --chain <a person's working, see evals/artifact/human-check.md>")
+        r = rederive.grade_human(Path(args.chain), Path(args.builds), args.model)
+        t = r["tally"]
+        print(f"human   {r['subject']} ({r['condition']}): {t['supported']}/{t['counted']} steps supported, "
+              f"result {'right' if r['result_right'] else 'stated' if r['result_stated'] else 'wrong'}   "
+              f"{', '.join(r['marks'])}")
+        return
     if args.suite == "rederive":
-        if not args.builds:
-            raise SystemExit("eval rederive needs --builds <an artifact run folder>")
         out = Path(args.out) if args.out else results / f"{date.today().isoformat()}-{args.split}-rederive"
         rederive.run(out, Path(args.builds), **stage)
         return
@@ -357,9 +366,11 @@ def main() -> None:
     p = sub.add_parser("eval", help="chat: answers under several system prompts; artifact: explainers built under "
                                      "several conditions, read and graded blind (then the rederivation stage); "
                                      "targets: check the rederivation targets; rederive: the rederivation stage on "
-                                     "an earlier artifact run's builds")
-    p.add_argument("suite", choices=["chat", "artifact", "targets", "rederive"])
-    p.add_argument("--builds", help="rederive: the artifact run folder whose builds are read (it is not changed)")
+                                     "an earlier artifact run's builds; human: grade a person's working")
+    p.add_argument("suite", choices=["chat", "artifact", "targets", "rederive", "human"])
+    p.add_argument("--builds", help="rederive, human: the artifact run folder whose builds are read (it is not "
+                                    "changed)")
+    p.add_argument("--chain", help="human: a person's working, as in evals/artifact/human-check.md")
     p.add_argument("--conditions", nargs="+",
                    help="name=source; source is none, principles, git:<rev>, or a file; for artifact also quick or "
                         "published (the explain skill at that tier). Default: chat none v0.5 v0.6; artifact none "
