@@ -234,7 +234,7 @@ Rounds 2 and 3 also produced general rules: names match pictures (call it an L o
 - The quiz is at its ceiling (94–100% in every condition, with a strong reader and with Haiku): a model reader cannot measure the difference. The same holds for the published tier's blind test.
 - The principles alone cut length 40% and rank first on effort in every grading pass, at the lowest cost. The quick tier is shortest but ranks below them and makes the most errors; the published tier costs 13× as much for no measured gain.
 - The first run was invalid: builders inside the repo loaded its CLAUDE.md in every condition. Builds now run outside every project.
-- Rederivation is also near its ceiling (90–100% of steps supported). One pair separates under the rule fixed before the run, none > published, by about two of 38 steps, from one subject (two-tides) where the published explanation lacks a building block the quiz also found missing. Two target defects and three subjects whose explanations state the derived steps are reported with it ([docs/evals.md](docs/evals.md#what-the-dev-baseline-found)).
+- Rederivation is also near its ceiling (90–100% of steps supported). One pair separates under the rule fixed before the run, none > published, by about two of 38 steps, from one subject (two-tides) where the published explanation lacks part of a building block (when the Sun's and Moon's tides add), a gap the quiz also found. Two target defects and three subjects whose explanations state the derived steps are reported with it ([docs/evals.md](docs/evals.md#what-the-dev-baseline-found)).
 
 **Next.**
 
