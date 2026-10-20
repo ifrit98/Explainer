@@ -168,3 +168,84 @@ def test_read_chain_skips_a_build_with_no_renderings(monkeypatch, tmp_path):
     monkeypatch.setattr(agent, "ask", lambda *a, **k: pytest.fail("no explanation, so no reader"))
     r = rederive.read_chain({"id": "s1", "rederive": TARGET}, "a", "A reader.", builds, tmp_path / "out", 1, None)
     assert r["missing"] is True and r["steps"] == []
+
+
+def test_grader_text_includes_page_scripts(tmp_path):
+    html = tmp_path / "index.html"
+    html.write_text("<p>Drag the slider</p><script>const loss = x => x * x</script>")
+    assert "const loss" not in ae.shown_text(html)                 # the visible text alone misses what a control shows
+    text = rederive.grader_text(html)
+    assert "Drag the slider" in text and "const loss" in text
+    md = tmp_path / "explanation.md"
+    md.write_text("# T\n\nBody `x = 1`.\n<!-- note -->\n")
+    assert rederive.grader_text(md) == ae.shown_text(md)
+
+
+def test_grade_prompt_is_blind_and_carries_the_rule():
+    reader, subjects = ae.load("dev")
+    s = subjects[0]
+    p = rederive.grade_prompt(s, reader, {"A": {"text": "body", "chain": rederive.chain_text(CHAIN)},
+                                          "B": {"text": "other", "chain": "(no chain)"}})
+    assert rederive.OUTSIDE_RULE in p and s["rederive"]["result"] in p
+    assert all(f"({step['kind']}) {step['text']}" in p for step in s["rederive"]["steps"])
+    assert "=== Explanation A ===" in p and "=== Explanation B ===" in p and rederive.chain_text(CHAIN) in p
+    assert "any order" in p and "stated" in p
+    assert "principles" not in p.lower() and "skill" not in p.lower()   # the grader does not know the conditions
+
+
+def test_marks_are_normalised():
+    assert rederive.marks(["supported", "stated", "bogus"], ["block", "block", "derived", "derived"]) == \
+        ["supported", "supported", "missing", "missing"]                # "stated" on a building block is supported
+    assert rederive.marks("x", ["block"]) == ["missing"]
+    assert rederive.marks(["supported", "unsupported", "supported"], ["block", "derived"]) == ["supported", "unsupported"]
+
+
+def test_tally():
+    marks, kinds = ["supported", "unsupported", "stated", "missing"], ["block", "derived", "derived", "derived"]
+    assert rederive.tally(marks, kinds, True, False) == \
+        {"supported": 1, "made": 2, "counted": 3, "stated": 1, "right": 1, "results": 1, "results_stated": 0}
+    t = rederive.tally(marks, kinds, True, True)                     # a stated result is left out of the result score
+    assert t["right"] == 0 and t["results"] == 0 and t["results_stated"] == 1
+
+
+def test_pass_scores_pool_subjects():
+    base = {"stated": 0, "results_stated": 0}
+    scores = rederive.pass_scores({
+        "a": [{**base, "supported": 1, "made": 2, "counted": 2, "right": 1, "results": 1},
+              {**base, "supported": 2, "made": 2, "counted": 3, "right": 0, "results": 1}],
+        "b": [{**base, "supported": 0, "made": 0, "counted": 2, "right": 0, "results": 0, "results_stated": 1}],
+    })
+    assert scores["a"] == {"supported": 0.6, "raw": 0.8, "result": 0.5}
+    assert scores["b"]["result"] is None
+
+
+def test_separations_need_every_pass():
+    assert rederive.separations([
+        {"a": {"supported": .7}, "b": {"supported": .5}, "c": {"supported": .6}},
+        {"a": {"supported": .7}, "b": {"supported": .5}, "c": {"supported": .4}},
+        {"a": {"supported": .6}, "b": {"supported": .6}, "c": {"supported": .3}},
+    ]) == [("a", "c")]
+
+
+def test_grade_subject_maps_labels_back_and_fills_missing(monkeypatch, tmp_path):
+    builds, out = builds_folder(tmp_path), tmp_path / "out"
+    s = {"id": "s1", "q": "Question?", "rederive": TARGET}
+    for cond in ("a", "b"):
+        f = out / "rederive" / "pass-1" / "read" / "s1" / f"{cond}.json"
+        f.parent.mkdir(parents=True, exist_ok=True)
+        f.write_text(json.dumps(CHAIN))
+    calls = []
+
+    def ask(system, prompt, model=None, **kw):
+        calls.append(prompt)
+        return json.dumps({"grades": {"A": {"marks": ["supported", "supported", "stated"], "result_right": True,
+                                            "result_stated": False}}})
+
+    monkeypatch.setattr(agent, "ask", ask)
+    g = rederive.grade_subject(s, {"A": "b", "B": "a"}, "A reader.", builds, out, 1, None)
+    assert g["grades"]["b"] == {"marks": ["supported", "supported", "stated"], "result_right": True, "result_stated": False}
+    assert g["grades"]["a"] == {"marks": ["missing"] * 3, "result_right": False, "result_stated": False}
+    assert "BETA" in calls[0].split("=== Explanation A ===")[1].split("=== Explanation B ===")[0]
+    assert (out / "rederive" / "pass-1" / "grades" / "s1.json").exists()
+    rederive.grade_subject(s, {"A": "b", "B": "a"}, "A reader.", builds, out, 1, None)
+    assert len(calls) == 1

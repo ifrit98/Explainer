@@ -17,6 +17,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import re
 import shutil
 import tempfile
 from pathlib import Path
@@ -26,6 +27,7 @@ from explainer_kit import artifact_eval as ae
 from explainer_kit.paths import project_root
 
 KINDS = ("block", "derived")
+MARKS = ("supported", "unsupported", "missing", "stated")
 CHECKER_SYSTEM = "You are a careful scientist and teacher. You check test questions. Reply with JSON only."
 CHECKS = ("correct", "blocks", "derived_follow", "steps", "not_stated")
 # The same words in the reader's prompt and the grader's: what the reader may bring, and what must come from the text.
@@ -183,6 +185,124 @@ def read_chain(subject: dict, cond: str, reader: str, builds: Path, out: Path, k
                     break
         finally:
             shutil.rmtree(tmp, ignore_errors=True)
+    saved.parent.mkdir(parents=True, exist_ok=True)
+    saved.write_text(json.dumps(result, indent=2, ensure_ascii=False))
+    return result
+
+
+# ---------------------------------------------------------------- 3. grade
+
+def grader_text(path: Path) -> str:
+    """What the grader reads: as for the quiz, plus a page's scripts, so a step that cites a control can be checked."""
+    text = ae.shown_text(path)
+    if path.suffix == ".html":
+        scripts = [s.strip() for s in re.findall(r"<script\b[^>]*>(.*?)</script>", path.read_text(), flags=re.S | re.I)]
+        if any(scripts):
+            text += "\n\n--- page script ---\n" + "\n\n".join(s for s in scripts if s)
+    return text
+
+
+def grade_prompt(subject: dict, reader: str, entries: dict[str, dict]) -> str:
+    t = subject["rederive"]
+    steps = "\n".join(f"  {i}. ({s['kind']}) {s['text']}" for i, s in enumerate(t["steps"], 1))
+    blocks = [f"=== Explanation {label} ===\n{e['text'][:ae.TEXT_LIMIT]}\n\n--- Reader's working from {label} ---\n"
+              f"{e['chain']}" for label, e in entries.items()]
+    return "\n".join([
+        f"Subject: {subject['q']}",
+        f"The reader: {reader}",
+        "",
+        "A reader read each explanation once, then worked out this question, which the explanation was not asked to "
+        "answer:",
+        f"Question: {t['q']}",
+        "Expected steps (block: an idea a good explanation gives; derived: worked out from the steps before it):",
+        steps,
+        f"Expected result: {t['result']}",
+        "",
+        "The reader was told: " + OUTSIDE_RULE,
+        "",
+        *blocks,
+        "",
+        "Grade each reader's working on its own, against its own explanation. The expected steps are a checklist of "
+        "ideas, not a script: credit a step when the working establishes the same idea, in any order, merged with "
+        "another step, split in two, or by an equivalent route. For each expected step, in order, give one mark:",
+        "- supported: the reader made the step, and either the parts of the explanation it names carry the ideas it "
+        "rests on, or it uses only background this reader already has on top of earlier steps;",
+        "- unsupported: the reader made the step, but from its own knowledge of the subject, or from a part of the "
+        "explanation that does not carry the idea;",
+        "- missing: the reader did not make the step;",
+        "- stated: a derived step that the explanation itself states outright, so the reader looked it up instead of "
+        "working it out. Use stated for derived steps only; building blocks are meant to be in the explanation.",
+        "Then give result_right (the reader's result matches the expected result) and result_stated (the explanation "
+        "itself states the expected result outright).",
+        "",
+        'Reply with JSON only: {"grades": {"<label>": {"marks": ["supported", ...], "result_right": true, '
+        '"result_stated": false}}}',
+    ])
+
+
+def marks(raw: object, kinds: list[str]) -> list[str]:
+    """One mark per expected step: unknown or absent marks are missing, and "stated" on a building block (which
+    is meant to be in the explanation) is supported."""
+    raw = raw if isinstance(raw, list) else []
+    out = []
+    for i, kind in enumerate(kinds):
+        m = str(raw[i]).strip().lower() if i < len(raw) else "missing"
+        m = m if m in MARKS else "missing"
+        out.append("supported" if m == "stated" and kind == "block" else m)
+    return out
+
+
+def tally(marks: list[str], kinds: list[str], right: bool, stated: bool) -> dict[str, int]:
+    """Counts for one chain. A stated derived step, or a stated result, is left out of the score: neither rewarded
+    nor penalized."""
+    n_stated = sum(m == "stated" for m in marks)
+    supported = sum(m == "supported" for m in marks)
+    return {"supported": supported, "made": supported + sum(m == "unsupported" for m in marks),
+            "counted": len(marks) - n_stated, "stated": n_stated, "right": int(right and not stated),
+            "results": int(not stated), "results_stated": int(stated)}
+
+
+def pass_scores(tallies: dict[str, list[dict]]) -> dict[str, dict]:
+    """Per condition, pooled over subjects: supported and raw shares of the counted steps, and the share of results
+    right (None when nothing was counted)."""
+    def share(key: str, of: str, ts: list[dict]) -> float | None:
+        total = sum(t[of] for t in ts)
+        return sum(t[key] for t in ts) / total if total else None
+    return {c: {"supported": share("supported", "counted", ts), "raw": share("made", "counted", ts),
+                "result": share("right", "results", ts)} for c, ts in tallies.items()}
+
+
+def separations(passes: list[dict[str, dict]]) -> list[tuple[str, str]]:
+    """Pairs (a, b) where a's supported score is higher than b's in every pass: the separation rule."""
+    if not passes:
+        return []
+    names = list(passes[0])
+    return [(a, b) for a in names for b in names if a != b and all(
+        p[a]["supported"] is not None and p[b]["supported"] is not None and p[a]["supported"] > p[b]["supported"]
+        for p in passes)]
+
+
+def grade_subject(subject: dict, key: dict[str, str], reader: str, builds: Path, out: Path, k: int,
+                  model: str | None) -> dict:
+    """One grading of a subject's chains in pass k, under the labels in `key` (label -> condition)."""
+    saved = out / "rederive" / f"pass-{k}" / "grades" / f"{subject['id']}.json"
+    if saved.exists():
+        return json.loads(saved.read_text())
+    entries = {}
+    for label, cond in key.items():
+        chain = json.loads((out / "rederive" / f"pass-{k}" / "read" / subject["id"] / f"{cond}.json").read_text())
+        files = ae.renderings(builds / "work" / subject["id"] / cond, subject["id"])
+        entries[label] = {"text": "\n\n".join(grader_text(f) for f in files) or "(no explanation)",
+                          "chain": "(no chain)" if chain.get("missing") else chain_text(chain)}
+    reply = agent.parse_json(agent.ask(ae.GRADER_SYSTEM, grade_prompt(subject, reader, entries), model=model))
+    kinds = [s["kind"] for s in subject["rederive"]["steps"]]
+    grades = {}
+    for label, cond in key.items():
+        g = (reply.get("grades") or {}).get(label)
+        g = g if isinstance(g, dict) else {}
+        grades[cond] = {"marks": marks(g.get("marks"), kinds), "result_right": g.get("result_right") is True,
+                        "result_stated": g.get("result_stated") is True}
+    result = {"key": key, "grades": grades}
     saved.parent.mkdir(parents=True, exist_ok=True)
     saved.write_text(json.dumps(result, indent=2, ensure_ascii=False))
     return result
