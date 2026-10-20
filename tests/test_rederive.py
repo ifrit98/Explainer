@@ -423,3 +423,13 @@ def test_human_check_lists_only_questions():
         if "rederive" in s:
             assert s["rederive"]["q"] in text, s["id"]
             assert all(step["text"] not in text for step in s["rederive"]["steps"]) and s["rederive"]["result"] not in text
+
+
+FROZEN = "07e484f8d7635887"   # all 30 targets as committed in 6b61cdf, before the first rederivation run
+
+
+def test_targets_are_the_frozen_ones():
+    # Every target, test split included, stays as frozen: a changed target fails here even before any run uses it.
+    targets = {s["id"]: s["rederive"] for s in ae.load("all")[1] if "rederive" in s}
+    digest = hashlib.sha256(json.dumps(targets, sort_keys=True, ensure_ascii=False).encode()).hexdigest()[:16]
+    assert digest == FROZEN, "a rederivation target changed after the freeze; add a new versioned target set instead"
