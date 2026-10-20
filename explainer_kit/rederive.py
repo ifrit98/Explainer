@@ -17,6 +17,8 @@ from __future__ import annotations
 
 import hashlib
 import json
+import shutil
+import tempfile
 from pathlib import Path
 
 from explainer_kit import agent
@@ -26,6 +28,9 @@ from explainer_kit.paths import project_root
 KINDS = ("block", "derived")
 CHECKER_SYSTEM = "You are a careful scientist and teacher. You check test questions. Reply with JSON only."
 CHECKS = ("correct", "blocks", "derived_follow", "steps", "not_stated")
+# The same words in the reader's prompt and the grader's: what the reader may bring, and what must come from the text.
+OUTSIDE_RULE = ("Background that this reader already has (see the reader above) may be used without a citation. Every "
+                "fact about the subject must come from a part of the explanation that the reader names.")
 
 
 def checks_file() -> Path:
@@ -112,3 +117,72 @@ def check_targets(only: list[str] | None = None, model: str | None = None) -> Pa
                           "reason": reply.get("reason", ""), "hash": h, "attempt": before.get("attempt", 0) + 1}
         path.write_text(json.dumps(dict(sorted(saved.items())), indent=2, ensure_ascii=False) + "\n")
     return path
+
+
+# ---------------------------------------------------------------- 2. read
+
+def reader_prompt(files: list[Path], reader: str, question: str) -> str:
+    return "\n".join([
+        "You are reading an explanation for the first time, as this reader: " + reader,
+        "",
+        "Read ONLY these files. Do not open any other file, and do not search the web:",
+        *[f"- {f}" for f in files],
+        "",
+        "An .html file is an interactive page: read its visible text, and its script to learn what the controls show.",
+        "",
+        "Then work out this question from what the explanation gives you. The explanation may not answer it directly:",
+        question,
+        "",
+        "Work it out step by step. For each step give: step (what it establishes); part (the part of the explanation "
+        "it rests on: a heading, a paragraph, a figure or diagram, or a control on a page; or the number of an "
+        "earlier step; or \"background\"); and idea (what that part gives you, in your own words).",
+        OUTSIDE_RULE,
+        "If the explanation lacks an idea you need, say which in gap and stop there: do not fill it from your own "
+        "knowledge. A gap is useful evidence. Otherwise end with your result.",
+        "",
+        'Reply with JSON only: {"steps": [{"step": "...", "part": "...", "idea": "..."}], "result": "...", '
+        '"gap": ""}',
+    ])
+
+
+def chain_reply(text: str) -> dict:
+    """The reader's chain in a fixed shape, whatever the reply looked like."""
+    try:
+        reply = agent.parse_json(text)
+    except ValueError:
+        reply = {}
+    reply = reply if isinstance(reply, dict) else {}
+    steps = reply.get("steps") if isinstance(reply.get("steps"), list) else []
+    return {"steps": [{k: str(s.get(k) or "") for k in ("step", "part", "idea")} for s in steps if isinstance(s, dict)],
+            "result": str(reply.get("result") or ""), "gap": str(reply.get("gap") or "")}
+
+
+def chain_text(chain: dict) -> str:
+    lines = [f"{i}. {s['step']} (rests on: {s['part']}; {s['idea']})" for i, s in enumerate(chain.get("steps", []), 1)]
+    if chain.get("gap"):
+        lines.append(f"Gap: {chain['gap']}")
+    return "\n".join([*lines, f"Result: {chain.get('result', '')}"])
+
+
+def read_chain(subject: dict, cond: str, reader: str, builds: Path, out: Path, k: int, model: str | None) -> dict:
+    """One reader's chain for one build in pass k. The builds folder is only read: copies go to a temp folder."""
+    saved = out / "rederive" / f"pass-{k}" / "read" / subject["id"] / f"{cond}.json"
+    if saved.exists():
+        return json.loads(saved.read_text())
+    files = ae.renderings(builds / "work" / subject["id"] / cond, subject["id"])
+    if not files:
+        result = {**chain_reply(""), "missing": True}
+    else:
+        tmp = Path(tempfile.mkdtemp(prefix="explainer-rederive-"))
+        try:
+            shown = tmp / "explanation"
+            prompt = reader_prompt(ae.copy_for_reader(files, shown), reader, subject["rederive"]["q"])
+            for _ in range(2):  # a broken JSON shape gets one more try
+                result = chain_reply(agent.ask(ae.READER_SYSTEM, prompt, model=model, read=[shown]))
+                if result["steps"] or result["gap"]:
+                    break
+        finally:
+            shutil.rmtree(tmp, ignore_errors=True)
+    saved.parent.mkdir(parents=True, exist_ok=True)
+    saved.write_text(json.dumps(result, indent=2, ensure_ascii=False))
+    return result
