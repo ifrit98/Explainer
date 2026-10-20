@@ -22,6 +22,7 @@ In the Explainer repo, prefix commands with `uv run`.
 from __future__ import annotations
 
 import argparse
+import json
 import os
 import re
 import shutil
@@ -216,6 +217,13 @@ def cmd_decide(args) -> None:
 
 
 def cmd_eval(args) -> None:
+    if args.suite == "targets":
+        from explainer_kit.rederive import check_targets
+
+        path = check_targets(args.only, args.model)
+        verdicts = [c["verdict"] for c in json.loads(path.read_text()).values()] if path.exists() else []
+        print(f"targets   {verdicts.count('pass')} pass, {verdicts.count('fail')} fail   {display(path)}")
+        return
     default = {"chat": ["none", "v0.5=git:v0.5.0", "v0.6=principles"],
                "artifact": ["none", "principles", "quick", "published"]}[args.suite]
     conditions = dict(c.split("=", 1) if "=" in c else (c, c) for c in (args.conditions or default))
@@ -339,8 +347,9 @@ def main() -> None:
     p.set_defaults(fn=cmd_decide)
 
     p = sub.add_parser("eval", help="chat: answers under several system prompts; artifact: explainers built under "
-                                     "several conditions, read and graded blind")
-    p.add_argument("suite", choices=["chat", "artifact"])
+                                     "several conditions, read and graded blind; targets: check the rederivation "
+                                     "targets")
+    p.add_argument("suite", choices=["chat", "artifact", "targets"])
     p.add_argument("--conditions", nargs="+",
                    help="name=source; source is none, principles, git:<rev>, or a file; for artifact also quick or "
                         "published (the explain skill at that tier). Default: chat none v0.5 v0.6; artifact none "
