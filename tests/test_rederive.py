@@ -314,7 +314,17 @@ def test_outputs_hold_no_absolute_paths(monkeypatch, tmp_path):
     rederive.run(out, builds)
     leaks = [p for p in out.rglob("*") if p.is_file() and str(tmp_path) in p.read_text()]
     assert not leaks, leaks
-    assert json.loads((out / "rederive" / "source.json").read_text()) == {"builds": "../builds"}
+    assert json.loads((out / "rederive" / "source.json").read_text()) == {"builds": "builds"}   # outside the project: its name
+
+
+def test_source_names_builds_inside_the_project_relative_to_it(monkeypatch, tmp_path):
+    # A path relative to --out climbs through the home folder when --out is elsewhere (a scratch folder).
+    builds, _, _ = run_fixture(monkeypatch, tmp_path)
+    monkeypatch.setattr(rederive, "project_root", lambda: tmp_path)
+    out = tmp_path.parent / f"{tmp_path.name}-elsewhere" / "deep" / "out"
+    rederive.run(out, builds)
+    assert json.loads((out / "rederive" / "source.json").read_text()) == {"builds": "builds"}
+    assert "Builds: `builds`." in (out / "rederive.md").read_text()
 
 
 def test_builds_folder_is_untouched(monkeypatch, tmp_path):

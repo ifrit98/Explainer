@@ -17,7 +17,6 @@ from __future__ import annotations
 
 import hashlib
 import json
-import os
 import random
 import re
 import shutil
@@ -334,7 +333,11 @@ def run(out: Path, builds: Path, split: str = "dev", only: list[str] | None = No
             raise SystemExit(f"targets changed since this run: {', '.join(changed)}")
         targets = {**before, **targets}
     snapshot.write_text(json.dumps(dict(sorted(targets.items())), indent=2, ensure_ascii=False) + "\n")
-    source = os.path.relpath(builds.resolve(), out.resolve())
+    # Named relative to the project, or by folder name: a path relative to --out can climb through the home folder.
+    try:
+        source = str(builds.resolve().relative_to(project_root().resolve()))
+    except ValueError:
+        source = builds.name
     (stage / "source.json").write_text(json.dumps({"builds": source}) + "\n")
 
     def read_job(job):
