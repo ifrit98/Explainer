@@ -245,22 +245,26 @@ def test_grade_subject_maps_labels_back_and_fills_missing(monkeypatch, tmp_path)
 
     monkeypatch.setattr(agent, "ask", ask)
     g = rederive.grade_subject(s, {"A": "b", "B": "a"}, "A reader.", builds, out, 1, None)
-    assert g["grades"]["b"] == {"marks": ["supported", "supported", "stated"], "result_right": True, "result_stated": False}
-    assert g["grades"]["a"] == {"marks": ["missing"] * 3, "result_right": False, "result_stated": False}
+    assert {k: g["grades"]["b"][k] for k in ("marks", "result_right", "result_stated")} == \
+        {"marks": ["supported", "supported", "stated"], "result_right": True, "result_stated": False}
+    assert {k: g["grades"]["a"][k] for k in ("marks", "result_right", "result_stated")} == \
+        {"marks": ["missing"] * 3, "result_right": False, "result_stated": False}
     assert "BETA" in calls[0].split("=== Explanation A ===")[1].split("=== Explanation B ===")[0]
     assert (out / "rederive" / "pass-1" / "grades" / "s1.json").exists()
+    assert len(calls) == 2                                         # a reply missing a label is asked once more
     rederive.grade_subject(s, {"A": "b", "B": "a"}, "A reader.", builds, out, 1, None)
-    assert len(calls) == 1
+    assert len(calls) == 2
 
 
 ROOT = Path(__file__).resolve().parent.parent
 
 
-def run_fixture(monkeypatch, tmp_path):
+def run_fixture(monkeypatch, tmp_path, texts=None, lenient=False):
     """One subject, two conditions (a: ALPHA, b: BETA), a stub reader, and a grader that supports every step of the
-    ALPHA explanation and none of the other. Returns builds, out, and the list of calls."""
+    ALPHA explanation and none of the other (lenient: every step of every label). Returns builds, out, and the list
+    of calls."""
     monkeypatch.setattr(ae, "questions_file", lambda: subjects_file(tmp_path, {"s1": target()}))
-    builds = builds_folder(tmp_path)
+    builds = builds_folder(tmp_path, texts=texts)
     (builds / "conditions.json").write_text(json.dumps({"a": "none", "b": "quick"}))
     (builds / "scores.json").write_text(json.dumps({
         "a": {"subjects": [{"id": "s1", "score": [2, 2, 1, 2], "raw": [2, 2, 2, 2]}]},
@@ -272,12 +276,31 @@ def run_fixture(monkeypatch, tmp_path):
         if system == ae.READER_SYSTEM:
             return json.dumps(CHAIN)
         blocks = dict(re.findall(r"=== Explanation (\w) ===\n(.*?)(?==== Explanation|\Z)", prompt, re.S))
-        return json.dumps({"grades": {lab: {"marks": ["supported" if "ALPHA" in b else "missing"] * 3,
-                                            "result_right": "ALPHA" in b, "result_stated": False}
+        return json.dumps({"grades": {lab: {"marks": ["supported" if lenient or "ALPHA" in b else "missing"] * 3,
+                                            "result_right": lenient or "ALPHA" in b, "result_stated": False}
                                       for lab, b in blocks.items()}})
 
     monkeypatch.setattr(agent, "ask", ask)
     return builds, tmp_path / "out", calls
+
+
+def test_a_grader_reply_that_does_not_fit_is_asked_again_and_kept(monkeypatch, tmp_path):
+    builds, out = builds_folder(tmp_path), tmp_path / "out"
+    s = {"id": "s1", "q": "Question?", "rederive": TARGET}
+    for cond in ("a", "b"):
+        f = out / "rederive" / "pass-1" / "read" / "s1" / f"{cond}.json"
+        f.parent.mkdir(parents=True, exist_ok=True)
+        f.write_text(json.dumps(CHAIN))
+    replies = [{"A": {"marks": ["supported"], "result_right": True}},                          # short, and no B
+               {"A": {"marks": ["supported"] * 3, "result_right": True},
+                "B": {"marks": ["missing", "supported", "Supported"], "result_right": False}}]
+    calls = []
+    monkeypatch.setattr(agent, "ask", lambda *a, **k: calls.append(1) or json.dumps({"grades": replies[len(calls) - 1]}))
+    g = rederive.grade_subject(s, {"A": "a", "B": "b"}, "A reader.", builds, out, 1, None)
+    assert len(calls) == 2
+    assert g["grades"]["a"]["marks"] == ["supported"] * 3
+    assert g["grades"]["b"]["marks"] == ["missing", "supported", "supported"]
+    assert g["grades"]["b"]["raw"] == ["missing", "supported", "Supported"]      # the reply as given, for audit
 
 
 def test_run_end_to_end(monkeypatch, tmp_path):
@@ -292,6 +315,22 @@ def test_run_end_to_end(monkeypatch, tmp_path):
     assert "| s1 | 3/3, 3/3, 3/3 | 0/3, 0/3, 0/3 |" in report
     scores = json.loads((out / "rederive-scores.json").read_text())
     assert scores["separations"] == [["a", "b"]] and len(scores["passes"]) == 3
+
+
+def test_a_build_with_no_explanation_scores_nothing_and_is_shown(monkeypatch, tmp_path):
+    # A failed build must not take whatever a lenient grader says about "(no explanation)".
+    builds, out, calls = run_fixture(monkeypatch, tmp_path, texts={"a": "ALPHA explains it.", "b": None}, lenient=True)
+    report = rederive.run(out, builds).read_text()
+    assert "| b | 0%, 0%, 0% | 0%, 0%, 0% |" in report
+    assert "| s1 | 3/3, 3/3, 3/3 | 0/3, 0/3, 0/3 NO EXPLANATION |" in report
+    g = json.loads((out / "rederive" / "pass-1" / "grades" / "s1.json").read_text())["grades"]["b"]
+    assert g["marks"] == ["missing"] * 3 and g["result_right"] is False and g["missing"] is True
+
+
+def test_no_grader_call_when_no_build_has_an_explanation(monkeypatch, tmp_path):
+    builds, out, calls = run_fixture(monkeypatch, tmp_path, texts={"a": None, "b": None}, lenient=True)
+    rederive.run(out, builds)
+    assert calls == []
 
 
 def test_rerun_makes_no_calls(monkeypatch, tmp_path):

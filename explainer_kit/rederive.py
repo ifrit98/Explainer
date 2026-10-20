@@ -294,20 +294,34 @@ def grade_subject(subject: dict, key: dict[str, str], reader: str, builds: Path,
     saved = out / "rederive" / f"pass-{k}" / "grades" / f"{subject['id']}.json"
     if saved.exists():
         return json.loads(saved.read_text())
-    entries = {}
+    kinds = [s["kind"] for s in subject["rederive"]["steps"]]
+    entries, missing = {}, set()
     for label, cond in key.items():
         chain = json.loads((out / "rederive" / f"pass-{k}" / "read" / subject["id"] / f"{cond}.json").read_text())
+        if chain.get("missing"):
+            missing.add(label)
         files = ae.renderings(builds / "work" / subject["id"] / cond, subject["id"])
         entries[label] = {"text": "\n\n".join(grader_text(f) for f in files) or "(no explanation)",
                           "chain": "(no chain)" if chain.get("missing") else chain_text(chain)}
-    reply = agent.parse_json(agent.ask(ae.GRADER_SYSTEM, grade_prompt(subject, reader, entries), model=model))
-    kinds = [s["kind"] for s in subject["rederive"]["steps"]]
+
+    def fits(g: object) -> bool:
+        return isinstance(g, dict) and isinstance(g.get("marks"), list) and len(g["marks"]) == len(kinds)
+
+    reply: dict = {}
+    if len(missing) < len(key):  # nothing to grade when no build has an explanation
+        prompt = grade_prompt(subject, reader, entries)
+        for _ in range(2):  # a reply missing a label, or with the wrong number of marks, gets one more try
+            reply = agent.parse_json(agent.ask(ae.GRADER_SYSTEM, prompt, model=model))
+            if all(fits((reply.get("grades") or {}).get(label)) for label in key if label not in missing):
+                break
     grades = {}
     for label, cond in key.items():
         g = (reply.get("grades") or {}).get(label)
-        g = g if isinstance(g, dict) else {}
+        g = g if isinstance(g, dict) and label not in missing else {}
         grades[cond] = {"marks": marks(g.get("marks"), kinds), "result_right": g.get("result_right") is True,
-                        "result_stated": g.get("result_stated") is True}
+                        "result_stated": g.get("result_stated") is True, "raw": g.get("marks")}
+        if label in missing:  # a failed build scores nothing, whatever a grader says about "(no explanation)"
+            grades[cond]["missing"] = True
     result = {"key": key, "grades": grades}
     saved.parent.mkdir(parents=True, exist_ok=True)
     saved.write_text(json.dumps(result, indent=2, ensure_ascii=False))
@@ -429,7 +443,9 @@ def summary(names: list[str], subjects: list[dict], builds: Path, out: Path, gra
         "| subject | " + " | ".join(names) + " |", "|---|" + "---|" * len(names),
     ]
     for i, s in enumerate(subjects):
-        cells = [", ".join(f"{tallies[k][n][i]['supported']}/{tallies[k][n][i]['counted']}" for k in ks) for n in names]
+        cells = [", ".join(f"{tallies[k][n][i]['supported']}/{tallies[k][n][i]['counted']}" for k in ks)
+                 + (" NO EXPLANATION" if any(grades[k, s["id"]]["grades"][n].get("missing") for k in ks) else "")
+                 for n in names]
         lines.append(f"| {s['id']} | " + " | ".join(cells) + " |")
     return "\n".join(lines) + "\n"
 
