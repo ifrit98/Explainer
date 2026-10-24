@@ -77,14 +77,18 @@ A new results folder, `evals/artifact/results/<date>-dev-controls/`, holds a bui
 - its fresh read;
 - a fresh grading call.
 
+The reader and grader prompts are word for word those of the baseline run. The grading code has changed since in two ways that touch only the calling: a reply that doesn't fit is asked again once, and the raw marks are kept.
+
 **Passes and models.** Three passes. The reader, grader, cutter, and checker use the `claude` CLI's default model, as the baseline did.
 
 **The leak check, after the run.** A cut the checker passed may still leave the block in a passage it missed. Such a passage would let the reader cite the block and the grader credit it, which would look like a blind test. So for each subject whose cut block is not caught (Goal 3):
 
 - a fresh `claude -p` checker sees the reader's chain and the cut copy;
-- it says whether a part the reader cited, as it stands in the copy, carries the cut block.
+- it says whether a part the reader cited, as it stands in the copy, carries the cut block, and if so quotes that passage word for word.
 
-If it does in any pass, the cut leaked. That subject leaves the count, and the report lists it. If no cited part carries the block, the subject counts as a miss.
+A leak counts only when code confirms that the quote appears in the cut copy, ignoring differences in whitespace. If a confirmed leak is found in any pass, that subject leaves the count, and the report lists it with the quote. Otherwise the subject counts as a miss.
+
+This check can only ever turn a miss into an exclusion, and it asks much the same question the grader answered. So Goal 3 limits what it can do to the verdict.
 
 ### 3. The bar, fixed in the freeze commit
 
@@ -104,9 +108,12 @@ The bar uses the grader's raw marks, before `stated` on a block is turned into `
 
 - **Trusted:** caught in at least 80% of the counted subjects, rounded up (5 of 6, or 4 of 5), and at most one of the clean-set blocks loses support.
 - **Blind:** caught in fewer than that.
-- **Inconclusive:** either of these:
+- **Inconclusive:** any of these:
   - fewer than 5 subjects are counted;
-  - the catch bar is met, but more than one clean-set block loses support. The cuts or the reads then damaged more than the cut block, so the catches may come from that damage.
+  - the catch bar is met, but more than one clean-set block loses support. The cuts or the reads then damaged more than the cut block, so the catches may come from that damage;
+  - the verdict is trusted only because of leak exclusions: counting every leaked subject as a miss would make it blind.
+
+The report gives the verdict both ways: with the leak exclusions, and with every leaked subject counted as a miss.
 
 ### 4. A report and a write-up, whatever the result
 
@@ -122,12 +129,12 @@ A controls report next to `rederive.md` gives, per subject:
 
 `docs/evals.md` gets a subsection under "Rederivation". It gives the verdict under the bar and what it means for PRD-003:
 
-- **Trusted:** the baseline's near-ceiling score is a fact about the v0.8 builds, not a sign of a blind test. PRD-003 may use the test.
+- **Trusted:** on targets with an eligible block, the test notices a missing block. On those six subjects, the baseline's near-ceiling score is then a fact about the v0.8 builds, not a sign of a blind test. PRD-003 may use the test, but only on targets with an eligible block.
 - **Blind or inconclusive:** PRD-003 does not use the test as it is.
 
-The subsection also notes something the eligibility rule found. Four of the ten dev targets get every block, or every reliably credited block, from the question or from background. Those targets can't show a missing block in any condition.
+Either way, the subsection notes what the eligibility rule found. In four of the ten dev targets, the question or background supplies every block, or every block the intact build was reliably credited with. Those targets can't show a missing block in any condition, so on them the ceiling comes from the target, not the builds. PRD-002's blocks test allowed blocks from the question on purpose, so the 20 test-split targets may share the problem.
 
-ROADMAP §15 ("Next") and the "Unreleased" section of `CHANGELOG.md` record the result.
+ROADMAP §15 ("Next") and the "Unreleased" section of `CHANGELOG.md` record the result. "Next" also gets one item: before PRD-003 relies on the test-split targets, classify them by the same eligibility rule.
 
 ### 5. Only if the verdict is blind: fix the test against the controls
 
@@ -187,7 +194,8 @@ Approving this PRD approves these calls.
 - **The classification of the 20 dev blocks** in the two tables of Goal 1. The checker re-checks every chosen block before the freeze.
 - **Bloom-filter stays,** though its only block is its mechanism, so the cut removes most of the explanation. It still tests whether a reader who knows Bloom filters well gets credit without the explanation.
 - **Caught means unsupported or missing in all three passes,** on raw marks.
-- **The leak check after the run.** A leaked cut leaves the count instead of counting as a miss.
+- **The leak check after the run.** A leaked cut leaves the count instead of counting as a miss, but only on a word-for-word quote that code finds in the cut copy. The verdict is reported both ways. A verdict that is trusted only because of leak exclusions is inconclusive.
+- **"Trusted" covers only targets with an eligible block.** PRD-003 may use the test only on those, and the test-split targets get classified first.
 - **At least 5 counted subjects are needed for a verdict.** Below that, the result is inconclusive.
 - **The clean set of 4 blocks and the inconclusive verdict.** At most one clean-set block may lose support.
 - **The eligibility rule reads the baseline's recorded marks,** which turn `stated` on a block into `supported`. The baseline predates the saving of raw marks.
