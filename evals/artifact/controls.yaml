@@ -1,0 +1,28 @@
+# Positive controls for the rederivation test (docs/prds/PRD-002a-rederivation-controls.md).
+#
+# Each subject in `cuts` gets a copy of its v0.8 `principles` explanation with one building block cut out (`cut`, a
+# 1-based step number in its frozen target); the test should then withhold credit for that block. `clean` lists the
+# uncut blocks that must stay supported. A block is eligible only when the explanation alone can supply it: not in
+# the target question, not reader-level background, not derivable from the other blocks, and credited to the intact
+# build in all three passes of the PRD-002 baseline. Subjects with no eligible block are in `left_out`.
+#
+# Frozen with the cut copies: change nothing here after `explainer eval cuts` has run.
+
+source: evals/artifact/results/2026-10-04-dev
+baseline: evals/artifact/results/2026-10-20-dev-rederive
+condition: principles
+cuts:
+  bloom-filter: {cut: 1, clean: []}
+  float-sum: {cut: 1, clean: []}
+  greenhouse: {cut: 1, clean: []}
+  heat-pump: {cut: 2, clean: [1]}
+  key-exchange: {cut: 3, clean: [1, 2]}
+  two-tides: {cut: 2, clean: [1]}
+left_out:
+  antibiotic-resistance: "The question gives the pre-existing resistant mutations (block 1). Selection (block 2) is school biology, and the question takes for granted that one drug alone ends in resistance."
+  gps-relativity: "The question states the receiver's clock error as a fourth unknown (block 2). It ties a satellite's clock error to its distance, and distance = speed × time is school physics (block 1)."
+  quorum: "The question states the write group and the committed write (block 1). Block 2 was marked unsupported in two of the three baseline passes."
+  vaccine-memory: "The question's model states both blocks: matching cells multiply until there are enough, and vaccination leaves 1,000 times more of them."
+# Trusted: caught in at least ceil(catch x counted) subjects, at most `clean_losses` clean blocks lost, and at least
+# `min_counted` subjects counted.
+bar: {catch: 0.8, min_counted: 5, clean_losses: 1}
