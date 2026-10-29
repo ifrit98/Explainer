@@ -224,6 +224,26 @@ def cmd_eval(args) -> None:
         verdicts = [c["verdict"] for c in json.loads(path.read_text()).values()] if path.exists() else []
         print(f"targets   {verdicts.count('pass')} pass, {verdicts.count('fail')} fail   {display(path)}")
         return
+    if args.suite in ("cuts", "controls"):
+        from explainer_kit import controls
+
+        if args.suite == "cuts":
+            results = project_root() / "evals" / "artifact" / "results"
+            out = Path(args.out) if args.out else results / f"{date.today().isoformat()}-dev-controls"
+            for sid, r in controls.make_cuts(out, args.only, args.redo, args.model).items():
+                diff = out / "cuts" / f"{sid}.diff"
+                print(f"cut     {sid:22} {r['verdict']:8} {len(r['attempts'])} attempt(s)"
+                      + (f"   {display(diff)}" if diff.exists() else ""))
+            return
+        if not args.out:
+            raise SystemExit("eval controls needs --out <the folder eval cuts made>")
+        out = Path(args.out)
+        report = controls.run(out, args.model, args.reader_model, args.workers)
+        v = json.loads((out / "controls.json").read_text())
+        print(f"verdict {v['verdict']}: caught {v['caught']} of {len(v['counted'])} counted (needs {v['need']}); "
+              f"counting leaked cuts as misses: {v['without_leak_exclusions']}")
+        print(f"report  {display(report)}")
+        return
     default = {"chat": ["none", "v0.5=git:v0.5.0", "v0.6=principles"],
                "artifact": ["none", "principles", "quick", "published"]}.get(args.suite, [])
     conditions = dict(c.split("=", 1) if "=" in c else (c, c) for c in (args.conditions or default))
@@ -366,8 +386,12 @@ def main() -> None:
     p = sub.add_parser("eval", help="chat: answers under several system prompts; artifact: explainers built under "
                                      "several conditions, read and graded blind (then the rederivation stage); "
                                      "targets: check the rederivation targets; rederive: the rederivation stage on "
-                                     "an earlier artifact run's builds; human: grade a person's working")
-    p.add_argument("suite", choices=["chat", "artifact", "targets", "rederive", "human"])
+                                     "an earlier artifact run's builds; human: grade a person's working; cuts: cut "
+                                     "one building block from saved explanations (PRD-002a); controls: the "
+                                     "rederivation stage on the cuts, and its verdict")
+    p.add_argument("suite", choices=["chat", "artifact", "targets", "rederive", "human", "cuts", "controls"])
+    p.add_argument("--redo", action="store_true", help="cuts: make one more attempt at the --only subjects' cuts, "
+                                                       "even after a pass (at most three in all)")
     p.add_argument("--builds", help="rederive, human: the artifact run folder whose builds are read (it is not "
                                     "changed)")
     p.add_argument("--chain", help="human: a person's working, as in evals/artifact/human-check.md")
@@ -376,7 +400,7 @@ def main() -> None:
                         "published (the explain skill at that tier). Default: chat none v0.5 v0.6; artifact none "
                         "principles quick published")
     p.add_argument("--split", choices=["dev", "test", "all"], default="dev", help="artifact: which subjects")
-    p.add_argument("--only", nargs="+", help="artifact: these subject ids only")
+    p.add_argument("--only", nargs="+", help="artifact, rederive, targets, cuts: these subject ids only")
     p.add_argument("--model", help="model for every agent (default: the claude CLI default)")
     p.add_argument("--reader-model", help="artifact: model for the reader only (a weaker reader fills fewer gaps)")
     p.add_argument("--out", help="output folder (default: evals/<suite>/results/<date>[-<split>]); "

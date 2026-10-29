@@ -448,3 +448,37 @@ def test_a_dropped_cut_is_not_run(monkeypatch, tmp_path):
     controls.run(out, workers=1)
     result = json.loads((out / "controls.json").read_text())
     assert result["dropped"] == ["s2"] and result["counted"] == ["s1"] and stage.count(ae.READER_SYSTEM) == 3
+
+
+def test_cli_cuts_and_controls_call_the_module(monkeypatch, tmp_path, capsys):
+    import sys
+
+    from explainer_kit import cli
+
+    seen = []
+
+    def make_cuts(out, only=None, redo=False, model=None):
+        seen.append(("cuts", out, only, redo, model))
+        return {"s1": {"verdict": "pass", "attempts": [{}]}}
+
+    def run(out, model=None, reader_model=None, workers=4):
+        seen.append(("controls", out, model, reader_model, workers))
+        (out / "controls.json").write_text(json.dumps({"verdict": "trusted", "caught": 5, "counted": ["a"] * 6,
+                                                       "need": 5, "without_leak_exclusions": "trusted"}))
+        return out / "controls.md"
+
+    monkeypatch.setattr(controls, "make_cuts", make_cuts)
+    monkeypatch.setattr(controls, "run", run)
+    o = tmp_path / "o"
+    o.mkdir()
+    monkeypatch.setattr(sys, "argv", ["explainer", "eval", "cuts", "--only", "s1", "--redo", "--out", str(o)])
+    cli.main()
+    monkeypatch.setattr(sys, "argv", ["explainer", "eval", "controls", "--out", str(o), "--reader-model", "r",
+                                      "--workers", "2"])
+    cli.main()
+    assert seen == [("cuts", o, ["s1"], True, None), ("controls", o, None, "r", 2)]
+    printed = capsys.readouterr().out
+    assert "s1" in printed and "pass" in printed and "trusted" in printed
+    monkeypatch.setattr(sys, "argv", ["explainer", "eval", "controls"])
+    with pytest.raises(SystemExit, match="needs --out"):
+        cli.main()

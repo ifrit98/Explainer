@@ -20,6 +20,7 @@ uv run explainer findings --stats             # how many review findings authors
 uv run explainer eval chat                    # chat answers under each system prompt, graded blind
 uv run explainer eval artifact --split dev    # held-out subjects built under each condition, read and graded blind
 uv run explainer eval rederive --builds <run> # a fresh reader works out a result each explanation never states, graded blind
+uv run explainer eval cuts && uv run explainer eval controls --out <folder> # does rederivation notice a cut building block? (PRD-002a)
 uv run explainer render <slug> --draft        # fast silent layout pass
 uv run pytest -q                              # toolkit tests
 ```
