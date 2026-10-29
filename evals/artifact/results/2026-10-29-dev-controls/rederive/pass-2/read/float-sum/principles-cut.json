@@ -1,0 +1,46 @@
+{
+  "steps": [
+    {
+      "step": "A double can only hold values that lie on a grid of numbers with a limited number of binary digits. Any other value is rounded to the nearest grid point.",
+      "part": "Section 3, 'What the computer actually stores'",
+      "idea": "A double keeps a limited number of binary digits, so the values it can hold form a grid. Every literal you type is rounded to the nearest grid point."
+    },
+    {
+      "step": "A fraction is stored exactly only if its binary expansion ends, and ends within the available digits. If the expansion repeats forever, it has to be cut off and rounded.",
+      "part": "Section 2, 'Why 0.1 has no exact binary form'",
+      "idea": "In base 10, 1/4 ends but 1/3 repeats. In base 2, 1/10 repeats forever, so the computer must cut it off and round. Ending versus repeating decides whether a value is exact."
+    },
+    {
+      "step": "0.375 = 3/8 = 0.011 in binary and 0.0625 = 1/16 = 0.0001 in binary. Both expansions end after a few digits.",
+      "part": "background",
+      "idea": "Converting a fraction whose denominator is a power of two into binary is school arithmetic."
+    },
+    {
+      "step": "So 0.375 and 0.0625 are grid points and are stored exactly. This matches 1/2, 1/4 and 3/4, which the explanation says are grid points.",
+      "part": "Steps 1–3; Section 6, 'When addition is exact'",
+      "idea": "Section 6 says 1/2, 1/4 and 3/4 are all grid points. These are the same kind of short, ending binary fraction as 3/8 and 1/16."
+    },
+    {
+      "step": "0.2 and 0.3 are not stored exactly. 0.2 is stored slightly high and 0.3 slightly low.",
+      "part": "Section 3 table; Summary",
+      "idea": "The table shows the stored 0.2 = 0.20000000000000001110… and the stored 0.3 = 0.29999999999999998889…. The Summary says each has a repeating binary expansion."
+    },
+    {
+      "step": "Adding 0.125 = 1/8 eight times: 0.125 itself and every running total (2/8, 3/8, …, 8/8 = 1) are short binary fractions, so they are all grid points. No addition needs rounding, and the final total is exactly 1.0.",
+      "part": "Section 6 and step 4",
+      "idea": "When the inputs and the exact sum are all grid points, no rounding happens and the addition is exact (as with 0.5 + 0.25 == 0.75)."
+    },
+    {
+      "step": "Adding 0.1 ten times starts from a stored value that is already slightly too high. Most running totals (such as 0.3) are not grid points, so each addition may round again.",
+      "part": "Section 3 table; Section 4, 'The addition, step by step'",
+      "idea": "The stored 0.1 is about 5.55×10⁻¹⁷ too high. When an exact sum falls between grid points, the processor rounds it, as it does with 0.1 + 0.2."
+    },
+    {
+      "step": "Each rounding happens separately, and the errors do not cancel. After ten additions the total lands on a double next to 1.0 rather than on 1.0 itself.",
+      "part": "Section 1, 'The same problem in decimal'",
+      "idea": "With 4 decimal digits, 1/3 + 1/3 = 0.6666 ≠ 0.6667, because each value was rounded separately and the errors do not cancel. Base 2 has the same problem, with 1/10 playing the role of 1/3."
+    }
+  ],
+  "result": "A double can store 0.375 (= 3/8 = 0.011 in binary) and 0.0625 (= 1/16 = 0.0001 in binary) exactly, because their binary expansions end within the digits a double keeps. It cannot store 0.2 or 0.3 exactly: their binary expansions repeat, so they are rounded (0.2 slightly high, 0.3 slightly low). Adding 0.125 eight times gives exactly 1.0 because 1/8 and every running total k/8 are grid points, so no addition ever rounds. Adding 0.1 ten times starts from a stored 0.1 that is already slightly too high. Most running totals then fall between grid points and get rounded again, and these separate errors do not cancel, so the total misses 1.0. The explanation supports why the total can miss 1.0. It says it does not cover how errors build up over a chain of additions, so the exact final value (and which way it misses) cannot be worked out from it.",
+  "gap": ""
+}

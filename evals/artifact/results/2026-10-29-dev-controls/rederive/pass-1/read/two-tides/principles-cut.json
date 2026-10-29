@@ -1,0 +1,26 @@
+{
+  "steps": [
+    {
+      "step": "Each body stretches the ocean along the line to itself: water bulges at both ends of that line and is squeezed at 90° from it.",
+      "part": "Step 2: compute the pull at three points (the paragraph on the squeeze at the sides and the bulge/squeeze diagram)",
+      "idea": "The tidal acceleration is about 2GMR/d³ outward at the near and far points. At the sides it is about GMR/d³ inward. So water is raised along the line and lowered at right angles to it."
+    },
+    {
+      "step": "The Sun makes its own pair of bulges along the Earth–Sun line.",
+      "part": "The Sun does the same thing",
+      "idea": "The Sun works by the same mechanism. It raises water at both ends of the Earth–Sun line and lowers it in between."
+    },
+    {
+      "step": "When the Sun and Moon are at right angles, the Sun's bulges fall where the Moon's squeeze is, and the reverse. So the two effects partly cancel instead of adding.",
+      "part": "Steps 1 and 2 combined with geometry (background)",
+      "idea": "The two patterns are each a stretch along one line and a squeeze across it. Turn one of them by 90° and its high water lands on the other's low water."
+    },
+    {
+      "step": "To say how large the tides are compared with spring tides, I need the size of the Sun's tidal effect compared with the Moon's, and a definition of spring tides. The explanation gives neither.",
+      "part": "The Sun does the same thing (gives no numbers); Step 2 table (gives the Moon's values only)",
+      "idea": "The 1/d³ rule is given, but the Sun's GM and distance are not. The Sun-to-Moon ratio cannot be worked out. Spring tides are never mentioned."
+    }
+  ],
+  "result": "Only a qualitative answer is possible. At quarter Moon the Sun's bulges sit in the Moon's squeeze, so the two tides partly cancel. The tides are then smaller than when the two bodies line up. The explanation does not support a figure for how much smaller.",
+  "gap": "The explanation gives no size for the Sun's tidal acceleration compared with the Moon's: it gives neither the Sun's GM nor its distance, and no ratio. It also never defines spring tides or says how the Sun's and Moon's tides add. Without these, the tide at quarter Moon cannot be compared with spring tides in numbers."
+}

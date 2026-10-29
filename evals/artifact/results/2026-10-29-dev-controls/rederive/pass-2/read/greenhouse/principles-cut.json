@@ -1,0 +1,31 @@
+{
+  "steps": [
+    {
+      "step": "Outgoing infrared that reaches space is what must balance the 238 W/m² absorbed from sunlight.",
+      "part": "1. The puzzle: Earth is 33 K too warm; 8. What the numbers mean",
+      "idea": "Energy in must equal energy out. Earth sheds 238 W/m², and that figure is set by sunlight and reflectivity, not by greenhouse gases."
+    },
+    {
+      "step": "A greenhouse gas absorbs infrared and then gives out new infrared at a rate set by its own temperature.",
+      "part": "3. Why CO2 and water absorb infrared, but N2 and O2 do not (last paragraph)",
+      "idea": "Gases that absorb at a wavelength also emit at that wavelength. How much they emit depends on their temperature, through P = σT⁴."
+    },
+    {
+      "step": "In the real atmosphere, temperature falls with height at about 6.5 K per km.",
+      "part": "5. The lapse rate",
+      "idea": "Convection and the cooling of rising, expanding air make higher air colder."
+    },
+    {
+      "step": "The explanation says that adding CO2 makes less energy leave than arrives, and that the effect is logarithmic because the centre of the band is already opaque.",
+      "part": "6. Why adding CO2 warms the surface",
+      "idea": "It states the result (3.7 W/m² for doubled CO2) and says why it follows a log curve. It never says why extra absorption at an already-absorbing wavelength cuts the outgoing energy."
+    },
+    {
+      "step": "To answer the question I need the link between the lapse rate and the drop in outgoing energy. The explanation does not give it.",
+      "part": "5. The lapse rate; 6. Why adding CO2 warms the surface; step 4",
+      "idea": "Section 5 sits right before section 6, but nothing joins them. Nothing says that space receives the band's infrared from some height, that more CO2 pushes that height up into colder air, or that colder air emits less. Without that, I can't tell whether an atmosphere at one temperature everywhere would still trap more energy as CO2 is added."
+    }
+  ],
+  "result": "I can't give a confident answer from the explanation alone. Section 3 hints that a gas at the surface's temperature would give out as much as it absorbs, so adding CO2 might then change nothing. But the explanation never says the warming depends on air getting colder with height, so I can't confirm that.",
+  "gap": "The explanation lacks the emission-height mechanism. It never says that space receives infrared from the height where the air above becomes thin enough for it to escape. It also never says that more CO2 raises that height into colder air, which emits less because of σT⁴, and that this is why less energy leaves. The lapse rate (section 5) is never connected to the CO2 warming (section 6), so the role of air getting colder with height can't be worked out."
+}

@@ -1,0 +1,36 @@
+{
+  "steps": [
+    {
+      "step": "Running the machine in reverse is the same machine: the cold coil takes heat in, the compressor adds work, and the warm coil gives heat out.",
+      "part": "'The trick: boiling point depends on pressure' (the loop diagram and the line 'A refrigerator is the same machine...')",
+      "idea": "A refrigerator uses the same loop. It takes heat from the cold box and dumps it on the warm side. An air conditioner works the same way, with the room as the cold side."
+    },
+    {
+      "step": "Energy balance: heat out at the warm side = heat taken from the cold side + electrical work.",
+      "part": "Short answer (heat delivered = heat taken from outside + electrical work, 3 = 2 + 1)",
+      "idea": "The machine moves heat and conserves energy. The heat it rejects is the heat it picked up plus the compressor work."
+    },
+    {
+      "step": "Define the two ratios. Heating COP = heat out / work. Cooling performance = heat removed from the cold side / work.",
+      "part": "'Why this matters' (COP = heat delivered / electrical work)",
+      "idea": "COP is useful heat divided by electricity. For cooling, the useful heat is the heat taken from the cold side."
+    },
+    {
+      "step": "Divide the balance from step 2 by the work: heat removed/work = heat out/work − work/work. So cooling COP = heating COP − 1.",
+      "part": "Steps 2 and 3; background algebra",
+      "idea": "The two useful heats differ by exactly the work. Dividing by the work makes that difference exactly 1. In the 3 = 2 + 1 example, cooling gives 2 while heating gives 3."
+    },
+    {
+      "step": "Work out the ideal heating limit from the table: ideal COP = T_condense / (T_condense − T_boil), with temperatures in kelvin.",
+      "part": "'Why the COP is not unlimited' (table of boiling and condensing temperatures in K, lift, ideal COP)",
+      "idea": "318/50 = 6.36 ≈ 6.4 and 318/70 = 4.54 ≈ 4.5. The ideal COP is the hot temperature divided by the lift. The text never states this formula; I inferred it from the numbers."
+    },
+    {
+      "step": "Ideal cooling limit = T_hot/(T_hot − T_cold) − 1 = T_cold/(T_hot − T_cold).",
+      "part": "Steps 4 and 5",
+      "idea": "Subtract 1 from the heating limit. Example: boiling at 268 K and condensing at 318 K gives 268/50 ≈ 5.4, compared with 6.4 for heating."
+    }
+  ],
+  "result": "The ideal cooling limit is (heat removed)/(electricity) = T_cold/(T_hot − T_cold), using the fluid's boiling and condensing temperatures in kelvin. For example, 268/50 ≈ 5.4, against 6.4 for heating. It is exactly one less because energy is conserved: heat rejected to the warm side = heat removed from the cold side + work. A heater counts the work as useful output, and an air conditioner does not. So after dividing by the work, the two ratios differ by work/work = 1. This holds for any machine, ideal or real.",
+  "gap": "This is only a partial gap. The explanation never states the formula for the ideal COP. I inferred T_hot/(T_hot − T_cold) from the table's numbers, so the T_cold/(T_hot − T_cold) form depends on that inference. The 'exactly one less' part follows fully from the energy balance the explanation gives."
+}

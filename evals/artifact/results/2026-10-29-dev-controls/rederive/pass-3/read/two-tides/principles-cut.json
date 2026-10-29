@@ -1,0 +1,31 @@
+{
+  "steps": [
+    {
+      "step": "The Moon's tide stretches the ocean along the Earth–Moon line. It raises water at the two ends of that line and lowers it at the sides, 90° away.",
+      "part": "Step 2: compute the pull at three points (squeeze/bulge diagram and the paragraph about the two sides)",
+      "idea": "The difference in pull gives about +1.1e-6 m/s² along the Earth–Moon line, which makes the two bulges. At 90° the pull squeezes inward with about half that strength, so the water is low there."
+    },
+    {
+      "step": "The Sun makes its own pair of bulges along the Earth–Sun line, and its lows are 90° from that line.",
+      "part": "The Sun does the same thing",
+      "idea": "The Sun works the same way: it raises water at both ends of the Earth–Sun line and lowers it in between."
+    },
+    {
+      "step": "At first and third quarter the Sun is at 90° to the Moon. So the Sun's bulges sit where the Moon's lows are, and the Moon's bulges sit where the Sun's lows are.",
+      "part": "Steps 1 and 2 plus the question's statement of the geometry",
+      "idea": "Each body's high water falls in the other's low region, so the two effects work against each other."
+    },
+    {
+      "step": "So the quarter-Moon tides are smaller than they would be if the Sun and Moon were lined up (I take 'spring tides' to mean that lined-up case). The Sun's effect partly cancels the Moon's instead of adding to it.",
+      "part": "Step 3 (bigger tidal acceleration gives taller bulges) and step 3 of this answer",
+      "idea": "Bulge height grows with tidal acceleration. When the two pulls line up they add, and at right angles they partly cancel. That gives an answer in words only (smaller), not a number."
+    },
+    {
+      "step": "To say how much smaller, I need the size of the Sun's tidal effect compared with the Moon's.",
+      "part": "The Sun does the same thing",
+      "idea": "This section says only that the Sun uses the same mechanism. It gives no GM or distance for the Sun and no Sun-to-Moon ratio, so I can't put a number on the result. It also never defines 'spring tides'."
+    }
+  ],
+  "result": "In words only: at quarter Moon the Sun's bulges fall on the Moon's lows, so the two tides partly cancel. The tides are smaller than spring tides, where the two tides add together. I can't say by how much.",
+  "gap": "The explanation never gives the strength of the Sun's tide compared with the Moon's (no GM or distance for the Sun, no ratio). It also doesn't define spring tides or say how the two tides combine when lined up versus at right angles. Without these I can't say how much smaller the quarter-Moon tides are."
+}

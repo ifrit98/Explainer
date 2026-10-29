@@ -1,0 +1,36 @@
+{
+  "steps": [
+    {
+      "step": "Energy balance: heat delivered to the warm side = heat taken from the cold side + electrical work (Q_hot = Q_cold + W).",
+      "part": "Short answer (heat delivered = heat taken from outside + electrical work, 3 = 2 + 1) and Summary bullet 1",
+      "idea": "The machine moves heat and does not create it. What comes out at the hot coil is the heat picked up at the cold coil plus the compressor work, so energy is conserved."
+    },
+    {
+      "step": "The heating figure of merit is COP_heat = Q_hot / W.",
+      "part": "Why this matters (COP definition)",
+      "idea": "COP is the heat delivered divided by the electricity used, for example 3 kWh / 1 kWh = 3."
+    },
+    {
+      "step": "Running the machine as an air conditioner or refrigerator uses the same loop. The useful output is now the heat taken from the cold side, so COP_cool = Q_cold / W.",
+      "part": "How it works: 'A refrigerator is the same machine' (takes heat from the food box and dumps it into the kitchen)",
+      "idea": "It is the same loop with the same flows. Only which heat we count as useful changes: the heat absorbed in the cold coil instead of the heat released in the hot coil."
+    },
+    {
+      "step": "Put step 1 into step 3: COP_cool = (Q_hot − W)/W = Q_hot/W − 1 = COP_heat − 1. This holds for any machine, ideal or real, between the same two temperatures. It is exactly one less because the work W itself is part of the heat that comes out at the hot side, but it was never taken from the cold side.",
+      "part": "Steps 1–3; background algebra",
+      "idea": "The heat delivered and the heat removed always differ by exactly the work. Dividing by the work makes that difference exactly 1."
+    },
+    {
+      "step": "Find the ideal heating limit as a formula. The explanation gives no formula, only table values, but they fit COP_heat,ideal = T_hot/(T_hot − T_cold) in kelvin: 318/50 = 6.36 ≈ 6.4 and 318/70 = 4.54 ≈ 4.5.",
+      "part": "Why the COP is not unlimited: table (boil/condense temperatures in K, lift, ideal COP) and the statement that the limit depends on the lift",
+      "idea": "The ideal COP is the condensing temperature divided by the lift, using absolute temperatures. I inferred this by checking both table rows; the text does not state it."
+    },
+    {
+      "step": "Ideal cooling limit: COP_cool,ideal = T_hot/(T_hot − T_cold) − 1 = T_cold/(T_hot − T_cold). For the mild-day temperatures (268 K and 318 K) this is 268/50 ≈ 5.4, compared with 6.4 for heating.",
+      "part": "Steps 4 and 5; table row 'Mild day'",
+      "idea": "Subtracting 1 from the hot temperature over the lift gives the cold temperature over the lift, since (T_hot − (T_hot − T_cold)) = T_cold."
+    }
+  ],
+  "result": "Ideal cooling COP = T_cold/(T_hot − T_cold), with temperatures in kelvin. For example, 268 K and 318 K give 268/50 ≈ 5.4, against a heating limit of 318/50 ≈ 6.4. It is exactly one less because of energy conservation: heat dumped outside = heat removed from inside + electrical work. Dividing by the work gives COP_heat = COP_cool + 1. The electricity counts as useful heat when heating, but it is not heat taken from the cold room when cooling. The 'exactly one less' part follows directly from the explanation. The formula T_hot/(T_hot − T_cold) is my inference from the table's numbers, because the text never states it.",
+  "gap": ""
+}

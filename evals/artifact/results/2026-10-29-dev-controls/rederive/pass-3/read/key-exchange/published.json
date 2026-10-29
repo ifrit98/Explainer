@@ -1,0 +1,46 @@
+{
+  "steps": [
+    {
+      "step": "Everyone, Eve included, knows the public p and g. Each of Alice, Bob and Carol picks a private number (a, b, c) and never sends it.",
+      "part": "The exchange, with small numbers (steps 1–2); The problem (each side needs its own private number)",
+      "idea": "The key is never sent. Each person keeps a random private exponent and agrees only p and g in public."
+    },
+    {
+      "step": "Round 1: each person publishes g^own mod p. Alice sends A = g^a, Bob sends B = g^b, Carol sends C = g^c (all mod p).",
+      "part": "The exchange, with small numbers (step 3)",
+      "idea": "A public number is g raised to the private number, mod p. With p=23, g=5, a=6, b=15, it gives A=8 and B=19. I add c=3, which gives C=5^3 mod 23=10 (the same number Mallory sends in the attack section)."
+    },
+    {
+      "step": "Round 1, second half: arrange the three in a ring. Each raises the previous person's public number to their own private number. Bob gets A^b = g^(ab). Carol gets B^c = g^(bc). Alice gets C^a = g^(ca). Each publishes the result.",
+      "part": "The exchange, with small numbers (step 4); Why both get 2",
+      "idea": "Raising someone's public number to your private number multiplies the exponents: (g^x)^y = g^(xy). Taking remainders along the way does not change the final remainder. Using the explanation's own numbers: 8^15 mod 23 = 2 = g^(ab), 19^3 mod 23 = 5 = g^(bc), and 10^6 mod 23 = 6 = g^(ca)."
+    },
+    {
+      "step": "Round 2: each raises the two-exponent number they receive to their own private number. Carol computes (g^(ab))^c, Alice computes (g^(bc))^a, and Bob computes (g^(ca))^b. All three equal g^(abc) mod p, the shared secret.",
+      "part": "Why both get 2 (exponent rule); step 3",
+      "idea": "The same exponent rule, used a second time, gives one product of all three exponents whatever the order. In the example, Carol gets 2^3 = 8, Alice gets 5^6 mod 23 = 8 (the table lists 8 for exponent 6), and Bob's 6^15 mod 23 must also be 8 because it equals 5^(6·15·3). All of them hash s=8 into the key."
+    },
+    {
+      "step": "Eve sees p, g, g^a, g^b, g^c, g^(ab), g^(bc) and g^(ca), but none of a, b, c or g^(abc).",
+      "part": "What Eve sees (the table); steps 2–4",
+      "idea": "The table extends to three people. Only the private numbers and the final s are never sent."
+    },
+    {
+      "step": "Combining public numbers does not give Eve the secret. Multiplying them adds exponents, but s needs the product a·b·c.",
+      "part": "What Eve sees (multiplying fails)",
+      "idea": "8×19 gives g^(a+b), not g^(ab). In the same way, multiplying any of the six public values gives g to a sum of exponents, never g^(abc)."
+    },
+    {
+      "step": "Getting s means solving a two-person problem Eve already can't solve. Take g^(ab) and g^c: they look exactly like a two-party exchange with private numbers ab and c, and s = g^((ab)·c).",
+      "part": "What Eve sees (no known way from A and B to s except finding a or b); Why powers, and why mod; Why real numbers are huge",
+      "idea": "To go further, Eve must in effect find an exponent from a public number. That is the discrete logarithm, which has no known fast method for a 2048-bit p (about 2^112 operations)."
+    },
+    {
+      "step": "Limits: this rests on an assumption, and it only stops a reader.",
+      "part": "Assumption, not proof; The limit: an attacker who changes messages",
+      "idea": "Hardness is not proven, and the explanation does not discuss whether having six public values instead of two helps Eve. Mallory, who can replace messages, could still sit in the middle unless the messages are authenticated."
+    }
+  ],
+  "result": "They use two rounds over a ring Alice→Bob→Carol→Alice. First, each person publishes g^own mod p. Next, each raises the previous person's public number to their own private number and publishes that (g^(ab), g^(bc), g^(ca)). Finally, each raises the number they receive to their own private number. All three get s = g^(abc) mod p and hash it into the key. With p=23, g=5, a=6, b=15, c=3, everyone gets 8. Eve sees only g to single exponents and g to pairs of exponents. Multiplying these adds exponents and never gives the triple product. Getting g^(abc) from g^(ab) and g^c is the same as the two-person Diffie–Hellman problem, which in effect needs a discrete logarithm. No fast method for that is known for large p. This is an unproven assumption, and it gives no protection against an attacker who changes messages unless they are authenticated.",
+  "gap": ""
+}

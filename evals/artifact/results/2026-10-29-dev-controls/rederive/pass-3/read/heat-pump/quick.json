@@ -1,0 +1,36 @@
+{
+  "steps": [
+    {
+      "step": "An air conditioner is the same refrigerant loop, with its parts placed the other way round: the evaporator is in the cold space being cooled and the condenser is in the warm place.",
+      "part": "Level 2, the paragraph 'A refrigerator uses the same loop...' (also the question's premise)",
+      "idea": "A fridge uses the same loop. Its evaporator is inside the cold box and its condenser is the warm grille at the back. So the cold side is where heat is picked up and the hot side is where heat is given off."
+    },
+    {
+      "step": "Energy balance for the machine: heat given off on the hot side = heat taken from the cold side + electricity. In symbols, Q_hot = Q_cold + W.",
+      "part": "Level 1, the sentence 'heat delivered = heat taken from the air + electricity' and the first diagram (3 = 2 + 1); Level 2, step 3 (Condenser)",
+      "idea": "No energy is created. The condenser gives off the heat picked up at the evaporator plus the compressor work."
+    },
+    {
+      "step": "For heating, the useful output is Q_hot, so COP_heat = Q_hot / W. For cooling, the useful output is the heat removed, Q_cold, so COP_cool = Q_cold / W.",
+      "part": "Level 1, the COP definition paragraph",
+      "idea": "COP is useful heat divided by the electricity paid for. For an air conditioner, the useful heat is the heat removed from the inside."
+    },
+    {
+      "step": "COP_cool = (Q_hot − W)/W = Q_hot/W − 1 = COP_heat − 1. This holds for any machine of this kind, including an ideal one. In the example: heat removed 2 kWh for 1 kWh of electricity gives 2, which is 3 − 1.",
+      "part": "Steps 2 and 3; background (algebra)",
+      "idea": "The heat removed is the heat delivered minus the electricity. That is the electricity counted once, so dividing by the electricity takes away exactly 1."
+    },
+    {
+      "step": "Ideal heating limit: COP_heat,max = T_hot / (T_hot − T_cold), with temperatures in kelvin.",
+      "part": "Level 3, the Carnot limit formula",
+      "idea": "Physics caps the heating COP at T_hot divided by the temperature lift."
+    },
+    {
+      "step": "Ideal cooling limit: COP_cool,max = T_hot/(T_hot − T_cold) − 1 = T_cold/(T_hot − T_cold). For example, with 263 K and 313 K: 6.3 − 1 ≈ 5.3, which equals 263/50.",
+      "part": "Steps 4 and 5; background (algebra)",
+      "idea": "Take 1 away from the heating limit and put it over the common denominator (the lift) to get T_cold over the lift."
+    }
+  ],
+  "result": "The ideal limit for an air conditioner is T_cold/(T_hot − T_cold), with temperatures in kelvin. For example, with 263 K and 313 K it is about 5.3, against 6.3 for heating. It is exactly one less because energy is conserved: heat dumped outside = heat removed from inside + electricity. Heating counts all the dumped heat, but cooling counts only the heat removed, which leaves out the electricity. Since COP divides by the electricity, leaving it out of the top takes away exactly 1: COP_cool = COP_heat − 1, so T_hot/(T_hot−T_cold) − 1 = T_cold/(T_hot−T_cold).",
+  "gap": ""
+}

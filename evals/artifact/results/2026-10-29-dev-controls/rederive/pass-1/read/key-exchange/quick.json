@@ -1,0 +1,56 @@
+{
+  "steps": [
+    {
+      "step": "Set the public setup: everyone, Eve included, knows the prime p and the base g (for example p = 23, g = 5).",
+      "part": "How it works, step 1",
+      "idea": "p and g are agreed in public and are not secret."
+    },
+    {
+      "step": "Each of the three picks a private number and never sends it: Alice a, Bob b, Carol c (for example a = 6, b = 15, and c = 3, which I chose).",
+      "part": "How it works, step 2",
+      "idea": "Each person's secret is a random exponent that never goes on the channel."
+    },
+    {
+      "step": "Each sends a public value: A = g^a mod p, B = g^b mod p, C = g^c mod p. In the example A = 8, B = 19, C = 5^3 mod 23 = 10.",
+      "part": "How it works, step 3",
+      "idea": "A public value is g raised to your private number, mod p."
+    },
+    {
+      "step": "Raising someone else's public value to your own private number adds your exponent to theirs as a product: (g^b)^a = g^(ab). Doing this again gives g^(abc), whatever the order.",
+      "part": "How it works, paragraph after step 4 ('Order does not matter'), plus background exponent rules",
+      "idea": "Applied once, the rule gives g^(ab). Applied twice (background power rules, and taking mod p at each stage is fine because the explanation does it), it gives g^(abc). The order of a, b, c does not matter."
+    },
+    {
+      "step": "Second round: each person raises the value they just received to their own private number and publishes the result. Alice publishes B^a = g^(ab), Bob publishes C^b = g^(bc), Carol publishes A^c = g^(ac). In the example: 19^6 = 2, 10^15 = 19, and 8^3 = 6 (all mod 23).",
+      "part": "Step 4",
+      "idea": "Each new value carries the product of two private exponents. It is sent in public, like any other message."
+    },
+    {
+      "step": "Each person takes the second-round value that is missing their own exponent and raises it to their private number. Carol: (g^(ab))^c, which is 2^3 = 8. Alice: (g^(bc))^a, which is 19^6 = 2^... no, 19^6 = 8 when computed as 5^6 mod 23 from 19^3 → 5. Bob: (g^(ac))^b, which is 6^15 = 8. All three get g^(abc) = 8.",
+      "part": "Steps 4 and 5",
+      "idea": "Every path ends at g^(abc) mod p, because the order of the exponents does not matter. The shared key is 8, and it is never sent."
+    },
+    {
+      "step": "Eve sees p, g, g^a, g^b, g^c, g^(ab), g^(bc) and g^(ac). Each of these is missing at least one of the three exponents. To add the missing one she would have to recover an exponent, such as c from g^c, or ab from g^(ab). That is a discrete logarithm.",
+      "part": "Why Eve fails, first paragraph",
+      "idea": "Getting an exponent back from g^x mod p is the discrete logarithm problem."
+    },
+    {
+      "step": "Eve cannot shortcut by combining the public values. Multiplying them adds exponents, so for example g^(ab)·g^c = g^(ab+c), not g^(abc).",
+      "part": "Why Eve fails, last paragraph (8 × 19 gives 5^(6+15))",
+      "idea": "Multiplying public values gives sums of exponents, never products."
+    },
+    {
+      "step": "With a large p (2048 bits) the discrete logarithm takes about 2^112 operations, so Eve is stuck. Each participant only needs fast repeated squaring.",
+      "part": "Why Eve fails, second paragraph; Limits ('Hardness is assumed, not proven')",
+      "idea": "Small p can be brute-forced, but large p is infeasible as far as anyone knows. This is an assumption, not a proof."
+    },
+    {
+      "step": "Caveat: this only holds if Eve can read but not change messages. Otherwise the public values need to be authenticated.",
+      "part": "Limits, first bullet (Mallory)",
+      "idea": "Someone who can replace messages can stand in the middle, so the public values must be signed."
+    }
+  ],
+  "result": "Use two rounds. Round 1: each person publishes g^x mod p from their private number x (a, b, c). Round 2: each raises the value they received to their own number and publishes it, giving g^(ab), g^(bc) and g^(ac). Each then raises the one second-round value missing their own exponent to their private number, so all three get the key g^(abc) mod p. In the example, with c = 3 chosen by me, the key is 8. The key itself is never sent. Eve sees only values with at least one exponent missing. Adding it would mean solving a discrete logarithm, which is infeasible for a 2048-bit p, and multiplying the public values only adds exponents. This assumes Eve only reads and does not change messages.",
+  "gap": ""
+}

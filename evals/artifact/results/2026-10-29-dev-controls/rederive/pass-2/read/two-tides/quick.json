@@ -1,0 +1,36 @@
+{
+  "steps": [
+    {
+      "step": "Water is moved only by the tidal acceleration, which is the pull at a point minus the pull at Earth's centre. This raises two bulges on the line to the attracting body: one facing it and one facing away.",
+      "part": "Only the difference in pull moves water (claim mech-bulges and the bulge diagram)",
+      "idea": "The near water is pulled more than Earth's centre and the far water less, so the bulges sit along the Earth–body line. Water is lower on the sides, 90° from that line."
+    },
+    {
+      "step": "The Sun raises its own pair of bulges in the same way, with a height 0.46 times that of the Moon's.",
+      "part": "Evidence that the difference is what counts: the Sun",
+      "idea": "Tidal effects fall off as 1/d³, so solar tides are 0.46 of lunar tides even though the Sun's raw pull is 179 times the Moon's."
+    },
+    {
+      "step": "The two pairs of bulges add or partly cancel. Spring tides happen when they add.",
+      "part": "Limits ('Not covered: spring and neap tides…')",
+      "idea": "The Sun's smaller pair of bulges either adds to the Moon's or partly cancels it. Adding gives spring tides, and partly cancelling gives neap tides."
+    },
+    {
+      "step": "Spring tides happen when the Sun, Earth and Moon are in a line. Their size is 1 + 0.46 = 1.46 lunar tides.",
+      "part": "Steps 1 and 3",
+      "idea": "When the bodies line up, both pairs of bulges point the same way, so their heights add."
+    },
+    {
+      "step": "When the Sun and Moon are at right angles, the Sun's bulges fall where the Moon's low water is. The two effects partly cancel, giving 1 − 0.46 = 0.54 lunar tides. This is the neap tide.",
+      "part": "Steps 1, 2 and 3",
+      "idea": "The pairs of bulges are 90° apart, so the Sun's high water fills the Moon's low water. This reduces the range, which is the 'partly cancels' case. I inferred the link between the quarter Moon and neap tides from the bulge geometry. The explanation does not state it."
+    },
+    {
+      "step": "Compare with spring tides: 0.54 / 1.46 ≈ 0.37.",
+      "part": "Steps 4 and 5",
+      "idea": "This is the ratio of the neap range to the spring range."
+    }
+  ],
+  "result": "At first and third quarter the tides are neap tides. They are about 0.54 of the Moon-only tide, compared with 1.46 at spring tides. So they are roughly 0.37 of spring tides, a bit over a third. This assumes the bulge heights simply add or subtract.",
+  "gap": "The explanation lists spring and neap tides as 'not covered'. It never says that the quarter Moon gives neap tides, or that at right angles the Sun's bulge heights simply subtract from the Moon's. I inferred both from the bulge geometry and the phrase 'adds to or partly cancels'."
+}

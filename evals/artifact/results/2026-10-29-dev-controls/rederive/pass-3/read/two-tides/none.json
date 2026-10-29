@@ -1,0 +1,41 @@
+{
+  "steps": [
+    {
+      "step": "Spring and neap tides come from the Sun's pair of bulges adding to the Moon's pair. Quarter moons, when the Sun and Moon are at right angles, give the smaller neap tides.",
+      "part": "Section 6, 'The Sun does the same thing, more weakly' (second paragraph)",
+      "idea": "At new and full moon the two pairs of bulges line up and add, giving spring tides. At the quarter moons the Sun's bulges partly fill in the Moon's lows, giving neap tides."
+    },
+    {
+      "step": "The Sun's tidal effect is about 0.46 times the Moon's.",
+      "part": "Section 6, first paragraph; the Summary ('about 2 to 1')",
+      "idea": "Tidal effect goes as mass/distance³, so the Sun's tide is about 46% of the Moon's."
+    },
+    {
+      "step": "For the Moon alone, the tide is +0.36 m under the bulges and −0.18 m at 90° from them.",
+      "part": "Section 4, equilibrium tide paragraph; index.html script, height(): AM=0.36 with the shape (1.5cos²−0.5)",
+      "idea": "Each body's tide is +A along its own line and −A/2 at right angles to it, where A is the amplitude."
+    },
+    {
+      "step": "The page uses a Sun amplitude of 0.165 m, which is about 0.46 × 0.36. So the Sun's tide is +0.165 m on the Sun line and about −0.0825 m at right angles to it.",
+      "part": "index.html script: AS=0.165, added in height() at the angle given by sunAngle(); steps 2 and 3",
+      "idea": "The Sun's tide has the same shape, lined up with the Sun's direction, and the two heights simply add."
+    },
+    {
+      "step": "Spring tide (Sun lined up with Moon): high = 0.36 + 0.165 = 0.525 m, low = −0.18 − 0.0825 = −0.2625 m. The range is about 0.79 m.",
+      "part": "Steps 3 and 4; the phase slider in section 4 of index.html (days = 0 or 14.8)",
+      "idea": "When the Sun and Moon are lined up, both highs fall in the same place and both lows fall in the same place."
+    },
+    {
+      "step": "Neap tide (Sun at 90°): under the Moon the height is 0.36 − 0.0825 = 0.2775 m. At 90° from the Moon it is −0.18 + 0.165 = −0.015 m. The range is about 0.29 m.",
+      "part": "Steps 3 and 4; Section 6 ('the Sun's bulges partly fill in the Moon's lows'); the phase slider at about 7.4 or 22 days",
+      "idea": "The Sun's high falls where the Moon's low is, and the Sun's low falls where the Moon's high is, so they partly cancel."
+    },
+    {
+      "step": "Neap range ÷ spring range = 0.2925 ÷ 0.7875 ≈ 0.37. This equals (1 − 0.46)/(1 + 0.46) = 0.54/1.46.",
+      "part": "Steps 5 and 6; background arithmetic",
+      "idea": "Dividing the two ranges gives the ratio."
+    }
+  ],
+  "result": "At the quarter moons you get neap tides, which are the smallest of the month. In the idealised whole-planet ocean, the range from high to low is roughly 0.29 m, compared with about 0.79 m at spring tides. That makes neap tides only about 37% of spring tides, a bit over a third, or (1−0.46)/(1+0.46). Put another way, a neap tide is about half the size of the Moon's tide alone, and a spring tide is about 1.5 times it. Real coasts change these figures (section 7).",
+  "gap": ""
+}

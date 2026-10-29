@@ -95,6 +95,37 @@ Dev baseline, 2026-10-20: the 40 v0.8 builds (10 subjects × 4 conditions), read
 
 **Human check:** none yet. A brief for testers is in [`evals/artifact/human-check.md`](../evals/artifact/human-check.md); results will be recorded here.
 
+### Does the test catch a missing block?
+
+PRD-002a, 2026-10-29. The baseline sat near its ceiling. That could mean the v0.8 builds are good, or that the test is blind: a strong reader fills in a missing block from its own knowledge and the grader credits it. To tell these apart, one building block was cut from saved `principles` explanations, and the unchanged stage was run on the cut copies. [Report](../evals/artifact/results/2026-10-29-dev-controls/controls.md). [The cuts and their review](../evals/artifact/results/2026-10-29-dev-controls/cuts/review.md), frozen before the run.
+
+**What was cut, and why only six subjects.** A cut block can show up as missing only if the reader cannot get it elsewhere. So a block was eligible only if it is not in the target question or presupposed by it, is not background for this reader, cannot be derived from the other blocks, and was credited in all three baseline passes. Six dev targets have such a block. Four do not (antibiotic-resistance, gps-relativity, quorum, vaccine-memory): their questions or school background supply the blocks. For each of the six, a fresh agent removed the block and changed nothing else. A second agent checked three things: the block could not be recovered, the removal was not marked, and the other reliably credited blocks were still there (the clean set, 4 blocks). Each cut got at most three attempts. Bloom-filter's cut failed all three: its block (adding an item sets bits to 1, and bits are never cleared) is implied by the worked example and the error maths. So five subjects count.
+
+**The bar, fixed before the run.** A cut is caught when the grader marks the cut block unsupported or missing in all three passes. Trusted needs three things: at least 80% of counted subjects caught, at most one clean-set block losing support, and at least five subjects counted. An uncaught cut can leave the count, but only if a leak checker quotes a passage that still carries the block and code finds that quote in the cut copy. The verdict is also given with every leaked cut counted as a miss. If only the exclusions make it trusted, it is inconclusive.
+
+**Verdict: trusted, at the floor.** 4 of 5 cuts were caught, and 4 were needed. No clean-set block lost support, no leak was found, and the verdict is the same with leaks counted as misses. One more miss, or one more subject dropped or leaked, would have made it blind or inconclusive.
+
+| subject | cut block | intact (baseline) | cut | caught | supported, intact → cut | result right, intact → cut |
+|---|---|---|---|---|---|---|
+| float-sum | 1: a value is exact only if its denominator is a power of 2 | s, s, s | s, s, s | no | 3/4, 4/4, 4/4 → 4/4, 4/4, 4/4 | 1 of 3 → 2 of 3 |
+| greenhouse | 1: Earth radiates from the height where infrared escapes; CO2 raises it | s, s, s | m, m, m | yes | 2/2 → 0/4 in each pass | 3 of 3 → 0 of 3 |
+| heat-pump | 2: ideal heating COP = T_hot ÷ (T_hot − T_cold) | s, s, s | u, u, u | yes | 4/4 → 3/4 in each pass | 3 of 3 → 3 of 3 |
+| key-exchange | 3: the discrete logarithm is infeasible for large p | s, s, s | m, m, m | yes | 5/5 → 3/5 in each pass | 3 of 3 → 0 of 3 |
+| two-tides | 2: the Sun's tide is about half the Moon's | s, s, s | m, m, m | yes | 3/3 → 2/4 in each pass | 3 of 3 → 0 of 3 |
+
+Marks per pass: s supported, u unsupported, m missing. The supported counts change their denominators because stated steps are left out of the score.
+
+- **The miss: float-sum.** The reader rebuilt the block from two sentences in the cut copy, plus its own knowledge of binary fractions. One sentence, the cutter's rewording of a sentence it removed, says a double holds a limited number of binary digits, so its values form a grid; the other says 1/10 repeats forever in binary. The grader credited the rebuilt block in every pass. The leak checker found no passage that carries the block, so the subject counts as a miss. This is either the blind case the controls exist to find, or a cut that left too much in; this run cannot tell which.
+- **Caught does not mean the reader failed.** In heat-pump, the reader worked the formula out from the table the cut left: 318 K, a 50 K lift and an ideal COP of 6.4, a leftover the review named before the run. The reader got the result right in all three passes. The grader still marked the block unsupported, because the explanation does not give it. The test catches what an explanation leaves out, not what a reader cannot rebuild.
+- **Derived steps.** Where a derived step rests on the cut block, it lost credit in three subjects: key-exchange step 5 (the eavesdropper needs a discrete logarithm) and two-tides step 4 (a third of a spring tide's range) went from supported to missing, and greenhouse steps 3–4 went from stated to missing or unsupported. In heat-pump it did not. Step 4 there is algebra on the cut formula, and it stayed supported in every pass. That is direct evidence for making a derived step's credit depend on the blocks it rests on.
+- **Greenhouse's catch comes with a thinner explanation.** Block 2 presupposes block 1, so the cut removed most of block 2 as well. The design allows this, because block 2 is not in the clean set.
+
+**Differences from the baseline.** The reader read only the cut copies. For none, quick and published, the baseline's chains were reused, and the grader graded all four fresh. One more difference was missing from the PRD's list. The stage shuffles labels once per subject, from one generator per pass, and this run covers five subjects, not ten. So each subject's label shuffle differs from its baseline pass.
+
+**What it means.** On targets with an eligible block, the test notices a missing block. On the five counted subjects, the baseline's near-ceiling score is then a fact about the v0.8 builds, not a sign of a blind test. PRD-003 may use the test, but only on targets with an eligible block. The evidence is thin: five subjects, one model, a verdict at the floor, and one miss of the kind the controls look for.
+
+**What the eligibility rule found.** In four of the ten dev targets, the question or background supplies every block, or every block the intact build was reliably credited with. Those targets cannot show a missing block in any condition, so on them the ceiling comes from the target, not from the builds. PRD-002's blocks test allowed blocks from the question on purpose, so the 20 test-split targets may share the problem. They need the same sort before PRD-003 relies on them.
+
 ## The chat eval
 
 `evals/chat/questions.yaml` holds six questions about phenomena (why ice floats, why TCP starts slowly, how a wing makes lift, why a hash table is fast, why we see one side of the Moon, why salt melts ice). For each one it lists:

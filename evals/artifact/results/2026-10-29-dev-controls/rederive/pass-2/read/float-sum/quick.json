@@ -1,0 +1,36 @@
+{
+  "steps": [
+    {
+      "step": "A double can hold a number exactly only if it is a short sum of powers of 2 (1/2, 1/4, 1/8, …) that fits in 53 bits. A number whose binary form repeats forever is stored as the nearest binary fraction instead.",
+      "part": "Why 0.1 has the same problem in base 2 (paragraph defining a double and the stored value)",
+      "idea": "A double is a binary fraction with 53 significant bits. If a number's binary digits go on forever, the computer keeps the closest value it can, which is slightly off."
+    },
+    {
+      "step": "0.375 = 3/8 = 1/4 + 1/8, so it is a short binary fraction (0.011 in binary). A double stores it exactly.",
+      "part": "Step 1, plus the 'When addition is exact' section (0.5 = 1/2 and 0.25 = 1/4 are short binary fractions)",
+      "idea": "A number made of a few powers of 2 has a short binary form, so nothing is rounded. Converting 0.375 to a fraction is school arithmetic."
+    },
+    {
+      "step": "0.0625 = 1/16, a single power of 2 (0.0001 in binary). A double stores it exactly.",
+      "part": "Step 1 and 'When addition is exact'",
+      "idea": "Powers of 2 are the building blocks of binary fractions, so they are stored without error."
+    },
+    {
+      "step": "0.2 and 0.3 cannot be stored exactly. The stored values are 0.2000000000000000111… and 0.2999999999999999888….",
+      "part": "Table under 'Why 0.1 has the same problem in base 2', and the closing line of 'When addition is exact'",
+      "idea": "The explanation names 0.1, 0.2 and 0.3 as numbers with no short binary form and gives their slightly wrong stored values."
+    },
+    {
+      "step": "0.125 = 1/8 is exact. Each running total 2/8, 3/8, …, 8/8 = 1.0 is also a short binary fraction, so no addition ever needs rounding. The result is exactly 1.0.",
+      "part": "When addition is exact (0.5 + 0.25 == 0.75)",
+      "idea": "If the inputs and the sum are all short binary fractions, no step rounds and no error appears."
+    },
+    {
+      "step": "0.1 is already wrong when it is stored (0.1000000000000000055…, slightly too high). Many of the running totals (0.3, 0.7, …) are not doubles either, so they get rounded to the nearest double, much as 0.1 + 0.2 did. These small errors add up, and the final double is not the double 1.0, so == says false.",
+      "part": "Table (stored 0.1); 'What happens in the addition' steps 1–4; 'The same problem in base 10' (the calculator adds correctly but the inputs were wrong)",
+      "idea": "Errors come from inputs that are already wrong and from rounding each sum that is not a double. == compares bit for bit, so any leftover error makes it false."
+    }
+  ],
+  "result": "A double stores 0.375 (= 1/4 + 1/8) and 0.0625 (= 1/16) exactly. It cannot store 0.2 or 0.3 exactly, because their binary forms repeat forever, so it keeps the nearest binary fraction. Adding 0.125 (= 1/8) eight times gives exactly 1.0 because the input and every running total (k/8) are short binary fractions, so nothing is ever rounded. Adding 0.1 ten times starts from a stored value slightly above 0.1, and the running totals that aren't doubles get rounded too. The small errors add up to a double that differs from 1.0, so == is false.",
+  "gap": "The explanation never works through the ten additions of 0.1. It gives no running totals and doesn't say which way each one rounds, so it doesn't show why the errors fail to cancel. I took 'does not equal 1.0' from the question and could only explain it in general terms."
+}

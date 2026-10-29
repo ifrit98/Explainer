@@ -1,0 +1,31 @@
+{
+  "steps": [
+    {
+      "step": "The Moon's tidal effect stretches the ocean along the Earth–Moon line. It makes two bulges at the ends of that line and a squeeze (low water) at 90° from it.",
+      "part": "Step 2: compute the pull at three points (the bulge/squeeze diagram and the paragraph on the sides at 90°)",
+      "idea": "The near side and far side bulge, about 2GMR/d³. The sides at 90° are squeezed inward, about GMR/d³, and water flows from the sides toward the ends."
+    },
+    {
+      "step": "The Sun produces its own pair of bulges along the Earth–Sun line, with low water between them.",
+      "part": "The Sun does the same thing",
+      "idea": "The Sun uses the same mechanism: it raises water at both ends of the Earth–Sun line and lowers it in between."
+    },
+    {
+      "step": "At quarter Moon the Sun–Earth line is at 90° to the Moon–Earth line. So the Sun's bulges fall where the Moon's squeeze is, and the Moon's bulges fall where the Sun's squeeze is. The two effects work against each other.",
+      "part": "Steps 1 and 2, plus the question's statement that the Sun and Moon are at right angles",
+      "idea": "Putting the two patterns together at right angles, each one's high water lands on the other's low water. They partly cancel, so the difference between high and low water is smaller."
+    },
+    {
+      "step": "For comparison, I take spring tides to be the case where the Sun and Moon are in line (new or full Moon). Then their bulges coincide and add, giving the largest tides.",
+      "part": "background (the explanation never names or defines spring tides; this is my assumption from the question)",
+      "idea": "When the two lines coincide, both bulges and both squeezes line up, so the effects add."
+    },
+    {
+      "step": "Putting a number on 'how large compared with spring tides' needs the size of the Sun's tidal effect relative to the Moon's. Then quarter-Moon tides ≈ (Moon − Sun) and spring tides ≈ (Moon + Sun).",
+      "part": "The Sun does the same thing; Step 3 (the effect goes as 1/d³)",
+      "idea": "The explanation gives the Moon's GM and distance, but not the Sun's GM or distance, and it never says how strong the Sun's tide is next to the Moon's. So I cannot work out the ratio."
+    }
+  ],
+  "result": "Qualitatively, tides at first and third quarter (neap tides) are smaller than spring tides. Each body's high water falls on the other's low water, so the effects partly cancel instead of adding. The range is roughly (Moon's effect − Sun's effect) instead of (Moon's + Sun's). The explanation does not let me say how much smaller, or even confirm that the Moon's effect is the larger one.",
+  "gap": "The explanation never gives the Sun's tidal strength compared with the Moon's: no GM or distance for the Sun, and no ratio. It also never defines spring tides or says how the Sun's and Moon's tides combine (add when lined up, partly cancel at right angles). So the size of quarter-Moon tides relative to spring tides cannot be worked out."
+}
