@@ -219,3 +219,61 @@ def test_cut_outputs_hold_no_absolute_paths(monkeypatch, tmp_path):
     for f in (out / "cuts").iterdir():
         text = f.read_text()
         assert str(tmp_path) not in text and str(Path.home()) not in text, f.name
+
+
+# ---------------------------------------------------------------- the verdict
+
+BAR = {"catch": 0.8, "min_counted": 5, "clean_losses": 1}
+
+
+def six(n_caught):
+    return {f"s{i}": i < n_caught for i in range(6)}
+
+
+def test_caught_needs_every_pass():
+    assert controls.caught([["supported", "missing"], ["s", "MISSING "], ["x", "unsupported"]], 2)
+    assert not controls.caught([["missing"], ["missing"], ["supported"]], 1)
+    assert not controls.caught([["missing"], ["stated"], ["missing"]], 1)
+    assert not controls.caught([["missing"], ["nonsense"], ["missing"]], 1)
+
+
+def test_absent_raw_mark_is_not_a_catch():    # Review Focus 1
+    assert not controls.caught([["missing"], None, ["missing"]], 1)
+    assert not controls.caught([["missing"], [], ["missing"]], 1)
+    assert not controls.caught([], 1)
+
+
+def test_kept_needs_supported_in_every_pass():
+    assert controls.kept([["supported"], [" Supported"], ["supported"]], 1)
+    assert not controls.kept([["supported"], ["stated"], ["supported"]], 1)
+    assert not controls.kept([["supported"], None, ["supported"]], 1)
+
+
+def test_verdict_trusted_blind_and_floor():
+    v = controls.verdict(six(5), {}, [], [], BAR)
+    assert (v["verdict"], v["caught"], v["need"], len(v["counted"])) == ("trusted", 5, 5, 6)
+    assert controls.verdict(six(4), {}, [], [], BAR)["verdict"] == "blind"
+    floor = controls.verdict(six(6), {}, ["s0", "s1"], [], BAR)
+    assert floor["verdict"] == "inconclusive" and floor["counted"] == ["s2", "s3", "s4", "s5"]
+    assert controls.verdict(six(4), {}, ["s5"], [], BAR)["verdict"] == "trusted"   # 4 of 5
+
+
+def test_verdict_clean_damage_is_inconclusive():
+    assert controls.verdict(six(6), {"s0": 1, "s1": 1}, [], [], BAR)["verdict"] == "inconclusive"
+    v = controls.verdict(six(6), {"s0": 1}, [], [], BAR)
+    assert v["verdict"] == "trusted" and v["clean_losses"] == 1
+
+
+def test_leak_exclusions_cannot_decide_trusted():
+    v = controls.verdict({**{f"s{i}": True for i in range(4)}, "s4": False, "s5": False}, {}, [], ["s5"], BAR)
+    assert (v["verdict"], v["without_leak_exclusions"]) == ("inconclusive", "blind")
+
+
+def test_leak_exclusion_stands_when_not_decisive():
+    v = controls.verdict(six(5), {}, [], ["s5"], BAR)
+    assert (v["verdict"], v["without_leak_exclusions"]) == ("trusted", "trusted") and "s5" not in v["counted"]
+
+
+def test_clean_losses_of_uncounted_subjects_are_ignored():
+    assert controls.verdict(six(6), {"s0": 2}, ["s0"], [], BAR)["verdict"] == "trusted"
+    assert controls.verdict(six(5), {"s5": 2}, [], ["s5"], BAR)["verdict"] == "trusted"

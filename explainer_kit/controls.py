@@ -17,6 +17,7 @@ from __future__ import annotations
 import difflib
 import hashlib
 import json
+import math
 import re
 import shutil
 from pathlib import Path
@@ -204,3 +205,41 @@ def make_cuts(out: Path, only: list[str] | None = None, redo: bool = False, mode
     (out / "conditions.json").write_text(json.dumps(names, indent=2) + "\n")
     return {s["id"]: cut_subject(s, c["cuts"][s["id"]], reader, c, out, redo, model)
             for s in subjects if not only or s["id"] in only}
+
+
+# ---------------------------------------------------------------- 2. the verdict
+
+def mark_at(raw: object, i: int) -> str | None:
+    """The grader's own mark for step i (1-based) in one pass, or None when it gave none."""
+    return str(raw[i - 1]).strip().lower() if isinstance(raw, list) and len(raw) >= i else None
+
+
+def caught(raws: list[object], i: int) -> bool:
+    """The cut block was withheld in every pass. A pass with no mark from the grader is not a catch."""
+    return bool(raws) and all(mark_at(r, i) in ("unsupported", "missing") for r in raws)
+
+
+def kept(raws: list[object], i: int) -> bool:
+    return bool(raws) and all(mark_at(r, i) == "supported" for r in raws)
+
+
+def verdict(caught_by: dict[str, bool], lost_by: dict[str, int], dropped: list[str], leaked: list[str],
+            bar: dict) -> dict:
+    """The verdict under the bar fixed in PRD-002a, with leaked cuts left out of the count and, to show what the
+    exclusions did, counted as misses. Exclusions alone cannot make the test trusted."""
+    def need(counted: list[str]) -> int:
+        return math.ceil(round(bar["catch"] * len(counted), 9))
+
+    def judge(counted: list[str]) -> str:
+        if len(counted) < bar["min_counted"]:
+            return "inconclusive"
+        if sum(caught_by[s] for s in counted) < need(counted):
+            return "blind"
+        return "inconclusive" if sum(lost_by.get(s, 0) for s in counted) > bar["clean_losses"] else "trusted"
+
+    counted = [s for s in caught_by if s not in dropped and s not in leaked]
+    with_leaks = [s for s in caught_by if s not in dropped]
+    v, without = judge(counted), judge(with_leaks)
+    return {"verdict": "inconclusive" if v == "trusted" and without == "blind" else v,
+            "without_leak_exclusions": without, "counted": counted, "caught": sum(caught_by[s] for s in counted),
+            "need": need(counted), "clean_losses": sum(lost_by.get(s, 0) for s in counted)}
