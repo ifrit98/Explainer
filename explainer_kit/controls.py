@@ -20,12 +20,14 @@ import json
 import math
 import re
 import shutil
+from datetime import date
 from pathlib import Path
 
 import yaml
 
 from explainer_kit import agent
 from explainer_kit import artifact_eval as ae
+from explainer_kit import rederive
 from explainer_kit.paths import project_root
 
 MAX_ATTEMPTS = 3                 # a cut that fails its check is redone at most twice
@@ -34,6 +36,9 @@ UNCUT = ("none", "quick", "published")
 CUTTER_SYSTEM = ("You are a careful editor. You remove one idea from an explanation and change nothing else. Reply "
                  "with JSON only.")
 CHECKER_SYSTEM = "You are a careful scientist and teacher. You check edited explanations. Reply with JSON only."
+LEAK_SYSTEM = ("You are a careful scientist and teacher. You check where a reader's facts came from. Reply with JSON "
+               "only.")
+PASSES = 3
 
 
 def controls_file() -> Path:
@@ -243,3 +248,192 @@ def verdict(caught_by: dict[str, bool], lost_by: dict[str, int], dropped: list[s
     return {"verdict": "inconclusive" if v == "trusted" and without == "blind" else v,
             "without_leak_exclusions": without, "counted": counted, "caught": sum(caught_by[s] for s in counted),
             "need": need(counted), "clean_losses": sum(lost_by.get(s, 0) for s in counted)}
+
+
+# ---------------------------------------------------------------- 3. the run
+
+def leak_prompt(block: str, chain: dict, text: str) -> str:
+    return "\n".join([
+        "A reader read the explanation below once, then worked out a question, naming the part of the explanation "
+        "each step rests on.",
+        f"This idea is not meant to be in the explanation: {block}",
+        "",
+        "=== Explanation ===",
+        text,
+        "=== End ===",
+        "",
+        "--- The reader's working ---",
+        rederive.chain_text(chain),
+        "",
+        "Does a part the reader names, as it stands in this explanation, carry that idea? If it does, set leak to true "
+        "and copy that passage word for word from the explanation into quote.",
+        "",
+        'Reply with JSON only: {"leak": false, "quote": ""}',
+    ])
+
+
+def quote_in(quote: str, text: str) -> bool:
+    """The quote occurs in the text, ignoring differences in whitespace; an empty quote never does."""
+    q = " ".join(str(quote).split())
+    return bool(q) and q in " ".join(text.split())
+
+
+def cut_copy(out: Path, sid: str) -> Path | None:
+    found = ae.renderings(out / "work" / sid / CUT, sid)
+    return found[0] if len(found) == 1 else None
+
+
+def named(path: Path) -> str:
+    """A folder named relative to the project, or by its name: never a path through the home folder."""
+    try:
+        return str(path.resolve().relative_to(project_root().resolve()))
+    except ValueError:
+        return path.name
+
+
+def finished_cuts(out: Path, cuts: dict) -> dict[str, dict]:
+    """Every cut's record, refusing a run while any cut is unfinished or a cut copy changed after its check."""
+    records = {}
+    for sid in cuts:
+        path = out / "cuts" / f"{sid}.json"
+        rec = json.loads(path.read_text()) if path.exists() else {}
+        if rec.get("verdict") not in ("pass", "fail"):
+            raise SystemExit(f"{sid}: its cut is not finished; run explainer eval cuts first")
+        if rec["verdict"] == "pass":
+            copy = cut_copy(out, sid)
+            if copy is None or digest(copy.read_text()) != rec.get("hash"):
+                raise SystemExit(f"{sid}: the cut copy changed after its check")
+        records[sid] = rec
+    return records
+
+
+def leak_checked(out: Path, sid: str, k: int, block: str, model: str | None) -> dict:
+    saved = out / "controls" / "leaks" / f"{sid}-pass-{k}.json"
+    if saved.exists():
+        return json.loads(saved.read_text())
+    chain = json.loads((out / "rederive" / f"pass-{k}" / "read" / sid / f"{CUT}.json").read_text())
+    text = cut_copy(out, sid).read_text()
+    reply = reply_of(LEAK_SYSTEM, leak_prompt(block, chain, text), model)
+    quote = str(reply.get("quote") or "")
+    result = {"leak": reply.get("leak") is True, "quote": quote,
+              "confirmed": reply.get("leak") is True and quote_in(quote, text)}
+    saved.parent.mkdir(parents=True, exist_ok=True)
+    saved.write_text(json.dumps(result, indent=2, ensure_ascii=False) + "\n")
+    return result
+
+
+def run(out: Path, model: str | None = None, reader_model: str | None = None, workers: int = 4) -> Path:
+    """Runs the unchanged rederivation stage on the cut copies in `out`, checks uncaught cuts for leaks, and reports
+    the verdict. The baseline's chains for the uncut conditions are reused, so only the cut copies are read."""
+    c = load_controls()
+    by_id = {s["id"]: s for s in ae.load("dev", list(c["cuts"]))[1]}
+    records = finished_cuts(out, c["cuts"])
+    passing = [sid for sid in c["cuts"] if records[sid]["verdict"] == "pass"]
+    dropped = [sid for sid in c["cuts"] if records[sid]["verdict"] == "fail"]
+    for k in range(1, PASSES + 1):
+        for sid in passing:
+            for cond in UNCUT:
+                rel = Path("rederive") / f"pass-{k}" / "read" / sid / f"{cond}.json"
+                if not (out / rel).exists():
+                    (out / rel).parent.mkdir(parents=True, exist_ok=True)
+                    shutil.copyfile(c["baseline"] / rel, out / rel)
+    if passing:   # an empty `only` would mean every subject
+        rederive.run(out, out, split="dev", only=passing, model=model, reader_model=reader_model, workers=workers,
+                     passes=PASSES)
+    detail, caught_by, lost_by, leaked = {}, {}, {}, []
+    for sid in passing:
+        spec, steps = c["cuts"][sid], by_id[sid]["rederive"]["steps"]
+        kinds = [s["kind"] for s in steps]
+        grades = [json.loads((out / "rederive" / f"pass-{k}" / "grades" / f"{sid}.json").read_text())["grades"][CUT]
+                  for k in range(1, PASSES + 1)]
+        intact = [json.loads((c["baseline"] / "rederive" / f"pass-{k}" / "grades" / f"{sid}.json").read_text())
+                  ["grades"][c["condition"]] for k in range(1, PASSES + 1)]
+        raws = [g.get("raw") for g in grades]
+        caught_by[sid] = caught(raws, spec["cut"])
+        lost_by[sid] = sum(not kept(raws, i) for i in spec["clean"])
+        leaks = {}
+        if not caught_by[sid]:
+            for k, raw in enumerate(raws, 1):
+                if mark_at(raw, spec["cut"]) not in ("unsupported", "missing"):
+                    leaks[k] = leak_checked(out, sid, k, steps[spec["cut"] - 1]["text"], model)
+            if any(r["confirmed"] for r in leaks.values()):
+                leaked.append(sid)
+        chains = [json.loads((out / "rederive" / f"pass-{k}" / "read" / sid / f"{CUT}.json").read_text())
+                  for k in range(1, PASSES + 1)]
+
+        def share(g: dict) -> str:
+            t = rederive.tally(g["marks"], kinds, g.get("result_right") is True, g.get("result_stated") is True)
+            return f"{t['supported']}/{t['counted']}"
+
+        detail[sid] = {
+            "cut": spec["cut"], "clean": spec["clean"], "kinds": kinds, "caught": caught_by[sid],
+            "clean_lost": lost_by[sid], "intact_marks": [g["marks"] for g in intact], "cut_raw": raws,
+            "no_mark_passes": [k for k, raw in enumerate(raws, 1) if mark_at(raw, spec["cut"]) is None],
+            "supported_intact": [share(g) for g in intact], "supported_cut": [share(g) for g in grades],
+            "gap": [bool(ch.get("gap")) for ch in chains], "leaks": {str(k): v for k, v in leaks.items()}}
+    v = verdict(caught_by, lost_by, dropped, leaked, c["bar"])
+    result = {**v, "bar": c["bar"], "dropped": dropped, "leaked": leaked, "left_out": c["left_out"],
+              "subjects": detail}
+    (out / "controls.json").write_text(json.dumps(result, indent=2, ensure_ascii=False) + "\n")
+    report = out / "controls.md"
+    report.write_text(summary(result, c))
+    return report
+
+
+SHORT = {"supported": "s", "unsupported": "u", "missing": "m", "stated": "t"}
+
+
+def summary(result: dict, c: dict) -> str:
+    def marks_at(per_pass: list[object], i: int) -> str:
+        return ", ".join(SHORT.get(mark_at(m, i) or "", "–") for m in per_pass)
+
+    bar = result["bar"]
+    lines = [
+        f"# Rederivation controls, {date.today().isoformat()} (PRD-002a)", "",
+        f"Source builds: `{named(c['source'])}`. Baseline: `{named(c['baseline'])}`. Each subject's "
+        f"`{c['condition']}` explanation had one building block cut (`{CUT}` here); the reader read only the cut "
+        "copy, the baseline's chains for the other three conditions were reused, and the grader graded all four "
+        "fresh, blind, in three passes.", "",
+        f"**Verdict: {result['verdict']}.** Caught in {result['caught']} of {len(result['counted'])} counted subjects "
+        f"(needs {result['need']}); clean-set blocks lost: {result['clean_losses']} (at most {bar['clean_losses']}); "
+        f"subjects counted: {len(result['counted'])} (at least {bar['min_counted']}). Counting every leaked cut as a "
+        f"miss instead: {result['without_leak_exclusions']}.", "",
+        "Marks per pass (the grader's own marks): s supported, u unsupported, m missing, t stated, – none given. "
+        "Caught: the cut block is u or m in all three passes.", "",
+        "| subject | cut block | intact (baseline) | cut | caught | uncut blocks | derived, intact → cut | "
+        "supported, intact → cut | gap named | leak check |",
+        "|---|---|---|---|---|---|---|---|---|---|",
+    ]
+    for sid, d in result["subjects"].items():
+        blocks = [i for i, kd in enumerate(d["kinds"], 1) if kd == "block" and i != d["cut"]]
+        derived = [i for i, kd in enumerate(d["kinds"], 1) if kd == "derived"]
+        found = {(True, True): "leak, confirmed", (True, False): "leak, quote not found"}
+        leak = "; ".join(f"pass {k}: {found.get((r['leak'], r['confirmed']), 'no leak')}"
+                         for k, r in d["leaks"].items()) or "–"
+        lines.append("| " + " | ".join([
+            sid, str(d["cut"]), marks_at(d["intact_marks"], d["cut"]), marks_at(d["cut_raw"], d["cut"]),
+            "yes" if d["caught"] else "no",
+            "; ".join(f"{i}: {marks_at(d['cut_raw'], i)}" for i in blocks) or "–",
+            "; ".join(f"{i}: {marks_at(d['intact_marks'], i)} → {marks_at(d['cut_raw'], i)}" for i in derived),
+            f"{', '.join(d['supported_intact'])} → {', '.join(d['supported_cut'])}",
+            ", ".join("yes" if g else "no" for g in d["gap"]), leak]) + " |")
+    no_mark = [f"{sid} (pass {', '.join(map(str, d['no_mark_passes']))})"
+               for sid, d in result["subjects"].items() if d["no_mark_passes"]]
+    lines += [
+        "",
+        "Intact marks are the baseline's recorded marks, in which `stated` on a block had already been turned into "
+        "`supported`; the cut copy's are the grader's own.",
+        "",
+        f"Passes with no grader mark for the cut block (counted as not caught): {', '.join(no_mark) or 'none'}.",
+        "",
+        "Labels: the stage shuffles labels once per subject from one generator per pass, and this run covers fewer "
+        "subjects than the baseline, so each subject's label shuffle differs from its baseline pass.",
+        "",
+        f"Dropped (the cut failed its check {MAX_ATTEMPTS} times): {', '.join(result['dropped']) or 'none'}.",
+        f"Leaked (a confirmed passage still carries the cut block): {', '.join(result['leaked']) or 'none'}.",
+        "",
+        "## Left out",
+        "",
+        *[f"- **{sid}.** {why}" for sid, why in result["left_out"].items()],
+    ]
+    return "\n".join(lines) + "\n"

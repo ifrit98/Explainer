@@ -47,7 +47,7 @@ def tree(root):
     return {str(p.relative_to(root)): hashlib.sha256(p.read_bytes()).hexdigest() for p in root.rglob("*") if p.is_file()}
 
 
-def project(monkeypatch, tmp_path, cuts=None):
+def project(monkeypatch, tmp_path, cuts=None, bar=None, left_out=None):
     """A project in tmp_path: questions.yaml, controls.yaml, and a source run with all four conditions."""
     cuts = cuts or {"s1": {"cut": 2, "clean": [1]}, "s2": {"cut": 1, "clean": []}}
     spec = {"reader": "A reader.", "subjects": [
@@ -63,8 +63,8 @@ def project(monkeypatch, tmp_path, cuts=None):
             (src / "work" / sid / cond / "run.json").write_text("{}")
     (src / "conditions.json").write_text(json.dumps({c: c for c in CONDS}))
     (tmp_path / "controls.yaml").write_text(yaml.safe_dump({
-        "source": "src", "baseline": "baseline", "condition": "principles", "cuts": cuts, "left_out": {},
-        "bar": {"catch": 0.8, "min_counted": 5, "clean_losses": 1}}))
+        "source": "src", "baseline": "baseline", "condition": "principles", "cuts": cuts, "left_out": left_out or {},
+        "bar": bar or {"catch": 0.8, "min_counted": 5, "clean_losses": 1}}))
     monkeypatch.setattr(controls, "project_root", lambda: tmp_path)
     monkeypatch.setattr(controls, "controls_file", lambda: tmp_path / "controls.yaml")
     monkeypatch.setattr(ae, "questions_file", lambda: tmp_path / "questions.yaml")
@@ -277,3 +277,174 @@ def test_leak_exclusion_stands_when_not_decisive():
 def test_clean_losses_of_uncounted_subjects_are_ignored():
     assert controls.verdict(six(6), {"s0": 2}, ["s0"], [], BAR)["verdict"] == "trusted"
     assert controls.verdict(six(5), {"s5": 2}, [], ["s5"], BAR)["verdict"] == "trusted"
+
+
+
+# ---------------------------------------------------------------- the controls run
+
+CHAIN = {"steps": [{"step": "The Moon stretches.", "part": "Section 'Tides'", "idea": "stretching"}],
+         "result": "Neap tides.", "gap": ""}
+CUT_TEXT = controls.apply_edits(TEXT, GOOD["edits"])
+SMALL = {"catch": 0.5, "min_counted": 1, "clean_losses": 1}
+CAUGHT = {"s1": ["supported", "missing", "supported"], "s2": ["unsupported", "supported", "supported"]}
+
+
+def baseline_folder(tmp_path, sids=("s1", "s2")):
+    stage = tmp_path / "baseline" / "rederive"
+    for k in (1, 2, 3):
+        for sid in sids:
+            for cond in CONDS:
+                f = stage / f"pass-{k}" / "read" / sid / f"{cond}.json"
+                f.parent.mkdir(parents=True, exist_ok=True)
+                f.write_text(json.dumps({**CHAIN, "result": f"{cond} pass {k}"}))
+            g = stage / f"pass-{k}" / "grades" / f"{sid}.json"
+            g.parent.mkdir(parents=True, exist_ok=True)
+            g.write_text(json.dumps({"key": {}, "grades": {c: {"marks": ["supported"] * 3, "result_right": True,
+                                                                "result_stated": False} for c in CONDS}}))
+    return tmp_path / "baseline"
+
+
+class Stage:
+    """agent.ask for the controls run: the reader must see the cut copy; the grader gives every label the marks set
+    for (subject, pass); the leak checker gives one reply."""
+
+    def __init__(self, marks=None, leak=None):
+        self.marks, self.leak = marks or {}, leak or {"leak": False, "quote": ""}
+        self.calls, self.prompts, self.graded = [], [], {}
+
+    def __call__(self, system, prompt, model=None, read=None, **kw):
+        self.calls.append(system)
+        self.prompts.append(prompt)
+        if system == ae.READER_SYSTEM:
+            texts = [f.read_text() for d in read for f in Path(d).rglob("*") if f.is_file()]
+            assert texts == [CUT_TEXT]
+            return json.dumps(CHAIN)
+        if system == ae.GRADER_SYSTEM:
+            sid = "s1" if "Question s1?" in prompt else "s2"
+            k = self.graded[sid] = self.graded.get(sid, 0) + 1
+            m = self.marks.get((sid, k), CAUGHT[sid])
+            return json.dumps({"grades": {lab: {"marks": m, "result_right": True, "result_stated": False}
+                                          for lab in "ABCD"}})
+        assert system == controls.LEAK_SYSTEM
+        return json.dumps(self.leak)
+
+    def count(self, system):
+        return self.calls.count(system)
+
+
+def cut_folder(monkeypatch, tmp_path, **kw):
+    src = project(monkeypatch, tmp_path, bar=SMALL, left_out={"s9": "Its question gives the block away."}, **kw)
+    base, out = baseline_folder(tmp_path), tmp_path / "out"
+    monkeypatch.setattr(agent, "ask", Agent())
+    controls.make_cuts(out)
+    return src, base, out
+
+
+def outputs(out):
+    return {str(f.relative_to(out)): f.read_text() for f in out.rglob("*") if f.is_file() and f.suffix in (".json", ".md")}
+
+
+def test_controls_end_to_end(monkeypatch, tmp_path):
+    src, base, out = cut_folder(monkeypatch, tmp_path)
+    stage = Stage()
+    monkeypatch.setattr(agent, "ask", stage)
+    report = controls.run(out, workers=1)
+    assert report == out / "controls.md"
+    assert stage.count(ae.READER_SYSTEM) == 6 and stage.count(ae.GRADER_SYSTEM) == 6
+    for k in (1, 2, 3):
+        for cond in ("none", "quick", "published"):
+            rel = Path("rederive") / f"pass-{k}" / "read" / "s1" / f"{cond}.json"
+            assert (out / rel).read_text() == (base / rel).read_text()
+    result = json.loads((out / "controls.json").read_text())
+    expected = controls.verdict({"s1": True, "s2": True}, {"s1": 0, "s2": 0}, [], [], SMALL)
+    assert {k: result[k] for k in expected} == expected and result["verdict"] == "trusted"
+    md = report.read_text()
+    assert "s9" in md and "Its question gives the block away." in md and "trusted" in md
+    assert "shuffle" in md
+    assert all("principles-cut" not in p for p in stage.prompts)
+    for name, text in outputs(out).items():
+        assert str(tmp_path) not in text and str(Path.home()) not in text, name
+
+
+def test_run_refuses_unfinished_cuts(monkeypatch, tmp_path):
+    _, _, out = cut_folder(monkeypatch, tmp_path)
+    (out / "cuts" / "s2.json").unlink()
+    with pytest.raises(SystemExit, match="s2"):
+        controls.run(out)
+    r = json.loads((out / "cuts" / "s1.json").read_text())
+    (out / "cuts" / "s1.json").write_text(json.dumps({**r, "verdict": "pending"}))
+    with pytest.raises(SystemExit, match="s1"):
+        controls.run(out)
+
+
+def test_run_refuses_a_changed_cut_copy(monkeypatch, tmp_path):     # Review Focus 2
+    _, _, out = cut_folder(monkeypatch, tmp_path)
+    copy = copy_of(out, "s1")
+    copy.write_text(copy.read_text() + "One more line.\n")
+    monkeypatch.setattr(agent, "ask", lambda *a, **k: pytest.fail("no calls before the cuts are checked"))
+    with pytest.raises(SystemExit, match="s1"):
+        controls.run(out)
+
+
+def test_leak_needs_a_quote_found_in_the_copy():
+    assert controls.quote_in("a  b\n c", "x a b c y")
+    assert not controls.quote_in("", "x a b c y") and not controls.quote_in("  ", "x a b c y")
+    assert not controls.quote_in("not there", "x a b c y")
+    p = controls.leak_prompt("The Sun is half.", CHAIN, "EXPLANATION TEXT")
+    assert "The Sun is half." in p and "EXPLANATION TEXT" in p and "Section 'Tides'" in p and '"quote"' in p
+
+
+def test_leak_check_runs_only_for_uncaught_passes(monkeypatch, tmp_path):
+    _, _, out = cut_folder(monkeypatch, tmp_path)
+    stage = Stage(marks={("s2", 2): ["supported", "supported", "supported"]},
+                  leak={"leak": True, "quote": "The Moon   stretches the oceans."})
+    monkeypatch.setattr(agent, "ask", stage)
+    controls.run(out, workers=1)
+    assert stage.count(controls.LEAK_SYSTEM) == 1
+    saved = json.loads((out / "controls" / "leaks" / "s2-pass-2.json").read_text())
+    assert saved["confirmed"] is True
+    result = json.loads((out / "controls.json").read_text())
+    assert result["leaked"] == ["s2"] and result["counted"] == ["s1"]
+
+
+def test_an_unconfirmed_leak_is_a_miss(monkeypatch, tmp_path):
+    _, _, out = cut_folder(monkeypatch, tmp_path)
+    stage = Stage(marks={("s2", 2): ["supported", "supported", "supported"]},
+                  leak={"leak": True, "quote": "a passage that is not in the copy"})
+    monkeypatch.setattr(agent, "ask", stage)
+    controls.run(out, workers=1)
+    result = json.loads((out / "controls.json").read_text())
+    assert result["leaked"] == [] and result["counted"] == ["s1", "s2"] and result["caught"] == 1
+
+
+def test_controls_rerun_makes_no_calls(monkeypatch, tmp_path):     # Review Focus 4
+    _, _, out = cut_folder(monkeypatch, tmp_path)
+    stage = Stage(marks={("s2", 1): ["supported", "supported", "supported"]})
+    monkeypatch.setattr(agent, "ask", stage)
+    controls.run(out, workers=1)
+    assert stage.count(controls.LEAK_SYSTEM) == 1
+    monkeypatch.setattr(agent, "ask", lambda *a, **k: pytest.fail("everything is saved"))
+    controls.run(out, workers=1)
+
+
+def test_baseline_and_source_are_untouched(monkeypatch, tmp_path):
+    src, base, out = cut_folder(monkeypatch, tmp_path)
+    before = (tree(src), tree(base))
+    monkeypatch.setattr(agent, "ask", Stage())
+    controls.run(out, workers=1)
+    assert (tree(src), tree(base)) == before
+
+
+def test_a_dropped_cut_is_not_run(monkeypatch, tmp_path):
+    project(monkeypatch, tmp_path, bar=SMALL)
+    baseline_folder(tmp_path)
+    out = tmp_path / "out"
+    monkeypatch.setattr(agent, "ask", Agent(checks=[{**PASS, "recoverable": True}] * 3))
+    controls.make_cuts(out, only=["s2"])
+    monkeypatch.setattr(agent, "ask", Agent())
+    controls.make_cuts(out, only=["s1"])
+    stage = Stage()
+    monkeypatch.setattr(agent, "ask", stage)
+    controls.run(out, workers=1)
+    result = json.loads((out / "controls.json").read_text())
+    assert result["dropped"] == ["s2"] and result["counted"] == ["s1"] and stage.count(ae.READER_SYSTEM) == 3
