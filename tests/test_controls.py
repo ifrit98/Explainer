@@ -103,13 +103,14 @@ def test_apply_edits_needs_each_old_exactly_once():
             controls.apply_edits("a a b", bad)
 
 
-def test_cut_prompt_names_the_block_and_what_stays():
+def test_cut_prompt_names_the_block_and_no_other_target_step():   # PRD Goal 1: the explanation and the block
     s = {"id": "s1", "q": "Why tides?", "rederive": {"q": "How big are neap tides?", "steps": STEPS, "result": "A third."}}
     spec = {"cut": 2, "clean": [1]}
     p = controls.cut_prompt(s, "A reader.", spec, TEXT)
-    assert STEPS[1]["text"] in p and STEPS[0]["text"] in p and "A reader." in p and "How big are neap tides?" in p
+    assert STEPS[1]["text"] in p and "A reader." in p and "How big are neap tides?" in p
     assert "word for word" in p and TEXT in p
-    assert "A third." not in p and STEPS[2]["text"] not in p
+    outside = p.replace(TEXT, "")   # the clean block is in the explanation, but the cutter must not be handed it
+    assert "A third." not in outside and STEPS[0]["text"] not in outside and STEPS[2]["text"] not in outside
     c = controls.cut_check_prompt(s, "A reader.", spec, "CUT COPY")
     assert "CUT COPY" in c and STEPS[0]["text"] in c and STEPS[1]["text"] in c and "How big are neap tides?" in c
     assert '"recoverable"' in c and '"marked"' in c and '"present"' in c
@@ -515,3 +516,14 @@ def test_uncut_builds_match_the_source():
             theirs = {f.relative_to(src): f.read_bytes() for f in ae.renderings(src, sid)}
             assert theirs and {f.relative_to(ours): f.read_bytes() for f in ae.renderings(ours, sid)} == theirs, \
                 (sid, cond)
+
+
+def test_cuts_are_refused_once_a_controls_run_used_them(monkeypatch, tmp_path):
+    _, _, out = cut_folder(monkeypatch, tmp_path)
+    monkeypatch.setattr(agent, "ask", Stage())
+    controls.run(out, workers=1)
+    before = copy_of(out, "s1").read_text()
+    monkeypatch.setattr(agent, "ask", lambda *a, **k: pytest.fail("the cuts are frozen once run"))
+    with pytest.raises(SystemExit, match="already run on these cuts"):
+        controls.make_cuts(out, only=["s1"], redo=True)
+    assert copy_of(out, "s1").read_text() == before

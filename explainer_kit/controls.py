@@ -69,8 +69,9 @@ def apply_edits(text: str, edits: list[dict]) -> str:
 
 
 def cut_prompt(subject: dict, reader: str, spec: dict, text: str) -> str:
+    """The cutter sees the explanation and the block (PRD-002a Goal 1), never another target step, which it could
+    paste into the copy for the reader to see."""
     steps = subject["rederive"]["steps"]
-    keep = [steps[i - 1]["text"] for i in spec["clean"]]
     return "\n".join([
         f"Here is an explanation written for this reader: {reader}",
         f"After reading it, the reader will be asked: {subject['rederive']['q']}",
@@ -81,7 +82,6 @@ def cut_prompt(subject: dict, reader: str, spec: dict, text: str) -> str:
         "a conclusion that gives it away. Keep everything else word for word; reword only where a removal breaks a "
         "sentence. Do not mark or mention any removal: the result must read as an explanation that never had the "
         "idea.",
-        *(["", "These ideas must stay in the explanation:", *[f"- {k}" for k in keep]] if keep else []),
         "",
         "=== Explanation ===",
         text,
@@ -203,6 +203,8 @@ def cut_subject(subject: dict, spec: dict, reader: str, c: dict, out: Path, redo
 def make_cuts(out: Path, only: list[str] | None = None, redo: bool = False, model: str | None = None) -> dict[str, dict]:
     """Cuts one block from each listed subject's principles explanation into `out`, with the uncut builds beside it.
     The source run is only read; a rerun continues pending cuts and skips finished ones, unless `redo`."""
+    if (out / "rederive").exists():   # its reads and grades were made from the cut copies as they are
+        raise SystemExit("eval controls has already run on these cuts; make new cuts in a new --out folder")
     c = load_controls()
     reader, subjects = ae.load("dev", list(c["cuts"]))
     out.mkdir(parents=True, exist_ok=True)
