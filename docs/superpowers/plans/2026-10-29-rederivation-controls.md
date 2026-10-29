@@ -19,6 +19,7 @@
 - The targets stay frozen. `test_targets_are_the_frozen_ones` and `test_frozen_targets_match_every_results_folder` pass unchanged.
 - No code change to the test: `explainer_kit/rederive.py` is not modified, and neither are its prompts, `OUTSIDE_RULE`, `marks`, or `tally`.
 - Neither the reader nor the grader is told that any build was cut. The cut copy is a plain `explanation.md`: no marker, and no note in any file the reader is shown.
+- In the controls folder the cut copy's condition is named `principles-cut`, in the `principles` slot of `conditions.json`, so no report there shows a cut copy as `principles`. The name only reaches paths and result keys: `read_chain` copies files to a temp `explanation/` folder, and the grader sees only labels.
 - Every stage saves its output, and a rerun skips what exists.
 - Tests run offline, without the `claude` CLI.
 - The reader, grader, cutter, and checkers use the `claude` CLI's default model. Three passes.
@@ -111,7 +112,7 @@ def test_the_bar_is_the_prds():
   - `ae.load`, `ae.renderings`;
   - `agent.ask(system, prompt, model=None)` and `agent.parse_json`.
 - Produces:
-  - `MAX_ATTEMPTS = 3`.
+  - `MAX_ATTEMPTS = 3`, and `CUT = "principles-cut"` (the condition name in the controls folder).
   - `CUTTER_SYSTEM` and `CHECKER_SYSTEM` strings.
   - `apply_edits(text: str, edits: list[dict]) -> str`. Raises `ValueError` when `edits` is empty, or when an `old` is not found exactly once. Applies the edits in order, then collapses 3+ newlines to 2.
   - `cut_prompt(subject: dict, reader: str, spec: dict, text: str) -> str`.
@@ -131,8 +132,8 @@ def test_the_bar_is_the_prds():
     ```
 
   - `out/cuts/<id>.diff`, a unified diff labelled `principles/explanation.md` and `principles/explanation.md (cut)`;
-  - `out/work/<id>/<cond>/…`;
-  - `out/conditions.json`, with the same mapping and order as the source run.
+  - `out/work/<id>/<cond>/…`, with the cut copy under `out/work/<id>/principles-cut/`;
+  - `out/conditions.json`: `{"none": "none", "principles-cut": "principles, one block cut (PRD-002a)", "quick": "quick", "published": "published"}`, in that order.
 
 **Prompt content (wording left to the implementer):**
 - **The cutter** sees the reader line, the target question, the block to cut (its text), the clean blocks (their text, "keep these"), and the explanation. It is told to:
@@ -156,7 +157,7 @@ def test_the_bar_is_the_prds():
   - copy the files `ae.renderings` returns for `none`, `quick`, and `published` into `out/work/<id>/<cond>/`, keeping their paths relative to the source condition folder;
   - require exactly one `principles` rendering, and raise `SystemExit` otherwise;
   - try at most `MAX_ATTEMPTS` attempts in total, counting earlier ones;
-  - an attempt whose edits don't apply records the `error` and counts as failed.
+  - a cutter reply whose edits don't apply (`apply_edits` raises) is asked once more within the same attempt, as `grade_subject` does for a reply that doesn't fit. No cut was made, so it is not a redo. The attempt fails, with its `error` recorded, only if the second reply doesn't apply either.
 - **The record is saved after every attempt.** It holds `verdict: pending` while attempts remain without a pass, so a crashed run resumes.
 - **On a pass:** write the cut copy at the source's relative path, the diff, and `verdict: pass` with its hash, then stop.
 - **After the last failed attempt:** `verdict: fail`, and remove any cut copy for that subject.
@@ -175,12 +176,14 @@ def test_apply_edits_needs_each_old_exactly_once():
 def test_cut_prompt_names_the_block_and_what_stays(): ...   # cut block text, clean block texts, reader, question,
                                                            # "word for word" in prompt; target result not in prompt
 def test_make_cuts_writes_copy_diff_and_record(monkeypatch, tmp_path): ...
-    # copy == apply_edits(original, edits); diff file names no tmp path; record verdict "pass", 1 attempt, hash matches
-    # copy; none/quick/published renderings byte-identical to source; conditions.json equals source's; source tree hash
-    # unchanged
+    # copy (under principles-cut/) == apply_edits(original, edits); diff file names no tmp path; record verdict "pass",
+    # 1 attempt, hash matches copy; none/quick/published renderings byte-identical to source; conditions.json as above;
+    # source tree hash unchanged
 def test_a_failed_check_is_redone_then_dropped(monkeypatch, tmp_path): ...
     # checker says recoverable three times -> 3 attempts, verdict "fail", no principles copy in out/work
-def test_edits_that_do_not_apply_are_a_failed_attempt(monkeypatch, tmp_path): ...
+def test_edits_that_do_not_apply_are_asked_again_within_the_attempt(monkeypatch, tmp_path): ...
+    # first cutter reply's old text absent, second applies -> 1 attempt, 2 cutter calls, verdict "pass";
+    # both replies bad -> the attempt fails with its error recorded, and attempt 2 is made
 def test_a_marked_copy_fails_its_check(monkeypatch, tmp_path): ...     # marked=True -> attempt 2 is made
 def test_a_missing_clean_block_fails_its_check(monkeypatch, tmp_path): ...  # present={"1": False} -> attempt 2
 def test_rerun_skips_passing_cuts_and_redo_makes_one_more(monkeypatch, tmp_path): ...
@@ -278,17 +281,19 @@ def test_clean_losses_of_uncounted_subjects_are_ignored(): ...
    - a passing record's hash differs from its copy on disk.
 2. **Copy in the baseline's reads.** For k in 1–3, each passing subject, and each condition in (`none`, `quick`, `published`): copy `baseline/rederive/pass-k/read/<id>/<cond>.json` to the same place under `out`, unless it already exists.
 3. **Run the stage:** `rederive.run(out, out, split="dev", only=<passing ids>, model=model, reader_model=reader_model, workers=workers, passes=3)`.
-4. **For each passing subject,** read `raw = grades["principles"]["raw"]` from each pass, then:
+4. **For each passing subject,** read `raw = grades["principles-cut"]["raw"]` from each pass, then:
    - `caught_by[sid] = caught(raws, cut)`;
    - `lost_by[sid]` = the number of clean `i` with `not kept(raws, i)`.
 5. **Leak check,** for each subject that was not caught. For each pass k whose raw mark is not `unsupported` or `missing`:
-   - ask `LEAK_SYSTEM` with `leak_prompt(cut block text, out/rederive/pass-k/read/<id>/principles.json, the cut copy's text)`;
+   - ask `LEAK_SYSTEM` with `leak_prompt(cut block text, out/rederive/pass-k/read/<id>/principles-cut.json, the cut copy's text)`;
    - `confirmed = reply["leak"] is True and quote_in(reply["quote"], copy text)`;
    - save the result, and skip the call if the file already exists;
    - the subject is leaked if any pass is confirmed.
 6. **Compute the verdict.** `verdict(caught_by, lost_by, dropped=<fail ids>, leaked=…, bar)`.
 7. **Write `controls.md`.** It covers:
    - per subject: the cut block number; the intact marks from the baseline grades (`marks`, per pass); the cut raw marks per pass; caught or not; the uncut blocks' raw marks; the derived steps' marks, intact and cut; the supported share, intact and cut, from `tally` on normalised marks; whether the reader named a gap (`chain["gap"]` non-empty, per pass); the leak result where one ran;
+   - any pass with no grader mark for the cut block (it counts as not caught), flagged so a reader sees whether a verdict rests on one;
+   - that each subject's label shuffle differs from its baseline pass, since `rederive.run` shuffles once per subject from one `random.Random(k)` and this run covers six subjects, not ten;
    - the dropped subjects;
    - the left-out subjects with their reasons;
    - the verdict both ways, and the counts against the bar.
@@ -302,7 +307,7 @@ def test_controls_end_to_end(monkeypatch, tmp_path): ...
     # reader calls: exactly 3 x len(passing), all for the cut copy (the stub reads the files in its `read` folder and
     # finds the cut copy's text in every reader call); grader calls: 3 x len(passing); baseline reads for none/quick/published copied unchanged;
     # controls.json verdict matches verdict() on the stubbed marks; controls.md names every left-out subject and both
-    # verdicts; no str(tmp_path) or str(Path.home()) in any output
+    # verdicts; no reader or grader prompt contains "principles-cut"; no str(tmp_path) or str(Path.home()) in any output
 def test_run_refuses_unfinished_cuts(monkeypatch, tmp_path): ...
 def test_run_refuses_a_changed_cut_copy(monkeypatch, tmp_path): ...      # Review Focus 2
 def test_leak_needs_a_quote_found_in_the_copy(): ...
@@ -352,7 +357,7 @@ def test_baseline_and_source_are_untouched(monkeypatch, tmp_path): ...   # tree 
 
   For a cut that removed more, run `uv run explainer eval cuts --only <id> --redo` once it has attempts left. Ledger each judgment as `Task 6: Ruling: <id> diff <accepted|redone> — <why> — <cost if wrong>`.
 - [ ] **Step 3: Check the folder for the floor.** If fewer than 5 subjects pass, the result will be inconclusive whatever the run shows. Ledger that, and continue: the PRD runs and reports it anyway.
-- [ ] **Step 4: Add the pin test,** then run `uv run pytest -q`. Expected: all pass.
+- [ ] **Step 4: Add the pin test, and a test that the uncut builds match on the real data,** then run `uv run pytest -q`. Expected: all pass. The second test is `test_uncut_builds_match_the_source`: for each passing subject and each of `none`, `quick`, `published`, `ae.renderings` on the controls folder returns the same paths (relative to the condition folder) and bytes as on the source. Heat-pump's `published` build relies on the rglob fallback.
 
 ```python
 CONTROLS = ROOT / "evals" / "artifact" / "results" / "<date>-dev-controls"
@@ -382,6 +387,7 @@ def test_cuts_are_the_frozen_ones():
   - the bar;
   - the verdict both ways, and the per-subject catches;
   - what the derived-step marks show;
+  - that the label shuffles differ from the baseline's, an item missing from the PRD's list of differences;
   - the meaning, in the PRD's wording for the verdict reached. "Trusted" covers only targets with an eligible block;
   - that four of ten dev targets can't show a missing block, and that the test-split targets may share the problem.
 - [ ] **Step 4: Record it in two places.**
