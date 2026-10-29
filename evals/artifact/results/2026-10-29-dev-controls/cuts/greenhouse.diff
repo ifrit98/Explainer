@@ -1,0 +1,82 @@
+--- principles/explanation.md
++++ principles/explanation.md (cut)
+@@ -1,6 +1,6 @@
+ # How greenhouse gases warm the Earth
+ 
+-**Short answer.** Earth loses heat to space only as infrared light. Greenhouse gases absorb infrared light, so most of the infrared that reaches space comes from high in the atmosphere, not from the surface. High air is cold, and cold air emits less infrared. To send out as much energy as it gets from the Sun, the whole lower atmosphere and the surface must become warmer. More CO2 lifts the emitting altitude higher, into colder air, so the surface must warm more.
++**Short answer.** Earth loses heat to space only as infrared light. Greenhouse gases absorb infrared light. To send out as much energy as it gets from the Sun, the whole lower atmosphere and the surface must become warmer.
+ 
+ The sections below build this answer step by step, with numbers.
+ 
+@@ -60,41 +60,17 @@
+ 1. Real air does not absorb all infrared. Between about 8 and 13 µm, few gases absorb, and some surface emission escapes directly through this **window**.
+ 2. Warm surface air rises, so **convection** carries heat upward. Radiation is not the only path.
+ 
+-The one-layer model shows *that* absorption warms the surface. It cannot show why *more* CO2 warms it further. If the layer already absorbs everything, extra CO2 would change nothing. The next model fixes this.
++The one-layer model shows *that* absorption warms the surface. It cannot show why *more* CO2 warms it further. If the layer already absorbs everything, extra CO2 would change nothing.
+ 
+-## 5. The real mechanism: the emission level and the lapse rate
++## 5. The lapse rate
+ 
+-Two facts replace the single layer.
+-
+-**Fact 1: infrared escapes from a height, not from the surface.** An infrared photon emitted low in the air is soon absorbed again. A photon reaches space only if little absorbing gas lies above it. So, at each wavelength, the infrared that reaches space comes mostly from one altitude, the **emission level**. Averaged over all wavelengths, Earth's emission level is about **5 km** up.
+-
+-**Fact 2: air gets colder with height.** Rising air expands as pressure falls, and expansion cools it. Convection keeps mixing the lower atmosphere (the **troposphere**), so its temperature falls at a nearly fixed rate, the **lapse rate**. The mean lapse rate is about **6.5 K per km**.
+-
+-Combine them:
+-
+-```text
+- altitude                         temperature
+-   ~5 km  ─── emission level ───  255 K   → emits 238 W/m² to space
+-            │  air cools 6.5 K/km
+-            │  as you go up
+-   0 km   ─── surface ──────────  255 + 6.5 × 5 ≈ 288 K
+-```
+-
+-The emission level must be at 255 K, because it must emit 238 W/m². The surface sits 5 km lower, on the same temperature slope, so it is about 33 K warmer. This matches the measured 288 K.
++**Air gets colder with height.** Rising air expands as pressure falls, and expansion cools it. Convection keeps mixing the lower atmosphere (the **troposphere**), so its temperature falls at a nearly fixed rate, the **lapse rate**. The mean lapse rate is about **6.5 K per km**.
+ 
+ ## 6. Why adding CO2 warms the surface
+ 
+ *Predict: the centre of the CO2 band already absorbs almost all 15 µm light within the lowest few hundred metres. Does adding more CO2 still matter?*
+ 
+-It does. More CO2 means more absorbing gas above each altitude. So a photon must start higher before it can escape, and the emission level rises. The chain is:
+-
+-1. More CO2 → emission level rises.
+-2. Higher air is colder (lapse rate) → the emission level emits less (σT⁴).
+-3. Less energy leaves than arrives → the planet gains energy.
+-4. The troposphere and surface warm until the new, higher emission level reaches 255 K again.
+-5. The surface is now further below the emission level on the same slope → it is warmer.
+-
+-The imbalance in step 3 is the **radiative forcing**. A fit to detailed radiation calculations gives:
++It does. Less energy leaves than arrives, so the planet gains energy. This imbalance is the **radiative forcing**. A fit to detailed radiation calculations gives:
+ 
+   ΔF ≈ 5.35 × ln(C / C₀) W/m², where C is the CO2 concentration and C₀ the starting value.
+ 
+@@ -105,23 +81,16 @@
+ - Forcing: 5.35 × ln 2 ≈ **3.7 W/m²** less energy leaving.
+ - How much warming removes this? Differentiate P = σT⁴: dP/dT = 4σT³ = 4 × 5.67 × 10⁻⁸ × 255³ ≈ **3.8 W/m² per K**.
+ - Warming needed: 3.7 / 3.8 ≈ **1 K**, with nothing else changed. (Detailed calculations give about 1.2 K.)
+-- Equivalent rise of the emission level: 1 K / 6.5 K per km ≈ **150 m**.
+ 
+ **Feedbacks amplify this.** Warmer air holds about 7% more water vapour per K, and water vapour is a greenhouse gas, so warming adds more absorption. Ice loss and clouds also respond. Water vapour cannot start a warming by itself, because extra water condenses and rains out within days; its amount follows temperature. CO2 stays in the air for centuries, so CO2 sets the level and water vapour amplifies it. Including feedbacks, the warming for doubled CO2 is *estimated* at **2.5 to 4 K** (IPCC AR6 likely range).
+ 
+-## 7. When the mechanism does not warm: the stratosphere
++## 7. The stratosphere
+ 
+-The argument in section 6 needs one assumption: the emission level must be colder than the air below it. Remove that assumption and the result breaks.
+-
+-- **Holds (troposphere):** temperature falls 6.5 K per km. Raising the emission level by 150 m makes it about 1 K colder, so it emits less and the surface must warm.
+-- **Breaks (isothermal air):** if temperature were the same at all heights, raising the emission level would not change its temperature. Emission would not change, and there would be no warming.
+-- **Reverses (stratosphere):** above about 12 km, ozone absorbs sunlight and temperature *rises* with height. At the very centre of the CO2 band, the emission level is already in the stratosphere. Here, more CO2 raises the emission level into warmer air, and the stratosphere cools. Satellites observe this stratospheric cooling at the same time as surface warming. A brighter Sun would warm both, so this pattern points to greenhouse gases as the cause.
++Above about 12 km, ozone absorbs sunlight and temperature *rises* with height. Satellites observe stratospheric cooling at the same time as surface warming. A brighter Sun would warm both, so this pattern points to greenhouse gases as the cause.
+ 
+ ## 8. What the numbers mean
+ 
+ - **238 W/m²** — the energy Earth must shed. It is fixed by sunlight and reflectivity, not by greenhouse gases.
+-- **255 K** — the temperature of the layer that sheds it. Greenhouse gases decide *where* that layer is, not its temperature.
+-- **5 km** — the emission height. Near 0 km, there would be almost no greenhouse effect (surface near 255 K). At 10 km, with the same lapse rate, the surface would be near 320 K.
+ - **3.7 W/m²** — about 1.5% of 238 W/m². A small change in the energy balance, held for decades, is enough to warm the surface by several kelvin.
+ 
+ **Not covered here:** cloud effects in detail, how fast the oceans take up heat (the delay between forcing and warming), and the carbon cycle that sets CO2 levels. A glass greenhouse also works differently: it warms mostly because the glass stops convection, not because of infrared absorption.

@@ -1,0 +1,30 @@
+{
+  "subject": "two-tides",
+  "cut": 2,
+  "clean": [
+    1
+  ],
+  "verdict": "pass",
+  "attempts": [
+    {
+      "edits": [
+        {
+          "old": "The Sun produces tidal bulges by the same mechanism. Its pull is much stronger than the Moon's, but tides depend on the *difference* across the Earth, which goes as M/d³. For the Sun, the result is about 46% of the Moon's effect. When the Sun and Moon line up (new and full moon), their bulges add: large **spring tides**. When they are at 90° (quarter moons), they partly cancel: small **neap tides**.",
+          "new": "The Sun produces tidal bulges by the same mechanism. It stretches the oceans along the Earth–Sun line, raising water at both ends of that line and lowering it in between."
+        }
+      ],
+      "error": "",
+      "check": {
+        "recoverable": false,
+        "quote": "",
+        "present": {
+          "1": true
+        },
+        "marked": false,
+        "reason": "Block 1 is still present. The Sun section says the Sun 'stretches the oceans along the Earth–Sun line, raising water at both ends of that line and lowering it in between,' and the Moon's two-bulge mechanism is explained in full. Block 2 is gone: the explanation never gives the Sun's tidal strength relative to the Moon's (about half), and never says the two effects add at new and full Moon. The 2GMR/d³ formula could in principle give the ratio, but the explanation provides no values for the Sun, and a reader new to the subject would not know them. The question names spring tides but does not give the ratio either, so the reader cannot recover the block. Nothing shows a removal: the Sun section reads as complete, with no marker, note or dangling reference."
+      },
+      "passed": true
+    }
+  ],
+  "hash": "7815e36c123a96e9"
+}

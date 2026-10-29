@@ -1,0 +1,11 @@
+--- principles/explanation.md
++++ principles/explanation.md (cut)
+@@ -70,7 +70,7 @@
+ 
+ ## The Sun does the same thing
+ 
+-The Sun produces tidal bulges by the same mechanism. Its pull is much stronger than the Moon's, but tides depend on the *difference* across the Earth, which goes as M/d³. For the Sun, the result is about 46% of the Moon's effect. When the Sun and Moon line up (new and full moon), their bulges add: large **spring tides**. When they are at 90° (quarter moons), they partly cancel: small **neap tides**.
++The Sun produces tidal bulges by the same mechanism. It stretches the oceans along the Earth–Sun line, raising water at both ends of that line and lowering it in between.
+ 
+ ## What this model leaves out
+ 

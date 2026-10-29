@@ -1,0 +1,30 @@
+--- principles/explanation.md
++++ principles/explanation.md (cut)
+@@ -60,23 +60,16 @@
+ 
+ Moving heat from cold to hot costs work, and the cost grows with the **temperature lift**: the gap between the temperature where the fluid condenses and where it boils.
+ 
+-The second law sets the limit. Heat *Q* leaving or entering a body at absolute temperature *T* carries an amount of entropy *Q/T*, and total entropy cannot decrease (established fact). So the entropy dumped inside must be at least the entropy taken from outside:
+-
+-```
+-Q_H / T_H  ≥  Q_C / T_C        and  W = Q_H − Q_C
+-⇒  COP = Q_H / W  ≤  T_H / (T_H − T_C)        (temperatures in kelvin)
+-```
+-
+-The bound has lift in the denominator. A small lift gives a high possible COP; a large lift gives a low one.
++The second law sets the limit, and the limit depends on the lift. A small lift gives a high possible COP; a large lift gives a low one.
+ 
+ | Case | Fluid boils | Fluid condenses | Lift | Ideal COP | Typical real COP (estimate, ~47% of ideal) |
+ |---|---|---|---|---|---|
+-| Mild day, air 5 °C | −5 °C (268 K) | 45 °C (318 K) | 50 K | 318/50 = 6.4 | ~3.0 |
+-| Cold day, air −15 °C | −25 °C (248 K) | 45 °C (318 K) | 70 K | 318/70 = 4.5 | ~2.1 |
++| Mild day, air 5 °C | −5 °C (268 K) | 45 °C (318 K) | 50 K | 6.4 | ~3.0 |
++| Cold day, air −15 °C | −25 °C (248 K) | 45 °C (318 K) | 70 K | 4.5 | ~2.1 |
+ 
+ Note that the lift the machine must do is larger than the gap between the air and the heating water. The fluid must be about 10 K colder than the air and about 10 K hotter than the water, so heat flows at a useful rate in both coils. Real machines also lose energy to friction, motor heat, and imperfect compression. That is why they reach only about half the ideal value.
+ 
+-**Predict:** what happens to the COP if the house uses underfloor heating, so the fluid only needs to condense at 35 °C instead of 45 °C? *(The lift falls to 40 K, the ideal COP rises to 308/40 = 7.7, and the real COP rises to about 3.6. This is why heat pumps work best with large, low-temperature radiators or floors.)*
++**Predict:** what happens to the COP if the house uses underfloor heating, so the fluid only needs to condense at 35 °C instead of 45 °C? *(The lift falls to 40 K, the ideal COP rises, and the real COP rises to about 3.6. This is why heat pumps work best with large, low-temperature radiators or floors.)*
+ 
+ ## Summary
+ 

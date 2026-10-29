@@ -482,3 +482,36 @@ def test_cli_cuts_and_controls_call_the_module(monkeypatch, tmp_path, capsys):
     monkeypatch.setattr(sys, "argv", ["explainer", "eval", "controls"])
     with pytest.raises(SystemExit, match="needs --out"):
         cli.main()
+
+
+# ---------------------------------------------------------------- the real cuts, frozen before the controls run
+
+ROOT = Path(__file__).resolve().parent.parent
+CONTROLS = ROOT / "evals" / "artifact" / "results" / "2026-10-29-dev-controls"
+FROZEN_CUTS = "f634b324da00c71c"   # controls.yaml plus every cut record and copy, as frozen before the controls run
+
+
+def frozen_digest() -> str:
+    h = hashlib.sha256(controls.controls_file().read_bytes())
+    for sid in sorted(controls.load_controls()["cuts"]):
+        rec = json.loads((CONTROLS / "cuts" / f"{sid}.json").read_text())
+        copy = controls.cut_copy(CONTROLS, sid)
+        h.update(f"{sid}\0{rec['verdict']}\0{rec.get('hash', '')}\0".encode())
+        h.update(copy.read_bytes() if copy else b"")
+    return h.hexdigest()[:16]
+
+
+def test_cuts_are_the_frozen_ones():
+    assert frozen_digest() == FROZEN_CUTS, "a cut changed after the freeze"
+
+
+def test_uncut_builds_match_the_source():
+    c = controls.load_controls()
+    for sid in c["cuts"]:
+        if json.loads((CONTROLS / "cuts" / f"{sid}.json").read_text())["verdict"] != "pass":
+            continue
+        for cond in controls.UNCUT:
+            src, ours = c["source"] / "work" / sid / cond, CONTROLS / "work" / sid / cond
+            theirs = {f.relative_to(src): f.read_bytes() for f in ae.renderings(src, sid)}
+            assert theirs and {f.relative_to(ours): f.read_bytes() for f in ae.renderings(ours, sid)} == theirs, \
+                (sid, cond)
