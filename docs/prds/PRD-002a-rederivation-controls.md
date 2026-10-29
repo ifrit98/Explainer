@@ -1,6 +1,6 @@
 # PRD-002a: Does the rederivation test catch a missing block?
 
-Status: draft, 2026-10-24 · Amends PRD-002, before PRD-003 (Olah-compass principles)
+Status: approved, 2026-10-29 · Amends PRD-002, before PRD-003 (Olah-compass principles)
 
 ## Why
 
