@@ -1,0 +1,31 @@
+{
+  "steps": [
+    {
+      "step": "Earth sheds heat to space only as infrared. To stay in balance it must send out 238 W/m², so the place that emits to space must have an effective temperature of 255 K.",
+      "part": "Section 1 (The puzzle: Earth is 33 K too warm) and the Short answer",
+      "idea": "Absorbed sunlight (238 W/m²) must equal emitted σT⁴, which gives 255 K."
+    },
+    {
+      "step": "Greenhouse gases absorb infrared and emit it again at a rate set by their own temperature.",
+      "part": "Section 3, last paragraph",
+      "idea": "A gas that absorbs at a wavelength also emits at that wavelength, at a rate set by its temperature, in all directions."
+    },
+    {
+      "step": "If the atmosphere already absorbs all infrared, more absorber adds nothing in the simple layer picture.",
+      "part": "Section 4, last paragraph",
+      "idea": "The one-layer model cannot show why more CO2 warms the surface. If the layer absorbs everything, extra CO2 would change nothing."
+    },
+    {
+      "step": "In the real atmosphere, air gets colder with height at about 6.5 K per km.",
+      "part": "Section 5 (The lapse rate)",
+      "idea": "Convection and the cooling of rising, expanding air make temperature fall with height. The question removes this by making the air the same temperature at every height."
+    },
+    {
+      "step": "Adding CO2 lowers the energy leaving Earth (radiative forcing, about 3.7 W/m² for doubled CO2), so the surface must warm.",
+      "part": "Section 6 (Why adding CO2 warms the surface)",
+      "idea": "Section 6 says that less energy leaves than arrives, and gives a fitted formula for how much. It never says why less leaves. In particular, it does not tie this to air getting colder with height."
+    }
+  ],
+  "result": "",
+  "gap": "The explanation never gives the step that links extra CO2 to less energy leaving. That step would be: extra CO2 makes the emission to space come from higher up, that higher air is colder because of the lapse rate, and so it emits less (σT⁴). Section 5 introduces the lapse rate but nothing uses it, and Section 6 states the forcing without a mechanism. So I can't tell from the explanation whether air at one temperature everywhere would still give a forcing. I'd guess no forcing and no surface warming, but that guess comes from my own knowledge, not from the text."
+}

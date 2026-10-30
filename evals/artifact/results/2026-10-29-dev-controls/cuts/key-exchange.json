@@ -1,0 +1,108 @@
+{
+  "subject": "key-exchange",
+  "cut": 3,
+  "clean": [
+    1,
+    2
+  ],
+  "verdict": "pass",
+  "attempts": [
+    {
+      "edits": [
+        {
+          "old": "Each person sends a *public value* made from their private number by an operation that is fast to do and very hard to undo.",
+          "new": "Each person sends a *public value* made from their private number."
+        },
+        {
+          "old": " To get the secret, she must undo the operation, and nobody knows a fast way to do that.",
+          "new": ""
+        },
+        {
+          "old": "## Why Eve cannot do the same\n\n",
+          "new": ""
+        },
+        {
+          "old": "To find the secret, Eve needs a or b. To get a, she must solve \"5 to what power, mod 23, gives 8?\" This is the **discrete logarithm problem**. Mod p, the powers of g jump around with no pattern that points back to the exponent:\n\n",
+          "new": ""
+        },
+        {
+          "old": "5¹ → 5, 5² → 2, 5³ → 10, 5⁴ → 4, 5⁵ → 20, 5⁶ → **8**, 5⁷ → 17, …\n\n",
+          "new": ""
+        },
+        {
+          "old": "With p = 23, Eve simply tries all 22 exponents and finds a = 6 in under a second. The defence is the size of p:\n\n",
+          "new": ""
+        },
+        {
+          "old": "- **Forward direction (Alice and Bob).** Repeated squaring computes g^a with about 2 multiplications per binary digit of a. For a 2048-bit a, that is about 4,000 multiplications. A laptop does this in milliseconds.\n",
+          "new": ""
+        },
+        {
+          "old": "- **Backward direction (Eve).** Trying every exponent takes about 2²⁰⁴⁸ steps. The best known algorithms do much better than that, but for a 2048-bit p they still need roughly 2¹¹² operations *(published estimate)*. At a billion billion (10¹⁸) operations per second, that is more than 100 million years.\n\n",
+          "new": ""
+        },
+        {
+          "old": "So the size of p sets the gap. A small p (like 23) gives Eve a few dozen tries. A 2048-bit p gives her more work than any computer can do.\n\n",
+          "new": ""
+        },
+        {
+          "old": "*Epistemic status:* nobody has proved that the discrete logarithm is hard. It is an **assumption** that has survived 50 years of attack. A large quantum computer running Shor's algorithm would break it; that is why newer \"post-quantum\" key exchanges exist.\n\n",
+          "new": ""
+        },
+        {
+          "old": "4. Eve must solve a discrete logarithm to copy this, which is infeasible for large p.\n5. Authenticate",
+          "new": "4. Authenticate"
+        }
+      ],
+      "error": "",
+      "check": {
+        "recoverable": true,
+        "quote": "Multiplication is easy to undo, so it fails. ... Use powers instead. Everything else stays the same. ... The method defeats Eve, who only reads.",
+        "present": {
+          "1": true,
+          "2": true
+        },
+        "marked": false,
+        "reason": "Block 3 is never stated: there is no mention of the discrete logarithm, of recovering the exponent from g^x mod p, or of p needing to be large. Still, the text sets up a clear contrast. Multiplication fails because Eve can undo it, the fix is to switch to powers, and the method then 'defeats Eve.' A reader could infer that exponentiation mod p is hard to undo, though not why, and not that this holds only for large p. Block 1 is present in the table and in Summary step 2–3 ('Each person keeps a private exponent... raises the other's public value to their own private exponent'). Block 2 is present in 'Why the two results are equal' ('Alice computes (g^b)^a. Bob computes (g^a)^b. Both equal g^(a×b), because the order of the exponents does not matter'). Nothing signals a removal: there is no marker or note, and no reference points to a missing passage. The 'Not covered here' list does not mention hardness."
+      },
+      "passed": false
+    },
+    {
+      "edits": [
+        {
+          "old": "Each person sends a *public value* made from their private number by an operation that is fast to do and very hard to undo.",
+          "new": "Each person sends a *public value* made from their private number."
+        },
+        {
+          "old": "Eve sees only the two public values. To get the secret, she must undo the operation, and nobody knows a fast way to do that. This method",
+          "new": "Eve sees only the two public values. This method"
+        },
+        {
+          "old": "Multiplication is easy to undo, so it fails.",
+          "new": "So multiplication fails."
+        },
+        {
+          "old": "## Why Eve cannot do the same\n\nTo find the secret, Eve needs a or b. To get a, she must solve \"5 to what power, mod 23, gives 8?\" This is the **discrete logarithm problem**. Mod p, the powers of g jump around with no pattern that points back to the exponent:\n\n5¹ → 5, 5² → 2, 5³ → 10, 5⁴ → 4, 5⁵ → 20, 5⁶ → **8**, 5⁷ → 17, …\n\nWith p = 23, Eve simply tries all 22 exponents and finds a = 6 in under a second. The defence is the size of p:\n\n- **Forward direction (Alice and Bob).** Repeated squaring computes g^a with about 2 multiplications per binary digit of a. For a 2048-bit a, that is about 4,000 multiplications. A laptop does this in milliseconds.\n- **Backward direction (Eve).** Trying every exponent takes about 2²⁰⁴⁸ steps. The best known algorithms do much better than that, but for a 2048-bit p they still need roughly 2¹¹² operations *(published estimate)*. At a billion billion (10¹⁸) operations per second, that is more than 100 million years.\n\nSo the size of p sets the gap. A small p (like 23) gives Eve a few dozen tries. A 2048-bit p gives her more work than any computer can do.\n\n*Epistemic status:* nobody has proved that the discrete logarithm is hard. It is an **assumption** that has survived 50 years of attack. A large quantum computer running Shor's algorithm would break it; that is why newer \"post-quantum\" key exchanges exist.\n\n",
+          "new": ""
+        },
+        {
+          "old": "4. Eve must solve a discrete logarithm to copy this, which is infeasible for large p.\n5. Authenticate",
+          "new": "4. Authenticate"
+        }
+      ],
+      "error": "",
+      "check": {
+        "recoverable": false,
+        "quote": "",
+        "present": {
+          "1": true,
+          "2": true
+        },
+        "marked": false,
+        "reason": "Block 3, that recovering an exponent from g^x mod p is infeasible for large p, is not stated anywhere. The multiplication section shows Eve undoing the hiding quickly, and the exponentiation section switches to powers. But it never says that powers cannot be undone the same way. It only lists what Eve saw and did not see ('She never saw 6, 15 or 2'). That describes the channel, not why her task is hard. A reader new to the subject might guess from the contrast that powers are harder to reverse, but nothing says so, and with p = 23 Eve could simply try every exponent. So the reader cannot tell that the security rests on the discrete logarithm being infeasible. Block 1 is present in 'Each person keeps a private exponent' and step 3 of the table and summary, where each person raises the other's public value to their own private exponent. Block 2 is present in 'Why the two results are equal': (g^b)^a = (g^a)^b = g^(a×b), order does not matter, mod p does not change this. There is no marker, note, or dangling reference showing that text was removed. The jump from 'Use powers instead of products' to the table reads naturally."
+      },
+      "passed": true
+    }
+  ],
+  "hash": "3e8e05555ead5926"
+}

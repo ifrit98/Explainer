@@ -1,0 +1,406 @@
+{
+  "verdict": "trusted",
+  "without_leak_exclusions": "trusted",
+  "counted": [
+    "float-sum",
+    "greenhouse",
+    "heat-pump",
+    "key-exchange",
+    "two-tides"
+  ],
+  "caught": 4,
+  "need": 4,
+  "clean_losses": 0,
+  "bar": {
+    "catch": 0.8,
+    "min_counted": 5,
+    "clean_losses": 1
+  },
+  "dropped": [
+    "bloom-filter"
+  ],
+  "leaked": [],
+  "left_out": {
+    "antibiotic-resistance": "The question gives the pre-existing resistant mutations (block 1). Selection (block 2) is school biology, and the question takes for granted that one drug alone ends in resistance.",
+    "gps-relativity": "The question states the receiver's clock error as a fourth unknown (block 2). It ties a satellite's clock error to its distance, and distance = speed × time is school physics (block 1).",
+    "quorum": "The question states the write group and the committed write (block 1). Block 2 was marked unsupported in two of the three baseline passes.",
+    "vaccine-memory": "The question's model states both blocks: matching cells multiply until there are enough, and vaccination leaves 1,000 times more of them."
+  },
+  "subjects": {
+    "float-sum": {
+      "cut": 1,
+      "clean": [],
+      "kinds": [
+        "block",
+        "block",
+        "derived",
+        "derived"
+      ],
+      "caught": false,
+      "clean_lost": 0,
+      "intact_marks": [
+        [
+          "supported",
+          "supported",
+          "supported",
+          "missing"
+        ],
+        [
+          "supported",
+          "supported",
+          "supported",
+          "supported"
+        ],
+        [
+          "supported",
+          "supported",
+          "supported",
+          "supported"
+        ]
+      ],
+      "cut_raw": [
+        [
+          "supported",
+          "supported",
+          "supported",
+          "supported"
+        ],
+        [
+          "supported",
+          "supported",
+          "supported",
+          "supported"
+        ],
+        [
+          "supported",
+          "supported",
+          "supported",
+          "supported"
+        ]
+      ],
+      "no_mark_passes": [],
+      "supported_intact": [
+        "3/4",
+        "4/4",
+        "4/4"
+      ],
+      "supported_cut": [
+        "4/4",
+        "4/4",
+        "4/4"
+      ],
+      "gap": [
+        false,
+        false,
+        true
+      ],
+      "leaks": {
+        "1": {
+          "leak": false,
+          "quote": "",
+          "confirmed": false
+        },
+        "2": {
+          "leak": false,
+          "quote": "",
+          "confirmed": false
+        },
+        "3": {
+          "leak": false,
+          "quote": "",
+          "confirmed": false
+        }
+      }
+    },
+    "greenhouse": {
+      "cut": 1,
+      "clean": [],
+      "kinds": [
+        "block",
+        "block",
+        "derived",
+        "derived"
+      ],
+      "caught": true,
+      "clean_lost": 0,
+      "intact_marks": [
+        [
+          "supported",
+          "supported",
+          "stated",
+          "stated"
+        ],
+        [
+          "supported",
+          "supported",
+          "stated",
+          "stated"
+        ],
+        [
+          "supported",
+          "supported",
+          "stated",
+          "stated"
+        ]
+      ],
+      "cut_raw": [
+        [
+          "missing",
+          "missing",
+          "missing",
+          "missing"
+        ],
+        [
+          "missing",
+          "missing",
+          "missing",
+          "missing"
+        ],
+        [
+          "missing",
+          "missing",
+          "missing",
+          "unsupported"
+        ]
+      ],
+      "no_mark_passes": [],
+      "supported_intact": [
+        "2/2",
+        "2/2",
+        "2/2"
+      ],
+      "supported_cut": [
+        "0/4",
+        "0/4",
+        "0/4"
+      ],
+      "gap": [
+        true,
+        true,
+        true
+      ],
+      "leaks": {}
+    },
+    "heat-pump": {
+      "cut": 2,
+      "clean": [
+        1
+      ],
+      "kinds": [
+        "block",
+        "block",
+        "derived",
+        "derived"
+      ],
+      "caught": true,
+      "clean_lost": 0,
+      "intact_marks": [
+        [
+          "supported",
+          "supported",
+          "supported",
+          "supported"
+        ],
+        [
+          "supported",
+          "supported",
+          "supported",
+          "supported"
+        ],
+        [
+          "supported",
+          "supported",
+          "supported",
+          "supported"
+        ]
+      ],
+      "cut_raw": [
+        [
+          "supported",
+          "unsupported",
+          "supported",
+          "supported"
+        ],
+        [
+          "supported",
+          "unsupported",
+          "supported",
+          "supported"
+        ],
+        [
+          "supported",
+          "unsupported",
+          "supported",
+          "supported"
+        ]
+      ],
+      "no_mark_passes": [],
+      "supported_intact": [
+        "4/4",
+        "4/4",
+        "4/4"
+      ],
+      "supported_cut": [
+        "3/4",
+        "3/4",
+        "3/4"
+      ],
+      "gap": [
+        false,
+        false,
+        true
+      ],
+      "leaks": {}
+    },
+    "key-exchange": {
+      "cut": 3,
+      "clean": [
+        1,
+        2
+      ],
+      "kinds": [
+        "block",
+        "block",
+        "block",
+        "derived",
+        "derived"
+      ],
+      "caught": true,
+      "clean_lost": 0,
+      "intact_marks": [
+        [
+          "supported",
+          "supported",
+          "supported",
+          "supported",
+          "supported"
+        ],
+        [
+          "supported",
+          "supported",
+          "supported",
+          "supported",
+          "supported"
+        ],
+        [
+          "supported",
+          "supported",
+          "supported",
+          "supported",
+          "supported"
+        ]
+      ],
+      "cut_raw": [
+        [
+          "supported",
+          "supported",
+          "missing",
+          "supported",
+          "missing"
+        ],
+        [
+          "supported",
+          "supported",
+          "missing",
+          "supported",
+          "missing"
+        ],
+        [
+          "supported",
+          "supported",
+          "missing",
+          "supported",
+          "missing"
+        ]
+      ],
+      "no_mark_passes": [],
+      "supported_intact": [
+        "5/5",
+        "5/5",
+        "5/5"
+      ],
+      "supported_cut": [
+        "3/5",
+        "3/5",
+        "3/5"
+      ],
+      "gap": [
+        true,
+        true,
+        true
+      ],
+      "leaks": {}
+    },
+    "two-tides": {
+      "cut": 2,
+      "clean": [
+        1
+      ],
+      "kinds": [
+        "block",
+        "block",
+        "derived",
+        "derived"
+      ],
+      "caught": true,
+      "clean_lost": 0,
+      "intact_marks": [
+        [
+          "supported",
+          "supported",
+          "stated",
+          "supported"
+        ],
+        [
+          "supported",
+          "supported",
+          "stated",
+          "supported"
+        ],
+        [
+          "supported",
+          "supported",
+          "stated",
+          "supported"
+        ]
+      ],
+      "cut_raw": [
+        [
+          "supported",
+          "missing",
+          "supported",
+          "missing"
+        ],
+        [
+          "supported",
+          "missing",
+          "supported",
+          "missing"
+        ],
+        [
+          "supported",
+          "missing",
+          "supported",
+          "missing"
+        ]
+      ],
+      "no_mark_passes": [],
+      "supported_intact": [
+        "3/3",
+        "3/3",
+        "3/3"
+      ],
+      "supported_cut": [
+        "2/4",
+        "2/4",
+        "2/4"
+      ],
+      "gap": [
+        true,
+        true,
+        true
+      ],
+      "leaks": {}
+    }
+  }
+}

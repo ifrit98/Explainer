@@ -1,0 +1,36 @@
+{
+  "steps": [
+    {
+      "step": "Everyone first agrees in public on a prime p and a base g. Each person picks a private exponent (a, b, c) and never sends it.",
+      "part": "Summary, items 1–2; 'The working method' table, step 1",
+      "idea": "The public settings are p and g. Each private number stays with its owner. Only values made from a private number get sent."
+    },
+    {
+      "step": "Each person publishes g^(own private) mod p: Alice sends g^a, Bob sends g^b, Carol sends g^c (all mod p).",
+      "part": "'The working method' table, step 2; Summary item 2",
+      "idea": "A public value is g raised to the private exponent, mod p. Anyone can read it."
+    },
+    {
+      "step": "Raising someone's public value to your own private exponent stacks the exponents. The order in which exponents are applied does not matter, and reducing mod p at each step changes nothing. So (g^a)^b = (g^b)^a = g^(ab), and applying a third exponent gives g^(abc) in any order.",
+      "part": "'Why the two results are equal' paragraph",
+      "idea": "(g^b)^a = (g^a)^b = g^(a×b). Exponents multiply and their order doesn't matter, so this carries over to three exponents."
+    },
+    {
+      "step": "To reach the three-way key, two-person intermediate values must also be sent in public. Bob raises Alice's g^a to b and sends g^(ab). Carol raises Bob's g^b to c and sends g^(bc). Alice raises Carol's g^c to a and sends g^(ca). Then Carol computes (g^(ab))^c, Alice computes (g^(bc))^a, and Bob computes (g^(ca))^b. All three get g^(abc) mod p.",
+      "part": "Steps 2–3; 'The working method' table, step 3",
+      "idea": "This is the same 'combine with your own private exponent' move, done in two rounds. Each person applies their own exponent last, so each needs only their own secret."
+    },
+    {
+      "step": "Eve sees p, g, g^a, g^b, g^c, g^(ab), g^(bc) and g^(ca). She never sees a, b, c or g^(abc). The secret itself is never sent.",
+      "part": "Paragraph after the table ('Eve saw 23, 5, 8 and 19…'); 'First attempt' section",
+      "idea": "The secret must never be sent, nor anything that obviously gives it away. Eve only reads public values."
+    },
+    {
+      "step": "To argue Eve still can't get the key, I need a fact the explanation doesn't give: that getting a private exponent back from g^x mod p is hard, and that the public values can't be combined to make g^(abc). The explanation shows only that undoing multiplication is easy. It never says undoing exponentiation is hard; it just states that Eve sees only the public values.",
+      "part": "'Second attempt' section; 'The working method' section",
+      "idea": "The text shows how multiplication fails (the extended Euclidean algorithm undoes it). It never explains why exponentiation resists the same kind of attack."
+    }
+  ],
+  "result": "How they do it, derived from the explanation: they agree on p and g in public, then each publishes g^a, g^b or g^c. In a second round they publish g^(ab), g^(bc) and g^(ca), each made by raising someone else's value to their own exponent. Each person then raises the one value that lacks their own exponent to their own exponent, and all three get g^(abc) mod p. This works because the order of the exponents doesn't matter. Why Eve fails: this can't be shown from the explanation (see gap).",
+  "gap": "The explanation never says why Eve can't recover a private exponent from g^x mod p. It needs to say that undoing exponentiation mod p (the 'discrete logarithm') is hard, unlike undoing multiplication. It also never says that combining public values like g^a, g^b or g^(ab) without a private exponent can't give the shared key. Without these, the security half of the question can't be derived."
+}

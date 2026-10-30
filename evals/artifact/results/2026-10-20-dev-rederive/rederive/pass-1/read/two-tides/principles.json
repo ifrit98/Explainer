@@ -1,0 +1,36 @@
+{
+  "steps": [
+    {
+      "step": "Take the Moon's tidal effect as 1 unit and the Sun's as 0.46 units.",
+      "part": "The Sun does the same thing",
+      "idea": "The Sun makes bulges in the same way as the Moon. Tides depend on M/d³, so the Sun's effect is about 46% of the Moon's."
+    },
+    {
+      "step": "Each body makes a pattern with two parts: high water (bulges) along its own line to the Earth, and low water (squeeze) at 90° from that line.",
+      "part": "Step 2: compute the pull at three points (the squeeze paragraph and the bulge/squeeze diagram)",
+      "idea": "The two bulges point toward and away from the body. The sides at 90° are squeezed, and water flows from the squeezed sides to the stretched ends."
+    },
+    {
+      "step": "At spring tides the two patterns line up, so the height ranges add: 1 + 0.46 = 1.46 units.",
+      "part": "The Sun does the same thing",
+      "idea": "At new and full moon the Sun and Moon line up, their bulges add, and the result is large spring tides."
+    },
+    {
+      "step": "At first and third quarter, the Sun's bulges fall where the Moon squeezes, and the Sun squeezes where the Moon's bulges are. The Sun raises water where the Moon lowers it, so the two ranges subtract: 1 − 0.46 = 0.54 units. The Moon's pattern still wins, so high water still follows the Moon.",
+      "part": "Steps 1 and 2; 'The Sun does the same thing' (at 90° they partly cancel: neap tides)",
+      "idea": "With the bodies at right angles, each one's high-water direction is the other's low-water direction. This gives the partial cancellation the explanation calls neap tides. I assume the two effects simply add or subtract, which the text implies when it says the bulges 'add' at spring tides."
+    },
+    {
+      "step": "Compare: 0.54 / 1.46 ≈ 0.37.",
+      "part": "Steps 3 and 4 (background arithmetic)",
+      "idea": "Ratio of the neap range to the spring range."
+    },
+    {
+      "step": "Put it in metres for the ideal ocean: the Moon alone gives about 0.5 m. That makes spring tides about 0.73 m and neap tides about 0.27 m.",
+      "part": "Step 3: what the number means",
+      "idea": "For an ideal ocean covering the whole Earth, the Moon's equilibrium tide is about half a metre from bulge to squeeze."
+    }
+  ],
+  "result": "At quarter moons you get neap tides. The Sun's bulges sit where the Moon squeezes the water, so the Sun's effect is subtracted from the Moon's instead of added. The tidal range is about (1 − 0.46)/(1 + 0.46) ≈ 0.37 of the spring range, so roughly a third. For the ideal ocean that is about 0.27 m against about 0.73 m. This assumes the two effects simply add, and it holds only for the idealized model; real coasts change the numbers.",
+  "gap": ""
+}

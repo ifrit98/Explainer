@@ -1,0 +1,36 @@
+{
+  "steps": [
+    {
+      "step": "For a read to see the latest committed write, the read group must share at least one server with the write group that committed it.",
+      "part": "Why a majority, and not \"whoever is still up\"? (paragraph after 'Two majorities of the same group always share at least one member')",
+      "idea": "Consistency comes from overlap. A server that was in the earlier group and is also in the later group carries the earlier decision forward. With no shared server, the later group can't know about the earlier decision."
+    },
+    {
+      "step": "Two groups of sizes W and R taken from n servers are sure to share a server exactly when W + R > n.",
+      "part": "Same paragraph: 'together they would contain more than all of them, which is impossible unless some server is in both'",
+      "idea": "The explanation counts two majorities. The same counting works for groups of any size: if their sizes add up to more than n, they can't fit without sharing a server. If W + R ≤ n, they could be completely separate. This is a generalisation I made; the explanation itself only treats two equal majorities."
+    },
+    {
+      "step": "With n = 5 the condition is W + R > 5, so W + R ≥ 6.",
+      "part": "Step 2",
+      "idea": "Put n = 5 into the overlap condition."
+    },
+    {
+      "step": "W = 4, R = 2 meets the condition, since 4 + 2 = 6 > 5. Also, W = 4 is more than half of 5, so any two write groups overlap too and two conflicting writes can't both commit.",
+      "part": "Step 3; 'Why a majority…' (split brain) and 'Now count'",
+      "idea": "Check the sum. Separately, write groups must overlap each other, as majorities do, or split brain becomes possible. 4 > 2.5 satisfies that."
+    },
+    {
+      "step": "An operation can go ahead as long as enough servers are up to form its group, so the failures it tolerates are n minus the group size.",
+      "part": "Now count ('failures tolerated = n − quorum size')",
+      "idea": "The explanation gives this rule for one majority quorum. I apply it to each group size separately."
+    },
+    {
+      "step": "Writes tolerate 5 − 4 = 1 failure. Reads tolerate 5 − 2 = 3 failures.",
+      "part": "Step 5",
+      "idea": "Plug in W = 4 and R = 2."
+    }
+  ],
+  "result": "The rule is W + R > 5 (so W + R ≥ 6). This makes every read group share a server with every write group. W > 2.5 is also wanted so that two writes can't conflict. With W = 4 and R = 2, writes keep working with up to 1 failed server and reads keep working with up to 3.",
+  "gap": "The explanation only covers equal majority quorums. It never describes separate read and write groups or the W + R > n rule. I had to extend its overlap-counting argument and its 'n − quorum size' formula to unequal groups myself."
+}

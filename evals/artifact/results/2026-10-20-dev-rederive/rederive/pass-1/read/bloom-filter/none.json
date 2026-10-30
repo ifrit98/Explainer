@@ -1,0 +1,46 @@
+{
+  "steps": [
+    {
+      "step": "For a filter built from a set S, bit i is 1 exactly when at least one item of S has i among its k positions. Otherwise it stays 0.",
+      "part": "Section 2, 'The machinery: bits and hash functions' (the Add rule in the highlighted box)",
+      "idea": "Adding an item sets its k bits to 1. A bit that is already 1 stays 1, and bits never go back to 0. So the final array depends only on which positions the items hit, not on the order they were added."
+    },
+    {
+      "step": "Same size and same hash functions mean each item maps to the same positions in both filters, so their bit positions mean the same thing.",
+      "part": "Section 2 (k hash functions taken modulo m) and the script's kSel handler",
+      "idea": "An item's positions come from the hash functions and m. The script rebuilds the filter when k changes, because the old bits no longer mean anything. So the two filters can only be combined bit by bit if m and the hashes match."
+    },
+    {
+      "step": "Bitwise OR of filter A and filter B gives exactly the filter you would get by adding every item of A ∪ B.",
+      "part": "Steps 1 and 2 + background (Boolean OR)",
+      "idea": "In the OR, bit i is 1 if some item of A or some item of B hits i. That is the same as some item of A ∪ B hitting i, which is the rule from step 1. No items are needed, only the two bit arrays."
+    },
+    {
+      "step": "So the union is exact in the sense that it matches a directly built filter bit for bit. It still answers like any Bloom filter: no false negatives, some false positives. Its rate follows the fraction of 1s, with n = |A ∪ B|.",
+      "part": "Section 4, 'How it can be wrong', and Section 5, Step 2 (rate ≈ f^k)",
+      "idea": "It is the normal filter for A ∪ B, so it has the normal one-way error. Because it is more full than either input, its false positive rate is higher. If it is overfilled, the error rises steeply (Section 6)."
+    },
+    {
+      "step": "Bitwise AND sets bit i to 1 only when some item of A and some item of B both hit i.",
+      "part": "Step 1 + background (Boolean AND)",
+      "idea": "This applies the per-bit rule to both filters at once."
+    },
+    {
+      "step": "Every item in A ∩ B has all of its bits set in both filters, so the AND never gives a false negative for A ∩ B.",
+      "part": "Step 5 and Section 2 (bits never go back to 0)",
+      "idea": "A shared item set its k bits in each filter, so they are all 1 in the AND."
+    },
+    {
+      "step": "The AND can still have extra 1s compared with the filter built directly from A ∩ B. This happens where one item from A and a different item from B happen to share a position.",
+      "part": "Section 3, 'Try it' (last note: different words sometimes share positions) and Section 4 (false positives from other items covering bits)",
+      "idea": "Shared positions between different items can switch on a bit in both filters even when no common item exists. So the AND has at least as many 1s as the true intersection filter, often more."
+    },
+    {
+      "step": "So the AND is only an approximation of the A ∩ B filter. It still has no false negatives, but it may have more false positives than a filter built from A ∩ B.",
+      "part": "Steps 6 and 7 + Section 5, Step 2 (more 1s means a higher rate, about f^k)",
+      "idea": "Extra 1s raise f, and that raises the false positive rate."
+    }
+  ],
+  "result": "Combine the two bit arrays with a bitwise OR. Bit i is 1 if any item of A or B hit it, so the result is exactly, bit for bit, the filter you would get by adding all of A ∪ B. In that sense it is exact. It still behaves like any Bloom filter, though: no false negatives, and false positives at the rate for |A ∪ B| items, which is higher than either filter alone. A bitwise AND gives a filter for A ∩ B that never misses a common item (no false negatives). But it is not exact. It can keep 1s where a different item of A and a different item of B happened to share a position, so it may have more 1s and more false positives than a filter built directly from A ∩ B.",
+  "gap": ""
+}

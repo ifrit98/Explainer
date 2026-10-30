@@ -1,0 +1,46 @@
+{
+  "steps": [
+    {
+      "step": "A double can hold a number exactly only if that number is a whole number of at most 53 binary digits times a power of two. Such a number is a fraction whose denominator is a power of two.",
+      "part": "'What the computer holds' and the first sentence of 'Why 0.1 must be rounded'",
+      "idea": "A double is a whole number times a power of two, so it can only be a fraction with a power-of-two denominator. Example: 0.75 = 3 × 2^-2."
+    },
+    {
+      "step": "A fraction whose lowest-terms denominator contains a factor of 5 can never be stored exactly.",
+      "part": "'Why 0.1 must be rounded' (1/10 has a factor 5, and no power of two is divisible by 5)",
+      "idea": "These fractions never end in binary, so the computer has to cut the digits off and round."
+    },
+    {
+      "step": "0.375 = 3/8 = 3 × 2^-3, so it is stored exactly.",
+      "part": "Step 1, plus the 3/8 = 0.011 example in 'Why 0.1 must be rounded'",
+      "idea": "The denominator is 8, a power of two, and the whole number 3 is tiny. The explanation even uses 3/8 as its example of a fraction that ends in binary."
+    },
+    {
+      "step": "0.0625 = 1/16 = 1 × 2^-4, so it is stored exactly.",
+      "part": "Step 1",
+      "idea": "The denominator is a power of two, so the number is a whole number times a power of two."
+    },
+    {
+      "step": "0.2 = 1/5 and 0.3 = 3/10 are not stored exactly.",
+      "part": "Step 2, and the table in 'The stored values'",
+      "idea": "Both denominators contain 5. The table confirms it: 0.2 is stored with error +1.11e-17 and 0.3 with error −1.11e-17."
+    },
+    {
+      "step": "Adding 0.125 eight times gives exactly 1.0, because no rounding ever happens.",
+      "part": "'When it works' and 'What `+` does'",
+      "idea": "0.125 = 1/8 is stored with error 0. Every running total k/8 (k = 1 to 8) has a power-of-two denominator and a small numerator, so it is itself a double. '+' rounds the exact sum, but here the exact sum is already a double, so nothing changes. After eight additions the total is exactly 8/8 = 1."
+    },
+    {
+      "step": "Adding 0.1 ten times starts from a stored value that is not 0.1, and each addition rounds its result.",
+      "part": "Table in 'The stored values'; 'What `+` does'",
+      "idea": "Stored 0.1 is 0.10000000000000000555, not 0.1. Each '+' rounds the exact sum to the nearest double, so ten small errors from the input, plus up to nine roundings, can each push the total away from 1.0."
+    },
+    {
+      "step": "Showing that the total really ends up different from 1.0 means following how these errors add up over the ten additions. The explanation leaves this out on purpose.",
+      "part": "'Not covered here' (second bullet: 'How errors grow over many operations, such as adding 0.1 ten times')",
+      "idea": "The explanation sends the reader to a numerical analysis text instead. It also gives no gap sizes for numbers above 0.5, so I can't track the running total step by step to see where it lands."
+    }
+  ],
+  "result": "0.375 (3/8) and 0.0625 (1/16) are stored exactly; 0.2 (1/5) and 0.3 (3/10) are not, because their denominators contain 5. Adding 0.125 eight times gives exactly 1.0: 1/8 and every running total k/8 are doubles, so no addition ever rounds. For 0.1 added ten times, the explanation only shows that the total can drift from 1.0: stored 0.1 is slightly too big, and each addition may round. It does not let me show that the final result is actually different from 1.0.",
+  "gap": "The explanation leaves out how rounding errors build up over repeated additions, and says so: 'Not covered here' lists 'adding 0.1 ten times'. It also gives no gap sizes for numbers above 0.5. So I can't follow the ten partial sums to show that the total ends up different from 1.0, rather than the errors cancelling out."
+}

@@ -1,0 +1,41 @@
+{
+  "steps": [
+    {
+      "step": "Before any drug, the infection already contains a few cells resistant to A or to B by random mutation. These cells were not created by the drug.",
+      "part": "Step 1: random variation makes a few resistant cells (Mutation item); Why selection, and not adaptation",
+      "idea": "Resistance comes from rare random copying errors that happen before the drug arrives. The drug only selects the cells that already resist it."
+    },
+    {
+      "step": "Drug A alone: expected A-resistant cells = 10^10 × 10^-8 = 100. Drug B alone: 10^10 × 10^-9 = 10. Both are well above 1, so resistant cells almost certainly exist.",
+      "part": "Step 2: the antibiotic selects the resistant cells (worked numbers)",
+      "idea": "Expected number of resistant cells = population size × chance per cell."
+    },
+    {
+      "step": "With one drug, those survivors divide and rebuild a resistant infection.",
+      "part": "Step 2 worked numbers and the paragraph defining selection",
+      "idea": "The drug kills susceptible cells. The roughly 10 resistant cells double about 30 times, which brings them back to about 10^10, and the new population is almost all resistant."
+    },
+    {
+      "step": "To survive both drugs, one cell must carry both unrelated mutations. Because the two are independent, the chance per cell is 10^-8 × 10^-9 = 10^-17.",
+      "part": "What follows from this: 'Two drugs at once help'",
+      "idea": "Two independent rare events must both happen in the same cell, so their chances multiply. The explanation's example uses 10^-9 × 10^-9 = 10^-18."
+    },
+    {
+      "step": "Expected double-resistant cells = 10^10 × 10^-17 = 10^-7, so almost certainly none exist.",
+      "part": "Step 2 'Predict before you read on' paragraph; 'Two drugs at once help'",
+      "idea": "When the expected number is far below 1, usually no resistant cell exists, so the drugs clear the infection."
+    },
+    {
+      "step": "Cells resistant to only one drug are killed by the other drug, so selection has nothing to work on.",
+      "part": "Steps 3 and 5; What an antibiotic does (definition of resistant)",
+      "idea": "Surviving means resisting every drug that is present. A cell resistant only to A is still susceptible to B."
+    },
+    {
+      "step": "Limitation: this fails if a single plasmid carries both resistance genes.",
+      "part": "'Two drugs at once help' (last sentence); Step 1 Gene transfer",
+      "idea": "One gene transfer can give resistance to several drugs at once, so the two events are no longer independent. The question rules this out by saying the mutations are unrelated."
+    }
+  ],
+  "result": "Each drug alone leaves resistant survivors: about 100 cells resist A and about 10 resist B. These cells already existed before treatment, and once the drug kills the rest they regrow into a resistant infection. With both drugs, a cell survives only if it resists both. The two mutations are independent, so their chances multiply: 10^-8 × 10^-9 = 10^-17 per cell. Across 10^10 cells that gives about 10^-7 expected cells, which in practice means none. Cells resistant to just one drug are killed by the other, so a resistant infection is roughly a million to a billion times less likely. This holds unless one plasmid carries both resistance genes.",
+  "gap": ""
+}

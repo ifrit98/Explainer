@@ -1,0 +1,41 @@
+{
+  "steps": [
+    {
+      "step": "An air conditioner is the same loop as the heat pump. It takes heat Q_C from a cold body and gives heat Q_H to a warm body, and the compressor's electricity W is the only energy input.",
+      "part": "'A refrigerator is the same machine' paragraph, plus the loop diagram and step 2 (Compressor)",
+      "idea": "A refrigerator takes heat from the food box and dumps it into the kitchen through the coil at the back. Electricity enters the loop only at the compressor."
+    },
+    {
+      "step": "Energy balance: Q_H = Q_C + W, so the heat dumped outside is the heat removed from inside plus the electricity.",
+      "part": "Short answer equation; 'W = Q_H − Q_C' in 'Why the COP is not unlimited'",
+      "idea": "The heat coming out of the hot side equals the heat taken in on the cold side plus the electrical work. Energy is conserved."
+    },
+    {
+      "step": "Define the cooling figure of merit as heat removed per unit of electricity: COP_cool = Q_C / W.",
+      "part": "'Why this matters' (definition of COP as useful heat ÷ electrical work), adapted",
+      "idea": "COP is the useful heat divided by the electrical work. For cooling, the useful heat is the heat taken from the cold side."
+    },
+    {
+      "step": "Second-law constraint: Q_H/T_H ≥ Q_C/T_C, with temperatures in kelvin.",
+      "part": "'Why the COP is not unlimited' entropy paragraph",
+      "idea": "Heat Q at temperature T carries entropy Q/T, and total entropy cannot decrease. So the entropy dumped on the hot side must be at least the entropy taken from the cold side."
+    },
+    {
+      "step": "Algebra: Q_H ≥ Q_C·T_H/T_C, so W = Q_H − Q_C ≥ Q_C·(T_H − T_C)/T_C. That gives Q_C/W ≤ T_C/(T_H − T_C).",
+      "part": "Steps 2–4 + background (algebra)",
+      "idea": "Put the energy balance into the entropy inequality and rearrange."
+    },
+    {
+      "step": "Why it is exactly one less: Q_C/W = (Q_H − W)/W = Q_H/W − 1. The same holds for the limits: T_C/(T_H−T_C) = T_H/(T_H−T_C) − (T_H−T_C)/(T_H−T_C) = T_H/(T_H−T_C) − 1.",
+      "part": "Step 2 + heating bound COP ≤ T_H/(T_H − T_C) in 'Why the COP is not unlimited' + background algebra",
+      "idea": "The heat delivered on the hot side always includes the electricity itself, on top of the heat moved. Heating counts W as useful output and cooling does not, so the two ratios always differ by exactly W/W = 1."
+    },
+    {
+      "step": "Numerical check with the mild-day temperatures: ideal cooling COP = 268/50 = 5.36 ≈ 5.4, which is 6.4 − 1.",
+      "part": "Table in 'Why the COP is not unlimited' (268 K, 318 K, lift 50 K, ideal heating COP 6.4)",
+      "idea": "The table's temperatures give a heating limit of 6.4, and the cooling limit comes out one lower."
+    }
+  ],
+  "result": "The ideal limit for an air conditioner is COP_cool = Q_C/W ≤ T_C/(T_H − T_C), with temperatures in kelvin (for example, 268/50 ≈ 5.4). It is exactly one less than the heating limit T_H/(T_H − T_C). This is because the heat given to the hot side is Q_H = Q_C + W. A heater counts the electricity W as part of its useful output, but an air conditioner counts only the heat it removes, Q_C. So Q_C/W = Q_H/W − 1, and the same difference of one holds for the ideal limits.",
+  "gap": ""
+}

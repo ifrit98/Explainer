@@ -1,0 +1,36 @@
+{
+  "steps": [
+    {
+      "step": "The Moon's tidal acceleration stretches the ocean along the Earth–Moon line, making two bulges. It squeezes the ocean across that line, giving low water at the side points.",
+      "part": "Section 'Only the part that differs from the centre's pull acts' (side-point paragraph) and the text diagram",
+      "idea": "The tidal acceleration is about +1.1 µm/s² outward at both ends of the line and 0.55 µm/s² inward at the 90° points. So high water lies on the line and low water lies 90° from it."
+    },
+    {
+      "step": "The Sun produces the same kind of stretch along the Earth–Sun line, at about 0.46 times the Moon's strength.",
+      "part": "Section 'Why subtract: two tests', second test (the Sun)",
+      "idea": "The tidal acceleration is roughly the pull × 2R/d. For the Sun this gives 179/389 ≈ 0.46 of the Moon's value, and observed solar tides are about half the Moon's."
+    },
+    {
+      "step": "Accelerations from the two bodies add as vectors, so the two stretch patterns add on top of each other.",
+      "part": "background",
+      "idea": "Vector addition of accelerations (school physics)."
+    },
+    {
+      "step": "Spring tides: when the Sun and Moon are in line, their bulges coincide and add. The tide's strength is about 1 + 0.46 = 1.46 Moon-units.",
+      "part": "Steps 2 and 3, plus the question's framing (the explanation never defines 'spring tide'; I take it as the in-line case)",
+      "idea": "Both bodies stretch along the same line and squeeze across the same line, so the effects reinforce."
+    },
+    {
+      "step": "Quarter Moon: the Sun's line is 90° from the Moon's. The Sun's bulges sit where the Moon makes low water, and the Sun's low water sits under the Moon's bulges. So the two partly cancel.",
+      "part": "Steps 1, 2 and 3",
+      "idea": "Along the Moon line the Moon stretches (+1) and the Sun squeezes. Across it the Moon squeezes and the Sun stretches. The difference between high and low is about 1 − 0.46 = 0.54 Moon-units, and high water stays under the Moon because the Moon is stronger."
+    },
+    {
+      "step": "Compare the two cases.",
+      "part": "Steps 4 and 5",
+      "idea": "0.54 / 1.46 ≈ 0.37."
+    }
+  ],
+  "result": "At quarter Moon the Sun's bulges fall where the Moon makes low water, so the solar tide partly cancels the lunar one. The tides are about (1 − 0.46) of the Moon's tide alone, versus (1 + 0.46) at spring tides. That makes them roughly a third (about 37%) of the size of spring tides. High water still follows the Moon. This holds in the explanation's ideal-ocean picture; real coasts differ.",
+  "gap": "Minor: the explanation never defines spring tides and never says that the Sun's and Moon's tides add together. I took spring tides to mean Sun and Moon in line, and used vector addition of accelerations as background."
+}

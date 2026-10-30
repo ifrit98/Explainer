@@ -1,0 +1,163 @@
+{
+  "subject": "bloom-filter",
+  "cut": 1,
+  "clean": [],
+  "verdict": "fail",
+  "attempts": [
+    {
+      "edits": [
+        {
+          "old": "To add an item, it hashes the item to a few bit positions and sets those bits to 1.",
+          "new": "To add an item, it hashes the item to a few bit positions."
+        },
+        {
+          "old": " The bits for that item could also have been set by other items.",
+          "new": ""
+        },
+        {
+          "old": "1. **Add(x)**: compute the `k` positions for `x`. Set each bit to 1.",
+          "new": "1. **Add(x)**: compute the `k` positions for `x`."
+        },
+        {
+          "old": "| Step | Positions | Bits that are 1 after the step |\n|---|---|---|\n| Add \"cat\" | 1, 6, 11 | 1, 6, 11 |\n| Add \"dog\" | 3, 6, 14 | 1, 3, 6, 11, 14 |",
+          "new": "| Step | Positions |\n|---|---|\n| Add \"cat\" | 1, 6, 11 |\n| Add \"dog\" | 3, 6, 14 |"
+        },
+        {
+          "old": "\"owl\" was never added. Its three bits were set by \"cat\" (bit 1) and \"dog\" (bits 3 and 14). The filter has no record of *which* item set a bit, so it cannot tell the difference.\n\n## Why it never misses an item it saw\n\nAdd only changes bits from 0 to 1. Nothing changes a bit back to 0. When you add `x`, its `k` bits become 1, and they stay 1. A later query for `x` computes the same `k` positions, finds all 1s, and answers \"probably seen\". So a **false negative** (a \"no\" for an item that was added) cannot happen.\n\n**Where this guarantee breaks.** The guarantee depends on \"nothing clears a bit\". Suppose you try to delete \"cat\" by clearing bits 1, 6, and 11. Bit 6 also belongs to \"dog\". A query for \"dog\" now finds bit 6 = 0 and answers \"definitely not seen\", which is wrong. For this reason a basic Bloom filter does not support delete. (A *counting Bloom filter* stores a small counter in place of each bit, so it can delete. It uses about 4 times the memory.)\n\n",
+          "new": "\"owl\" was never added.\n\n"
+        },
+        {
+          "old": "One hash sets one specific bit with probability `1/m`. After `n` adds, there were `k·n` bit-sets. The chance that a given bit is still 0 is\n\n```\n(1 − 1/m)^(k·n)  ≈  e^(−k·n/m)\n```\n\n",
+          "new": ""
+        },
+        {
+          "old": "But each hash also sets more bits, so the array fills faster.",
+          "new": "But more hashes also make the array fill faster."
+        },
+        {
+          "old": "maps each item to `k` positions in a bit array and sets those bits.",
+          "new": "maps each item to `k` positions in a bit array."
+        },
+        {
+          "old": "because other items can set the same bits.",
+          "new": "because other items can map to the same positions."
+        }
+      ],
+      "error": "",
+      "check": {
+        "recoverable": true,
+        "quote": "If any of those bits is 0, the item was never added. If all of them are 1, the item was *probably* added. That last case is the only way the filter is wrong. It can say \"yes\" to an item that it never saw. It never says \"no\" to an item that it did see.",
+        "present": {},
+        "marked": false,
+        "reason": "The explanation no longer states directly that Add sets the k bits to 1 or that bits are never cleared. The Add(x) step now only computes positions. The reader can still infer both facts. A 0 proves absence and an added item always tests all 1s, so adding must set those bits to 1. 'Never says no to an item it did see' implies bits are never cleared. The worked example also shows that bits at added positions are 1 and other bits stay 0, and 'more hashes make the array fill faster' supports this. With that rule, the reader can answer that OR gives an exact union filter and AND gives at least A∩B's bits, possibly more, so it is not exact. Nothing marks the removal: the shortened Add step reads as complete and there is no note."
+      },
+      "passed": false
+    },
+    {
+      "edits": [
+        {
+          "old": "To add an item, it hashes the item to a few bit positions and sets those bits to 1.",
+          "new": "To add an item, it hashes the item to a few bit positions."
+        },
+        {
+          "old": "If all of them are 1, the item was *probably* added. The bits for that item could also have been set by other items. That last case",
+          "new": "If all of them are 1, the item was *probably* added. That last case"
+        },
+        {
+          "old": "1. **Add(x)**: compute the `k` positions for `x`. Set each bit to 1.",
+          "new": "1. **Add(x)**: compute the `k` positions for `x`."
+        },
+        {
+          "old": "| Step | Positions | Bits that are 1 after the step |\n|---|---|---|\n| Add \"cat\" | 1, 6, 11 | 1, 6, 11 |\n| Add \"dog\" | 3, 6, 14 | 1, 3, 6, 11, 14 |",
+          "new": "| Step | Positions |\n|---|---|\n| Add \"cat\" | 1, 6, 11 |\n| Add \"dog\" | 3, 6, 14 |"
+        },
+        {
+          "old": "Its three bits were set by \"cat\" (bit 1) and \"dog\" (bits 3 and 14). The filter has no record of *which* item set a bit, so it cannot tell the difference.",
+          "new": "Its three positions are all shared with \"cat\" (bit 1) and \"dog\" (bits 3 and 14). The filter has no record of *which* item a bit belongs to, so it cannot tell the difference."
+        },
+        {
+          "old": "## Why it never misses an item it saw\n\nAdd only changes bits from 0 to 1. Nothing changes a bit back to 0. When you add `x`, its `k` bits become 1, and they stay 1. A later query for `x` computes the same `k` positions, finds all 1s, and answers \"probably seen\". So a **false negative** (a \"no\" for an item that was added) cannot happen.\n\n**Where this guarantee breaks.** The guarantee depends on \"nothing clears a bit\". Suppose you try to delete \"cat\" by clearing bits 1, 6, and 11. Bit 6 also belongs to \"dog\". A query for \"dog\" now finds bit 6 = 0 and answers \"definitely not seen\", which is wrong. For this reason a basic Bloom filter does not support delete.",
+          "new": "**Deleting.** A basic Bloom filter does not support delete."
+        },
+        {
+          "old": "One hash sets one specific bit with probability `1/m`. After `n` adds, there were `k·n` bit-sets. The chance that a given bit is still 0 is",
+          "new": "After `n` adds, the chance that a given bit is 0 is"
+        },
+        {
+          "old": "But each hash also sets more bits, so the array fills faster.",
+          "new": "But each extra hash also makes the array fill faster."
+        },
+        {
+          "old": "maps each item to `k` positions in a bit array and sets those bits.",
+          "new": "maps each item to `k` positions in a bit array."
+        },
+        {
+          "old": "because other items can set the same bits.",
+          "new": "because other items can map to the same bits."
+        }
+      ],
+      "error": "",
+      "check": {
+        "recoverable": true,
+        "quote": "After `n` adds, the chance that a given bit is 0 is",
+        "present": {},
+        "marked": false,
+        "reason": "The Add(x) step no longer says to set the k bits to 1. The reader can still infer it. Bits start at 0, the query for an added item finds all 1s at its positions, and the probability that a bit is still 0 shrinks with each add. The statement that a basic filter does not support delete implies bits are never cleared. Block 1 was the only block, so none must stay. Nothing shows the removal: the Add step simply reads 'compute the k positions for x.', with no marker, note or dangling reference."
+      },
+      "passed": false
+    },
+    {
+      "edits": [
+        {
+          "old": "To add an item, it hashes the item to a few bit positions and sets those bits to 1. To check an item, it hashes the item the same way and looks at the same positions.",
+          "new": "To check an item, it hashes the item to a few bit positions and looks at those bits."
+        },
+        {
+          "old": " The bits for that item could also have been set by other items.",
+          "new": ""
+        },
+        {
+          "old": "1. **Add(x)**: compute the `k` positions for `x`. Set each bit to 1.",
+          "new": "1. **Add(x)**: compute the `k` positions for `x`."
+        },
+        {
+          "old": "| Step | Positions | Bits that are 1 after the step |\n|---|---|---|\n| Add \"cat\" | 1, 6, 11 | 1, 6, 11 |\n| Add \"dog\" | 3, 6, 14 | 1, 3, 6, 11, 14 |\n\n\"cat\" and \"dog\" share bit 6. That sharing is normal, and it is the source of every error.\n\nNow query three items:",
+          "new": "Add \"cat\" and \"dog\". Afterwards, bits 1, 3, 6, 11, and 14 are 1.\n\nNow query three items:"
+        },
+        {
+          "old": "\"owl\" was never added. Its three bits were set by \"cat\" (bit 1) and \"dog\" (bits 3 and 14). The filter has no record of *which* item set a bit, so it cannot tell the difference.",
+          "new": "\"owl\" was never added. Its three bits happen to be 1. The filter has no record of *which* item a bit belongs to, so it cannot tell the difference."
+        },
+        {
+          "old": "## Why it never misses an item it saw\n\nAdd only changes bits from 0 to 1. Nothing changes a bit back to 0. When you add `x`, its `k` bits become 1, and they stay 1. A later query for `x` computes the same `k` positions, finds all 1s, and answers \"probably seen\". So a **false negative** (a \"no\" for an item that was added) cannot happen.\n\n**Where this guarantee breaks.** The guarantee depends on \"nothing clears a bit\". Suppose you try to delete \"cat\" by clearing bits 1, 6, and 11. Bit 6 also belongs to \"dog\". A query for \"dog\" now finds bit 6 = 0 and answers \"definitely not seen\", which is wrong. For this reason a basic Bloom filter does not support delete. (A *counting Bloom filter* stores a small counter in place of each bit, so it can delete. It uses about 4 times the memory.)\n\n",
+          "new": ""
+        },
+        {
+          "old": "One hash sets one specific bit with probability `1/m`. After `n` adds, there were `k·n` bit-sets. The chance that a given bit is still 0 is",
+          "new": "One hash picks one specific bit with probability `1/m`. After `n` adds, there were `k·n` picks. The chance that a given bit is 0 is"
+        },
+        {
+          "old": "But each hash also sets more bits, so the array fills faster.",
+          "new": "But each hash also uses more bits, so the array fills faster."
+        },
+        {
+          "old": "maps each item to `k` positions in a bit array and sets those bits.",
+          "new": "maps each item to `k` positions in a bit array."
+        },
+        {
+          "old": "All 1s mean \"probably present\", because other items can set the same bits.",
+          "new": "All 1s mean \"probably present\"."
+        }
+      ],
+      "error": "",
+      "check": {
+        "recoverable": true,
+        "quote": "Add \"cat\" and \"dog\". Afterwards, bits 1, 3, 6, 11, and 14 are 1.",
+        "present": {},
+        "marked": false,
+        "reason": "The Add(x) definition now says only 'compute the k positions for x' and never says those bits are set to 1. A reader can still infer it. The worked example shows that adding items leaves their positions at 1. The error analysis treats each of the k·n hash picks as a chance to turn a bit from 0 to 1 ('the array fills faster', 'the chance that a given bit is 0 is (1 − 1/m)^(k·n)'). The line 'A 0 proves the item is absent' only holds if bits are never cleared. Together these give back the whole block: set k bits to 1, never clear them. That is enough to see that OR gives the exact union filter and AND does not give an exact intersection filter. No other blocks had to stay. Nothing marks the removal: Add(x) reads as a complete step, with no note or placeholder and no reference to missing text."
+      },
+      "passed": false
+    }
+  ]
+}

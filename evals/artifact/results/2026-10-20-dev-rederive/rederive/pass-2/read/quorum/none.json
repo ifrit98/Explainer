@@ -1,0 +1,36 @@
+{
+  "steps": [
+    {
+      "step": "For a later group of servers to know about an earlier decision, the two groups must have at least one server in common.",
+      "part": "Why a majority, and not \"whoever is still up\"? (paragraph after 'Two majorities of the same group always share at least one member')",
+      "idea": "Because any two quorums overlap, every decision is seen by at least one server that also took part in the previous decision. That shared server is what keeps later decisions consistent with earlier ones."
+    },
+    {
+      "step": "The overlap guarantee comes from counting, not from the groups being majorities as such: if two groups together hold more servers than exist, they must share one.",
+      "part": "Same section: 'If each of two groups contained more than half the servers, together they would contain more than all of them, which is impossible unless some server is in both'",
+      "idea": "Two groups share a member whenever their sizes add up to more than n. This is the pigeonhole principle, which I also know as background."
+    },
+    {
+      "step": "Apply this to a read group and a write group: for a read to see the latest committed write, every read group of R servers must share a server with every write group of W servers. With n = 5 this means W + R > 5, so W + R ≥ 6.",
+      "part": "Steps 1 and 2",
+      "idea": "The latest write is held by its W servers, and the read asks R servers. If W + R > 5, at least one server the read asks holds the write. If W + R ≤ 5, the two groups can be completely separate, and the read can miss the write."
+    },
+    {
+      "step": "Check W = 4, R = 2: 4 + 2 = 6 > 5, so every read group overlaps every write group.",
+      "part": "Step 3",
+      "idea": "The condition holds."
+    },
+    {
+      "step": "An operation can still go ahead as long as enough servers are up to form its group, so the number of failures it survives is n minus the group size.",
+      "part": "Now count ('failures tolerated = n − quorum size')",
+      "idea": "Failures tolerated equals the total number of servers minus the number that must respond."
+    },
+    {
+      "step": "Writes need 4 of 5 servers, so they survive 5 − 4 = 1 failure. Reads need 2 of 5, so they survive 5 − 2 = 3 failures.",
+      "part": "Step 5",
+      "idea": "Substitute W = 4 and R = 2 into n − group size."
+    }
+  ],
+  "result": "The rule is W + R > 5 (that is, W + R ≥ 6), so every read group overlaps every write group. With W = 4 and R = 2 the rule holds (6 > 5). Writes survive 1 failure (5 − 4) and reads survive 3 failures (5 − 2).",
+  "gap": "Small gap: the explanation only covers one majority quorum used for every decision. It never talks about separate read and write groups or groups smaller than a majority. I got W + R > n by applying its counting argument for why groups overlap. The explanation doesn't state that rule itself, and it doesn't say whether two write groups must also overlap (which would need W > n/2)."
+}

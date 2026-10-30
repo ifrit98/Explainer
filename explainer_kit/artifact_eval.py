@@ -204,6 +204,16 @@ def reader_prompt(files: list[Path], reader: str, quiz: list[dict]) -> str:
     ])
 
 
+def copy_for_reader(files: list[Path], shown: Path) -> list[Path]:
+    """The reader gets copies of the renderings alone, so it cannot open model.md or the review runs."""
+    if shown.exists():
+        shutil.rmtree(shown)
+    shown.mkdir(parents=True)
+    for f in files:
+        shutil.copy(f, shown / f.name)
+    return [shown / f.name for f in files]
+
+
 def read(subject: dict, name: str, reader: str, out: Path, model: str | None) -> dict:
     ws = out / "work" / subject["id"] / name
     saved = ws / "read.json"
@@ -213,15 +223,8 @@ def read(subject: dict, name: str, reader: str, out: Path, model: str | None) ->
     if not files:
         result = {"answers": {}, "stops": [], "excess": [], "missing": True}
     else:
-        # The reader gets copies of the renderings alone, so it cannot open model.md or the review runs.
         shown = out / "shown" / subject["id"] / name
-        if shown.exists():
-            shutil.rmtree(shown)
-        shown.mkdir(parents=True)
-        copies = []
-        for f in files:
-            shutil.copy(f, shown / f.name)
-            copies.append(shown / f.name)
+        copies = copy_for_reader(files, shown)
         prompt = reader_prompt(copies, reader, subject["quiz"])
         for _ in range(2):  # a smaller reader model sometimes breaks the JSON shape; ask once more
             result = reader_reply(agent.ask(READER_SYSTEM, prompt, model=model, read=[shown]), len(subject["quiz"]))

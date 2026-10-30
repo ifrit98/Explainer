@@ -1,0 +1,41 @@
+{
+  "steps": [
+    {
+      "step": "A filter's bit array is exactly the set of positions turned on by its added items. Adding only ever sets bits to 1, and the order of adds doesn't matter.",
+      "part": "How it works: add and query",
+      "idea": "To add an item, set its k positions (hash mod m) to 1 and keep nothing else. The final bits are just the union of the positions of every item added."
+    },
+    {
+      "step": "Both filters use the same m and the same hash functions, so any item maps to the same k positions in either one.",
+      "part": "How it works: add and query",
+      "idea": "Positions depend only on the hash functions and m. Matching m and k means matching positions."
+    },
+    {
+      "step": "A filter built directly from A ∪ B would have a 1 exactly at the positions set by items of A or items of B. That is a bitwise OR of the two arrays.",
+      "part": "Steps 1, 2",
+      "idea": "The union of A's positions and B's positions is the OR of A's bit array and B's bit array."
+    },
+    {
+      "step": "The OR is exact: it is bit-for-bit the same as adding every item of A and B into one fresh filter. So it has no false negatives and the same false-positive behaviour as that filter. Its fill comes from n = |A ∪ B|.",
+      "part": "Step 3; Why it is never wrong the other way; How often it is wrong",
+      "idea": "Same bits means same answers. The rate p ≈ f^k uses the fill from all the items, so if |A ∪ B| is well above the capacity, p rises."
+    },
+    {
+      "step": "A bitwise AND keeps only the positions that are 1 in both filters. Every item in A ∩ B set its k positions in both, so all of those bits survive. The AND therefore has no false negatives for A ∩ B.",
+      "part": "Step 1; Why it is never wrong the other way",
+      "idea": "Every item in both sets has all its bits on in both arrays, so its bits are still on after the AND."
+    },
+    {
+      "step": "The AND is not exact. A position can be 1 in A's filter because of one item and 1 in B's filter because of a different item. Then it stays on even though no item of A ∩ B set it.",
+      "part": "How it can be wrong: false positives",
+      "idea": "Bits don't record which item set them (like owl's bits coming from cat and dog). So the AND can have extra 1s that a filter built from A ∩ B would not have."
+    },
+    {
+      "step": "So the AND is a valid but noisier filter for A ∩ B. It has the same or more 1s than the true one, so its false-positive rate is the same or higher.",
+      "part": "Step 6; How often it is wrong",
+      "idea": "More 1 bits means a higher fill f, and p ≈ f^k rises with f."
+    }
+  ],
+  "result": "OR the two bit arrays position by position. This gives exactly the filter you would get by adding every item of A ∪ B to one fresh filter, so it is exact. Its false-positive rate is that of a filter holding |A ∪ B| items, which is higher if that goes past capacity. A bitwise AND gives a filter for A ∩ B that never says 'definitely not seen' for an item in both sets. But it isn't exact: a bit can be on in A's filter from one item and in B's from a different item. So the AND can have extra 1s compared with a filter built from A ∩ B, and its false-positive rate is the same or higher.",
+  "gap": ""
+}

@@ -1,0 +1,31 @@
+{
+  "steps": [
+    {
+      "step": "Earth has to shed about 238 W/m² to space, and greenhouse gases set none of this figure.",
+      "part": "Section 1 and Section 8 ('238 W/m²')",
+      "idea": "Absorbed sunlight (1361/4 × 0.70) fixes how much energy must leave. Emission follows σT⁴."
+    },
+    {
+      "step": "Greenhouse gases absorb infrared and give out new infrared at a rate set by their own temperature.",
+      "part": "Section 3, last paragraph",
+      "idea": "A gas that absorbs at a wavelength also emits at that wavelength, at a rate set by its temperature."
+    },
+    {
+      "step": "Making the air more absorbing cannot, on its own terms, explain extra warming once the band is opaque.",
+      "part": "Section 4, final paragraph",
+      "idea": "If a layer already absorbs everything, adding more CO2 changes nothing in the one-layer model."
+    },
+    {
+      "step": "In the real atmosphere, temperature falls with height at about 6.5 K per km.",
+      "part": "Section 5 (lapse rate)",
+      "idea": "Convection keeps the troposphere colder higher up."
+    },
+    {
+      "step": "Adding CO2 causes a forcing: less energy leaves than arrives, about 3.7 W/m² for doubled CO2.",
+      "part": "Section 6",
+      "idea": "The text states the imbalance and gives the fitted formula. It says the logarithm comes from the band edges, but it does not say why less energy escapes."
+    }
+  ],
+  "result": "Not reached. My guess is that with no lapse rate, adding CO2 would change little or nothing, because the gas would emit at the same temperature at every height. But the explanation never says how the lapse rate produces the forcing, so I cannot support that guess from the text.",
+  "gap": "The explanation never links the lapse rate (Section 5) to the forcing (Section 6). It never says that radiation reaches space from some height in the atmosphere, that more CO2 moves that height upward, or that the air there is colder and so emits less (σT⁴). Without that link, I cannot work out from the text what would happen with the same temperature at every height."
+}

@@ -1,0 +1,41 @@
+{
+  "steps": [
+    {
+      "step": "Energy balance requires whatever emits to space to give off 240 W/m², which means it must be at 255 K.",
+      "part": "Section 1 (Without greenhouse gases: 255 K)",
+      "idea": "Absorbed sunlight is 1361/4 × 0.70 ≈ 240 W/m². Setting σT⁴ = 240 gives T = 255 K for the emitter."
+    },
+    {
+      "step": "Infrared escapes to space from the emission height, and the air there must be at 255 K.",
+      "part": "Section 3, first two paragraphs",
+      "idea": "Infrared only escapes from air with little greenhouse gas above it. That emitting air has to emit 240 W/m², so it must be at 255 K."
+    },
+    {
+      "step": "In the real atmosphere the surface is warmer than the emitting air only because air cools with height.",
+      "part": "Section 3, lapse rate paragraph and table",
+      "idea": "With a fall of 6.5 K per km, the surface 5 km below the emitting air is 33 K warmer (255 K up there, 288 K at the ground)."
+    },
+    {
+      "step": "Adding CO₂ raises the emission height.",
+      "part": "Section 4, item 1",
+      "idea": "With more gas, infrared has to start higher before little gas remains above it (about 150 m higher for a doubling)."
+    },
+    {
+      "step": "If the temperature is the same at every height (lapse rate 0), the air at the new, higher emission height is just as warm as before.",
+      "part": "Section 5, test-case paragraph; steps 3–4",
+      "idea": "With no cooling with height, the higher emitting air is still 255 K and still emits 240 W/m²."
+    },
+    {
+      "step": "So there is no imbalance and nothing makes the Earth warm up.",
+      "part": "Section 4, items 3–4; Section 5",
+      "idea": "Warming comes from a forcing: the Earth emitting less than it absorbs. Here outgoing power stays at 240 W/m², so the forcing is zero and the Earth gains no energy."
+    },
+    {
+      "step": "The surface temperature does not change.",
+      "part": "Section 4, item 5; Section 5, last paragraph; step 3",
+      "idea": "Normally the surface warms because it ends up further below colder emitting air. With no cooling with height, being further below adds no warmth. Warming needs both a rising emission height and air that is colder higher up."
+    }
+  ],
+  "result": "Nothing would happen to the surface temperature. Adding CO₂ still lifts the emission height. But with the same temperature at every height, the air at the new height is still 255 K and still emits 240 W/m², matching the absorbed sunlight. There is no radiative forcing, the Earth gains no energy, and the surface does not warm. Greenhouse warming needs both a rising emission height and air that gets colder with height.",
+  "gap": ""
+}

@@ -1,0 +1,41 @@
+{
+  "steps": [
+    {
+      "step": "Growing an infection to 10^10 bacteria takes about 10^10 cell divisions, and each division is a chance for a copying error.",
+      "part": "Section 3, 'Mutation', worked example",
+      "idea": "Going from one cell to 10^10 cells takes about 10^10 divisions. Resistance mutations are rare errors made while the cell copies its DNA."
+    },
+    {
+      "step": "With drug A alone, about 10^10 × 1/10^8 = 100 cells already resist A before the first dose. With drug B alone, about 10^10 × 1/10^9 = 10 cells resist B.",
+      "part": "Section 3, 'Mutation', worked example; and step 1",
+      "idea": "Expected number of resistant cells = number of divisions × mutation rate. These cells exist before treatment starts; the drug does not create them."
+    },
+    {
+      "step": "With either drug alone, those few resistant cells survive and grow back into a resistant infection.",
+      "part": "Section 4, 'How the drug makes resistance common'",
+      "idea": "The drug kills the susceptible cells. The resistant cells are not affected and keep doubling (100 × 2^24 ≈ 1.7 × 10^9 in a day), so resistance takes over. Even 10 B-resistant cells are enough to start this."
+    },
+    {
+      "step": "When both drugs are given together, a cell survives only if it resists both, so it needs both unrelated mutations.",
+      "part": "Section 4, 'Dose controls which cells survive', last paragraph",
+      "idea": "Some treatments use two drugs at once because a cell would need two independent mutations to survive both."
+    },
+    {
+      "step": "Because the two mutations are independent, their rates multiply: 1/10^8 × 1/10^9 = 1 in 10^17 divisions.",
+      "part": "Section 4, 'Dose controls which cells survive', last paragraph (the 1 in 10^8 × 1 in 10^8 = 1 in 10^16 example)",
+      "idea": "The chance of a cell having two independent mutations is the product of the two rates. I used the question's rates in place of the explanation's example numbers."
+    },
+    {
+      "step": "The expected number of cells that resist both drugs is 10^10 × 10^-17 = 10^-7. In practice that is almost certainly zero.",
+      "part": "Steps 1 and 5; background (arithmetic)",
+      "idea": "10^17 divisions would be needed to expect one double mutant, which is far more than the 10^10 divisions in the whole infection."
+    },
+    {
+      "step": "With no cell that resists both drugs, the combination kills every cell, and nothing is left to be selected and grow back.",
+      "part": "Section 4 (selection only multiplies cells that already exist); step 6",
+      "idea": "Selection can only enrich cells that are already there. One drug faces about 100 or 10 survivors; two drugs face about one chance in 10 million that a single survivor exists."
+    }
+  ],
+  "result": "Given alone, drug A faces about 100 cells that already resist it (10^10 × 10^-8), and drug B faces about 10 (10^10 × 10^-9). The drug kills everything else, and those few cells multiply into a resistant infection. Given together, the drugs kill any cell that resists only one of them. A cell survives only if it carries both unrelated mutations, and because they are independent that happens about once in 10^8 × 10^9 = 10^17 divisions. An infection of 10^10 cells is expected to hold only about 10^-7 such cells, roughly a 1-in-10-million chance that even one exists. So the combination almost certainly leaves nothing to select. One caveat from the explanation: a single plasmid passed between bacteria can carry several resistance genes at once, so this argument holds only when the two resistances come from separate mutations, as the question states.",
+  "gap": ""
+}

@@ -1,0 +1,36 @@
+{
+  "steps": [
+    {
+      "step": "Each body stretches the water into two bulges along the line to that body, and squeezes it at the points 90° away from that line.",
+      "part": "Step 2: compute the pull at three points (the bulge/squeeze diagram and the paragraph on the sides at 90°)",
+      "idea": "The tidal acceleration is outward at the near and far sides and inward at the sides 90° away, so water flows from the squeezed sides to the stretched ends."
+    },
+    {
+      "step": "The size of a tide (bulge minus squeeze) grows with the tidal acceleration.",
+      "part": "Step 3: what the number means",
+      "idea": "A larger tidal acceleration gives taller bulges. The ideal ocean's difference of about 0.5 m between bulge and squeeze is set by how strong the tidal pull is."
+    },
+    {
+      "step": "The Sun's tidal effect is about 0.46 of the Moon's, and it works the same way.",
+      "part": "The Sun does the same thing",
+      "idea": "Tides depend on M/d³. For the Sun this comes to about 46% of the Moon's effect, made by the same two-bulge mechanism."
+    },
+    {
+      "step": "Spring tides: with the Sun and Moon lined up, the bulges sit in the same places and add. Size ≈ 1 + 0.46 = 1.46 times the Moon's tide alone.",
+      "part": "The Sun does the same thing; steps 1–3",
+      "idea": "When the Sun and Moon line up, their bulges add, giving spring tides."
+    },
+    {
+      "step": "Quarter Moons: with the Sun at 90°, the Sun's bulges fall where the Moon squeezes the water, and the Sun's squeeze falls on the Moon's bulges. So the two effects subtract: size ≈ 1 − 0.46 = 0.54 times the Moon's tide alone.",
+      "part": "The Sun does the same thing ('partly cancel'); step 1",
+      "idea": "At 90° the two patterns are offset by a quarter turn, so the Sun lowers the Moon's bulges and fills in its lows. This gives small neap tides."
+    },
+    {
+      "step": "Ratio of neap to spring: 0.54 / 1.46 ≈ 0.37.",
+      "part": "steps 4 and 5; background (arithmetic)",
+      "idea": "Divide the two combined sizes."
+    }
+  ],
+  "result": "At the quarter Moons you get neap tides. Their range is about (1 − 0.46)/(1 + 0.46) ≈ 0.37 of a spring tide's range, so a bit more than a third. Put another way, spring tides are about 2.7 times larger. In the ideal ocean that would be roughly 0.5 × 0.54 ≈ 0.27 m against 0.5 × 1.46 ≈ 0.73 m, if the explanation's ~0.5 m is the Moon's effect alone. This is the idealized model; real coasts differ.",
+  "gap": ""
+}

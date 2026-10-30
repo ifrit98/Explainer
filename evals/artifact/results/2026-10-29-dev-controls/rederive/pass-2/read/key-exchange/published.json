@@ -1,0 +1,41 @@
+{
+  "steps": [
+    {
+      "step": "Each of the three picks a private number at random and never sends it. Example: a = 6 (Alice), b = 15 (Bob), c = 3 (Carol). Everyone uses p = 23 and g = 5, which are public.",
+      "part": "The exchange, with small numbers (steps 1–2)",
+      "idea": "The two-person exchange works by giving each person a private number that is never sent, plus public p and g. Nothing in it limits it to two people."
+    },
+    {
+      "step": "Round 1: each person sends g^(own private) mod p. Alice sends 5^6 mod 23 = 8, Bob sends 5^15 mod 23 = 19, and Carol sends 5^3 mod 23 = 10. Each of these goes to the next person around a circle: Alice→Bob, Bob→Carol, Carol→Alice.",
+      "part": "The exchange, with small numbers (step 3); The limit section (5^3 mod 23 = 10)",
+      "idea": "A public number is g raised to the private number, mod p. The explanation already gives 8 and 19, and the Mallory section shows 5^3 mod 23 = 10."
+    },
+    {
+      "step": "Round 2: each person raises the number they just got to their own private number and passes the result on around the circle. Bob computes 8^15 mod 23 = 2 (= g^(ab)) and sends it to Carol. Carol computes 19^3 mod 23 = 5 (= g^(bc)) and sends it to Alice. Alice computes 10^6 mod 23 = 6 (= g^(ca)) and sends it to Bob.",
+      "part": "The exchange, with small numbers (step 4); The limit section (8^3 = 6, 19^3 = 5, 10^6 = 6)",
+      "idea": "Raising someone's public number to your own private number finishes half of a calculation without undoing it. The explanation's examples give these values directly."
+    },
+    {
+      "step": "Final step: each person raises the round-2 number they received to their own private number. Carol computes 2^3 = 8. Alice computes 5^6 mod 23 = 8. Bob computes 6^15 mod 23 = 8. All three get s = 8, and each feeds it into the hash function to get the key.",
+      "part": "Why both get 2; the 5^x mod 23 table in 'Why powers, and why mod'; the paragraph after the exchange steps (hash)",
+      "idea": "By the exponent rule, ((g^a)^b)^c, ((g^b)^c)^a and ((g^c)^a)^b all equal g^(abc). Taking remainders along the way doesn't change the final remainder. The table gives 5^6 mod 23 = 8. Then s goes through the hash to make the key."
+    },
+    {
+      "step": "Eve sees p, g, 8, 19, 10, 2, 5 and 6, which are g^a, g^b, g^c, g^ab, g^bc and g^ca. She does not see a, b, c or s.",
+      "part": "What Eve sees (table)",
+      "idea": "The eavesdropper has every public number and none of the private ones."
+    },
+    {
+      "step": "Combining public numbers by multiplying doesn't work. For example, g^ab × g^c mod p = g^(ab+c), which adds the exponents. The secret needs them multiplied: g^(ab·c).",
+      "part": "What Eve sees (multiplying fails)",
+      "idea": "Multiplying powers adds exponents, but the shared secret needs the product of the exponents."
+    },
+    {
+      "step": "Each pair Eve could use, such as g^ab with g^c or g^bc with g^a, is the same problem Eve faces in the two-person exchange: two public powers whose exponents must be multiplied. The only known way is to find an exponent (a, b, c or ab) from its power, which is the discrete logarithm. With a 2048-bit p that takes about 2^112 operations.",
+      "part": "What Eve sees; Why powers, and why mod; Why real numbers are huge; Assumption, not proof",
+      "idea": "g^x mod p is one-way, and no fast discrete-log method is known for a large p. Security rests on that assumption, which has not been proven."
+    }
+  ],
+  "result": "Use a ring of three rounds. (1) Each person sends g^(own private) mod p to the next person: Alice→Bob→Carol→Alice. (2) Each raises what they got to their own private number and passes it on, so Bob sends g^ab to Carol, Carol sends g^bc to Alice, and Alice sends g^ca to Bob. (3) Each raises what they got to their own private number. All three get g^(abc) mod p (8 in the p = 23, g = 5, a = 6, b = 15, c = 3 example), and they hash it to make the key. Eve sees only g^a, g^b, g^c, g^ab, g^bc and g^ca. Multiplying them only adds exponents. Getting g^(abc) from any pair is the same two-person problem: in effect she must take a discrete logarithm to find a hidden exponent, and no fast method is known for a large p. This is an assumption, not a proof. As with two people, this stops only someone who reads messages, not someone who changes them, unless the messages are authenticated.",
+  "gap": "The explanation only covers two people. The three-party ring of rounds is my own extension, built from the explanation's exponent rule and mod-power steps. The claim that Eve can't get g^(abc) from the six public values also goes beyond the text. The explanation argues only that A and B alone don't give s, so treating g^ab as just another public number is my step, not its claim."
+}

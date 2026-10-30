@@ -1,0 +1,36 @@
+{
+  "steps": [
+    {
+      "step": "A double can store a number exactly only if it is a finite sum of powers of 2 (1/2, 1/4, 1/8, …) that fits in 53 significant bits. Any other number is replaced by the nearest such binary fraction.",
+      "part": "Why 0.1 has the same problem in base 2 (first paragraph and the paragraph above the table)",
+      "idea": "A double is a binary fraction with 53 significant bits. A number whose binary form repeats forever is stored as the nearest binary fraction, called the stored value."
+    },
+    {
+      "step": "0.375 = 3/8 = 1/4 + 1/8, which is binary 0.011. That is a short binary fraction, so a double stores it exactly.",
+      "part": "Step 1 + background (fraction arithmetic)",
+      "idea": "Write 0.375 as a fraction and break it into powers of 2. It needs only a few bits."
+    },
+    {
+      "step": "0.0625 = 1/16 = 2^-4, which is binary 0.0001. It is exact.",
+      "part": "Step 1 + background",
+      "idea": "A single power of 2 is the simplest binary fraction there is."
+    },
+    {
+      "step": "0.2 and 0.3 are not exact. The stored 0.2 is 0.2000000000000000111… and the stored 0.3 is 0.2999999999999999888….",
+      "part": "Why 0.1 has the same problem in base 2 (table of stored values) and When addition is exact (last sentence)",
+      "idea": "The table shows that the stored values differ from the written ones. The text names 0.1, 0.2 and 0.3 as numbers with no short binary form."
+    },
+    {
+      "step": "0.125 = 1/8 is exact. Each running total k/8 (1/8, 2/8, …, 8/8 = 1) is also a short binary fraction, so no addition ever has to round, and the eighth sum is exactly 1.0.",
+      "part": "When addition is exact (0.5 + 0.25 example) + Step 1 + background",
+      "idea": "If the inputs and the sum are all short binary fractions, no step rounds and no error appears. Every k/8 is a short binary fraction."
+    },
+    {
+      "step": "0.1 is stored as 0.1000000000000000055…, so the input is wrong before any adding starts. Most of the running totals (0.2, 0.3, …) are not short binary fractions either, so each addition rounds its exact sum to the nearest double. These input and rounding errors build up, and the final double can differ from the double for 1.0. Since == compares bit for bit, the comparison fails.",
+      "part": "Why 0.1 has the same problem in base 2 (table); What happens in the addition (steps 1–4); The same problem in base 10 (calculator analogy)",
+      "idea": "The adding is done correctly, but the inputs are already wrong and each sum is rounded to the nearest double. The small errors add up to a different double, and == then reports false."
+    }
+  ],
+  "result": "Exact: 0.375 (= 1/4 + 1/8) and 0.0625 (= 1/16). Not exact: 0.2 and 0.3, because their binary forms repeat forever and get rounded. Adding 0.125 = 1/8 eight times is exact because 1/8 and every running total k/8 are short binary fractions, so no step rounds and the total is exactly 1.0. Adding 0.1 ten times starts from a stored 0.1 that is slightly too high. Most running totals then need rounding to the nearest double, and the errors build up to a double that is not 1.0, so == is false. The explanation does not give the final value (whether it ends up just above or just below 1.0). For that you would have to work through the ten roundings yourself, but you don't need it for the 'why'.",
+  "gap": ""
+}

@@ -1,0 +1,31 @@
+{
+  "steps": [
+    {
+      "step": "Matching cells build up by dividing, so the response grows by multiplication, starting from the cells that match.",
+      "part": "How it works, item 3 (Clonal expansion)",
+      "idea": "A lymphocyte that binds the antigen and gets an alarm signal divides over and over, making a clone of thousands of identical cells."
+    },
+    {
+      "step": "Vaccination means the response starts from a larger population of matching cells, so it reaches useful strength sooner.",
+      "part": "How it works, item 4 (Memory cells remain), and the table in 'Why it works: a race'",
+      "idea": "Memory cells leave more matching cells than before (the explanation says 10–100 times; the question uses 1,000 times), and with this head start useful antibody arrives in 2–4 days instead of 7–14."
+    },
+    {
+      "step": "Write the model: with N0 starting cells doubling every 12 h, the time to reach a threshold N is t = 12 h × log2(N/N0).",
+      "part": "background",
+      "idea": "Exponential growth and logarithms from school maths, using the 12-hour doubling time given in the question."
+    },
+    {
+      "step": "Subtract the two times: t_first − t_vaccinated = 12 h × [log2(N/N0) − log2(N/(1000·N0))] = 12 h × log2(1000). The threshold N cancels out.",
+      "part": "step 3",
+      "idea": "The threshold is the same in both cases, so it drops out of the difference. Only the ratio of starting sizes matters."
+    },
+    {
+      "step": "log2(1000) ≈ 9.97, about 10 doublings, and 10 × 12 h = 120 h ≈ 5 days.",
+      "part": "step 4",
+      "idea": "2^10 = 1024 ≈ 1000."
+    }
+  ],
+  "result": "About 5 days sooner. A 1,000-fold head start is worth about 10 doublings (2^10 ≈ 1000), and 10 × 12 hours = 120 hours. The answer does not depend on how many cells count as 'enough' because in exponential growth, the time to reach any level is the doubling time × log2(target/start). Both responses aim at the same target, so the target cancels when you subtract the two times. The vaccinated population simply passes every level 10 doublings earlier. The explanation itself gives typical figures of about 10–100 times more memory cells and useful antibody after 2–4 days instead of 7–14. The 1,000-fold figure and 12-hour doubling time come from the question.",
+  "gap": ""
+}

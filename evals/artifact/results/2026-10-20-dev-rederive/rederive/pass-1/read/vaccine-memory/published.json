@@ -1,0 +1,36 @@
+{
+  "steps": [
+    {
+      "step": "Number of doublings needed: starting count × 2^n = target count, so n = log2(target / starting count).",
+      "part": "The first meeting is slow (paragraph: 100 × 2^n = 1,000,000)",
+      "idea": "The explanation works out response time by counting the doublings from the precursor count up to the target number of effector cells, then multiplying by the doubling time."
+    },
+    {
+      "step": "Each doubling of the starting count removes exactly one division.",
+      "part": "What stays behind (rule under the table)",
+      "idea": "If the precursor count doubles, one division is saved. The worked numbers show this: 100 cells need 13.3 divisions, 10,000 cells need 6.6, and the 100× head start saves about log2(100) ≈ 6.6 divisions."
+    },
+    {
+      "step": "A 1,000× larger starting count saves log2(1000) ≈ 9.97, or about 10, divisions.",
+      "part": "Step 2 + background",
+      "idea": "1,000 is about 2^10 (1,024), so 1,000 times as many cells is about 10 doublings already done."
+    },
+    {
+      "step": "At 12 hours per doubling, 10 divisions are about 120 hours, or about 5 days.",
+      "part": "Step 3 + question's 12-hour doubling time",
+      "idea": "Time saved = divisions saved × doubling time. The question uses 12 hours instead of the explanation's 8."
+    },
+    {
+      "step": "The saving does not depend on the target count N.",
+      "part": "Step 1 + background (logarithms)",
+      "idea": "Vaccinated n = log2(N/1000P) = log2(N/P) − log2(1000). The difference from the unvaccinated case is log2(1000) whatever N is. Both cases have to reach the same target, and the extra 1,000× just means the first ~10 doublings are already done."
+    },
+    {
+      "step": "This simple model leaves out activation delays.",
+      "part": "What stays behind (memory cells activate in under a day vs about 2.5 days)",
+      "idea": "The explanation adds a separate activation delay, which also shortens after a first exposure. The question's model counts only doublings, so this is not included."
+    }
+  ],
+  "result": "About 10 doublings sooner (2^10 ≈ 1,000), so about 10 × 12 h ≈ 120 hours, or about 5 days earlier. The number of doublings needed is log2(target / starting cells). Multiplying the starting cells by 1,000 always subtracts log2(1000) ≈ 10 doublings, whatever the target is, so the size of 'enough' cancels out.",
+  "gap": ""
+}

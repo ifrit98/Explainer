@@ -1,0 +1,36 @@
+{
+  "steps": [
+    {
+      "step": "Earth must shed about 238 W/m² to space, and this sets the temperature the emitting layer must have: 255 K.",
+      "part": "Section 1 and Section 8 ('238 W/m²', '255 K')",
+      "idea": "Absorbed sunlight sets the energy that must leave. By σT⁴, the layer that emits it must be at 255 K. Greenhouse gases decide where that layer is, not its temperature."
+    },
+    {
+      "step": "The infrared that reaches space comes from an emission level high in the air, not from the surface.",
+      "part": "Section 5, Fact 1",
+      "idea": "A photon escapes only if little absorbing gas lies above it, so the emission comes from a certain altitude."
+    },
+    {
+      "step": "The surface is warmer than the emission level only because temperature changes with height (the lapse rate).",
+      "part": "Section 5, Fact 2 and the altitude diagram",
+      "idea": "Surface temperature = emission-level temperature + lapse rate × height of the emission level."
+    },
+    {
+      "step": "Adding CO2 raises the emission level.",
+      "part": "Section 6, chain step 1",
+      "idea": "More absorbing gas above each altitude means a photon must start higher to escape."
+    },
+    {
+      "step": "In air with the same temperature at every height, the higher emission level has the same temperature, so it emits the same amount (σT⁴ unchanged).",
+      "part": "Section 7, 'Breaks (isothermal air)' bullet; step 3",
+      "idea": "With no lapse rate, moving up does not make the emitting air colder."
+    },
+    {
+      "step": "So no energy imbalance appears, and nothing pushes the surface to warm. The surface is also at the same temperature as the emission level (255 K), however high that level is.",
+      "part": "Step 5; Section 6 chain steps 2–5; step 3",
+      "idea": "Warming needs the emission to drop. Here it does not drop, and the gap between surface and emission level is zero at any height."
+    }
+  ],
+  "result": "Adding CO2 would not change the surface temperature. More CO2 still raises the emission level, but in air that is the same temperature at every height, the new level is no colder. It emits the same 238 W/m², so no energy imbalance (forcing) appears, and the surface does not need to warm. The surface would stay at the same temperature as the emission level (about 255 K) wherever that level is. So there would be no greenhouse warming from this mechanism.",
+  "gap": ""
+}

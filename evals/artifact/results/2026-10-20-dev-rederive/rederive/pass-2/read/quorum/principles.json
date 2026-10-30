@@ -1,0 +1,36 @@
+{
+  "steps": [
+    {
+      "step": "A read can only see the latest committed write if its read group shares at least one server with the write group that committed that write. The shared server holds the write.",
+      "part": "The fix: any two deciding groups must share a server",
+      "idea": "Safety comes from overlap. Two groups that must not act independently need a common server, and that server connects what one group did to what the other group sees. The page applies this to two write groups. I apply the same reasoning to one write group and one read group."
+    },
+    {
+      "step": "A write group of W servers and a read group of R servers, chosen from n = 5, always overlap only if W + R > 5, which means W + R ≥ 6.",
+      "part": "The fix: any two deciding groups must share a server (the line 'must overlap when their sizes add up to more than n')",
+      "idea": "Two groups inside n servers must overlap when their sizes add up to more than n. If the sizes add up to n or less, the groups can be disjoint, as the 2|2 example shows. The page uses q + q, but the rule depends only on the sum of the sizes, so W + R works the same way."
+    },
+    {
+      "step": "Writes should also satisfy W + W > 5, so W ≥ 3. Otherwise two conflicting writes could each succeed in separate groups.",
+      "part": "The fix: any two deciding groups must share a server; Why 'half' is not enough",
+      "idea": "Two write groups must overlap, or split brain returns. This gives the strict-majority condition W > n/2."
+    },
+    {
+      "step": "Check W = 4 and R = 2: 4 + 2 = 6 > 5, and 4 + 4 = 8 > 5. Both overlap conditions hold.",
+      "part": "steps 2 and 3",
+      "idea": "Plug the numbers into the inequalities."
+    },
+    {
+      "step": "An operation that needs a group of size k keeps working while at least k servers are alive, so it survives n − k failures.",
+      "part": "From quorum to failure tolerance (f = n − q)",
+      "idea": "Failure tolerance is total servers minus the group size needed. I apply this separately to the write size and the read size."
+    },
+    {
+      "step": "Writes survive 5 − 4 = 1 failure. Reads survive 5 − 2 = 3 failures. With more failures than that, the operation stops instead of returning a wrong result.",
+      "part": "step 5; What 'survive' means, and where it stops",
+      "idea": "With fewer than the needed number of servers alive, the operation is unavailable but still correct."
+    }
+  ],
+  "result": "The condition is W + R > 5 (W + R ≥ 6), so every read group shares a server with every write group. To stop conflicting writes, you also need W + W > 5 (W ≥ 3). With W = 4 and R = 2 (4 + 2 = 6 > 5), writes survive 1 failure and reads survive 3. One caveat: the page never says how a reader tells which of the replies it gets is the latest. I assumed the overlapping server's copy can be recognised as the newest.",
+  "gap": ""
+}

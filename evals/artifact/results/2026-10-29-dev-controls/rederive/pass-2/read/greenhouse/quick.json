@@ -1,0 +1,36 @@
+{
+  "steps": [
+    {
+      "step": "Infrared escapes to space only from air near the emission height. Adding greenhouse gas raises that height.",
+      "part": "Level 2, paragraph tagged mech-emission-height, and the Level 2 flowchart (A→B)",
+      "idea": "Infrared sent out lower down gets absorbed again higher up, so what reaches space comes from air with little gas above it. More gas pushes that air higher, by about 150 m for doubled CO2."
+    },
+    {
+      "step": "How much the planet sends to space depends on the temperature of the emitting air.",
+      "part": "Level 1, Stefan–Boltzmann paragraph; Level 2, second paragraph",
+      "idea": "Emission per m² is σT⁴, so colder emitting air sends out less power."
+    },
+    {
+      "step": "Today a higher emitter is colder only because of the lapse rate.",
+      "part": "Level 2, mech-emission-height paragraph (lapse rate 6.5 K/km) and flowchart step C",
+      "idea": "Air normally cools by about 6.5 K per km of height. Raising the emitter 150 m therefore makes it about 1 K colder, and that cuts the output by 3.8 W/m²."
+    },
+    {
+      "step": "If the atmosphere has one temperature at every height, the emitter is no colder after it rises.",
+      "part": "Step 3 plus the Level 2 paragraph tagged guar-lapse-rate",
+      "idea": "With no lapse rate, the air at the new, higher emission height is as warm as the air at the old height."
+    },
+    {
+      "step": "So the planet's output to space does not fall, and energy balance is never broken.",
+      "part": "Step 2, Level 1 energy-balance paragraph, guar-lapse-rate paragraph",
+      "idea": "The same T gives the same σT⁴, so outgoing infrared stays at 240 W/m², matching the sunlight absorbed. The planet gains no energy, so nothing pushes the column to warm."
+    },
+    {
+      "step": "So the surface temperature does not change.",
+      "part": "Steps 4–5; guar-lapse-rate paragraph ('more gas would not warm the surface'); Level 2 flowchart E→F",
+      "idea": "Surface warming in this mechanism comes only from the imbalance that makes the whole column warm. With no imbalance, the surface stays where it was."
+    }
+  ],
+  "result": "Adding CO2 would not change the surface temperature. More CO2 still raises the height from which infrared escapes to space. But when every height has the same temperature, the higher emitting air is just as warm as before. Its output (σT⁴) stays at 240 W/m², which still equals the sunlight absorbed. Energy balance is never broken, so nothing makes the column or the surface warm up. The extra warming from more gas depends on air getting colder with height.",
+  "gap": ""
+}

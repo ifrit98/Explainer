@@ -1,0 +1,50 @@
+{
+  "key": {
+    "A": "quick",
+    "B": "none",
+    "C": "principles",
+    "D": "published"
+  },
+  "grades": {
+    "quick": {
+      "marks": [
+        "supported",
+        "missing",
+        "missing",
+        "missing"
+      ],
+      "result_right": false,
+      "result_stated": false
+    },
+    "none": {
+      "marks": [
+        "supported",
+        "supported",
+        "stated",
+        "supported"
+      ],
+      "result_right": true,
+      "result_stated": false
+    },
+    "principles": {
+      "marks": [
+        "supported",
+        "supported",
+        "stated",
+        "supported"
+      ],
+      "result_right": true,
+      "result_stated": false
+    },
+    "published": {
+      "marks": [
+        "supported",
+        "unsupported",
+        "supported",
+        "unsupported"
+      ],
+      "result_right": false,
+      "result_stated": false
+    }
+  }
+}

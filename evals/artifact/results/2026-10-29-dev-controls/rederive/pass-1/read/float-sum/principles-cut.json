@@ -1,0 +1,36 @@
+{
+  "steps": [
+    {
+      "step": "A double stores only values on a grid made from a limited number of binary digits. Any other value is rounded to the nearest grid point.",
+      "part": "Section 3, 'What the computer actually stores'",
+      "idea": "A double holds a limited number of binary digits. Every literal is rounded to the nearest value that can be held, so a number is stored exactly only if its binary expansion ends within that limit."
+    },
+    {
+      "step": "A fraction is exact in a base only if its expansion in that base ends. A repeating expansion has to be cut off, which means rounding.",
+      "part": "Section 2, 'Why 0.1 has no exact binary form'",
+      "idea": "In base 10, 1/4 ends but 1/3 repeats. In base 2, 1/10 repeats ('0011' forever), so it must be rounded."
+    },
+    {
+      "step": "0.375 = 3/8 = 1/4 + 1/8, which is 0.011 in binary. 0.0625 = 1/16, which is 0.0001 in binary. Both expansions end after a few digits, so both are grid points and are stored exactly.",
+      "part": "background (converting fractions to binary), applied with steps 1–2 and Section 6",
+      "idea": "Section 6 gives 1/2, 1/4 and 3/4 as grid points. Halves of halves like 1/8 and 1/16 have short binary expansions in the same way."
+    },
+    {
+      "step": "0.2 and 0.3 cannot be stored exactly.",
+      "part": "Section 3 table and the Summary",
+      "idea": "The stored 0.2 is 0.20000000000000001110… and the stored 0.3 is 0.29999999999999998889…. The Summary says 0.1, 0.2 and 0.3 each have a repeating binary expansion."
+    },
+    {
+      "step": "Adding 0.125 eight times: 0.125 = 1/8 is stored exactly. Every running total (2/8, 3/8, … 8/8 = 1) is a short binary fraction, so it is a grid point too. No step needs rounding, and the final sum is exactly 1.0.",
+      "part": "Section 6, 'When addition is exact', plus step 3",
+      "idea": "When the inputs and the exact sum are all grid points, no rounding happens and the addition is exact."
+    },
+    {
+      "step": "Adding 0.1 ten times: the starting value is already wrong (slightly high). Each running total may also fall between grid points and be rounded again. These separate rounding errors do not cancel, so the final double can be one that is not 1.0.",
+      "part": "Section 1 (4-digit calculator), Section 3 table, Section 4 (sum rounded again)",
+      "idea": "Section 1 shows that numbers rounded one at a time give errors that don't cancel (0.3333 + 0.3333 ≠ 0.6667). Section 4 shows that a sum of stored values can land off the grid and be rounded a second time, onto a different double."
+    }
+  ],
+  "result": "Stored exactly: 0.375 (3/8 = binary 0.011) and 0.0625 (1/16 = binary 0.0001). Not exact: 0.2 and 0.3, which repeat forever in binary and are rounded to the nearest double. Adding 0.125 eight times gives exactly 1.0 because 1/8 and every running total k/8 are grid points, so no rounding ever happens. Adding 0.1 ten times starts from a value that is already slightly high, and each running total may be rounded again. These errors don't cancel, so the result can land on a double other than 1.0. One limit: the explanation says it doesn't cover how errors grow over long chains of additions. So it supports 'the result is not guaranteed to be 1.0', but not the exact value you get or which direction it is off.",
+  "gap": ""
+}

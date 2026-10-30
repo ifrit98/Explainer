@@ -1,0 +1,74 @@
+{
+  "key": {
+    "A": "published",
+    "B": "quick",
+    "C": "principles-cut",
+    "D": "none"
+  },
+  "grades": {
+    "published": {
+      "marks": [
+        "supported",
+        "supported",
+        "stated",
+        "stated"
+      ],
+      "result_right": true,
+      "result_stated": true,
+      "raw": [
+        "supported",
+        "supported",
+        "stated",
+        "stated"
+      ]
+    },
+    "quick": {
+      "marks": [
+        "supported",
+        "supported",
+        "stated",
+        "stated"
+      ],
+      "result_right": true,
+      "result_stated": true,
+      "raw": [
+        "supported",
+        "supported",
+        "stated",
+        "stated"
+      ]
+    },
+    "principles-cut": {
+      "marks": [
+        "missing",
+        "missing",
+        "missing",
+        "missing"
+      ],
+      "result_right": false,
+      "result_stated": false,
+      "raw": [
+        "missing",
+        "missing",
+        "missing",
+        "missing"
+      ]
+    },
+    "none": {
+      "marks": [
+        "supported",
+        "supported",
+        "supported",
+        "supported"
+      ],
+      "result_right": true,
+      "result_stated": false,
+      "raw": [
+        "supported",
+        "supported",
+        "supported",
+        "supported"
+      ]
+    }
+  }
+}

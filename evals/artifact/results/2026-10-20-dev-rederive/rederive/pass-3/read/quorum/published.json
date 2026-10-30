@@ -1,0 +1,41 @@
+{
+  "steps": [
+    {
+      "step": "Set up the problem: a write is committed once W of the 5 servers accept it. A read asks R servers. To see the latest committed write, the read group must include at least one server that accepted that write.",
+      "part": "The rule (definitions of accept, decided, quorum, quorum size)",
+      "idea": "A change is final once a group of the required size has accepted it and stored it on disk. Each server in that group holds the change."
+    },
+    {
+      "step": "Any two groups whose sizes add up to more than n must share a server. So if W + R > 5, every read group overlaps every write group.",
+      "part": "Why more than half works (the overlap paragraph: 3 + 3 = 6 > 5, so C is in both)",
+      "idea": "The counting argument is general. If two groups together list more than n servers, at least one server has to appear in both. The explanation uses it for two majorities, and the same counting works for groups of sizes W and R."
+    },
+    {
+      "step": "The condition is W + R > n, so W + R ≥ 6 for n = 5. If W + R ≤ 5, the two groups can be disjoint and the read can miss the write.",
+      "part": "Why not let the survivors go on (two groups of 2 among 4 need not share a server)",
+      "idea": "When the sizes add up to n or less, two groups can be chosen with no server in common, as {A,B} and {C,D} are in the split-brain table."
+    },
+    {
+      "step": "The shared server holds the committed write and can pass it to the read group. This is only partly supported: the explanation says it does not cover how reads work, so I assume the reader takes the newest value it receives.",
+      "part": "Limits (Simplified bullet: the shared server reports x = 1 to the new group; Not covered: how reads work)",
+      "idea": "The server in the overlap passes on the decided value. How a reader picks the newest value from the replies is not explained."
+    },
+    {
+      "step": "Two writes must not both be decided for the same position, so two write groups must also overlap: 2W > 5. W = 4 satisfies this (8 > 5).",
+      "part": "Why more than half works / Why not let the survivors go on",
+      "idea": "Two groups that need not share a server can decide different changes (split brain). Overlap between them prevents this."
+    },
+    {
+      "step": "Check W = 4, R = 2: 4 + 2 = 6 > 5, so every read overlaps the latest committed write.",
+      "part": "Step 3",
+      "idea": "Apply the condition W + R > n."
+    },
+    {
+      "step": "Failures survived = n − group size. Writes: 5 − 4 = 1. Reads: 5 − 2 = 3.",
+      "part": "Counting failures (tolerance = n − majority size; the cluster stops when fewer than a quorum answer)",
+      "idea": "An operation that needs k servers can go ahead as long as k servers still answer, so it survives n − k failures. Here k is W for writes and R for reads, not the majority size."
+    }
+  ],
+  "result": "W and R must satisfy W + R > 5 (so W + R ≥ 6), so that every read group shares a server with every write group. To stop two writes from both being decided, the write groups must also overlap: 2W > 5. With W = 4 and R = 2 (4 + 2 = 6 > 5), writes survive 5 − 4 = 1 failure and reads survive 5 − 2 = 3 failures. One assumption is not covered by the explanation: that a reader recognises and takes the newest value among the replies it gets.",
+  "gap": ""
+}

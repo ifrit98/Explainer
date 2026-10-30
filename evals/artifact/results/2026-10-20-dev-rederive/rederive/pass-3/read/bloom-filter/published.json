@@ -1,0 +1,41 @@
+{
+  "steps": [
+    {
+      "step": "The filter built from a set is just the bits switched on by its items. Adding an item only sets its k positions to 1, and nothing else is kept. So bit i is 1 exactly when at least one added item has a hash position at i.",
+      "part": "How it works: add and query",
+      "idea": "Adding sets an item's k positions (hash mod m) to 1 and stores nothing else. The table shows each 1 bit was set by some item."
+    },
+    {
+      "step": "The order in which items are added does not matter. Setting a bit that is already 1 changes nothing, and no bit ever goes back to 0.",
+      "part": "Why it is never wrong the other way",
+      "idea": "Nothing ever sets a bit back to 0, so a bit stays 1 once any item has turned it on."
+    },
+    {
+      "step": "Both filters have the same m and the same hash functions, so an item gets the same positions in either filter. A ∪ B's filter would have bit i = 1 exactly when some item of A or some item of B hits position i. That is the same as (bit i of A's filter) OR (bit i of B's filter).",
+      "part": "Steps 1–2, plus the setup in 'How it works' (same k hashes, same m)",
+      "idea": "Positions come only from the hash functions and m, so the bits line up position by position between the two filters."
+    },
+    {
+      "step": "So the bitwise OR of the two filters is bit-for-bit the filter you would get by adding every item of A ∪ B. That makes it exact: it has the same answers and the same no-false-negative guarantee as building the union filter directly. Its false-positive rate is the normal one for n = |A ∪ B|, which could be high if that exceeds the capacity.",
+      "part": "Step 3; 'How often it is wrong'; 'Overfilling'",
+      "idea": "The rate depends on the fill, which comes from the number of items, so a large union fills the array more."
+    },
+    {
+      "step": "AND keeps a bit only when it is 1 in both filters. Every item in A ∩ B set its bits in both filters, so all its bits survive. The AND filter therefore never says 'definitely not seen' for an item in A ∩ B: there are no false negatives for the intersection.",
+      "part": "Step 1; 'Why it is never wrong the other way'",
+      "idea": "An added item's bits are all 1 in every filter it was added to."
+    },
+    {
+      "step": "But AND is not the filter of A ∩ B. A bit can be 1 in A's filter because of one item that is only in A, and 1 in B's filter because of a different item that is only in B. Then it is 1 in the AND even though no shared item set it. For example, if cat is in A only and owl is in B only, bits 6 and 11 survive the AND even though the intersection is empty.",
+      "part": "How it can be wrong: false positives (owl and cat share bits 6 and 11)",
+      "idea": "Bits do not record which item set them, and different items share bits."
+    },
+    {
+      "step": "So the AND has every bit of the true A ∩ B filter, possibly with extra 1 bits. Using the AND gives an approximate filter for A ∩ B with no false negatives but a false-positive rate at least as high as, and usually higher than, building it from A ∩ B directly.",
+      "part": "Steps 5–6; 'How often it is wrong' (more 1s means higher fill f, so a higher p ≈ f^k)",
+      "idea": "Extra 1 bits raise the fill, and a higher fill raises the false-positive rate."
+    }
+  ],
+  "result": "Take the bitwise OR of the two filters. Each bit is 1 if it was set by an item of A or of B, which is exactly what adding all of A ∪ B would produce. So the OR is identical to the filter built from A ∪ B: it is exact. It still has the usual false-positive rate for |A ∪ B| items, which rises if that number is more than the filter was sized for. A bitwise AND gives a filter with no false negatives for A ∩ B, but it is only approximate. It can keep bits that were set by an item only in A and a different item only in B, so it can have extra 1s compared with the true A ∩ B filter. That gives more false positives than a filter built directly from A ∩ B.",
+  "gap": ""
+}

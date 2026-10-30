@@ -1,0 +1,46 @@
+{
+  "steps": [
+    {
+      "step": "Turn each decimal into a simplified fraction: 0.375 = 3/8, 0.2 = 1/5, 0.0625 = 1/16, 0.3 = 3/10.",
+      "part": "background",
+      "idea": "Turning a decimal into a fraction is school arithmetic."
+    },
+    {
+      "step": "A fraction can be written with a finite number of binary digits only if its simplified denominator is a power of 2.",
+      "part": "Section 2, 'The same problem in binary' (first paragraph)",
+      "idea": "Base 2 has only one prime factor, 2, so only power-of-2 denominators give binary forms that end (1/2, 1/4, 3/8, 5/16...)."
+    },
+    {
+      "step": "3/8 and 1/16 have power-of-2 denominators, so their binary forms end: 0.375 = 0.011 and 0.0625 = 0.0001 in binary. 1/5 and 3/10 have a factor of 5, so their binary forms repeat forever.",
+      "part": "Step 2, plus the table in Section 2 and the repeated-doubling method",
+      "idea": "The table marks 0.2 and 0.3 'no'. Repeated doubling on 0.375 gives 0.75→0, 1.5→1 (keep 0.5), 1.0→1 and then stops, so 0.011."
+    },
+    {
+      "step": "A double keeps 53 significant binary digits and rounds anything longer to the nearest storable value. So 0.375 (2 significant bits) and 0.0625 (1 bit) are stored exactly, while 0.2 and 0.3 are rounded.",
+      "part": "Section 3, 'How much room the computer has', and its table of stored values",
+      "idea": "53-digit budget with round-to-nearest. The table shows 0.2 stored slightly too big and 0.3 slightly too small."
+    },
+    {
+      "step": "0.125 = 1/8 = 0.001 in binary is exact. Every partial sum k/8 (0.25, 0.375, ..., 1.0) is also a fraction over 8 that needs only a few bits, so each one is itself a double.",
+      "part": "Steps 2–4",
+      "idea": "Power-of-2 denominator with few significant digits fits easily in 53 bits."
+    },
+    {
+      "step": "Each addition gives the exact result rounded to the nearest double. When the exact result already is a double, rounding leaves it unchanged. So none of the eight additions adds any error, and the sum is exactly 1.0.",
+      "part": "Section 6, 'Bounded, predictable error' bullet",
+      "idea": "IEEE 754 makes +, −, ×, ÷ and √ exact results correctly rounded. Rounding only causes error when the exact result is not storable."
+    },
+    {
+      "step": "For 0.1: the stored starting value is already wrong (0.1000000000000000055...). The partial sums (0.2, 0.3, ...) are not exact doubles, so each addition gets rounded again, and these errors don't cancel out.",
+      "part": "Section 2 table and binary expansion of 0.1; Section 3 table; Section 4 'The addition itself'; intro fact 2",
+      "idea": "1/10 repeats forever in binary, so it gets rounded. Section 4 shows that adding stored tenths gives a sum that has to be rounded again (0.1+0.2 lands on a different double from 0.3). Rounding errors pile up instead of cancelling."
+    },
+    {
+      "step": "So after ten additions the result carries piled-up rounding error and can land on a neighbouring double instead of 1.0.",
+      "part": "Steps 6–7; Section 5 example (0.1+0.7 prints 0.7999999999999999)",
+      "idea": "Unlike the 0.125 case, nothing guarantees the exact answer. Section 5 shows that sums of stored tenths can land just off the 'nice' value."
+    }
+  ],
+  "result": "A double can store 0.375 (= 3/8 = 0.011 in binary) and 0.0625 (= 1/16 = 0.0001 in binary) exactly. It cannot store 0.2 (= 1/5) or 0.3 (= 3/10) exactly: their denominators have a factor of 5, so their binary digits repeat forever and get rounded to 53 bits. Adding 0.125 eight times gives exactly 1.0 because 0.125 and every partial sum k/8 are exact doubles. Each addition is correctly rounded, and when the exact answer is already a double, rounding changes nothing. Adding 0.1 ten times starts from a value that is already rounded, and the result of each addition has to be rounded again. These errors don't cancel, so the total can miss 1.0. One limit: the explanation shows how the miss happens, but it gives no way to work out the ten-step sum itself. You have to take the fact that it actually lands just below 1.0 (0.9999999999999999) on trust; the explanation doesn't show it.",
+  "gap": ""
+}

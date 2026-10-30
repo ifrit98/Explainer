@@ -1,0 +1,41 @@
+{
+  "steps": [
+    {
+      "step": "A double holds a fraction exactly only if the fraction's binary form ends. In binary, that happens only when the denominator, after simplifying, is a power of 2.",
+      "part": "Section 2, 'The same problem in binary', first paragraph",
+      "idea": "Base 2 has only the prime factor 2, so 1/2, 1/4, 3/8, 5/16 and so on end in binary. Other fractions repeat forever."
+    },
+    {
+      "step": "Write each number as a simplified fraction: 0.375 = 3/8, 0.2 = 1/5, 0.0625 = 1/16, 0.3 = 3/10.",
+      "part": "background",
+      "idea": "Turning a decimal into a fraction and simplifying it is school arithmetic."
+    },
+    {
+      "step": "0.375 (3/8) and 0.0625 (1/16) have power-of-2 denominators, so their binary forms end (0.011 and 0.0001). Each needs only a few bits, well within the 53 that a double keeps, so both are stored exactly.",
+      "part": "Section 2 (power-of-2 rule) and Section 3, 'How much room the computer has' (53 significant binary digits)",
+      "idea": "A fraction that ends in binary and fits in 53 significant bits is stored with no rounding."
+    },
+    {
+      "step": "0.2 (1/5) and 0.3 (3/10) have a factor of 5 in the denominator, so their binary forms repeat forever. Each is rounded to the nearest double: 0.2 ends up slightly too big and 0.3 slightly too small.",
+      "part": "Section 2 table and Section 3 table of stored values",
+      "idea": "The table lists 0.2 and 0.3 as not exact and shows the slightly-off values that are actually stored."
+    },
+    {
+      "step": "0.125 = 1/8 is stored exactly. Each running total in 0.125 + 0.125 + ... is k/8 for k = 1 to 8. Every one has a power-of-2 denominator and needs only a few bits, so each is exactly a double.",
+      "part": "Steps 1 and 3; Section 3 (53-bit budget)",
+      "idea": "Every partial sum can be stored exactly, so nothing needs rounding."
+    },
+    {
+      "step": "Each addition gives the exact sum, correctly rounded to the nearest double. When the exact sum is already a double, the rounding changes nothing. So all eight additions are exact and the final total is exactly 8/8 = 1.0.",
+      "part": "Section 6, 'Bounded, predictable error' bullet",
+      "idea": "IEEE 754 returns the exact result correctly rounded. An exactly storable result comes back unchanged."
+    },
+    {
+      "step": "Adding 0.1 ten times starts from a stored value that is not 0.1. The stored value is slightly too big. Ten copies of it add up to slightly more than 1, so there is already an error before any addition. Each running total, such as 0.3, 0.7 or 0.9, is also not exactly storable, so each addition rounds again. These small errors don't cancel each other, so the total lands on a double close to 1.0 but not on 1.0 itself.",
+      "part": "Section 3 table (0.1 stored too big); Introduction point 2 ('rounding errors don't cancel out'); Section 4, 'The addition itself' (the sum is rounded again); Section 1 (0.3333 × 3 = 0.9999 analogy)",
+      "idea": "The error is built in the moment 0.1 is stored, and repeated additions build on it, the same way 0.3333 added three times gives 0.9999."
+    }
+  ],
+  "result": "A double can store 0.375 (3/8) and 0.0625 (1/16) exactly, because their denominators are powers of 2. It cannot store 0.2 (1/5) or 0.3 (3/10) exactly: both have a factor of 5 in the denominator, so they repeat forever in binary and get rounded. Adding 0.125 (1/8) eight times is exact because 0.125 and every running total k/8 can be stored exactly, so no addition ever rounds, and the total is exactly 1.0. Adding 0.1 ten times starts from a stored 0.1 that is slightly too big. The running totals also can't be stored exactly, so each addition rounds again. These errors don't cancel, and the total ends up near 1.0 but not equal to it. The explanation gives the reasons for this but never works out the exact final value of the ten-0.1 sum. So 'not exactly 1.0' is a conclusion from those reasons, not a number taken from the text.",
+  "gap": ""
+}

@@ -1,0 +1,36 @@
+{
+  "steps": [
+    {
+      "step": "The receiver works out each satellite's distance from the time sent, which the satellite stamps using its own clock, and the time received, which the receiver reads on its own clock.",
+      "part": "Short answer paragraph; Section 1 'Time becomes distance' (distance = c × (time received − time sent))",
+      "idea": "Distance is c times the gap between the two timestamps, so an error in either timestamp turns straight into a distance error."
+    },
+    {
+      "step": "A 10 ns timing error gives a distance error of about 3 m.",
+      "part": "Section 1, paragraph 'This conversion is unforgiving'",
+      "idea": "Light travels 30 cm per nanosecond, and the text gives 10 ns → 3 m as its own example."
+    },
+    {
+      "step": "Direction of the error: a fast satellite clock stamps a send time 10 ns later than the true one. That makes (received − sent) 10 ns too short, so this satellite's distance comes out about 3 m too short.",
+      "part": "Step 1 (the formula) plus background arithmetic",
+      "idea": "If the time sent is too large, the subtraction is too small. The receiver's clock is correct, so it adds no error of its own."
+    },
+    {
+      "step": "The fourth unknown b adds the same amount, c·b, to every measured distance.",
+      "part": "Section 3, the equation and the sentence 'The receiver's error adds the same amount, c·b, to every measured distance'",
+      "idea": "b can only model an offset that is shared by all the signals."
+    },
+    {
+      "step": "A clock error on one satellite affects only that satellite's distance, so it is not shared. b cannot absorb it, and the solve cannot even detect it. The leftover 3 m error goes into the position fix.",
+      "part": "Section 3, 'What this trick cannot fix'",
+      "idea": "If only one satellite's clock is off, only its distance is wrong (30 ns → 9 m), so satellite clocks must all agree with GPS time to within a few ns."
+    },
+    {
+      "step": "This matches how the explanation treats other errors that differ from satellite to satellite.",
+      "part": "Section 5 'In the receiver'; Section 6, second bullet",
+      "idea": "The eccentricity term is different for each satellite, so the fourth-satellite trick cannot absorb it and it has to be calculated and removed separately."
+    }
+  ],
+  "result": "The distance to that satellite is wrong by about 3 m, because 10 ns × 30 cm/ns = 3 m. Since the fast clock stamps a send time that is too late, the measured travel time is too short, so the distance comes out about 3 m too short. The receiver's fourth unknown b adds the same c·b to every distance, so it can only cancel an error that all the signals share, such as the receiver's own clock error. This error affects one satellite only, so b cannot absorb it and the solve cannot detect it. It goes straight into the position as an error of a few metres. That is why every satellite clock must agree with GPS time to within a few nanoseconds.",
+  "gap": ""
+}

@@ -1,0 +1,120 @@
+{
+  "subject": "heat-pump",
+  "cut": 2,
+  "clean": [
+    1
+  ],
+  "verdict": "pass",
+  "attempts": [
+    {
+      "edits": [
+        {
+          "old": "Heat *Q* leaving or entering a body at absolute temperature *T* carries an amount of entropy *Q/T*, and total entropy cannot decrease (established fact). So the entropy dumped inside must be at least the entropy taken from outside:\n\n```\nQ_H / T_H  ≥  Q_C / T_C        and  W = Q_H − Q_C\n⇒  COP = Q_H / W  ≤  T_H / (T_H − T_C)        (temperatures in kelvin)\n```\n\nThe bound has lift in the denominator. ",
+          "new": ""
+        },
+        {
+          "old": "| Case | Fluid boils | Fluid condenses | Lift | Ideal COP | Typical real COP (estimate, ~47% of ideal) |\n|---|---|---|---|---|---|",
+          "new": "| Case | Fluid boils | Fluid condenses | Lift | Typical real COP (estimate) |\n|---|---|---|---|---|"
+        },
+        {
+          "old": "| 50 K | 318/50 = 6.4 | ~3.0 |",
+          "new": "| 50 K | ~3.0 |"
+        },
+        {
+          "old": "| 70 K | 318/70 = 4.5 | ~2.1 |",
+          "new": "| 70 K | ~2.1 |"
+        },
+        {
+          "old": "The lift falls to 40 K, the ideal COP rises to 308/40 = 7.7, and the real COP rises to about 3.6.",
+          "new": "The lift falls to 40 K, and the real COP rises to about 3.6."
+        }
+      ],
+      "error": "",
+      "check": {
+        "recoverable": false,
+        "quote": "",
+        "present": {
+          "1": true
+        },
+        "marked": true,
+        "reason": "Block 2, the formula COP = T_hot ÷ (T_hot − T_cold), is gone. The explanation only says 'The second law sets the limit' and that a small lift gives a higher COP. The table lists kelvin temperatures and lifts but no ideal COP and no formula. A reader new to the subject could not rebuild the Carnot expression from this, and the question does not supply it either. Block 1 is still present, both as 'heat delivered = heat taken from outside + electrical work' and as 'Energy is conserved.' The removal leaves a visible trace: 'That is why they reach only about half the ideal value' points to an ideal value the text never gives. The kelvin conversions in the table also no longer feed any calculation."
+      },
+      "passed": false
+    },
+    {
+      "edits": [
+        {
+          "old": "The second law sets the limit. Heat *Q* leaving or entering a body at absolute temperature *T* carries an amount of entropy *Q/T*, and total entropy cannot decrease (established fact). So the entropy dumped inside must be at least the entropy taken from outside:",
+          "new": "The second law sets the limit."
+        },
+        {
+          "old": "```\nQ_H / T_H  ≥  Q_C / T_C        and  W = Q_H − Q_C\n⇒  COP = Q_H / W  ≤  T_H / (T_H − T_C)        (temperatures in kelvin)\n```\n\n",
+          "new": ""
+        },
+        {
+          "old": "The bound has lift in the denominator. A small lift gives a high possible COP; a large lift gives a low one.",
+          "new": "A small lift gives a high possible COP; a large lift gives a low one."
+        },
+        {
+          "old": "| Case | Fluid boils | Fluid condenses | Lift | Ideal COP | Typical real COP (estimate, ~47% of ideal) |\n|---|---|---|---|---|---|",
+          "new": "| Case | Fluid boils | Fluid condenses | Lift | Typical real COP (estimate) |\n|---|---|---|---|---|"
+        },
+        {
+          "old": "| Mild day, air 5 °C | −5 °C (268 K) | 45 °C (318 K) | 50 K | 318/50 = 6.4 | ~3.0 |",
+          "new": "| Mild day, air 5 °C | −5 °C (268 K) | 45 °C (318 K) | 50 K | ~3.0 |"
+        },
+        {
+          "old": "| Cold day, air −15 °C | −25 °C (248 K) | 45 °C (318 K) | 70 K | 318/70 = 4.5 | ~2.1 |",
+          "new": "| Cold day, air −15 °C | −25 °C (248 K) | 45 °C (318 K) | 70 K | ~2.1 |"
+        },
+        {
+          "old": "*(The lift falls to 40 K, the ideal COP rises to 308/40 = 7.7, and the real COP rises to about 3.6.",
+          "new": "*(The lift falls to 40 K, and the real COP rises to about 3.6."
+        }
+      ],
+      "error": "",
+      "check": {
+        "recoverable": false,
+        "quote": "",
+        "present": {
+          "1": true
+        },
+        "marked": true,
+        "reason": "Block 2, the ideal heating limit COP = T_hot ÷ (T_hot − T_cold) in kelvin, has been removed. The text says only 'The second law sets the limit' and that a small lift gives a high possible COP, without stating the formula. The table gives temperatures in kelvin and lifts, but no ideal COP values that would let the reader infer the formula. A reader new to thermodynamics could not derive the Carnot expression from what remains or from school background. Block 1 is still present: 'heat delivered = heat taken from outside + electrical work' and 'Heat out = heat from outside + electricity.' The removal shows in two places. 'The second law sets the limit.' is a one-line paragraph that announces a limit it never gives. 'That is why they reach only about half the ideal value' refers to an ideal value that is no longer stated anywhere."
+      },
+      "passed": false
+    },
+    {
+      "edits": [
+        {
+          "old": "The second law sets the limit. Heat *Q* leaving or entering a body at absolute temperature *T* carries an amount of entropy *Q/T*, and total entropy cannot decrease (established fact). So the entropy dumped inside must be at least the entropy taken from outside:\n\n```\nQ_H / T_H  ≥  Q_C / T_C        and  W = Q_H − Q_C\n⇒  COP = Q_H / W  ≤  T_H / (T_H − T_C)        (temperatures in kelvin)\n```\n\nThe bound has lift in the denominator. A small lift gives a high possible COP; a large lift gives a low one.",
+          "new": "The second law sets the limit, and the limit depends on the lift. A small lift gives a high possible COP; a large lift gives a low one."
+        },
+        {
+          "old": "| 50 K | 318/50 = 6.4 |",
+          "new": "| 50 K | 6.4 |"
+        },
+        {
+          "old": "| 70 K | 318/70 = 4.5 |",
+          "new": "| 70 K | 4.5 |"
+        },
+        {
+          "old": "the ideal COP rises to 308/40 = 7.7, and the real COP",
+          "new": "the ideal COP rises, and the real COP"
+        }
+      ],
+      "error": "",
+      "check": {
+        "recoverable": false,
+        "quote": "",
+        "present": {
+          "1": true
+        },
+        "marked": false,
+        "reason": "Block 2, the formula COP = T_hot ÷ (T_hot − T_cold), is no longer stated. The text says only that 'The second law sets the limit, and the limit depends on the lift.' The table does give kelvin temperatures with ideal COPs of 6.4 and 4.5, which match 318/50 and 318/70. But a reader new to the subject would have to guess the formula from two data points, so it is not reliably recoverable. The question does not supply it either. Block 1 is still present: 'heat delivered = heat taken from outside + electrical work' and 'Heat out = heat from outside + electricity.' No marker or note signals the removal. The unexplained 'Ideal COP' column is a quiet gap, not an explicit reference to removed text."
+      },
+      "passed": true
+    }
+  ],
+  "hash": "1a35c9720396b45f"
+}

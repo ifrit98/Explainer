@@ -1,0 +1,41 @@
+{
+  "steps": [
+    {
+      "step": "The Earth has to send 240 W/m² to space, so whatever does the emitting must be at 255 K.",
+      "part": "Section 1 (energy balance and the 255 K emission temperature)",
+      "idea": "Over the long run, energy in must equal energy out. The Earth absorbs about 240 W/m², and σT⁴ = 240 W/m² gives T = 255 K."
+    },
+    {
+      "step": "Infrared escapes to space from the emission height, and the air there must be at 255 K.",
+      "part": "Section 3, first two paragraphs",
+      "idea": "Infrared only gets out from air with little greenhouse gas above it. The air at that average height must emit 240 W/m², so it must be at 255 K."
+    },
+    {
+      "step": "Adding CO₂ raises the emission height.",
+      "part": "Section 4, item 1",
+      "idea": "With more gas, infrared has to start higher before little gas remains above it. For a doubling, the height rises by about 150 m."
+    },
+    {
+      "step": "Normally the higher air is colder, so it emits less, and that imbalance (the forcing) warms the Earth.",
+      "part": "Section 4, items 2–3",
+      "idea": "The air 150 m higher is about 1 K colder at 6.5 K/km. It emits about 236 W/m², not 240, which leaves a 3.7 W/m² imbalance."
+    },
+    {
+      "step": "If the temperature were the same at every height, the air at the new, higher emission height would still be 255 K.",
+      "part": "Section 5, second paragraph (the test case)",
+      "idea": "With a lapse rate of 0, going higher does not make the air colder."
+    },
+    {
+      "step": "So the emission to space stays at 240 W/m², with no imbalance and no warming.",
+      "part": "Section 5, second paragraph; step 1",
+      "idea": "Air at 255 K emits 240 W/m², which still matches what the Earth absorbs. With no forcing, the Earth gains no energy."
+    },
+    {
+      "step": "The surface temperature does not change.",
+      "part": "Section 5, third paragraph; Section 3 (255 K + lapse rate × height)",
+      "idea": "Warming needs two things together: the gas lifts the emission height, and the air is colder higher up. With no lapse rate, the surface is not warmer than the emitting air, so it stays at 255 K no matter how high the emission height is."
+    }
+  ],
+  "result": "Adding CO₂ would leave the surface temperature unchanged. CO₂ still raises the emission height, but the air up there is the same temperature as everywhere else, 255 K. So it still sends out 240 W/m², which matches the absorbed sunlight. There is no imbalance, so the Earth gains no energy and does not warm. In fact, with no fall in temperature with height, the surface would sit at 255 K whatever the amount of CO₂. The greenhouse warming only happens because the air gets colder with height.",
+  "gap": ""
+}

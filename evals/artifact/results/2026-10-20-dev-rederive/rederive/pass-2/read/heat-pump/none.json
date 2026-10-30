@@ -1,0 +1,36 @@
+{
+  "steps": [
+    {
+      "step": "For the air conditioner, the useful output is the heat taken from the cold inside, Q_cold. So the figure to find is Q_cold / W, where W is the electrical work.",
+      "part": "Run backwards, it's an air conditioner (in 'Why this isn't too good to be true'), and the COP definition in 'The short answer'",
+      "idea": "The same machine with its coils swapped moves heat out of the house. COP is a ratio of a useful heat to the paid-for electricity. When cooling, the useful heat is the heat removed, not the heat delivered."
+    },
+    {
+      "step": "Energy balance: Q_hot = Q_cold + W.",
+      "part": "Energy conservation line in section 3 (Q_cold = Q_hot − W), plus the 1 + 2 = 3 kWh box in 'The short answer'",
+      "idea": "The heat dumped at the warm side equals the heat picked up at the cold side plus the electricity. Nothing is created."
+    },
+    {
+      "step": "Entropy condition: Q_hot / T_hot ≥ Q_cold / T_cold.",
+      "part": "Entropy bookkeeping in section 3",
+      "idea": "Heat Q at temperature T carries entropy Q/T, and work carries none. A steady cycle can't store entropy, so it must give out at least as much as it takes in. This applies whichever coil is indoors."
+    },
+    {
+      "step": "Put step 2 into step 3: (Q_cold + W)/T_hot ≥ Q_cold/T_cold. This gives W ≥ Q_cold (T_hot − T_cold)/T_cold, so Q_cold/W ≤ T_cold/(T_hot − T_cold).",
+      "part": "Steps 2 and 3 (background algebra)",
+      "idea": "The same rearrangement the explanation does for heating, solved for Q_cold instead of Q_hot. This is the ideal (Carnot) cooling limit."
+    },
+    {
+      "step": "Why it is exactly one less: Q_cold/W = (Q_hot − W)/W = Q_hot/W − 1. In the ideal case, T_hot/(T_hot − T_cold) − 1 = T_cold/(T_hot − T_cold).",
+      "part": "Step 2 and the heating Carnot limit COP ≤ T_hot/(T_hot − T_cold) in section 3",
+      "idea": "The heat delivered includes the electricity itself, but the heat removed does not. For the same heat moved, the two ratios always differ by exactly W/W = 1."
+    },
+    {
+      "step": "Example: with 273 K and 308 K, the cooling limit is 273/35 ≈ 7.8, compared with 308/35 ≈ 8.8 for heating.",
+      "part": "Plugging in numbers (section 3)",
+      "idea": "The explanation's worked numbers, shifted down by one."
+    }
+  ],
+  "result": "The ideal cooling limit is heat removed per unit of electricity ≤ T_cold/(T_hot − T_cold), using absolute temperatures. For example, 273/35 ≈ 7.8 for 0 °C and 35 °C. It is exactly one less than the heating limit T_hot/(T_hot − T_cold) because of energy conservation: the heat released at the warm side is the heat taken from the cold side plus the electricity (Q_hot = Q_cold + W). So Q_cold/W = Q_hot/W − 1. The heating figure counts the electricity's own energy as delivered heat, and the cooling figure does not.",
+  "gap": ""
+}

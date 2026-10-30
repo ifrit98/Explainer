@@ -1,0 +1,46 @@
+{
+  "steps": [
+    {
+      "step": "An air conditioner moves heat in the same direction as a heat pump: it takes Q_cold from the cold side at T_cold, gets work W, and releases Q_hot at T_hot. The only difference is which side is 'useful'.",
+      "part": "Why this isn't too good to be true: 'Run backwards, it's an air conditioner' bullet; paragraph 'A fridge is exactly this machine'",
+      "idea": "It is the same machine with the coils swapped. Heat still goes from the cold side to the warm side, driven by the compressor. Indoors is now the cold side."
+    },
+    {
+      "step": "Energy balance: Q_hot = Q_cold + W.",
+      "part": "Section 3, 'Energy conservation gives Q_cold = Q_hot − W'; The short answer (1 + 2 = 3 kWh)",
+      "idea": "The heat released on the warm side is exactly the heat taken from the cold side plus the electrical work."
+    },
+    {
+      "step": "Second-law constraint: Q_hot/T_hot ≥ Q_cold/T_cold.",
+      "part": "Section 3, 'Entropy bookkeeping'",
+      "idea": "Heat Q at temperature T carries entropy Q/T, and work carries none. A cycling machine can't store entropy, so the entropy it gives out must be at least the entropy it takes in."
+    },
+    {
+      "step": "Define the cooling figure of merit as heat removed per unit of electricity: COP_cool = Q_cold / W.",
+      "part": "The short answer (definition of COP as useful heat / paid-for work); the question itself",
+      "idea": "COP compares the useful heat with the part you pay for. For cooling, the useful heat is the heat taken from inside."
+    },
+    {
+      "step": "Substitute Q_hot = Q_cold + W into the inequality: (Q_cold + W)/T_hot ≥ Q_cold/T_cold, so W/T_hot ≥ Q_cold(1/T_cold − 1/T_hot) = Q_cold(T_hot − T_cold)/(T_hot·T_cold). That gives Q_cold/W ≤ T_cold/(T_hot − T_cold).",
+      "part": "Steps 2, 3, 4; algebra (background)",
+      "idea": "This is the same rearrangement the explanation does for heating, but solved for Q_cold/W instead of Q_hot/W."
+    },
+    {
+      "step": "The heating limit for the same temperatures is Q_hot/W ≤ T_hot/(T_hot − T_cold).",
+      "part": "Section 3, Carnot limit formula",
+      "idea": "This is the ideal heating COP from the explanation."
+    },
+    {
+      "step": "Why the difference is exactly 1: from Q_hot = Q_cold + W, dividing by W gives Q_hot/W = Q_cold/W + 1, so COP_heat = COP_cool + 1 for any machine. For the limits: T_hot/(ΔT) − T_cold/(ΔT) = (T_hot − T_cold)/(T_hot − T_cold) = 1.",
+      "part": "Steps 2, 5, 6",
+      "idea": "The heat delivered on the warm side includes the electricity itself, but the heat removed on the cold side doesn't. So the two ratios always differ by exactly W/W = 1."
+    },
+    {
+      "step": "Example: with 0 °C (273 K) and 35 °C (308 K), the cooling limit is 273/35 ≈ 7.8, compared with 8.8 for heating.",
+      "part": "Section 3, 'Plugging in numbers'; step 5",
+      "idea": "Same numbers as the explanation's worked example; the cooling limit comes out 1 lower."
+    }
+  ],
+  "result": "The ideal air-conditioner limit is COP_cool = Q_cold/W ≤ T_cold/(T_hot − T_cold), with absolute temperatures. For example, 273/35 ≈ 7.8 for 273 K and 308 K. It is exactly one less than the heating limit T_hot/(T_hot − T_cold). Energy conservation gives Q_hot = Q_cold + W, so Q_hot/W = Q_cold/W + 1: the heat dumped on the warm side includes the electrical work, but the heat removed from the cold side doesn't. In the formulas, (T_hot − T_cold)/(T_hot − T_cold) = 1.",
+  "gap": ""
+}

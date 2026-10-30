@@ -1,0 +1,36 @@
+{
+  "steps": [
+    {
+      "step": "Energy balance for one cycle: heat given out on the hot side = heat taken in on the cold side + electrical work.",
+      "part": "Short answer (heat delivered = heat taken from outside + electrical work) and Condenser step 3",
+      "idea": "The machine moves heat rather than making it. What comes out of the hot coil is the heat picked up at the cold coil plus the compressor work, for example 3 = 2 + 1 kWh."
+    },
+    {
+      "step": "Heating COP = heat delivered / work = (heat taken from the cold side + work) / work.",
+      "part": "Why this matters (COP definition)",
+      "idea": "COP is defined as heat delivered divided by electrical work. Substituting the balance from step 1 gives COP_heat = Q_cold/W + 1."
+    },
+    {
+      "step": "Running the machine in reverse does not change the cycle, only which coil is useful.",
+      "part": "A refrigerator is the same machine paragraph; also the question's premise",
+      "idea": "A refrigerator or air conditioner is the same loop. The useful output is now the heat absorbed at the cold coil (the evaporator), and the heat released at the warm coil is waste."
+    },
+    {
+      "step": "Cooling COP = heat removed / work = Q_cold/W = (Q_hot − W)/W = COP_heat − 1.",
+      "part": "Steps 1–3",
+      "idea": "The heating figure counts the work itself as delivered heat. The cooling figure cannot count it, because the work ends up as heat on the hot side, not as heat removed. So for the same machine at the same two temperatures, the cooling figure is always exactly one less. In the example, 2 kWh is removed per 1 kWh, against 3 kWh delivered."
+    },
+    {
+      "step": "Ideal heating limit: COP_heat,ideal = T_hot/(T_hot − T_cold), with temperatures in kelvin. This is inferred, not stated.",
+      "part": "Why the COP is not unlimited (table: 318 K and 268 K with lift 50 K giving 6.4; 318 K and 248 K with lift 70 K giving 4.5)",
+      "idea": "The text says the limit depends on the lift but never gives a formula. I inferred it from the table: 318/50 = 6.36 ≈ 6.4 and 318/70 = 4.54 ≈ 4.5. Both rows fit 'condensing temperature divided by lift'."
+    },
+    {
+      "step": "Ideal cooling limit: COP_cool,ideal = T_hot/(T_hot − T_cold) − 1 = T_cold/(T_hot − T_cold).",
+      "part": "Steps 4 and 5",
+      "idea": "Subtracting 1 from the heating limit gives the cold-side temperature divided by the lift. For the mild-day row this is 268/50 ≈ 5.4, compared with 6.4 for heating."
+    }
+  ],
+  "result": "The ideal air-conditioner limit is T_cold/(T_hot − T_cold), using absolute temperatures: the cold-side temperature divided by the temperature lift. For example, 268 K and 318 K give 268/50 ≈ 5.4. It is exactly one less than the heating limit T_hot/(T_hot − T_cold) because heat out = heat in + work. When heating, the electricity itself ends up as delivered heat and counts in the ratio. When cooling, only the heat taken from the cold side counts, and the work is dumped outside with it. So Q_cold/W = Q_hot/W − 1, and this holds for real machines as well as ideal ones. The explanation never states the ideal-limit formula. I worked it out from the two table rows, which both match T_hot/lift.",
+  "gap": ""
+}

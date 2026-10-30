@@ -1,0 +1,36 @@
+{
+  "steps": [
+    {
+      "step": "Set up the energy balance for one cycle: heat given to the warm side equals heat taken from the cold side plus the electricity, Q_hot = Q_cold + W.",
+      "part": "Level 1 diagram (1 kWh electricity + 2 kWh outdoor heat → 3 kWh delivered) and the 'Energy conservation gives Q_cold = Q_hot − W' line in 'Where the limit comes from'",
+      "idea": "The machine creates no energy. Everything it dumps on the hot side is the heat it picked up on the cold side plus the electricity it used."
+    },
+    {
+      "step": "The same loop can be used for cooling, with the cold coil on the side being cooled, so the same energy and entropy rules apply. For an air conditioner the useful output is Q_cold, so its figure of merit is Q_cold / W.",
+      "part": "Summary ('A fridge uses the same loop, with the cold coil inside the fridge') and the COP definition paragraph",
+      "idea": "COP means useful heat divided by electricity. For heating, the useful heat is what is delivered. For cooling, the question defines it as the heat removed from the cold side."
+    },
+    {
+      "step": "Entropy condition: Q_hot / T_hot ≥ Q_cold / T_cold, with temperatures in kelvin.",
+      "part": "'Where the limit comes from' (refrigerant stores no entropy, electricity carries none, entropy cannot be destroyed) and 'Use kelvin, not Celsius'",
+      "idea": "The warm side must gain at least as much entropy (Q/T) as the cold side loses. Which way the machine is used makes no difference to this."
+    },
+    {
+      "step": "Substitute Q_hot = Q_cold + W: (Q_cold + W)/T_hot ≥ Q_cold/T_cold, so W/T_hot ≥ Q_cold(T_hot − T_cold)/(T_hot·T_cold), so Q_cold/W ≤ T_cold/(T_hot − T_cold).",
+      "part": "Steps 1 and 3, using the same algebra as the 4-line derivation in 'Where the limit comes from'",
+      "idea": "The same rearrangement used for the heating limit, but solved for Q_cold/W instead of Q_hot/W."
+    },
+    {
+      "step": "Compare with the heating limit T_hot/(T_hot − T_cold): the difference is (T_hot − T_cold)/(T_hot − T_cold) = 1. Physically, Q_hot/W = (Q_cold + W)/W = Q_cold/W + 1. This holds for any machine, including the ideal one, so the two limits differ by exactly 1.",
+      "part": "'The ideal limit' formula, plus steps 1 and 4",
+      "idea": "When heating, the electricity itself ends up as delivered heat and counts as useful. When cooling, it is extra heat the machine must dump outside and does not count as heat removed. That is a difference of exactly one unit per unit of electricity."
+    },
+    {
+      "step": "Example: for 0 °C (273.15 K) and 35 °C (308.15 K), the cooling limit is 273.15/35 ≈ 7.8, one less than the heating limit of 8.8.",
+      "part": "'The ideal limit' (308.15/35 = 8.8) and step 4",
+      "idea": "A numerical check with the explanation's own temperatures."
+    }
+  ],
+  "result": "In its ideal limit, the air conditioner removes at most T_cold/(T_hot − T_cold) of heat per unit of electricity, with temperatures in kelvin. For 273.15 K and 308.15 K that is about 7.8. This is exactly one less than the heating limit T_hot/(T_hot − T_cold) because energy is conserved: Q_hot = Q_cold + W, so Q_hot/W = Q_cold/W + 1. A heat pump counts the electricity as part of its useful output, because the electricity ends up as heat delivered inside. An air conditioner cannot count it, because that electricity is extra heat it has to dump outside.",
+  "gap": ""
+}

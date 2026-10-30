@@ -1,0 +1,46 @@
+{
+  "steps": [
+    {
+      "step": "A double can only hold values with a limited number of binary digits. These values form a grid, and any other number is rounded to the nearest grid point.",
+      "part": "Section 3, 'What the computer actually stores'",
+      "idea": "A double has a fixed, limited number of binary digits, so only certain values (grid points) are stored exactly. Every literal you type is rounded to the nearest one."
+    },
+    {
+      "step": "A number can be stored exactly only if its binary expansion ends. If it repeats forever, it has to be cut off and rounded.",
+      "part": "Section 2, 'Why 0.1 has no exact binary form', and Section 1",
+      "idea": "Just as 1/4 ends in base 10 but 1/3 repeats, some fractions end in base 2 and some repeat. A repeating one must be cut off, so it must be rounded."
+    },
+    {
+      "step": "0.375 = 1/4 + 1/8 = 3/8 = 0.011 in binary. 0.0625 = 1/16 = 0.0001 in binary. Both expansions end after a few digits.",
+      "part": "background",
+      "idea": "Converting a fraction whose denominator is a power of 2 into binary is ordinary arithmetic. These fractions need only 3 and 4 binary digits."
+    },
+    {
+      "step": "So 0.375 and 0.0625 are grid points, and a double stores them exactly.",
+      "part": "Steps 1–3; Section 6, 'When addition is exact'",
+      "idea": "Section 6 says 1/2, 1/4 and 3/4 are grid points. 3/8 and 1/16 are the same kind of short, ending binary fraction, so they fit in the available digits too."
+    },
+    {
+      "step": "0.2 and 0.3 cannot be stored exactly.",
+      "part": "Section 3 table; Summary",
+      "idea": "The stored 0.2 is 0.2000000000000000111… (slightly high) and the stored 0.3 is 0.2999999999999999888… (slightly low). Both have repeating binary expansions."
+    },
+    {
+      "step": "Adding 0.125 eight times: 0.125 = 1/8 is exact, and every running total k/8 (0.25, 0.375, …, 1.0) also ends in binary, so each one is a grid point.",
+      "part": "Section 6, 'When addition is exact'; Step 3",
+      "idea": "When the inputs and the exact sum are all grid points, no rounding happens. So each addition is exact and the last one gives exactly 1.0."
+    },
+    {
+      "step": "Adding 0.1 ten times: the stored 0.1 is already slightly too high, and the running totals are generally not grid points, so many of the additions round again.",
+      "part": "Section 3 table; Section 4, 'The addition, step by step'",
+      "idea": "Section 4 shows that the exact sum of two stored values may fall between grid points, and the processor then rounds it (with round half to even for ties). So error can enter at every step."
+    },
+    {
+      "step": "Each number and each sum is rounded on its own, and these rounding errors do not cancel out, so the final total need not land on the grid point for 1.0.",
+      "part": "Section 1, 'The same problem in decimal'",
+      "idea": "On the 4-digit calculator, 1/3 + 1/3 gives 0.6666, not the stored 2/3 of 0.6667. Rounding each piece separately leaves leftover error, and 1/10 plays the role of 1/3 in binary."
+    }
+  ],
+  "result": "A double can store 0.375 (= 3/8 = 0.011 in binary) and 0.0625 (= 1/16 = 0.0001 in binary) exactly. It cannot store 0.2 or 0.3 exactly, because their binary expansions repeat forever and must be rounded. Adding 0.125 eight times gives exactly 1.0 because 0.125 and every running total (2/8, 3/8, …, 8/8) are grid points, so no addition ever rounds. Adding 0.1 ten times starts from a stored value that is already slightly too high, and most of the running totals fall between grid points and get rounded again. These separate rounding errors don't cancel, so the final value misses the double for 1.0.",
+  "gap": "The explanation shows only a single addition (0.1 + 0.2). It says plainly that it does not cover 'how errors grow across long chains of operations'. It also gives the grid spacing only between 0.25 and 0.5, not near 1. So from this explanation I can't trace the ten additions to show that the errors definitely don't cancel, or which side of 1.0 the result ends up on. I can only show why an exact 1.0 isn't guaranteed. Also, the explanation never states the general rule that a fraction ends in binary only when its denominator is a power of 2. I used ordinary binary conversion (background) plus the examples in Section 6 to reach that conclusion."
+}

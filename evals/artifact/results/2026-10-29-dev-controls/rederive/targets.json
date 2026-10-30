@@ -1,0 +1,116 @@
+{
+  "float-sum": {
+    "q": "Which of these can a double store exactly: 0.375, 0.2, 0.0625, 0.3? And why does adding 0.125 eight times give exactly 1.0, while adding 0.1 ten times does not?",
+    "steps": [
+      {
+        "kind": "block",
+        "text": "Floating-point numbers are binary fractions: a value is stored exactly only if it is a fraction whose denominator is a power of 2 (within the available digits)."
+      },
+      {
+        "kind": "block",
+        "text": "0.1 has no finite binary expansion, so it is stored as the nearest double, with a small error."
+      },
+      {
+        "kind": "derived",
+        "text": "0.375 = 3/8 and 0.0625 = 1/16 have power-of-2 denominators and are exact; 0.2 = 1/5 and 0.3 = 3/10 have a factor of 5 in the denominator and are not."
+      },
+      {
+        "kind": "derived",
+        "text": "0.125 = 1/8 and every sum of eighths up to 1 is exact, so eight additions give exactly 1.0; the stored 0.1 carries an error, and the additions round again, so ten of them do not land exactly on 1.0."
+      }
+    ],
+    "result": "Exact: 0.375 and 0.0625; not exact: 0.2 and 0.3. Eighths add exactly to 1.0, but ten copies of the inexact 0.1 sum to a nearby double (0.9999999999999999), not 1.0."
+  },
+  "greenhouse": {
+    "q": "Suppose the atmosphere had the same temperature at every height. What would adding CO2 then do to the surface temperature, and why?",
+    "steps": [
+      {
+        "kind": "block",
+        "text": "The Earth radiates to space from the height at which infrared can escape, and adding CO2 raises that height."
+      },
+      {
+        "kind": "block",
+        "text": "Higher air is normally colder and radiates less, so raising the emission height makes the Earth give off less than it takes in until the surface and lower air warm."
+      },
+      {
+        "kind": "derived",
+        "text": "If temperature did not fall with height, the new emission height would be as warm as the old one, so the Earth would give off as much as before."
+      },
+      {
+        "kind": "derived",
+        "text": "With no imbalance between what comes in and what goes out, nothing would have to warm: adding CO2 would not warm the surface."
+      }
+    ],
+    "result": "Nothing: with no drop in temperature with height, raising the emission height does not reduce the outgoing radiation, so there is no imbalance and no warming."
+  },
+  "heat-pump": {
+    "q": "The same machine run in reverse is an air conditioner: it takes heat from the cold inside and gives it to the warm outside. What is its ideal limit on heat removed per unit of electricity, and why is it exactly one less than the heating limit for the same two temperatures?",
+    "steps": [
+      {
+        "kind": "block",
+        "text": "Energy is conserved: the heat given off on the warm side = the heat taken from the cold side + the electrical work."
+      },
+      {
+        "kind": "block",
+        "text": "The ideal heating limit is COP = T_hot ÷ (T_hot − T_cold), in kelvin."
+      },
+      {
+        "kind": "derived",
+        "text": "The heat taken from the cold side is the heat given off minus the work, so the heat removed per unit of work is the heating COP minus 1."
+      },
+      {
+        "kind": "derived",
+        "text": "T_hot ÷ (T_hot − T_cold) − 1 = T_cold ÷ (T_hot − T_cold)."
+      }
+    ],
+    "result": "COP_cooling = T_cold ÷ (T_hot − T_cold), exactly one less than the heating limit, because the work ends up in the heat given off but not in the heat removed."
+  },
+  "key-exchange": {
+    "q": "Three people, Alice, Bob, and Carol, want one shared secret key, using the same public p and g and sending only messages anyone can read. How can they do it, and why does an eavesdropper still not get the key?",
+    "steps": [
+      {
+        "kind": "block",
+        "text": "Each person keeps a secret exponent and can raise any number they receive to it, mod p."
+      },
+      {
+        "kind": "block",
+        "text": "Exponents multiply and their order does not matter: (g^a)^b = (g^b)^a = g^(ab) mod p."
+      },
+      {
+        "kind": "block",
+        "text": "Recovering an exponent from g^x mod p (the discrete logarithm) is infeasible for large p."
+      },
+      {
+        "kind": "derived",
+        "text": "So the key can be g^(abc): each person needs g raised to the product of the other two secrets, which can be built by passing values around (Alice sends g^a to Bob, who sends g^(ab) to Carol, and likewise from each starting person), and then raises it to their own secret."
+      },
+      {
+        "kind": "derived",
+        "text": "The eavesdropper sees only values like g^a and g^(ab); getting g^(abc) needs one of the secret exponents, which means solving a discrete logarithm."
+      }
+    ],
+    "result": "Each computes g^(abc) mod p by raising a public value g^(product of the other two secrets), built by passing values around, to their own secret; the eavesdropper sees only values like g^a and g^(ab), and undoing them needs a discrete logarithm."
+  },
+  "two-tides": {
+    "q": "At first and third quarter Moon, the Sun and Moon are at right angles as seen from Earth. How large are the tides then, compared with spring tides?",
+    "steps": [
+      {
+        "kind": "block",
+        "text": "Each body stretches the oceans along the line toward it, raising water at both ends of that line and lowering it in between."
+      },
+      {
+        "kind": "block",
+        "text": "The Sun's tidal effect is about half the Moon's; at new and full Moon the two lie in line and their effects add."
+      },
+      {
+        "kind": "derived",
+        "text": "At right angles, the Sun's stretch raises water where the Moon's lowers it, so the two effects work against each other."
+      },
+      {
+        "kind": "derived",
+        "text": "The range is then about 1 − ½ of the Moon's alone, against 1 + ½ at spring tide: about a third of a spring tide's range."
+      }
+    ],
+    "result": "Smallest (neap) tides, with a range of about (1 − ½) ÷ (1 + ½) ≈ one third of a spring tide's, because the Sun's stretch works against the Moon's."
+  }
+}

@@ -4,6 +4,12 @@
 # it does not depend on what the builder chose to cover. The last item of each quiz is a prediction
 # (kind: predict): a case the explanation need not mention, answered from the mechanism it gives.
 #
+# Each subject also has a rederivation target (rederive): a question about a result the explanation was never asked
+# to state, the steps a derivation needs (block: an idea a good explanation gives; derived: worked out from the
+# steps before it), and the result. Neither the builder nor the reader sees the steps or the result; the reader gets
+# only the question (docs/evals.md#rederivation). A fresh agent checked each target (rederive-checks.json), and the
+# targets were frozen before the first rederivation run: do not edit them.
+#
 # Split: tune against `dev` only. Run `test` to confirm a change before a release, and do not change the
 # principles or skills in response to a single test subject (docs/evals.md).
 #
@@ -27,6 +33,14 @@ subjects:
       - q: "A receiver's clock is 1 µs fast, and it uses three satellites as if its clock were right. About how large is the error in the distances it computes?"
         expect: "About 300 m per satellite: the speed of light × 1 µs; a fourth satellite would let it solve for the clock error."
         kind: predict
+    rederive:
+      q: "A receiver's own clock is right, but one of the four satellites it uses has a clock 10 nanoseconds fast that nothing corrects. Roughly how wrong is the distance to that satellite, and why can the receiver's fourth unknown not absorb this error the way it absorbs its own clock error?"
+      steps:
+        - {kind: block, text: "The receiver turns each signal's travel time into a distance: distance = speed of light × travel time, where the travel time is the arrival time minus the send time stamped in the signal."}
+        - {kind: block, text: "The receiver's own clock error is a fourth unknown, solved for together with the three coordinates from four distances."}
+        - {kind: derived, text: "A satellite clock 10 ns fast stamps its signal 10 ns too late, so that travel time comes out 10 ns short and that one distance about 3 m short (3×10^8 m/s × 10^-8 s)."}
+        - {kind: derived, text: "An error in the receiver's clock shifts every distance by the same amount; an error in one satellite's distance alone does not have that form, so solving for the clock error cannot remove it, and it moves the computed position."}
+      result: "About 3 m, in that one distance only; the clock unknown can absorb only an error shared by all the distances, so this one shifts the position fix."
 
   - id: vaccine-memory
     split: dev
@@ -42,6 +56,14 @@ subjects:
       - q: "A virus changes the shape of the part that antibodies recognize. What happens to the protection from an old vaccine, and why?"
         expect: "It weakens: the memory cells and antibodies match the old shape and bind the new one poorly; a vaccine with the new antigen restores it."
         kind: predict
+    rederive:
+      q: "In a simple model, the immune cells that match an antigen double every 12 hours until there are enough to clear the infection. Vaccination leaves 1,000 times more matching cells than a first infection starts with. About how much sooner does the response reach full strength, and why does the answer not depend on how many cells count as 'enough'?"
+      steps:
+        - {kind: block, text: "A first response starts from few matching cells and must select and multiply them, which takes one to two weeks."}
+        - {kind: block, text: "After vaccination, memory cells specific to that antigen remain, so the response starts from many more matching cells."}
+        - {kind: derived, text: "Starting with 1,000 times more cells saves the doublings needed to grow 1,000-fold: about 10 doublings, since 2^10 ≈ 1,000."}
+        - {kind: derived, text: "Ten doublings at 12 hours each is about 5 days; each start needs log2(enough ÷ start) doublings, so the difference between the two starts is log2(1,000) whatever 'enough' is."}
+      result: "About 5 days sooner (about 10 doublings saved); the saving is the same whatever number of cells counts as enough."
 
   - id: key-exchange
     split: dev
@@ -57,6 +79,15 @@ subjects:
       - q: "With p = 23 and g = 5, Alice's secret is 6 and Bob's is 15. What do they send, and what key do they share?"
         expect: "Alice sends 5^6 mod 23 = 8, Bob sends 5^15 mod 23 = 19; the key is 19^6 mod 23 = 8^15 mod 23 = 2."
         kind: predict
+    rederive:
+      q: "Three people, Alice, Bob, and Carol, want one shared secret key, using the same public p and g and sending only messages anyone can read. How can they do it, and why does an eavesdropper still not get the key?"
+      steps:
+        - {kind: block, text: "Each person keeps a secret exponent and can raise any number they receive to it, mod p."}
+        - {kind: block, text: "Exponents multiply and their order does not matter: (g^a)^b = (g^b)^a = g^(ab) mod p."}
+        - {kind: block, text: "Recovering an exponent from g^x mod p (the discrete logarithm) is infeasible for large p."}
+        - {kind: derived, text: "So the key can be g^(abc): each person needs g raised to the product of the other two secrets, which can be built by passing values around (Alice sends g^a to Bob, who sends g^(ab) to Carol, and likewise from each starting person), and then raises it to their own secret."}
+        - {kind: derived, text: "The eavesdropper sees only values like g^a and g^(ab); getting g^(abc) needs one of the secret exponents, which means solving a discrete logarithm."}
+      result: "Each computes g^(abc) mod p by raising a public value g^(product of the other two secrets), built by passing values around, to their own secret; the eavesdropper sees only values like g^a and g^(ab), and undoing them needs a discrete logarithm."
 
   - id: two-tides
     split: dev
@@ -72,6 +103,14 @@ subjects:
       - q: "If the Moon stayed fixed in the sky instead of moving along its orbit, how often would high tides come?"
         expect: "Every 12 hours exactly: Earth turns once in 24 hours under two fixed bulges."
         kind: predict
+    rederive:
+      q: "At first and third quarter Moon, the Sun and Moon are at right angles as seen from Earth. How large are the tides then, compared with spring tides?"
+      steps:
+        - {kind: block, text: "Each body stretches the oceans along the line toward it, raising water at both ends of that line and lowering it in between."}
+        - {kind: block, text: "The Sun's tidal effect is about half the Moon's; at new and full Moon the two lie in line and their effects add."}
+        - {kind: derived, text: "At right angles, the Sun's stretch raises water where the Moon's lowers it, so the two effects work against each other."}
+        - {kind: derived, text: "The range is then about 1 − ½ of the Moon's alone, against 1 + ½ at spring tide: about a third of a spring tide's range."}
+      result: "Smallest (neap) tides, with a range of about (1 − ½) ÷ (1 + ½) ≈ one third of a spring tide's, because the Sun's stretch works against the Moon's."
 
   - id: bloom-filter
     split: dev
@@ -87,6 +126,14 @@ subjects:
       - q: "Every bit in a filter is 1. What does it answer for an item that was never added?"
         expect: "'Probably seen': every lookup finds all its bits set, so every answer is a false positive."
         kind: predict
+    rederive:
+      q: "Two Bloom filters have the same size and the same hash functions; one was built from a set A and the other from a set B. How can you get a filter for A ∪ B without the items, and is it exact? What does a bitwise AND of the two give?"
+      steps:
+        - {kind: block, text: "Adding an item sets the k bits its hash functions choose to 1, and bits are never cleared."}
+        - {kind: derived, text: "So a bit in a filter is 1 exactly when at least one added item chose it."}
+        - {kind: derived, text: "The items of A ∪ B choose exactly the bits chosen by A's items or by B's items, so OR-ing the two arrays gives the same bits as building the filter from A ∪ B: exact."}
+        - {kind: derived, text: "AND keeps a bit that one item of A and a different item of B both chose, even when no item in both sets chose it; every item in both sets still has all its bits set, so AND gives a filter for A ∩ B with no false negatives but possibly extra 1s."}
+      result: "OR the bit arrays: the result is exactly the filter built from A ∪ B. AND gives a filter for A ∩ B that never misses a common item but can have extra 1s, so more false positives than one built from A ∩ B."
 
   - id: heat-pump
     split: dev
@@ -102,6 +149,14 @@ subjects:
       - q: "By the ideal limit, how does a heat pump that heats a house to 35 °C compare between a 5 °C day and a −15 °C day?"
         expect: "COP limit 308/30 ≈ 10 at 5 °C and 308/50 ≈ 6 at −15 °C: the colder day gives less heat per unit of electricity."
         kind: predict
+    rederive:
+      q: "The same machine run in reverse is an air conditioner: it takes heat from the cold inside and gives it to the warm outside. What is its ideal limit on heat removed per unit of electricity, and why is it exactly one less than the heating limit for the same two temperatures?"
+      steps:
+        - {kind: block, text: "Energy is conserved: the heat given off on the warm side = the heat taken from the cold side + the electrical work."}
+        - {kind: block, text: "The ideal heating limit is COP = T_hot ÷ (T_hot − T_cold), in kelvin."}
+        - {kind: derived, text: "The heat taken from the cold side is the heat given off minus the work, so the heat removed per unit of work is the heating COP minus 1."}
+        - {kind: derived, text: "T_hot ÷ (T_hot − T_cold) − 1 = T_cold ÷ (T_hot − T_cold)."}
+      result: "COP_cooling = T_cold ÷ (T_hot − T_cold), exactly one less than the heating limit, because the work ends up in the heat given off but not in the heat removed."
 
   - id: quorum
     split: dev
@@ -117,6 +172,14 @@ subjects:
       - q: "A 5-server cluster splits into a group of 3 and a group of 2. Which group can still commit writes, and why?"
         expect: "Only the group of 3: it is a majority; the 2 cannot form one, so the two groups cannot commit conflicting writes."
         kind: predict
+    rederive:
+      q: "A five-server store uses a write group of W servers and a read group of R servers, not necessarily majorities. What must W and R satisfy for every read to see the latest committed write, and with W = 4 and R = 2, how many failures can writes and reads each survive?"
+      steps:
+        - {kind: block, text: "A write is committed when a group of servers acknowledges it."}
+        - {kind: block, text: "Majorities are used because any two majorities share at least one server, so the next group always sees every committed write."}
+        - {kind: derived, text: "What matters is the overlap: a read group of R and a write group of W among N servers must share a server whenever R + W > N."}
+        - {kind: derived, text: "With N = 5, W = 4, R = 2: 4 + 2 > 5, so every read sees the latest write; writes need 4 of 5 servers and survive 1 failure, reads need 2 and survive 3."}
+      result: "R + W > N (here R + W > 5); with W = 4 and R = 2, every read overlaps every write, writes survive 1 failure, and reads survive 3."
 
   - id: antibiotic-resistance
     split: dev
@@ -132,6 +195,14 @@ subjects:
       - q: "One bacterium in a billion in an infection is resistant. Why can a full course of antibiotics end with a resistant infection?"
         expect: "The drug kills the susceptible ones; the resistant one survives and, with its competitors gone, multiplies into a resistant population."
         kind: predict
+    rederive:
+      q: "In an infection of 10^10 bacteria, one in 10^8 resists drug A and one in 10^9 resists drug B, by unrelated mutations. Why is giving both drugs together much less likely to end with a resistant infection than giving either alone?"
+      steps:
+        - {kind: block, text: "Resistance comes from random mutations that already exist before the drug is used."}
+        - {kind: block, text: "A drug kills the susceptible bacteria, and the resistant ones survive and multiply (selection)."}
+        - {kind: derived, text: "With unrelated mutations, a bacterium resists both with probability about 10^-8 × 10^-9 = 10^-17."}
+        - {kind: derived, text: "The infection holds about 100 cells resistant to A and about 10 resistant to B, which either drug alone would select, but expects only 10^10 × 10^-17 = 10^-7 cells resistant to both, so with both drugs there is almost surely nothing to select."}
+      result: "About 100 A-resistant and 10 B-resistant cells are present, which either drug alone would select, but a double-resistant cell has a probability of about 10^-17 each, so the infection almost surely holds none and the combination leaves no survivors to multiply."
 
   - id: float-sum
     split: dev
@@ -147,6 +218,14 @@ subjects:
       - q: "Is 0.5 + 0.25 == 0.75 true in the same languages? Why?"
         expect: "True: 1/2, 1/4, and 3/4 have power-of-2 denominators, so all are stored exactly and no rounding error occurs."
         kind: predict
+    rederive:
+      q: "Which of these can a double store exactly: 0.375, 0.2, 0.0625, 0.3? And why does adding 0.125 eight times give exactly 1.0, while adding 0.1 ten times does not?"
+      steps:
+        - {kind: block, text: "Floating-point numbers are binary fractions: a value is stored exactly only if it is a fraction whose denominator is a power of 2 (within the available digits)."}
+        - {kind: block, text: "0.1 has no finite binary expansion, so it is stored as the nearest double, with a small error."}
+        - {kind: derived, text: "0.375 = 3/8 and 0.0625 = 1/16 have power-of-2 denominators and are exact; 0.2 = 1/5 and 0.3 = 3/10 have a factor of 5 in the denominator and are not."}
+        - {kind: derived, text: "0.125 = 1/8 and every sum of eighths up to 1 is exact, so eight additions give exactly 1.0; the stored 0.1 carries an error, and the additions round again, so ten of them do not land exactly on 1.0."}
+      result: "Exact: 0.375 and 0.0625; not exact: 0.2 and 0.3. Eighths add exactly to 1.0, but ten copies of the inexact 0.1 sum to a nearby double (0.9999999999999999), not 1.0."
 
   - id: greenhouse
     split: dev
@@ -162,6 +241,14 @@ subjects:
       - q: "On a planet with no greenhouse gases, where would its heat radiate to space from, and what follows for its surface temperature?"
         expect: "From the surface itself, so the surface settles at the temperature that balances sunlight (about 255 K for Earth, instead of the actual 288 K)."
         kind: predict
+    rederive:
+      q: "Suppose the atmosphere had the same temperature at every height. What would adding CO2 then do to the surface temperature, and why?"
+      steps:
+        - {kind: block, text: "The Earth radiates to space from the height at which infrared can escape, and adding CO2 raises that height."}
+        - {kind: block, text: "Higher air is normally colder and radiates less, so raising the emission height makes the Earth give off less than it takes in until the surface and lower air warm."}
+        - {kind: derived, text: "If temperature did not fall with height, the new emission height would be as warm as the old one, so the Earth would give off as much as before."}
+        - {kind: derived, text: "With no imbalance between what comes in and what goes out, nothing would have to warm: adding CO2 would not warm the surface."}
+      result: "Nothing: with no drop in temperature with height, raising the emission height does not reduce the outgoing radiation, so there is no imbalance and no warming."
 
   # ------------------------------------------------------------------ test
   - id: jpeg
@@ -178,6 +265,14 @@ subjects:
       - q: "At the same quality setting, which compresses better as JPEG: a photo of a clear sky or a scan of printed text? Why?"
         expect: "The sky: smooth areas are mostly low frequencies, which quantize to few nonzero values; text has sharp edges that need high frequencies (and shows artifacts)."
         kind: predict
+    rederive:
+      q: "You open a JPEG and save it again, unchanged, at the same quality setting. Why does this second save lose much less than the first one did?"
+      steps:
+        - {kind: block, text: "JPEG splits the image into 8×8 blocks and transforms each into frequency components."}
+        - {kind: block, text: "Quantization, the lossy step, rounds each component to a multiple of a step size, coarser for high frequencies."}
+        - {kind: derived, text: "After the first save, the decoded image's blocks transform back into components that already lie on, or very near, multiples of the same step sizes."}
+        - {kind: derived, text: "Rounding a value that is already on the grid changes little, so the second quantization loses little more (only small effects, such as rounding pixels to whole numbers, remain)."}
+      result: "Its frequency components are already at or near multiples of the same quantization steps, so rounding them again changes little; most of the loss happened in the first save."
 
   - id: transistor-switch
     split: test
@@ -193,6 +288,14 @@ subjects:
       - q: "What happens to a CMOS chip's power use when its clock frequency doubles, the voltage unchanged?"
         expect: "The switching power about doubles: the gates charge and discharge their capacitance twice as often."
         kind: predict
+    rederive:
+      q: "A chip's supply voltage is lowered from 1.0 V to 0.8 V, with the same clock frequency. By about how much does its switching power fall, and why?"
+      steps:
+        - {kind: block, text: "A CMOS chip spends power mainly on charging and discharging capacitance each time its gates switch."}
+        - {kind: block, text: "Switching power is proportional to how often the gates switch: twice the clock gives twice the power."}
+        - {kind: derived, text: "Charging a capacitance C to voltage V takes charge C × V from the supply at voltage V, so each charge-and-discharge costs energy C × V²."}
+        - {kind: derived, text: "Power ≈ switches per second × C × V², so at the same clock it scales with V²: 0.8² = 0.64, about 36% less."}
+      result: "About 36% less (to about 0.64 of before), because switching power scales with the square of the supply voltage."
 
   - id: kidney-filter
     split: test
@@ -208,6 +311,14 @@ subjects:
       - q: "A drug blocks the transporters that take glucose back in the tubules. What happens to the urine and to blood sugar?"
         expect: "Glucose stays in the urine, and blood sugar falls (this is how SGLT2-inhibitor drugs work)."
         kind: predict
+    rederive:
+      q: "If the tubules took back 98% of the filtered water instead of about 99%, about how much urine would a person make each day, and why does such a small change matter so much?"
+      steps:
+        - {kind: block, text: "The kidneys filter about 180 litres a day."}
+        - {kind: block, text: "The tubules take back about 99% of the filtered water, and about 1.5 litres a day leaves as urine."}
+        - {kind: derived, text: "At 98%, 2% of 180 litres leaves: about 3.6 litres a day, about double."}
+        - {kind: derived, text: "Urine is the small difference between two large flows, so a one-point change in the fraction taken back changes it by about 1.8 litres a day."}
+      result: "About 3.6 litres a day, about double, because urine is the small difference between the large filtered flow and the nearly equal amount taken back."
 
   - id: garbage-collection
     split: test
@@ -223,6 +334,15 @@ subjects:
       - q: "Two objects refer to each other, and nothing else refers to either. Does a tracing collector free them? Does pure reference counting?"
         expect: "Tracing: yes, they are unreachable from the roots. Reference counting: no, each keeps the other's count at 1."
         kind: predict
+    rederive:
+      q: "A program builds a doubly linked list of a million nodes (each node refers to the next and the previous one) and then sets its only variable pointing to the head to null. What does a tracing collector free, and what does pure reference counting free? What changes if a global cache still refers to the tail?"
+      steps:
+        - {kind: block, text: "A tracing collector keeps the objects reachable from the roots by following references and frees the rest."}
+        - {kind: block, text: "Reference counting frees an object when no reference to it remains; objects in a cycle keep each other's counts above zero."}
+        - {kind: derived, text: "After the head variable is cleared, no root reaches any node, so a tracing collector frees all million nodes."}
+        - {kind: derived, text: "Every node is still referred to by a neighbor (the head by the second node's back link), so no count reaches zero and pure reference counting frees none."}
+        - {kind: derived, text: "If the cache refers to the tail, every node is reachable from it through the back links, so the tracing collector frees nothing."}
+      result: "Tracing frees all million nodes; pure reference counting frees none, since neighbors keep each other's counts above zero. If the cache holds the tail, every node is reachable through the back links and nothing is freed."
 
   - id: liquid-core
     split: test
@@ -238,6 +358,14 @@ subjects:
       - q: "If the outer core were solid, what would change in the records of seismometers on the far side of the Earth?"
         expect: "Direct S waves would arrive there too: no S-wave shadow zone."
         kind: predict
+    rederive:
+      q: "If the Earth's liquid core were much larger, reaching most of the way to the surface, how would the zone where no direct S waves arrive change?"
+      steps:
+        - {kind: block, text: "S waves cannot travel through a liquid."}
+        - {kind: block, text: "Beyond about 104° from an earthquake no direct S waves arrive, because the liquid core lies in their way."}
+        - {kind: derived, text: "The shadow begins where a wave's path from the earthquake just grazes the core."}
+        - {kind: derived, text: "A larger core is grazed by paths to points closer to the earthquake, so the shadow would begin at a smaller angle than 104° and cover more of the Earth."}
+      result: "The S-wave shadow would start closer to the earthquake (at a smaller angle than 104°) and cover more of the Earth's surface."
 
   - id: backprop
     split: test
@@ -253,6 +381,14 @@ subjects:
       - q: "A weight's gradient is zero. What happens to it in one training step, and why?"
         expect: "It does not change: a small change to it does not change the loss (to first order), so the step is zero."
         kind: predict
+    rederive:
+      q: "A network's loss, as a function of one weight, is L = (w − 3)². Starting at w = 0 with a learning rate of 0.1, where is w after one step? Above what learning rate does w never settle at 3?"
+      steps:
+        - {kind: block, text: "Each training step moves a weight against the gradient of the loss: by the learning rate times the gradient."}
+        - {kind: block, text: "Too large a learning rate makes steps overshoot, so the loss jumps around or diverges."}
+        - {kind: derived, text: "The gradient is 2(w − 3) = −6 at w = 0, so the step is −0.1 × (−6) = +0.6: w = 0.6."}
+        - {kind: derived, text: "Each step multiplies the distance from 3 by (1 − 2 × learning rate), so the distance shrinks only if that factor is between −1 and 1: a learning rate of 1 or more never settles (1 bounces between 0 and 6; more diverges)."}
+      result: "w = 0.6 after one step; each step scales the distance from 3 by (1 − 2 × rate), so a rate of 1 or more never settles (1 oscillates between 0 and 6, larger rates diverge)."
 
   - id: mountain-boiling
     split: test
@@ -268,6 +404,15 @@ subjects:
       - q: "At the top of Everest the air pressure is about a third of sea level's. Will an egg in boiling water cook faster or slower than at sea level? Why?"
         expect: "Slower: water boils there at about 70 °C, so the egg sits in cooler water."
         kind: predict
+    rederive:
+      q: "A pressure cooker's valve holds the pressure inside 1 atmosphere above the air outside. At 3,000 m, does water in it boil hotter, colder, or the same as in the same cooker at sea level?"
+      steps:
+        - {kind: block, text: "Water boils when its vapor pressure equals the pressure above it, so a lower pressure means a lower boiling point."}
+        - {kind: block, text: "At 3,000 m the air pressure is about 70% of sea level's, so open water boils at about 90 °C."}
+        - {kind: block, text: "A pressure cooker adds about 1 atmosphere, so at sea level its water boils at about 120 °C."}
+        - {kind: derived, text: "The valve holds a fixed pressure above the outside air, so at 3,000 m the inside is about 1.7 atmospheres instead of 2."}
+        - {kind: derived, text: "A lower pressure gives a lower boiling point, so the water boils a few degrees below 120 °C, though still far above an open pot's 90 °C."}
+      result: "Colder: the inside reaches only about 1.7 atmospheres instead of 2, so the water boils a few degrees below 120 °C (still well above the open pot's 90 °C)."
 
   - id: ssd-wear
     split: test
@@ -283,6 +428,14 @@ subjects:
       - q: "An SSD holds photos that are written once and read every day for years. Will it wear out from this use? Why?"
         expect: "No: reading does not wear the cells; wear comes from program/erase cycles, and these photos use very few."
         kind: predict
+    rederive:
+      q: "A 1 TB SSD's cells each last about 1,000 program/erase cycles. If its writes are spread evenly over all cells, about how much data can be written over its life, and how many years would that last at 50 GB a day? (Ignore any extra writes the drive makes internally.)"
+      steps:
+        - {kind: block, text: "A cell lasts a limited number of program/erase cycles."}
+        - {kind: block, text: "Wear leveling spreads writes and erases across the whole drive, so no block wears out early."}
+        - {kind: derived, text: "With even spreading, writing the drive's full capacity once uses about one cycle of every cell, so the drive can take about 1,000 full writes: about 1,000 TB (1 PB)."}
+        - {kind: derived, text: "1,000,000 GB ÷ 50 GB a day = 20,000 days, about 55 years."}
+      result: "About 1,000 TB (1 PB) in total, which at 50 GB a day lasts about 20,000 days, roughly 55 years."
 
   - id: rent-cap
     split: test
@@ -298,6 +451,14 @@ subjects:
       - q: "A city caps rents in existing buildings but exempts new construction. Which part of the mechanism does that weaken, and which part remains?"
         expect: "It weakens the effect on new building (construction is not discouraged); the shortage in existing capped units, conversions, and lower mobility remain."
         kind: predict
+    rederive:
+      q: "A city sets its rent cap above the current market rent. What happens to the shortage now, and what happens if market rents later rise above the cap?"
+      steps:
+        - {kind: block, text: "A rent cap creates a shortage only when it holds the price below the market level: then more people want housing than is offered."}
+        - {kind: block, text: "The effect grows over time, as landlords convert, sell, or stop maintaining units and less is built."}
+        - {kind: derived, text: "A cap above the market rent holds no price down, so it causes no shortage now."}
+        - {kind: derived, text: "If demand pushes the market rent above the cap, the cap starts to hold the price down: a shortage opens and grows over the following years as supply responds."}
+      result: "No shortage while the cap is above the market rent; once market rents rise past it, the cap binds, a shortage opens, and it grows over time."
 
   - id: pagerank
     split: test
@@ -313,6 +474,14 @@ subjects:
       - q: "Page X gets one link from a page with 1,000 outgoing links; page Y gets one link from a page of equal rank with 2 outgoing links. Which gains more rank from its link?"
         expect: "Y: a page shares its rank among its outgoing links, so Y gets half of that page's share and X a thousandth."
         kind: predict
+    rederive:
+      q: "A small web has three pages: A links only to B, B links only to A, and C links only to A; no page links to C. With the usual random jump (probability 0.15, to any of the three pages), which page ranks highest and which lowest, and what is C's rank?"
+      steps:
+        - {kind: block, text: "Each page shares its rank equally among the pages it links to."}
+        - {kind: block, text: "With probability about 0.15 the random surfer jumps to a random page, so every page gets at least its share of the jumps."}
+        - {kind: derived, text: "No page links to C, so C gets only its share of the jumps: 0.15 ÷ 3 = 0.05."}
+        - {kind: derived, text: "A receives all of B's rank and all of C's, while B receives all of A's; A therefore gets more than B, and both far more than C (about 0.49 and 0.46)."}
+      result: "A ranks highest (about 0.49), then B (about 0.46); C is lowest, with only its share of the random jumps: 0.05."
 
   - id: muscle-contraction
     split: test
@@ -328,6 +497,14 @@ subjects:
       - q: "After death, cells stop making ATP. What happens to the muscles, and why?"
         expect: "They lock stiff (rigor mortis): without ATP the myosin heads cannot release from actin."
         kind: predict
+    rederive:
+      q: "A muscle fiber has plenty of ATP, but its calcium pumps stop working. What happens to the muscle, and how does this differ from rigor mortis?"
+      steps:
+        - {kind: block, text: "A nerve signal releases calcium inside the fiber, which uncovers actin's binding sites; when calcium is pumped away, the sites are covered again and the contraction stops."}
+        - {kind: block, text: "ATP releases the myosin head from actin, and splitting ATP re-cocks it for the next stroke; without ATP the heads stay bound (rigor)."}
+        - {kind: derived, text: "With the pumps stopped, calcium stays high and the binding sites stay uncovered, so the heads keep binding and pulling: the muscle stays contracted."}
+        - {kind: derived, text: "Unlike rigor, the heads keep cycling and using ATP; when the ATP runs out, they can no longer release, and the muscle locks in rigor."}
+      result: "It stays contracted, with the heads still cycling and using ATP, because the binding sites stay uncovered; in rigor mortis the heads are stuck because there is no ATP to release them. Once the ATP runs out, this muscle locks in rigor too."
 
   - id: noise-cancelling
     split: test
@@ -343,6 +520,14 @@ subjects:
       - q: "If the headphone played the microphone's sound without inverting it, what would the listener hear?"
         expect: "The noise louder, about twice the amplitude: the waves add in step instead of cancelling."
         kind: predict
+    rederive:
+      q: "Two speakers play the same steady 170 Hz hum, in step. You stand where one speaker is 1 m farther from you than the other. Is the hum louder or quieter there than near either speaker alone? (Sound travels at 340 m/s.)"
+      steps:
+        - {kind: block, text: "Two sound waves with opposite pressure at the same moment add to nearly zero (destructive interference); waves in step add to a louder sound."}
+        - {kind: block, text: "A delay shifts a wave by a fraction of its period; a shift of half a period turns a wave into its inverse."}
+        - {kind: derived, text: "The extra metre takes 1 ÷ 340 s ≈ 2.9 ms, and the 170 Hz hum has a period of 1 ÷ 170 s ≈ 5.9 ms, so the farther wave arrives half a period late."}
+        - {kind: derived, text: "Half a period late, the two waves arrive inverted relative to each other and cancel."}
+      result: "Quieter: the 1 m path difference is half the 2 m wavelength (half a period), so the two waves arrive inverted and largely cancel."
 
   - id: sort-bound
     split: test
@@ -358,6 +543,14 @@ subjects:
       - q: "What is the smallest number of comparisons that always suffices to sort 3 items, and why can 2 not be enough?"
         expect: "3: there are 3! = 6 orderings; 2 comparisons separate at most 4, and 3 separate up to 8."
         kind: predict
+    rederive:
+      q: "By the same counting argument, at least how many comparisons does any comparison-based algorithm need, in the worst case, to merge two sorted lists of 2 items each into one sorted list?"
+      steps:
+        - {kind: block, text: "An algorithm must tell apart every input that needs a different output."}
+        - {kind: block, text: "Each comparison has two outcomes, so k comparisons separate at most 2^k cases."}
+        - {kind: derived, text: "Two sorted lists of 2 can interleave in 4!/(2!·2!) = 6 ways, and each needs a different output."}
+        - {kind: derived, text: "2^2 = 4 < 6 ≤ 8 = 2^3, so at least 3 comparisons are needed."}
+      result: "At least 3: the 6 possible interleavings need 6 different outcomes, and 2 comparisons separate at most 4."
 
   - id: lightning
     split: test
@@ -373,6 +566,14 @@ subjects:
       - q: "You see a flash and hear its thunder 9 seconds later. About how far away was the stroke?"
         expect: "About 3 km (9 s ÷ 3 s per km)."
         kind: predict
+    rederive:
+      q: "Thunder from one stroke often rumbles for several seconds instead of arriving as one bang. Why? If the nearest point of a stroke's channel is 1 km away and its farthest point 4 km away, about when does the rumble start and how long does it last?"
+      steps:
+        - {kind: block, text: "The stroke heats the air along its whole channel in microseconds, and that expansion makes the sound."}
+        - {kind: block, text: "Sound travels about 340 m/s, about 3 s per kilometer, while the light arrives almost at once."}
+        - {kind: derived, text: "Sound from each part of the channel starts at almost the same moment but travels a different distance, so the nearest part is heard first and the farthest last."}
+        - {kind: derived, text: "1 km takes about 3 s and 4 km about 12 s, so the rumble starts about 3 s after the flash and lasts about 9 s."}
+      result: "It rumbles because each part of the channel is at a different distance; here it starts about 3 s after the flash and lasts about 9 s, until about 12 s."
 
   - id: double-spend
     split: test
@@ -388,6 +589,14 @@ subjects:
       - q: "An attacker controls 60% of the network's hashing power. Do six confirmations protect a merchant? Why?"
         expect: "No: with most of the hashing power the attacker's chain grows faster and eventually overtakes the honest one, however many blocks it starts behind."
         kind: predict
+    rederive:
+      q: "Suppose Bitcoin blocks did not contain the hash of the previous block, but each still needed the same proof of work. How could an attacker undo a payment that is six blocks deep, and what would waiting for confirmations then be worth?"
+      steps:
+        - {kind: block, text: "Each block holds the hash of the one before it."}
+        - {kind: block, text: "Each block needs a costly proof of work, and an attacker who changes a block must redo the work of that block and every later one."}
+        - {kind: derived, text: "Changing a block changes its hash; with the previous hash in each block, every later block's stored hash stops matching, which is why all later blocks must be redone."}
+        - {kind: derived, text: "Without that link, later blocks would not depend on the changed block, so the attacker could replace only the block with the payment, redoing one block's work: depth would give no protection, and confirmations would be worth almost nothing."}
+      result: "The attacker could redo just the one block holding the payment, since later blocks would not depend on it; waiting for more confirmations would then add almost no protection."
 
   - id: screen-yellow
     split: test
@@ -403,6 +612,14 @@ subjects:
       - q: "A spectrometer measures a screen showing yellow and a sodium lamp (light near 589 nm). Do the spectra match? Why do the two look alike?"
         expect: "No: the screen shows separate red and green peaks, the lamp one line near 589 nm; both give the cones about the same ratio of responses."
         kind: predict
+    rederive:
+      q: "Suppose an animal had four kinds of cone instead of three. Could a red-green-blue screen make red plus green light look the same to it as spectral yellow? Why or why not?"
+      steps:
+        - {kind: block, text: "The eye measures color as the responses of its kinds of cone, and the brain sees color from their ratio."}
+        - {kind: block, text: "Red plus green looks like spectral yellow to us because together they give our three kinds of cone about the same responses as yellow light does."}
+        - {kind: derived, text: "To look identical to the animal, two lights must give the same response in all four of its cone kinds."}
+        - {kind: derived, text: "A mix of three primaries has only three intensities to adjust, so it cannot in general match four separate responses: red plus green would usually look different from spectral yellow to the animal."}
+      result: "Generally no: a match must give the same response in all four cone kinds, and three primaries offer only three adjustable intensities, so red-plus-green 'yellow' would usually look different from spectral yellow."
 
   - id: https-identity
     split: test
@@ -418,6 +635,14 @@ subjects:
       - q: "A phishing site has a valid certificate and a padlock. How is that possible?"
         expect: "A certificate proves control of a domain name, not honesty; the attacker gets a certificate for their own look-alike domain."
         kind: predict
+    rederive:
+      q: "An attacker steals a website's private key, but not the certificate authority's. What can the attacker do, and why do they not need the certificate authority's key?"
+      steps:
+        - {kind: block, text: "A certificate binds a domain name to a public key, is signed by a certificate authority, and is public."}
+        - {kind: block, text: "During the handshake, the server proves it is the site by signing with the private key that matches the certificate's public key."}
+        - {kind: derived, text: "With the stolen private key, the attacker can present the site's own certificate and complete that proof, so to a browser whose traffic they can intercept, they are the site."}
+        - {kind: derived, text: "They need no new signature from the certificate authority: the existing, public certificate already binds the name to the stolen key."}
+      result: "They can impersonate the site to anyone whose traffic they can intercept, using its own public certificate; no new signature is needed, because the existing certificate already binds the domain to the stolen key."
 
   - id: skater-spin
     split: test
@@ -433,6 +658,15 @@ subjects:
       - q: "A skater spinning at 2 turns per second pulls in until the moment of inertia is a third of what it was. What is the new spin rate?"
         expect: "6 turns per second: L = Iω is constant, so ω triples."
         kind: predict
+    rederive:
+      q: "If a skater could move all the arm mass from 0.8 m to 0.4 m from the spin axis, and the arms were all that mattered, how much faster would the skater spin, and how would the kinetic energy change?"
+      steps:
+        - {kind: block, text: "Moment of inertia depends on mass × distance² from the axis."}
+        - {kind: block, text: "Angular momentum L = I × ω stays the same."}
+        - {kind: block, text: "Kinetic energy of spinning is ½ I ω²; the muscles supply the extra by pulling the arms in."}
+        - {kind: derived, text: "Halving the distance divides I by 4, so ω is multiplied by 4."}
+        - {kind: derived, text: "½ I ω² = ½ L ω with L fixed, so the kinetic energy is multiplied by 4 too."}
+      result: "Four times faster, with four times the kinetic energy, supplied by the muscles' work."
 
   - id: bond-prices
     split: test
@@ -448,6 +682,14 @@ subjects:
       - q: "Rates rise by 1 point. Which falls more in price: a 2-year bond or a 30-year bond? Why?"
         expect: "The 30-year bond: more of its payments are far in the future, where a higher discount rate shrinks them most."
         kind: predict
+    rederive:
+      q: "A bond pays a single $1,000 in 10 years and nothing before. What is it worth today if rates are 3%, and by about how much does its price fall if rates rise to 5%?"
+      steps:
+        - {kind: block, text: "A bond's price is its fixed future payments discounted at the current rate: what you would need to invest today, at that rate, to have those payments then."}
+        - {kind: block, text: "When rates rise, the payments are discounted more, so the price falls."}
+        - {kind: derived, text: "At 3%: 1,000 ÷ 1.03^10 ≈ $744."}
+        - {kind: derived, text: "At 5%: 1,000 ÷ 1.05^10 ≈ $614, a fall of about 17%."}
+      result: "About $744 at 3% and about $614 at 5%: a fall of about 17%."
 
   - id: cache-order
     split: test
@@ -463,3 +705,11 @@ subjects:
       - q: "The array is stored column-major instead (Fortran, or NumPy with order='F'). Which loop order is fast now? Why?"
         expect: "Column by column: now each column is contiguous, so that order uses every value in each cache line."
         kind: predict
+    rederive:
+      q: "A loop reads every element of a 1000 × 1000 array of doubles, stored row-major, column by column. If no cache line survives from one column to the next, about how many cache lines does it load, compared with reading row by row? How does that ratio change for an array of 1-byte chars?"
+      steps:
+        - {kind: block, text: "In row-major order each row is stored contiguously."}
+        - {kind: block, text: "Memory moves into the cache in lines of about 64 bytes; row order uses every value in a line, while column order uses one value per line loaded."}
+        - {kind: derived, text: "Row by row, the 8,000,000 bytes take 8,000,000 ÷ 64 = 125,000 lines; column by column, each of the 1,000,000 reads loads a new line: 8 times as many."}
+        - {kind: derived, text: "With 1-byte chars a line holds 64 values: row order loads 1,000,000 ÷ 64 ≈ 15,600 lines and column order still 1,000,000, about 64 times as many."}
+      result: "About 1,000,000 lines against 125,000 (8×) for doubles; for 1-byte chars, about 1,000,000 against 15,600 (64×): the smaller the elements, the larger the gap."

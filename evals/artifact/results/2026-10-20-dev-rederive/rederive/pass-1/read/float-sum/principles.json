@@ -1,0 +1,36 @@
+{
+  "steps": [
+    {
+      "step": "Set the test for exact storage: a double holds only numbers of the form (an integer of at most 53 bits) × (a power of 2). A fraction is exact only if its denominator in lowest terms has no prime factor other than 2. Otherwise its binary expansion repeats forever and has to be rounded.",
+      "part": "Section 2 'Why 0.1 has no exact binary form' and Section 3 'What the computer actually stores'",
+      "idea": "In base 2 the only prime factor allowed in the denominator is 2. A factor of 5 makes the expansion repeat, so the value is rounded to the nearest grid point."
+    },
+    {
+      "step": "Write each number as a fraction in lowest terms: 0.375 = 3/8 = 3 × 2⁻³; 0.0625 = 1/16 = 1 × 2⁻⁴; 0.2 = 1/5; 0.3 = 3/10 = 3/(2 × 5).",
+      "part": "background",
+      "idea": "Turning a decimal into a fraction and reducing it is school arithmetic."
+    },
+    {
+      "step": "So 0.375 and 0.0625 are stored exactly: they are grid points with small integers. 0.2 and 0.3 are not, because their denominators contain 5. The explanation's table confirms that 0.2 is stored slightly high and 0.3 slightly low.",
+      "part": "Steps 1–2; Section 3 table; Section 6 'When addition is exact'",
+      "idea": "Power-of-2 denominators are exact. The table gives the rounded stored values of 0.2 and 0.3."
+    },
+    {
+      "step": "Adding 0.125 eight times: 0.125 = 1/8 is exact. Every running total k/8 (0.25, 0.375, …, 1.0) also has a power-of-2 denominator and needs only a few bits, so each one is a grid point. No addition has to round, and the final total is exactly 8/8 = 1.0.",
+      "part": "Section 6 'When addition is exact' (0.5 + 0.25 == 0.75 example), Step 1",
+      "idea": "Sums of power-of-2 fractions are exact while they fit in 53 bits, because every result is already a grid point."
+    },
+    {
+      "step": "Adding 0.1 ten times: the stored 0.1 is not 1/10. It is slightly high (7205759403792794 × 2⁻⁵⁶). So the computer is adding a value that is already wrong. Running totals such as 0.3 are not grid points either, so each addition can round again. The rounding errors do not cancel, just as in the 4-digit calculator example and in 0.1 + 0.2, which ends up one step above the stored 0.3.",
+      "part": "Section 3 table; Section 1 'The same problem in decimal'; Section 4 'The addition, step by step'",
+      "idea": "Inputs are rounded and each sum may be rounded again. The errors build up and do not cancel, so the total is not guaranteed to be exactly 1."
+    },
+    {
+      "step": "To confirm that the ten-step total actually ends up different from 1.0, rather than just not being guaranteed, you would have to follow the rounding through all ten additions. The explanation says it does not cover this.",
+      "part": "Summary, 'Not covered: … how errors grow across long chains of operations'",
+      "idea": "The explanation works through only a single addition (0.1 + 0.2). It does not give the rounding for longer chains."
+    }
+  ],
+  "result": "Stored exactly: 0.375 (= 3/8) and 0.0625 (= 1/16), because their denominators are powers of 2. Not exact: 0.2 (= 1/5) and 0.3 (= 3/10), because the factor 5 makes their binary expansions repeat, so they get rounded. Adding 0.125 eight times is exact: 1/8 and every running total k/8 are grid points, so no step ever rounds and the result is exactly 1.0. Adding 0.1 ten times starts from a stored 0.1 that is already slightly too high, and running totals like 0.3 are not grid points, so each step can round again and the errors do not cancel. So nothing makes the total land exactly on 1.0. The explanation does not let me check the claim that it ends up somewhere other than 1.0, or say which way it misses.",
+  "gap": "The explanation leaves out how rounding errors build up across a chain of operations (its Summary says so). It works through only the single addition 0.1 + 0.2. So I can't work out from it what ten additions of 0.1 actually produce, or confirm that the total is different from 1.0. I can only show that it isn't guaranteed to be exact."
+}

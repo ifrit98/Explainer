@@ -1,0 +1,1188 @@
+{
+  "passes": [
+    {
+      "none": {
+        "supported": 1.0,
+        "raw": 1.0,
+        "result": 1.0
+      },
+      "principles": {
+        "supported": 0.9459459459459459,
+        "raw": 0.972972972972973,
+        "result": 0.8888888888888888
+      },
+      "quick": {
+        "supported": 0.9230769230769231,
+        "raw": 1.0,
+        "result": 1.0
+      },
+      "published": {
+        "supported": 0.9473684210526315,
+        "raw": 0.9736842105263158,
+        "result": 0.8888888888888888
+      }
+    },
+    {
+      "none": {
+        "supported": 1.0,
+        "raw": 1.0,
+        "result": 1.0
+      },
+      "principles": {
+        "supported": 1.0,
+        "raw": 1.0,
+        "result": 0.8888888888888888
+      },
+      "quick": {
+        "supported": 1.0,
+        "raw": 1.0,
+        "result": 1.0
+      },
+      "published": {
+        "supported": 0.9473684210526315,
+        "raw": 0.9736842105263158,
+        "result": 0.7777777777777778
+      }
+    },
+    {
+      "none": {
+        "supported": 1.0,
+        "raw": 1.0,
+        "result": 1.0
+      },
+      "principles": {
+        "supported": 0.9722222222222222,
+        "raw": 1.0,
+        "result": 1.0
+      },
+      "quick": {
+        "supported": 0.8974358974358975,
+        "raw": 0.9230769230769231,
+        "result": 0.8888888888888888
+      },
+      "published": {
+        "supported": 0.9473684210526315,
+        "raw": 1.0,
+        "result": 0.8888888888888888
+      }
+    }
+  ],
+  "tallies": {
+    "1": {
+      "none": [
+        {
+          "supported": 3,
+          "made": 3,
+          "counted": 3,
+          "stated": 1,
+          "right": 1,
+          "results": 1,
+          "results_stated": 0
+        },
+        {
+          "supported": 4,
+          "made": 4,
+          "counted": 4,
+          "stated": 0,
+          "right": 1,
+          "results": 1,
+          "results_stated": 0
+        },
+        {
+          "supported": 5,
+          "made": 5,
+          "counted": 5,
+          "stated": 0,
+          "right": 1,
+          "results": 1,
+          "results_stated": 0
+        },
+        {
+          "supported": 3,
+          "made": 3,
+          "counted": 3,
+          "stated": 1,
+          "right": 1,
+          "results": 1,
+          "results_stated": 0
+        },
+        {
+          "supported": 4,
+          "made": 4,
+          "counted": 4,
+          "stated": 0,
+          "right": 1,
+          "results": 1,
+          "results_stated": 0
+        },
+        {
+          "supported": 4,
+          "made": 4,
+          "counted": 4,
+          "stated": 0,
+          "right": 1,
+          "results": 1,
+          "results_stated": 0
+        },
+        {
+          "supported": 4,
+          "made": 4,
+          "counted": 4,
+          "stated": 0,
+          "right": 1,
+          "results": 1,
+          "results_stated": 0
+        },
+        {
+          "supported": 4,
+          "made": 4,
+          "counted": 4,
+          "stated": 0,
+          "right": 1,
+          "results": 1,
+          "results_stated": 0
+        },
+        {
+          "supported": 4,
+          "made": 4,
+          "counted": 4,
+          "stated": 0,
+          "right": 1,
+          "results": 1,
+          "results_stated": 0
+        },
+        {
+          "supported": 4,
+          "made": 4,
+          "counted": 4,
+          "stated": 0,
+          "right": 1,
+          "results": 1,
+          "results_stated": 0
+        }
+      ],
+      "principles": [
+        {
+          "supported": 3,
+          "made": 3,
+          "counted": 3,
+          "stated": 1,
+          "right": 1,
+          "results": 1,
+          "results_stated": 0
+        },
+        {
+          "supported": 4,
+          "made": 4,
+          "counted": 4,
+          "stated": 0,
+          "right": 1,
+          "results": 1,
+          "results_stated": 0
+        },
+        {
+          "supported": 5,
+          "made": 5,
+          "counted": 5,
+          "stated": 0,
+          "right": 1,
+          "results": 1,
+          "results_stated": 0
+        },
+        {
+          "supported": 3,
+          "made": 3,
+          "counted": 3,
+          "stated": 1,
+          "right": 1,
+          "results": 1,
+          "results_stated": 0
+        },
+        {
+          "supported": 4,
+          "made": 4,
+          "counted": 4,
+          "stated": 0,
+          "right": 1,
+          "results": 1,
+          "results_stated": 0
+        },
+        {
+          "supported": 4,
+          "made": 4,
+          "counted": 4,
+          "stated": 0,
+          "right": 1,
+          "results": 1,
+          "results_stated": 0
+        },
+        {
+          "supported": 3,
+          "made": 4,
+          "counted": 4,
+          "stated": 0,
+          "right": 1,
+          "results": 1,
+          "results_stated": 0
+        },
+        {
+          "supported": 4,
+          "made": 4,
+          "counted": 4,
+          "stated": 0,
+          "right": 1,
+          "results": 1,
+          "results_stated": 0
+        },
+        {
+          "supported": 3,
+          "made": 3,
+          "counted": 4,
+          "stated": 0,
+          "right": 0,
+          "results": 1,
+          "results_stated": 0
+        },
+        {
+          "supported": 2,
+          "made": 2,
+          "counted": 2,
+          "stated": 2,
+          "right": 0,
+          "results": 0,
+          "results_stated": 1
+        }
+      ],
+      "quick": [
+        {
+          "supported": 4,
+          "made": 4,
+          "counted": 4,
+          "stated": 0,
+          "right": 1,
+          "results": 1,
+          "results_stated": 0
+        },
+        {
+          "supported": 4,
+          "made": 4,
+          "counted": 4,
+          "stated": 0,
+          "right": 1,
+          "results": 1,
+          "results_stated": 0
+        },
+        {
+          "supported": 5,
+          "made": 5,
+          "counted": 5,
+          "stated": 0,
+          "right": 1,
+          "results": 1,
+          "results_stated": 0
+        },
+        {
+          "supported": 3,
+          "made": 4,
+          "counted": 4,
+          "stated": 0,
+          "right": 1,
+          "results": 1,
+          "results_stated": 0
+        },
+        {
+          "supported": 4,
+          "made": 4,
+          "counted": 4,
+          "stated": 0,
+          "right": 1,
+          "results": 1,
+          "results_stated": 0
+        },
+        {
+          "supported": 4,
+          "made": 4,
+          "counted": 4,
+          "stated": 0,
+          "right": 1,
+          "results": 1,
+          "results_stated": 0
+        },
+        {
+          "supported": 3,
+          "made": 4,
+          "counted": 4,
+          "stated": 0,
+          "right": 1,
+          "results": 1,
+          "results_stated": 0
+        },
+        {
+          "supported": 4,
+          "made": 4,
+          "counted": 4,
+          "stated": 0,
+          "right": 1,
+          "results": 1,
+          "results_stated": 0
+        },
+        {
+          "supported": 3,
+          "made": 4,
+          "counted": 4,
+          "stated": 0,
+          "right": 1,
+          "results": 1,
+          "results_stated": 0
+        },
+        {
+          "supported": 2,
+          "made": 2,
+          "counted": 2,
+          "stated": 2,
+          "right": 0,
+          "results": 0,
+          "results_stated": 1
+        }
+      ],
+      "published": [
+        {
+          "supported": 3,
+          "made": 3,
+          "counted": 3,
+          "stated": 1,
+          "right": 1,
+          "results": 1,
+          "results_stated": 0
+        },
+        {
+          "supported": 4,
+          "made": 4,
+          "counted": 4,
+          "stated": 0,
+          "right": 1,
+          "results": 1,
+          "results_stated": 0
+        },
+        {
+          "supported": 5,
+          "made": 5,
+          "counted": 5,
+          "stated": 0,
+          "right": 1,
+          "results": 1,
+          "results_stated": 0
+        },
+        {
+          "supported": 3,
+          "made": 4,
+          "counted": 4,
+          "stated": 0,
+          "right": 1,
+          "results": 1,
+          "results_stated": 0
+        },
+        {
+          "supported": 4,
+          "made": 4,
+          "counted": 4,
+          "stated": 0,
+          "right": 1,
+          "results": 1,
+          "results_stated": 0
+        },
+        {
+          "supported": 4,
+          "made": 4,
+          "counted": 4,
+          "stated": 0,
+          "right": 1,
+          "results": 1,
+          "results_stated": 0
+        },
+        {
+          "supported": 4,
+          "made": 4,
+          "counted": 4,
+          "stated": 0,
+          "right": 1,
+          "results": 1,
+          "results_stated": 0
+        },
+        {
+          "supported": 4,
+          "made": 4,
+          "counted": 4,
+          "stated": 0,
+          "right": 1,
+          "results": 1,
+          "results_stated": 0
+        },
+        {
+          "supported": 3,
+          "made": 3,
+          "counted": 4,
+          "stated": 0,
+          "right": 0,
+          "results": 1,
+          "results_stated": 0
+        },
+        {
+          "supported": 2,
+          "made": 2,
+          "counted": 2,
+          "stated": 2,
+          "right": 0,
+          "results": 0,
+          "results_stated": 1
+        }
+      ]
+    },
+    "2": {
+      "none": [
+        {
+          "supported": 3,
+          "made": 3,
+          "counted": 3,
+          "stated": 1,
+          "right": 1,
+          "results": 1,
+          "results_stated": 0
+        },
+        {
+          "supported": 4,
+          "made": 4,
+          "counted": 4,
+          "stated": 0,
+          "right": 1,
+          "results": 1,
+          "results_stated": 0
+        },
+        {
+          "supported": 5,
+          "made": 5,
+          "counted": 5,
+          "stated": 0,
+          "right": 1,
+          "results": 1,
+          "results_stated": 0
+        },
+        {
+          "supported": 3,
+          "made": 3,
+          "counted": 3,
+          "stated": 1,
+          "right": 1,
+          "results": 1,
+          "results_stated": 0
+        },
+        {
+          "supported": 4,
+          "made": 4,
+          "counted": 4,
+          "stated": 0,
+          "right": 1,
+          "results": 1,
+          "results_stated": 0
+        },
+        {
+          "supported": 4,
+          "made": 4,
+          "counted": 4,
+          "stated": 0,
+          "right": 1,
+          "results": 1,
+          "results_stated": 0
+        },
+        {
+          "supported": 4,
+          "made": 4,
+          "counted": 4,
+          "stated": 0,
+          "right": 1,
+          "results": 1,
+          "results_stated": 0
+        },
+        {
+          "supported": 4,
+          "made": 4,
+          "counted": 4,
+          "stated": 0,
+          "right": 1,
+          "results": 1,
+          "results_stated": 0
+        },
+        {
+          "supported": 4,
+          "made": 4,
+          "counted": 4,
+          "stated": 0,
+          "right": 1,
+          "results": 1,
+          "results_stated": 0
+        },
+        {
+          "supported": 4,
+          "made": 4,
+          "counted": 4,
+          "stated": 0,
+          "right": 1,
+          "results": 1,
+          "results_stated": 0
+        }
+      ],
+      "principles": [
+        {
+          "supported": 3,
+          "made": 3,
+          "counted": 3,
+          "stated": 1,
+          "right": 1,
+          "results": 1,
+          "results_stated": 0
+        },
+        {
+          "supported": 4,
+          "made": 4,
+          "counted": 4,
+          "stated": 0,
+          "right": 1,
+          "results": 1,
+          "results_stated": 0
+        },
+        {
+          "supported": 5,
+          "made": 5,
+          "counted": 5,
+          "stated": 0,
+          "right": 1,
+          "results": 1,
+          "results_stated": 0
+        },
+        {
+          "supported": 3,
+          "made": 3,
+          "counted": 3,
+          "stated": 1,
+          "right": 1,
+          "results": 1,
+          "results_stated": 0
+        },
+        {
+          "supported": 4,
+          "made": 4,
+          "counted": 4,
+          "stated": 0,
+          "right": 1,
+          "results": 1,
+          "results_stated": 0
+        },
+        {
+          "supported": 4,
+          "made": 4,
+          "counted": 4,
+          "stated": 0,
+          "right": 1,
+          "results": 1,
+          "results_stated": 0
+        },
+        {
+          "supported": 4,
+          "made": 4,
+          "counted": 4,
+          "stated": 0,
+          "right": 1,
+          "results": 1,
+          "results_stated": 0
+        },
+        {
+          "supported": 4,
+          "made": 4,
+          "counted": 4,
+          "stated": 0,
+          "right": 1,
+          "results": 1,
+          "results_stated": 0
+        },
+        {
+          "supported": 4,
+          "made": 4,
+          "counted": 4,
+          "stated": 0,
+          "right": 0,
+          "results": 1,
+          "results_stated": 0
+        },
+        {
+          "supported": 2,
+          "made": 2,
+          "counted": 2,
+          "stated": 2,
+          "right": 0,
+          "results": 0,
+          "results_stated": 1
+        }
+      ],
+      "quick": [
+        {
+          "supported": 4,
+          "made": 4,
+          "counted": 4,
+          "stated": 0,
+          "right": 1,
+          "results": 1,
+          "results_stated": 0
+        },
+        {
+          "supported": 4,
+          "made": 4,
+          "counted": 4,
+          "stated": 0,
+          "right": 1,
+          "results": 1,
+          "results_stated": 0
+        },
+        {
+          "supported": 5,
+          "made": 5,
+          "counted": 5,
+          "stated": 0,
+          "right": 1,
+          "results": 1,
+          "results_stated": 0
+        },
+        {
+          "supported": 4,
+          "made": 4,
+          "counted": 4,
+          "stated": 0,
+          "right": 1,
+          "results": 1,
+          "results_stated": 0
+        },
+        {
+          "supported": 4,
+          "made": 4,
+          "counted": 4,
+          "stated": 0,
+          "right": 1,
+          "results": 1,
+          "results_stated": 0
+        },
+        {
+          "supported": 4,
+          "made": 4,
+          "counted": 4,
+          "stated": 0,
+          "right": 1,
+          "results": 1,
+          "results_stated": 0
+        },
+        {
+          "supported": 4,
+          "made": 4,
+          "counted": 4,
+          "stated": 0,
+          "right": 1,
+          "results": 1,
+          "results_stated": 0
+        },
+        {
+          "supported": 4,
+          "made": 4,
+          "counted": 4,
+          "stated": 0,
+          "right": 1,
+          "results": 1,
+          "results_stated": 0
+        },
+        {
+          "supported": 4,
+          "made": 4,
+          "counted": 4,
+          "stated": 0,
+          "right": 1,
+          "results": 1,
+          "results_stated": 0
+        },
+        {
+          "supported": 2,
+          "made": 2,
+          "counted": 2,
+          "stated": 2,
+          "right": 0,
+          "results": 0,
+          "results_stated": 1
+        }
+      ],
+      "published": [
+        {
+          "supported": 3,
+          "made": 3,
+          "counted": 3,
+          "stated": 1,
+          "right": 1,
+          "results": 1,
+          "results_stated": 0
+        },
+        {
+          "supported": 4,
+          "made": 4,
+          "counted": 4,
+          "stated": 0,
+          "right": 1,
+          "results": 1,
+          "results_stated": 0
+        },
+        {
+          "supported": 5,
+          "made": 5,
+          "counted": 5,
+          "stated": 0,
+          "right": 1,
+          "results": 1,
+          "results_stated": 0
+        },
+        {
+          "supported": 2,
+          "made": 3,
+          "counted": 4,
+          "stated": 0,
+          "right": 0,
+          "results": 1,
+          "results_stated": 0
+        },
+        {
+          "supported": 4,
+          "made": 4,
+          "counted": 4,
+          "stated": 0,
+          "right": 1,
+          "results": 1,
+          "results_stated": 0
+        },
+        {
+          "supported": 4,
+          "made": 4,
+          "counted": 4,
+          "stated": 0,
+          "right": 1,
+          "results": 1,
+          "results_stated": 0
+        },
+        {
+          "supported": 4,
+          "made": 4,
+          "counted": 4,
+          "stated": 0,
+          "right": 1,
+          "results": 1,
+          "results_stated": 0
+        },
+        {
+          "supported": 4,
+          "made": 4,
+          "counted": 4,
+          "stated": 0,
+          "right": 1,
+          "results": 1,
+          "results_stated": 0
+        },
+        {
+          "supported": 4,
+          "made": 4,
+          "counted": 4,
+          "stated": 0,
+          "right": 0,
+          "results": 1,
+          "results_stated": 0
+        },
+        {
+          "supported": 2,
+          "made": 2,
+          "counted": 2,
+          "stated": 2,
+          "right": 0,
+          "results": 0,
+          "results_stated": 1
+        }
+      ]
+    },
+    "3": {
+      "none": [
+        {
+          "supported": 2,
+          "made": 2,
+          "counted": 2,
+          "stated": 2,
+          "right": 0,
+          "results": 0,
+          "results_stated": 1
+        },
+        {
+          "supported": 4,
+          "made": 4,
+          "counted": 4,
+          "stated": 0,
+          "right": 1,
+          "results": 1,
+          "results_stated": 0
+        },
+        {
+          "supported": 5,
+          "made": 5,
+          "counted": 5,
+          "stated": 0,
+          "right": 1,
+          "results": 1,
+          "results_stated": 0
+        },
+        {
+          "supported": 3,
+          "made": 3,
+          "counted": 3,
+          "stated": 1,
+          "right": 1,
+          "results": 1,
+          "results_stated": 0
+        },
+        {
+          "supported": 4,
+          "made": 4,
+          "counted": 4,
+          "stated": 0,
+          "right": 1,
+          "results": 1,
+          "results_stated": 0
+        },
+        {
+          "supported": 4,
+          "made": 4,
+          "counted": 4,
+          "stated": 0,
+          "right": 1,
+          "results": 1,
+          "results_stated": 0
+        },
+        {
+          "supported": 4,
+          "made": 4,
+          "counted": 4,
+          "stated": 0,
+          "right": 1,
+          "results": 1,
+          "results_stated": 0
+        },
+        {
+          "supported": 4,
+          "made": 4,
+          "counted": 4,
+          "stated": 0,
+          "right": 1,
+          "results": 1,
+          "results_stated": 0
+        },
+        {
+          "supported": 4,
+          "made": 4,
+          "counted": 4,
+          "stated": 0,
+          "right": 1,
+          "results": 1,
+          "results_stated": 0
+        },
+        {
+          "supported": 4,
+          "made": 4,
+          "counted": 4,
+          "stated": 0,
+          "right": 1,
+          "results": 1,
+          "results_stated": 0
+        }
+      ],
+      "principles": [
+        {
+          "supported": 2,
+          "made": 2,
+          "counted": 2,
+          "stated": 2,
+          "right": 0,
+          "results": 0,
+          "results_stated": 1
+        },
+        {
+          "supported": 4,
+          "made": 4,
+          "counted": 4,
+          "stated": 0,
+          "right": 1,
+          "results": 1,
+          "results_stated": 0
+        },
+        {
+          "supported": 5,
+          "made": 5,
+          "counted": 5,
+          "stated": 0,
+          "right": 1,
+          "results": 1,
+          "results_stated": 0
+        },
+        {
+          "supported": 3,
+          "made": 3,
+          "counted": 3,
+          "stated": 1,
+          "right": 1,
+          "results": 1,
+          "results_stated": 0
+        },
+        {
+          "supported": 4,
+          "made": 4,
+          "counted": 4,
+          "stated": 0,
+          "right": 1,
+          "results": 1,
+          "results_stated": 0
+        },
+        {
+          "supported": 4,
+          "made": 4,
+          "counted": 4,
+          "stated": 0,
+          "right": 1,
+          "results": 1,
+          "results_stated": 0
+        },
+        {
+          "supported": 3,
+          "made": 4,
+          "counted": 4,
+          "stated": 0,
+          "right": 1,
+          "results": 1,
+          "results_stated": 0
+        },
+        {
+          "supported": 4,
+          "made": 4,
+          "counted": 4,
+          "stated": 0,
+          "right": 1,
+          "results": 1,
+          "results_stated": 0
+        },
+        {
+          "supported": 4,
+          "made": 4,
+          "counted": 4,
+          "stated": 0,
+          "right": 1,
+          "results": 1,
+          "results_stated": 0
+        },
+        {
+          "supported": 2,
+          "made": 2,
+          "counted": 2,
+          "stated": 2,
+          "right": 0,
+          "results": 0,
+          "results_stated": 1
+        }
+      ],
+      "quick": [
+        {
+          "supported": 4,
+          "made": 4,
+          "counted": 4,
+          "stated": 0,
+          "right": 1,
+          "results": 1,
+          "results_stated": 0
+        },
+        {
+          "supported": 4,
+          "made": 4,
+          "counted": 4,
+          "stated": 0,
+          "right": 1,
+          "results": 1,
+          "results_stated": 0
+        },
+        {
+          "supported": 5,
+          "made": 5,
+          "counted": 5,
+          "stated": 0,
+          "right": 1,
+          "results": 1,
+          "results_stated": 0
+        },
+        {
+          "supported": 1,
+          "made": 1,
+          "counted": 4,
+          "stated": 0,
+          "right": 0,
+          "results": 1,
+          "results_stated": 0
+        },
+        {
+          "supported": 4,
+          "made": 4,
+          "counted": 4,
+          "stated": 0,
+          "right": 1,
+          "results": 1,
+          "results_stated": 0
+        },
+        {
+          "supported": 4,
+          "made": 4,
+          "counted": 4,
+          "stated": 0,
+          "right": 1,
+          "results": 1,
+          "results_stated": 0
+        },
+        {
+          "supported": 3,
+          "made": 4,
+          "counted": 4,
+          "stated": 0,
+          "right": 1,
+          "results": 1,
+          "results_stated": 0
+        },
+        {
+          "supported": 4,
+          "made": 4,
+          "counted": 4,
+          "stated": 0,
+          "right": 1,
+          "results": 1,
+          "results_stated": 0
+        },
+        {
+          "supported": 4,
+          "made": 4,
+          "counted": 4,
+          "stated": 0,
+          "right": 1,
+          "results": 1,
+          "results_stated": 0
+        },
+        {
+          "supported": 2,
+          "made": 2,
+          "counted": 2,
+          "stated": 2,
+          "right": 0,
+          "results": 0,
+          "results_stated": 1
+        }
+      ],
+      "published": [
+        {
+          "supported": 3,
+          "made": 3,
+          "counted": 3,
+          "stated": 1,
+          "right": 1,
+          "results": 1,
+          "results_stated": 0
+        },
+        {
+          "supported": 4,
+          "made": 4,
+          "counted": 4,
+          "stated": 0,
+          "right": 1,
+          "results": 1,
+          "results_stated": 0
+        },
+        {
+          "supported": 5,
+          "made": 5,
+          "counted": 5,
+          "stated": 0,
+          "right": 1,
+          "results": 1,
+          "results_stated": 0
+        },
+        {
+          "supported": 2,
+          "made": 4,
+          "counted": 4,
+          "stated": 0,
+          "right": 0,
+          "results": 1,
+          "results_stated": 0
+        },
+        {
+          "supported": 4,
+          "made": 4,
+          "counted": 4,
+          "stated": 0,
+          "right": 1,
+          "results": 1,
+          "results_stated": 0
+        },
+        {
+          "supported": 4,
+          "made": 4,
+          "counted": 4,
+          "stated": 0,
+          "right": 1,
+          "results": 1,
+          "results_stated": 0
+        },
+        {
+          "supported": 4,
+          "made": 4,
+          "counted": 4,
+          "stated": 0,
+          "right": 1,
+          "results": 1,
+          "results_stated": 0
+        },
+        {
+          "supported": 4,
+          "made": 4,
+          "counted": 4,
+          "stated": 0,
+          "right": 1,
+          "results": 1,
+          "results_stated": 0
+        },
+        {
+          "supported": 4,
+          "made": 4,
+          "counted": 4,
+          "stated": 0,
+          "right": 1,
+          "results": 1,
+          "results_stated": 0
+        },
+        {
+          "supported": 2,
+          "made": 2,
+          "counted": 2,
+          "stated": 2,
+          "right": 0,
+          "results": 0,
+          "results_stated": 1
+        }
+      ]
+    }
+  },
+  "separations": [
+    [
+      "none",
+      "published"
+    ]
+  ]
+}
